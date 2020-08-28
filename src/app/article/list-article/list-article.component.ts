@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { Categorie } from 'src/app/models/categorie';
 import { Scategorie } from 'src/app/models/scategorie';
@@ -6,30 +6,51 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ArticleService } from 'src/app/services/article.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-list-article',
   templateUrl: './list-article.component.html',
   styleUrls: ['./list-article.component.scss']
 })
-export class ListArticleComponent implements OnInit {
+export class ListArticleComponent implements OnDestroy, OnInit {
 
   listData : Article[];
 
   private editForm: FormGroup;
 
+  dtOptions: DataTables.Settings = {};
+
+  dtTrigger: Subject<any> = new Subject();
+
   constructor(public crudApi: ArticleService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router
     ) { }
 
-  ngOnInit() {
-    this.getListArticles();
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    };
+
+    this.crudApi.getAllArticles().subscribe(
+      response =>{
+        this.listData = response;
+        this.dtTrigger.next();
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
   getListArticles() {
     this.crudApi.getAllArticles().subscribe(
-      response =>{this.listData = response;}
-    );
+      response =>{this.listData = response;
+
+      });
 
   }
 

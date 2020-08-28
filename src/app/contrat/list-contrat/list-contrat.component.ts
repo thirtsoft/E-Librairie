@@ -1,27 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Contrat } from 'src/app/models/contrat';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ContratService } from 'src/app/services/contrat.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-list-contrat',
   templateUrl: './list-contrat.component.html',
   styleUrls: ['./list-contrat.component.scss']
 })
-export class ListContratComponent implements OnInit {
+export class ListContratComponent implements OnDestroy, OnInit {
 
   listData : Contrat[];
 
   private editForm: FormGroup;
+
+  dtOptions: DataTables.Settings = {};
+
+  dtTrigger: Subject<any> = new Subject();
 
   constructor(public crudApi: ContratService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router
     ) { }
 
   ngOnInit() {
-    this.getListContrats();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    };
+
+    this.crudApi.getAllContrats().subscribe(
+      response =>{
+        this.listData = response;
+        this.dtTrigger.next();
+      }
+    );
+
+    //this.getListContrats();
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
   getListContrats() {

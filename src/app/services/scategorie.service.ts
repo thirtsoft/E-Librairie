@@ -10,6 +10,7 @@ import { Scategorie } from '../models/scategorie';
 export class ScategorieService {
 
   private baseUrl = 'http://localhost:8080/alAmine';
+  //private baseUrl = 'http://localhost:8080/alAmine';
   // private baseUrl = '/api/categories';
    choixmenu : string  = 'A';
    listData : Scategorie[];
@@ -25,6 +26,10 @@ export class ScategorieService {
    public getScategorieById(id: number): Observable<Object> {
      return this.http.get(`${this.baseUrl}/scategories/${id}`);
    }
+
+   getListScategoriesByCategoryId(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchListScategoriesByCategoryId/${id}`);
+  }
 
    createScategorie(info: Object): Observable<Object> {
      return this.http.post(`${this.baseUrl}/scategories`, info);

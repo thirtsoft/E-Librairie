@@ -1,27 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Versement } from 'src/app/models/versement';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { VersementService } from 'src/app/services/versement.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-list-versement',
   templateUrl: './list-versement.component.html',
   styleUrls: ['./list-versement.component.scss']
 })
-export class ListVersementComponent implements OnInit {
+export class ListVersementComponent implements OnDestroy, OnInit {
 
   listData : Versement[];
 
   private editForm: FormGroup;
+
+  dtOptions: DataTables.Settings = {};
+
+  dtTrigger: Subject<any> = new Subject();
 
   constructor(public crudApi: VersementService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router
     ) { }
 
   ngOnInit() {
-    this.getListVersements();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    };
+
+    this.crudApi.getAllVersements().subscribe(
+      response =>{
+        this.listData = response;
+        this.dtTrigger.next();
+      }
+    );
+
+    //this.getListVersements();
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
   getListVersements() {

@@ -29,8 +29,6 @@ export class CreateArticleComponent implements OnInit {
     public toastr: ToastrService, private router : Router
 
   ) { }
-
-
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
 
@@ -82,7 +80,6 @@ export class CreateArticleComponent implements OnInit {
       this.router.navigate(['/articles']);
     });
   }
-
   updateArticle(){
     this.crudApi.updateArticle(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
@@ -92,6 +89,24 @@ export class CreateArticleComponent implements OnInit {
       );
       this.router.navigate(['/articles']);
     });
+  }
+
+  onSelectCateg(id: number) {
+    this.ScatService.getListScategoriesByCategoryId(id).subscribe(
+      response => {
+        this.scategories = response;
+      }
+    );
+
+  }
+
+  onSelectScateg(id: number) {
+    this.ScatService.getScategorieById(id).subscribe(
+      response => {
+        this.crudApi.dataForm.value.code = "10";
+      }
+    );
+
   }
 
 

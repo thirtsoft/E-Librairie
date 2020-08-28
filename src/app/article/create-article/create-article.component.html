@@ -17,7 +17,7 @@
         <label>Categorie</label>
         <div class="form-group">
           <select name="categorie" id="categorie" [(ngModel)]="article.categorie" class="form-control input-lg m-bot15">
-            <option [ngValue]="article.categorie">Categorie</option>
+            <option value=0>-Select-</option>
             <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.designation}}</option>
           </select>
         </div>
@@ -27,7 +27,7 @@
         <label>Sous-Categorie</label>
         <div class="form-group">
           <select name="scategorie" id="scategorie" [(ngModel)]="article.scategorie" class="form-control input-lg m-bot15">
-            <option [ngValue]="article.scategorie">Scategorie</option>
+            <option value=0>-Select-</option>
             <option *ngFor="let scat of scategories" [ngValue]="scat">{{scat.libelle}}</option>
           </select>
         </div>
