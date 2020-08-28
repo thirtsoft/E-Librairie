@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>ARTICLES</h1>
+    <form #addArticleForm="ngForm" (ngSubmit)="saveArticle(addArticleForm.value)">
+
+      <div class="form-group">
+        <label>Référence </label>
+        <input type="text" class="form-control" [(ngModel)]="article.reference" name="reference" id="reference">
+      </div>
+
+      <div class="form-group">
+        <label>Désignation</label>
+        <input type="text" class="form-control" [(ngModel)]="article.designation" name="designation"  id="designation">
+      </div>
+
+      <div class="form-group">
+        <label>Categorie</label>
+        <div class="form-group">
+          <select name="categorie" id="categorie" [(ngModel)]="article.categorie" class="form-control input-lg m-bot15">
+            <option [ngValue]="article.categorie">Categorie</option>
+            <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.designation}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Sous-Categorie</label>
+        <div class="form-group">
+          <select name="scategorie" id="scategorie" [(ngModel)]="article.scategorie" class="form-control input-lg m-bot15">
+            <option [ngValue]="article.scategorie">Scategorie</option>
+            <option *ngFor="let scat of scategories" [ngValue]="scat">{{scat.libelle}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>P.Achat</label>
+        <input type="number" class="form-control" [(ngModel)]="article.prixAchat" name="prixAchat"  id="prixAchat">
+      </div>
+
+      <div class="form-group">
+        <label>P.Vente</label>
+        <input type="number" class="form-control" [(ngModel)]="article.prixVente" name="prixVente"  id="prixVente">
+      </div>
+
+      <div class="form-group">
+        <label>QStock</label>
+        <input type="number" class="form-control" [(ngModel)]="article.qtestock" name="qtestock"  id="qtestock">
+      </div>
+
+      <div class="form-group">
+        <label>QStockInitial</label>
+        <input type="number" class="form-control" [(ngModel)]="article.stockInitial" name="stockInitial"  id="stockInitial">
+      </div>
+
+      <div class="form-group">
+        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
+
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button>
+      </div>
+    </form>
+ </div>
+</div>

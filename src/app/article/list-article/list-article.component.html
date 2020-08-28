@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="btn-toolbar">
+    <div class="panel-heading">
+      <h3>GESTION DES ARTICLES </h3>
+    </div>
+   <div style="padding-left: 20px; padding-bottom: 10px;">
+      <a type="button" (click)="onCreateArticle()"  class="btn btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
+    <!--   <a type="button" [routerLink]="['/createClient']" class="btn btn-primary btn-lg" (click)="onCreateCategorie()"><i class="fa fa-download" aria-hidden="true"></i> Import</a>&nbsp;&nbsp;
+      <a type="button" class="btn btn-warning btn-lg" (click)="onCreateCategorie()"><i class="fa fa-upload" aria-hidden="true"></i> Export</a> -->
+    </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-sm row-border hover">
+           <thead>
+            <tr>
+              <th>Reference</th><th>Designation</th><th>Scategorie</th><th>Categorie</th>
+              <th>P.Achat</th><th>P.Vente</th><th>Quantité</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let art of listData">
+              <td>{{art.reference}}</td>
+              <td>{{art.designation}}</td>
+              <td>{{art.scategorie.libelle}}</td>
+              <td>{{art.categorie.designation}}</td>
+              <td>{{art.prixAchat}}</td>
+              <td>{{art.prixVente}}</td>
+              <td>{{art.qtestock}}</td>
+              <td>
+                <button class="btn btn-info btn-lg" (click)="editArticle(art)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+                <button class="btn btn-danger btn-lg" (click)="deleteArticle(art.id)"><i class="fa fa-trash-o"></i>  Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>

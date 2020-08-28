@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>CONTRATS</h1>
+    <form #addContratForm="ngForm" (ngSubmit)="saveContrat(addContratForm.value)">
+
+      <div class="form-group">
+        <label>Référence </label>
+        <input type="text" class="form-control" [(ngModel)]="contrat.reference" name="reference" id="reference">
+      </div>
+
+      <div class="form-group">
+        <label>Nature</label>
+        <input type="text" class="form-control" [(ngModel)]="contrat.nature" name="nature"  id="nature">
+      </div>
+
+      <div class="form-group">
+        <label>Client</label>
+        <div class="form-group">
+          <select name="client" id="client" [(ngModel)]="contrat.client" class="form-control input-lg m-bot15">
+            <option [ngValue]="contrat.client">Client</option>
+            <option *ngFor="let clt of clients" [ngValue]="clt">{{clt.raisonSocial}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" [(ngModel)]="contrat.description" name="description"  id="description">
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" class="form-control" [(ngModel)]="contrat.dateContrat" name="dateContrat"  id="dateContrat">
+      </div>
+
+      <div class="form-group">
+        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
+
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button>
+      </div>
+    </form>
+ </div>
+</div>
