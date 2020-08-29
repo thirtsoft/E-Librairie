@@ -1,10 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Categorie } from 'src/app/models/categorie';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialogRef } from "@angular/material/dialog";
+
 import { Subject } from 'rxjs';
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+
+import { CreateCategorieComponent } from '../create-categorie/create-categorie.component';
 
 @Component({
   selector: 'app-list-categorie',
@@ -19,11 +25,16 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
   private editForm: FormGroup;
 
+  control: FormControl = new FormControl('');
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   constructor(public crudApi: CategorieService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router
+    private router : Router,
+    private matDialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef:MatDialogRef<CreateCategorieComponent>,
     ) { }
 
 
@@ -55,21 +66,33 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
   onCreateCategorie(){
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("categories/new");
-   /* const dialogConfig = new MatDialogConfig();
+    //this.router.navigateByUrl("categories/new");
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width="50%"; */
+    dialogConfig.width="30%";
     //dialogConfig.data="gdddd";
-   // this.matDialog.open(CreateClientComponent, dialogConfig);
+    this.matDialog.open(CreateCategorieComponent, dialogConfig);
   }
+
+  selectData(item : Categorie) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+
+    this.matDialog.open(CreateCategorieComponent, dialogConfig);
+  }
+
   deleteCategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Categorie ?')) {
     this.crudApi.deleteCategorie(id)
       .subscribe(
         data => {
           console.log(data);
-          this.toastr.success('Categorie supprimé avec succès!');
+          this.toastr.warning('Categorie supprimé avec succès!');
           this.getListCategories();
       },
         error => console.log(error));

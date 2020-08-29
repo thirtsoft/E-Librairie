@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Categorie } from 'src/app/models/categorie';
 import { CategorieService } from 'src/app/services/categorie.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-create-categorie',
@@ -15,10 +18,9 @@ export class CreateCategorieComponent implements OnInit {
   listData : Categorie[];
 
   constructor(public crudApi: CategorieService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router
+    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateCategorieComponent>,
     ) { }
-
-
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
@@ -58,6 +60,7 @@ export class CreateCategorieComponent implements OnInit {
   saveCategorie() {
     this.crudApi.createCategorie(this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Categorie Ajouté avec Succès");
      // this.dialogRef.close();
       //this.ResetForm();
@@ -68,6 +71,7 @@ export class CreateCategorieComponent implements OnInit {
   updateCategorie(){
     this.crudApi.updateCategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Categorie Modifier avec Succès");
       this.getListCategories();
       this.router.navigate(['/categories']);
