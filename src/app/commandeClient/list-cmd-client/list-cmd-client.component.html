@@ -1,3 +1,36 @@
-<p>
-  list-cmd-client works!
-</p>
+<div class="btn-toolbar">
+  <a type="button" class="btn btn-success btn-lg" (click)="onCreateCommandeClient()"><i class="fa fa-plus" aria-hidden="true"></i> Create</a>
+  <a type="button" class="btn btn-primary btn-lg" (click)="onCreateCommandeClient()"><i class="fa fa-download" aria-hidden="true"></i> Import</a>
+  <a type="button" class="btn btn-warning btn-lg" (click)="onCreateCommandeClient()"><i class="fa fa-upload" aria-hidden="true"></i> Export</a>
+
+</div>
+<table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Numéro</th>
+      <th>Client</th>
+      <th>Montant</th>
+      <th>Etat</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cmdClient of commandeClients">
+      <td>{{cmdClient.id}}</td>
+      <td>{{cmdClient.numCommande}}</td>
+      <td>{{cmdClient.client.raisonSocial}}  {{cmdClient.client.chefService}}</td>
+      <td>{{cmdClient.totalCommande}}</td>
+      <td>{{cmdClient.status}}</td>
+      <td>{{cmdClient.dateCommande}}</td>
+      <td>
+        <button class="btn btn-primary btn-xs" (click)="onEditCommandeClient(cmdClient)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;&nbsp;
+        <button class="btn btn-danger btn-xs" (click)="onDeleteCommandeClient(cmdClient.id)"><i class="fa fa-trash-o"></i> Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

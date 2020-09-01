@@ -51,6 +51,8 @@ import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
 import { ListCreanceComponent } from './creance/list-creance/list-creance.component';
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
+import { CreateLcmdClientComponent } from './commandeClient/create-lcmd-client/create-lcmd-client.component';
+import { ListLcmdClientComponent } from './commandeClient/list-lcmd-client/list-lcmd-client.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,9 @@ import { CreateCreanceComponent } from './creance/create-creance/create-creance.
     ListAvoirComponent,
     CreateAvoirComponent,
     ListCreanceComponent,
-    CreateCreanceComponent
+    CreateCreanceComponent,
+    CreateLcmdClientComponent,
+    ListLcmdClientComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +118,7 @@ import { CreateCreanceComponent } from './creance/create-creance/create-creance.
     { provide: MatDialogRef, useValue: {} }],
 
   bootstrap: [AppComponent],
-  entryComponents: [CreateCategorieComponent]
+  entryComponents: [CreateCategorieComponent,
+    CreateLcmdClientComponent]
 })
 export class AppModule { }

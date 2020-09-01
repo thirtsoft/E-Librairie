@@ -56,7 +56,7 @@ const routes: Routes = [
 
     { path: 'commandeclients', component: ListCmdClientComponent},
     { path: 'commandeclient', component: CreateCmdClientComponent},
-    { path:'clients/:id',component:EditClientComponent },
+    { path:'commandeclient/:id',component:EditClientComponent },
 
     { path: 'avoirs', component: ListAvoirComponent},
     { path: 'avoirs', component: CreateAvoirComponent},
