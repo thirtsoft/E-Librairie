@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Contrat } from 'src/app/models/contrat';
 import { Client } from 'src/app/models/client';
 import { ContratService } from 'src/app/services/contrat.service';
@@ -6,6 +6,8 @@ import { ClientService } from 'src/app/services/client.service';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA,MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-create-contrat',
@@ -21,7 +23,9 @@ export class CreateContratComponent implements OnInit {
   submitted = false;
 
   constructor(public crudApi: ContratService, public clientService: ClientService ,
-    public fb: FormBuilder, public toastr: ToastrService, private router : Router
+    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
+    @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateContratComponent>,
 
   ) { }
 
@@ -64,8 +68,8 @@ export class CreateContratComponent implements OnInit {
   saveContrat(cont: Contrat) {
     this.crudApi.createContrat(cont).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Contrat Ajouté avec Succès");
-      //this.dialogRef.close();
       this.crudApi.getAllContrats().subscribe(
         response =>{this.crudApi.listData = response;},
 
@@ -77,6 +81,7 @@ export class CreateContratComponent implements OnInit {
   updateContrat(){
     this.crudApi.updateContrat(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Contrat Modifier avec Succès");
       this.crudApi.getAllContrats().subscribe(
         response =>{this.crudApi.listData = response;}

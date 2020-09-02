@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Employe } from 'src/app/models/employe';
 import { EmployeService } from 'src/app/services/employe.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-create-employe',
@@ -15,7 +16,9 @@ export class CreateEmployeComponent implements OnInit {
   listData : Employe[];
 
   constructor(public crudApi: EmployeService ,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router
+    public toastr: ToastrService, private router : Router,
+    @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateEmployeComponent>,
     ) { }
 
 
@@ -62,8 +65,8 @@ export class CreateEmployeComponent implements OnInit {
   saveEmploye() {
     this.crudApi.createEmploye(this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Employe Ajouté avec Succès");
-     // this.dialogRef.close();
       //this.ResetForm();
       this.getListEmployes();
       this.router.navigate(['/employes']);
@@ -72,6 +75,7 @@ export class CreateEmployeComponent implements OnInit {
   updateEmploye(){
     this.crudApi.updateEmploye(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Employe Modifier avec Succès");
       this.crudApi.getAllEmployes().subscribe(
         response =>{this.crudApi.listData = response;}

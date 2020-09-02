@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-create-fournisseur',
@@ -15,7 +16,9 @@ export class CreateFournisseurComponent implements OnInit {
   listData : Fournisseur[];
 
   constructor(public crudApi: FournisseurService ,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router
+    public toastr: ToastrService, private router : Router,
+    @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateFournisseurComponent>,
     ) { }
 
   ngOnInit() {
@@ -64,8 +67,8 @@ export class CreateFournisseurComponent implements OnInit {
   saveFournisseur() {
     this.crudApi.createFournisseur(this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Fournisseur Ajouté avec Succès");
-     // this.dialogRef.close();
       //this.ResetForm();
       this.getListFournisseurs();
       this.router.navigate(['/fournisseurs']);
@@ -74,6 +77,7 @@ export class CreateFournisseurComponent implements OnInit {
   updateFournisseur(){
     this.crudApi.updateFournisseur(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Fournisseur Modifier avec Succès");
       this.crudApi.getAllFournisseurs().subscribe(
         response =>{this.crudApi.listData = response;}

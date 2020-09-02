@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Versement } from 'src/app/models/versement';
 import { Employe } from 'src/app/models/employe';
 import { VersementService } from 'src/app/services/versement.service';
@@ -6,6 +6,7 @@ import { EmployeService } from 'src/app/services/employe.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-create-versement',
@@ -21,7 +22,9 @@ export class CreateVersementComponent implements OnInit {
   submitted = false;
 
   constructor(public crudApi: VersementService, public empService: EmployeService ,
-    public fb: FormBuilder, public toastr: ToastrService, private router : Router
+    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
+    @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateVersementComponent>,
   ) { }
 
 
@@ -63,8 +66,9 @@ export class CreateVersementComponent implements OnInit {
   saveVersement(versment: Versement) {
     this.crudApi.createVersement(versment).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Versement Ajouté avec Succès");
-      //this.dialogRef.close();
+
       this.crudApi.getAllVersements().subscribe(
         response =>{this.crudApi.listData = response;},
 
@@ -76,6 +80,7 @@ export class CreateVersementComponent implements OnInit {
   updateVersement(){
     this.crudApi.updateVersement(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Versement Modifier avec Succès");
       this.crudApi.getAllVersements().subscribe(
         response =>{this.crudApi.listData = response;}

@@ -1,6 +1,6 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h1>ARTICLES</h1>
+
+  <div class="col-md-11 col-md-offset-1 scroll">
+    <h1>Nouveau Article</h1>
     <form #addArticleForm="ngForm" (ngSubmit)="saveArticle(addArticleForm.value)">
 
       <div class="form-group">
@@ -58,8 +58,7 @@
         <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
 
         <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button>
+        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>
     </form>
  </div>
-</div>

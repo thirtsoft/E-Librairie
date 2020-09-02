@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Contrat } from 'src/app/models/contrat';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ContratService } from 'src/app/services/contrat.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef } from "@angular/material/dialog";
+import { CreateContratComponent } from '../create-contrat/create-contrat.component';
 
 @Component({
   selector: 'app-list-contrat',
@@ -22,7 +25,10 @@ export class ListContratComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   constructor(public crudApi: ContratService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router
+    public toastr: ToastrService, private router : Router,
+    private matDialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef:MatDialogRef<CreateContratComponent>,
     ) { }
 
   ngOnInit() {
@@ -55,13 +61,26 @@ export class ListContratComponent implements OnDestroy, OnInit {
 
   onCreateContrat(){
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("contrats/new");
-   /* const dialogConfig = new MatDialogConfig();
+    //this.router.navigateByUrl("contrats/new");
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width="50%"; */
-    //dialogConfig.data="gdddd";
-   // this.matDialog.open(CreateClientComponent, dialogConfig);
+    dialogConfig.width="50%";
+
+    this.matDialog.open(CreateContratComponent, dialogConfig);
+  }
+
+  editContrat(item : Contrat) {
+
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+
+    this.matDialog.open(CreateContratComponent, dialogConfig);
+
   }
   deleteContrat(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Contrat ?')) {
@@ -76,7 +95,7 @@ export class ListContratComponent implements OnDestroy, OnInit {
     }
 
   }
-  editContrat(item : Contrat) {
+  editerContrat(item : Contrat) {
 
     this.router.navigateByUrl('contrats/'+item.id);
 

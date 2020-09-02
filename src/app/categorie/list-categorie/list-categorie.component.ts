@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators } f
 import { CategorieService } from 'src/app/services/categorie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef } from "@angular/material/dialog";
 
 import { Subject } from 'rxjs';

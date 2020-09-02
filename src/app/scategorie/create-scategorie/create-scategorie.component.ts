@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
 import { ScategorieService } from 'src/app/services/scategorie.service';
@@ -6,6 +6,7 @@ import { CategorieService } from 'src/app/services/categorie.service';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-create-scategorie',
@@ -21,7 +22,9 @@ export class CreateScategorieComponent implements OnInit {
   submitted = false;
 
   constructor(public crudApi: ScategorieService , private catService: CategorieService,
-    public fb: FormBuilder,public toastr: ToastrService,private router : Router
+    public fb: FormBuilder,public toastr: ToastrService,private router : Router,
+    @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateScategorieComponent>,
     ) { }
 
 
@@ -63,8 +66,9 @@ export class CreateScategorieComponent implements OnInit {
   saveScategorie(Scat: Scategorie) {
     this.crudApi.createScategorie(Scat).
     subscribe( data => {
+
+      this.dialogRef.close();
       this.toastr.success("Scategorie Ajouté avec Succès");
-      //this.dialogRef.close();
       this.crudApi.getAllScategories().subscribe(
         response =>{this.crudApi.listData = response;},
 
@@ -76,6 +80,7 @@ export class CreateScategorieComponent implements OnInit {
   updateScategorie(){
     this.crudApi.updateScategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Scategorie Modifier avec Succès");
       this.crudApi.getAllScategories().subscribe(
         response =>{this.crudApi.listData = response;}

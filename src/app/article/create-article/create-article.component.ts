@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
@@ -8,6 +8,8 @@ import { CategorieService } from 'src/app/services/categorie.service';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-create-article',
@@ -26,7 +28,9 @@ export class CreateArticleComponent implements OnInit {
 
   constructor(public crudApi: ArticleService, public ScatService: ScategorieService ,
     private catService: CategorieService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router
+    public toastr: ToastrService, private router : Router,
+    @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateArticleComponent>,
 
   ) { }
   ngOnInit() {
@@ -71,8 +75,8 @@ export class CreateArticleComponent implements OnInit {
   saveArticle(art: Article) {
     this.crudApi.createArticle(art).
     subscribe( data => {
+      this.dialogRef.close();
       this.toastr.success("Article Ajouté avec Succès");
-      //this.dialogRef.close();
       this.crudApi.getAllArticles().subscribe(
         response =>{this.crudApi.listData = response;},
 
@@ -84,6 +88,7 @@ export class CreateArticleComponent implements OnInit {
     this.crudApi.updateArticle(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.toastr.success("Article Modifier avec Succès");
+      this.dialogRef.close();
       this.crudApi.getAllArticles().subscribe(
         response =>{this.crudApi.listData = response;}
       );

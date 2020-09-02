@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -7,6 +7,9 @@ import { ScategorieService } from 'src/app/services/scategorie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import {MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CreateScategorieComponent } from '../create-scategorie/create-scategorie.component';
 
 @Component({
   selector: 'app-list-scategorie',
@@ -25,9 +28,14 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
   dtTrigger: Subject<any> = new Subject();
 
+  closeResult: string;
+
   constructor(public crudApi: ScategorieService,
     public fb: FormBuilder, public toastr: ToastrService,
-    private router : Router
+    private router : Router,
+    private matDialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef:MatDialogRef<CreateScategorieComponent>,
     ) { }
 
 
@@ -61,13 +69,23 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
   onCreateScategorie(){
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("scategories/new");
-   /* const dialogConfig = new MatDialogConfig();
+   // this.router.navigateByUrl("scategorie");
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width="50%"; */
-    //dialogConfig.data="gdddd";
-   // this.matDialog.open(CreateClientComponent, dialogConfig);
+    dialogConfig.width="50%";
+    this.matDialog.open(CreateScategorieComponent, dialogConfig);
+  }
+
+  editScategorie(item : Scategorie) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+
+    this.matDialog.open(CreateScategorieComponent, dialogConfig);
   }
   deleteScategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Sous-Categorie ?')) {
@@ -82,7 +100,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     }
 
   }
-  editScategorie(item : Scategorie) {
+  editerScategorie(item : Scategorie) {
 
     this.router.navigateByUrl('scategories/'+item.id);
 
