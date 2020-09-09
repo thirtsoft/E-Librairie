@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateCmdClientComponent } from './create-cmd-client.component';
+import { EditCommandeClientComponent } from './edit-commande-client.component';
 
-describe('CreateCmdClientComponent', () => {
-  let component: CreateCmdClientComponent;
-  let fixture: ComponentFixture<CreateCmdClientComponent>;
+describe('EditCommandeClientComponent', () => {
+  let component: EditCommandeClientComponent;
+  let fixture: ComponentFixture<EditCommandeClientComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateCmdClientComponent ]
+      declarations: [ EditCommandeClientComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateCmdClientComponent);
+    fixture = TestBed.createComponent(EditCommandeClientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -45,14 +45,15 @@ import { CreateContratComponent } from './contrat/create-contrat/create-contrat.
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ListCmdClientComponent } from './commandeClient/list-cmd-client/list-cmd-client.component';
-import { CreateCmdClientComponent } from './commandeClient/create-cmd-client/create-cmd-client.component';
 import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
 import { ListCreanceComponent } from './creance/list-creance/list-creance.component';
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
-import { CreateLcmdClientComponent } from './commandeClient/create-lcmd-client/create-lcmd-client.component';
-import { ListLcmdClientComponent } from './commandeClient/list-lcmd-client/list-lcmd-client.component';
+import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
+import { CreateCommandeClientComponent } from './CommandeClient/create-commande-client/create-commande-client.component';
+import { EditCommandeClientComponent } from './CommandeClient/edit-commande-client/edit-commande-client.component';
+import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 
 @NgModule({
   declarations: [
@@ -84,14 +85,15 @@ import { ListLcmdClientComponent } from './commandeClient/list-lcmd-client/list-
     HomeComponent,
     DashboardComponent,
     PageNotFoundComponent,
-    ListCmdClientComponent,
-    CreateCmdClientComponent,
     ListAvoirComponent,
     CreateAvoirComponent,
     ListCreanceComponent,
     CreateCreanceComponent,
-    CreateLcmdClientComponent,
-    ListLcmdClientComponent
+    ListCommandeClientComponent,
+    CreateCommandeClientComponent,
+    EditCommandeClientComponent,
+    ListLigneCmdClientComponent,
+    CreateLigneCmdClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,6 @@ import { ListLcmdClientComponent } from './commandeClient/list-lcmd-client/list-
     { provide: MatDialogRef, useValue: {} }],
 
   bootstrap: [AppComponent],
-  entryComponents: [CreateCategorieComponent,
-    CreateLcmdClientComponent]
+  entryComponents: [CreateCategorieComponent]
 })
 export class AppModule { }

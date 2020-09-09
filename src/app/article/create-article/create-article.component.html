@@ -16,7 +16,8 @@
       <div class="form-group">
         <label>Categorie</label>
         <div class="form-group">
-          <select name="categorie" id="categorie" [(ngModel)]="article.categorie" class="form-control input-lg m-bot15">
+          <select name="categorie" id="categorie" [(ngModel)]="article.categorie" class="form-control input-lg m-bot15"
+            (change)="onChangeCtegorie($event.target.val)">
             <option value=0>-Select-</option>
             <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.designation}}</option>
           </select>
@@ -26,7 +27,8 @@
       <div class="form-group">
         <label>Sous-Categorie</label>
         <div class="form-group">
-          <select name="scategorie" id="scategorie" [(ngModel)]="article.scategorie" class="form-control input-lg m-bot15">
+          <select name="scategorie" id="scategorie" [(ngModel)]="article.scategorie" class="form-control input-lg m-bot15"
+            (change)="onSelectScateg($event.target.value)">>
             <option value=0>-Select-</option>
             <option *ngFor="let scat of scategories" [ngValue]="scat">{{scat.libelle}}</option>
           </select>

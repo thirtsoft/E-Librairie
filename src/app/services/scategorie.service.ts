@@ -27,6 +27,10 @@ export class ScategorieService {
      return this.http.get(`${this.baseUrl}/scategories/${id}`);
    }
 
+   getListScategoriesByCategory(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchListScategoriesByCategoryId/?catId=${id}`);
+  }
+
    getListScategoriesByCategoryId(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/searchListScategoriesByCategoryId/${id}`);
   }

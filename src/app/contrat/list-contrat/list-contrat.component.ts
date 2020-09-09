@@ -88,7 +88,7 @@ export class ListContratComponent implements OnDestroy, OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.toastr.success('Contrat supprimé avec succès!');
+          this.toastr.warning('Contrat supprimé avec succès!');
           this.getListContrats();
       },
         error => console.log(error));

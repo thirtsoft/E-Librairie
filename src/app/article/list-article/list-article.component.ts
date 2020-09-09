@@ -88,7 +88,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.toastr.success('Article supprimé avec succès!');
+          this.toastr.warning('Article supprimé avec succès!');
           this.getListArticles();
       },
         error => console.log(error));

@@ -3,7 +3,7 @@ import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
 import { ScategorieService } from 'src/app/services/scategorie.service';
 import { CategorieService } from 'src/app/services/categorie.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -37,19 +37,20 @@ export class CreateScategorieComponent implements OnInit {
       );
 
     }
+  }
 
- /*  infoForm() {
-    let cat = new SousCategorie();
+/*  infoForm() {
+    let cat = new Scategorie();
     this.crudApi.dataForm = this.fb.group({
       id: null,
       code: ['', [Validators.required]],
       libelle: ['', [Validators.required]],
-      categories: ['', [Validators.required]],
+      categories: [''],
 
-    }); */
+    });
 
 
-  }
+  }*/
 
   ResetForm() {
     this.crudApi.dataForm.reset();

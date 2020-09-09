@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateScategorieComponent } from '../create-scategorie/create-scategorie.component';
+import { EditScategorieComponent } from '../edit-scategorie/edit-scategorie.component';
 
 @Component({
   selector: 'app-list-scategorie',
@@ -85,7 +86,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
 
-    this.matDialog.open(CreateScategorieComponent, dialogConfig);
+    this.matDialog.open(EditScategorieComponent, dialogConfig);
   }
   deleteScategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Sous-Categorie ?')) {
@@ -93,7 +94,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.toastr.success('Scategorie supprimé avec succès!');
+          this.toastr.warning('Scategorie supprimé avec succès!');
           this.getListScategories();
       },
         error => console.log(error));

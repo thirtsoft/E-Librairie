@@ -27,12 +27,15 @@ import { EditVersementComponent } from './versement/edit-versement/edit-versemen
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ListCmdClientComponent } from './commandeClient/list-cmd-client/list-cmd-client.component';
-import { CreateCmdClientComponent } from './commandeClient/create-cmd-client/create-cmd-client.component';
 import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
 import { ListCreanceComponent } from './creance/list-creance/list-creance.component';
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
+import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
+import { CreateCommandeClientComponent } from './CommandeClient/create-commande-client/create-commande-client.component';
+import { EditCommandeClientComponent } from './CommandeClient/edit-commande-client/edit-commande-client.component';
+import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 
 const routes: Routes = [
 
@@ -44,7 +47,7 @@ const routes: Routes = [
 
     { path: 'scategories', component: ListScategorieComponent},
     { path: 'scategorie', component: CreateScategorieComponent},
-    { path:'scategories/:id',component:EditScategorieComponent },
+    { path:'scategorie/:id',component:EditScategorieComponent },
 
     { path: 'categories', component: ListCategorieComponent},
     { path: 'categorie', component: CreateCategorieComponent},
@@ -54,9 +57,14 @@ const routes: Routes = [
     { path: 'client', component: CreateClientComponent},
     { path:'clients/:id',component:EditClientComponent },
 
-    { path: 'commandeclients', component: ListCmdClientComponent},
-    { path: 'commandeclient', component: CreateCmdClientComponent},
-    { path:'commandeclient/:id',component:EditClientComponent },
+    { path: 'commandeclients', component: ListCommandeClientComponent},
+    { path: 'commandeclient', component: CreateCommandeClientComponent},
+    { path:'commandeclient/:id',component:EditCommandeClientComponent },
+
+    { path: 'lcommandeclients', component: ListLigneCmdClientComponent},
+    { path: 'lcommandeclient', component: CreateLigneCmdClientComponent},
+    { path:'lcommandeclient/:id',component:EditCommandeClientComponent },
+
 
     { path: 'avoirs', component: ListAvoirComponent},
     { path: 'avoirs', component: CreateAvoirComponent},

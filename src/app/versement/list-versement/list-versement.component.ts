@@ -87,7 +87,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.toastr.success('Versement supprimé avec succès!');
+          this.toastr.warning('Versement supprimé avec succès!');
           this.getListVersements();
       },
         error => console.log(error));

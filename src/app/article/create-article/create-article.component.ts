@@ -20,7 +20,10 @@ export class CreateArticleComponent implements OnInit {
 
   public article = new Article();
 
-  public scategories:  Scategorie[];
+  //scategories: any;
+  ScategorieList: any;
+
+  scategorie : any={};
 
   public categories: Categorie[];
 
@@ -42,7 +45,7 @@ export class CreateArticleComponent implements OnInit {
       );
 
       this.ScatService.getAllScategories().subscribe(
-        response =>{this.scategories = response;}
+        response =>{this.ScategorieList = response;}
       );
 
     }
@@ -96,19 +99,19 @@ export class CreateArticleComponent implements OnInit {
     });
   }
 
-  onSelectCateg(id: number) {
-    this.ScatService.getListScategoriesByCategoryId(id).subscribe(
+  onChangeCtegorie(id: number) {
+    this.ScatService.getScategorieById(id).subscribe(
       response => {
-        this.scategories = response;
+        this.ScategorieList = response;
       }
     );
 
   }
 
   onSelectScateg(id: number) {
-    this.ScatService.getScategorieById(id).subscribe(
+    this.ScatService.getListScategoriesByCategoryId(id).subscribe(
       response => {
-        this.crudApi.dataForm.value.code = "10";
+        this.ScategorieList = response;
       }
     );
 

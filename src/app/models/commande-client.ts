@@ -1,19 +1,16 @@
 import { Client } from './client';
-import { LcmdClient } from './lcmd-client';
-export class CmdClient {
+
+export class CommandeClient {
   id: number;
   numCommande: string;
   totalCommande: number;
   status: string;
   dateCommande: Date;
 
-  lcomms :Array<LcmdClient> =[];
-
-  client: Client
+  client: Client;
 
   public constructor() {
     this.client = new Client();
   }
-
 
 }

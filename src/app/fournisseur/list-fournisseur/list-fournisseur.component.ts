@@ -88,7 +88,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.toastr.success('Fournisseur supprimé avec succès!');
+          this.toastr.warning('Fournisseur supprimé avec succès!');
           this.getListFournisseurs();
       },
         error => console.log(error));

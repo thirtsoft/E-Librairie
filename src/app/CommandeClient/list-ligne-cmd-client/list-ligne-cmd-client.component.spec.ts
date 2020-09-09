@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListLcmdClientComponent } from './list-lcmd-client.component';
+import { ListLigneCmdClientComponent } from './list-ligne-cmd-client.component';
 
-describe('ListLcmdClientComponent', () => {
-  let component: ListLcmdClientComponent;
-  let fixture: ComponentFixture<ListLcmdClientComponent>;
+describe('ListLigneCmdClientComponent', () => {
+  let component: ListLigneCmdClientComponent;
+  let fixture: ComponentFixture<ListLigneCmdClientComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListLcmdClientComponent ]
+      declarations: [ ListLigneCmdClientComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListLcmdClientComponent);
+    fixture = TestBed.createComponent(ListLigneCmdClientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
