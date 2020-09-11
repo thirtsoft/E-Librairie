@@ -18,7 +18,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
 
   formData: LigneCmdClient;
   listArticle: Article[];
-  
+
   isValid: boolean = true;
   commande: any;
   produit: any;
@@ -37,7 +37,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
         this.listArticle = response;
       }
     );
-    
+
     if (this.data.orderItemIndex == null)
       this.formData = {
         OrderItemId: null,
@@ -48,7 +48,8 @@ export class CreateLigneCmdClientComponent implements OnInit {
         quantite: 0,
         ItemName: '',
         total: 0,
-        
+        produit: new Article()
+
       }
     else
       this.formData = Object.assign({}, this.commandeService.orderItems[this.data.orderItemIndex]);
@@ -62,7 +63,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
     else {
       this.formData.prix = this.listArticle[ctrl.selectedIndex-1].prixVente;
       this.formData.ItemName = this.listArticle[ctrl.selectedIndex-1].designation;
-     
+
     }
 
     this.calculTotal();

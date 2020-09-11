@@ -13,7 +13,7 @@ export class LigneCmdClient {
 
   //commande: CommandeClient;
 
-  //produit: Article;
+  produit: Article;
 
  /*  public constructor() {
     this.commande = new CommandeClient();

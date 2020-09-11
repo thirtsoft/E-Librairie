@@ -4,15 +4,15 @@
     <hr>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)" autocomplete="off">
         <!-- <input type="hidden" class="form-control" formControlName="id" id="id">-->
-        <input type="hidden" name="OrderItemId" #OrderItemId="ngModel" [(ngModel)]="formData.OrderItemId" class="form-control"> 
-        <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="formData.OrderId" class="form-control"> 
-        <input type="hidden" name="ItemName" #ItemName="ngModel" [(ngModel)]="formData.ItemName" class="form-control"> 
+        <input type="hidden" name="OrderItemId" #OrderItemId="ngModel" [(ngModel)]="formData.OrderItemId" class="form-control">
+        <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="formData.OrderId" class="form-control">
+        <input type="hidden" name="ItemName" #ItemName="ngModel" [(ngModel)]="formData.ItemName" class="form-control">
         <div class="form-group">
           <label>Article</label>
-          <select name="ItemId" #ItemId="ngModel" [(ngModel)]="formData.ItemId" class="form-control"
-            (change)="selectPrice($event.target)" [class.is-invalid]="!isValid && formData.ItemId==0">
+          <select name="produit" #ItemId="ngModel" [(ngModel)]="formData.produit" class="form-control"
+            (change)="selectPrice($event.target)" [class.is-invalid]="!isValid && formData.produit.id==0">
             <option value="0">-Select-</option>
-            <option *ngFor="let item of listArticle" value="{{item.id}}">{{item.reference}}</option>
+            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
           </select>
         </div>
 

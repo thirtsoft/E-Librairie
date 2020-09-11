@@ -18,9 +18,10 @@
     <div class="col-md-6 form-group">
       <label>Client</label>
       <div class="form-group">
-        <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="service.formData.CustomerId" class="form-control">
+        <select name="client" #client="ngModel" [(ngModel)]="service.formData.client" class="form-control"
+          [class.is-invalid]="!isValid && service.formData.client.id==0">
           <option value="0">-Select-</option>
-          <option *ngFor="let item of clientList" value="{{item.id}}">{{item.raisonSocial}}</option>
+          <option *ngFor="let item of clientList" [ngValue]="item">{{item.raisonSocial}}</option>
         </select>
       </div>
     </div>
@@ -43,7 +44,7 @@
       </th>
     </thead>
     <tbody>
-      <tr *ngIf="service.orderItems.length==0">
+      <tr *ngIf="service.orderItems.length==0" [class.text-danger]="!isValid && service.orderItems.length==0">
         <td class="font-italic text-center" colspan="5">
             Aucune Commande sélectionnée ...
         </td>

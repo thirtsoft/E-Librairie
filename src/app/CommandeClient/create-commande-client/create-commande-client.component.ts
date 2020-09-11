@@ -21,7 +21,7 @@ export class CreateCommandeClientComponent implements OnInit {
 
   clientList: Client[];
 
-  formData: FormGroup;
+  //formData: FormGroup;
 
   public order = new CommandeClient();
 
@@ -41,10 +41,7 @@ export class CreateCommandeClientComponent implements OnInit {
     public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
     ) { }
 
-  //get f() { return this.service.formData.controls }
-
   ngOnInit() {
-   
     this.resetForm();
 
     this.clientService.getAllClients().subscribe(
@@ -55,24 +52,25 @@ export class CreateCommandeClientComponent implements OnInit {
     );
 
   }
+
   resetForm(form?: NgForm) {
     if (form = null)
       form.resetForm();
     this.service.formData = {
       id: null,
       numCommande: Math.floor(100000 + Math.random() * 900000).toString(),
-      CustomerId: 0,
+      //CustomerId: 0,
       totalCommande: 0,
       status: '',
       dateCommande: new Date(),
+      client: new Client(),
       DeletedOrderItemIDs: ''
-      //DeletedOrderItemIDs: '',
-     
+
     };
+
     this.service.orderItems=[];
 
   }
-
 
   AddData(lcommandeIndex, OrderId){
     const dialogConfig = new MatDialogConfig();
@@ -80,27 +78,25 @@ export class CreateCommandeClientComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     dialogConfig.data={lcommandeIndex, OrderId};
-    this.dialog.open(CreateLigneCmdClientComponent, dialogConfig).afterClosed().subscribe(b10=>{
+    this.dialog.open(CreateLigneCmdClientComponent, dialogConfig).afterClosed().subscribe(res =>{
         this.calculMontantTotal();
     });
 
   }
 
-
-
   calculMontantTotal() {
-  //  this.service.commande.totalCommande = this.service.listLigneCmd.reduce((prev, curr) => {
-  //    return prev + curr.total;
- //   }, 0);
- //   this.service.commande.totalCommande = parseFloat(this.service.commande.totalCommande.toFixed(2));
+    this.service.formData.totalCommande = this.service.orderItems.reduce((prev, curr) => {
+      return prev + curr.total ;
+    }, 0);
+    this.service.formData.totalCommande = parseFloat(this.service.formData.totalCommande.toFixed(2));
 
   }
 
   validateForm() {
     this.isValid = true;
-    if (this.service.commande.id == 0)
+    if (this.service.formData.client.id==0)
       this.isValid = false;
-    else if (this.service.listLigneCmd.length == 0)
+    else if (this.service.orderItems.length==0)
       this.isValid = false;
     return this.isValid;
   }
@@ -117,7 +113,7 @@ export class CreateCommandeClientComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.validateForm()) {
-      this.service.createCommandeClient(this.service.commande).subscribe(res => {
+      this.service.createCommandeClient().subscribe(res => {
         this.resetForm();
         this.toastr.success('Commande Ajoutée avec succès');
         this.router.navigate(['/commandeclients']);
@@ -142,7 +138,7 @@ export class CreateCommandeClientComponent implements OnInit {
     if (orderItemID != null)
       this.service.formData.DeletedOrderItemIDs += orderItemID + ",";
     this.service.orderItems.splice(i, 1);
-    //this.updateGrandTotal();
+    this.calculMontantTotal();
   }
 
 

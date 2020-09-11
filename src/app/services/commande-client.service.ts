@@ -36,8 +36,16 @@ export class CommandeClientService {
     return this.http.get(`${this.baseUrl}/commandes/${id}`);
   }
 
-  createCommandeClient(info: CommandeClient): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/commandes`, info);
+  /* createCommandeClient(info: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/commandesClientes`, info);
+  } */
+
+  createCommandeClient() {
+    var body = {
+      ...this.formData,
+      ligneCmdClients: this.orderItems
+    };
+    return this.http.post(`${this.baseUrl}/commandesClientes`, body);
   }
 
   /**
