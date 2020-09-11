@@ -79,7 +79,7 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
 
   editerLigneCmdClient(item : LigneCmdClient) {
 
-    this.router.navigateByUrl('lcommandeclient/'+item.id);
+    this.router.navigateByUrl('lcommandeclient/'+item.OrderItemId);
 
   }
 

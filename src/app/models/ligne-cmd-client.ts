@@ -2,17 +2,21 @@ import { CommandeClient } from './commande-client';
 import { Article } from './article';
 
 export class LigneCmdClient {
-  id: number;
+  OrderItemId: number;
   numero: string;
+  OrderId: number;
+  ItemId: number;
+  ItemName: string;
   quantite: number;
   prix: number;
+  total: number;
 
-  commande: CommandeClient;
+  //commande: CommandeClient;
 
-  produit: Article;
+  //produit: Article;
 
-  public constructor() {
+ /*  public constructor() {
     this.commande = new CommandeClient();
     this.produit = new Article();
-  }
+  } */
 }

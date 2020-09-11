@@ -1,3 +1,113 @@
-<p>
-  create-ligne-cmd-client works!
-</p>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-md-offset-2">
+    <h4 class="dislay-4">Commande </h4>
+    <hr>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" autocomplete="off">
+        <!-- <input type="hidden" class="form-control" formControlName="id" id="id">-->
+        <input type="hidden" name="OrderItemId" #OrderItemId="ngModel" [(ngModel)]="formData.OrderItemId" class="form-control"> 
+        <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="formData.OrderId" class="form-control"> 
+        <input type="hidden" name="ItemName" #ItemName="ngModel" [(ngModel)]="formData.ItemName" class="form-control"> 
+        <div class="form-group">
+          <label>Article</label>
+          <select name="ItemId" #ItemId="ngModel" [(ngModel)]="formData.ItemId" class="form-control"
+            (change)="selectPrice($event.target)" [class.is-invalid]="!isValid && formData.ItemId==0">
+            <option value="0">-Select-</option>
+            <option *ngFor="let item of listArticle" value="{{item.id}}">{{item.reference}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Prix Unitaire</label>
+          <div class="form-group">
+            <input name="prix" #prix="ngModel" [(ngModel)]="formData.prix" class="form-control" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Quantité</label>
+          <div class="form-group">
+            <input type="number" name="quantite" #quantite="ngModel" [(ngModel)]="formData.quantite" class="form-control"
+              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.quantite==0">
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Total</label>
+          <div class="form-group">
+            <input name="total" #total="ngModel" [(ngModel)]="formData.total" class="form-control" readonly>
+          </div>
+        </div>
+        <!-- <input type="hidden" class="form-control" formControlName="tottva" id="tottva" readonly>
+        <input type="hidden" class="form-control" formControlName="totttc" id="totttc" readonly> -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+
+<!--
+<div class="row justify-content-center">
+  <div class="col-md-8 col-md-offset-2">
+
+    <h1 class="dislay-4">Commande </h1>
+    <hr>
+    <form [formGroup]="this.formData"  (ngSubmit)="onSubmit()">
+        <input type="hidden" class="form-control" formControlName="id" id="id">
+        <input type="hidden" class="form-control" formControlName="libart" id="libart">
+
+        <div class="form-group">
+            <label>Article </label>
+            <select  class="form-control" formControlName="code_article" id="code_article"
+            (change)="selectPrice($event.target)">
+                <option value="0">-Select-</option>
+                <option *ngFor="let item of articleList" value="{{item.id}}">{{item.reference}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+        <label>Prix Unitaire </label>
+        <div class="form-group">
+              <input class="form-control" (keyup)="cal()" formControlName="prix" id="prix"
+              [class.is-invalid]="!isValid && formData.value.prix==0" >
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label>Quantité</label>
+          <div class="form-group">
+            <input type="number" name="quantite"  class="form-control" formControlName="quantite" id="quantite" (keyup)="cal()"
+            [class.is-invalid]="!isValid && formData.value.quantite==0">
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label>Tva</label>
+          <div class="form-group">
+            <input class="form-control" formControlName="tva" id="tva"  readonly >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Totht </label>
+          <div class="form-group">
+            <input type = "text" class="form-control" formControlName="totht" id="totht"  readonly>
+        </div>
+        </div>
+
+        <input type="hidden" class="form-control" formControlName="tottva" id="tottva" readonly>
+        <input type="hidden" class="form-control" formControlName="totttc" id="totttc" readonly>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        </div>
+
+    </form>
+  </div>
+</div>
+ -->

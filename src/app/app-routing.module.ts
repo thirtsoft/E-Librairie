@@ -58,8 +58,10 @@ const routes: Routes = [
     { path:'clients/:id',component:EditClientComponent },
 
     { path: 'commandeclients', component: ListCommandeClientComponent},
-    { path: 'commandeclient', component: CreateCommandeClientComponent},
-    { path:'commandeclient/:id',component:EditCommandeClientComponent },
+    { path: 'commandeclient', children: [
+      { path: '', component: CreateCommandeClientComponent},
+      { path:'edit/:id',component: CreateCommandeClientComponent },
+    ]},
 
     { path: 'lcommandeclients', component: ListLigneCmdClientComponent},
     { path: 'lcommandeclient', component: CreateLigneCmdClientComponent},

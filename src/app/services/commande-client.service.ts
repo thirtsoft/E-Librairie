@@ -3,6 +3,7 @@ import { CommandeClient } from '../models/commande-client';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LigneCmdClient } from '../models/ligne-cmd-client';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,16 @@ export class CommandeClientService {
   choixmenu : string  = 'A';
   listData : CommandeClient[];
 
-  public dataForm:  FormGroup;
+  commande: CommandeClient;
+
+  listLigneCmd: LigneCmdClient[];
+
+  //public dataForm:  FormGroup;
+
+  list: LigneCmdClient[] = [];
+
+  public formData:  CommandeClient;
+  orderItems: LigneCmdClient[];
 
   constructor(private http: HttpClient) { }
 
