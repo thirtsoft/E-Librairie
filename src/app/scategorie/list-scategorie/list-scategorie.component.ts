@@ -78,7 +78,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateScategorieComponent, dialogConfig);
   }
 
-  editScategorie(item : Scategorie) {
+  editerScategorie(item : Scategorie) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
@@ -86,7 +86,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
 
-    this.matDialog.open(EditScategorieComponent, dialogConfig);
+    this.matDialog.open(CreateScategorieComponent, dialogConfig);
   }
   deleteScategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Sous-Categorie ?')) {
@@ -101,9 +101,9 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     }
 
   }
-  editerScategorie(item : Scategorie) {
+  editScategorie(item : Scategorie) {
 
-    this.router.navigateByUrl('scategories/'+item.id);
+    this.router.navigateByUrl('scategorie/'+item.id);
 
   }
 

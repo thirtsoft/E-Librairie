@@ -29,8 +29,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateLigneCmdClientComponent>,
    ) { }
 
-
-
    ngOnInit() {
     this.articleService.getAllArticles().subscribe(
       response =>{
@@ -48,7 +46,8 @@ export class CreateLigneCmdClientComponent implements OnInit {
         quantite: 0,
         ItemName: '',
         total: 0,
-        produit: new Article()
+        produit: new Article(),
+        commande: new CommandeClient(),
 
       }
     else
@@ -91,7 +90,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
     this.isValid = true;
     if (formData.ItemId==0)
       this.isValid = false;
-    else if (formData.quantite == 0)
+    else if (formData.quantite==0)
       this.isValid = false;
     return this.isValid;
   }

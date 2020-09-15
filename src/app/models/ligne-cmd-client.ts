@@ -11,12 +11,12 @@ export class LigneCmdClient {
   prix: number;
   total: number;
 
-  //commande: CommandeClient;
+  commande: CommandeClient;
 
   produit: Article;
 
- /*  public constructor() {
+  public constructor() {
     this.commande = new CommandeClient();
     this.produit = new Article();
-  } */
+  }
 }

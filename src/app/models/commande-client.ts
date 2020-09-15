@@ -12,8 +12,8 @@ export class CommandeClient {
 
   client: Client;
 
-  /* public constructor() {
+  public constructor() {
     this.client = new Client();
-  } */
+  }
 
 }

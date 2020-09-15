@@ -49,13 +49,13 @@
             Aucune Commande sélectionnée ...
         </td>
       </tr>
-      <tr *ngFor="let item of service.orderItems; let i=index;">
+      <tr *ngFor="let item of service.orderItems;let i=index;">
         <td>{{item.ItemName}}</td>
         <td>{{item.prix}}</td>
         <td>{{item.quantite}}</td>
         <td>{{item.total}}</td>
         <td>
-          <a class="btn btn-sm btn-info text-white" (click)="AddData(i,service.formData.id)">
+          <a class="btn btn-sm btn-info text-white" (click)="AddOrderItem(i,service.formData.id)">
               <i class="fa fa-pencil"></i></a>
           <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemId,i)">
               <i class="fa fa-trash"></i></a>
@@ -75,7 +75,7 @@
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-    <a class="btn btn-outline-dark ml-1" routerLink="/lcommandeclients"><i class="fa fa-plus-square"></i> Liste </a>
+    <a class="btn btn-outline-dark ml-1" routerLink="/detailsCommandeClients"><i class="fa fa-plus-square"></i> Liste </a>
   </div>
 </form>
 

@@ -70,7 +70,7 @@ export class ListContratComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateContratComponent, dialogConfig);
   }
 
-  editContrat(item : Contrat) {
+  editerContrat(item : Contrat) {
 
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
@@ -95,7 +95,7 @@ export class ListContratComponent implements OnDestroy, OnInit {
     }
 
   }
-  editerContrat(item : Contrat) {
+  editContrat(item : Contrat) {
 
     this.router.navigateByUrl('contrats/'+item.id);
 

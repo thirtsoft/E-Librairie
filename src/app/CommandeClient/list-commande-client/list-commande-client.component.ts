@@ -8,6 +8,7 @@ import { CommandeClientService } from 'src/app/services/commande-client.service'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
+import { Client } from 'src/app/models/client';
 
 @Component({
   selector: 'app-list-commande-client',
@@ -16,7 +17,9 @@ import { CreateCommandeClientComponent } from '../create-commande-client/create-
 })
 export class ListCommandeClientComponent implements OnDestroy, OnInit {
 
-  listData : CommandeClient[];
+  listData: CommandeClient[];
+
+  client;
 
   private editForm: FormGroup;
 
@@ -41,9 +44,12 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     this.crudApi.getAllCommandeClients().subscribe(
       response =>{
         this.listData = response;
+        console.log(this.listData);
         this.dtTrigger.next();
       }
     );
+
+    this.client = new Client();
   }
 
   ngOnDestroy(): void {
@@ -52,7 +58,8 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
 
   getListCommandeClients() {
     this.crudApi.getAllCommandeClients().subscribe(
-      response =>{this.listData = response;
+      response =>{
+        this.listData = response;
 
       });
 

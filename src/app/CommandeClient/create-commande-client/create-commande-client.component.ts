@@ -11,6 +11,7 @@ import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/di
 import { MatDialogRef } from "@angular/material/dialog";
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { CommandeClient } from 'src/app/models/commande-client';
+import { EditLigneCmdClientComponent } from '../edit-ligne-cmd-client/edit-ligne-cmd-client.component';
 
 @Component({
   selector: 'app-create-commande-client',
@@ -25,6 +26,8 @@ export class CreateCommandeClientComponent implements OnInit {
 
   public order = new CommandeClient();
 
+  orders: CommandeClient[];
+
   isValid:boolean = true;
   articleService: any;
   Date;
@@ -35,14 +38,22 @@ export class CreateCommandeClientComponent implements OnInit {
   constructor(private service: CommandeClientService, private dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService,
     private toastr :ToastrService, private router :Router,
-    private currentRoute: ActivatedRoute, private datePipe : DatePipe,
+    private currentRoute: ActivatedRoute, private comService: CommandeClientService,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
     ) { }
 
   ngOnInit() {
-    this.resetForm();
+    let OrderId = this.currentRoute.snapshot.paramMap.get('id');
+    if (OrderId == null) {
+      this.resetForm();
+    }else {
+      this.comService.getOrderByID(parseInt(OrderId)).then(res =>{
+         this.orders = res.order;
+        this.comService.orderItems = res.orderItems;
+      });
+    }
 
     this.clientService.getAllClients().subscribe(
       response =>{
@@ -79,6 +90,18 @@ export class CreateCommandeClientComponent implements OnInit {
     dialogConfig.width="50%";
     dialogConfig.data={lcommandeIndex, OrderId};
     this.dialog.open(CreateLigneCmdClientComponent, dialogConfig).afterClosed().subscribe(res =>{
+        this.calculMontantTotal();
+    });
+
+  }
+
+  AddOrderItem(lcommandeIndex, OrderId){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data={lcommandeIndex, OrderId};
+    this.dialog.open(EditLigneCmdClientComponent, dialogConfig).afterClosed().subscribe(res =>{
         this.calculMontantTotal();
     });
 
@@ -121,9 +144,6 @@ export class CreateCommandeClientComponent implements OnInit {
     }
   }
 
-  transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
-  }
   /* OnSelectClient(ctrl){
     if(ctrl.selectedIndex == 0){
       this.formData.get('lib_client').setValue('');

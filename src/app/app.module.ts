@@ -54,6 +54,11 @@ import { CreateCommandeClientComponent } from './CommandeClient/create-commande-
 import { EditCommandeClientComponent } from './CommandeClient/edit-commande-client/edit-commande-client.component';
 import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
 import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+import { EditLigneCmdClientComponent } from './CommandeClient/edit-ligne-cmd-client/edit-ligne-cmd-client.component';
+import { ListVenteComponent } from './vente/list-vente/list-vente.component';
+import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
+import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
+import { CreateLigneVenteComponent } from './vente/create-ligne-vente/create-ligne-vente.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +99,11 @@ import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd
     EditCommandeClientComponent,
     ListLigneCmdClientComponent,
     CreateLigneCmdClientComponent,
+    EditLigneCmdClientComponent,
+    ListVenteComponent,
+    CreateVenteComponent,
+    ListLigneVenteComponent,
+    CreateLigneVenteComponent,
   ],
   imports: [
     BrowserModule,

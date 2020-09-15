@@ -71,7 +71,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateVersementComponent, dialogConfig);
   }
 
-  editVersement(item : Versement) {
+  editerVersement(item : Versement) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
@@ -94,7 +94,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
     }
 
   }
-  editerVersement(item : Versement) {
+  editVersement(item : Versement) {
 
     this.router.navigateByUrl('versements/'+item.id);
 

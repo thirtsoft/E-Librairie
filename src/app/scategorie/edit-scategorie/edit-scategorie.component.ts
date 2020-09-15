@@ -6,7 +6,7 @@ import { CategorieService } from 'src/app/services/categorie.service';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Scategorie } from 'src/app/models/scategorie';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-edit-scategorie',
@@ -25,13 +25,12 @@ export class EditScategorieComponent implements OnInit {
 
   constructor(private crudApi:ScategorieService, private route: ActivatedRoute,
     private catService: CategorieService, private router: Router,
-    public fb: FormBuilder,public toastr: ToastrService,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<EditScategorieComponent>,
+    public toastr: ToastrService, private matDialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     ) { }
 
   ngOnInit() {
-    this.idScat = this.route.snapshot.params.id;
+    this.idScat = this.route.snapshot.params['id'];
     this.crudApi.getScategorieById(this.idScat)
       .subscribe(data => {
         this.currentScategorie = data;
@@ -47,7 +46,7 @@ export class EditScategorieComponent implements OnInit {
     this.crudApi.updateScategorie(this.idScat, Scat)
       .subscribe(data=> {
         this.scategorie = data;
-        this.dialogRef.close();
+      //  this.dialogRef.close();
         this.toastr.success("Scategorie Modifier avec Succès");
         this.router.navigate(['/scategories']);
       }, error=> {

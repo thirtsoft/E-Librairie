@@ -28,12 +28,16 @@ export class CommandeClientService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCommandeClients(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/commandes`);
+  getAllCommandeClients(): Observable<CommandeClient[]> {
+    return this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes`);
   }
 
   public getCommandeClientById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/commandes/${id}`);
+  }
+
+  getOrderByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/commandes/${id}`).toPromise();
   }
 
   /* createCommandeClient(info: Object): Observable<Object> {

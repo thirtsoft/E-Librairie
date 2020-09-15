@@ -7,6 +7,7 @@ export class Article {
   designation: string;
   prixAchat: number;
   prixVente: number;
+  prixDetail: number;
   tva: number;
   qtestock: number;
   stockInitial: number;

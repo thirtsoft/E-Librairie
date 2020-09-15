@@ -26,9 +26,15 @@ export class ArticleService {
     return this.http.get(`${this.baseUrl}/produits/${id}`);
   }
 
+  exportPdfArticle(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/createPdf`,{responseType: 'blob'});
+  }
+
   createArticle(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/produits`, info);
   }
+
+
 
   /**
    * Methode pour afficher la liste des categories par pages

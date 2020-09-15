@@ -36,6 +36,11 @@ import { CreateCommandeClientComponent } from './CommandeClient/create-commande-
 import { EditCommandeClientComponent } from './CommandeClient/edit-commande-client/edit-commande-client.component';
 import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
 import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+import { EditLigneCmdClientComponent } from './CommandeClient/edit-ligne-cmd-client/edit-ligne-cmd-client.component';
+import { ListVenteComponent } from './vente/list-vente/list-vente.component';
+import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
+import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
+import { CreateLigneVenteComponent } from './vente/create-ligne-vente/create-ligne-vente.component';
 
 const routes: Routes = [
 
@@ -43,7 +48,7 @@ const routes: Routes = [
 
     { path: 'articles', component: ListArticleComponent},
     { path: 'article', component: CreateArticleComponent},
-    { path:'articles/:id',component:EditArticleComponent },
+    { path:'article/:id',component:EditArticleComponent },
 
     { path: 'scategories', component: ListScategorieComponent},
     { path: 'scategorie', component: CreateScategorieComponent},
@@ -58,14 +63,30 @@ const routes: Routes = [
     { path:'clients/:id',component:EditClientComponent },
 
     { path: 'commandeclients', component: ListCommandeClientComponent},
-    { path: 'commandeclient', children: [
-      { path: '', component: CreateCommandeClientComponent},
-      { path:'edit/:id',component: CreateCommandeClientComponent },
-    ]},
 
-    { path: 'lcommandeclients', component: ListLigneCmdClientComponent},
-    { path: 'lcommandeclient', component: CreateLigneCmdClientComponent},
-    { path:'lcommandeclient/:id',component:EditCommandeClientComponent },
+    { path:'commandeclient',children:[
+        {path:'',component:CreateCommandeClientComponent},
+        {path:'edit/:id',component:EditLigneCmdClientComponent}
+      ]
+    },
+
+    { path: 'detailsCommandeClients', component: ListLigneCmdClientComponent},
+    { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent},
+    { path:'detailsCommandeClient/:id',component:EditCommandeClientComponent },
+
+    { path: 'ventes', component: ListVenteComponent},
+    { path:'vente',children:[
+        {path:'',component:CreateVenteComponent},
+        {path:'edit/:id',component:EditLigneCmdClientComponent}
+      ]
+    },
+
+    { path: 'detailsVentes', component: ListLigneVenteComponent},
+    { path:'detailsVente',children:[
+        {path:'',component:CreateLigneVenteComponent},
+        {path:'edit/:id',component:EditLigneCmdClientComponent}
+      ]
+    },
 
 
     { path: 'avoirs', component: ListAvoirComponent},
