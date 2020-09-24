@@ -1,0 +1,81 @@
+<mat-toolbar color="success">
+  <div>
+  <h1>Gestion Approvisionnement</h1>
+  </div>
+</mat-toolbar>
+
+<form #commandeForm="ngForm" (ngSubmit)="onSubmit(commandeForm)" *ngIf="crudApi.formData" autocomplete="off">
+  <div class="form-group row col-md-12">
+    <div class="form-group col-md-6">
+        <label><strong>Code Approvisionnement : </strong></label>
+        <input name="code" #code="ngModel" [(ngModel)]="crudApi.formData.code" class="form-control">
+    </div>
+    <div class="col-md-6 form-group">
+        <label>Date</label>
+        <input  type="date" name="dateAppro" #dateAppro="ngModel" [(ngModel)]="crudApi.formData.dateAppro" class="form-control">
+    </div>
+
+    <div class="col-md-6 form-group">
+      <label>Fournisseur</label>
+      <div class="form-group">
+        <select name="fournisseur" #fournisseur="ngModel" [(ngModel)]="crudApi.formData.fournisseur" class="form-control"
+          [class.is-invalid]="!isValid && crudApi.formData.fournisseur.id==0">
+          <option value="0">-Select-</option>
+          <option *ngFor="let item of fournisseurList" [ngValue]="item">{{item.raisonSociale}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6 form-group">
+      <label>Status</label>
+      <input type="text"  name="status" #status="ngModel" [(ngModel)]="crudApi.formData.status" class="form-control">
+    </div>
+  </div>
+  <!-- Debut Ligne de commandes -->
+  <table class="table table-borderless">
+    <thead class="thead-light">
+      <th>Article</th>
+      <th>Price</th>
+      <th>Quantite</th>
+      <th>Total</th>
+      <th>
+        <a class="btn btn-sm btn-success text-white" (click)="AddData(null,crudApi.formData.id)">
+            <i class="fa fa-plus"></i>Ajouter
+        </a>
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngIf="crudApi.orderItems.length==0" [class.text-danger]="!isValid && crudApi.orderItems.length==0">
+        <td class="font-italic text-center" colspan="5">
+            Aucune Commande sélectionnée ...
+        </td>
+      </tr>
+      <tr *ngFor="let item of crudApi.orderItems;let i=index;">
+        <td>{{item.ItemName}}</td>
+        <td>{{item.prix}}</td>
+        <td>{{item.quantite}}</td>
+        <td>{{item.total}}</td>
+        <td>
+          <a class="btn btn-sm btn-info text-white" (click)="AddOrderItem(i,crudApi.formData.id)">
+              <i class="fa fa-pencil"></i></a>
+          <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemId,i)">
+              <i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Fin  Ligne de commandes -->
+
+  <div class="form-group row">
+    <div class="col-sm-4 mb-3 mb-sm-0">
+      <div class="form-group">
+        <label>Total Ht : </label>
+        <input name="totalAppro" #totalAppro="ngModel" [(ngModel)]="crudApi.formData.totalAppro" class="form-control" readonly>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+    <a class="btn btn-outline-dark ml-1" routerLink="/detailsApprovisionnements"><i class="fa fa-plus-square"></i> Liste </a>
+  </div>
+</form>

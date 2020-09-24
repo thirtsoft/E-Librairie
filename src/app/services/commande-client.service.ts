@@ -11,7 +11,7 @@ import { LigneCmdClient } from '../models/ligne-cmd-client';
 export class CommandeClientService {
 
   private baseUrl = 'http://localhost:8080/alAmine';
- // private baseUrl = '/api/categories';
+
   choixmenu : string  = 'A';
   listData : CommandeClient[];
 
@@ -49,7 +49,9 @@ export class CommandeClientService {
       ...this.formData,
       ligneCmdClients: this.orderItems
     };
+
     return this.http.post(`${this.baseUrl}/commandesClientes`, body);
+
   }
 
   /**

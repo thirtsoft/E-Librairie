@@ -35,11 +35,10 @@ export class CreateCommandeClientComponent implements OnInit {
   client: any;
   annee  = 0;
 
-  constructor(private service: CommandeClientService, private dialog:MatDialog,
+  constructor(private crudApi: CommandeClientService, private dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService,
     private toastr :ToastrService, private router :Router,
-    private currentRoute: ActivatedRoute, private comService: CommandeClientService,
-    private matDialog: MatDialog,
+    private currentRoute: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
     ) { }
@@ -49,9 +48,9 @@ export class CreateCommandeClientComponent implements OnInit {
     if (OrderId == null) {
       this.resetForm();
     }else {
-      this.comService.getOrderByID(parseInt(OrderId)).then(res =>{
+      this.crudApi.getOrderByID(parseInt(OrderId)).then(res =>{
          this.orders = res.order;
-        this.comService.orderItems = res.orderItems;
+        this.crudApi.orderItems = res.orderItems;
       });
     }
 
@@ -67,7 +66,7 @@ export class CreateCommandeClientComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form = null)
       form.resetForm();
-    this.service.formData = {
+    this.crudApi.formData = {
       id: null,
       numCommande: Math.floor(100000 + Math.random() * 900000).toString(),
       //CustomerId: 0,
@@ -79,7 +78,7 @@ export class CreateCommandeClientComponent implements OnInit {
 
     };
 
-    this.service.orderItems=[];
+    this.crudApi.orderItems=[];
 
   }
 
@@ -108,18 +107,18 @@ export class CreateCommandeClientComponent implements OnInit {
   }
 
   calculMontantTotal() {
-    this.service.formData.totalCommande = this.service.orderItems.reduce((prev, curr) => {
+    this.crudApi.formData.totalCommande = this.crudApi.orderItems.reduce((prev, curr) => {
       return prev + curr.total ;
     }, 0);
-    this.service.formData.totalCommande = parseFloat(this.service.formData.totalCommande.toFixed(2));
+    this.crudApi.formData.totalCommande = parseFloat(this.crudApi.formData.totalCommande.toFixed(2));
 
   }
 
   validateForm() {
     this.isValid = true;
-    if (this.service.formData.client.id==0)
+    if (this.crudApi.formData.client.id==0)
       this.isValid = false;
-    else if (this.service.orderItems.length==0)
+    else if (this.crudApi.orderItems.length==0)
       this.isValid = false;
     return this.isValid;
   }
@@ -136,7 +135,7 @@ export class CreateCommandeClientComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.validateForm()) {
-      this.service.createCommandeClient().subscribe(res => {
+      this.crudApi.createCommandeClient().subscribe(res => {
         this.resetForm();
         this.toastr.success('Commande Ajoutée avec succès');
         this.router.navigate(['/commandeclients']);
@@ -156,13 +155,13 @@ export class CreateCommandeClientComponent implements OnInit {
 
   onDeleteOrderItem(orderItemID: number, i: number) {
     if (orderItemID != null)
-      this.service.formData.DeletedOrderItemIDs += orderItemID + ",";
-    this.service.orderItems.splice(i, 1);
+      this.crudApi.formData.DeletedOrderItemIDs += orderItemID + ",";
+    this.crudApi.orderItems.splice(i, 1);
     this.calculMontantTotal();
   }
 
 
-  }
+}
 
 
 /*   ClientList: Client[];

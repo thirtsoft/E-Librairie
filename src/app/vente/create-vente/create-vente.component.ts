@@ -25,9 +25,9 @@ export class CreateVenteComponent implements OnInit {
   client: any;
   annee  = 0;
 
-  constructor(private service: VenteService, private dialog:MatDialog,
+  constructor(private crudApi: VenteService, private dialog:MatDialog,
     public fb: FormBuilder, private toastr :ToastrService, private router :Router,
-    private currentRoute: ActivatedRoute,  private matDialog: MatDialog,
+    private currentRoute: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
     ) { }
@@ -37,9 +37,9 @@ export class CreateVenteComponent implements OnInit {
     if (OrderId == null) {
       this.resetForm();
     }else {
-      this.service.getVenteID(parseInt(OrderId)).then(res =>{
+      this.crudApi.getVenteID(parseInt(OrderId)).then(res =>{
          this.orders = res.order;
-        this.service.orderItems = res.orderItems;
+        this.crudApi.orderItems = res.orderItems;
       });
     }
 
@@ -48,17 +48,17 @@ export class CreateVenteComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form = null)
       form.resetForm();
-    this.service.formData = {
-      VenteId: null,
+    this.crudApi.formData = {
+      venteId: null,
       numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
       totalVente: 0,
       status: '',
-      DeletedOrderItemIDs: '',
       dateVente: new Date(),
+      DeletedOrderItemIDs: ''
 
     };
 
-    this.service.orderItems=[];
+    this.crudApi.orderItems=[];
 
   }
 
@@ -87,23 +87,22 @@ export class CreateVenteComponent implements OnInit {
   }
 
   calculMontantTotal() {
-    this.service.formData.totalVente = this.service.orderItems.reduce((prev, curr) => {
+    this.crudApi.formData.totalVente = this.crudApi.orderItems.reduce((prev, curr) => {
       return prev + curr.total ;
     }, 0);
-    this.service.formData.totalVente = parseFloat(this.service.formData.totalVente.toFixed(2));
+    this.crudApi.formData.totalVente = parseFloat(this.crudApi.formData.totalVente.toFixed(2));
 
   }
-
   validateForm() {
     this.isValid = true;
-    if (this.service.orderItems.length==0)
+    if (this.crudApi.orderItems.length==0)
       this.isValid = false;
     return this.isValid;
   }
 
   onSubmit(form: NgForm) {
     if (this.validateForm()) {
-      this.service.createVente().subscribe(res => {
+      this.crudApi.createVente().subscribe(res => {
         this.resetForm();
         this.toastr.success('Vente Ajoutée avec succès');
         this.router.navigate(['/ventes']);
@@ -113,8 +112,8 @@ export class CreateVenteComponent implements OnInit {
 
   onDeleteOrderItem(orderItemID: number, i: number) {
     if (orderItemID != null)
-      this.service.formData.DeletedOrderItemIDs += orderItemID + ",";
-    this.service.orderItems.splice(i, 1);
+      this.crudApi.formData.DeletedOrderItemIDs += orderItemID + ",";
+    this.crudApi.orderItems.splice(i, 1);
     this.calculMontantTotal();
   }
 

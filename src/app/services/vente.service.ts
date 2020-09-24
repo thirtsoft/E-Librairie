@@ -44,7 +44,7 @@ export class VenteService {
    createVente() {
      var body = {
        ...this.formData,
-       ligneCmdClients: this.orderItems
+       ligneVentes: this.orderItems
      };
      return this.http.post(`${this.baseUrl}/ventes`, body);
    }

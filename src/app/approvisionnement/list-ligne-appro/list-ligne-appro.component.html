@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="btn-toolbar">
+    <div class="panel-heading">
+      <h3>DETAILS APPROVISIONNEMENTS</h3>
+    </div>
+    <div style="padding-left: 20px; padding-top: 10px;">
+      <a type="button" (click)="onCreateLigneAppro()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
+      <!-- <a type="button" [routerLink]="['/createArticle']" class="btn btn-primary btn-lg" (click)="onCreateCategorie()"><i class="fa fa-download" aria-hidden="true"></i> Import</a>&nbsp;&nbsp;
+      <a type="button" class="btn btn-warning btn-lg" (click)="onCreateCategorie()"><i class="fa fa-upload" aria-hidden="true"></i> Export</a> -->
+    </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th>Produit</th><th>Prix</th><th>Quantité</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+          <tbody *ngIf="listData">
+            <tr *ngFor="let lAppro of listData">
+             <!-- <td>{{lcomClient.OrderItemId}}</td>
+                <td>{{lcomClient.numero}}</td>
+              <td>{{lcomClient.commande.numCommande}}</td>-->
+              <td>{{lAppro.produit?.designation}}</td>
+              <td>{{lAppro.prix}}</td>
+              <td>{{lAppro.quantite}}</td>
+              <td>{{(lAppro.prix)*(lAppro.quantite)}} </td>
+              <td>
+                <button class="btn btn-info btn-lg" (click)="editerLigneAppro(lAppro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+                <button class="btn btn-danger btn-lg" (click)="deleteLigneAppro(lAppro.id)"><i class="fa fa-trash-o"></i>  Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+

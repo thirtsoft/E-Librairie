@@ -20,10 +20,10 @@ export class CreateLigneVenteComponent implements OnInit {
   listArticle: Article[];
 
   isValid: boolean = true;
-  vente: any;
+  approvisionnement: any;
   produit: any;
 
-  constructor(public lventeService: LigneVenteService, private toastr :ToastrService,
+  constructor(public lVenteService: LigneVenteService, private toastr :ToastrService,
     @Inject(MAT_DIALOG_DATA) public data, private articleService: ArticleService,
     private venteService: VenteService,public fb: FormBuilder,
     public dialogRef: MatDialogRef<CreateLigneVenteComponent>,
@@ -85,7 +85,6 @@ export class CreateLigneVenteComponent implements OnInit {
     }
 
   }
-
   validateForm(formData: LigneVente) {
     this.isValid = true;
     if (formData.ItemId==0)

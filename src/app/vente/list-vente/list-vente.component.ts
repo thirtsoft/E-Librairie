@@ -81,7 +81,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   editerVente(item : Vente) {
 
-    this.router.navigateByUrl('vente/'+item.VenteId);
+    this.router.navigateByUrl('vente/'+item.venteId);
 
   }
 

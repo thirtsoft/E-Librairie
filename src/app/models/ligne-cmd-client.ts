@@ -19,4 +19,5 @@ export class LigneCmdClient {
     this.commande = new CommandeClient();
     this.produit = new Article();
   }
+
 }

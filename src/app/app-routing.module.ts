@@ -41,6 +41,11 @@ import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
 import { CreateLigneVenteComponent } from './vente/create-ligne-vente/create-ligne-vente.component';
+import { ListApproComponent } from './approvisionnement/list-appro/list-appro.component';
+import { CreateApproComponent } from './approvisionnement/create-appro/create-appro.component';
+import { ListLigneApproComponent } from './approvisionnement/list-ligne-appro/list-ligne-appro.component';
+import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appro/create-ligne-appro.component';
+import { ListStockComponent } from './stock/list-stock/list-stock.component';
 
 const routes: Routes = [
 
@@ -88,14 +93,41 @@ const routes: Routes = [
       ]
     },
 
+    { path: 'approvisionnements', component: ListApproComponent},
+    { path:'approvisionnement',children:[
+        {path:'',component: CreateApproComponent},
+        {path:'edit/:id',component: CreateApproComponent}
+      ]
+    },
 
-    { path: 'avoirs', component: ListAvoirComponent},
-    { path: 'avoirs', component: CreateAvoirComponent},
-    { path:'clients/:id',component:EditClientComponent },
+    { path: 'detailsApprovisionnements', component: ListLigneApproComponent},
+    { path:'detailsApprovisionnement',children:[
+        {path:'',component: CreateLigneApproComponent},
+        {path:'edit/:id',component: CreateLigneApproComponent}
+      ]
+    },
+
+    { path: 'stocks', component: ListStockComponent},
+    { path:'stock',children:[
+        {path:'',component: CreateApproComponent},
+        {path:'edit/:id',component: CreateLigneApproComponent}
+      ]
+    },
 
     { path: 'creances', component: ListCreanceComponent},
-    { path: 'creance', component: CreateCreanceComponent},
-    { path:'clients/:id',component:EditClientComponent },
+    { path:'creance',children:[
+        {path:'',component: CreateCreanceComponent},
+        {path:'edit/:id',component: CreateCreanceComponent}
+      ]
+    },
+
+    { path: 'avoirs', component: ListAvoirComponent},
+    { path:'avoir',children:[
+        {path:'',component: CreateAvoirComponent},
+        {path:'edit/:id',component: CreateAvoirComponent}
+      ]
+    },
+
 
     { path: 'contrats', component: ListContratComponent},
     { path: 'contrat', component: CreateContratComponent},

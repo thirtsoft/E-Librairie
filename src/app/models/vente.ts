@@ -1,5 +1,5 @@
 export class Vente {
-  VenteId: number;
+  venteId: number;
   numeroVente: string;
   dateVente: Date;
   totalVente: number;

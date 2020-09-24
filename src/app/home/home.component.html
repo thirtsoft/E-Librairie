@@ -9,7 +9,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">Gestion <span class="lite">de Stock</span></a>
+      <a href="index.html" class="logo">AL <span class="lite">AMINE</span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -337,8 +337,10 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" [routerLink]="['/approvisionnements']" routerLinkActive="router-link-active">Entrées</a></li>
-              <li><a class="" [routerLink]="['/vente-list']" routerLinkActive="router-link-active"><span>Sorties</span></a></li>
+              <li><a class="" routerLink="/approvisionnements" routerLinkActive="router-link-active">Entrées</a></li>
+              <li><a class="" routerLink="/detailsApprovisionnements" routerLinkActive="router-link-active">Détails Entrées</a></li>
+              <li><a class="" routerLink="/vente-list" routerLinkActive="router-link-active"><span>Sorties</span></a></li>
+              <li><a class="" routerLink="/stocks" routerLinkActive="router-link-active">Stock</a></li>
             </ul>
           </li>
 
@@ -349,8 +351,10 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" [routerLink]="['/versements']">Versement</a></li>
-              <li><a class="" [routerLink]="['/contrats']"><span>Contrat</span></a></li>
+              <li><a class="" routerLink="/versements">Versement</a></li>
+              <li><a class="" routerLink="/contrats">Contrat</a></li>
+              <li><a class="" routerLink="/creances">Creance</a></li>
+              <li><a class="" routerLink="/avoirs">Avoirs</a></li>
             </ul>
           </li>
 

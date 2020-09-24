@@ -2,17 +2,28 @@
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Versement</h1>
     <form #addVersmentForm="ngForm" (ngSubmit)="saveVersement(addVersmentForm.value)">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Numéro </label>
+          <input type="text" class="form-control" [(ngModel)]="versement.numVersement" name="numVersement" id="numVersement">
+        </div>
 
-      <div class="form-group">
-        <label>Numéro </label>
-        <input type="text" class="form-control" [(ngModel)]="versement.numVersement" name="numVersement" id="numVersement">
+        <div class="form-group col-md-6">
+          <label>Numéro Reçu</label>
+          <input type="text" class="form-control" [(ngModel)]="versement.numeroRecu" name="numeroRecu"  id="numeroRecu">
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Nature</label>
-        <input type="text" class="form-control" [(ngModel)]="versement.nature" name="nature"  id="nature">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Nature</label>
+          <input type="text" class="form-control" [(ngModel)]="versement.nature" name="nature"  id="nature">
+        </div>
+        <div class="form-group col-md-6">
+          <label>Bank</label>
+          <input type="text" class="form-control" [(ngModel)]="versement.nomBank" name="nomBank"  id="nomBank">
+        </div>
       </div>
-
       <div class="form-group">
         <label>Employe</label>
         <div class="form-group">
@@ -22,16 +33,24 @@
           </select>
         </div>
       </div>
-
-      <div class="form-group">
-        <label>Montant</label>
-        <input type="number" class="form-control" [(ngModel)]="versement.montantVersement" name="montantVersement"  id="montantVersement">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Montant</label>
+          <input type="number" class="form-control" [(ngModel)]="versement.montantVersement" name="montantVersement"  id="montantVersement">
+        </div>
+        <div class="form-group col-md-6">
+          <label>Date</label>
+          <input type="date" class="form-control" [(ngModel)]="versement.dateVersement" name="dateVersement"  id="dateVersement">
+        </div>
       </div>
 
       <div class="form-group">
-        <label>Date</label>
-        <input type="date" class="form-control" [(ngModel)]="versement.dateVersement" name="dateVersement"  id="dateVersement">
+        <label>Motif</label>
+        <textarea class="form-control" [(ngModel)]="versement.motif" name="motif"  id="motif" cols="6" rows="5"></textarea>
+        <!-- <input type="number" class="form-control" [(ngModel)]="versement.motif" name="motif"  id="motif"> -->
       </div>
+
+
 
       <div class="form-group">
         <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>

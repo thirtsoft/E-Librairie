@@ -59,6 +59,12 @@ import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
 import { CreateLigneVenteComponent } from './vente/create-ligne-vente/create-ligne-vente.component';
+import { ListApproComponent } from './approvisionnement/list-appro/list-appro.component';
+import { CreateApproComponent } from './approvisionnement/create-appro/create-appro.component';
+import { ListStockComponent } from './stock/list-stock/list-stock.component';
+import { CreateStockComponent } from './stock/create-stock/create-stock.component';
+import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appro/create-ligne-appro.component';
+import { ListLigneApproComponent } from './approvisionnement/list-ligne-appro/list-ligne-appro.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +110,12 @@ import { CreateLigneVenteComponent } from './vente/create-ligne-vente/create-lig
     CreateVenteComponent,
     ListLigneVenteComponent,
     CreateLigneVenteComponent,
+    ListApproComponent,
+    CreateApproComponent,
+    ListStockComponent,
+    CreateStockComponent,
+    CreateLigneApproComponent,
+    ListLigneApproComponent,
   ],
   imports: [
     BrowserModule,

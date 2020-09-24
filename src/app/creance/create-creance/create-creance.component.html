@@ -1,3 +1,45 @@
-<p>
-  create-creance works!
-</p>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Nouvelle Creance</h1>
+    <form #addContratForm="ngForm" (ngSubmit)="saveCreance(addContratForm.value)">
+
+      <div class="form-group">
+        <label>Référence </label>
+        <input type="text" class="form-control" [(ngModel)]="creance.reference" name="reference" id="reference">
+      </div>
+
+      <div class="form-group">
+        <label>Libelle</label>
+        <input type="text" class="form-control" [(ngModel)]="creance.libelle" name="libelle"  id="libelle">
+      </div>
+
+      <div class="form-group">
+        <label>Client</label>
+        <div class="form-group">
+          <select name="client" id="client" [(ngModel)]="creance.client" class="form-control input-lg m-bot15">
+            <option [ngValue]="0">-Select-</option>
+            <option *ngFor="let clt of clients" [ngValue]="clt">{{clt.raisonSocial}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Solde</label>
+        <input type="number" class="form-control" [(ngModel)]="creance.soldeCreance" name="soldeCreance"  id="soldeCreance">
+      </div>
+
+      <div class="form-group">
+        <label>Nbre Jours</label>
+        <input type="number" class="form-control" [(ngModel)]="creance.nbreJours" name="nbreJours"  id="nbreJours">
+      </div>
+
+      <div class="form-group">
+        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
+
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+      </div>
+    </form>
+ </div>
+</div>

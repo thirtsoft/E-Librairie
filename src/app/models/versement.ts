@@ -4,8 +4,11 @@ export class Versement {
   id: number;
   numVersement: string;
   nature: string;
+  numeroRecu: string;
+  nomBank: string;
   montantVersement: number;
   dateVersement: Date;
+  motif: string;
 
   employe: Employe;
 

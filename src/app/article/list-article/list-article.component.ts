@@ -10,6 +10,9 @@ import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateArticleComponent } from '../create-article/create-article.component';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+//import * as jsPDF from 'jspdf'
 
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -130,18 +133,66 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
 
-  generatePdf(){
-    const documentDefinition = { content: 'This is for testing.' };
-    pdfMake.createPdf(documentDefinition).download();
-  }
-
-
   /* generatePdf(){
+    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+    pdfMake.createPdf(documentDefinition).open();
+   } */
+
+
+  generatePdf(){
     const document = this.getDocument();
     pdfMake.createPdf(document).open();
   }
- */
+
   getDocument() {
+    return {
+      content: [
+        {
+          columns: [
+            [
+              {
+                text: 'LIBRARY ALAMINE',
+                style: 'name',
+              },
+              {
+                text: 'En Face CBAO Marché Bignona',
+              },
+              {
+                text: 'Téléphone : +221338763598',
+              },
+              {
+                text: 'Mobile : +221779440310',
+              },
+              {
+                text: 'Email : alamine@gmail.com',
+              },
+              {
+                text: 'LA LISTE DES ARTICLES',
+                bold: true,
+                fontSize: 16,
+                alignment: 'center',
+                margin: [0, 0, 0, 20]
+              }
+            ],
+
+          ]
+        },
+        {
+          text: 'LA LISTE DES ARTICLES',
+          bold: true,
+          fontSize: 16,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+      //  this.getList(this.crudApi.listData),
+
+      ]
+
+    }
+
+  }
+
+  getDocument1() {
     return {
       content: [
         {
@@ -221,47 +272,57 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   getList(item: Article[]) {
-    const items = [];
     return {
-      table: [
-        {
-          widths: ['*', '*', '*', '*', '*', '*'],
-          body: [
-            [
-              {
-                text: 'Réference',
-                style: 'tableHeader'
-              },
-              {
-                text: 'Désignation',
-                style: 'tableHeader'
-              },
-              {
-                text: 'Prix Achat',
-                style: 'tableHeader'
-              },
-              {
-                text: 'Prix vente',
-                style: 'tableHeader'
-              },
-              {
-                text: 'Scategorie',
-                style: 'tableHeader'
-              },
-              {
-                text: 'Categorie',
-                style: 'tableHeader'
-              },
-            ],
-            ...item.map(red => red.reference)
-
-          ]
-        },
-      ]
-
+      table: {
+        width: ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
+        body: [
+          [
+            {
+              text: 'Reference',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Designation',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Categorie',
+              style: 'tableHeader'
+            },
+            {
+              text: 'SCategorie',
+              style: 'tableHeader'
+            },
+            {
+              text: 'PAchat',
+              style: 'tableHeader'
+            },
+            {
+              text: 'PVente',
+              style: 'tableHeader'
+            },
+            {
+              text: 'PDetails',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Quantié',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Date_Ajout',
+              style: 'tableHeader'
+            },
+          ],
+          ...item.map(resp => {
+            (resp.reference,resp.designation,resp.categorie.designation,resp.scategorie.libelle,resp.prixAchat,resp.prixVente,
+            resp.prixDetail, resp.qtestock,resp.add_date);
+          })
+        ]
+      }
     };
-  }
 
+  }
 
 
 }

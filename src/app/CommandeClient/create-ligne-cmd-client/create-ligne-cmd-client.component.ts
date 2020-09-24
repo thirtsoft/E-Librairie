@@ -20,12 +20,12 @@ export class CreateLigneCmdClientComponent implements OnInit {
   listArticle: Article[];
 
   isValid: boolean = true;
-  commande: any;
+  approvisionnement: any;
   produit: any;
 
-  constructor(public lcomService: LigneCmdClientService, private toastr :ToastrService,
+  constructor(public lcmdService: LigneCmdClientService, private toastr :ToastrService,
     @Inject(MAT_DIALOG_DATA) public data, private articleService: ArticleService,
-    private commandeService: CommandeClientService,public fb: FormBuilder,
+    private cmdService: CommandeClientService,public fb: FormBuilder,
     public dialogRef: MatDialogRef<CreateLigneCmdClientComponent>,
    ) { }
 
@@ -51,7 +51,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
 
       }
     else
-      this.formData = Object.assign({}, this.commandeService.orderItems[this.data.orderItemIndex]);
+      this.formData = Object.assign({}, this.cmdService.orderItems[this.data.orderItemIndex]);
   }
 
   selectPrice(ctrl) {
@@ -76,16 +76,15 @@ export class CreateLigneCmdClientComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (this.validateForm(form.value)) {
       if (this.data.orderItemIndex == null) {
-        this.commandeService.orderItems.push(form.value);
+        this.cmdService.orderItems.push(form.value);
       }
       else {
-        this.commandeService.orderItems[this.data.orderItemIndex] = form.value;
+        this.cmdService.orderItems[this.data.orderItemIndex] = form.value;
       }
       this.dialogRef.close();
     }
 
   }
-
   validateForm(formData: LigneCmdClient) {
     this.isValid = true;
     if (formData.ItemId==0)
@@ -96,103 +95,4 @@ export class CreateLigneCmdClientComponent implements OnInit {
   }
 
 }
-
-
-
-
-
- /*  formData: FormGroup;
-  articleList:Article[];
-  isValid:boolean=true;
-  wtotht = 0;
-  wtottva = 0;
-  wtotttc = 0;
-  constructor(public service: LigneCmdClientService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA)  public data, private articleService: ArticleService,
-    private commandeService: CommandeClientService,public fb: FormBuilder,
-    public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
-
-  ){}
-
-  get f() { return this.formData.controls; } */
-
-  /* ngOnInit() {
-    if(this.data.lcommandeIndex == null) {
-      this.InfoForm();
-    } else {
-      this.formData =this.fb.group(Object.assign({},this.commandeService.list[this.data.lcommandeIndex]));
-    }
-
-    this.articleService.getAllArticles().subscribe(
-      response =>{this.articleList= response;}
-    );
-  } */
-
- /*  InfoForm() {
-    this.formData = this.fb.group({
-      id: null,
-      numero :0,
-      quantite : 0,
-      prix : 0,
-      tva : 0,
-      totht : 0,
-      tottva :0,
-      totttc :0,
-      code_article :'',
-      libart :'', */
-     // comm_id : this.data.id,
-      //prod_id : this.data.id
-  //  });
-
-  //}
-
-/*   selectPrice(ctrl){
-    if(ctrl.selectedIndex == 0){
-      this.formData.get('prix').setValue(0);
-      this.formData.get('tva').setValue(0);
-      this.formData.get('libart').setValue('');
-      this.formData.get('quantite').setValue(0);
-    }
-    else{
-      this.formData.get('prix').setValue(this.articleList[ctrl.selectedIndex-1].prixVente);
-      this.formData.get('tva').setValue(this.articleList[ctrl.selectedIndex-1].tva);
-      this.formData.get('libart').setValue(this.articleList[ctrl.selectedIndex - 1].designation);
-      this.formData.get('code_article').setValue( this.articleList[ctrl.selectedIndex - 1].id);
-    }
-    this.cal();
-  } */
-
-/*
-  cal(){
-
-  this.wtotht =  parseFloat((this.formData.value.quantite * this.formData.value.prix).toFixed(3));
-  this.wtottva = parseFloat(((this.wtotht * this.formData.value.tva)*0.01).toFixed(3));
-  this.wtotttc = parseFloat((this.wtotht + this.wtottva).toFixed(3));
-  this.formData.get('totht').setValue(this.wtotht); */
- /* this.formData.get('tottva').setValue(this.wtottva);
-  this.formData.get('totttc').setValue(this.wtotttc); */
-  //}
-
-  /* onSubmit() {
-    if(this.data.lcommandeIndex==null) {
-      this.commandeService.list.push(this.formData.value)
-      this.dialogRef.close();
-    } else {
-      this.commandeService.list[this.data.lcommandeIndex] = this.formData.value;
-    }
-
-    this.dialogRef.close();
-
-  } */
-
-  /* validateForm(formData: LigneCmdClient){
-    this.isValid=true;
-    if(formData.produit.reference=='')
-      this.isValid=false;
-    else if(formData.quantite ==0)
-      this.isValid=false;
-    return this.isValid;
-  }
- */
-
 
