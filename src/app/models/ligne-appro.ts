@@ -17,7 +17,7 @@ export class LigneAppro {
 
   public constructor() {
     this.approvisionnement = new Appro();
-    this.produit = new Article();
+    this.produit  = new Article();
   }
 
 }

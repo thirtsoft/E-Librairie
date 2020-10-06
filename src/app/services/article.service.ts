@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { Article } from '../models/article';
+
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +66,64 @@ export class ArticleService {
   deleteArticle(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/produits/${id}`, { responseType: 'text' });
   }
+
+  public uploadExcelFile(formData: FormData) {
+
+    let headers = new HttpHeaders();
+
+    headers.append('Content-Type','multipart/form-data');
+    headers.append('Accept', 'application/json');
+
+    const httpOptions = { headers: headers };
+
+    return this.http.post(`${this.baseUrl}/upload`, formData, httpOptions);
+
+  }
+
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = { Sheets: {'data': worksheet}, SheetNames: ['data']};
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array'});
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+
+  }
+
+  public saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+
+  }
+
+  /**
+   * methode permettant de generer un fichier excel depuis API Spring boot
+   */
+
+  generateExcelFile() {
+    this.http.get(`${this.baseUrl}/createExcel`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+      const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
+      FileSaver.saveAs(blob, 'articles.xlsx');
+    });
+
+  }
+
+  generatePdfFile(): any {
+   // let headers = new Headers{'Content-Type': 'application/pdf'};
+
+    this.http.get(`${this.baseUrl}/createPdf`, {observe: 'response', responseType: 'blob'}).subscribe((res) => {
+        const file = new Blob([res.body], {
+          type: 'application/pdf',
+        });
+        //const a = document.createElement('a');
+        //document.body.appendChild(a);
+       // a.click();
+        return res;
+        document.createElement('articles.pdf');
+       // saveAs(document, 'new.pdf');
+      }
+
+    );
+  }
+
+
 
 }

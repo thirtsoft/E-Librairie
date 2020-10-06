@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, Input } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { Categorie } from 'src/app/models/categorie';
 import { Scategorie } from 'src/app/models/scategorie';
@@ -14,6 +14,11 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 //import * as jsPDF from 'jspdf'
 
+/* import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx'; */
+
+import * as XLSX from 'xlsx';
+
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -27,6 +32,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ListArticleComponent implements OnDestroy, OnInit {
 
+  @Input()
   listData : Article[];
 
   private editForm: FormGroup;
@@ -34,6 +40,16 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   dtOptions: DataTables.Settings = {};
 
   dtTrigger: Subject<any> = new Subject();
+
+  @ViewChild('TABLE') TABLE: ElementRef;
+
+  @ViewChild("fileUploadInput")
+  fileUploadInput: any;
+
+  mesagge: string;
+
+  logObject: any;
+
 
   constructor(public crudApi: ArticleService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
@@ -132,6 +148,88 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   }
 
+  uploadExcelFile() {
+    let formData = new FormData();
+    console.log(formData)
+    formData.append('file', this.fileUploadInput.nativeElement.files[0]);
+    this.crudApi.uploadExcelFile(formData).subscribe(result => {
+      console.log(result);
+      this.mesagge = result.toString();
+      this.getListArticles();
+    })
+  }
+
+  /* generateExceles() {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.TABLE.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Articles');
+    XLSX.writeFile(wb, 'Article.xlsx');
+  } */
+
+  generateExcels() {
+    this.crudApi.exportAsExcelFile(this.listData, 'Articles');
+  }
+
+  generateExcel() {
+    this.crudApi.generateExcelFile();
+  }
+
+  selectFile($event) {
+    let fileList = $event.srcElement.files;
+    let file = fileList[0];
+    if(file && file.name.endsWith(".csv")){
+      let input = $event.target;
+      let reader = new FileReader();
+      reader.readAsText(input.files[0]);
+
+      reader.onload = (data) => {
+        let csvData = reader.result;
+        let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
+        let headers = csvRecordsArray && csvRecordsArray.length>0 ? csvRecordsArray[0].split(";"): [];
+        // bind headers with dataModelList
+        let bindArray = this.getBindheadersDataModelistArray(headers);
+
+        this.logObject = bindArray;
+
+        console.log(bindArray);
+      };
+    }
+
+
+  }
+
+  getBindheadersDataModelistArray(headers: any[]) {
+    let bindArray = [];
+    let index = 0;
+    let getDataType = (header => {
+      let dataType = '';
+      this.listData.forEach(dataModel => {
+        if (dataModel.reference == header) {
+          dataType = dataModel.reference;
+        }
+
+      });
+      return dataType;
+    })
+
+    headers.forEach(header => {
+      const bindItem = {
+        columnName: header,
+        dataType: getDataType(header),
+        index: index
+      }
+      index++;
+      bindArray.push(bindItem);
+    });
+
+    return bindArray;
+
+  }
+
+  generatePdf() {
+    this.crudApi.generatePdfFile();
+  }
+
 
   /* generatePdf(){
     const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
@@ -139,7 +237,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
    } */
 
 
-  generatePdf(){
+  generatePdf1(){
     const document = this.getDocument();
     pdfMake.createPdf(document).open();
   }

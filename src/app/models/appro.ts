@@ -5,6 +5,7 @@ export class Appro {
     code: string;
     totalAppro: number;
     status: string;
+    observation: string;
     DeletedOrderItemIDs: string;
 
     dateAppro: Date;

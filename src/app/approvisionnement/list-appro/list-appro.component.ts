@@ -90,4 +90,8 @@ export class ListApproComponent implements OnDestroy, OnInit {
 
   }
 
+  viewAppro() {
+
+  }
+
 }

@@ -18,9 +18,13 @@ export class LigneApproService {
 
   constructor(private http: HttpClient) { }
 
-  getAllLigneAppros(): Observable<LigneAppro[]> {
-    return this.http.get<LigneAppro[]>(`${this.baseUrl}/ligneApprovisionnements`);
+  getAllLigneAppros(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/ligneApprovisionnements`);
   }
+
+  /* getAllLigneAppros(): Observable<LigneAppro[]> {
+    return this.http.get<LigneAppro[]>(`${this.baseUrl}/ligneApprovisionnements`);
+  } */
 
   public getLigneApproId(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/ligneApprovisionnements/${id}`);

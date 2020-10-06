@@ -4,16 +4,20 @@ export class Contrat {
   id: number;
   reference: string;
   nature: string;
+  montantContrat: number;
   description: string;
-  dateContrat: Date;
+  dateDebutContrat: Date;
+	dateFinContrat: Date;
 
   client: Client;
 
   public constructor() {
     this.reference = this.reference;
     this.nature = this.nature;
+    this.montantContrat = this.montantContrat;
     this.description = this.description;
-    this.dateContrat = this.dateContrat;
+    this.dateDebutContrat = this.dateDebutContrat;
+    this.dateFinContrat = this.dateFinContrat;
     this.client = new Client();
   }
 

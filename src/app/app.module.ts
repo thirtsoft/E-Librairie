@@ -65,6 +65,10 @@ import { ListStockComponent } from './stock/list-stock/list-stock.component';
 import { CreateStockComponent } from './stock/create-stock/create-stock.component';
 import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appro/create-ligne-appro.component';
 import { ListLigneApproComponent } from './approvisionnement/list-ligne-appro/list-ligne-appro.component';
+import { ListVenteJounalierComponent } from './vente/list-vente-jounalier/list-vente-jounalier.component';
+import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
+import { ViewApprovisionnementComponent } from './approvisionnement/view-approvisionnement/view-approvisionnement.component';
+import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +120,10 @@ import { ListLigneApproComponent } from './approvisionnement/list-ligne-appro/li
     CreateStockComponent,
     CreateLigneApproComponent,
     ListLigneApproComponent,
+    ListVenteJounalierComponent,
+    ViewCommandeComponent,
+    ViewApprovisionnementComponent,
+    ViewVenteComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,12 @@
       <label>Status</label>
       <input type="text"  name="status" #status="ngModel" [(ngModel)]="crudApi.formData.status" class="form-control">
     </div>
+    <div class="col-md-6 form-group">
+      <label>Observation</label>
+      <textarea type="text" rows="4" cols="5"  name="observation" #observation="ngModel" [(ngModel)]="crudApi.formData.observation" class="form-control"></textarea>
+    </div>
   </div>
+
   <!-- Debut Ligne de commandes -->
   <table class="table table-borderless">
     <thead class="thead-light">
@@ -46,7 +51,7 @@
     <tbody>
       <tr *ngIf="crudApi.orderItems.length==0" [class.text-danger]="!isValid && crudApi.orderItems.length==0">
         <td class="font-italic text-center" colspan="5">
-            Aucune Commande sélectionnée ...
+            Aucune Ligne Approvisionnement sélectionnée ...
         </td>
       </tr>
       <tr *ngFor="let item of crudApi.orderItems;let i=index;">

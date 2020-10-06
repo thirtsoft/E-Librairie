@@ -35,6 +35,8 @@ export class CreateCommandeClientComponent implements OnInit {
   client: any;
   annee  = 0;
 
+  isChecked = false;
+
   constructor(private crudApi: CommandeClientService, private dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService,
     private toastr :ToastrService, private router :Router,
@@ -121,6 +123,10 @@ export class CreateCommandeClientComponent implements OnInit {
     else if (this.crudApi.orderItems.length==0)
       this.isValid = false;
     return this.isValid;
+  }
+
+  checked() {
+    this.isChecked = true;
   }
 
  /*  onSubmit(){

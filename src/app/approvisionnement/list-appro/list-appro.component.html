@@ -15,7 +15,7 @@
             <thead>
               <tr>
                <th>Id</th><th>Code</th><th>Fournisseur</th><th>Montant</th>
-                <th>Status</th><th>Date</th>
+                <th>Status</th><th>Observation</th><th>Date</th>
                 <th>Action</th>
 
               </tr>
@@ -27,9 +27,11 @@
               <td>{{appro.fournisseur.raisonSociale}} - {{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}} </td>
               <td>{{appro.totalAppro}}</td>
               <td>{{appro.status}}</td>
+              <td>{{appro.observation}}</td>
               <td>{{appro.dateApprovisionnement}}</td>
               <td>
                 <button class="btn btn-info btn-lg" (click)="editeAppro(appro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+                <button class="btn btn-success btn-lg" (click)="viewAppro(appro)"> <i class="fa fa-eye" aria-hidden="true"></i> Voir</button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteAppro(appro.id)"><i class="fa fa-trash-o"></i>  Delete</button>
               </td>
             </tr>

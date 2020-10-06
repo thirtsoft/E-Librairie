@@ -65,6 +65,7 @@ export class CreateApproComponent implements OnInit {
       code: Math.floor(100000 + Math.random() * 900000).toString(),
       totalAppro: 0,
       status: '',
+      observation: '',
       dateAppro: new Date(),
       fournisseur: new Fournisseur(),
       DeletedOrderItemIDs: ''

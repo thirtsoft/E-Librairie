@@ -19,10 +19,15 @@ import { CreateLigneApproComponent } from '../create-ligne-appro/create-ligne-ap
 })
 export class ListLigneApproComponent implements OnInit {
 
+  //listData : LigneAppro[];
+
   listData : LigneAppro[];
 
   appro: Appro = new Appro();
-  produit: Article = {
+
+  produit: Article = new Article();
+
+  /* produit1: Article = {
     id: null,
     reference: '',
     designation: '',
@@ -38,10 +43,7 @@ export class ListLigneApproComponent implements OnInit {
     scategorie: new Scategorie(),
     categorie: new Categorie(),
 
-  };
-
-  produit1;
-  commande1;
+  }; */
 
   private editForm: FormGroup;
 
@@ -70,8 +72,9 @@ export class ListLigneApproComponent implements OnInit {
       }
     );
 
-    this.commande1 = new Appro();
-   // this.produit1= new Article() = {}
+    this.appro = new Appro();
+    //this.produit = this.produit;
+    //console.log(this.produit1);
   }
 
   ngOnDestroy(): void {

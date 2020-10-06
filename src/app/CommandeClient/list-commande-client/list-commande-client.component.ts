@@ -90,5 +90,9 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
 
   }
 
+  viewCommandeClient() {
+
+  }
+
 
 }

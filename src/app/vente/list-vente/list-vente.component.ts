@@ -85,5 +85,9 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   }
 
+  viewVente() {
+
+  }
+
 
 }
