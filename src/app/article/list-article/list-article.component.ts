@@ -174,6 +174,30 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.crudApi.generateExcelFile();
   }
 
+
+  generatePdf() {
+    this.crudApi.exportPdfProduits().subscribe(x => {
+      const blob = new Blob([x], {type: 'application/pdf'});
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob);
+        return;
+
+      }
+      const data = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = 'articles.pdf';
+      link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+
+      setTimeout(function() {
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100)
+
+    });
+
+  }
+
   selectFile($event) {
     let fileList = $event.srcElement.files;
     let file = fileList[0];
@@ -224,22 +248,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
     return bindArray;
 
-  }
-
-  generatePdf() {
-    this.crudApi.generatePdfFile();
-  }
-
-
-  /* generatePdf(){
-    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-    pdfMake.createPdf(documentDefinition).open();
-   } */
-
-
-  generatePdf1(){
-    const document = this.getDocument();
-    pdfMake.createPdf(document).open();
   }
 
   getDocument() {

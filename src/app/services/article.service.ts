@@ -66,7 +66,10 @@ export class ArticleService {
   deleteArticle(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/produits/${id}`, { responseType: 'text' });
   }
-
+  /**
+   * method pour importer les données de Excel à MySQL
+   * @param formData
+   */
   public uploadExcelFile(formData: FormData) {
 
     let headers = new HttpHeaders();
@@ -99,29 +102,17 @@ export class ArticleService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl}/createExcel`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+    this.http.get(`${this.baseUrl}/download/articles.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
       FileSaver.saveAs(blob, 'articles.xlsx');
     });
 
   }
-
-  generatePdfFile(): any {
-   // let headers = new Headers{'Content-Type': 'application/pdf'};
-
-    this.http.get(`${this.baseUrl}/createPdf`, {observe: 'response', responseType: 'blob'}).subscribe((res) => {
-        const file = new Blob([res.body], {
-          type: 'application/pdf',
-        });
-        //const a = document.createElement('a');
-        //document.body.appendChild(a);
-       // a.click();
-        return res;
-        document.createElement('articles.pdf');
-       // saveAs(document, 'new.pdf');
-      }
-
-    );
+  /**
+   * methode permettant de generer un pdf depuis API Spring boot
+   */
+  exportPdfProduits(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/createPdf`, {responseType: 'blob'});
   }
 
 
