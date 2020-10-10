@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -11,6 +11,7 @@ import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateScategorieComponent } from '../create-scategorie/create-scategorie.component';
 import { EditScategorieComponent } from '../edit-scategorie/edit-scategorie.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-scategorie',
@@ -26,8 +27,8 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   closeResult: string;
 
@@ -37,14 +38,22 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateScategorieComponent>,
-    ) { }
+    ) {
+      this.crudApi.listen().subscribe((m:any) => {
+        console.log(m);
+        this.rerender();
+        this.getListScategories();
+      })
+     }
 
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllScategories().subscribe(
@@ -53,8 +62,18 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
+  }
 
-    //this.getListScategories();
+  /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {

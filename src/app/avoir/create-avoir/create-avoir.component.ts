@@ -68,6 +68,7 @@ export class CreateAvoirComponent implements OnInit {
     this.crudApi.createAvoir(avoir).
     subscribe( data => {
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Avoir Ajouté avec Succès");
       this.crudApi.getAllAvoirs().subscribe(
         response =>{

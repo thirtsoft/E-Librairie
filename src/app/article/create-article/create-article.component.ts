@@ -79,6 +79,7 @@ export class CreateArticleComponent implements OnInit {
     this.crudApi.createArticle(art).
     subscribe( data => {
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Article Ajouté avec Succès");
       this.crudApi.getAllArticles().subscribe(
         response =>{this.crudApi.listData = response;},

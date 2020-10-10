@@ -69,6 +69,8 @@ import { ListVenteJounalierComponent } from './vente/list-vente-jounalier/list-v
 import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 import { ViewApprovisionnementComponent } from './approvisionnement/view-approvisionnement/view-approvisionnement.component';
 import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
+import { ListChargeComponent } from './charge/list-charge/list-charge.component';
+import { CreateChargeComponent } from './charge/create-charge/create-charge.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +126,8 @@ import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
     ViewCommandeComponent,
     ViewApprovisionnementComponent,
     ViewVenteComponent,
+    ListChargeComponent,
+    CreateChargeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { CreateArticleComponent } from 'src/app/article/create-article/create-article.component';
 import { CreateApproComponent } from 'src/app/approvisionnement/create-appro/create-appro.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-stock',
@@ -21,8 +22,8 @@ export class ListStockComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   closeResult: string;
 
@@ -38,7 +39,9 @@ export class ListStockComponent implements OnDestroy, OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllStocks().subscribe(
@@ -48,7 +51,18 @@ export class ListStockComponent implements OnDestroy, OnInit {
       }
     );
 
-    //this.getListScategories();
+  }
+
+   /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -79,7 +93,6 @@ export class ListStockComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateApproComponent, dialogConfig);
   }
   deleteStock(id: number) {
@@ -89,6 +102,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Stock supprimé avec succès!');
+          this.rerender();
           this.getListStocks();
       },
         error => console.log(error));

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Categorie } from 'src/app/models/categorie';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
 import { CategorieService } from 'src/app/services/categorie.service';
@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 import { CreateCategorieComponent } from '../create-categorie/create-categorie.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-categorie',
@@ -29,29 +30,49 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: CategorieService ,public fb: FormBuilder,public toastr: ToastrService,
     private router : Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateCategorieComponent>,
-    ) { }
+    ) {
+      this.crudApi.listen().subscribe((m:any) => {
+        console.log(m);
+        this.rerender();
+        this.getListCategories();
+      })
+     }
 
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
     this.crudApi.getAllCategories().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
-      }
-    );
-    //this.getListCategories();
+      });
+
   }
+   /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
+  }
+
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -93,6 +114,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Categorie supprimé avec succès!');
+          this.rerender();
           this.getListCategories();
       },
         error => console.log(error));

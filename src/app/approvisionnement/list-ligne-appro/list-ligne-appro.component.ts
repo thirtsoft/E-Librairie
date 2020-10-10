@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { LigneAppro } from 'src/app/models/ligne-appro';
 import { Appro } from 'src/app/models/appro';
 import { Article } from 'src/app/models/article';
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateLigneApproComponent } from '../create-ligne-appro/create-ligne-appro.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-ligne-appro',
@@ -48,8 +49,8 @@ export class ListLigneApproComponent implements OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: LigneApproService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
@@ -61,7 +62,9 @@ export class ListLigneApproComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllLigneAppros().subscribe(
@@ -75,6 +78,18 @@ export class ListLigneApproComponent implements OnInit {
     this.appro = new Appro();
     //this.produit = this.produit;
     //console.log(this.produit1);
+  }
+
+  /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -102,6 +117,7 @@ export class ListLigneApproComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Détails Appro supprimé avec succès!');
+          this.rerender();
           this.getListLigneAppros();
       },
         error => console.log(error));

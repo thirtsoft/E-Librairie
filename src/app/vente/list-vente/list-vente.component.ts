@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Vente } from 'src/app/models/vente';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateVenteComponent } from '../create-vente/create-vente.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-vente',
@@ -20,8 +21,8 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: VenteService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
@@ -34,7 +35,9 @@ export class ListVenteComponent implements OnDestroy, OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllVentes().subscribe(
@@ -45,6 +48,18 @@ export class ListVenteComponent implements OnDestroy, OnInit {
       }
     );
 
+  }
+
+   /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -72,6 +87,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Vente supprimé avec succès!');
+          this.rerender();
           this.getListVentes();
       },
         error => console.log(error));

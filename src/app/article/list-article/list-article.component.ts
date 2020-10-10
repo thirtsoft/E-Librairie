@@ -23,6 +23,7 @@ import * as XLSX from 'xlsx';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { style } from '@angular/animations';
+import { DataTableDirective } from 'angular-datatables';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -38,8 +39,8 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   @ViewChild('TABLE') TABLE: ElementRef;
 
@@ -56,13 +57,21 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateArticleComponent>,
-    ) { }
+    ) {
+      this.crudApi.listen().subscribe((m:any) => {
+        console.log(m);
+        this.rerender();
+        this.getListArticles();
+      })
+     }
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllArticles().subscribe(
@@ -71,6 +80,18 @@ export class ListArticleComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
+  }
+
+  /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -114,6 +135,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Article supprimé avec succès!');
+          this.rerender();
           this.getListArticles();
       },
         error => console.log(error));

@@ -8,15 +8,16 @@
         <button (click)="onCreateArticle()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
       </div>
         <div class="col-md-3">
-          <input class="form-control" type="file" #fileUploadInput  size="30" style="height:45px;" />
+          <input class="form-control" type="file" #fileUploadInput style="height:45px;" />
         </div>
         <div class="col-md-1" style="margin-left: 0px">
-          <button class="btn btn-warning  btn-lg" (click)="uploadExcelFile();"><i class="fa fa-upload" aria-hidden="true"></i> Export</button>
+          <button class="btn btn-warning  btn-lg" (click)="uploadExcelFile();"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
         </div>
-      <div class="col-md-1">
+      <div class="col-md-1 col-md-offset-1">
         <div class="input-group">
           <div class="input-group-btn">
-            <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export <span class="caret"></span></button>
+            <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Download <span class="caret"></span></button>
             <ul class="dropdown-menu">
               <li><a type="button" class="btn btn-success" (click)="generateExcel()"><i class="fa fa-file-excel-o" aria-hidden="true"></i>Excel</a></li>
               <li><a type="button" class="btn btn-danger" (click)="generatePdf()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Pdf</a></li>

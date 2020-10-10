@@ -12,6 +12,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { CommandeClient } from 'src/app/models/commande-client';
 import { EditLigneCmdClientComponent } from '../edit-ligne-cmd-client/edit-ligne-cmd-client.component';
+import { CreanceService } from 'src/app/services/creance.service';
 
 @Component({
   selector: 'app-create-commande-client',
@@ -38,7 +39,7 @@ export class CreateCommandeClientComponent implements OnInit {
   isChecked = false;
 
   constructor(private crudApi: CommandeClientService, private dialog:MatDialog,
-    public fb: FormBuilder, public clientService: ClientService,
+    public fb: FormBuilder, public clientService: ClientService, public creanceService: CreanceService,
     private toastr :ToastrService, private router :Router,
     private currentRoute: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -147,6 +148,7 @@ export class CreateCommandeClientComponent implements OnInit {
         this.router.navigate(['/commandeclients']);
       })
     }
+
   }
 
   /* OnSelectClient(ctrl){

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Versement } from 'src/app/models/versement';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { VersementService } from 'src/app/services/versement.service';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateVersementComponent } from '../create-versement/create-versement.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-versement',
@@ -21,21 +22,29 @@ export class ListVersementComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: VersementService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateVersementComponent>,
-    ) { }
+    ) {
+      this.crudApi.listen().subscribe((m:any) => {
+        console.log(m);
+        this.rerender();
+        this.getListVersements();
+      })
+     }
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllVersements().subscribe(
@@ -45,7 +54,18 @@ export class ListVersementComponent implements OnDestroy, OnInit {
       }
     );
 
-    //this.getListVersements();
+  }
+
+   /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -67,7 +87,6 @@ export class ListVersementComponent implements OnDestroy, OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     dialogConfig.data="gdddd";
-
     this.matDialog.open(CreateVersementComponent, dialogConfig);
   }
 
@@ -78,7 +97,6 @@ export class ListVersementComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateVersementComponent, dialogConfig);
   }
   deleteVersement(id: number) {
@@ -88,6 +106,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Versement supprimé avec succès!');
+          this.rerender();
           this.getListVersements();
       },
         error => console.log(error));

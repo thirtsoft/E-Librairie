@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Employe } from 'src/app/models/employe';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EmployeService } from 'src/app/services/employe.service';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateEmployeComponent } from '../create-employe/create-employe.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-employe',
@@ -23,21 +24,29 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: EmployeService ,public fb: FormBuilder,public toastr: ToastrService,
     private router : Router, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateEmployeComponent>,
-    ) { }
+    ) {
+      this.crudApi.listen().subscribe((m:any) => {
+        console.log(m);
+        this.rerender();
+        this.getListEmployes();
+      })
+     }
 
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
     this.crudApi.getAllEmployes().subscribe(
       response =>{
@@ -45,8 +54,20 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
+  }
 
-    //this.getListEmployes();
+   /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+
+    });
+
   }
 
   ngOnDestroy(): void {
@@ -67,7 +88,6 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateEmployeComponent, dialogConfig);
   }
 
@@ -78,7 +98,6 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateEmployeComponent, dialogConfig);
   }
   deleteEmploye(id: number) {
@@ -88,6 +107,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Employe supprimé avec succès!');
+          this.rerender();
           this.getListEmployes();
       },
         error => console.log(error));

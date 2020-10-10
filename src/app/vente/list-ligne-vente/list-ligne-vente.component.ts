@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { LigneVente } from 'src/app/models/ligne-vente';
 import { Vente } from 'src/app/models/vente';
 import { Article } from 'src/app/models/article';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CreateLigneVenteComponent } from '../create-ligne-vente/create-ligne-vente.component';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-ligne-vente',
@@ -47,8 +48,8 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: LigneVenteService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
@@ -61,7 +62,9 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllLigneVentes().subscribe(
@@ -74,6 +77,18 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
 
     this.commande1 = new Vente();
    // this.produit1= new Article() = {}
+  }
+
+   /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -100,6 +115,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Détails Vente supprimé avec succès!');
+          this.rerender();
           this.getListLigneVentes();
       },
         error => console.log(error));

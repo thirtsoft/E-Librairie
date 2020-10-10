@@ -46,6 +46,8 @@ import { CreateApproComponent } from './approvisionnement/create-appro/create-ap
 import { ListLigneApproComponent } from './approvisionnement/list-ligne-appro/list-ligne-appro.component';
 import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appro/create-ligne-appro.component';
 import { ListStockComponent } from './stock/list-stock/list-stock.component';
+import { ListChargeComponent } from './charge/list-charge/list-charge.component';
+import { CreateChargeComponent } from './charge/create-charge/create-charge.component';
 
 const routes: Routes = [
 
@@ -125,6 +127,13 @@ const routes: Routes = [
     { path:'avoir',children:[
         {path:'',component: CreateAvoirComponent},
         {path:'edit/:id',component: CreateAvoirComponent}
+      ]
+    },
+
+    { path: 'charges', component: ListChargeComponent},
+    { path:'charge',children:[
+        {path:'',component: CreateChargeComponent},
+        {path:'edit/:id',component: CreateChargeComponent}
       ]
     },
 

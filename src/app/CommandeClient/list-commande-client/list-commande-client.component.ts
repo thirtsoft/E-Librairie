@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CommandeClient } from 'src/app/models/commande-client';
@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
 import { Client } from 'src/app/models/client';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-commande-client',
@@ -24,8 +25,8 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: CommandeClientService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
@@ -38,7 +39,9 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllCommandeClients().subscribe(
@@ -50,6 +53,18 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     );
 
     this.client = new Client();
+  }
+
+  /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -77,6 +92,7 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Commande supprimé avec succès!');
+          this.rerender();
           this.getListCommandeClients();
       },
         error => console.log(error));

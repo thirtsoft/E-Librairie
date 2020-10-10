@@ -68,10 +68,9 @@ export class CreateFournisseurComponent implements OnInit {
     this.crudApi.createFournisseur(this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Fournisseur Ajouté avec Succès");
-      //this.ResetForm();
       this.getListFournisseurs();
-      this.router.navigate(['/fournisseurs']);
     });
   }
   updateFournisseur(){

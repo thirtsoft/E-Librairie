@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateFournisseurComponent } from '../create-fournisseur/create-fournisseur.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-fournisseur',
@@ -23,22 +24,29 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: FournisseurService ,public fb: FormBuilder,public toastr: ToastrService,
     private router : Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateFournisseurComponent>,
-    ) { }
-
+    ) {
+      this.crudApi.listen().subscribe((m:any) => {
+        console.log(m);
+        this.rerender();
+        this.getListFournisseurs();
+      })
+     }
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
     this.crudApi.getAllFournisseurs().subscribe(
       response =>{
@@ -46,8 +54,18 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
+  }
 
-    //this.getListFournisseurs();
+  /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -78,7 +96,6 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateFournisseurComponent, dialogConfig);
   }
 
@@ -89,6 +106,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Fournisseur supprimé avec succès!');
+          this.rerender();
           this.getListFournisseurs();
       },
         error => console.log(error));

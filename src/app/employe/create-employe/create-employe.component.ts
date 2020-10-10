@@ -22,7 +22,6 @@ export class CreateEmployeComponent implements OnInit {
     ) { }
 
 
-
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
@@ -66,8 +65,8 @@ export class CreateEmployeComponent implements OnInit {
     this.crudApi.createEmploye(this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Employe Ajouté avec Succès");
-      //this.ResetForm();
       this.getListEmployes();
       this.router.navigate(['/employes']);
     });

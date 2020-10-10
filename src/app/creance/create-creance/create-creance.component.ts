@@ -68,6 +68,7 @@ export class CreateCreanceComponent implements OnInit {
     this.crudApi.createCreance(cont).
     subscribe( data => {
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Creance Ajouté avec Succès");
       this.crudApi.getAllCreances().subscribe(
         response =>{this.crudApi.listData = response;},

@@ -62,6 +62,7 @@ export class CreateClientComponent implements OnInit {
     this.crudApi.createClient(this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Client Ajouté avec Succès");
       //this.ResetForm();
       this.getListClients();

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Appro } from 'src/app/models/appro';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -9,6 +9,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateApproComponent } from '../create-appro/create-appro.component';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { Fournisseur } from 'src/app/models/fournisseur';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-appro',
@@ -24,8 +25,8 @@ export class ListApproComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: ApproService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
@@ -38,7 +39,9 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
 
     this.crudApi.getAllAppros().subscribe(
@@ -51,6 +54,19 @@ export class ListApproComponent implements OnDestroy, OnInit {
 
     this.fournisseur = new Fournisseur();
   }
+
+  /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
+  }
+
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -77,9 +93,11 @@ export class ListApproComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Approvisionnement supprimé avec succès!');
+          this.rerender
           this.getListAppros();
-      },
-        error => console.log(error));
+        },
+        error => console.log(error)
+      );
     }
 
   }

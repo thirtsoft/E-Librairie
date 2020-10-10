@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { Scategorie } from '../models/scategorie';
@@ -16,6 +16,14 @@ export class ScategorieService {
    listData : Scategorie[];
 
    public dataForm:  FormGroup;
+
+   private listners = new Subject<any>();
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
    constructor(private http: HttpClient) { }
 

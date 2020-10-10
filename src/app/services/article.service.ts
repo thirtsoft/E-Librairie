@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { Article } from '../models/article';
@@ -20,6 +20,14 @@ export class ArticleService {
   listData : Article[];
 
   public dataForm:  FormGroup;
+
+  private listners = new Subject<any>();
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
   constructor(private http: HttpClient) { }
 

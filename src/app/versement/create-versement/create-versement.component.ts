@@ -67,12 +67,8 @@ export class CreateVersementComponent implements OnInit {
     this.crudApi.createVersement(versment).
     subscribe( data => {
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Versement Ajouté avec Succès");
-
-      this.crudApi.getAllVersements().subscribe(
-        response =>{this.crudApi.listData = response;},
-
-      );
       this.router.navigate(['/versements']);
     });
   }

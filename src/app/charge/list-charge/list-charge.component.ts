@@ -1,41 +1,39 @@
-import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
-import { Contrat } from 'src/app/models/contrat';
+import { Component, OnInit, OnDestroy, Inject, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Charge } from 'src/app/models/charge';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ContratService } from 'src/app/services/contrat.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
-import { MatDialogRef } from "@angular/material/dialog";
-import { CreateContratComponent } from '../create-contrat/create-contrat.component';
+import { ChargeService } from 'src/app/services/charge.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
+import { CreateChargeComponent } from '../create-charge/create-charge.component';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
-  selector: 'app-list-contrat',
-  templateUrl: './list-contrat.component.html',
-  styleUrls: ['./list-contrat.component.scss']
+  selector: 'app-list-charge',
+  templateUrl: './list-charge.component.html',
+  styleUrls: ['./list-charge.component.scss']
 })
-export class ListContratComponent implements OnDestroy, OnInit {
+export class ListChargeComponent implements OnDestroy, OnInit {
 
-  listData : Contrat[];
+  listData : Charge[];
 
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ContratService,public fb: FormBuilder,
+  constructor(public crudApi: ChargeService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateContratComponent>,
+    public dialogRef:MatDialogRef<CreateChargeComponent>
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
-        this.getListContrats();
+        this.getListCharges();
       })
      }
 
@@ -48,7 +46,7 @@ export class ListContratComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllContrats().subscribe(
+    this.crudApi.getAllCharges().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
@@ -56,7 +54,6 @@ export class ListContratComponent implements OnDestroy, OnInit {
     );
 
   }
-
   /**
    * methode pour recharger automatique le Datatable
    */
@@ -66,6 +63,7 @@ export class ListContratComponent implements OnDestroy, OnInit {
       dtInstance.destroy();
       // call the dtTrigger to rerender again
       this.dtTrigger.next();
+
     });
 
   }
@@ -74,49 +72,51 @@ export class ListContratComponent implements OnDestroy, OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  getListContrats() {
-    this.crudApi.getAllContrats().subscribe(
+  getListCharges() {
+    this.crudApi.getAllCharges().subscribe(
       response =>{this.listData = response;}
     );
+
   }
 
-  onCreateContrat(){
+  onCreateCharge(){
     this.crudApi.choixmenu = "A";
     //this.router.navigateByUrl("contrats/new");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-    this.matDialog.open(CreateContratComponent, dialogConfig);
+
+    this.matDialog.open(CreateChargeComponent, dialogConfig);
   }
 
-  editerContrat(item : Contrat) {
+  editerCharge(item : Charge) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-    this.matDialog.open(CreateContratComponent, dialogConfig);
+    this.matDialog.open(CreateChargeComponent, dialogConfig);
 
   }
-  deleteContrat(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Contrat ?')) {
-    this.crudApi.deleteContrat(id)
+  deleteCharge(id: number) {
+    if (window.confirm('Etes-vous sure de vouloir supprimer cette Charge ?')) {
+    this.crudApi.deleteCharge(id)
       .subscribe(
         data => {
           console.log(data);
-          this.toastr.warning('Contrat supprimé avec succès!');
+          this.toastr.warning('Charge supprimé avec succès!');
           this.rerender();
-          this.getListContrats();
+          this.getListCharges();
       },
         error => console.log(error));
     }
 
   }
-  editContrat(item : Contrat) {
+  editCharge(item : Charge) {
 
-    this.router.navigateByUrl('contrats/'+item.id);
+    this.router.navigateByUrl('charges/'+item.id);
 
   }
 

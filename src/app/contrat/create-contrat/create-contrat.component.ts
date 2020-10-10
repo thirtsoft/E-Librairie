@@ -70,6 +70,7 @@ export class CreateContratComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Contrat Ajouté avec Succès");
+      this.crudApi.filter('Register click');
       this.crudApi.getAllContrats().subscribe(
         response =>{this.crudApi.listData = response;},
 

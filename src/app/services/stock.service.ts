@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Stock } from '../models/stock';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,14 @@ export class StockService {
   listData : Stock[];
 
   public dataForm:  FormGroup;
+
+  private listners = new Subject<any>();
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
   constructor(private http: HttpClient) { }
 

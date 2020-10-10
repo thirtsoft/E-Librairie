@@ -27,10 +27,8 @@ export class CreateScategorieComponent implements OnInit {
     public dialogRef:MatDialogRef<CreateScategorieComponent>,
     ) { }
 
-
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
-
      // this.infoForm()};
       this.catService.getAllCategories().subscribe(
         response =>{this.categories = response;}
@@ -67,12 +65,11 @@ export class CreateScategorieComponent implements OnInit {
   saveScategorie(Scat: Scategorie) {
     this.crudApi.createScategorie(Scat).
     subscribe( data => {
-
       this.dialogRef.close();
+      this.crudApi.filter('Register click');
       this.toastr.success("Scategorie Ajouté avec Succès");
       this.crudApi.getAllScategories().subscribe(
         response =>{this.crudApi.listData = response;},
-
       );
       this.router.navigate(['/scategories']);
     });

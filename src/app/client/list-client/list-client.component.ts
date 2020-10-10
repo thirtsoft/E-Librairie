@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/services/client.service';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from "@angular/material/dialog";
 import { CreateClientComponent } from '../create-client/create-client.component';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-list-client',
@@ -23,8 +24,8 @@ export class ListClientComponent implements OnDestroy, OnInit {
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
-
   dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   control: FormControl = new FormControl('');
 
@@ -33,14 +34,21 @@ export class ListClientComponent implements OnDestroy, OnInit {
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateClientComponent>,
-    ) { }
-
+    ) {
+      this.crudApi.listen().subscribe((m:any) => {
+        console.log(m);
+        this.rerender();
+        this.getListClients();
+      })
+     }
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
-      processing: true
+      processing: true,
+      autoWidth: true,
+      order: [[0, 'desc']]
     };
     this.crudApi.getAllClients().subscribe(
       response =>{
@@ -48,7 +56,18 @@ export class ListClientComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
-    //this.getListClients();
+  }
+
+   /**
+   * methode pour recharger automatique le Datatable
+   */
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+      // call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   ngOnDestroy(): void {
@@ -74,19 +93,14 @@ export class ListClientComponent implements OnDestroy, OnInit {
   }
 
   editClient(item : Client) {
-
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateClientComponent, dialogConfig);
-
   }
-
-
   deleteClient(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Client ?')) {
     this.crudApi.deleteClient(id)
@@ -94,6 +108,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Client supprimé avec succès!');
+          this.rerender();
           this.getListClients();
       },
         error => console.log(error));

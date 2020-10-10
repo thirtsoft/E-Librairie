@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Contrat } from '../models/contrat';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,15 @@ export class ContratService {
   listData : Contrat[];
 
   public dataForm:  FormGroup;
+
+  private listners = new Subject<any>();
+
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
   constructor(private http: HttpClient) { }
 
