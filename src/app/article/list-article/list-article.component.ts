@@ -143,27 +143,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   }
 
-  onCreatePdf() {
-    this.crudApi.exportPdfArticle().subscribe(res => {
-      const blob = new Blob([res], {type: 'application/pdf'});
-      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-        window.navigator.msSaveOrOpenBlob(blob);
-        return;
-      }
-      const data = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.download = 'C:\Users\Folio9470m\articles.pdf';
-      link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
-
-      setTimeout(function() {
-        window.URL.revokeObjectURL(data);
-        link.remove();
-
-      }, 100);
-     // this.listData = res;
-    })
-  }
-
   editArticle(item : Article) {
 
     this.router.navigateByUrl('article/'+item.id);
@@ -177,23 +156,15 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.crudApi.uploadExcelFile(formData).subscribe(result => {
       console.log(result);
       this.mesagge = result.toString();
+      this.rerender();
+      this.toastr.warning("Fichier importer avec succès");
       this.getListArticles();
     })
   }
 
-  /* generateExceles() {
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.TABLE.nativeElement);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Articles');
-    XLSX.writeFile(wb, 'Article.xlsx');
-  } */
-
-  generateExcels() {
-    this.crudApi.exportAsExcelFile(this.listData, 'Articles');
-  }
-
   generateExcel() {
     this.crudApi.generateExcelFile();
+    this.toastr.warning("Fichier téléchargé avec succès");
   }
 
 
@@ -217,6 +188,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       }, 100)
 
     });
+    this.toastr.warning("Fichier exporté avec succès");
 
   }
 

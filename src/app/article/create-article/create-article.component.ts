@@ -5,7 +5,7 @@ import { Categorie } from 'src/app/models/categorie';
 import { ArticleService } from 'src/app/services/article.service';
 import { ScategorieService } from 'src/app/services/scategorie.service';
 import { CategorieService } from 'src/app/services/categorie.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -21,7 +21,10 @@ export class CreateArticleComponent implements OnInit {
   public article = new Article();
 
   //scategories: any;
-  ScategorieList: any;
+
+  categorieList;
+  scategorieList;
+  dropDownForm: FormGroup;
 
   scategorie : any={};
 
@@ -37,18 +40,25 @@ export class CreateArticleComponent implements OnInit {
 
   ) { }
   ngOnInit() {
+    this.dropDownForm = this.fb.group({
+      categorie: [''],
+      scategorie: [''],
+
+    });
+
     if (this.crudApi.choixmenu == "A"){
 
      // this.infoForm()};
       this.catService.getAllCategories().subscribe(
-        response =>{this.categories = response;}
+        response =>{this.categorieList = response;}
       );
-
+    /*
       this.ScatService.getAllScategories().subscribe(
-        response =>{this.ScategorieList = response;}
+        response =>{this.scategorieList = response;}
       );
-
+        */
     }
+
 
  /*  infoForm() {
     let cat = new SousCategorie();
@@ -61,6 +71,13 @@ export class CreateArticleComponent implements OnInit {
     }); */
 
 
+  }
+
+  onChangeScategories(event) {
+    console.log(event);
+    this.ScatService.getListScategoriesByCategoryId(event.target.value).subscribe(response => {
+      this.scategorieList = response;
+    });
   }
 
   ResetForm() {
@@ -103,16 +120,7 @@ export class CreateArticleComponent implements OnInit {
   onChangeCtegorie(id: number) {
     this.ScatService.getScategorieById(id).subscribe(
       response => {
-        this.ScategorieList = response;
-      }
-    );
-
-  }
-
-  onSelectScateg(id: number) {
-    this.ScatService.getListScategoriesByCategoryId(id).subscribe(
-      response => {
-        this.ScategorieList = response;
+        this.scategorieList = response;
       }
     );
 

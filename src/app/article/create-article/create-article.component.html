@@ -17,9 +17,9 @@
         <label>Categorie</label>
         <div class="form-group">
           <select name="categorie" id="categorie" [(ngModel)]="article.categorie" class="form-control input-lg m-bot15"
-            (change)="onChangeCtegorie($event.target.val)">
+            (change)="onChangeScategories($event)">
             <option value=0>-Select-</option>
-            <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.designation}}</option>
+            <option *ngFor="let cat of categorieList" [value]="cat.id">{{cat.designation}}</option>
           </select>
         </div>
       </div>
@@ -27,10 +27,9 @@
       <div class="form-group">
         <label>Sous-Categorie</label>
         <div class="form-group">
-          <select name="scategorie" id="scategorie" [(ngModel)]="article.scategorie" class="form-control input-lg m-bot15"
-            (change)="onSelectScateg($event.target.value)">>
+          <select name="scategorie" id="scategorie" [(ngModel)]="article.scategorie" class="form-control input-lg m-bot15">
             <option value=0>-Select-</option>
-            <option *ngFor="let scat of scategories" [ngValue]="scat">{{scat.libelle}}</option>
+            <option  *ngFor="let scat of scategorieList" [value]="scat.id">{{scat.libelle}}</option>
           </select>
         </div>
       </div>
@@ -39,20 +38,27 @@
         <label>P.Achat</label>
         <input type="number" class="form-control" [(ngModel)]="article.prixAchat" name="prixAchat"  id="prixAchat">
       </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>P.Vente</label>
+          <input type="number" class="form-control" [(ngModel)]="article.prixVente" name="prixVente"  id="prixVente">
+        </div>
 
-      <div class="form-group">
-        <label>P.Vente</label>
-        <input type="number" class="form-control" [(ngModel)]="article.prixVente" name="prixVente"  id="prixVente">
+        <div class="form-group col-md-6">
+          <label>P.Détails</label>
+          <input type="number" class="form-control" [(ngModel)]="article.prixDetail" name="prixDetail"  id="prixDetail">
+        </div>
       </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>QStock</label>
+          <input type="number" class="form-control" [(ngModel)]="article.qtestock" name="qtestock"  id="qtestock">
+        </div>
 
-      <div class="form-group">
-        <label>QStock</label>
-        <input type="number" class="form-control" [(ngModel)]="article.qtestock" name="qtestock"  id="qtestock">
-      </div>
-
-      <div class="form-group">
-        <label>QStockInitial</label>
-        <input type="number" class="form-control" [(ngModel)]="article.stockInitial" name="stockInitial"  id="stockInitial">
+        <div class="form-group col-md-6">
+          <label>QStockInitial</label>
+          <input type="number" class="form-control" [(ngModel)]="article.stockInitial" name="stockInitial"  id="stockInitial">
+        </div>
       </div>
 
       <div class="form-group">

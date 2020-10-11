@@ -30,6 +30,10 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
+  @ViewChild("fileUploadInput")
+  fileUploadInput: any;
+  mesagge: string;
+
   closeResult: string;
 
   constructor(public crudApi: ScategorieService,
@@ -114,15 +118,58 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
         data => {
           console.log(data);
           this.toastr.warning('Scategorie supprimé avec succès!');
+          this.rerender();
           this.getListScategories();
       },
         error => console.log(error));
     }
 
   }
-  editScategorie(item : Scategorie) {
 
+  editScategorie(item : Scategorie) {
     this.router.navigateByUrl('scategorie/'+item.id);
+  }
+
+  uploadExcelFile() {
+    let formData = new FormData();
+    console.log(formData)
+    formData.append('file', this.fileUploadInput.nativeElement.files[0]);
+    this.crudApi.uploadScategorieExcelFile(formData).subscribe(result => {
+      console.log(result);
+      this.mesagge = result.toString();
+      this.toastr.warning('Fichier importé avec succès!');
+          this.rerender();
+      this.getListScategories();
+    })
+  }
+
+  generateExcel() {
+    this.crudApi.generateExcelFile();
+    this.toastr.warning("Fichier téléchargé avec succès");
+  }
+
+
+  generatePdf() {
+    this.crudApi.exportPdfScategories().subscribe(x => {
+      const blob = new Blob([x], {type: 'application/pdf'});
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob);
+        return;
+
+      }
+      const data = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = 'scategories.pdf';
+      link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+
+      setTimeout(function() {
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100)
+
+    });
+    this.toastr.warning("Fichier exporté avec succès");
 
   }
 

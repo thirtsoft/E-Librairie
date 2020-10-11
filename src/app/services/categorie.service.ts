@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Categorie } from '../models/categorie';
 import { FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +67,41 @@ export class CategorieService {
 
   deleteCategorie(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/categories/${id}`, { responseType: 'text' });
+  }
+
+  /**
+   * method pour importer les données de Excel à MySQL
+   * @param formData
+   */
+  public uploadCategorieExcelFile(formData: FormData) {
+
+    let headers = new HttpHeaders();
+
+    headers.append('Content-Type','multipart/form-data');
+    headers.append('Accept', 'application/json');
+
+    const httpOptions = { headers: headers };
+
+    return this.http.post(`${this.baseUrl}/uploadCategorie`, formData, httpOptions);
+
+  }
+
+  /**
+   * methode permettant de generer un fichier excel depuis API Spring boot
+   */
+
+  generateExcelFile() {
+    this.http.get(`${this.baseUrl}/download/categories.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+      const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
+      FileSaver.saveAs(blob, 'categories.xlsx');
+    });
+
+  }
+  /**
+   * methode permettant de generer un pdf depuis API Spring boot
+   */
+  exportPdfCategories(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/createCategoriePdf`, {responseType: 'blob'});
   }
 
 }

@@ -32,6 +32,10 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
+  @ViewChild("fileUploadInput")
+  fileUploadInput: any;
+  mesagge: string;
+
   constructor(public crudApi: CategorieService ,public fb: FormBuilder,public toastr: ToastrService,
     private router : Router,
     private matDialog: MatDialog,
@@ -122,9 +126,51 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
   }
   editCategorie(item : Categorie) {
-
     this.router.navigateByUrl('categories/'+item.id);
+  }
+
+  uploadExcelFile() {
+    let formData = new FormData();
+    console.log(formData)
+    formData.append('file', this.fileUploadInput.nativeElement.files[0]);
+    this.crudApi.uploadCategorieExcelFile(formData).subscribe(result => {
+      console.log(result);
+      this.mesagge = result.toString();
+      this.toastr.warning('Fichier Importé avec succès!');
+      this.rerender();
+      this.getListCategories();
+    })
+  }
+
+  generateExcel() {
+    this.crudApi.generateExcelFile();
+    this.toastr.warning('Fichier Télécharger avec succès!');
+  }
+
+
+  generatePdf() {
+    this.crudApi.exportPdfCategories().subscribe(x => {
+      const blob = new Blob([x], {type: 'application/pdf'});
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob);
+        return;
+
+      }
+      const data = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = 'categories.pdf';
+      link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+
+      setTimeout(function() {
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100)
+
+    });
+    this.toastr.warning('Fichier Exportée avec succès!');
 
   }
+
 
 }

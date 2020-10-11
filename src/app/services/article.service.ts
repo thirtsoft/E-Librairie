@@ -47,8 +47,6 @@ export class ArticleService {
     return this.http.post(`${this.baseUrl}/produits`, info);
   }
 
-
-
   /**
    * Methode pour afficher la liste des categories par pages
    */
@@ -66,11 +64,9 @@ export class ArticleService {
   createData(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/produits`, info);
   }
-
   updateArticle(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/produits/${id}`, value);
   }
-
   deleteArticle(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/produits/${id}`, { responseType: 'text' });
   }
