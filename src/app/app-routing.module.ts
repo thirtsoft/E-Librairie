@@ -48,6 +48,7 @@ import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appr
 import { ListStockComponent } from './stock/list-stock/list-stock.component';
 import { ListChargeComponent } from './charge/list-charge/list-charge.component';
 import { CreateChargeComponent } from './charge/create-charge/create-charge.component';
+import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 
 const routes: Routes = [
 
@@ -73,9 +74,10 @@ const routes: Routes = [
 
     { path:'commandeclient',children:[
         {path:'',component:CreateCommandeClientComponent},
-        {path:'edit/:id',component:EditLigneCmdClientComponent}
+        {path:'edit/:id',component:EditLigneCmdClientComponent},
       ]
     },
+    {path:'commandeView/:id', component: ViewCommandeComponent},
 
     { path: 'detailsCommandeClients', component: ListLigneCmdClientComponent},
     { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent},

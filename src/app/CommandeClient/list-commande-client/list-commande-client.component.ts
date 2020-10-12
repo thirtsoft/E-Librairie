@@ -106,7 +106,13 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
 
   }
 
-  viewCommandeClient() {
+  /* editClient(item : Client) {
+    this.router.navigateByUrl('clients/'+item.id);
+
+  } */
+
+  viewCommandeClient(item: CommandeClient) {
+    this.router.navigateByUrl('commandeView/' + item.id);
 
   }
 

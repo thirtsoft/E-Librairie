@@ -27,7 +27,6 @@ export class EditClientComponent implements OnInit {
     private router : Router, private route: ActivatedRoute
     ) { }
 
-
   ngOnInit() {
     this.idClient = this.route.snapshot.params.id;
     console.log(this.idClient);

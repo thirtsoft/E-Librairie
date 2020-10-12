@@ -33,6 +33,14 @@ export class LigneCmdClientService {
   /**
    * Methode pour afficher la liste des categories par pages
    */
+  public getAllLigneCmdClientByCommande(comId: number) {
+    return this.http.get(`${this.baseUrl}/searchListLigneCmdClientByCommandeId/${comId}`);
+   // return this.http.get(this.baseUrl+'/searchListLigneCmdClientByCommandeId/' + comId);
+  }
+
+  /**
+   * Methode pour afficher la liste des categories par pages
+   */
   public getAllLigneCmdClientParPage(page: number, size: number) {
     return this.http.get(this.baseUrl+"/ligneCommandes/chercherCategoriesParPages?page="+page+"&size="+size);
   }
