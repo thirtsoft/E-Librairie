@@ -20,8 +20,10 @@ export class Article {
   scategorie: Scategorie;
 
   public constructor() {
-    this.categorie = new Categorie();
+    /*
     this.scategorie = new Scategorie();
+    this.categorie = new Categorie();
+    */
   }
 
 

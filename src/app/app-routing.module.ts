@@ -54,27 +54,48 @@ const routes: Routes = [
 
   {path: '', component: HomeComponent, children : [
 
-    { path: 'articles', component: ListArticleComponent},
+  /*  { path: 'articles', component: ListArticleComponent},
     { path: 'article', component: CreateArticleComponent},
     { path:'article/:id',component:EditArticleComponent },
 
     { path: 'scategories', component: ListScategorieComponent},
     { path: 'scategorie', component: CreateScategorieComponent},
-    { path:'scategorie/:id',component:EditScategorieComponent },
+    { path:'scategorie/:id',component:EditScategorieComponent }, */
 
-    { path: 'categories', component: ListCategorieComponent},
-    { path: 'categorie', component: CreateCategorieComponent},
-    { path:'categories/:id',component:EditCategorieComponent },
+    { path: 'categories', children: [
+        { path: '', component: ListCategorieComponent},
+        { path:'edit/:id',component:ListCategorieComponent },
+      ]
+    },
 
-    { path: 'clients', component: ListClientComponent},
+    { path: 'scategories', children: [
+        { path: '', component: ListScategorieComponent},
+        { path:'edit/:id',component:ListScategorieComponent },
+      ]
+    },
+
+    { path: 'articles', children: [
+        { path: '', component: ListArticleComponent},
+        { path:'edit/:id',component:ListArticleComponent },
+      ]
+    },
+
+  /*  { path: 'clients', component: ListClientComponent},
     { path: 'client', component: CreateClientComponent},
-    { path:'clients/:id',component:EditClientComponent },
+    { path:'clients/:id',component:EditClientComponent }, */
+
+
+    { path: 'clients', children: [
+        { path: '', component: ListClientComponent},
+        { path:'edit/:id',component:ListClientComponent },
+      ]
+    },
 
     { path: 'commandeclients', component: ListCommandeClientComponent},
 
     { path:'commandeclient',children:[
         {path:'',component:CreateCommandeClientComponent},
-        {path:'edit/:id',component:EditLigneCmdClientComponent},
+        {path:'edit/:id',component:CreateCommandeClientComponent},
       ]
     },
     {path:'commandeView/:id', component: ViewCommandeComponent},
@@ -131,11 +152,17 @@ const routes: Routes = [
         {path:'edit/:id',component: CreateAvoirComponent}
       ]
     },
-
+  /*
     { path: 'charges', component: ListChargeComponent},
     { path:'charge',children:[
         {path:'',component: CreateChargeComponent},
         {path:'edit/:id',component: CreateChargeComponent}
+      ]
+    }, */
+
+    { path: 'charges', children: [
+        { path: '', component: ListChargeComponent},
+        { path:'edit/:id',component:ListChargeComponent },
       ]
     },
 
@@ -144,10 +171,16 @@ const routes: Routes = [
     { path: 'contrat', component: CreateContratComponent},
     { path:'contrats/:id',component:EditContratComponent },
 
+    { path: 'fournisseurs', children: [
+        { path: '', component: ListFournisseurComponent},
+        { path:'edit/:id',component:ListFournisseurComponent },
+      ]
+    },
+  /*
     { path: 'fournisseurs', component: ListFournisseurComponent},
     { path: 'fournisseur', component: CreateFournisseurComponent},
     { path:'fournisseurs/:id',component:EditFournisseurComponent },
-
+  */
     { path: 'employes', component: ListEmployeComponent},
     { path: 'employe', component: CreateEmployeComponent},
     { path:'employes/:id',component:EditEmployeComponent },

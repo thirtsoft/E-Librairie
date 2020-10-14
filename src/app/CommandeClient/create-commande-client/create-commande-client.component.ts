@@ -38,22 +38,28 @@ export class CreateCommandeClientComponent implements OnInit {
 
   isChecked = false;
 
+  formData: CommandeClient;
+  orderItem: LigneCmdClient[];
+  OrderId: number;
+
   constructor(private crudApi: CommandeClientService, private dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService, public creanceService: CreanceService,
     private toastr :ToastrService, private router :Router,
-    private currentRoute: ActivatedRoute, private matDialog: MatDialog,
+    private route: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
     ) { }
 
   ngOnInit() {
-    let OrderId = this.currentRoute.snapshot.paramMap.get('id');
-    if (OrderId == null) {
+    this.OrderId = this.route.snapshot.params.id;
+    console.log(this.OrderId);
+    if (this.OrderId == null) {
       this.resetForm();
     }else {
-      this.crudApi.getOrderByID(parseInt(OrderId)).then(res =>{
+      this.crudApi.getOrderByID(this.OrderId).then(res =>{
          this.orders = res.order;
-        this.crudApi.orderItems = res.orderItems;
+        this.crudApi.orderItems = res.orderItem;
+        console.log(res.orderItem);
       });
     }
 
@@ -96,6 +102,20 @@ export class CreateCommandeClientComponent implements OnInit {
     });
 
   }
+
+  AddOrEditOrderItem(lcommandeIndex, OrderId) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "50%";
+    dialogConfig.data={lcommandeIndex, OrderId};
+    this.dialog.open(CreateLigneCmdClientComponent, dialogConfig).afterClosed().subscribe(res =>{
+      this.calculMontantTotal();
+    });
+
+  }
+
+
 
   AddOrderItem(lcommandeIndex, OrderId){
     const dialogConfig = new MatDialogConfig();

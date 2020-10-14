@@ -19,6 +19,7 @@ export class ScategorieService {
   // private baseUrl = '/api/categories';
    choixmenu : string  = 'A';
    listData : Scategorie[];
+   public formData:  Scategorie;
 
    public dataForm:  FormGroup;
 
@@ -35,6 +36,10 @@ export class ScategorieService {
    getAllScategories(): Observable<any> {
      return this.http.get(`${this.baseUrl}/scategories`);
    }
+
+   getScategorieByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/scategories/`+id).toPromise();
+  }
 
    public getScategorieById(id: number): Observable<Object> {
      return this.http.get(`${this.baseUrl}/scategories/${id}`);

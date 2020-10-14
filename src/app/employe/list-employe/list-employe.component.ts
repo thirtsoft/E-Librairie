@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Employe } from 'src/app/models/employe';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { EmployeService } from 'src/app/services/employe.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -17,9 +17,9 @@ import { DataTableDirective } from 'angular-datatables';
 })
 export class ListEmployeComponent implements OnDestroy, OnInit {
 
-  client: Employe;
-
+  emp: Employe;
   listData : Employe[];
+  empID: number;
 
   private editForm: FormGroup;
 
@@ -27,8 +27,9 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: EmployeService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router, private matDialog: MatDialog,
+  constructor(public crudApi: EmployeService ,public fb: FormBuilder,
+    private route: ActivatedRoute, private router : Router,
+    public toastr: ToastrService, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateEmployeComponent>,
     ) {
@@ -37,10 +38,17 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListEmployes();
       })
-     }
-
-
+  }
   ngOnInit() {
+    this.empID = this.route.snapshot.params.id;
+    if (this.empID == null) {
+      this.resetForm();
+    }else {
+      this.crudApi.getEmployeByID(this.empID).then(res => {
+        this.listData = res.client;
+      });
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -65,7 +73,6 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
       dtInstance.destroy();
       // call the dtTrigger to rerender again
       this.dtTrigger.next();
-
     });
 
   }
@@ -74,11 +81,26 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
     this.dtTrigger.unsubscribe();
   }
 
+  resetForm(form?: NgForm) {
+    if (form = null)
+      form.resetForm();
+    this.crudApi.formData = {
+      id: null,
+      prenom: '',
+      nom: '',
+      cni: '',
+      adresse: '',
+      email: '',
+      telephone: '',
+      telephone2: ''
+    };
+
+  }
+
   getListEmployes() {
     this.crudApi.getAllEmployes().subscribe(
       response =>{this.listData = response;}
     );
-
   }
 
   onCreateEmploye(){

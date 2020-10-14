@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Categorie } from 'src/app/models/categorie';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators, NgForm } from '@angular/forms';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef } from "@angular/material/dialog";
 
@@ -23,6 +23,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   categorie: Categorie;
 
   listData : Categorie[];
+  CatId: number;
 
   private editForm: FormGroup;
 
@@ -36,9 +37,9 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   fileUploadInput: any;
   mesagge: string;
 
-  constructor(public crudApi: CategorieService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router,
-    private matDialog: MatDialog,
+  constructor(public crudApi: CategorieService ,public fb: FormBuilder,
+    public toastr: ToastrService, private router : Router,
+    private matDialog: MatDialog, private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateCategorieComponent>,
     ) {
@@ -47,10 +48,18 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListCategories();
       })
-     }
-
+  }
 
   ngOnInit(): void {
+    this.CatId = this.route.snapshot.params.id;
+    if (this.CatId == null) {
+      this.resetForm();
+    }else {
+      this.crudApi.getCategorieByID(this.CatId).then(res => {
+        this.listData = res.categorie;
+      });
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -77,9 +86,19 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     });
   }
 
-
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  resetForm(form?: NgForm) {
+    if (form = null)
+      form.resetForm();
+    this.crudApi.formData = {
+      id: null,
+      code: '',
+      designation: ''
+    };
+
   }
 
   getListCategories() {
@@ -107,7 +126,6 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateCategorieComponent, dialogConfig);
   }
 

@@ -58,15 +58,15 @@
       <th>Quantite</th>
       <th>Total</th>
       <th>
-        <a class="btn btn-sm btn-success text-white" (click)="AddData(null,crudApi.formData.id)">
+        <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null,crudApi.formData.id)">
             <i class="fa fa-plus"></i>Ajouter
         </a>
       </th>
     </thead>
     <tbody>
       <tr *ngIf="crudApi.orderItems.length==0" [class.text-danger]="!isValid && crudApi.orderItems.length==0">
-        <td class="font-italic text-center" colspan="5">
-            Aucune Commande sélectionnée ...
+        <td class="font-italic text-center" colspan="4">
+            Aucun Article sélectionné Pour cette Commande ...
         </td>
       </tr>
       <tr *ngFor="let item of crudApi.orderItems;let i=index;">
@@ -75,7 +75,7 @@
         <td>{{item.quantite}}</td>
         <td>{{item.total}}</td>
         <td>
-          <a class="btn btn-sm btn-info text-white" (click)="AddOrderItem(i,crudApi.formData.id)">
+          <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,crudApi.formData.id)">
               <i class="fa fa-pencil"></i></a>
           <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemId,i)">
               <i class="fa fa-trash"></i></a>

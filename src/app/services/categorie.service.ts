@@ -19,6 +19,8 @@ export class CategorieService {
   choixmenu : string  = 'A';
   listData : Categorie[];
 
+  public formData:  Categorie;
+
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();
@@ -33,6 +35,10 @@ export class CategorieService {
 
   getAllCategories(): Observable<any> {
     return this.http.get(`${this.baseUrl}/categories`);
+  }
+
+  getCategorieByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/categories/`+id).toPromise();
   }
 
   public getCategorieById(id: number): Observable<Object> {

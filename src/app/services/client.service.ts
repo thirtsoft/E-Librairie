@@ -13,6 +13,7 @@ export class ClientService {
  // private baseUrl = '/api/categories';
   choixmenu : string  = 'A';
   listData : Client[];
+  public formData:  Client;
 
   public dataForm:  FormGroup;
 
@@ -37,6 +38,10 @@ export class ClientService {
 
   public getClientById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/clients/${id}`);
+  }
+
+  getClientByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/clients/`+id).toPromise();
   }
 
 

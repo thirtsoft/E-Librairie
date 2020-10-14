@@ -16,7 +16,7 @@
 
           <thead>
             <tr>
-              <th>Prénom</th><th>Nom</th><th>cni</th><th>Adresse</th>
+              <th>Prénom et Nom</th><th>cni</th><th>Adresse</th>
               <th>Telephone</th><th>Telephone2</th><th>Email</th>
               <th>Action</th>
             </tr>
@@ -24,8 +24,7 @@
 
           <tbody>
             <tr *ngFor="let emp of listData">
-              <td>{{emp.prenom}}</td>
-              <td>{{emp.nom}}</td>
+              <td>{{emp.prenom}}  {{emp.nom}}</td>
               <td>{{emp.cni}}</td>
               <td>{{emp.adresse}}</td>
               <td>{{emp.telephone}}</td>

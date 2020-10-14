@@ -11,6 +11,7 @@ import { CreateCommandeClientComponent } from '../create-commande-client/create-
 import { Client } from 'src/app/models/client';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
+import { Article } from 'src/app/models/article';
 
 @Component({
   selector: 'app-view-commande',
@@ -28,6 +29,8 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
   comId: number;
   currentCommande;
+
+  produit: Article = new Article();
 
   private editForm: FormGroup;
 

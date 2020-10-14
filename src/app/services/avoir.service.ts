@@ -30,6 +30,10 @@ export class AvoirService {
     return this.http.get(`${this.baseUrl}/avoirs`);
   }
 
+  getAvoirByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/avoirs/`+id).toPromise();
+  }
+
   public getAvoirById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/avoirs/${id}`);
   }

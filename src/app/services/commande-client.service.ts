@@ -37,7 +37,7 @@ export class CommandeClientService {
   }
 
   getOrderByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/commandes/${id}`).toPromise();
+    return this.http.get(`${this.baseUrl}/commandes/`+id).toPromise();
   }
 
   /* createCommandeClient(info: Object): Observable<Object> {

@@ -36,7 +36,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
       }
     );
 
-    if (this.data.orderItemIndex == null)
+    if (this.data.lcommandeIndex == null)
       this.formData = {
         OrderItemId: null,
         OrderId: this.data.OrderId,
@@ -51,7 +51,8 @@ export class CreateLigneCmdClientComponent implements OnInit {
 
       }
     else
-      this.formData = Object.assign({}, this.cmdService.orderItems[this.data.orderItemIndex]);
+      this.formData = Object.assign({}, this.cmdService.orderItems[this.data.lcommandeIndex]);
+      console.log(this.formData);
   }
 
   selectPrice(ctrl) {
@@ -75,11 +76,11 @@ export class CreateLigneCmdClientComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.validateForm(form.value)) {
-      if (this.data.orderItemIndex == null) {
+      if (this.data.lcommandeIndex == null) {
         this.cmdService.orderItems.push(form.value);
       }
       else {
-        this.cmdService.orderItems[this.data.orderItemIndex] = form.value;
+        this.cmdService.orderItems[this.data.lcommandeIndex] = form.value;
       }
       this.dialogRef.close();
     }

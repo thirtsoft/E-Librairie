@@ -19,8 +19,9 @@ export class CreateEmployeComponent implements OnInit {
     public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateEmployeComponent>,
-    ) { }
+    ) {
 
+  }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
@@ -68,7 +69,7 @@ export class CreateEmployeComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Employe Ajouté avec Succès");
       this.getListEmployes();
-      this.router.navigate(['/employes']);
+
     });
   }
   updateEmploye(){
@@ -76,10 +77,9 @@ export class CreateEmployeComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Employe Modifier avec Succès");
-      this.crudApi.getAllEmployes().subscribe(
-        response =>{this.crudApi.listData = response;}
-       );
-      this.router.navigate(['/employes']);
+      this.crudApi.filter('Register click');
+      this.getListEmployes();
+
     });
   }
 

@@ -15,7 +15,7 @@
           [dtTrigger]="dtTrigger">
           <thead>
             <tr>
-              <th>Code</th><th>Raison Sociale</th><th>Prénom</th><th>Nom</th><th>NomBank</th><th>Numero Compte</th>
+              <th>Code</th><th>Raison Sociale</th><th>Prénom et Nom</th><th>Numero Compte</th><th>NomBank</th>
               <th>Adresse</th><th>Telephone</th><th>Fax</th><th>Email</th>
               <th>Action</th>
             </tr>
@@ -24,10 +24,9 @@
             <tr *ngFor="let four of listData">
               <td>{{four.code}}</td>
               <td>{{four.raisonSociale}}</td>
-              <td>{{four.prenom}}</td>
-              <td>{{four.nom}}</td>
-              <td>{{four.nomBank}}</td>
+              <td>{{four.prenom}}  {{four.nom}}</td>
               <td>{{four.numeroCompte}}</td>
+              <td>{{four.nomBank}}</td>
               <td>{{four.adresse}}</td>
               <td>{{four.telephone}}</td>
               <td>{{four.fax}}</td>

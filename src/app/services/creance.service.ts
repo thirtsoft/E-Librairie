@@ -30,6 +30,10 @@ export class CreanceService {
     return this.http.get(`${this.baseUrl}/creances`);
   }
 
+  getCreancetByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/creances/`+id).toPromise();
+  }
+
   public getCreanceById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/creances/${id}`);
   }

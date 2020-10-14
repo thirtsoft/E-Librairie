@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-md-8 col-md-offset-2">
-    <h4 class="dislay-4">Commandes </h4>
+    <h4 class="dislay-4">Lignes Commandes </h4>
     <hr>
     <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
 
@@ -10,10 +10,10 @@
 
         <div class="form-group">
           <label>Article</label>
-          <select name="produit" #ItemId="ngModel" [(ngModel)]="formData.produit" class="form-control"
-            (change)="selectPrice($event.target)" [class.is-invalid]="!isValid && formData.produit.id==0">
+          <select name="ItemId" #ItemId="ngModel" [(ngModel)]="formData.ItemId" class="form-control"
+            (change)="selectPrice($event.target)" [class.is-invalid]="!isValid && formData.ItemId==0">
             <option value="0">-Select-</option>
-            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
+            <option *ngFor="let item of listArticle" value="{{item.id}}">{{item.reference}}</option>
           </select>
         </div>
 

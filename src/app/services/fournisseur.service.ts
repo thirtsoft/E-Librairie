@@ -13,6 +13,7 @@ export class FournisseurService {
   // private baseUrl = '/api/categories';
    choixmenu : string  = 'A';
    listData : Fournisseur[];
+   public formData:  Fournisseur;
 
    public dataForm:  FormGroup;
 
@@ -27,9 +28,12 @@ export class FournisseurService {
    constructor(private http: HttpClient) { }
 
    getAllFournisseurs(): Observable<any> {
-
      return this.http.get(`${this.baseUrl}/fournisseurs`);
    }
+
+   getFournisseurByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/fournisseurs/`+id).toPromise();
+  }
 
    public getFournisseurById(id: number): Observable<Object> {
      return this.http.get(`${this.baseUrl}/fournisseurs/${id}`);

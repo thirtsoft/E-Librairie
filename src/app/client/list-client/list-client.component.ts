@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/services/client.service';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators, NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,13 +13,15 @@ import { DataTableDirective } from 'angular-datatables';
 @Component({
   selector: 'app-list-client',
   templateUrl: './list-client.component.html',
-  styleUrls: ['./list-client.component.scss']
+  styleUrls: ['./list-client.component.scss'],
 })
 export class ListClientComponent implements OnDestroy, OnInit {
 
-  client: Client;
+ // client: Client;
+  public client = new Client();
 
   listData : Client[];
+  clientID: number;
 
   private editForm: FormGroup;
 
@@ -29,9 +31,9 @@ export class ListClientComponent implements OnDestroy, OnInit {
 
   control: FormControl = new FormControl('');
 
-  constructor(public crudApi: ClientService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router,
-    private matDialog: MatDialog,
+  constructor(public crudApi: ClientService ,public fb: FormBuilder,
+    public toastr: ToastrService, private router : Router,
+    private matDialog: MatDialog, private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateClientComponent>,
     ) {
@@ -43,6 +45,15 @@ export class ListClientComponent implements OnDestroy, OnInit {
      }
 
   ngOnInit() {
+    this.clientID = this.route.snapshot.params.id;
+    if (this.clientID == null) {
+      this.resetForm();
+    }else {
+      this.crudApi.getClientByID(this.clientID).then(res => {
+        this.listData = res.client;
+      });
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -72,6 +83,20 @@ export class ListClientComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  resetForm(form?: NgForm) {
+    if (form = null)
+      form.resetForm();
+    this.crudApi.formData = {
+      id: null,
+      raisonSocial: '',
+      chefService: '',
+      adresse: '',
+      email: '',
+      telephone:''
+    };
+
   }
 
   getListClients() {

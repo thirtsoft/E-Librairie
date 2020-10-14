@@ -30,6 +30,10 @@ export class VersementService {
     return this.http.get(`${this.baseUrl}/versements`);
   }
 
+  getVersementByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/versements/`+id).toPromise();
+  }
+
   public getVersementById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/versements/${id}`);
   }

@@ -13,7 +13,7 @@ export class EmployeService {
  // private baseUrl = '/api/categories';
   choixmenu : string  = 'A';
   listData : Employe[];
-
+  public formData:  Employe;
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();
@@ -29,6 +29,10 @@ export class EmployeService {
   getAllEmployes(): Observable<any> {
 
     return this.http.get(`${this.baseUrl}/employes`);
+  }
+
+  getEmployeByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/employes/`+id).toPromise();
   }
 
   public getEmployeById(id: number): Observable<Object> {

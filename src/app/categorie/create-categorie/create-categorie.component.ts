@@ -72,6 +72,7 @@ export class CreateCategorieComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Categorie Modifier avec Succès");
+      this.crudApi.filter('Register click');
       this.getListCategories();
       this.router.navigate(['/categories']);
     });

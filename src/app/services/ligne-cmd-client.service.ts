@@ -18,8 +18,8 @@ export class LigneCmdClientService {
 
   constructor(private http: HttpClient) { }
 
-  getAllLigneCmdClients(): Observable<LigneCmdClient[]> {
-    return this.http.get<LigneCmdClient[]>(`${this.baseUrl}/ligneCommandes`);
+  getAllLigneCmdClients(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/ligneCommandes`);
   }
 
   public getLigneCmdClientId(id: number): Observable<Object> {

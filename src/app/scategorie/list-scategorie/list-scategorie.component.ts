@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { ScategorieService } from 'src/app/services/scategorie.service';
 //import { CategorieService } from 'src/app/services/categorie.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -21,8 +21,9 @@ import { DataTableDirective } from 'angular-datatables';
 export class ListScategorieComponent implements OnDestroy, OnInit {
 
   listData : Scategorie[];
-
   listCategorie : Categorie[];
+  scat: Scategorie;
+  ScatID: number;
 
   private editForm: FormGroup;
 
@@ -36,10 +37,9 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
   closeResult: string;
 
-  constructor(public crudApi: ScategorieService,
-    public fb: FormBuilder, public toastr: ToastrService,
-    private router : Router,
-    private matDialog: MatDialog,
+  constructor(public crudApi: ScategorieService, public fb: FormBuilder,
+    public toastr: ToastrService, private router : Router,
+    private matDialog: MatDialog, private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateScategorieComponent>,
     ) {
@@ -48,10 +48,19 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListScategories();
       })
-     }
-
+  }
 
   ngOnInit() {
+    this.ScatID = this.route.snapshot.params.id;
+    console.log(this.ScatID);
+    if (this.ScatID == null) {
+      this.resetForm();
+    }else {
+      this.crudApi.getScategorieByID(this.ScatID).then(res =>{
+         this.listData = res.scat;
+      });
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -84,11 +93,21 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     this.dtTrigger.unsubscribe();
   }
 
+  resetForm(form?: NgForm) {
+    if (form = null)
+      form.resetForm();
+    this.crudApi.formData = {
+      id: null,
+      code: '',
+      libelle: '',
+      categorie : new Categorie()
+    };
+  }
+
   getListScategories() {
     this.crudApi.getAllScategories().subscribe(
       response =>{this.listData = response;}
     );
-
   }
 
   onCreateScategorie(){

@@ -30,6 +30,9 @@ export class ContratService {
   getAllContrats(): Observable<any> {
     return this.http.get(`${this.baseUrl}/contrats`);
   }
+  getContratByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/contrats/`+id).toPromise();
+  }
 
   public getContratById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/contrats/${id}`);

@@ -13,6 +13,8 @@ import { Article } from 'src/app/models/article';
 import { Categorie } from 'src/app/models/categorie';
 import { Scategorie } from 'src/app/models/scategorie';
 import { DataTableDirective } from 'angular-datatables';
+import { CommandeClientService } from 'src/app/services/commande-client.service';
+import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
 
 @Component({
   selector: 'app-list-ligne-cmd-client',
@@ -21,10 +23,12 @@ import { DataTableDirective } from 'angular-datatables';
 })
 export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
 
-  listData : LigneCmdClient[];
+  listData: LigneCmdClient[] = [];
 
   commande: CommandeClient = new CommandeClient();
-  produit: Article = {
+  produit: Article = new Article();
+  /*
+  produit21: Article = {
     id: null,
     reference: '',
     designation: '',
@@ -42,7 +46,7 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
 
 
   };
-
+*/
   produit1;
   commande1;
 
@@ -54,9 +58,9 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: LigneCmdClientService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
+    private matDialog: MatDialog, public comService: CommandeClientService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
+    public dialogRef:MatDialogRef<CreateCommandeClientComponent>,
     ) { }
 
   ngOnInit(): void {
@@ -77,7 +81,9 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
     );
 
     this.commande1 = new CommandeClient();
-   // this.produit1= new Article() = {}
+    this.produit = new Article();
+    console.log(this.produit.designation);
+   console.log(this.comService.orderItems);
   }
 
   /**
@@ -107,7 +113,7 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
 
   onCreateLigneCmdClient() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("detailsCommandeClient");
+    this.router.navigateByUrl("commandeclient");
   }
 
   deleteLigneCmdClient(id: number) {

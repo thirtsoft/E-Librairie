@@ -35,6 +35,10 @@ export class ArticleService {
     return this.http.get(`${this.baseUrl}/produits`);
   }
 
+  getArticleByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/produits/`+id).toPromise();
+  }
+
   public getArticleById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/produits/${id}`);
   }

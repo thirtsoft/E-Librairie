@@ -154,6 +154,8 @@ import { CreateChargeComponent } from './charge/create-charge/create-charge.comp
     { provide: MatDialogRef, useValue: {} }],
 
   bootstrap: [AppComponent],
-  entryComponents: [CreateCategorieComponent]
+  entryComponents: [CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent, CreateFournisseurComponent,
+    CreateVersementComponent, CreateCreanceComponent, CreateContratComponent, CreateAvoirComponent, CreateChargeComponent,
+    CreateEmployeComponent]
 })
 export class AppModule { }

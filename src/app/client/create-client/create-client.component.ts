@@ -74,10 +74,8 @@ export class CreateClientComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Client Modifier avec Succès");
-      this.crudApi.getAllClients().subscribe(
-        response =>{this.crudApi.listData = response;}
-       );
-      this.router.navigate(['/clients']);
+      this.crudApi.filter('Register click');
+      this.getListClients();
     });
   }
 

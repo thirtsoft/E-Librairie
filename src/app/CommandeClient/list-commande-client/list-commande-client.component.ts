@@ -53,6 +53,7 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     );
 
     this.client = new Client();
+    console.log(this.client);
   }
 
   /**

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Charge } from 'src/app/models/charge';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ChargeService } from 'src/app/services/charge.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { CreateChargeComponent } from '../create-charge/create-charge.component';
 import { DataTableDirective } from 'angular-datatables';
@@ -17,6 +17,8 @@ import { DataTableDirective } from 'angular-datatables';
 export class ListChargeComponent implements OnDestroy, OnInit {
 
   listData : Charge[];
+  charge: Charge;
+  ChargeID: number;
 
   private editForm: FormGroup;
 
@@ -26,7 +28,7 @@ export class ListChargeComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: ChargeService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
+    private matDialog: MatDialog, private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateChargeComponent>
     ) {
@@ -35,9 +37,17 @@ export class ListChargeComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListCharges();
       })
-     }
-
+  }
   ngOnInit() {
+    this.ChargeID = this.route.snapshot.params.id;
+    if (this.ChargeID == null) {
+      this.resetForm();
+    }else {
+      this.crudApi.getChargeByID(this.ChargeID).then(res => {
+        this.listData = res.charge;
+      });
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -63,8 +73,20 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       dtInstance.destroy();
       // call the dtTrigger to rerender again
       this.dtTrigger.next();
-
     });
+  }
+
+  resetForm(form?: NgForm) {
+    if (form = null)
+      form.resetForm();
+    this.crudApi.formData = {
+      id: null,
+      codeCharge: '',
+      nature: '',
+      montantCharge: 0,
+      date: Date()
+
+    };
 
   }
 
@@ -86,11 +108,10 @@ export class ListChargeComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateChargeComponent, dialogConfig);
   }
 
-  editerCharge(item : Charge) {
+  editerCharge(item: Charge) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();

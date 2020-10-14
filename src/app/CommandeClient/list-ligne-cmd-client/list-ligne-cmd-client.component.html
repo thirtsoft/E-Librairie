@@ -14,16 +14,14 @@
             [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-                <th>Produit</th><th>Prix</th><th>Quantité</th>
+                <th>Numéro Commande</th> <th>Produit</th><th>Prix</th><th>Quantité</th>
                 <th>Total</th>
                 <th>Action</th>
               </tr>
             </thead>
-          <tbody *ngIf="listData">
+          <tbody >
             <tr *ngFor="let lcomClient of listData">
-             <!-- <td>{{lcomClient.OrderItemId}}</td>
-                <td>{{lcomClient.numero}}</td>
-              <td>{{lcomClient.commande.numCommande}}</td>-->
+              <td>{{lcomClient.numero}}</td>
               <td>{{lcomClient.produit?.designation}}</td>
               <td>{{lcomClient.prix}}</td>
               <td>{{lcomClient.quantite}}</td>
