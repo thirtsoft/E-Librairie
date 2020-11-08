@@ -25,7 +25,6 @@ export class CreateFournisseurComponent implements OnInit {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
     };
-
   }
 
   infoForm() {
@@ -71,8 +70,10 @@ export class CreateFournisseurComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Fournisseur Ajouté avec Succès");
       this.getListFournisseurs();
+      this.router.navigate(['/fournisseurs']);
     });
   }
+
   updateFournisseur(){
     this.crudApi.updateFournisseur(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
@@ -80,8 +81,8 @@ export class CreateFournisseurComponent implements OnInit {
       this.toastr.success("Fournisseur Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListFournisseurs();
+      this.router.navigate(['/fournisseurs']);
     });
-
   }
 
 

@@ -30,6 +30,14 @@ export class LigneApproService {
     return this.http.get(`${this.baseUrl}/ligneApprovisionnements/${id}`);
   }
 
+   /**
+   * Methode pour afficher la liste des categories par pages
+   */
+  public getAllLigneApproByAppro(approId: number) {
+    return this.http.get(`${this.baseUrl}/searchListLigneApproByApproId/${approId}`);
+   // return this.http.get(this.baseUrl+'/searchListLigneCmdClientByCommandeId/' + comId);
+  }
+
   createLigneAppro(info: LigneAppro): Observable<Object> {
     return this.http.post(`${this.baseUrl}/ligneApprovisionnements`, info);
   }

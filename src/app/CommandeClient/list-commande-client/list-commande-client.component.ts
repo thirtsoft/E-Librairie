@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
 import { Client } from 'src/app/models/client';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-commande-client',
@@ -18,8 +20,7 @@ import { DataTableDirective } from 'angular-datatables';
 })
 export class ListCommandeClientComponent implements OnDestroy, OnInit {
 
-  listData: CommandeClient[];
-
+  listData;
   client;
 
   private editForm: FormGroup;
@@ -30,9 +31,11 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: CommandeClientService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateCommandeClientComponent>,
+    private dialogService: DialogService,private datePipe : DatePipe,
+  /*@Inject(MAT_DIALOG_DATA) public data: any,
+      private matDialog: MatDialog,
+
+    public dialogRef:MatDialogRef<CreateCommandeClientComponent>,*/
     ) { }
 
   ngOnInit(): void {
@@ -76,9 +79,7 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     this.crudApi.getAllCommandeClients().subscribe(
       response =>{
         this.listData = response;
-
       });
-
   }
 
   onCreateCommandeClient() {
@@ -86,7 +87,38 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl("commandeclient");
   }
 
-  deleteCommandeClient(id: number) {
+  editerCommandeClient(item : CommandeClient) {
+    this.router.navigateByUrl('commandeclient/'+item.id);
+  }
+
+  editCommandeClient(item: CommandeClient) {
+    this.crudApi.formData = this.fb.group(Object.assign({}, item));
+    this.crudApi.choixmenu = "M"
+    this.router.navigate(['/commandeclient']);
+  }
+
+  viewCommandeClient(item: CommandeClient) {
+    this.router.navigateByUrl('commandeView/' + item.id);
+  }
+  deleteCommandeClient(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteCommande(id).subscribe(data => {
+          this.toastr.warning('Commande supprimé avec succès!');
+          this.rerender();
+          this.getListCommandeClients();
+          this.router.navigate(['/commandeclients']);
+        });
+      }
+    });
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  /*  deleteCommandeClient(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Commande ?')) {
     this.crudApi.deleteCommandeClient(id)
       .subscribe(
@@ -99,23 +131,7 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
-  }
-
-  editerCommandeClient(item : CommandeClient) {
-
-    this.router.navigateByUrl('commandeclient/'+item.id);
-
-  }
-
-  /* editClient(item : Client) {
-    this.router.navigateByUrl('clients/'+item.id);
-
   } */
-
-  viewCommandeClient(item: CommandeClient) {
-    this.router.navigateByUrl('commandeView/' + item.id);
-
-  }
 
 
 }

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateLigneApproComponent } from '../create-ligne-appro/create-ligne-appro.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-ligne-appro',
@@ -52,7 +53,7 @@ export class ListLigneApproComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: LigneApproService, public fb: FormBuilder,
+  constructor(public crudApi: LigneApproService, private dialogService: DialogService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateLigneApproComponent>,
@@ -100,9 +101,7 @@ export class ListLigneApproComponent implements OnInit {
     this.crudApi.getAllLigneAppros().subscribe(
       response =>{this.listData = response;
       }
-
     );
-
   }
 
   onCreateLigneAppro() {
@@ -110,7 +109,7 @@ export class ListLigneApproComponent implements OnInit {
     this.router.navigateByUrl("approvisionnement");
   }
 
-  deleteLigneAppro(id: number) {
+/*  deleteLigneAppro(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Détails Appro ?')) {
     this.crudApi.deleteLigneAppro(id)
       .subscribe(
@@ -122,13 +121,23 @@ export class ListLigneApproComponent implements OnInit {
       },
         error => console.log(error));
     }
+  } */
 
+  deleteLigneAppro(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteLigneAppro(id).subscribe(data => {
+          this.toastr.warning('Détails Appro supprimé avec succès!');
+          this.rerender();
+          this.getListLigneAppros();
+        });
+      }
+    });
   }
 
   editerLigneAppro(item : LigneAppro) {
-
     this.router.navigateByUrl('detailsApprovisionnement/'+item.OrderItemId);
-
   }
 
 }

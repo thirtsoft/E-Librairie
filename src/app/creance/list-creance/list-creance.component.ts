@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { CreateCreanceComponent } from '../create-creance/create-creance.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-creance',
@@ -26,7 +28,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: CreanceService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+    public toastr: ToastrService, private router : Router, private dialogService: DialogService,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateCreanceComponent>,
     ) {
@@ -35,7 +37,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListCreances();
       })
-    }
+  }
 
   ngOnInit() {
     this.dtOptions = {
@@ -48,7 +50,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllCreances().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -68,16 +70,14 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
   }
 
-
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
 
   getListCreances() {
     this.crudApi.getAllCreances().subscribe(
-      response =>{this.listData = response;}
+      response =>{this.crudApi.listData = response;}
     );
-
   }
 
   onCreateCreance(){
@@ -87,8 +87,19 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
     this.matDialog.open(CreateCreanceComponent, dialogConfig);
+  }
+
+  addEditCreance(creanceId?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      creanceId
+    };
+    this.matDialog.open(CreateCreanceComponent, dialogConfig);
+
   }
 
   editerCreance(item : Creance) {
@@ -100,6 +111,8 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateCreanceComponent, dialogConfig);
   }
+
+  /*
   deleteCreance(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Creance ?')) {
     this.crudApi.deleteCreance(id)
@@ -112,12 +125,23 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
       },
         error => console.log(error));
     }
+  }*/
 
+  deleteCreance(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteCreance(id).subscribe(data => {
+          this.toastr.warning('Creance supprimé avec succès!');
+          this.rerender();
+          this.getListCreances();
+        });
+      }
+    });
   }
+
   editContrat(item : Creance) {
-
     this.router.navigateByUrl('creances/'+item.id);
-
   }
 
 

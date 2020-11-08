@@ -25,10 +25,14 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
   cmdClient: CommandeClient;
   currentCmdClient;
 
-  client;
+
 
   comId: number;
   currentCommande;
+  numeroCommande;
+  totalCommande;
+  dateCommande;
+  client;
 
   produit: Article = new Article();
 
@@ -48,24 +52,38 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.comId = this.route.snapshot.params.id;
     console.log(this.comId);
-    this.lcmdService.getAllLigneCmdClientByCommande(this.comId).subscribe(data => {
-      this.currentCommande = data;
-      console.log(this.currentCommande);
+    this.lcmdService.getAllLigneCmdClientByCommande(this.comId).subscribe((data: LigneCmdClient[]) => {
+      this.lcmdService.listData = data;
+    //  this.currentCommande = data;
+      console.log(this.lcmdService.listData);
+
+      console.log(this.lcmdService.listData[0].numero);
+      this.numeroCommande = this.lcmdService.listData[0].numero;
+      console.log(this.lcmdService.listData[0].commande.totalCommande);
+      this.totalCommande = this.lcmdService.listData[0].commande.totalCommande;
+      console.log(this.lcmdService.listData[0].commande.dateCommande);
+      this.dateCommande = this.lcmdService.listData[0].commande.dateCommande;
+      this.client = this.lcmdService.listData[0].commande.client.chefService;
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
     })
-
+  /*
     this.cmdClient = new CommandeClient();
     this.cmdClient = {
       id: null,
-      numCommande: '',
+      numeroCommande: 0,
+      total: 0,
+   //   libArticle: '',
       totalCommande: 0,
       status: '',
+    //  refClient: '',
+      lib_client: '',
+      lcomms: [],
       dateCommande: new Date(),
       DeletedOrderItemIDs: '',
       client: new Client()
-    }
+    }*/
   }
 
   /**

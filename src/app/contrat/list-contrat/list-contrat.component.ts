@@ -1,14 +1,18 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Contrat } from 'src/app/models/contrat';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { ContratService } from 'src/app/services/contrat.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialogRef } from "@angular/material/dialog";
 import { CreateContratComponent } from '../create-contrat/create-contrat.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
+import { EditContratComponent } from '../edit-contrat/edit-contrat.component';
+import { Client } from 'src/app/models/client';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-contrat',
@@ -19,17 +23,15 @@ export class ListContratComponent implements OnDestroy, OnInit {
 
   listData : Contrat[];
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ContratService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: ContratService,  private dialogService: DialogService,
+     public toastr: ToastrService, private datePipe: DatePipe,
+    public fb: FormBuilder, private router : Router, private matDialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any, private currentRoute: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateContratComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
@@ -50,11 +52,10 @@ export class ListContratComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllContrats().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
-
   }
 
   /**
@@ -76,8 +77,12 @@ export class ListContratComponent implements OnDestroy, OnInit {
 
   getListContrats() {
     this.crudApi.getAllContrats().subscribe(
-      response =>{this.listData = response;}
+      response =>{this.crudApi.listData = response;}
     );
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   onCreateContrat(){
@@ -90,17 +95,20 @@ export class ListContratComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateContratComponent, dialogConfig);
   }
 
-  editerContrat(item : Contrat) {
-    this.crudApi.choixmenu = "M";
-    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+  addEditContrat(contId?: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
+    dialogConfig.data = {
+      contId
+    };
     this.matDialog.open(CreateContratComponent, dialogConfig);
 
   }
-  deleteContrat(id: number) {
+
+
+/*   deleteContrat(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Contrat ?')) {
     this.crudApi.deleteContrat(id)
       .subscribe(
@@ -113,11 +121,19 @@ export class ListContratComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
-  }
-  editContrat(item : Contrat) {
+  } */
 
-    this.router.navigateByUrl('contrats/'+item.id);
-
+  deleteContrat(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteContrat(id).subscribe(data => {
+          this.toastr.warning('Contrat supprimé avec succès!');
+          this.rerender();
+          this.getListContrats();
+        });
+      }
+    });
   }
 
 

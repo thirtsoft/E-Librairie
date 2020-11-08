@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-create-creance',
@@ -14,10 +15,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   styleUrls: ['./create-creance.component.scss']
 })
 export class CreateCreanceComponent implements OnInit {
+  creance = new Creance();
+  formDataCreance = new Creance();
 
-  public creance = new Creance();
-
-  public clients:  Client[]
+  listClients:  Client[]
 
   submitted = false;
 
@@ -30,26 +31,15 @@ export class CreateCreanceComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.crudApi.choixmenu == "A"){
-
-     // this.infoForm()};
-      this.clientService.getAllClients().subscribe(
-        response =>{this.clients = response;}
-      );
-
+    this.getClients();
+    if (!isNullOrUndefined(this.data.creanceId)) {
+      this.formDataCreance = Object.assign({},this.crudApi.listData[this.data.creanceId])
     }
+  }
 
- /*  infoForm() {
-    let cat = new SousCategorie();
-    this.crudApi.dataForm = this.fb.group({
-      id: null,
-      code: ['', [Validators.required]],
-      libelle: ['', [Validators.required]],
-      categories: ['', [Validators.required]],
-
-    }); */
-
-
+  getClients() {
+    this.clientService.getAllClients().subscribe((response) => {
+      this.listClients = response as Client[];});
   }
 
   ResetForm() {
@@ -57,13 +47,43 @@ export class CreateCreanceComponent implements OnInit {
   }
 
   onSubmit() {
+    if(isNullOrUndefined(this.data.creanceId)) {
+      this.crudApi.createCreance(this.formDataCreance).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Creance Ajouté avec Succès");
+        this.crudApi.getAllCreances().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/creances']);
+      });
+
+    }else {
+      this.crudApi.updateCreance(this.formDataCreance.id, this.formDataCreance).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Creance Modifiée avec Succès");
+        this.crudApi.getAllCreances().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/creances']);
+      });
+    }
+
+  }
+
+  /*
+  onSubmit() {
     if (this.crudApi.choixmenu == "A") {
       this.saveCreance(this.creance);
     }else {
       this.updateCreance();
     }
 
-  }
+  }*/
+
   saveCreance(cont: Creance) {
     this.crudApi.createCreance(cont).
     subscribe( data => {

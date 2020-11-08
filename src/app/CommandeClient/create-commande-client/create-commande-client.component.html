@@ -4,6 +4,99 @@
   </div>
 </mat-toolbar>
 
+<form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()">
+
+  <!--  <input  type="hidden"  class="form-control" formControlName="lib_client" id="lib_client" > -->
+  <input  type="hidden"  class="form-control" formControlName="client" id="client" >
+
+  <div class="row col-md-12">
+    <div class="row">
+      <div class="form-row col-sm-4 mb-3 mb-sm-0">
+          <label><strong>Numéro : </strong></label>
+          <input type="text" class="form-control" formControlName="numeroCommande" id="numeroCommande" readonly>
+      </div>
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
+        <label>Client</label>
+        <div class="form-group">
+          <select name="client" formControlName="client" id="client" class="form-control"
+              [compareWith]="compareClient">
+            <option value="0">-Select-</option>
+            <option *ngFor="let item of ClientList" [ngValue]="item">{{item.chefService}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row col-sm-4 mb-3 mb-sm-0">
+        <label>Status</label>
+        <input type="text" formControlName="status" class="form-control" id="status">
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Date</label>
+      <input  type="date"  class="form-control" formControlName="dateCommande"  id="dateCommande">
+  </div>
+    </div>
+
+  <!-- Debut Ligne de commandes -->
+  <table class="table table-borderless">
+    <thead class="thead-light">
+      <th>Article</th>
+      <th>Price</th>
+      <th>Quantite</th>
+      <th>Total</th>
+      <th>
+        <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
+            <i class="fa fa-plus"></i>Ajouter
+        </a>
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngIf="crudApi.list.length==0" [class.text-danger]="!isValid && crudApi.list.length ==0">
+        <td class="font-italic text-center" colspan="4">
+            Aucun Article pour cette Commande ...
+        </td>
+      </tr>
+      <tr *ngFor="let item of crudApi.list;let i=index;">
+        <td>{{item.ItemName}}</td>
+        <td>{{item.prix}}</td>
+        <td>{{item.quantite}}</td>
+        <td>{{item.total}}</td>
+        <td>
+          <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
+              <i class="fa fa-pencil"></i></a>
+          <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.id,i)">
+              <i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Fin  Ligne de commandes -->
+  <div class="col-sm-4 mb-3 mb-sm-0">
+    <div class="input-group">
+      <label>Total Ht : </label>
+      <input type="text" id="totalCommande" formControlName="totalCommande" class="form-control" readonly>
+    </div>
+  </div>
+</div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+    <a class="btn btn-outline-dark ml-1" routerLink="/detailsCommandeClients"><i class="fa fa-plus-square"></i> Liste </a>
+  </div>
+</form>
+
+
+
+
+
+
+
+<!--
+
+
+<mat-toolbar color="success">
+  <div>
+  <h1>Gestion Commandes</h1>
+  </div>
+</mat-toolbar>
+
 <form #commandeForm="ngForm" (ngSubmit)="onSubmit(commandeForm)" *ngIf="crudApi.formData" autocomplete="off">
   <div class="row col-md-12">
     <div class="row">
@@ -47,10 +140,10 @@
         <input type="number"  name="status" #status="ngModel" [(ngModel)]="creanceService.formData.status" class="form-control">
       </div>
     </div>
+-->
 
 
-
-  <!-- Debut Ligne de commandes -->
+  <!-- Debut Ligne de commandes --><!--
   <table class="table table-borderless">
     <thead class="thead-light">
       <th>Article</th>
@@ -82,8 +175,8 @@
         </td>
       </tr>
     </tbody>
-  </table>
-  <!-- Fin  Ligne de commandes -->
+  </table>-->
+  <!-- Fin  Ligne de commandes --><!--
   <div class="col-sm-4 mb-3 mb-sm-0">
     <div class="input-group">
       <label>Total Ht : </label>
@@ -97,181 +190,6 @@
     <a class="btn btn-outline-dark ml-1" routerLink="/detailsCommandeClients"><i class="fa fa-plus-square"></i> Liste </a>
   </div>
 </form>
+-->
 
 
-
-<!-- <mat-toolbar color="success">
-  <div>
-  <h1>Gestion Commande</h1>
-  </div>
-</mat-toolbar>
-
-<form #commandeForm="ngForm" autocomplete="off" (ngSubmit)="onSubmit(commandeForm)"
-  *ngIf="service.formData">
-  <div class="form-group row col-md-12">
-    <div class="form-group col-md-6">
-        <label><strong>Num Commande : </strong></label>
-        <input name="numCommande" #numCommande="ngModel" [(ngModel)]="service.formData.numCommande" class="form-control">
-    </div>
-    <div class="col-md-6 form-group">
-        <label>Date</label>
-        <input  type="date" name="dateCommande" #dateCommande="ngModel" [(ngModel)]="service.formData.dateCommande" class="form-control">
-    </div>
-    <div class="col-md-6 form-group">
-      <label>Client</label>
-      <div class="form-group">
-        <select name="client" #client="ngModel" [(ngModel)]="service.formData.client" class="form-control"
-          [class.is-invalid]="!isValid && service.formData.client.id==0">
-          <option value="0">-Select-</option>
-          <option *ngFor="let item of clientList" [ngValue]="item">{{item.raisonSocial}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-6 form-group">
-      <label>Status</label>
-      <input type="text"  name="status" #status="ngModel" [(ngModel)]="service.formData.status" class="form-control">
-    </div>
-  </div> -->
-  <!-- Debut Ligne de commandes -->
-  <!-- <table class="table table-borderless">
-    <thead class="thead-light">
-      <th>Article</th>
-      <th>Price</th>
-      <th>Quantite</th>
-      <th>Total</th>
-      <th>
-        <a class="btn btn-sm btn-success text-white" (click)="AddData(null,service.formData.id)">
-            <i class="fa fa-plus"></i>Ajouter
-        </a>
-      </th>
-    </thead>
-    <tbody>
-      <tr *ngIf="service.orderItems.length==0" [class.text-danger]="!isValid && service.orderItems.length==0">
-        <td class="font-italic text-center" colspan="5">
-            Aucune Commande sélectionnée ...
-        </td>
-      </tr>
-      <tr *ngFor="let item of service.orderItems;let i=index;">
-        <td>{{item.ItemName}}</td>
-        <td>{{item.prix}}</td>
-        <td>{{item.quantite}}</td>
-        <td>{{item.total}}</td>
-        <td>
-          <a class="btn btn-sm btn-info text-white" (click)="AddOrderItem(i,service.formData.id)">
-              <i class="fa fa-pencil"></i></a>
-          <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemId,i)">
-              <i class="fa fa-trash"></i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
-  <!-- Fin  Ligne de commandes -->
-  <!-- <div class="form-group row">
-    <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="form-group">
-        <label>Total Ht : </label>
-        <input name="totalCommande" #totalCommande="ngModel" [(ngModel)]="service.formData.totalCommande" class="form-control" readonly>
-      </div>
-    </div>
-
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-    <a class="btn btn-outline-dark ml-1" routerLink="/detailsCommandeClients"><i class="fa fa-plus-square"></i> Liste </a>
-  </div>
-</form> -->
-
-
-<!--
-<mat-toolbar color="success">
-  <div>
-  <h1>Gestion Commande</h1>
-  </div>
-
-</mat-toolbar>
-<form [formGroup]="this.service.formData" (ngSubmit)="onSubmit()">
-  <input  type="hidden"  class="form-control" formControlName="raisonSocial" id="raisonSocial" >
-<div class="form-group row col-md-12">
-<div class="form-group col-md-6">
-    <label><strong>Num Commande : </strong></label>
-    <input  type="text"  class="form-control" formControlName="numCommande" id="numCommande" readonly>
-</div>
-<div class="col-md-6 form-group">
-    <label>Date</label>
-    <input  type="date"  class="form-control" formControlName="dateCommande"  id="dateCommande">
-</div>
-<div class="col-md-6 form-group">
-  <label>Client</label>
-  <select class="form-control" formControlName="code_client" id="code_client" (change)="OnSelectClient($event)">
-  <option value="0">-Select-</option>
-  <option *ngFor="let client of this.ClientList" value="{{client.id}}">{{client.raisonSocial}}</option>
-  </select>
-</div>
-<div class="col-md-6">
-    <label>status</label>
-    <input class="form-control" formControlName="status" id="status">
-</div>
-</div>
-<table class="table table-borderless">
-  <thead class="thead-light">
-    <th>Code_article</th>
-    <th>Article</th>
-    <th>Pu</th>
-    <th>Quantite</th>
-    <th>Tva</th>
-    <th>Total Ht</th>
-    <th>
-      <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
-          <i class="fa fa-plus"></i>Ajouter </a>
-    </th>
-  </thead>
-  <tbody>
-     <tr *ngIf="service.list.length==0"
-       [class.text-danger]="!isValid && service.list.length ==0">
-          <td class="font-italic text-center" colspan="5">
-            Aucune Commande sélectionnée ...
-          </td>
-
-      </tr>
-    <tr *ngFor="let item of service.list;let i=index;">
-    <td>{{item.code_article}}</td>
-    <td>{{item.libart}}</td>
-    <td>{{item.prix}}</td>
-    <td>{{item.quantite}}</td>
-    <td>{{item.tva}}</td>
-    <td>{{item.totht}}</td>
-    <td>
-        <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
-            <i class="fa fa-pencil"></i></a>
-        <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDelete(item,item.id,i)">
-            <i class="fa fa-trash"></i></a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<div class="form-group row">
-      <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="form-group">
-          <label>Total Ht : </label>
-         <input type="text" class="form-control" id="totht" formControlName="totht" readonly>
-      </div>
-      </div>
-      <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="form-group">
-          <label>Total Tva  : </label>
-          <input type="text" class="form-control" id="tottva" formControlName="tottva" readonly>
-      </div>
-      </div>
-      <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="form-group">
-      <label>Total TTC : </label>
-      <input type="text" class="form-control" id="totttc" formControlName="totttc" readonly>
-      </div>
-      </div>
-   </div>
-<div class="form-group">
-  <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-  <a class="btn btn-outline-dark ml-1" routerLink="/lcommandeclients"><i class="fa fa-plus-square"></i> Liste </a>
-</div>
-</form>
- -->

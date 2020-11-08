@@ -25,9 +25,9 @@
       <td>{{ch.codeCharge}}</td>
       <td>{{ch.nature}}</td>
       <td>{{ch.montantCharge}}</td>
-      <td>{{ch.date}}</td>
+      <td>{{ch.date| date:'dd/MM/yyyy'}}</td>
       <td>
-        <button class="btn btn-info btn-lg" (click)="editerCharge(ch)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+        <button class="btn btn-info btn-lg" (click)="editCharge(ch)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
         <button class="btn btn-danger btn-lg" (click)="deleteCharge(ch.id)"><i class="fa fa-trash-o"></i>  Delete</button>
       </td>
     </tr>

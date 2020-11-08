@@ -1,61 +1,56 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Versement</h1>
-    <form #addVersmentForm="ngForm" (ngSubmit)="saveVersement(addVersmentForm.value)">
+    <form #addVersmentForm="ngForm" (ngSubmit)="onSubmit(addVersmentForm)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataVersement.id">
       <div class="row">
         <div class="form-group col-md-6">
           <label>Numéro </label>
-          <input type="text" class="form-control" [(ngModel)]="versement.numVersement" name="numVersement" id="numVersement">
+          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numVersement" name="numVersement" id="numVersement">
         </div>
 
         <div class="form-group col-md-6">
           <label>Numéro Reçu</label>
-          <input type="text" class="form-control" [(ngModel)]="versement.numeroRecu" name="numeroRecu"  id="numeroRecu">
+          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numeroRecu" name="numeroRecu"  id="numeroRecu">
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
           <label>Nature</label>
-          <input type="text" class="form-control" [(ngModel)]="versement.nature" name="nature"  id="nature">
+          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nature" name="nature"  id="nature">
         </div>
         <div class="form-group col-md-6">
           <label>Bank</label>
-          <input type="text" class="form-control" [(ngModel)]="versement.nomBank" name="nomBank"  id="nomBank">
+          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nomBank" name="nomBank"  id="nomBank">
         </div>
       </div>
       <div class="form-group">
         <label>Employe</label>
         <div class="form-group">
-          <select name="employe" id="employe" [(ngModel)]="versement.employe" class="form-control input-lg m-bot15">
-            <option [ngValue]="versement.employe">Employe</option>
-            <option *ngFor="let emp of employes" [ngValue]="emp">{{emp.cni}}</option>
+          <select name="employe" id="employe" [(ngModel)]="formDataVersement.employe" class="form-control">
+            <option [ngValue]="null">--Select--</option>
+            <option *ngFor="let emp of listEmployes" [ngValue]="emp.id == formDataVersement.employe?.id ? formDataVersement.employe : emp">{{emp.cni}}</option>
           </select>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="versement.montantVersement" name="montantVersement"  id="montantVersement">
+          <input type="number" class="form-control" [(ngModel)]="formDataVersement.montantVersement" name="montantVersement"  id="montantVersement">
         </div>
         <div class="form-group col-md-6">
           <label>Date</label>
-          <input type="date" class="form-control" [(ngModel)]="versement.dateVersement" name="dateVersement"  id="dateVersement">
+          <input type="date" class="form-control" [(ngModel)]="formDataVersement.dateVersement" name="dateVersement"  id="dateVersement">
         </div>
       </div>
 
       <div class="form-group">
         <label>Motif</label>
-        <textarea class="form-control" [(ngModel)]="versement.motif" name="motif"  id="motif" cols="6" rows="5"></textarea>
-        <!-- <input type="number" class="form-control" [(ngModel)]="versement.motif" name="motif"  id="motif"> -->
+        <textarea class="form-control" [(ngModel)]="formDataVersement.motif" name="motif"  id="motif" cols="6" rows="5"></textarea>
       </div>
 
-
-
       <div class="form-group">
-        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
-
         <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
         <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>

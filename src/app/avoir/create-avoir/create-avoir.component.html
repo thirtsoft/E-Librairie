@@ -1,42 +1,40 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Avoir</h1>
-    <form #addAvoirForm="ngForm" (ngSubmit)="saveAvoir(addAvoirForm.value)">
+    <form #addAvoirForm="ngForm" (ngSubmit)="onSubmit(addAvoirForm)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataAvoir.id">
 
       <div class="form-group">
         <label>Référence </label>
-        <input type="text" class="form-control" [(ngModel)]="avoir.reference" name="reference" id="reference">
+        <input type="text" class="form-control" [(ngModel)]="formDataAvoir.reference" name="reference" id="reference">
       </div>
 
       <div class="form-group">
         <label>Libelle</label>
-        <input type="text" class="form-control" [(ngModel)]="avoir.libelle" name="libelle"  id="libelle">
+        <input type="text" class="form-control" [(ngModel)]="formDataAvoir.libelle" name="libelle"  id="libelle">
       </div>
 
       <div class="form-group">
         <label>Fournisseur</label>
         <div class="form-group">
-          <select name="fournisseur" id="fournisseur" [(ngModel)]="avoir.fournisseur" class="form-control input-lg m-bot15">
+          <select name="fournisseur" id="fournisseur" [(ngModel)]="formDataAvoir.fournisseur" class="form-control">
             <option [ngValue]="0">-Select-</option>
-            <option *ngFor="let four of fourList" [ngValue]="four">{{four.raisonSociale}}</option>
+            <option *ngFor="let four of listFournisseurs" [ngValue]="four.id == formDataAvoir.fournisseur?.id ? formDataAvoir.fournisseur : four">{{four.raisonSociale}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
         <label>Solde</label>
-        <input type="number" class="form-control" [(ngModel)]="avoir.soldeAvoir" name="soldeAvoir"  id="soldeAvoir">
+        <input type="number" class="form-control" [(ngModel)]="formDataAvoir.soldeAvoir" name="soldeAvoir"  id="soldeAvoir">
       </div>
 
       <div class="form-group">
         <label>Nbre Jours</label>
-        <input type="number" class="form-control" [(ngModel)]="avoir.nbreJours" name="nbreJours"  id="nbreJours">
+        <input type="number" class="form-control" [(ngModel)]="formDataAvoir.nbreJours" name="nbreJours"  id="nbreJours">
       </div>
 
       <div class="form-group">
-        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
-
         <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
         <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>

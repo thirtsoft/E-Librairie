@@ -6,12 +6,13 @@ import { ScategorieService } from 'src/app/services/scategorie.service';
 //import { CategorieService } from 'src/app/services/categorie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateScategorieComponent } from '../create-scategorie/create-scategorie.component';
 import { EditScategorieComponent } from '../edit-scategorie/edit-scategorie.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-scategorie',
@@ -21,9 +22,10 @@ import { DataTableDirective } from 'angular-datatables';
 export class ListScategorieComponent implements OnDestroy, OnInit {
 
   listData : Scategorie[];
-  listCategorie : Categorie[];
+//  listCategorie : Categorie[];
   scat: Scategorie;
   ScatID: number;
+
 
   private editForm: FormGroup;
 
@@ -40,7 +42,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   constructor(public crudApi: ScategorieService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog, private route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any, private dialogService: DialogService,
     public dialogRef:MatDialogRef<CreateScategorieComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
@@ -51,16 +53,6 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    this.ScatID = this.route.snapshot.params.id;
-    console.log(this.ScatID);
-    if (this.ScatID == null) {
-      this.resetForm();
-    }else {
-      this.crudApi.getScategorieByID(this.ScatID).then(res =>{
-         this.listData = res.scat;
-      });
-    }
-
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -71,7 +63,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllScategories().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -111,7 +103,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   }
 
   onCreateScategorie(){
-    this.crudApi.choixmenu = "A";
+  //  this.crudApi.choixmenu = "A";
    // this.router.navigateByUrl("scategorie");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -120,16 +112,21 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateScategorieComponent, dialogConfig);
   }
 
-  editerScategorie(item : Scategorie) {
-    this.crudApi.choixmenu = "M";
-    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+  addEditScategorie(scatId?: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-
+    dialogConfig.data = {
+      scatId
+    };
     this.matDialog.open(CreateScategorieComponent, dialogConfig);
+
   }
+
+
+ 
+  /*
   deleteScategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Sous-Categorie ?')) {
     this.crudApi.deleteScategorie(id)
@@ -142,12 +139,21 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
       },
         error => console.log(error));
     }
+  }*/
 
+  deleteScategorie(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteScategorie(id).subscribe(data => {
+          this.toastr.warning('Scategorie supprimé avec succès!');
+          this.rerender();
+          this.getListScategories();
+        });
+      }
+    });
   }
 
-  editScategorie(item : Scategorie) {
-    this.router.navigateByUrl('scategorie/'+item.id);
-  }
 
   uploadExcelFile() {
     let formData = new FormData();

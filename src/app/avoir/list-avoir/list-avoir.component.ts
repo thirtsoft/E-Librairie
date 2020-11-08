@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 import { CreateAvoirComponent } from '../create-avoir/create-avoir.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-avoir',
@@ -18,14 +19,12 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
   listData : Avoir[];
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: AvoirService, public fb: FormBuilder,
+  constructor(public crudApi: AvoirService, private dialogService: DialogService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateAvoirComponent>
@@ -35,7 +34,7 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListAvoirs();
       })
-     }
+  }
 
   ngOnInit() {
     this.dtOptions = {
@@ -48,7 +47,7 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllAvoirs().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -75,7 +74,7 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
   getListAvoirs() {
     this.crudApi.getAllAvoirs().subscribe(
-      response =>{this.listData = response;}
+      response =>{this.crudApi.listData = response;}
     );
 
   }
@@ -90,16 +89,19 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateAvoirComponent, dialogConfig);
   }
 
-  editerAvoir(item : Avoir) {
-    this.crudApi.choixmenu = "M";
-    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+  addEditAvoir(avoirId?: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
+    dialogConfig.data = {
+      avoirId
+    };
     this.matDialog.open(CreateAvoirComponent, dialogConfig);
 
   }
+
+  /*
   deleteAvoir(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Avoir ?')) {
     this.crudApi.deleteAvoir(id)
@@ -113,11 +115,23 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
+  }*/
+
+  deleteAvoir(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteAvoir(id).subscribe(data => {
+          this.toastr.warning('Avoir supprimé avec succès!');
+          this.rerender();
+          this.getListAvoirs();
+        });
+      }
+    });
   }
+
   editAvoir(item : Avoir) {
-
     this.router.navigateByUrl('avoirs/'+item.id);
-
   }
 
 

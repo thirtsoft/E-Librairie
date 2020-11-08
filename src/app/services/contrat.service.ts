@@ -11,10 +11,11 @@ export class ContratService {
 
   private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = '/api/categories';
-  choixmenu : string  = 'A';
-  listData : Contrat[];
+  choixmenu: string  = 'A';
+  listData: Contrat[];
+  formData: Contrat;
 
-  public dataForm:  FormGroup;
+  dataForm:  FormGroup;
 
   private listners = new Subject<any>();
 

@@ -27,7 +27,6 @@ export class CreateEmployeComponent implements OnInit {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
     };
-
   }
 
   infoForm() {
@@ -41,18 +40,16 @@ export class CreateEmployeComponent implements OnInit {
       telephone2: ['', [Validators.required]],
       email: ['', [Validators.required]],
     });
-
   }
 
   getListEmployes() {
     this.crudApi.getAllEmployes().subscribe(
       response =>{this.listData = response;}
     );
-
   }
 
   ResetForm() {
-      this.crudApi.dataForm.reset();
+    this.crudApi.dataForm.reset();
   }
   onSubmit() {
     if (this.crudApi.choixmenu == "A"){
@@ -60,8 +57,8 @@ export class CreateEmployeComponent implements OnInit {
     }else{
       this.updateEmploye();
     }
-
   }
+
   saveEmploye() {
     this.crudApi.createEmploye(this.crudApi.dataForm.value).
     subscribe( data => {
@@ -69,9 +66,10 @@ export class CreateEmployeComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Employe Ajouté avec Succès");
       this.getListEmployes();
-
+      this.router.navigate(['/employes']);
     });
   }
+
   updateEmploye(){
     this.crudApi.updateEmploye(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
@@ -79,7 +77,7 @@ export class CreateEmployeComponent implements OnInit {
       this.toastr.success("Employe Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListEmployes();
-
+      this.router.navigate(['/employes']);
     });
   }
 

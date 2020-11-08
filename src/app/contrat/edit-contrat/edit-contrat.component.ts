@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/services/client.service';
 import { ContratService } from 'src/app/services/contrat.service';
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Contrat } from 'src/app/models/contrat';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-edit-contrat',
@@ -14,16 +15,23 @@ import { Contrat } from 'src/app/models/contrat';
 })
 export class EditContratComponent implements OnInit {
 
-  public contrat;
+  contrat;
 
   public currentContrat: any;
 
   public idCont: number;
 
   public clients: Client[];
-
+/*
   constructor(private crudApi: ContratService, private clientService: ClientService,
     private route: ActivatedRoute, private router: Router, public fb: FormBuilder,public toastr: ToastrService
+
+  ) { } */
+
+  constructor(public crudApi: ContratService, public clientService: ClientService ,
+    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
+    @Inject(MAT_DIALOG_DATA)  public data, private route: ActivatedRoute,
+    public dialogRef:MatDialogRef<EditContratComponent>,
 
   ) { }
 

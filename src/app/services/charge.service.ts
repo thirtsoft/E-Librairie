@@ -13,9 +13,9 @@ export class ChargeService {
 
   choixmenu : string  = 'A';
   listData : Charge[];
-  public formData:  Charge;
+  public formData: Charge;
 
-  public dataForm:  FormGroup;
+  public dataForm: FormGroup;
 
   private listners = new Subject<any>();
   listen(): Observable<any> {
@@ -30,6 +30,7 @@ export class ChargeService {
   getAllCharges(): Observable<any> {
     return this.http.get(`${this.baseUrl}/charges`);
   }
+
   getChargeByID(id:number):any {
     return this.http.get(`${this.baseUrl}/charges/`+id).toPromise();
   }

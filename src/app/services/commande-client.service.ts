@@ -14,6 +14,9 @@ export class CommandeClientService {
 
   choixmenu : string  = 'A';
   listData : CommandeClient[];
+  public formData:  FormGroup;
+  list: any={}
+ // list: LigneCmdClient[] = [];
 
   commande: CommandeClient;
 
@@ -21,9 +24,9 @@ export class CommandeClientService {
 
   //public dataForm:  FormGroup;
 
-  list: LigneCmdClient[] = [];
+  //list: LigneCmdClient[] = [];
 
-  public formData:  CommandeClient;
+  //public formData:  CommandeClient;
   orderItems: LigneCmdClient[];
 
   constructor(private http: HttpClient) { }
@@ -47,11 +50,16 @@ export class CommandeClientService {
   createCommandeClient() {
     var body = {
       ...this.formData,
-      ligneCmdClients: this.orderItems
+      lcomms: this.orderItems
     };
 
     return this.http.post(`${this.baseUrl}/commandesClientes`, body);
 
+  }
+
+  saveCommande(info: Object) {
+
+    return this.http.post(`${this.baseUrl}/commandesClientes`, info);
   }
 
   /**
@@ -77,6 +85,10 @@ export class CommandeClientService {
   }
 
   deleteCommandeClient(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/commandes/${id}`, { responseType: 'text' });
+  }
+
+  deleteCommande(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/commandes/${id}`, { responseType: 'text' });
   }
 

@@ -29,3 +29,9 @@ export class Article {
 
 
 }
+
+export class Item {
+  ItemID: number;
+  designation: string;
+  prixVente: number;
+}

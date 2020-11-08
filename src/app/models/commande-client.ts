@@ -1,19 +1,31 @@
 import { Client } from './client';
+import { LigneCmdClient } from './ligne-cmd-client';
 
 export class CommandeClient {
   id: number;
-  numCommande: string;
- // CustomerId: number;
+  numeroCommande: number;
+  total: number;
+  //libArticle: string;
   totalCommande: number;
   status: string;
   dateCommande: Date;
   DeletedOrderItemIDs: string;
-  //DeletedOrderItemIDs: string;
+
+ // refClient : number;
+  lib_client : String;
 
   client: Client;
+  lcomms :Array<LigneCmdClient>=[];
 
-  public constructor() {
-    this.client = new Client();
-  }
 
 }
+
+export class Order {
+  OrderID: number;
+  OrderNo: string;
+  CustomerID: number;
+  numeroCommande: number;
+  total: number;
+  DeletedOrderItemIDs: string;
+}
+

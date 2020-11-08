@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Charge } from 'src/app/models/charge';
 import { ChargeService } from 'src/app/services/charge.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -16,6 +16,7 @@ import { Subject } from 'rxjs';
 export class CreateChargeComponent implements OnInit {
 
   public charge = new Charge();
+  listData: Charge[];
   submitted = false;
   dtTrigger: Subject<any> = new Subject();
 
@@ -27,6 +28,20 @@ export class CreateChargeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.crudApi.choixmenu == "A"){
+      this.infoForm()
+    };
+
+  }
+
+  infoForm() {
+    this.crudApi.dataForm = this.fb.group({
+      id: null,
+      codeCharge: ['', [Validators.required]],
+      nature: ['', [Validators.required]],
+      montantCharge: ['', [Validators.required]],
+      date: ['', [Validators.required]],
+    });
 
   }
 
@@ -34,23 +49,29 @@ export class CreateChargeComponent implements OnInit {
     this.crudApi.dataForm.reset();
   }
 
+  getListCharges() {
+    this.crudApi.getAllCharges().subscribe(
+      response =>{this.listData = response;}
+    );
+
+  }
   onSubmit() {
     if (this.crudApi.choixmenu == "A") {
-      this.saveCharge(this.charge);
+      this.saveCharge();
     }else {
       this.updateCharge();
     }
 
   }
-  saveCharge(cont: Charge) {
-    this.crudApi.createCharge(cont).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.crudApi.filter('Register click');
-      this.toastr.success("Charge Ajouté avec Succès");
 
-      this.router.navigate(['/charges']);
-
+  saveCharge() {
+    this.crudApi.createCharge(this.crudApi.dataForm.value)
+      .subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Charge Ajouté avec Succès");
+        this.getListCharges();
+        this.router.navigate(['/charges']);
     });
   }
 
@@ -59,9 +80,8 @@ export class CreateChargeComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Charge Modifier avec Succès");
-      this.crudApi.getAllCharges().subscribe(
-        response =>{this.crudApi.listData = response;}
-      );
+      this.crudApi.filter('Register click');
+      this.getListCharges();
       this.router.navigate(['/charges']);
     });
 

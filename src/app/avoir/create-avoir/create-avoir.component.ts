@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-create-avoir',
@@ -16,8 +17,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class CreateAvoirComponent implements OnInit {
 
   public avoir = new Avoir();
-
-  public fourList: Fournisseur[];
+  formDataAvoir = new Avoir();
+  listFournisseurs: Fournisseur[];
 
   submitted = false;
 
@@ -28,42 +29,58 @@ export class CreateAvoirComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.crudApi.choixmenu == "A"){
-     // this.infoForm()};
-      this.fourService.getAllFournisseurs().subscribe(
-        response =>{
-          this.fourList = response;
-        }
-
-      );
-
+    this.getFournisseurs();
+    if (!isNullOrUndefined(this.data.avoirId)) {
+      this.formDataAvoir = Object.assign({},this.crudApi.listData[this.data.avoirId])
     }
 
- /*  infoForm() {
-    let cat = new SousCategorie();
-    this.crudApi.dataForm = this.fb.group({
-      id: null,
-      code: ['', [Validators.required]],
-      libelle: ['', [Validators.required]],
-      categories: ['', [Validators.required]],
+  }
 
-    }); */
-
-
+  getFournisseurs() {
+    this.fourService.getAllFournisseurs().subscribe((response) => {
+      this.listFournisseurs = response as Fournisseur[];});
   }
 
   ResetForm() {
     this.crudApi.dataForm.reset();
   }
+  onSubmit() {
+    if(isNullOrUndefined(this.data.avoirId)) {
+      this.crudApi.createAvoir(this.formDataAvoir).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Avoir Ajouté avec Succès");
+        this.crudApi.getAllAvoirs().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/avoirs']);
+      });
 
+    }else {
+      this.crudApi.updateAvoir(this.formDataAvoir.id, this.formDataAvoir).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Avoir Modifiée avec Succès");
+        this.crudApi.getAllAvoirs().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/avoirs']);
+      });
+    }
+
+  }
+
+/*
   onSubmit() {
     if (this.crudApi.choixmenu == "A") {
       this.saveAvoir(this.avoir);
     }else {
       this.updateAvoir();
     }
+  }*/
 
-  }
   saveAvoir(avoir: Avoir) {
     this.crudApi.createAvoir(avoir).
     subscribe( data => {

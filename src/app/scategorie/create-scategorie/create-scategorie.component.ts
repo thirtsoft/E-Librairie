@@ -3,10 +3,11 @@ import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
 import { ScategorieService } from 'src/app/services/scategorie.service';
 import { CategorieService } from 'src/app/services/categorie.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-create-scategorie',
@@ -15,55 +16,111 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class CreateScategorieComponent implements OnInit {
 
-  public scat = new Scategorie();
-
-  public categories: Categorie[];
-
+  listCategorie: Categorie[];
+  listCategories: any[] = [];
   submitted = false;
+  currentScategorie;
+  formDataScategorie = new Scategorie();
+  addScategorieForm: NgForm;
+  currentCategorie;
 
   constructor(public crudApi: ScategorieService , private catService: CategorieService,
     public fb: FormBuilder,public toastr: ToastrService,private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateScategorieComponent>,
-    ) { }
+    ) {}
 
   ngOnInit() {
-    if (this.crudApi.choixmenu == "A"){
-     // this.infoForm()};
-      this.catService.getAllCategories().subscribe(
-        response =>{this.categories = response;}
-      );
-
+    this.getCategories();
+    if (!isNullOrUndefined(this.data.scatId)) {
+      console.log(this.crudApi.listData[this.data.scatId]);
+      this.formDataScategorie = Object.assign({},this.crudApi.listData[this.data.scatId])
     }
   }
 
-/*  infoForm() {
-    let cat = new Scategorie();
+  getCategories() {
+    this.catService.getAllCategories().subscribe((response) => {
+      this.listCategorie = response as Categorie[];});
+  }
+
+  infoForm() {
     this.crudApi.dataForm = this.fb.group({
-      id: null,
-      code: ['', [Validators.required]],
-      libelle: ['', [Validators.required]],
-      categories: [''],
-
+        id: null,
+        code: ['', [Validators.required]],
+        id_categ: ['', [Validators.required]],
+        libelle: ['', [Validators.required]]
     });
-
-
-  }*/
+  }
 
   ResetForm() {
     this.crudApi.dataForm.reset();
   }
 
   onSubmit() {
-    if (this.crudApi.choixmenu == "A") {
-      this.saveScategorie(this.scat);
+    if (isNullOrUndefined(this.data.scatId)) {
+      this.crudApi.createScategorie(this.formDataScategorie).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Scategorie Ajouté avec Succès");
+        this.crudApi.getAllScategories().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/scategories']);
+      });
+
     }else {
-      this.updateScategorie();
+      console.log(this.formDataScategorie.id, this.formDataScategorie);
+      this.crudApi.updateScategorie(this.formDataScategorie.id, this.formDataScategorie).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Scategorie Modifiée avec Succès");
+        this.crudApi.getAllScategories().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/scategories']);
+      });
+
     }
 
   }
-  saveScategorie(Scat: Scategorie) {
-    this.crudApi.createScategorie(Scat).
+
+  saveScategorie() {
+    if (isNullOrUndefined(this.data.scatId)) {
+      this.crudApi.createScategorie(this.addScategorieForm.value).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Scategorie Ajouté avec Succès");
+        this.crudApi.getAllScategories().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/scategories']);
+      });
+    }
+  }
+
+  updateScategorie(addScategorieForm: NgForm) {
+    if (!isNullOrUndefined(this.data.scatId)) {
+      this.crudApi.updateScategorie(addScategorieForm.value.id, addScategorieForm.value).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Scategorie Ajouté avec Succès");
+        this.crudApi.getAllScategories().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/scategories']);
+      });
+    }
+  }
+
+
+  saveScategories() {
+    console.log(this.crudApi.dataForm.value);
+   /* this.crudApi.createScategorie(this.crudApi.dataForm.value).
+  //  this.crudApi.createScategorie(Scat).
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
@@ -72,20 +129,22 @@ export class CreateScategorieComponent implements OnInit {
         response =>{this.crudApi.listData = response;},
       );
       this.router.navigate(['/scategories']);
-    });
+    }); */
   }
 
-  updateScategorie(){
+  updateScategories(){
+  //  const scatId =  this.crudApi.dataForm.value.id;
     this.crudApi.updateScategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
+  //  this.crudApi.updateScategorie(this.crudApi.formData.id, cat).
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Scategorie Modifier avec Succès");
+      this.crudApi.filter('Register click');
       this.crudApi.getAllScategories().subscribe(
         response =>{this.crudApi.listData = response;}
       );
       this.router.navigate(['/scategories']);
     });
   }
-
 
 }

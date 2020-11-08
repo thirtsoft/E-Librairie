@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-create-versement',
@@ -15,10 +16,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class CreateVersementComponent implements OnInit {
 
-  public versement = new Versement();
-
-  public employes:  Employe[]
-
+  formDataVersement = new Versement();
+  listEmployes: Employe[];
   submitted = false;
 
   constructor(public crudApi: VersementService, public empService: EmployeService ,
@@ -27,28 +26,17 @@ export class CreateVersementComponent implements OnInit {
     public dialogRef:MatDialogRef<CreateVersementComponent>,
   ) { }
 
-
   ngOnInit() {
-    if (this.crudApi.choixmenu == "A"){
-
-     // this.infoForm()};
-      this.empService.getAllEmployes().subscribe(
-        response =>{this.employes = response;}
-      );
-
+    this.getEmployes();
+    if (!isNullOrUndefined(this.data.verId)) {
+      this.formDataVersement = Object.assign({},this.crudApi.listData[this.data.verId])
     }
 
- /*  infoForm() {
-    let cat = new SousCategorie();
-    this.crudApi.dataForm = this.fb.group({
-      id: null,
-      code: ['', [Validators.required]],
-      libelle: ['', [Validators.required]],
-      categories: ['', [Validators.required]],
+  }
 
-    }); */
-
-
+  getEmployes() {
+    this.empService.getAllEmployes().subscribe((response) => {
+      this.listEmployes = response as Employe[];});
   }
 
   ResetForm() {
@@ -56,13 +44,42 @@ export class CreateVersementComponent implements OnInit {
   }
 
   onSubmit() {
+    if(isNullOrUndefined(this.data.verId)) {
+      this.crudApi.createVersement(this.formDataVersement).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Versement Ajouté avec Succès");
+        this.crudApi.getAllVersements().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/versements']);
+      });
+
+    }else {
+      this.crudApi.updateVersement(this.formDataVersement.id, this.formDataVersement).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Versement Modifiée avec Succès");
+        this.crudApi.getAllVersements().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/versements']);
+      });
+    }
+
+  }
+/*
+  onSubmit() {
     if (this.crudApi.choixmenu == "A") {
       this.saveVersement(this.versement);
     }else {
       this.updateVersement();
     }
-
   }
+  */
+
   saveVersement(versment: Versement) {
     this.crudApi.createVersement(versment).
     subscribe( data => {

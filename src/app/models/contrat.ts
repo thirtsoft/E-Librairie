@@ -12,6 +12,7 @@ export class Contrat {
   client: Client;
 
   public constructor() {
+    this.id = this.id;
     this.reference = this.reference;
     this.nature = this.nature;
     this.montantContrat = this.montantContrat;

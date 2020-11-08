@@ -53,12 +53,13 @@ export class EditLigneCmdClientComponent implements OnInit {
 
     if (this.data.orderItemIndex == null)
       this.formData = {
-        OrderItemId: null,
+        id: null,
         OrderId: this.data.OrderId,
         ItemId: 0,
-        numero: '',
+        numero: 0,
         prix: 0,
         quantite: 0,
+        code_article: '',
         ItemName: '',
         total: 0,
         produit: new Article(),

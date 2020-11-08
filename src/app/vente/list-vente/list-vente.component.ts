@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateVenteComponent } from '../create-vente/create-vente.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-vente',
@@ -26,7 +27,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: VenteService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
+    private matDialog: MatDialog, private dialogService: DialogService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateVenteComponent>,
     ) { }
@@ -68,18 +69,15 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   getListVentes() {
     this.crudApi.getAllVentes().subscribe(
-      response =>{
-        this.listData = response;
-
-      });
-
+      response =>{this.listData = response;}
+    );
   }
 
   onCreateVente() {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("vente");
   }
-
+/*
   deleteVente(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette vente ?')) {
     this.crudApi.deleteVente(id)
@@ -93,16 +91,27 @@ export class ListVenteComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
+  } */
+
+  deleteVente(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteVente(id).subscribe(data => {
+          this.toastr.warning('Vente supprimé avec succès!');
+          this.rerender();
+          this.getListVentes();
+        });
+      }
+    });
   }
 
   editerVente(item : Vente) {
-
     this.router.navigateByUrl('vente/'+item.venteId);
-
   }
 
-  viewVente() {
-
+  viewVente(item: Vente) {
+    this.router.navigateByUrl('venteView/' + item.venteId);
   }
 
 

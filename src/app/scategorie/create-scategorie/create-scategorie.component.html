@@ -1,35 +1,41 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>SOUS CATEGORIE</h1>
-    <form #addScategorieForm="ngForm" (ngSubmit)="saveScategorie(addScategorieForm.value)">
-
+    <form #addScategorieForm="ngForm" (ngSubmit)="onSubmit(addScategorieForm)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataScategorie.id">
       <div class="form-group">
         <label>Code </label>
-        <input type="text" class="form-control" [(ngModel)]="scat.code" name="code" id="code">
+        <input type="text" class="form-control" [(ngModel)]="formDataScategorie.code" name="code" id="code">
       </div>
 
       <div class="form-group">
         <label>Libelle</label>
-        <input type="text" class="form-control" [(ngModel)]="scat.libelle" name="libelle"  id="libelle">
+        <input type="text" class="form-control" [(ngModel)]="formDataScategorie.libelle" name="libelle"  id="libelle">
       </div>
+      <!--
+      <div class="form-group">
+        <label>Categorie</label>
+        <select class="form-control" id="categorie" name="categorie" [(ngModel)]="scat.categorie">
+          <option [ngValue]="cat.id == scat.categorie?.id ? scat.categorie : cat" *ngFor="let cat of listCategories">{{cat.designation}}</option>
+        </select>
+      </div> -->
 
       <div class="form-group">
         <label>Categorie</label>
         <div class="form-group">
-          <select name="categorie" id="categorie" [(ngModel)]="scat.categorie" class="form-control input-lg m-bot15">
-            <option value="0">-Select-</option>
-            <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.designation}}</option>
+          <select name="categorie"
+              [(ngModel)]="formDataScategorie.categorie" class="form-control">
+
+            <option *ngFor="let cat of listCategorie" [ngValue]="cat.id == formDataScategorie.categorie?.id ? formDataScategorie.categorie : cat">{{cat.designation}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
-        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
-
         <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
         <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>
     </form>
  </div>
 </div>
+-->

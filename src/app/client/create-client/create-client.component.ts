@@ -15,8 +15,8 @@ export class CreateClientComponent implements OnInit {
 
   listData : Client[];
 
-  constructor(public crudApi: ClientService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router,
+  constructor(public crudApi: ClientService ,public fb: FormBuilder,
+    public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateClientComponent>,
     ) { }
@@ -25,26 +25,24 @@ export class CreateClientComponent implements OnInit {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
     };
-
   }
 
   infoForm() {
     this.crudApi.dataForm = this.fb.group({
       id: null,
+      codeClient: ['', [Validators.required]],
       raisonSocial: ['', [Validators.required]],
       chefService: ['', [Validators.required]],
       adresse: ['', [Validators.required]],
       telephone: ['', [Validators.required]],
       email: ['', [Validators.required]],
     });
-
   }
 
   getListClients() {
     this.crudApi.getAllClients().subscribe(
       response =>{this.listData = response;}
     );
-
   }
 
   ResetForm() {
@@ -56,8 +54,8 @@ export class CreateClientComponent implements OnInit {
     }else{
       this.updateClient();
     }
-
   }
+
   saveClient() {
     this.crudApi.createClient(this.crudApi.dataForm.value).
     subscribe( data => {
@@ -67,8 +65,10 @@ export class CreateClientComponent implements OnInit {
       //this.ResetForm();
       this.getListClients();
       this.router.navigate(['/clients']);
+    //  this.router.navigate(['/clients']);
     });
   }
+
   updateClient(){
     this.crudApi.updateClient(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
@@ -76,6 +76,7 @@ export class CreateClientComponent implements OnInit {
       this.toastr.success("Client Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListClients();
+      this.router.navigate(['/clients']);
     });
   }
 

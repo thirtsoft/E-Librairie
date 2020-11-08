@@ -11,24 +11,32 @@
   </div>
   <div class="panel-body">
     <div class="row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-1">
         <label>Commande : </label>
         <input name="id" [value]="this.comId"  class="form-control" readonly>
       </div>
 
-      <div class="form-group col-md-3" *ngIf="currentCommande">
+      <div class="form-group col-md-2">
         <label>Commande Numéro : </label>
-        <input type="text" class="form-control" name="numero" [(ngModel)]="this.currentCommande.numero"  id="numero" readonly>
+        <input type="text" class="form-control" name="numeroCommande" [value]="this.numeroCommande"  id="numeroCommande" readonly>
+        <!--  <input type="text" class="form-control" name="numero" [(ngModel)]="this.numeroCommande"  id="numero" readonly> -->
       </div>
 
       <div class="form-group col-md-3">
+        <label>Client : </label>
+        <input type="text" class="form-control" name="client" [value]="this.client"  id="client" readonly>
+        <!--  <input type="text" class="form-control" name="numero" [(ngModel)]="this.numeroCommande"  id="numero" readonly> -->
+      </div>
+
+
+      <div class="form-group col-md-3">
         <label>Total Commande : </label>
-        <input type="text" class="form-control" name="" id="total" readonly>
+        <input type="text" class="form-control" name="" [value]="this.totalCommande" id="total" readonly>
       </div>
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="date"  name="date"   class="form-control" readonly>
+        <input type="date"  name="date" [value]="this.dateCommande"   class="form-control" readonly>
       </div>
     </div>
     <div></div>
@@ -44,7 +52,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of this.currentCommande">
+        <tr *ngFor="let item of this.lcmdService.listData">
           <td>{{item.produit.designation}}</td>
           <td>{{item.prix}}</td>
           <td>{{item.quantite}}</td>

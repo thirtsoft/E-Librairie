@@ -9,6 +9,7 @@ import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/di
 import { MatDialogRef } from "@angular/material/dialog";
 import { CreateClientComponent } from '../create-client/create-client.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-client',
@@ -18,9 +19,8 @@ import { DataTableDirective } from 'angular-datatables';
 export class ListClientComponent implements OnDestroy, OnInit {
 
  // client: Client;
-  public client = new Client();
-
-  listData : Client[];
+  client: Client;
+  listData: Client[];
   clientID: number;
 
   private editForm: FormGroup;
@@ -32,7 +32,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
   control: FormControl = new FormControl('');
 
   constructor(public crudApi: ClientService ,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+    public toastr: ToastrService, private dialogService: DialogService, private router : Router,
     private matDialog: MatDialog, private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateClientComponent>,
@@ -42,9 +42,10 @@ export class ListClientComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListClients();
       })
-     }
+  }
 
   ngOnInit() {
+    /*
     this.clientID = this.route.snapshot.params.id;
     if (this.clientID == null) {
       this.resetForm();
@@ -53,7 +54,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
         this.listData = res.client;
       });
     }
-
+*/
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -90,6 +91,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
       form.resetForm();
     this.crudApi.formData = {
       id: null,
+      codeClient: '',
       raisonSocial: '',
       chefService: '',
       adresse: '',
@@ -126,6 +128,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateClientComponent, dialogConfig);
   }
+/*
   deleteClient(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Client ?')) {
     this.crudApi.deleteClient(id)
@@ -139,6 +142,20 @@ export class ListClientComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
+  }
+  */
+
+  deleteClient(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteClient(id).subscribe(data => {
+          this.toastr.warning('Client supprimé avec succès!');
+          this.rerender();
+          this.getListClients();
+        });
+      }
+    });
   }
 
   /* editClient(item : Client) {

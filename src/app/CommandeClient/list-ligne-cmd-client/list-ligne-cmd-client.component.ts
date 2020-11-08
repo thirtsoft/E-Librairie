@@ -15,6 +15,8 @@ import { Scategorie } from 'src/app/models/scategorie';
 import { DataTableDirective } from 'angular-datatables';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
+import { DialogService } from 'src/app/services/dialog.service';
+
 
 @Component({
   selector: 'app-list-ligne-cmd-client',
@@ -59,7 +61,7 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
   constructor(public crudApi: LigneCmdClientService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog, public comService: CommandeClientService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any, private dialogService: DialogService,
     public dialogRef:MatDialogRef<CreateCommandeClientComponent>,
     ) { }
 
@@ -105,17 +107,15 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
   getListLigneCmdClients() {
     this.crudApi.getAllLigneCmdClients().subscribe(
       response =>{this.listData = response;
-
       }
     );
-
   }
 
   onCreateLigneCmdClient() {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("commandeclient");
   }
-
+/*
   deleteLigneCmdClient(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Détails Commande ?')) {
     this.crudApi.deleteLigneCmdClient(id)
@@ -131,11 +131,22 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
     }
 
   }
+*/
+  deleteLigneCmdClient(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteLigneCmdClient(id).subscribe(data => {
+          this.toastr.warning('Détails Commande supprimé avec succès!');
+          this.rerender();
+          this.getListLigneCmdClients();
+        });
+      }
+    });
+  }
 
   editerLigneCmdClient(item : LigneCmdClient) {
-
-    this.router.navigateByUrl('detailsCommandeClient/'+item.OrderItemId);
-
+    this.router.navigateByUrl('detailsCommandeClient/'+item.id);
   }
 
 }

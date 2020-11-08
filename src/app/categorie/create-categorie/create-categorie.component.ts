@@ -26,7 +26,6 @@ export class CreateCategorieComponent implements OnInit {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
     };
-
   }
 
   infoForm() {
@@ -35,14 +34,12 @@ export class CreateCategorieComponent implements OnInit {
       code: ['', [Validators.required]],
       designation: ['', [Validators.required]],
     });
-
   }
 
   getListCategories() {
     this.crudApi.getAllCategories().subscribe(
       response =>{this.listData = response;}
     );
-
   }
 
   ResetForm() {
@@ -54,7 +51,6 @@ export class CreateCategorieComponent implements OnInit {
     }else{
       this.updateCategorie();
     }
-
   }
 
   saveCategorie() {
@@ -77,6 +73,5 @@ export class CreateCategorieComponent implements OnInit {
       this.router.navigate(['/categories']);
     });
   }
-
 
 }

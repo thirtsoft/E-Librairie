@@ -71,6 +71,11 @@ import { ViewApprovisionnementComponent } from './approvisionnement/view-approvi
 import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
 import { ListChargeComponent } from './charge/list-charge/list-charge.component';
 import { CreateChargeComponent } from './charge/create-charge/create-charge.component';
+import { MatConfirmDialogComponent } from './matdialog/mat-confirm-dialog/mat-confirm-dialog.component';
+import { MatButtonModule } from '@angular/material';
+import { OrderItemComponent } from './order/order-item/order-item.component';
+import { OrderComponent } from './order/order/order.component';
+import { OrdersComponent } from './order/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +133,10 @@ import { CreateChargeComponent } from './charge/create-charge/create-charge.comp
     ViewVenteComponent,
     ListChargeComponent,
     CreateChargeComponent,
+    MatConfirmDialogComponent,
+    OrdersComponent,
+    OrderItemComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -144,8 +153,7 @@ import { CreateChargeComponent } from './charge/create-charge/create-charge.comp
     MatDialogModule,
     MatToolbarModule,
     MatIconModule,
-
-
+    MatButtonModule
 
 
   ],
@@ -156,6 +164,6 @@ import { CreateChargeComponent } from './charge/create-charge/create-charge.comp
   bootstrap: [AppComponent],
   entryComponents: [CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent, CreateFournisseurComponent,
     CreateVersementComponent, CreateCreanceComponent, CreateContratComponent, CreateAvoirComponent, CreateChargeComponent,
-    CreateEmployeComponent]
+    CreateEmployeComponent, MatConfirmDialogComponent]
 })
 export class AppModule { }

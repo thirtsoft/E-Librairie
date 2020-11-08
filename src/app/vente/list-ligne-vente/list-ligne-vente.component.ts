@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CreateLigneVenteComponent } from '../create-ligne-vente/create-ligne-vente.component';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-ligne-vente',
@@ -53,7 +54,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: LigneVenteService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
+    private matDialog: MatDialog, private dialogService: DialogService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
     ) { }
@@ -97,17 +98,15 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
 
   getListLigneVentes() {
     this.crudApi.getAllLigneVentes().subscribe(
-      response =>{this.listData = response;
-
-      });
-
+      response =>{this.listData = response;}
+    );
   }
 
   onCreateLigneVente() {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("vente");
   }
-
+/*
   deleteLigneVente(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Détails Vente ?')) {
     this.crudApi.deleteLigneVente(id)
@@ -121,12 +120,23 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
+  } */
+
+  deleteLigneVente(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteLigneVente(id).subscribe(data => {
+           this.toastr.warning('Détails Vente supprimé avec succès!');
+          this.rerender();
+          this.getListLigneVentes();
+        });
+      }
+    });
   }
 
   editerLigneVente(item : LigneVente) {
-
     this.router.navigateByUrl('detailsVente/'+item.OrderItemId);
-
   }
 
 

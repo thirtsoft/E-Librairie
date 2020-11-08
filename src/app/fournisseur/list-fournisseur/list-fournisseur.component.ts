@@ -9,6 +9,7 @@ import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateFournisseurComponent } from '../create-fournisseur/create-fournisseur.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-fournisseur',
@@ -29,7 +30,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: FournisseurService ,public fb: FormBuilder,public toastr: ToastrService,
     private router : Router, private route: ActivatedRoute,
-    private matDialog: MatDialog,
+    private matDialog: MatDialog, private dialogService: DialogService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateFournisseurComponent>,
     ) {
@@ -38,9 +39,10 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListFournisseurs();
       })
-     }
+  }
 
   ngOnInit() {
+    /*
     this.FourID = this.route.snapshot.params.id;
     if (this.FourID == null) {
       this.resetForm();
@@ -49,7 +51,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
         this.listData = res.fournisseur;
       });
     }
-
+    */
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -126,7 +128,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateFournisseurComponent, dialogConfig);
   }
-
+/*
   deleteFournisseur(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Fournisseur ?')) {
     this.crudApi.deleteFournisseur(id)
@@ -139,12 +141,23 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
       },
         error => console.log(error));
     }
+  } */
 
+  deleteFournisseur(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteFournisseur(id).subscribe(data => {
+          this.toastr.warning('Fournisseur supprimé avec succès!');
+          this.rerender();
+          this.getListFournisseurs();
+        });
+      }
+    });
   }
+
   editerFournisseur(item : Fournisseur) {
-
     this.router.navigateByUrl('fournisseurs/'+item.id);
-
   }
 
 

@@ -9,6 +9,8 @@ import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateVersementComponent } from '../create-versement/create-versement.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-versement',
@@ -19,15 +21,13 @@ export class ListVersementComponent implements OnDestroy, OnInit {
 
   listData : Versement[];
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: VersementService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
+    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
+    private matDialog: MatDialog, private dialogService: DialogService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateVersementComponent>,
     ) {
@@ -36,7 +36,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListVersements();
       })
-     }
+  }
 
   ngOnInit() {
     this.dtOptions = {
@@ -49,7 +49,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllVersements().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -74,9 +74,8 @@ export class ListVersementComponent implements OnDestroy, OnInit {
 
   getListVersements() {
     this.crudApi.getAllVersements().subscribe(
-      response =>{this.listData = response;}
+      response =>{this.crudApi.listData = response;}
     );
-
   }
 
   onCreateVersement(){
@@ -90,6 +89,18 @@ export class ListVersementComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateVersementComponent, dialogConfig);
   }
 
+  addEditVersement(verId?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      verId
+    };
+    this.matDialog.open(CreateVersementComponent, dialogConfig);
+
+  }
+
   editerVersement(item : Versement) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
@@ -99,6 +110,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateVersementComponent, dialogConfig);
   }
+  /*
   deleteVersement(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Versement ?')) {
     this.crudApi.deleteVersement(id)
@@ -111,12 +123,26 @@ export class ListVersementComponent implements OnDestroy, OnInit {
       },
         error => console.log(error));
     }
+  }*/
 
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
+  deleteVersement(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteVersement(id).subscribe(data => {
+          this.toastr.warning('Versement supprimé avec succès!');
+          this.rerender();
+          this.getListVersements();
+        });
+      }
+    });
+  }
+
   editVersement(item : Versement) {
-
     this.router.navigateByUrl('versements/'+item.id);
-
   }
 
 }

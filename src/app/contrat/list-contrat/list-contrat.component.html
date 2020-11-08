@@ -4,7 +4,7 @@
       <h1>GESTION DES CONTRATS</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="onCreateContrat()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
+      <a type="button" (click)="addEditContrat(null)" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
       <!-- <a type="button" [routerLink]="['/createArticle']" class="btn btn-primary btn-lg" (click)="onCreateCategorie()"><i class="fa fa-download" aria-hidden="true"></i> Import</a>&nbsp;&nbsp;
       <a type="button" class="btn btn-warning btn-lg" (click)="onCreateCategorie()"><i class="fa fa-upload" aria-hidden="true"></i> Export</a> -->
     </div>
@@ -21,17 +21,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let creance of listData">
-      <td>{{creance.reference}}</td>
-      <td>{{creance.nature}}</td>
-      <td>{{creance.montantContrat}}</td>
-      <td>{{creance.client.raisonSocial}} - {{creance.client.chefService}}</td>
-      <td>{{creance.description}}</td>
-      <td>{{creance.dateDebutContrat}}</td>
-      <td>{{creance.dateFinContrat}}</td>
+    <tr *ngFor="let cont of crudApi.listData; let i=index;">
+      <td>{{cont.reference}}</td>
+      <td>{{cont.nature}}</td>
+      <td>{{cont.montantContrat}}</td>
+      <td>{{cont.client.raisonSocial}} - {{cont.client.chefService}}</td>
+      <td>{{cont.description}}</td>
+      <td>{{cont.dateDebutContrat| date:'dd/MM/yyyy'}}</td>
+      <td>{{cont.dateFinContrat| date:'dd/MM/yyyy'}}</td>
       <td>
-        <button class="btn btn-info btn-lg" (click)="editerCreance(cont)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
-        <button class="btn btn-danger btn-lg" (click)="deleteCreance(cont.id)"><i class="fa fa-trash-o"></i>  Delete</button>
+        <button class="btn btn-info btn-lg" (click)="addEditContrat(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+        <button class="btn btn-danger btn-lg" (click)="deleteContrat(cont.id)"><i class="fa fa-trash-o"></i>  Delete</button>
       </td>
     </tr>
   </tbody>

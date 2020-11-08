@@ -4,11 +4,11 @@ export class Scategorie {
   id: number;
   code: string;
   libelle: string;
-
-  categorie: Categorie;
-
+  categorie = new Categorie();
+/*
   public constructor() {
-    this.categorie = new Categorie();
+  this.categorie = new Categorie();
   }
+*/
 
 }

@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatDialogRef } from "@angular/material/dialog";
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-create-article',
@@ -20,9 +21,11 @@ export class CreateArticleComponent implements OnInit {
 
   public article = new Article();
 
-  //scategories: any;
+  formDataArticle = new Article();
 
-  categorieList;
+  listCategories: Categorie[];
+  listScategories: Scategorie[];
+
   scategorieList;
   dropDownForm: FormGroup;
 
@@ -32,7 +35,7 @@ export class CreateArticleComponent implements OnInit {
 
   submitted = false;
 
-  constructor(public crudApi: ArticleService, public ScatService: ScategorieService ,
+  constructor(public crudApi: ArticleService, public scatService: ScategorieService ,
     private catService: CategorieService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
@@ -40,6 +43,12 @@ export class CreateArticleComponent implements OnInit {
 
   ) { }
   ngOnInit() {
+    //this.getCategories();
+    this.getScategories();
+    if (!isNullOrUndefined(this.data.artId)) {
+      this.formDataArticle = Object.assign({},this.crudApi.listData[this.data.artId])
+    }
+    /*
     this.dropDownForm = this.fb.group({
       categorie: [''],
       scategorie: [''],
@@ -57,26 +66,24 @@ export class CreateArticleComponent implements OnInit {
         response =>{this.scategorieList = response;}
       );
         */
-    }
+  }
 
+  getCategories() {
+    this.catService.getAllCategories().subscribe((response) => {
+      this.listCategories = response as Categorie[];});
 
- /*  infoForm() {
-    let cat = new SousCategorie();
-    this.crudApi.dataForm = this.fb.group({
-      id: null,
-      code: ['', [Validators.required]],
-      libelle: ['', [Validators.required]],
-      categories: ['', [Validators.required]],
+  }
 
-    }); */
-
+  getScategories() {
+    this.scatService.getAllScategories().subscribe((response) => {
+      this.listScategories = response as Scategorie[];});
 
   }
 
   onChangeScategories(event) {
     console.log(event);
-    this.ScatService.getListScategoriesByCategoryId(event.target.value).subscribe(response => {
-      this.scategorieList = response;
+    this.scatService.getListScategoriesByCategoryId(event.target.value).subscribe(response => {
+      this.listScategories = response as Scategorie[];
     });
   }
 
@@ -85,13 +92,43 @@ export class CreateArticleComponent implements OnInit {
   }
 
   onSubmit() {
+    if(isNullOrUndefined(this.data.artId)) {
+      this.crudApi.createArticle(this.formDataArticle).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Articel Ajouté avec Succès");
+        this.crudApi.getAllArticles().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/articles']);
+      });
+
+    }else {
+      this.crudApi.updateArticle(this.formDataArticle.id, this.formDataArticle).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Article Modifiée avec Succès");
+        this.crudApi.getAllArticles().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/articles']);
+      });
+    }
+
+  }
+
+  /*
+  onSubmit() {
     if (this.crudApi.choixmenu == "A") {
       this.saveArticle(this.article);
     }else {
       this.updateArticle();
     }
 
-  }
+  }*/
+
   saveArticle(art: Article) {
     this.crudApi.createArticle(art).
     subscribe( data => {
@@ -118,7 +155,7 @@ export class CreateArticleComponent implements OnInit {
   }
 
   onChangeCtegorie(id: number) {
-    this.ScatService.getScategorieById(id).subscribe(
+    this.scatService.getScategorieById(id).subscribe(
       response => {
         this.scategorieList = response;
       }

@@ -1,3 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Nouvelle Charge</h1>
+    <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Code Charge </label>
+          <input type="text" class="form-control" formControlName="codeCharge" id="codeCharge">
+        </div>
+        <div class="form-group col-md-6">
+          <label>Nature</label>
+          <input type="text" class="form-control" formControlName="nature" id="nature">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Montant</label>
+          <input type="number" class="form-control" formControlName="montantCharge" id="montantCharge">
+        </div>
+        <div class="form-group col-md-6">
+          <label>Date</label>
+          <input type="date" class="form-control" formControlName="date" id="date">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]>
+          <i class="fa fa-close"></i> Close</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+
+<!--
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Charge</h1>
@@ -24,12 +63,10 @@
       </div>
 
       <div class="form-group">
-        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
-
         <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
         <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>
     </form>
  </div>
 </div>
+-->

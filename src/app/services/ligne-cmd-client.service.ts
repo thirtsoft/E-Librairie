@@ -13,20 +13,27 @@ export class LigneCmdClientService {
  // private baseUrl = '/api/categories';
   choixmenu : string  = 'A';
   listData : LigneCmdClient[];
-
   public dataForm:  FormGroup;
+  public formData:  FormGroup;
+
+  lcommande: LigneCmdClient = new LigneCmdClient();
+  lcommandeList: LigneCmdClient[];
 
   constructor(private http: HttpClient) { }
 
+
   getAllLigneCmdClients(): Observable<any> {
     return this.http.get(`${this.baseUrl}/ligneCommandes`);
+  }
+  getAllByNumero(id: number): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/lcomms/${id}`);
   }
 
   public getLigneCmdClientId(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/ligneCommandes/${id}`);
   }
 
-  createLigneCmdClient(info: LigneCmdClient): Observable<Object> {
+  createLigneCmdClient(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/ligneCommandes`, info);
   }
 
@@ -61,7 +68,7 @@ export class LigneCmdClientService {
   }
 
   deleteLigneCmdClient(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/ligneCommandes/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/ligneCommandes/${id}`);
   }
 
 }

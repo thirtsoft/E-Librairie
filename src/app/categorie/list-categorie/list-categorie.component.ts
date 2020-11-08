@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef } from "@angular/material/dialog";
+import { DialogService } from 'src/app/services/dialog.service';
 
 import { Subject } from 'rxjs';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -37,7 +38,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   fileUploadInput: any;
   mesagge: string;
 
-  constructor(public crudApi: CategorieService ,public fb: FormBuilder,
+  constructor(public crudApi: CategorieService, private dialogService: DialogService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog, private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -51,6 +52,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    /*
     this.CatId = this.route.snapshot.params.id;
     if (this.CatId == null) {
       this.resetForm();
@@ -59,6 +61,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
         this.listData = res.categorie;
       });
     }
+    */
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -128,7 +131,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateCategorieComponent, dialogConfig);
   }
-
+/*
   deleteCategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Categorie ?')) {
     this.crudApi.deleteCategorie(id)
@@ -142,10 +145,26 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
+  } */
+
+  deleteCategorie(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteCategorie(id).subscribe(data => {
+          this.toastr.warning('Categorie supprimé avec succès!');
+          this.rerender();
+          this.getListCategories();
+        });
+      }
+    });
   }
+
+  /*
   editCategorie(item : Categorie) {
     this.router.navigateByUrl('categories/'+item.id);
   }
+*/
 
   uploadExcelFile() {
     let formData = new FormData();

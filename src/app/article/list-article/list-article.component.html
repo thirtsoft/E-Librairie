@@ -5,7 +5,7 @@
     </div>
     <div class="row" style="padding-left: 20px; padding-top: 10px;">
       <div class="col-md-1">
-        <button (click)="onCreateArticle()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
+        <button (click)="addEditArticle(NULL)" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
       </div>
         <div class="col-md-3">
           <input class="form-control" type="file" #fileUploadInput style="height:45px;" />
@@ -39,7 +39,7 @@
               </tr>
             </thead>
           <tbody>
-            <tr *ngFor="let art of listData">
+            <tr *ngFor="let art of listData; let i=index;">
               <td>{{art.reference}}</td>
               <td>{{art.designation}}</td>
               <td>{{art.scategorie?.libelle}}</td>
@@ -48,7 +48,7 @@
               <td>{{art.prixVente}}</td>
               <td>{{art.qtestock}}</td>
               <td>
-                <button class="btn btn-info btn-lg" (click)="editArticle(art)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+                <button class="btn btn-info btn-lg" (click)="addEditArticle(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteArticle(art.id)"><i class="fa fa-trash-o"></i>  Delete</button>
               </td>
             </tr>

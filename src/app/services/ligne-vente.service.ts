@@ -22,6 +22,14 @@ export class LigneVenteService {
     return this.http.get<LigneVente[]>(`${this.baseUrl}/ligneVentes`);
   }
 
+   /**
+   * Methode pour afficher la liste des categories par pages
+   */
+  public getLigneVentesByVente(venteId: number) {
+    return this.http.get(`${this.baseUrl}/searchListLigneVentesByVenteId/${venteId}`);
+   // return this.http.get(this.baseUrl+'/searchListLigneCmdClientByCommandeId/' + comId);
+  }
+
   public getLigneVenteId(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/ligneVentes/${id}`);
   }

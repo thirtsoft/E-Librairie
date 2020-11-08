@@ -10,6 +10,7 @@ import { CreateApproComponent } from '../create-appro/create-appro.component';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-appro',
@@ -28,10 +29,9 @@ export class ListApproComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ApproService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: ApproService, private dialogService: DialogService, 
+    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
+    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateApproComponent>,
     ) { }
 
@@ -86,7 +86,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl("approvisionnement");
   }
 
-  deleteAppro(id: number) {
+/*  deleteAppro(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Approvisionnement ?')) {
     this.crudApi.deleteApprovisionnement(id)
       .subscribe(
@@ -100,15 +100,27 @@ export class ListApproComponent implements OnDestroy, OnInit {
       );
     }
 
+  } */
+
+  deleteAppro(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteApprovisionnement(id).subscribe(data => {
+          this.toastr.warning('Approvisionnement supprimé avec succès!');
+          this.rerender
+          this.getListAppros();
+        });
+      }
+    });
   }
 
   editeAppro(item : Appro) {
-
     this.router.navigateByUrl('approvisionnement/'+item.id);
-
   }
 
-  viewAppro() {
+  viewAppro(item : Appro) {
+    this.router.navigateByUrl('approView/'+item.id);
 
   }
 

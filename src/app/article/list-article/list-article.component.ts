@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateArticleComponent } from '../create-article/create-article.component';
+import { DialogService } from 'src/app/services/dialog.service';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 //import * as jsPDF from 'jspdf'
@@ -51,8 +52,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   logObject: any;
 
-
-  constructor(public crudApi: ArticleService,public fb: FormBuilder,
+  constructor(public crudApi: ArticleService, private dialogService: DialogService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -63,7 +63,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
         this.rerender();
         this.getListArticles();
       })
-     }
+  }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -101,9 +101,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   getListArticles() {
     this.crudApi.getAllArticles().subscribe(
       response =>{this.listData = response;
-
       });
-
   }
 
   onCreateArticle(){
@@ -117,6 +115,18 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateArticleComponent, dialogConfig);
   }
 
+  addEditArticle(artId?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      artId
+    };
+    this.matDialog.open(CreateArticleComponent, dialogConfig);
+
+  }
+
   editerArticle(item : Article) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
@@ -127,7 +137,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
     this.matDialog.open(CreateArticleComponent, dialogConfig);
   }
-
+/*
   deleteArticle(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Article ?')) {
     this.crudApi.deleteArticle(id)
@@ -140,7 +150,19 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       },
         error => console.log(error));
     }
+  } */
 
+  deleteArticle(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteArticle(id).subscribe(data => {
+          this.toastr.warning('Article supprimé avec succès!');
+          this.rerender();
+          this.getListArticles();
+        });
+      }
+    });
   }
 
   editArticle(item : Article) {

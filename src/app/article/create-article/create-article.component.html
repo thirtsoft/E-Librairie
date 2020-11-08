@@ -1,70 +1,67 @@
 
   <div class="col-md-11 col-md-offset-1 scroll">
     <h1>Nouveau Article</h1>
-    <form #addArticleForm="ngForm" (ngSubmit)="saveArticle(addArticleForm.value)">
-
+    <form #addArticleForm="ngForm" (ngSubmit)="onSubmit(addArticleForm)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataArticle.id">
       <div class="form-group">
         <label>Référence </label>
-        <input type="text" class="form-control" [(ngModel)]="article.reference" name="reference" id="reference">
+        <input type="text" class="form-control" [(ngModel)]="formDataArticle.reference" name="reference" id="reference">
       </div>
 
       <div class="form-group">
         <label>Désignation</label>
-        <input type="text" class="form-control" [(ngModel)]="article.designation" name="designation"  id="designation">
+        <input type="text" class="form-control" [(ngModel)]="formDataArticle.designation" name="designation"  id="designation">
       </div>
-
+      <!--
       <div class="form-group">
         <label>Categorie</label>
         <div class="form-group">
-          <select name="categorie" id="categorie" [(ngModel)]="article.categorie" class="form-control input-lg m-bot15"
+          <select name="categorie" id="categorie" [(ngModel)]="formDataArticle.categorie" class="form-control"
             (change)="onChangeScategories($event)">
             <option value=0>-Select-</option>
-            <option *ngFor="let cat of categorieList" [value]="cat.id">{{cat.designation}}</option>
+            <option *ngFor="let cat of listCategories" [ngValue]="cat.id == formDataArticle.categorie?.id ? formDataArticle.categorie : cat">{{cat.designation}}</option>
           </select>
         </div>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label>Sous-Categorie</label>
         <div class="form-group">
-          <select name="scategorie" id="scategorie" [(ngModel)]="article.scategorie" class="form-control input-lg m-bot15">
+          <select name="scategorie" id="scategorie" [(ngModel)]="formDataArticle.scategorie" class="form-control">
             <option value=0>-Select-</option>
-            <option  *ngFor="let scat of scategorieList" [value]="scat.id">{{scat.libelle}}</option>
+            <option  *ngFor="let scat of listScategories" [ngValue]="scat.id == formDataArticle.scategorie?.id ? formDataArticle.scategorie : scat">{{scat.libelle}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
         <label>P.Achat</label>
-        <input type="number" class="form-control" [(ngModel)]="article.prixAchat" name="prixAchat"  id="prixAchat">
+        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixAchat" name="prixAchat"  id="prixAchat">
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>P.Vente</label>
-          <input type="number" class="form-control" [(ngModel)]="article.prixVente" name="prixVente"  id="prixVente">
+          <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixVente" name="prixVente"  id="prixVente">
         </div>
 
         <div class="form-group col-md-6">
           <label>P.Détails</label>
-          <input type="number" class="form-control" [(ngModel)]="article.prixDetail" name="prixDetail"  id="prixDetail">
+          <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixDetail" name="prixDetail"  id="prixDetail">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>QStock</label>
-          <input type="number" class="form-control" [(ngModel)]="article.qtestock" name="qtestock"  id="qtestock">
+          <input type="number" class="form-control" [(ngModel)]="formDataArticle.qtestock" name="qtestock"  id="qtestock">
         </div>
 
         <div class="form-group col-md-6">
           <label>QStockInitial</label>
-          <input type="number" class="form-control" [(ngModel)]="article.stockInitial" name="stockInitial"  id="stockInitial">
+          <input type="number" class="form-control" [(ngModel)]="formDataArticle.stockInitial" name="stockInitial"  id="stockInitial">
         </div>
       </div>
 
       <div class="form-group">
-        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
-
         <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
         <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>

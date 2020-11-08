@@ -9,6 +9,7 @@ import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateEmployeComponent } from '../create-employe/create-employe.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-employe',
@@ -28,7 +29,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: EmployeService ,public fb: FormBuilder,
-    private route: ActivatedRoute, private router : Router,
+    private route: ActivatedRoute, private router : Router, private dialogService: DialogService,
     public toastr: ToastrService, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateEmployeComponent>,
@@ -39,7 +40,9 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
         this.getListEmployes();
       })
   }
+
   ngOnInit() {
+    /*
     this.empID = this.route.snapshot.params.id;
     if (this.empID == null) {
       this.resetForm();
@@ -48,7 +51,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
         this.listData = res.client;
       });
     }
-
+  */
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -122,6 +125,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateEmployeComponent, dialogConfig);
   }
+/*
   deleteEmploye(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Employe ?')) {
     this.crudApi.deleteEmploye(id)
@@ -135,11 +139,23 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
         error => console.log(error));
     }
 
+  } */
+
+  deleteEmploye(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteEmploye(id).subscribe(data => {
+          this.toastr.warning('Employe supprimé avec succès!');
+          this.rerender();
+          this.getListEmployes();
+        });
+      }
+    });
   }
+
   editerEmploye(item : Employe) {
-
     this.router.navigateByUrl('employes/'+item.id);
-
   }
 
 }

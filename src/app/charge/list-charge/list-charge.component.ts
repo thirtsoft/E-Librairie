@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { CreateChargeComponent } from '../create-charge/create-charge.component';
 import { DataTableDirective } from 'angular-datatables';
+import { DialogService } from 'src/app/services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-charge',
@@ -18,7 +20,7 @@ export class ListChargeComponent implements OnDestroy, OnInit {
 
   listData : Charge[];
   charge: Charge;
-  ChargeID: number;
+  chargeID: number;
 
   private editForm: FormGroup;
 
@@ -26,11 +28,11 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ChargeService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+  constructor(public crudApi: ChargeService, private dialogService: DialogService, public toastr: ToastrService,
+    public fb: FormBuilder, private router : Router, private datePipe : DatePipe,
     private matDialog: MatDialog, private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateChargeComponent>
+    public dialogRef:MatDialogRef<CreateChargeComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
@@ -38,15 +40,18 @@ export class ListChargeComponent implements OnDestroy, OnInit {
         this.getListCharges();
       })
   }
+
   ngOnInit() {
-    this.ChargeID = this.route.snapshot.params.id;
-    if (this.ChargeID == null) {
+    /*
+    this.chargeID = this.route.snapshot.params.id;
+    if (this.chargeID == null) {
       this.resetForm();
     }else {
-      this.crudApi.getChargeByID(this.ChargeID).then(res => {
+      this.crudApi.getChargeByID(this.chargeID).then(res => {
         this.listData = res.charge;
       });
     }
+   */
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -55,16 +60,15 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-
     this.crudApi.getAllCharges().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
       }
     );
-
   }
-  /**
+
+   /**
    * methode pour recharger automatique le Datatable
    */
   rerender() {
@@ -76,6 +80,14 @@ export class ListChargeComponent implements OnDestroy, OnInit {
     });
   }
 
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
+
   resetForm(form?: NgForm) {
     if (form = null)
       form.resetForm();
@@ -84,14 +96,8 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       codeCharge: '',
       nature: '',
       montantCharge: 0,
-      date: Date()
-
+      date: new Date()
     };
-
-  }
-
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
   }
 
   getListCharges() {
@@ -111,7 +117,7 @@ export class ListChargeComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateChargeComponent, dialogConfig);
   }
 
-  editerCharge(item: Charge) {
+  editCharge(item : Charge) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
@@ -119,10 +125,10 @@ export class ListChargeComponent implements OnDestroy, OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     this.matDialog.open(CreateChargeComponent, dialogConfig);
-
   }
+/*
   deleteCharge(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette Charge ?')) {
+    if (window.confirm('Etes-vous sure de vouloir supprimer ce Charge ?')) {
     this.crudApi.deleteCharge(id)
       .subscribe(
         data => {
@@ -133,13 +139,27 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       },
         error => console.log(error));
     }
-
   }
+ */
+
+  deleteCharge(id: number){
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.crudApi.deleteCharge(id).subscribe(data => {
+          this.toastr.warning('Charge supprimé avec succès!');
+          this.rerender();
+          this.getListCharges();
+        });
+      }
+    });
+  }
+
+
+/*
   editCharge(item : Charge) {
-
     this.router.navigateByUrl('charges/'+item.id);
-
   }
-
+*/
 
 }

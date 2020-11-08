@@ -1,30 +1,31 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Contrat</h1>
-    <form #addContratForm="ngForm" (ngSubmit)="saveContrat(addContratForm.value)">
+    <form #addContratForm="ngForm" (ngSubmit)="onSubmit(addContratForm)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataContrat.id">
       <div class="row">
         <div class="form-group col-md-6">
           <label>Référence </label>
-          <input type="text" class="form-control" [(ngModel)]="contrat.reference" name="reference" id="reference">
+          <input type="text" class="form-control" [(ngModel)]="formDataContrat.reference" name="reference" id="reference">
         </div>
 
         <div class="form-group col-md-6">
           <label>Nature</label>
-          <input type="text" class="form-control" [(ngModel)]="contrat.nature" name="nature"  id="nature">
+          <input type="text" class="form-control" [(ngModel)]="formDataContrat.nature" name="nature"  id="nature">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="contrat.montantContrat" name="montantContrat"  id="montantContrat">
+          <input type="number" class="form-control" [(ngModel)]="formDataContrat.montantContrat" name="montantContrat"  id="montantContrat">
         </div>
 
         <div class="form-group col-md-6">
           <label>Client</label>
           <div class="form-group">
-            <select name="client" id="client" [(ngModel)]="contrat.client" class="form-control input-lg m-bot15">
-              <option [ngValue]="contrat.client">Client</option>
-              <option *ngFor="let clt of clients" [ngValue]="clt">{{clt.raisonSocial}}</option>
+            <select name="client" id="client" [(ngModel)]="formDataContrat.client" class="form-control">
+              <option [ngValue]="0">Client</option>
+              <option *ngFor="let client of listClient" [ngValue]="client.id == formDataContrat.client?.id ? formDataContrat.client : client">{{client.raisonSocial}}</option>
             </select>
           </div>
         </div>
@@ -32,23 +33,20 @@
 
       <div class="form-group">
         <label>Description</label>
-        <textarea type="text" class="form-control" [(ngModel)]="contrat.description" name="description"  id="description"></textarea>
+        <textarea type="text" class="form-control" [(ngModel)]="formDataContrat.description" name="description"  id="description"></textarea>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Date-Début</label>
-          <input type="date" class="form-control" [(ngModel)]="contrat.dateDebutContrat" name="dateDebutContrat"  id="dateDebutContrat">
+          <input type="date" class="form-control" [(ngModel)]="formDataContrat.dateDebutContrat" name="dateDebutContrat"  id="dateDebutContrat">
         </div>
         <div class="form-group col-md-6">
           <label>Date-Fin</label>
-          <input type="date" class="form-control" [(ngModel)]="contrat.dateFinContrat" name="dateFinContrat"  id="dateFinContrat">
+          <input type="date" class="form-control" [(ngModel)]="formDataContrat.dateFinContrat" name="dateFinContrat"  id="dateFinContrat">
         </div>
       </div>
 
       <div class="form-group">
-        <!-- <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-        <button type="button" class="btn btn-outline-dark ml-1"><i class="fa fa-close"></i> Close</button> -->
-
         <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
         <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>

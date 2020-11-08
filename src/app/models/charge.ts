@@ -3,6 +3,6 @@ export class Charge {
   codeCharge: string;
   nature: string;
   montantCharge: number;
-  date: string;
+  date: Date;
 
 }

@@ -1,3 +1,57 @@
-<p>
-  view-vente works!
-</p>
+<div class="panel panel-default">
+  <div class="btn-toolbar">
+    <div class="panel-heading">
+      <h1>DETAILS D'UNE VENTE</h1>
+    </div>
+    <div style="padding-left: 20px; padding-top: 10px;">
+      <a type="button" (click)="onCreateVente()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp;
+      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" > <span class="fa fa-arrow-left"></span>&nbsp; Retour</a>
+
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Vente : </label>
+        <input name="id" [value]="this.venteId"  class="form-control" readonly>
+      </div>
+
+      <div class="form-group col-md-3" *ngIf="currentVente">
+        <label>Commande Numéro : </label>
+        <input type="text" class="form-control" name="numero" [(ngModel)]="this.currentVente.numero"  id="numero" readonly>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label>Total Vente : </label>
+        <input type="text" class="form-control" name="" id="total" readonly>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label>Date : </label>
+        <input type="date"  name="date"   class="form-control" readonly>
+      </div>
+    </div>
+    <div></div>
+    <div></div>
+    <!-- Debut Ligne de commandes -->
+    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger">
+      <thead>
+        <tr>
+          <th>Article</th><th>Price</th><th>Quantite</th><th>Total</th>
+            <!--  <th>Status</th><th>Date</th>
+             <th>Action</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.currentVente">
+          <td>{{item.produit.designation}}</td>
+          <td>{{item.prixVente}}</td>
+          <td>{{item.quantite}}</td>
+          <td>{{(item.prixVente)*(item.quantite)}} </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Fin  Ligne de commandes -->
+  </div>
+</div>
