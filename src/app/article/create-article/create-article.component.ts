@@ -77,7 +77,6 @@ export class CreateArticleComponent implements OnInit {
   getScategories() {
     this.scatService.getAllScategories().subscribe((response) => {
       this.listScategories = response as Scategorie[];});
-
   }
 
   onChangeScategories(event) {

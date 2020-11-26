@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ArticleService } from 'src/app/services/article.service';
 import { VenteService } from 'src/app/services/vente.service';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { FormBuilder, NgForm, FormGroup } from '@angular/forms';
 import { Vente } from 'src/app/models/vente';
 
 @Component({
@@ -16,44 +16,94 @@ import { Vente } from 'src/app/models/vente';
 })
 export class CreateLigneVenteComponent implements OnInit {
 
-  formData: LigneVente;
+ // formData: LigneVente;
   listArticle: Article[];
 
   isValid: boolean = true;
   approvisionnement: any;
   produit: any;
+  total = 0;
+  lvente: LigneVente;
+  formData: FormGroup;
 
-  constructor(public lVenteService: LigneVenteService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ArticleService,
-    private venteService: VenteService,public fb: FormBuilder,
+  constructor(public lventeService: LigneVenteService, private toastr :ToastrService,
+    private articleService: ArticleService, private venteService: VenteService,
+    @Inject(MAT_DIALOG_DATA) public data, public fb: FormBuilder,
     public dialogRef: MatDialogRef<CreateLigneVenteComponent>,
    ) { }
 
-   ngOnInit() {
+   get f() { return this.formData.controls; }
+
+  ngOnInit() {
+    if (this.data.lcommandeIndex == null) {
+      this.infoForm();
+    } else {
+      this.formData = this.fb.group(Object.assign({}, this.venteService.list[this.data.lcommandeIndex]));
+      console.log(this.formData);
+    }
+
     this.articleService.getAllArticles().subscribe(
       response =>{
         this.listArticle = response;
       }
     );
-
+  /*
     if (this.data.orderItemIndex == null)
       this.formData = {
-        OrderItemId: null,
-        OrderId: this.data.OrderId,
-        ItemId: 0,
-        numero: '',
-        prixVente: 0,
-        quantite: 0,
-        ItemName: '',
-        total: 0,
-        produit: new Article(),
-        vente: new Vente(),
-
+        OrderItemId: null, OrderId: this.data.OrderId,
+        ItemId: 0, numero: '', prixVente: 0, quantite: 0,
+        ItemName: '', total: 0, produit: new Article(), vente: new Vente(),
       }
     else
       this.formData = Object.assign({}, this.venteService.orderItems[this.data.orderItemIndex]);
   }
+  */
+  }
 
+  infoForm() {
+    this.formData = this.fb.group({
+     // OrderItemId: null,
+      id: null,
+      OrderId: this.data.OrderId,
+      ItemId: 0,
+      numero: this.data.numeroVente,
+      prixVente: 0,
+      quantite: 0,
+      qteStock: 0,
+      ItemName: '',
+      total: 0,
+      produit: new Article(),
+      vente: new Vente(),
+    });
+
+  }
+
+  compareProduit(prod1: Article, prod2: Article) : boolean {
+    return prod1 && prod2 ? prod1.id === prod2.id : prod1 === prod2;
+  }
+
+  selectPrice(ctrl) {
+    if (ctrl.selectedIndex == 0) {
+      this.f['prixVente'].setValue(0);
+      this.f['quantite'].setValue(0);
+      this.f['ItemName'].setValue('');
+      this.f['qteStock'].setValue(0);
+    } else {
+      this.f['prixVente'].setValue(this.listArticle[ctrl.selectedIndex-1].prixDetail);
+
+      this.f['ItemName'].setValue(this.listArticle[ctrl.selectedIndex-1].designation);
+
+      this.f['qteStock'].setValue(this.listArticle[ctrl.selectedIndex-1].qtestock);
+    }
+    this.calculTotal();
+  }
+
+  calculTotal() {
+    this.total = parseFloat((this.formData.value.quantite * this.formData.value.prixVente).toFixed(2));
+    this.f['total'].setValue(this.total);
+  }
+
+/*
   selectPrice(ctrl) {
     if (ctrl.selectedIndex==0) {
       this.formData.prixVente = 0;
@@ -62,17 +112,35 @@ export class CreateLigneVenteComponent implements OnInit {
     else {
       this.formData.prixVente = this.listArticle[ctrl.selectedIndex-1].prixDetail;
       this.formData.ItemName = this.listArticle[ctrl.selectedIndex-1].designation;
-
     }
-
     this.calculTotal();
-
   }
 
   calculTotal() {
     this.formData.total = parseFloat((this.formData.quantite * this.formData.prixVente).toFixed(2));
   }
+  */
 
+  onSubmit() {
+    if (this.data.lcommandeIndex == null) {
+      this.venteService.list.push(this.formData.value);
+      this.dialogRef.close();
+    }else {
+      this.venteService.list[this.data.lcommandeIndex] = this.formData.value;
+    }
+    this.dialogRef.close();
+  }
+
+  validateForm(formData: LigneVente){
+    this.isValid=true;
+    if(formData.produit.id==0)
+      this.isValid=false;
+      else if(formData.quantite==0)
+      this.isValid=false;
+      return this.isValid;
+  }
+
+  /*
   onSubmit(form: NgForm) {
     if (this.validateForm(form.value)) {
       if (this.data.orderItemIndex == null) {
@@ -83,7 +151,6 @@ export class CreateLigneVenteComponent implements OnInit {
       }
       this.dialogRef.close();
     }
-
   }
   validateForm(formData: LigneVente) {
     this.isValid = true;
@@ -93,5 +160,6 @@ export class CreateLigneVenteComponent implements OnInit {
       this.isValid = false;
     return this.isValid;
   }
+  */
 
 }

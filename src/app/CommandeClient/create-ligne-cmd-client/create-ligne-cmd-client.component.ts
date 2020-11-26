@@ -67,14 +67,17 @@ export class CreateLigneCmdClientComponent implements OnInit {
       console.log(this.formData);
       */
   }
+
   infoForm() {
     this.formData = this.fb.group({
-      OrderItemId: null,
+     // OrderItemId: null,
+      id: null,
       OrderId: this.data.OrderId,
       ItemId: 0,
       numero: this.data.numeroCommande,
       prix: 0,
       quantite: 0,
+      qteStock: 0,
       ItemName: '',
      // code_article: '',
       total: 0,
@@ -85,7 +88,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
 
   compareProduit(prod1: Article, prod2: Article) : boolean {
     return prod1 && prod2 ? prod1.id === prod2.id : prod1 === prod2;
-
   }
 
   selectPrice(ctrl) {
@@ -93,17 +95,20 @@ export class CreateLigneCmdClientComponent implements OnInit {
       this.f['prix'].setValue(0);
       this.f['quantite'].setValue(0);
       this.f['ItemName'].setValue('');
+      this.f['qteStock'].setValue(0);
     } else {
       this.f['prix'].setValue(this.listArticle[ctrl.selectedIndex-1].prixVente);
 
       this.f['ItemName'].setValue(this.listArticle[ctrl.selectedIndex-1].designation);
+
+      this.f['qteStock'].setValue(this.listArticle[ctrl.selectedIndex-1].qtestock);
     }
     this.calculTotal();
   }
+
   calculTotal() {
     this.total = parseFloat((this.formData.value.quantite * this.formData.value.prix).toFixed(2));
     this.f['total'].setValue(this.total);
-
   }
   /*
   selectPrice(ctrl) {
@@ -149,9 +154,9 @@ export class CreateLigneCmdClientComponent implements OnInit {
   }
   */
 
- validateForm(formData:LigneCmdClient){
+ validateForm(formData: LigneCmdClient){
   this.isValid=true;
-  if(formData.ItemId==0)
+  if(formData.produit.id==0)
     this.isValid=false;
     else if(formData.quantite==0)
     this.isValid=false;

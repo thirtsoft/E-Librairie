@@ -20,14 +20,14 @@
               </tr>
             </thead>
           <tbody>
-            <tr *ngFor="let vent of listData">
-              <td>{{vent.venteId}}</td>
+            <tr *ngFor="let vent of listData; let i=index;">
+              <td>{{vent.id}}</td>
               <td>{{vent.numeroVente}}</td>
               <td>{{vent.totalVente}}</td>
               <td>{{vent.status}}</td>
-              <td>{{vent.dateVente}}</td>
+              <td>{{vent.dateVente | date:'dd/MM/yyyy'}}</td>
               <td>
-                <button class="btn btn-info btn-lg" (click)="editerVente(vent)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+          <!--  <button class="btn btn-info btn-lg" (click)="editerVente(vent)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
                 <button class="btn btn-success btn-lg" (click)="viewVente(vent)"> <i class="fa fa-eye" aria-hidden="true"></i> Voir</button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteVente(vent.VenteId)"><i class="fa fa-trash-o"></i>  Delete</button>
               </td>

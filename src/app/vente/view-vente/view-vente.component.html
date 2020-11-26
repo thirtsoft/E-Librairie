@@ -4,7 +4,7 @@
       <h1>DETAILS D'UNE VENTE</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="onCreateVente()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp;
+  <!--<a type="button" (click)="onCreateVente()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp; -->
       <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" > <span class="fa fa-arrow-left"></span>&nbsp; Retour</a>
 
     </div>
@@ -12,23 +12,23 @@
   <div class="panel-body">
     <div class="row">
       <div class="form-group col-md-3">
-        <label>Vente : </label>
+        <label>Vente ID : </label>
         <input name="id" [value]="this.venteId"  class="form-control" readonly>
       </div>
 
-      <div class="form-group col-md-3" *ngIf="currentVente">
-        <label>Commande Numéro : </label>
-        <input type="text" class="form-control" name="numero" [(ngModel)]="this.currentVente.numero"  id="numero" readonly>
+      <div class="form-group col-md-3">
+        <label>Numéro Vente: </label>
+        <input type="text" class="form-control" name="numeroVente" [value]="this.numeroVente"  id="numeroVente" readonly>
       </div>
 
       <div class="form-group col-md-3">
         <label>Total Vente : </label>
-        <input type="text" class="form-control" name="" id="total" readonly>
+        <input type="text" class="form-control" [value]="this.totalVente" name="" id="totalVente" readonly>
       </div>
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="date"  name="date"   class="form-control" readonly>
+        <input type="date"  name="dateVente" [value]="this.dateVente" class="form-control" readonly>
       </div>
     </div>
     <div></div>
@@ -44,8 +44,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of this.currentVente">
-          <td>{{item.produit.designation}}</td>
+        <tr *ngFor="let item of this.lventeService.listData">
+          <td>{{item.produit?.designation}}</td>
           <td>{{item.prixVente}}</td>
           <td>{{item.quantite}}</td>
           <td>{{(item.prixVente)*(item.quantite)}} </td>

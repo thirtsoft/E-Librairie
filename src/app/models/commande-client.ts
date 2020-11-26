@@ -17,7 +17,6 @@ export class CommandeClient {
   client: Client;
   lcomms :Array<LigneCmdClient>=[];
 
-
 }
 
 export class Order {

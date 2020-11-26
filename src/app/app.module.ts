@@ -76,6 +76,12 @@ import { MatButtonModule } from '@angular/material';
 import { OrderItemComponent } from './order/order-item/order-item.component';
 import { OrderComponent } from './order/order/order.component';
 import { OrdersComponent } from './order/orders/orders.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { ListRegisterComponent } from './authentication/list-register/list-register.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +143,12 @@ import { OrdersComponent } from './order/orders/orders.component';
     OrdersComponent,
     OrderItemComponent,
     OrderComponent,
+    LoginComponent,
+    RegisterComponent,
+    SidebarComponent,
+    FooterComponent,
+    NavbarComponent,
+    ListRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -163,7 +175,8 @@ import { OrdersComponent } from './order/orders/orders.component';
 
   bootstrap: [AppComponent],
   entryComponents: [CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent, CreateFournisseurComponent,
-    CreateVersementComponent, CreateCreanceComponent, CreateContratComponent, CreateAvoirComponent, CreateChargeComponent,
+    CreateVersementComponent, CreateCreanceComponent, CreateContratComponent, CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent,
+    CreateApproComponent, CreateVenteComponent,
     CreateEmployeComponent, MatConfirmDialogComponent]
 })
 export class AppModule { }

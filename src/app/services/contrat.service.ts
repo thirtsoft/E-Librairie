@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contrat } from '../models/contrat';
 import { FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -60,6 +60,36 @@ export class ContratService {
   createData(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/contrats`, info);
   }
+
+  public createContrat2(contrat, file:File) {
+
+    const data:FormData= new FormData();
+    data.append('contrat',JSON.stringify(contrat));
+    data.append('file_contrat',file);
+
+    return this.http.post<Contrat>(`${this.baseUrl}/createContrat`, data);
+  }
+
+  public downloadFile(pathContrat: String){
+
+    return this.http.get<any>("http://localhost:8080/alAmine//downloadFile"+"/"+ pathContrat);
+  }
+
+  /**
+   * Methode pour ajouter un nouveau produit avec sa photo
+   */
+  public saveContrat(formData, file:File): Observable<any> {
+    const data:FormData= new FormData();
+    data.append('contrat',JSON.stringify(formData));
+    data.append('file',file);
+    const req = new HttpRequest('POST', this.baseUrl+"/saveContrat", formData, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+    return this.http.request(req);
+
+  }
+
 
   updateContrat(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/contrats/${id}`, value);

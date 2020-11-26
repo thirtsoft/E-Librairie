@@ -3,6 +3,7 @@ import { Appro } from '../models/appro';
 import { LigneAppro } from '../models/ligne-appro';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,23 @@ export class ApproService {
 
   choixmenu : string  = 'A';
   listData : Appro[];
+ // public formData:  Appro;
+
+  public formData:  FormGroup;
 
   commande: Appro;
 
-  listLigneCmd: LigneAppro[];
+  listLigneAppro: LigneAppro[];
+
+ // listLigneCmd: LigneAppro[];
 
   //public dataForm:  FormGroup;
 
-  list: LigneAppro[] = [];
+  list: any={}
 
-  public formData:  Appro;
+  //list: LigneAppro[] = [];
+
+
   orderItems: LigneAppro[];
 
   constructor(private http: HttpClient) { }
@@ -53,6 +61,10 @@ export class ApproService {
 
   }
 
+  saveApprovisionnement(info: Object) {
+    return this.http.post(`${this.baseUrl}/approvisionnements`, info);
+  }
+
   /**
    * Methode pour afficher la liste des categories par pages
    */
@@ -74,7 +86,11 @@ export class ApproService {
   updateApprovisionnement(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/approvisionnements/${id}`, value);
   }
-
+/*
+  deleteApprovisionnement(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/approvisionnements/${id}`, { responseType: 'text' });
+  }
+*/
   deleteApprovisionnement(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/approvisionnements/${id}`, { responseType: 'text' });
   }

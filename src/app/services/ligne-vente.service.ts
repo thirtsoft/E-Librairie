@@ -22,6 +22,10 @@ export class LigneVenteService {
     return this.http.get<LigneVente[]>(`${this.baseUrl}/ligneVentes`);
   }
 
+  getAllByNumero(id: number): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/lventes/${id}`);
+  }
+
    /**
    * Methode pour afficher la liste des categories par pages
    */

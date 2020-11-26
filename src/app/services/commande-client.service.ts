@@ -52,13 +52,10 @@ export class CommandeClientService {
       ...this.formData,
       lcomms: this.orderItems
     };
-
     return this.http.post(`${this.baseUrl}/commandesClientes`, body);
-
   }
 
   saveCommande(info: Object) {
-
     return this.http.post(`${this.baseUrl}/commandesClientes`, info);
   }
 

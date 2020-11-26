@@ -2,12 +2,13 @@ import { Vente } from './vente';
 import { Article } from './article';
 
 export class LigneVente {
-  OrderItemId: number;
-  numero: string;
+  id: number;
+  numero: number;
   OrderId: number;
   ItemId: number;
   ItemName: string;
   quantite: number;
+  qteStock: number;
   prixVente: number;
   total: number;
 
@@ -15,8 +16,4 @@ export class LigneVente {
 
   produit: Article;
 
-  public constructor() {
-    this.vente = new Vente();
-    this.produit = new Article();
-  }
 }

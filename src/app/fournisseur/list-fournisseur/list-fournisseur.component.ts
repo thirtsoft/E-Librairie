@@ -62,6 +62,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     this.crudApi.getAllFournisseurs().subscribe(
       response =>{
         this.listData = response;
+        console.log(this.listData);
         this.dtTrigger.next();
       }
     );

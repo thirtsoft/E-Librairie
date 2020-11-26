@@ -1,34 +1,39 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>DETAILS D'UNE COMMANDE</h1>
+      <h1>DETAILS D'UN APPROVISIONNEMENT</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="onCreateAppro()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp;
+<!--  <a type="button" (click)="onCreateAppro()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp; -->
       <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" > <span class="fa fa-arrow-left"></span>&nbsp; Retour</a>
-
     </div>
   </div>
   <div class="panel-body">
     <div class="row">
+      <!--
       <div class="form-group col-md-3">
-        <label>Commande : </label>
-        <input name="id" [value]="this.comId"  class="form-control" readonly>
+        <label>Appro ID : </label>
+        <input name="approId" [value]="this.approId"  class="form-control" readonly>
+      </div>
+      -->
+      <div class="form-group col-md-3">
+        <label>Code Appro : </label>
+        <input type="text" class="form-control" name="code" [value]="this.code"  id="code" readonly>
       </div>
 
-      <div class="form-group col-md-3" *ngIf="currentCommande">
-        <label>Commande Numéro : </label>
-        <input type="text" class="form-control" name="numero" [(ngModel)]="this.currentAppro.numero"  id="numero" readonly>
+      <div class="form-group col-md-3">
+        <label>Fournisseur : </label>
+        <input type="text" class="form-control" name="forunisseur" [value]="this.forunisseur"  id="forunisseur" readonly>
       </div>
 
       <div class="form-group col-md-3">
-        <label>Total Commande : </label>
-        <input type="text" class="form-control" name="" id="total" readonly>
+        <label>Total Appro : </label>
+        <input type="text" class="form-control" [value]="this.totalAppro" name="totalAppro" id="totalAppro" readonly>
       </div>
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="date"  name="date"   class="form-control" readonly>
+        <input type="date"  name="dateAppro" [value]="this.dateAppro" id="dateAppro"   class="form-control" readonly>
       </div>
     </div>
     <div></div>
@@ -44,8 +49,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of this.currentAppro">
-          <td>{{item.produit.designation}}</td>
+        <tr *ngFor="let item of this.lapproService.listData">
+          <td>{{item.produit?.designation}}</td>
           <td>{{item.prix}}</td>
           <td>{{item.quantite}}</td>
           <td>{{(item.prix)*(item.quantite)}} </td>

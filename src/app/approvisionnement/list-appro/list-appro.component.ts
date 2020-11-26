@@ -11,6 +11,7 @@ import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-appro',
@@ -19,7 +20,9 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class ListApproComponent implements OnDestroy, OnInit {
 
-  listData: Appro[];
+  //listData: Appro[];
+
+  listData;
 
   fournisseur;
 
@@ -29,10 +32,12 @@ export class ListApproComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ApproService, private dialogService: DialogService, 
-    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: ApproService, private dialogService: DialogService,
+    private datePipe : DatePipe, public fb: FormBuilder,
+    public toastr: ToastrService, private router : Router,
+   /* private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateApproComponent>,
+    */
     ) { }
 
   ngOnInit(): void {
@@ -76,7 +81,6 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.crudApi.getAllAppros().subscribe(
       response =>{
         this.listData = response;
-
       });
 
   }
@@ -121,7 +125,10 @@ export class ListApproComponent implements OnDestroy, OnInit {
 
   viewAppro(item : Appro) {
     this.router.navigateByUrl('approView/'+item.id);
+  }
 
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 
 }

@@ -95,17 +95,30 @@ export class ListContratComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateContratComponent, dialogConfig);
   }
 
-  addEditContrat(contId?: number) {
+  addEditContrat(id?: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     dialogConfig.data = {
-      contId
+      id
     };
     this.matDialog.open(CreateContratComponent, dialogConfig);
 
   }
+/*
+  downloadFile(fileName){
+
+    this.fileDownloadService.downloadFile({'filename':fileName})
+    .subscribe(data => {
+
+      saveAs(new Blob([data],{type:"application/pdf"}),fileName);
+
+    })
+
+  }
+*/
+
 
 
 /*   deleteContrat(id: number) {

@@ -13,8 +13,7 @@ import { CreateArticleComponent } from '../create-article/create-article.compone
 import { DialogService } from 'src/app/services/dialog.service';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
-//import * as jsPDF from 'jspdf'
-
+import autoTable from 'jspdf-autotable';
 /* import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx'; */
 
@@ -34,8 +33,10 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ListArticleComponent implements OnDestroy, OnInit {
 
-  @Input()
+ // @Input()
   listData : Article[];
+
+  @ViewChild('htmlData') htmlData:ElementRef;
 
   private editForm: FormGroup;
 
@@ -43,14 +44,14 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  @ViewChild('TABLE') TABLE: ElementRef;
+ // @ViewChild('TABLE') TABLE: ElementRef;
 
   @ViewChild("fileUploadInput")
   fileUploadInput: any;
-
   mesagge: string;
 
   logObject: any;
+  array;
 
   constructor(public crudApi: ArticleService, private dialogService: DialogService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
@@ -166,9 +167,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   editArticle(item : Article) {
-
     this.router.navigateByUrl('article/'+item.id);
-
   }
 
   uploadExcelFile() {
@@ -178,8 +177,8 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.crudApi.uploadExcelFile(formData).subscribe(result => {
       console.log(result);
       this.mesagge = result.toString();
-      this.rerender();
       this.toastr.warning("Fichier importer avec succès");
+      this.rerender();
       this.getListArticles();
     })
   }
@@ -188,7 +187,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.crudApi.generateExcelFile();
     this.toastr.warning("Fichier téléchargé avec succès");
   }
-
 
   generatePdf() {
     this.crudApi.exportPdfProduits().subscribe(x => {
@@ -306,12 +304,17 @@ export class ListArticleComponent implements OnDestroy, OnInit {
           alignment: 'center',
           margin: [0, 0, 0, 20]
         },
-      //  this.getList(this.crudApi.listData),
+        this.getList(this.crudApi.listData),
 
       ]
 
     }
 
+  }
+
+  openPdf1() {
+    const document = this.getDocument1();
+    pdfMake.createPdf(document).open();
   }
 
   getDocument1() {
@@ -394,6 +397,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   getList(item: Article[]) {
+    let officersIds = [];
     return {
       table: {
         width: ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
@@ -436,15 +440,120 @@ export class ListArticleComponent implements OnDestroy, OnInit {
               style: 'tableHeader'
             },
           ],
-          ...item.map(resp => {
-            (resp.reference,resp.designation,resp.categorie.designation,resp.scategorie.libelle,resp.prixAchat,resp.prixVente,
-            resp.prixDetail, resp.qtestock,resp.add_date);
-          })
+           item.map(resp =>{(
+             officersIds.push(resp.reference, resp.designation, resp.scategorie.libelle, resp.prixAchat)
+           )})
+
         ]
       }
     };
 
   }
 
+  public openPdf2():void {
+    let DATA = this.htmlData.nativeElement;
+    let doc = new jsPDF('p','pt', 'a4');
+    doc.fromHTML(DATA.innerHTML,15,15);
+    doc.output('dataurlnewwindow');
+  }
+
+  public downloadPDF():void {
+    let DATA = this.htmlData.nativeElement;
+    let doc = new jsPDF('p','pt', 'a4');
+
+    let handleElement = {
+      '#editor':function(element,renderer){
+        return true;
+      }
+    };
+    doc.fromHTML(DATA.innerHTML,15,15,{
+      'width': 200,
+      'elementHandlers': handleElement
+    });
+
+    doc.save('angular-demo.pdf');
+  }
+
+  getAllArticlees(){
+    this.crudApi.getAllArticles().subscribe((res: any) => {
+      this.listData = res.data.lisData;
+      for(var i = 0; i< this.listData.length; i++) {
+        this.array = this.listData[i]
+        console.log(this.array)
+      }
+    });
+  }
+
+  openPdf3(){
+    const documentDefinition = this.getDocumentDefinition();
+    pdfMake.createPdf(documentDefinition).open();
+  }
+
+  getDocumentDefinition() {
+    return {
+      content: [
+          {
+          table: {
+            headerRows: 6,
+            widths: ['*', 100, 200, '*', '*', '*'],
+            body: [
+              ['Reference', 'Desigation', 'PU', 'Scategorie' ]
+              .concat(this.listData[0].reference, this.listData[0].designation, this.listData[0].scategorie.libelle),
+            ]
+          }
+        }
+      ]
+    };
+  }
+
+  openPdf() {
+    var doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text('My Team Detail', 11, 8);
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+    autoTable(doc, { html: '#my-htmlData' });
+
+    autoTable(doc, {
+      head: this.headRows(), //define head rows
+      body: this.bodyRows(this.listData.length, this.listData),
+     // head: [['Reference', 'Designation', 'PU', 'Scategorie']],
+    //  body: [
+      //  ['Tairou', 'Diallo', 'M2', 'SEN']
+     // ]
+    }),
+
+    // below line for Open PDF document in new tab
+    doc.output('dataurlnewwindow')
+
+    // below line for Download PDF document
+    doc.save('myteamdetail.pdf');
+  }
+
+  headRows() {
+    return [{
+      id: 'ID',
+      reference: 'Reference',
+      designation: 'Designation',
+      prixAchat: 'PU',
+      scategorie: 'SCAT',
+    }];
+
+  }
+
+  bodyRows(rowCount, listData: Article[]) {
+   // rowCount = rowCount || 10;
+    let body = [];
+    for (var j = 0; j < listData.length; j++) {
+      body.push({
+          id: j+1,
+          reference: listData[j].reference,
+          designation: listData[j].designation,
+          prixAchat: listData[j].prixAchat,
+          scategorie: listData[j].scategorie.libelle,
+      });
+      return body;
+  }
+  }
 
 }

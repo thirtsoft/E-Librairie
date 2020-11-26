@@ -7,7 +7,8 @@ export class Contrat {
   montantContrat: number;
   description: string;
   dateDebutContrat: Date;
-	dateFinContrat: Date;
+  dateFinContrat: Date;
+  fileContrat: string;
 
   client: Client;
 

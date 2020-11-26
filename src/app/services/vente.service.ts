@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Vente } from '../models/vente';
 import { HttpClient } from '@angular/common/http';
 import { LigneVente } from '../models/ligne-vente';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,18 @@ export class VenteService {
   // private baseUrl = '/api/categories';
    choixmenu : string  = 'A';
    listData : Vente[];
+   public formData:  FormGroup;
+   list: any={};
+   vente: Vente;
 
    listLigneVente: LigneVente[];
 
+
    //public dataForm:  FormGroup;
 
-   list: LigneVente[] = [];
+  // list: LigneVente[] = [];
 
-   public formData:  Vente;
+  // public formData:  Vente;
    orderItems: LigneVente[];
 
    constructor(private http: HttpClient) { }
@@ -48,6 +53,10 @@ export class VenteService {
      };
      return this.http.post(`${this.baseUrl}/ventes`, body);
    }
+
+   saveVente(info: Object) {
+    return this.http.post(`${this.baseUrl}/ventes`, info);
+  }
 
    /**
     * Methode pour afficher la liste des categories par pages

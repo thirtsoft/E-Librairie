@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
+import { Article } from 'src/app/models/Article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { StockService } from 'src/app/services/stock.service';
@@ -9,6 +10,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angu
 import { CreateArticleComponent } from 'src/app/article/create-article/create-article.component';
 import { CreateApproComponent } from 'src/app/approvisionnement/create-appro/create-appro.component';
 import { DataTableDirective } from 'angular-datatables';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-list-stock',
@@ -18,6 +20,7 @@ import { DataTableDirective } from 'angular-datatables';
 export class ListStockComponent implements OnDestroy, OnInit {
 
   listData : Stock[];
+  listArticle : Article[];
 
   private editForm: FormGroup;
 
@@ -27,8 +30,8 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
   closeResult: string;
 
-  constructor(public crudApi: StockService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+  constructor(public crudApi: StockService, private artService: ArticleService,
+    public toastr: ToastrService, private router : Router, public fb: FormBuilder,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateApproComponent>,
 
@@ -43,10 +46,17 @@ export class ListStockComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-
+    /*
     this.crudApi.getAllStocks().subscribe(
       response =>{
         this.listData = response;
+        console.log(this.listData);
+        this.dtTrigger.next();
+      }
+    ); */
+    this.artService.getAllArticles().subscribe(
+      response => {
+        this.listArticle = response;
         this.dtTrigger.next();
       }
     );
@@ -69,13 +79,23 @@ export class ListStockComponent implements OnDestroy, OnInit {
     this.dtTrigger.unsubscribe();
   }
 
+  getListArticle() {
+    this.artService.getAllArticles().subscribe(
+      response =>{this.listArticle = response;}
+    );
+  }
+
   getListStocks() {
     this.crudApi.getAllStocks().subscribe(
       response =>{this.listData = response;}
     );
-
   }
 
+  onCreateStock() {
+    this.crudApi.choixmenu = "A";
+    this.router.navigateByUrl("approvisionnement");
+  }
+/*
   onCreateStock(){
     this.crudApi.choixmenu = "A";
    // this.router.navigateByUrl("scategorie");
@@ -85,7 +105,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateApproComponent, dialogConfig);
   }
-
+*/
   editeStock(item : Stock) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));

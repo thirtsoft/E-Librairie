@@ -23,11 +23,17 @@ import { VenteService } from 'src/app/services/vente.service';
   styleUrls: ['./view-approvisionnement.component.scss']
 })
 export class ViewApprovisionnementComponent implements OnInit {
-  listData: Vente[];
-  listDetalVente: LigneVente[];
-  vente: Vente;
-  venteId: number;
-  currentVente;
+
+  listData: Appro[];
+  listDetalAppro: LigneAppro[];
+  appro: Appro;
+  approId: number;
+  currentAppro;
+
+  code;
+  totalAppro;
+  dateAppro;
+  forunisseur;
 
   produit: Article = new Article();
 
@@ -37,34 +43,40 @@ export class ViewApprovisionnementComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: VenteService, public fb: FormBuilder,
+  constructor(public crudApi: ApproService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, private lVenteService: LigneVenteService,
+    private matDialog: MatDialog, private lapproService: LigneApproService,
     @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateVenteComponent>,
     ) { }
 
   ngOnInit(): void {
-    this.venteId = this.route.snapshot.params.id;
-    console.log(this.venteId);
-    this.lVenteService.getLigneVenteId(this.venteId).subscribe(data => {
-      this.currentVente = data;
-      console.log(this.currentVente);
+    this.approId = this.route.snapshot.params.id;
+    console.log(this.approId);
+    this.lapproService.getAllLigneApproByAppro(this.approId).subscribe((data: LigneAppro[]) => {
+      //this.currentVente = data;
+      this.lapproService.listData = data;
+      console.log(this.lapproService.listData);
+
+    //  console.log(this.lapproService.listData[0].numero);
+      this.code = this.lapproService.listData[0].numero;
+    //  console.log(this.lapproService.listData[0].approvisionnement.totalAppro);
+      this.totalAppro = this.lapproService.listData[0].approvisionnement.totalAppro;
+      console.log(this.lapproService.listData[0].approvisionnement.dateApprovisionnement);
+      this.forunisseur = (this.lapproService.listData[0].approvisionnement.fournisseur.prenom +"."+this.lapproService.listData[0].approvisionnement.fournisseur.nom);
+      this.dateAppro = this.lapproService.listData[0].approvisionnement.dateApprovisionnement;
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
-    })
-
+    });
+  /*
     this.vente = new Vente();
     this.vente = {
-      venteId: null,
-      numeroVente: '',
-      totalVente: 0,
-      status: '',
-      DeletedOrderItemIDs: '',
-      dateVente: new Date()
-
+      venteId: null, numeroVente: 0,
+      totalVente: 0, status: '',
+      DeletedOrderItemIDs: '', dateVente: new Date()
     }
+    */
   }
 
   /**
@@ -84,7 +96,7 @@ export class ViewApprovisionnementComponent implements OnInit {
   }
 
   getListVentes() {
-    this.crudApi.getAllVentes().subscribe(
+    this.crudApi.getAllAppros().subscribe(
       response =>{this.listData = response;}
     );
   }

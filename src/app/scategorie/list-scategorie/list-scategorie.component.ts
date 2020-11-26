@@ -63,7 +63,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllScategories().subscribe(
       response =>{
-        this.crudApi.listData = response;
+        this.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -125,7 +125,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   }
 
 
- 
+
   /*
   deleteScategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Sous-Categorie ?')) {
@@ -154,16 +154,14 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     });
   }
 
-
   uploadExcelFile() {
     let formData = new FormData();
-    console.log(formData)
     formData.append('file', this.fileUploadInput.nativeElement.files[0]);
     this.crudApi.uploadScategorieExcelFile(formData).subscribe(result => {
       console.log(result);
       this.mesagge = result.toString();
       this.toastr.warning('Fichier importé avec succès!');
-          this.rerender();
+      this.rerender();
       this.getListScategories();
     })
   }

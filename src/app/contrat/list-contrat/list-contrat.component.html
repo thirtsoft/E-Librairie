@@ -29,6 +29,12 @@
       <td>{{cont.description}}</td>
       <td>{{cont.dateDebutContrat| date:'dd/MM/yyyy'}}</td>
       <td>{{cont.dateFinContrat| date:'dd/MM/yyyy'}}</td>
+      <!--
+      <td>{{cont.fileContrat}}
+        <a href="http://localhost:8080/alamine/downloadFile/{{contrat.fileContrat}}"
+        class="cv"> <i class="fa fa-download"></i></a>
+      </td>
+      -->
       <td>
         <button class="btn btn-info btn-lg" (click)="addEditContrat(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
         <button class="btn btn-danger btn-lg" (click)="deleteContrat(cont.id)"><i class="fa fa-trash-o"></i>  Delete</button>

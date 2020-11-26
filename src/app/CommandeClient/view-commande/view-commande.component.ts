@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { CommandeClient } from 'src/app/models/commande-client';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -12,6 +12,7 @@ import { Client } from 'src/app/models/client';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { Article } from 'src/app/models/article';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-view-commande',
@@ -25,8 +26,6 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
   cmdClient: CommandeClient;
   currentCmdClient;
 
-
-
   comId: number;
   currentCommande;
   numeroCommande;
@@ -37,6 +36,8 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
   produit: Article = new Article();
 
   private editForm: FormGroup;
+
+  @ViewChild('content') content: ElementRef;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -136,6 +137,25 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
   onGoBack() {
     this.router.navigateByUrl('commandeclients');
+  }
+
+  onGeneratePdf() {
+    let content=this.content.nativeElement;
+    let doc = new jsPDF();
+    let _elementHandlers =
+    {
+      '#editor':function(element,renderer){
+        return true;
+      }
+    };
+    doc.fromHTML(content.innerHTML,15,15,{
+
+      'width':190,
+      'elementHandlers':_elementHandlers
+    });
+
+    doc.save('test.pdf');
+
   }
 
 }

@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let four of listData">
+            <tr *ngFor="let four of listData; let i=index;">
               <td>{{four.code}}</td>
               <td>{{four.raisonSociale}}</td>
               <td>{{four.prenom}}  {{four.nom}}</td>

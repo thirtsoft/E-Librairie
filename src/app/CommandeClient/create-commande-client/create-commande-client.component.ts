@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Client } from 'src/app/models/client';
-import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm, Validators } from '@angular/forms';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { ClientService } from 'src/app/services/client.service';
 import { ToastrService } from 'ngx-toastr';
@@ -120,16 +120,16 @@ export class CreateCommandeClientComponent implements OnInit {
     this.crudApi.formData = this.fb.group({
       id: null,
       numeroCommande: Math.floor(100000 + Math.random() * 900000).toString(),
-      total: 0,
+      total: [0, Validators.required],
     //  libArticle: '',
-      totalCommande: 0,
-      status: '',
-      refClient: '',
+      totalCommande: [0, Validators.required],
+      status: ['', Validators.required],
+      refClient: ['', Validators.required],
     //  lib_client: '',
-      dateCommande: new Date(),
-      client: new Client(),
+      dateCommande: [new Date(), Validators.required],
+      client: [new Client(), Validators.required],
       DeletedOrderItemIDs: '',
-      lcomms: [],
+      lcomms: [[], Validators.required],
     });
   }
 
@@ -221,6 +221,7 @@ export class CreateCommandeClientComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.router.navigate(['/commandeclients']);
       });
+
   }
 
   OnSelectClient(ctrl) {
@@ -305,11 +306,9 @@ export class CreateCommandeClientComponent implements OnInit {
     this.calculMontantTotal();
   }
 
-
   transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
-
 
 }
 

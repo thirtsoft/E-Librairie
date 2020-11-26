@@ -15,7 +15,7 @@ export class Article {
   photo: string;
   add_date: Date;
 
-  categorie: Categorie;
+//  categorie: Categorie;
 
   scategorie: Scategorie;
 

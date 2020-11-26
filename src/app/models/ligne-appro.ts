@@ -2,12 +2,13 @@ import { Appro } from './appro';
 import { Article } from './article';
 
 export class LigneAppro {
-  OrderItemId: number;
-  numero: string;
+  id: number;
+  numero: number;
   OrderId: number;
   ItemId: number;
   ItemName: string;
   quantite: number;
+  qteStock: number;
   prix: number;
   total: number;
 
@@ -15,10 +16,11 @@ export class LigneAppro {
 
   produit: Article;
 
+/*
   public constructor() {
     this.approvisionnement = new Appro();
     this.produit  = new Article();
   }
-
+*/
 }
 

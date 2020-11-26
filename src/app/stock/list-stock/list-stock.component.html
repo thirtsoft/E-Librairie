@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>GESTION DES SCATEGORIES</h1>
+      <h1>GESTION DES STOCK</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
       <a type="button" (click)="onCreateStock()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
@@ -15,22 +15,22 @@
           [dtTrigger]="dtTrigger">
           <thead>
             <tr>
-              <th>ID</th><th>Article</th><th>Scategorie</th><th>Catégorie</th><th>Quantite</th><th>Etat</th><th>Date</th>
+              <th>ID</th><th>Article</th><th>Scategorie</th><th>Quantite</th><th>Qté Initial</th><th>Etat</th><th>Date</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let stock of listData">
+            <tr *ngFor="let stock of listArticle; let i=index;">
               <td>{{stock.id}}</td>
-              <td>{{stock.produit.designation}}</td>
-              <td>{{stock.produit.scategorie.libelle}}</td>
-              <td>{{stock.produit.categorie.designation}}</td>
-              <td>{{stock.quantite}}</td>
-              <td>{{stock.quantite}}</td>
+              <td>{{stock.designation}}</td>
+              <td>{{stock.scategorie?.libelle}}</td>
+              <td>{{stock.qtestock}}</td>
+              <td>{{stock.stockInitial}}</td>
+              <td>{{stock.qtestock < stock.stockInitial ? "epuisé": "encours"}}</td>
               <td>{{stock.dateMiseAJour}}</td>
               <td>
-                <button class="btn btn-info btn-lg" (click)="editeStock(stock)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
-                <button class="btn btn-danger btn-lg" (click)="deleteStock(stock.id)"><i class="fa fa-trash-o"></i>  Delete</button>
+                <!--   <button class="btn btn-info btn-lg" (click)="editeStock(stock)" [disabled]> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
+                <button class="btn btn-danger btn-lg" (click)="deleteStock(stock.id)" [disabled]><i class="fa fa-trash-o"></i>  Delete</button>
               </td>
             </tr>
           </tbody>

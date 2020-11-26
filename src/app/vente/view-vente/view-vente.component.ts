@@ -26,6 +26,10 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
   venteId: number;
   currentVente;
 
+  numeroVente;
+  totalVente;
+  dateVente;
+
   produit: Article = new Article();
 
   private editForm: FormGroup;
@@ -44,23 +48,29 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.venteId = this.route.snapshot.params.id;
     console.log(this.venteId);
-    this.lventeService.getLigneVentesByVente(this.venteId).subscribe(data => {
-      this.currentVente = data;
-      console.log(this.currentVente);
+    this.lventeService.getLigneVentesByVente(this.venteId).subscribe((data: LigneVente[]) => {
+      this.lventeService.listData = data;
+      //this.currentVente = data;
+      console.log(this.lventeService.listData);
+
+      console.log(this.lventeService.listData[0].numero);
+      this.numeroVente = this.lventeService.listData[0].numero;
+      console.log(this.lventeService.listData[0].vente.totalVente);
+      this.totalVente = this.lventeService.listData[0].vente.totalVente;
+      console.log(this.lventeService.listData[0].vente.dateVente);
+      this.dateVente = this.lventeService.listData[0].vente.dateVente;
+
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
     })
-
+/*
     this.cmdVente = new Vente();
     this.cmdVente = {
-      venteId: null,
-      numeroVente: '',
-      totalVente: 0,
-      status: '',
-      dateVente: new Date(),
-      DeletedOrderItemIDs: ''
+      venteId: null, numeroVente: 0, totalVente: 0,
+      status: '', dateVente: new Date(), DeletedOrderItemIDs: ''
     }
+    */
   }
 
   /**

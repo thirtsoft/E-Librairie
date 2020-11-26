@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-charge',
@@ -21,7 +22,7 @@ export class CreateChargeComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   constructor(public crudApi: ChargeService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
     @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateChargeComponent>,
 
@@ -47,6 +48,10 @@ export class CreateChargeComponent implements OnInit {
 
   ResetForm() {
     this.crudApi.dataForm.reset();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   getListCharges() {

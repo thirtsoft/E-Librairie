@@ -4,19 +4,21 @@
       <h1>DETAILS D'UNE COMMANDE</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="onCreateCommandeClient()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp;
+  <!--<a type="button" (click)="onCreateCommandeClient()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp; -->
       <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" > <span class="fa fa-arrow-left"></span>&nbsp; Retour</a>
 
     </div>
   </div>
   <div class="panel-body">
     <div class="row">
+        <!--
       <div class="form-group col-md-1">
         <label>Commande : </label>
         <input name="id" [value]="this.comId"  class="form-control" readonly>
       </div>
+        -->
 
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <label>Commande Numéro : </label>
         <input type="text" class="form-control" name="numeroCommande" [value]="this.numeroCommande"  id="numeroCommande" readonly>
         <!--  <input type="text" class="form-control" name="numero" [(ngModel)]="this.numeroCommande"  id="numero" readonly> -->

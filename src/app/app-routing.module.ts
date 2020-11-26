@@ -53,8 +53,13 @@ import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
 import { ViewApprovisionnementComponent } from './approvisionnement/view-approvisionnement/view-approvisionnement.component';
 import { OrdersComponent } from './order/orders/orders.component';
 import { OrderComponent } from './order/order/order.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { ListRegisterComponent } from './authentication/list-register/list-register.component';
+import { RegisterComponent } from './authentication/register/register.component';
 
 const routes: Routes = [
+
+  {path: 'login', component: LoginComponent},
 
   {path: '', component: HomeComponent, children : [
 
@@ -74,6 +79,9 @@ const routes: Routes = [
 */
     { path: 'categories', component: ListCategorieComponent},
     { path:'categorie',component: CreateCategorieComponent },
+
+    { path: 'registers', component: ListRegisterComponent},
+    { path: 'register', component: RegisterComponent},
 
   /*  { path: 'scategories', component: ListScategorieComponent},
     { path:'scategorie',component: CreateScategorieComponent }, */

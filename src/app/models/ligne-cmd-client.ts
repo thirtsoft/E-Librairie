@@ -8,6 +8,7 @@ export class LigneCmdClient {
   ItemId: number;
   ItemName: string;
   quantite: number;
+  qteStock: number;
   prix: number;
   total: number;
 

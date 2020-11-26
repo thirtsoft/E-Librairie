@@ -1,8 +1,14 @@
+import { LigneVente } from './ligne-vente';
+
 export class Vente {
-  venteId: number;
-  numeroVente: string;
-  dateVente: Date;
+  id: number;
+  numeroVente: number;
+  total: number;
   totalVente: number;
   status: string;
+  dateVente: Date;
   DeletedOrderItemIDs: string;
+
+  ligneVentes :Array<LigneVente>=[];
+
 }

@@ -21,16 +21,17 @@
               </tr>
             </thead>
           <tbody>
-            <tr *ngFor="let appro of listData">
+            <tr *ngFor="let appro of listData; let i=index;">
               <td>{{appro.id}}</td>
               <td>{{appro.code}}</td>
-              <td>{{appro.fournisseur.raisonSociale}} - {{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}} </td>
+          <!--    <td>{{appro.fournisseur.raisonSociale}} - {{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}} </td> -->
+              <td>{{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}}</td>
               <td>{{appro.totalAppro}}</td>
               <td>{{appro.status}}</td>
               <td>{{appro.observation}}</td>
-              <td>{{appro.dateApprovisionnement}}</td>
+              <td>{{appro.dateApprovisionnement| date:'dd/MM/yyyy'}}</td>
               <td>
-                <button class="btn btn-info btn-lg" (click)="editeAppro(appro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+          <!--      <button class="btn btn-info btn-lg" (click)="editeAppro(appro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
                 <button class="btn btn-success btn-lg" (click)="viewAppro(appro)"> <i class="fa fa-eye" aria-hidden="true"></i> Voir</button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteAppro(appro.id)"><i class="fa fa-trash-o"></i>  Delete</button>
               </td>

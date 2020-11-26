@@ -9,6 +9,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateVenteComponent } from '../create-vente/create-vente.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-vente',
@@ -17,9 +18,9 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class ListVenteComponent implements OnDestroy, OnInit {
 
-  listData: Vente[];
-
-  private editForm: FormGroup;
+  //listData: Vente[];
+  listData;
+ // private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -27,9 +28,10 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: VenteService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, private dialogService: DialogService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogService: DialogService, private datePipe : DatePipe,
+   /* @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog,
     public dialogRef:MatDialogRef<CreateVenteComponent>,
+    */
     ) { }
 
   ngOnInit(): void {
@@ -94,7 +96,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   } */
 
   deleteVente(id: number){
-    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.crudApi.deleteVente(id).subscribe(data => {
@@ -107,12 +109,15 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   }
 
   editerVente(item : Vente) {
-    this.router.navigateByUrl('vente/'+item.venteId);
+    this.router.navigateByUrl('vente/'+item.id);
   }
 
   viewVente(item: Vente) {
-    this.router.navigateByUrl('venteView/' + item.venteId);
+    this.router.navigateByUrl('venteView/' + item.id);
   }
 
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
+  }
 
 }

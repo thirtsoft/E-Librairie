@@ -59,6 +59,7 @@ export class EditLigneCmdClientComponent implements OnInit {
         numero: 0,
         prix: 0,
         quantite: 0,
+        qteStock: 0,
         code_article: '',
         ItemName: '',
         total: 0,

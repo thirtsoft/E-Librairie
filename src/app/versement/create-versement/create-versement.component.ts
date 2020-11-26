@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { isNullOrUndefined } from 'util';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-versement',
@@ -21,7 +22,8 @@ export class CreateVersementComponent implements OnInit {
   submitted = false;
 
   constructor(public crudApi: VersementService, public empService: EmployeService ,
-    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
+    public toastr: ToastrService, private datePipe : DatePipe,
+    private router : Router, public fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateVersementComponent>,
   ) { }
@@ -41,6 +43,10 @@ export class CreateVersementComponent implements OnInit {
 
   ResetForm() {
     this.crudApi.dataForm.reset();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   onSubmit() {

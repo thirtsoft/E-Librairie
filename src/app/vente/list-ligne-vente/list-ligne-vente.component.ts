@@ -13,6 +13,7 @@ import { CreateLigneVenteComponent } from '../create-ligne-vente/create-ligne-ve
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
+import { VenteService } from 'src/app/services/vente.service';
 
 @Component({
   selector: 'app-list-ligne-vente',
@@ -22,30 +23,21 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class ListLigneVenteComponent implements OnDestroy, OnInit {
 
   listData : LigneVente[];
+ // listData: LigneVente[] = [];
 
   vente: Vente = new Vente();
+  produit: Article = new Article();
+/*
   produit: Article = {
-    id: null,
-    reference: '',
-    designation: '',
-    photo: '',
-    add_date: new Date(),
-    prixAchat: 0,
-    prixVente: 0,
-    prixDetail: 0,
-    promo: false,
-    tva: 0,
-    qtestock: 0,
-    stockInitial: 0,
-    scategorie: new Scategorie(),
-    categorie: new Categorie(),
-
-
+    id: null, reference: '',
+    designation: '', photo: '', add_date: new Date(),
+    prixAchat: 0, prixVente: 0, prixDetail: 0,
+    promo: false, tva: 0, qtestock: 0, stockInitial: 0,
+    scategorie: new Scategorie(), categorie: new Categorie(),
   };
-
   produit1;
   commande1;
-
+*/
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
@@ -54,8 +46,8 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: LigneVenteService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, private dialogService: DialogService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogService: DialogService, private ventService: VenteService,
+    @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog,
     public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
     ) { }
 
@@ -76,7 +68,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
       }
     );
 
-    this.commande1 = new Vente();
+   // this.commande1 = new Vente();
    // this.produit1= new Article() = {}
   }
 
@@ -123,7 +115,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
   } */
 
   deleteLigneVente(id: number){
-    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.crudApi.deleteLigneVente(id).subscribe(data => {
@@ -136,7 +128,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
   }
 
   editerLigneVente(item : LigneVente) {
-    this.router.navigateByUrl('detailsVente/'+item.OrderItemId);
+    this.router.navigateByUrl('detailsVente/'+item.id);
   }
 
 

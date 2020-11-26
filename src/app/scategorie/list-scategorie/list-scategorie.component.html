@@ -38,7 +38,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let scat of crudApi.listData; let i=index;">
+            <tr *ngFor="let scat of listData; let i=index;">
               <td>{{scat.code}}</td>
               <td>{{scat.libelle}}</td>
               <td>{{scat.categorie?.designation}}</td>

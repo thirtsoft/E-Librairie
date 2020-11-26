@@ -24,6 +24,8 @@ export class CategorieService {
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();
+
+  public jwtToken = null;
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
@@ -33,8 +35,14 @@ export class CategorieService {
 
   constructor(private http: HttpClient) { }
 
+  loadToken() {
+    this.jwtToken = localStorage.getItem('token');
+  }
+
   getAllCategories(): Observable<any> {
+    if (this.jwtToken == null) this.loadToken();
     return this.http.get(`${this.baseUrl}/categories`);
+
   }
 
   getCategorieByID(id:number):any {

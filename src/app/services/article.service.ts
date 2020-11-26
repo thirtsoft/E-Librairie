@@ -18,7 +18,7 @@ export class ArticleService {
  // private baseUrl = '/api/categories';
   choixmenu : string  = 'A';
   listData : Article[];
-
+  list : Article[];
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();

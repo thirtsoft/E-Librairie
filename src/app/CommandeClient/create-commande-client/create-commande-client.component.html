@@ -1,20 +1,20 @@
 <mat-toolbar color="success">
-  <div>
-  <h1>Gestion Commandes</h1>
+  <div><h1>Gestion Commandes</h1>
   </div>
 </mat-toolbar>
 
 <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()">
-
   <!--  <input  type="hidden"  class="form-control" formControlName="lib_client" id="lib_client" > -->
   <input  type="hidden"  class="form-control" formControlName="client" id="client" >
 
   <div class="row col-md-12">
     <div class="row">
+
       <div class="form-row col-sm-4 mb-3 mb-sm-0">
-          <label><strong>Numéro : </strong></label>
-          <input type="text" class="form-control" formControlName="numeroCommande" id="numeroCommande" readonly>
+        <label><strong>Numéro : </strong></label>
+        <input type="text" class="form-control" formControlName="numeroCommande" id="numeroCommande" readonly>
       </div>
+
       <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Client</label>
         <div class="form-group">
@@ -25,61 +25,71 @@
           </select>
         </div>
       </div>
-      <div class="form-row col-sm-4 mb-3 mb-sm-0">
+
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Status</label>
         <input type="text" formControlName="status" class="form-control" id="status">
       </div>
-      <div class="col-md-6 form-group">
-        <label>Date</label>
-      <input  type="date"  class="form-control" formControlName="dateCommande"  id="dateCommande">
-  </div>
-    </div>
 
-  <!-- Debut Ligne de commandes -->
-  <table class="table table-borderless">
-    <thead class="thead-light">
-      <th>Article</th>
-      <th>Price</th>
-      <th>Quantite</th>
-      <th>Total</th>
-      <th>
-        <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
-            <i class="fa fa-plus"></i>Ajouter
-        </a>
-      </th>
-    </thead>
-    <tbody>
-      <tr *ngIf="crudApi.list.length==0" [class.text-danger]="!isValid && crudApi.list.length ==0">
-        <td class="font-italic text-center" colspan="4">
-            Aucun Article pour cette Commande ...
-        </td>
-      </tr>
-      <tr *ngFor="let item of crudApi.list;let i=index;">
-        <td>{{item.ItemName}}</td>
-        <td>{{item.prix}}</td>
-        <td>{{item.quantite}}</td>
-        <td>{{item.total}}</td>
-        <td>
-          <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
-              <i class="fa fa-pencil"></i></a>
-          <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.id,i)">
-              <i class="fa fa-trash"></i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <!-- Fin  Ligne de commandes -->
-  <div class="col-sm-4 mb-3 mb-sm-0">
-    <div class="input-group">
-      <label>Total Ht : </label>
+      <div class="form-group col-sm-4 mb-sm-0">
+        <label>Date</label>
+        <input  type="date"  class="form-control" formControlName="dateCommande"  id="dateCommande">
+      </div>
+    </div>
+  <!--</div> -->
+
+    <!-- Debut Ligne de commandes -->
+    <table class="table table-borderless">
+      <thead class="thead-light">
+        <th>Article</th>
+        <th>Price</th>
+        <th>Quantite</th>
+        <th>Total</th>
+        <th>
+          <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
+              <i class="fa fa-plus"></i>Ajouter
+          </a>
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngIf="crudApi.list.length==0" [class.text-danger]="!isValid && crudApi.list.length ==0">
+          <td class="font-italic text-center" colspan="4">
+              Aucun Article pour cette Commande ...
+          </td>
+        </tr>
+        <tr *ngFor="let item of crudApi.list;let i=index;">
+          <td>{{item.ItemName}}</td>
+          <td>{{item.prix}}</td>
+          <td>{{item.quantite}}</td>
+          <td>{{item.total}}</td>
+          <td>
+            <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
+                <i class="fa fa-pencil"></i></a>
+            <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.id,i)">
+                <i class="fa fa-trash"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Fin  Ligne de commandes -->
+    <div class="form-group col-sm-4 mb-sm-0" style="padding-left: 0px;">
+      <label><strong>Total Ht : </strong></label>
       <input type="text" id="totalCommande" formControlName="totalCommande" class="form-control" readonly>
     </div>
+    <!--
+    <div class="col-sm-4 mb-3 mb-sm-0">
+      <div class="form-group">
+        <label>Total Ht : </label>
+        <input type="text" id="totalCommande" formControlName="totalCommande" class="form-control" readonly>
+      </div>
+    </div> -->
   </div>
-</div>
+
   <div class="form-group">
-    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-    <a class="btn btn-outline-dark ml-1" routerLink="/detailsCommandeClients"><i class="fa fa-plus-square"></i> Liste </a>
+    <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;&nbsp;
+    <a class="btn btn-sm btn-primary ml-1" routerLink="/detailsCommandeClients"><i class="fa fa-plus-square"></i> Liste </a>
   </div>
+
 </form>
 
 

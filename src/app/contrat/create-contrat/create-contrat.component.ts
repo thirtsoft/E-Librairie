@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA,MatDialogRef } from '@angular/material/dialog';
 import { isNullOrUndefined } from 'util';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-contrat',
@@ -18,13 +19,16 @@ export class CreateContratComponent implements OnInit {
 
   public contrat = new Contrat();
   formDataContrat = new Contrat();
-  listClient:  Client[]
+  listClient:  Client[];
+
+  contratFile: any = File;
 
   submitted = false;
 
   constructor(public crudApi: ContratService, public clientService: ClientService ,
-    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
-   @Inject(MAT_DIALOG_DATA)  public data,
+    public toastr: ToastrService, private datePipe : DatePipe,
+    private router : Router, public fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateContratComponent>,
 
   ) { }
@@ -32,8 +36,8 @@ export class CreateContratComponent implements OnInit {
 
   ngOnInit() {
     this.getClients();
-    if (!isNullOrUndefined(this.data.contId)) {
-      this.formDataContrat = Object.assign({},this.crudApi.listData[this.data.contId])
+    if (!isNullOrUndefined(this.data.id)) {
+      this.formDataContrat = Object.assign({},this.crudApi.listData[this.data.id])
     }
   }
 
@@ -49,6 +53,7 @@ export class CreateContratComponent implements OnInit {
       id: null,
       reference: '',
       nature: '',
+      fileContrat: '',
       montantContrat: 0,
       description: '',
       dateDebutContrat: new Date(),
@@ -61,8 +66,18 @@ export class CreateContratComponent implements OnInit {
     this.crudApi.dataForm.reset();
   }
 
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  // selectionner une image et la garder
+  selectFileContrat(event) {
+    const file = event.target.files[0];
+    this.contratFile = file;
+  }
+
   onSubmit() {
-    if(isNullOrUndefined(this.data.contId)) {
+    if(isNullOrUndefined(this.data.id)) {
       this.crudApi.createContrat(this.formDataContrat).
       subscribe( data => {
         this.dialogRef.close();

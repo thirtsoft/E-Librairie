@@ -276,7 +276,7 @@
                           <span>Dashboard</span>
                       </a>
           </li>
-          <li class="sub-menu">
+          <li class="sub-menu" *ngIf="!isAuthenticated()">
             <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
                           <span>Library</span>
@@ -293,16 +293,17 @@
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_desktop"></i>
-                          <span>Achat</span>
+                          <span>Commandes</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
               <li><a class="" routerLink="/commandeclients" routerLinkActive="router-link-active">Commande</a></li>
               <li><a class="" routerLink="/detailsCommandeClients" routerLinkActive="router-link-active">Détails Commandes</a></li>
-              <li><a class="" routerLink="/commandeFournisseur" routerLinkActive="router-link-active">Livraison</a></li>
-              <li><a class="" routerLink="/commandeFournisseur" routerLinkActive="router-link-active">Facture</a></li>
+          <!--<li><a class="" routerLink="/commandeFournisseur" routerLinkActive="router-link-active">Livraison</a></li>
+              <li><a class="" routerLink="/commandeFournisseur" routerLinkActive="router-link-active">Facture</a></li> -->
             </ul>
           </li>
+          <!--
           <li>
             <a class="" href="widgets.html">
                           <i class="icon_genius"></i>
@@ -316,12 +317,12 @@
 
                       </a>
 
-          </li>
+          </li>  -->
 
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_table"></i>
-                          <span>Vente</span>
+                          <span>Ventes</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
@@ -339,7 +340,7 @@
             <ul class="sub">
               <li><a class="" routerLink="/approvisionnements" routerLinkActive="router-link-active">Entrées</a></li>
               <li><a class="" routerLink="/detailsApprovisionnements" routerLinkActive="router-link-active">Détails Entrées</a></li>
-              <li><a class="" routerLink="/vente-list" routerLinkActive="router-link-active"><span>Sorties</span></a></li>
+          <!--<li><a class="" routerLink="/vente-list" routerLinkActive="router-link-active"><span>Sorties</span></a></li> -->
               <li><a class="" routerLink="/stocks" routerLinkActive="router-link-active">Stock</a></li>
             </ul>
           </li>
@@ -367,8 +368,8 @@
                       </a>
             <ul class="sub">
               <li><a class="" routerLink="/employes" routerLinkActive="router-link-active">Employee</a></li>
-              <li><a class="" routerLink="/role-list" routerLinkActive="router-link-active"><span>Role</span></a></li>
-              <li><a class="" routerLink="/orders" routerLinkActive="router-link-active">Orders</a></li>
+              <!---   <li><a class="" routerLink="/registers" routerLinkActive="router-link-active"><span>Users</span></a></li>
+          <li><a class="" routerLink="/orders" routerLinkActive="router-link-active">Orders</a></li> -->
             </ul>
           </li>
 
@@ -397,18 +398,19 @@
         </div>
         <!--/.row-->
 
-		 </section>
+     </section>
+     <!--
       <div class="text-right">
         <div class="credits">
-          <!--
+
             All the links in the footer should remain intact.
             You can delete the links only if you purchased the pro version.
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-          -->
+
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
-      </div>
+      </div>  -->
     </section>
     <!--main content end-->
   </section>

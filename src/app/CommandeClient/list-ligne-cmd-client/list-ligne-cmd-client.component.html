@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>GESTION DES COMMANDES</h1>
+      <h1>DETAILS DES COMMANDES</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
       <a type="button" (click)="onCreateLigneCmdClient()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
@@ -27,7 +27,7 @@
               <td>{{lcomClient.quantite}}</td>
               <td>{{(lcomClient.prix)*(lcomClient.quantite)}} </td>
               <td>
-                <button class="btn btn-info btn-lg" (click)="editerLigneCmdClient(lcomClient)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
+           <!-- <button class="btn btn-info btn-lg" (click)="editerLigneCmdClient(lcomClient)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
                 <button class="btn btn-danger btn-lg" (click)="deleteLigneCmdClient(lcomClient.id)"><i class="fa fa-trash-o"></i>  Delete</button>
               </td>
             </tr>
