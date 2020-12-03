@@ -10,7 +10,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class ApproService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
+ // private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : Appro[];

@@ -10,7 +10,8 @@ import { LigneCmdClient } from '../models/ligne-cmd-client';
 })
 export class CommandeClientService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
+ // private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : CommandeClient[];

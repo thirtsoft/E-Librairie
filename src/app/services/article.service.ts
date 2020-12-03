@@ -14,7 +14,8 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ArticleService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
+ // private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl = window["cfgApiBaseUrl"];
  // private baseUrl = '/api/categories';
   choixmenu : string  = 'A';
   listData : Article[];

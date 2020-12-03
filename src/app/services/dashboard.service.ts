@@ -11,8 +11,9 @@ import { Client } from '../models/client';
 })
 export class DashboardService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
-  // private baseUrl = '/api/categories';
+ // private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl = window["cfgApiBaseUrl"];
+
    choixmenu : string  = 'A';
    listDataVente : Vente[];
    listDataCmd : CommandeClient[];

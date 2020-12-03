@@ -9,7 +9,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">AL <span class="lite">AMINE</span></a>
+      <a href="/" class="logo">AL <span class="lite">AMINE</span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -271,12 +271,12 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+            <a class="" routerLink="/dashboard" routerLinkActive="router-link-active" >
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
           </li>
-          <li class="sub-menu" *ngIf="!isAuthenticated()">
+          <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
                           <span>Library</span>

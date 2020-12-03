@@ -9,7 +9,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ClientService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
+ // private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl = window["cfgApiBaseUrl"];
  // private baseUrl = '/api/categories';
   choixmenu : string  = 'A';
   listData : Client[];

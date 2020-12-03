@@ -13,7 +13,6 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 import { CreateCategorieComponent } from '../create-categorie/create-categorie.component';
 import { DataTableDirective } from 'angular-datatables';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-list-categorie',
@@ -40,7 +39,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   mesagge: string;
 
   constructor(public crudApi: CategorieService, private dialogService: DialogService,
-    public toastr: ToastrService, private authService: AuthenticationService,
+    public toastr: ToastrService,
     private router : Router, private route: ActivatedRoute,
     private matDialog: MatDialog,  public fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -77,9 +76,11 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
         this.listData = response;
         this.dtTrigger.next();
       }, err=> {
+        /*
         this.authService.jwtToken = null;
         this.authService.logout();
         this.router.navigateByUrl('/login');
+        */
       });
 
   }

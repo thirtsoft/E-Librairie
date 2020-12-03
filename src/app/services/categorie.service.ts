@@ -14,7 +14,8 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class CategorieService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
+//  private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl = window["cfgApiBaseUrl"];
  // private baseUrl = '/api/categories';
   choixmenu : string  = 'A';
   listData : Categorie[];
@@ -34,15 +35,13 @@ export class CategorieService {
   }
 
   constructor(private http: HttpClient) { }
-
+/*
   loadToken() {
     this.jwtToken = localStorage.getItem('token');
   }
-
+*/
   getAllCategories(): Observable<any> {
-    if (this.jwtToken == null) this.loadToken();
     return this.http.get(`${this.baseUrl}/categories`);
-
   }
 
   getCategorieByID(id:number):any {

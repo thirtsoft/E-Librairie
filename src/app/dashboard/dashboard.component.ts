@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
     this.getSumOfCommandes();
     this.getNumberOfCommandes();
     this.getNumberOfClients();
+    this.getSumOfVentes();
   }
 
   getSumOfCommandes(): void {
