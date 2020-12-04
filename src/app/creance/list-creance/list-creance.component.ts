@@ -80,14 +80,22 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     );
   }
 
+  viewCreance(item: Creance) {
+    this.router.navigateByUrl('creanceView/' + item.id);
+  }
+  /*
   onCreateCreance(){
     this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("contrats/new");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     this.matDialog.open(CreateCreanceComponent, dialogConfig);
+  }
+*/
+  onCreateCreance() {
+    this.crudApi.choixmenu = "A";
+    this.router.navigateByUrl("creance");
   }
 
   addEditCreance(creanceId?: number) {

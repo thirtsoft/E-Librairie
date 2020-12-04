@@ -9,12 +9,14 @@ import { Observable, Subject } from 'rxjs';
 })
 export class CreanceService {
 
- // private baseUrl = 'http://localhost:8080/alAmine';
-  private baseUrl = window["cfgApiBaseUrl"];
+  private baseUrl = 'http://localhost:8080/alAmine';
+ // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : Creance[];
 
+  public formData:  FormGroup;
+  list: any={}
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();

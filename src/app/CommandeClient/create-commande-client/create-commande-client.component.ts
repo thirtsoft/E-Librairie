@@ -135,7 +135,6 @@ export class CreateCommandeClientComponent implements OnInit {
 
   compareClient(client1: Client, client2: Client) : boolean {
     return client1 && client2 ? client1.id === client2.id : client1 === client2;
-
   }
 
   resetForm() {

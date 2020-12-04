@@ -58,6 +58,9 @@ import { ListRegisterComponent } from './authentication/list-register/list-regis
 import { RegisterComponent } from './authentication/register/register.component';
 import { ListCategorieChargeComponent } from './charge/list-categorie-charge/list-categorie-charge.component';
 import { CreateCategorieChargeComponent } from './charge/create-categorie-charge/create-categorie-charge.component';
+import { ViewCreanceComponent } from './creance/view-creance/view-creance.component';
+import { CreateLigneCreanceComponent } from './creance/create-ligne-creance/create-ligne-creance.component';
+import { ListLigneCreanceComponent } from './creance/list-ligne-creance/list-ligne-creance.component';
 
 const routes: Routes = [
 
@@ -166,12 +169,22 @@ const routes: Routes = [
       ]
     },
 
+
+    { path: 'creances', component: ListCreanceComponent},
+    { path:'creance',component: CreateCreanceComponent},
+
+    {path:'creanceView/:id', component: ViewCreanceComponent},
+
+    { path: 'detailsCreances', component: ListLigneCreanceComponent},
+    { path: 'detailsCreance', component: CreateLigneCreanceComponent},
+
+   /*
     { path:'creances',children:[
         {path:'',component: ListCreanceComponent},
         {path:'edit/:id',component: ListCreanceComponent}
       ]
     },
-
+    */
     { path:'avoirs',children:[
         {path:'',component: ListAvoirComponent},
         {path:'edit/:id',component: ListAvoirComponent}

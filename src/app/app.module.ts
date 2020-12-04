@@ -84,6 +84,12 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ListRegisterComponent } from './authentication/list-register/list-register.component';
 import { CreateCategorieChargeComponent } from './charge/create-categorie-charge/create-categorie-charge.component';
 import { ListCategorieChargeComponent } from './charge/list-categorie-charge/list-categorie-charge.component';
+import { CreateLigneCreanceComponent } from './creance/create-ligne-creance/create-ligne-creance.component';
+import { ListLigneCreanceComponent } from './creance/list-ligne-creance/list-ligne-creance.component';
+import { ListLigneAvoirComponent } from './avoir/list-ligne-avoir/list-ligne-avoir.component';
+import { CreateLigneAvoirComponent } from './avoir/create-ligne-avoir/create-ligne-avoir.component';
+import { ViewAvoirComponent } from './avoir/view-avoir/view-avoir.component';
+import { ViewCreanceComponent } from './creance/view-creance/view-creance.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +159,12 @@ import { ListCategorieChargeComponent } from './charge/list-categorie-charge/lis
     ListRegisterComponent,
     CreateCategorieChargeComponent,
     ListCategorieChargeComponent,
+    CreateLigneCreanceComponent,
+    ListLigneCreanceComponent,
+    ListLigneAvoirComponent,
+    CreateLigneAvoirComponent,
+    ViewAvoirComponent,
+    ViewCreanceComponent,
   ],
   imports: [
     BrowserModule,
