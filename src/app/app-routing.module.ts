@@ -56,6 +56,8 @@ import { OrderComponent } from './order/order/order.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { ListRegisterComponent } from './authentication/list-register/list-register.component';
 import { RegisterComponent } from './authentication/register/register.component';
+import { ListCategorieChargeComponent } from './charge/list-categorie-charge/list-categorie-charge.component';
+import { CreateCategorieChargeComponent } from './charge/create-categorie-charge/create-categorie-charge.component';
 
 const routes: Routes = [
 
@@ -185,6 +187,9 @@ const routes: Routes = [
 
     { path: 'charges', component: ListChargeComponent},
     { path:'charge',component: CreateChargeComponent },
+
+    { path: 'categorieCharges', component: ListCategorieChargeComponent},
+    { path:'categorieCharge', component: CreateCategorieChargeComponent },
 
 
 

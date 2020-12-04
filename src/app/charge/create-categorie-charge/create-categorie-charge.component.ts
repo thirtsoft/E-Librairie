@@ -1,0 +1,76 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { CategorieChargeService } from 'src/app/services/categorie-charge.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { CategorieCharge } from 'src/app/models/categorieCharge';
+import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+@Component({
+  selector: 'app-create-categorie-charge',
+  templateUrl: './create-categorie-charge.component.html',
+  styleUrls: ['./create-categorie-charge.component.scss']
+})
+export class CreateCategorieChargeComponent implements OnInit {
+
+  listData : CategorieCharge[];
+
+  constructor(public crudApi: CategorieChargeService ,public fb: FormBuilder,public toastr: ToastrService,
+    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
+    public dialogRef:MatDialogRef<CreateCategorieChargeComponent>,
+    ) { }
+
+  ngOnInit() {
+    if (this.crudApi.choixmenu == "A"){
+      this.infoForm()
+    };
+  }
+
+  infoForm() {
+    this.crudApi.dataForm = this.fb.group({
+      id: null,
+      codeCategorieCharge: ['', [Validators.required]],
+      nomCategorieCharge: ['', [Validators.required]],
+    });
+  }
+
+  getListCategorieCharges() {
+    this.crudApi.getAllCategorieCharges().subscribe(
+      response =>{this.listData = response;}
+    );
+  }
+
+  ResetForm() {
+      this.crudApi.dataForm.reset();
+  }
+  onSubmit() {
+    if (this.crudApi.choixmenu == "A"){
+      this.saveCategorieCharge();
+    }else{
+      this.updateCategorieCharge();
+    }
+  }
+
+  saveCategorieCharge() {
+    this.crudApi.createCategorieCharge(this.crudApi.dataForm.value).
+    subscribe( data => {
+      this.dialogRef.close();
+      this.crudApi.filter('Register click');
+      this.toastr.success("CategorieCharge Ajouté avec Succès");
+      this.getListCategorieCharges();
+      this.router.navigate(['/categorieCharges']);
+    });
+  }
+  updateCategorieCharge(){
+    this.crudApi.updateCategorieCharge(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
+    subscribe( data => {
+      this.dialogRef.close();
+      this.toastr.success("CategorieCharge Modifier avec Succès");
+      this.crudApi.filter('Register click');
+      this.getListCategorieCharges();
+      this.router.navigate(['/categorieCharges']);
+    });
+  }
+
+
+}

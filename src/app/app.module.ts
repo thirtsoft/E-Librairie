@@ -82,6 +82,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ListRegisterComponent } from './authentication/list-register/list-register.component';
+import { CreateCategorieChargeComponent } from './charge/create-categorie-charge/create-categorie-charge.component';
+import { ListCategorieChargeComponent } from './charge/list-categorie-charge/list-categorie-charge.component';
 
 @NgModule({
   declarations: [
@@ -149,6 +151,8 @@ import { ListRegisterComponent } from './authentication/list-register/list-regis
     FooterComponent,
     NavbarComponent,
     ListRegisterComponent,
+    CreateCategorieChargeComponent,
+    ListCategorieChargeComponent,
   ],
   imports: [
     BrowserModule,
