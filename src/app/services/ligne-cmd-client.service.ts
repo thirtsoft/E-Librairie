@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class LigneCmdClientService {
 
- // private baseUrl = 'http://localhost:8080/alAmine';
-  private baseUrl = window["cfgApiBaseUrl"];
+  private baseUrl = 'http://localhost:8080/alAmine';
+ // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : LigneCmdClient[];

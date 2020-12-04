@@ -11,7 +11,7 @@ export class CategorieChargeService {
 
   private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
- // private baseUrl = '/api/categories';
+
   choixmenu : string  = 'A';
   listData : CategorieCharge[];
 

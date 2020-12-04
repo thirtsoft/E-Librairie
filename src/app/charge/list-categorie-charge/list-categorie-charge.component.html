@@ -16,13 +16,13 @@
         [dtTrigger]="dtTrigger">
       <thead>
         <tr>
-          <th>Id</th><th>Code</th><th>Designation</th>
+          <th>#</th><th>Code</th><th>Designation</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let catCharge of listData">
-          <td>{{catCharge.id}}</td>
+           <td>{{catCharge.id}}</td> 
           <td>{{catCharge.codeCategorieCharge}}</td>
           <td>{{catCharge.nomCategorieCharge}}</td>
           <td>

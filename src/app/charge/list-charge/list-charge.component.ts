@@ -10,6 +10,7 @@ import { CreateChargeComponent } from '../create-charge/create-charge.component'
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { DatePipe } from '@angular/common';
+import { CategorieCharge } from 'src/app/models/categorieCharge';
 
 @Component({
   selector: 'app-list-charge',
@@ -96,7 +97,8 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       codeCharge: '',
       nature: '',
       montantCharge: 0,
-      date: new Date()
+      date: new Date(),
+      categorieCharge: new CategorieCharge()
     };
   }
 
@@ -105,6 +107,17 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       response =>{this.listData = response;}
     );
 
+  }
+
+  addOrEditCharge(id?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      id
+    };
+    this.matDialog.open(CreateChargeComponent, dialogConfig);
   }
 
   onCreateCharge(){

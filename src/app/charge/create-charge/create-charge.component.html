@@ -1,3 +1,50 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Nouveau Charge</h1>
+    <form #addChargeForm="ngForm" (ngSubmit)="onSubmit(addChargeForm)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataContrat.id">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Code Charge </label>
+          <input type="text" class="form-control" [(ngModel)]="formDataContrat.codeCharge" name="codeCharge" id="codeCharge">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label>Nature</label>
+          <input type="text" class="form-control" [(ngModel)]="formDataContrat.nature" name="nature"  id="nature">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Categorie</label>
+          <div class="form-group">
+            <select name="categorieCharge" id="categorieCharge" [(ngModel)]="formDataContrat.categorieCharge" class="form-control">
+              <option [ngValue]="0">-Select-</option>
+              <option *ngFor="let catCharge of listCategorieCharge" [ngValue]="catCharge.id == formDataContrat.categorieCharge?.id ? formDataContrat.categorieCharge : catCharge">{{catCharge.nomCategorieCharge}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label>Montant</label>
+          <input type="number" class="form-control" [(ngModel)]="formDataContrat.montantCharge" name="montantCharge"  id="montantCharge">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Date</label>
+          <input type="date" class="form-control" [(ngModel)]="formDataContrat.date" name="date"  id="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+      </div>
+    </form>
+ </div>
+</div>
+
+<!--
 <div class="row justify-content-center">
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouvelle Charge</h1>
@@ -10,6 +57,15 @@
         <div class="form-group col-md-6">
           <label>Nature</label>
           <input type="text" class="form-control" formControlName="nature" id="nature">
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Categorie</label>
+        <div class="form-group">
+          <select name="categorieCharge" id="client" [(ngModel)]="formDataContrat.client" class="form-control">
+            <option [ngValue]="0">Client</option>
+            <option *ngFor="let client of listClient" [ngValue]="client.id == formDataContrat.client?.id ? formDataContrat.client : client">{{client.raisonSocial}}</option>
+          </select>
         </div>
       </div>
       <div class="row">
@@ -32,41 +88,7 @@
     </form>
   </div>
 </div>
-
-
-
-<!--
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h1>Nouveau Charge</h1>
-    <form #addChargeForm="ngForm" (ngSubmit)="saveCharge(addChargeForm.value)">
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label>Code Charge </label>
-          <input type="text" class="form-control" [(ngModel)]="charge.codeCharge" name="codeCharge" id="codeCharge">
-        </div>
-        <div class="form-group col-md-6">
-          <label>Nature</label>
-          <input type="text" class="form-control" [(ngModel)]="charge.nature" name="nature"  id="nature">
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="charge.montantCharge" name="montantCharge"  id="montantCharge">
-        </div>
-        <div class="form-group col-md-6">
-          <label>Date</label>
-          <input type="date" class="form-control" [(ngModel)]="charge.date" name="date"  id="date">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
-      </div>
-    </form>
- </div>
-</div>
 -->
+
+
+

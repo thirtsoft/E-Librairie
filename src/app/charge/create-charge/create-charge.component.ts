@@ -8,6 +8,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { CategorieChargeService } from 'src/app/services/categorie-charge.service';
+import { CategorieCharge } from 'src/app/models/categorieCharge';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-create-charge',
@@ -16,23 +19,31 @@ import { DatePipe } from '@angular/common';
 })
 export class CreateChargeComponent implements OnInit {
 
-  public charge = new Charge();
+ // public charge = new Charge();
+  formDataContrat = new Charge();
   listData: Charge[];
+  listCategorieCharge: CategorieCharge[];
   submitted = false;
   dtTrigger: Subject<any> = new Subject();
 
   constructor(public crudApi: ChargeService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
+    public toastr: ToastrService, private catChargeService: CategorieChargeService,
+    private router : Router, private datePipe : DatePipe,
     @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateChargeComponent>,
 
   ) { }
 
   ngOnInit() {
+    this.getListCategorieCharges();
+    if (!isNullOrUndefined(this.data.id)) {
+      this.formDataContrat = Object.assign({},this.crudApi.listData[this.data.id])
+    }
+    /*
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
     };
-
+    */
   }
 
   infoForm() {
@@ -40,6 +51,7 @@ export class CreateChargeComponent implements OnInit {
       id: null,
       codeCharge: ['', [Validators.required]],
       nature: ['', [Validators.required]],
+      categorieCharge: [''],
       montantCharge: ['', [Validators.required]],
       date: ['', [Validators.required]],
     });
@@ -58,16 +70,54 @@ export class CreateChargeComponent implements OnInit {
     this.crudApi.getAllCharges().subscribe(
       response =>{this.listData = response;}
     );
+  }
+
+  getListCategorieCharges() {
+    this.catChargeService.getAllCategorieCharges().subscribe(
+      response => {
+        this.listCategorieCharge = response;
+      }
+    );
+  }
+
+  onSubmit() {
+    if(isNullOrUndefined(this.data.id)) {
+      this.crudApi.createCharge(this.formDataContrat).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Charge Ajouté avec Succès");
+        this.crudApi.getAllCharges().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/charges']);
+      });
+
+    }else {
+      this.crudApi.updateCharge(this.formDataContrat.id, this.formDataContrat).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Charge Modifiée avec Succès");
+        this.crudApi.getAllCharges().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/charges']);
+      });
+    }
 
   }
+
+
+  /*
   onSubmit() {
     if (this.crudApi.choixmenu == "A") {
       this.saveCharge();
     }else {
       this.updateCharge();
     }
-
   }
+  */
 
   saveCharge() {
     this.crudApi.createCharge(this.crudApi.dataForm.value)

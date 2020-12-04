@@ -9,8 +9,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ContratService {
 
- // private baseUrl = 'http://localhost:8080/alAmine';
-  private baseUrl = window["cfgApiBaseUrl"];
+  private baseUrl = 'http://localhost:8080/alAmine';
+ // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu: string  = 'A';
   listData: Contrat[];
