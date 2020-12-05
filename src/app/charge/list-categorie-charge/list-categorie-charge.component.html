@@ -22,12 +22,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let catCharge of listData">
-           <td>{{catCharge.id}}</td> 
+           <td>{{catCharge.id}}</td>
           <td>{{catCharge.codeCategorieCharge}}</td>
           <td>{{catCharge.nomCategorieCharge}}</td>
           <td>
-            <button class="btn btn-info btn-lg" (click)="selectData(catCharge)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
-            <button class="btn btn-danger btn-lg" (click)="deleteCategorieCharge(catCharge.id)"><i class="fa fa-trash-o"></i>  Delete</button>
+            <button class="btn btn-info btn-lg" (click)="selectData(catCharge)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
+            <button class="btn btn-danger btn-lg" (click)="deleteCategorieCharge(catCharge.id)"><i class="fa fa-trash-o"></i>  </button>
           </td>
         </tr>
       </tbody>
