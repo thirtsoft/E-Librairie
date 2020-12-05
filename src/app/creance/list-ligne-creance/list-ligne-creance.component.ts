@@ -20,7 +20,6 @@ import { CreateCreanceComponent } from '../create-creance/create-creance.compone
 })
 export class ListLigneCreanceComponent implements OnInit {
 
-  listData: LigneCreance[] = [];
   listDataCreance: LigneCreance[];
 
   private editForm: FormGroup;

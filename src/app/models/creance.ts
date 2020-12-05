@@ -14,8 +14,4 @@ export class Creance {
 
   lcreances :Array<LigneCreance>=[];
 
-/*
-  public constructor() {this.client = new Client();}
-  */
-
 }

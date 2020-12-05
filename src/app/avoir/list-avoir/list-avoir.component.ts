@@ -81,12 +81,11 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
   onCreateAvoir(){
     this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("contrats/new");
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    this.matDialog.open(CreateAvoirComponent, dialogConfig);
+    this.router.navigateByUrl("avoir");
+  }
+
+  viewAvoir(item: Avoir) {
+    this.router.navigateByUrl('avoirView/' + item.id);
   }
 
   addEditAvoir(avoirId?: number) {
@@ -98,7 +97,6 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
       avoirId
     };
     this.matDialog.open(CreateAvoirComponent, dialogConfig);
-
   }
 
   /*

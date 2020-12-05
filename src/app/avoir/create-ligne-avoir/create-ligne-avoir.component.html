@@ -1,3 +1,58 @@
-<p>
-  create-ligne-avoir works!
-</p>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-md-offset-2">
+    <h4 class="dislay-4">Lignes Avoirs </h4>
+    <hr>
+    <form [formGroup]="this.formData" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="OrderId" id="OrderId" class="form-control">
+        <input type="hidden" formControlName="ItemName" id="ItemName" class="form-control">
+
+        <div class="form-group">
+          <label>Article</label>
+          <select formControlName="produit" id="produit" class="form-control"
+            (change)="selectPrice($event.target)" [compareWith]="compareProduit">
+            <option value="0">-Select-</option>
+            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Prix Unitaire</label>
+          <div class="form-group">
+            <input name="prix" formControlName="prix" id="prix" class="form-control"  (keyup)="calculTotal()"
+              [class.is-invalid]="!isValid && formData.value.prix==0"  readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>QtéStock</label>
+          <div class="form-group">
+            <input formControlName="qteStock" id="qteStock" class="form-control"
+              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.qteStock==0" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Quantité</label>
+          <div class="form-group">
+            <input type="number" formControlName="quantite" id="quantite" class="form-control"
+              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.quantite==0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Total</label>
+          <div class="form-group">
+            <input name="total" formControlName="total" id="total" class="form-control" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
+          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+

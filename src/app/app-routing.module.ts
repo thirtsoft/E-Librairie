@@ -61,6 +61,9 @@ import { CreateCategorieChargeComponent } from './charge/create-categorie-charge
 import { ViewCreanceComponent } from './creance/view-creance/view-creance.component';
 import { CreateLigneCreanceComponent } from './creance/create-ligne-creance/create-ligne-creance.component';
 import { ListLigneCreanceComponent } from './creance/list-ligne-creance/list-ligne-creance.component';
+import { ViewAvoirComponent } from './avoir/view-avoir/view-avoir.component';
+import { ListLigneAvoirComponent } from './avoir/list-ligne-avoir/list-ligne-avoir.component';
+import { CreateLigneAvoirComponent } from './avoir/create-ligne-avoir/create-ligne-avoir.component';
 
 const routes: Routes = [
 
@@ -178,18 +181,15 @@ const routes: Routes = [
     { path: 'detailsCreances', component: ListLigneCreanceComponent},
     { path: 'detailsCreance', component: CreateLigneCreanceComponent},
 
-   /*
-    { path:'creances',children:[
-        {path:'',component: ListCreanceComponent},
-        {path:'edit/:id',component: ListCreanceComponent}
-      ]
-    },
-    */
-    { path:'avoirs',children:[
-        {path:'',component: ListAvoirComponent},
-        {path:'edit/:id',component: ListAvoirComponent}
-      ]
-    },
+    { path: 'avoirs', component: ListAvoirComponent},
+    { path:'avoir',component: CreateAvoirComponent},
+
+    {path:'avoirView/:id', component: ViewAvoirComponent},
+
+    { path: 'detailsAvoirs', component: ListLigneAvoirComponent},
+    { path: 'detailsAvoir', component: CreateLigneAvoirComponent},
+
+
   /*
     { path: 'charges', component: ListChargeComponent},
     { path:'charge',children:[

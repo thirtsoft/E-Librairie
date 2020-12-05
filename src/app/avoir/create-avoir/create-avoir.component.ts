@@ -3,11 +3,14 @@ import { Avoir } from 'src/app/models/avoir';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { AvoirService } from 'src/app/services/avoir.service';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { isNullOrUndefined } from 'util';
+import { DatePipe } from '@angular/common';
+import { LigneAvoirService } from 'src/app/services/ligne-avoir.service';
+import { CreateLigneAvoirComponent } from '../create-ligne-avoir/create-ligne-avoir.component';
 
 @Component({
   selector: 'app-create-avoir',
@@ -16,6 +19,122 @@ import { isNullOrUndefined } from 'util';
 })
 export class CreateAvoirComponent implements OnInit {
 
+  avoir = new Avoir();
+  formDataAvoir = new Avoir();
+
+  date;
+  FourList: Fournisseur[];
+  isValid:boolean = true;
+  articleService: any;
+  compteur : any={};
+  client: any={};
+  annee  = 0;
+
+  total = 0;
+
+  submitted = false;
+
+  constructor(private crudApi: AvoirService, private dialog:MatDialog,
+    public fb: FormBuilder, public fourService: FournisseurService,
+    private lavoirService: LigneAvoirService, private datePipe : DatePipe,
+    private toastr :ToastrService, private router :Router,
+    private matDialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) { }
+
+  get f() { return this.crudApi.formData.controls; }
+  ngOnInit() {
+    this.getListFournisseurs();
+    if (this.crudApi.choixmenu == "A") {
+      this.infoForm();
+      this.crudApi.list = [];
+    } else {
+
+    }
+  }
+
+  infoForm() {
+    this.crudApi.formData = this.fb.group({
+      id: null,
+      reference: Math.floor(100000 + Math.random() * 900000).toString(),
+      total: [0, Validators.required],
+      libelle: ['', Validators.required],
+      soldeAvoir: [0, Validators.required],
+      nbreJours: [0, Validators.required],
+      totalAvoir: [0, Validators.required],
+      status: ['', Validators.required],
+      fournisseur: [new Fournisseur(), Validators.required],
+      lavoirs: [[], Validators.required],
+    });
+  }
+  compareFournisseur(four1: Fournisseur, four2: Fournisseur) : boolean {
+    return four1 && four2 ? four1.id === four2.id : four1 === four2;
+  }
+
+  getListFournisseurs() {
+    this.fourService.getAllFournisseurs().subscribe((response) => {
+      this.FourList = response as Fournisseur[];});
+  }
+
+  ResetForm() {
+    this.crudApi.dataForm.reset();
+  }
+
+  AddData(lavoirIndex, OrderId) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "50%";
+    dialogConfig.data={lavoirIndex, OrderId};
+    this.matDialog.open(CreateLigneAvoirComponent, dialogConfig).afterClosed().subscribe(res =>{
+      this.calculMontantTotal();
+    });
+  }
+
+  calculMontantTotal() {
+    this.f['totalAvoir'].setValue(this.crudApi.list.reduce((prev, curr) => {
+      return prev + curr.total;
+    }, 0));
+  }
+  validateForm() {
+    this.isValid = true;
+    if (this.crudApi.formData.value.id_client==0)
+      this.isValid = false
+    else if (this.crudApi.list.length==0)
+      this.isValid = false;
+    return this.isValid;
+  }
+
+  onSubmit() {
+    this.f['lavoirs'].setValue(this.crudApi.list);
+    console.log(this.crudApi.formData.value);
+    this.crudApi.createAvoir(this.crudApi.formData.value).subscribe(
+      data => {
+        console.log(this.crudApi.formData.value);
+        this.toastr.success('Avoir Ajoutée avec succès');
+        console.log(this.crudApi.formData.value);
+        this.router.navigate(['/avoirs']);
+      });
+  }
+
+  onDeleteOrderItem(id: number, i: number) {
+    if (id != null) {
+      this.lavoirService.deleteLigneAvoir(id).subscribe(data => {
+        this.toastr.warning('Détails Avoir supprimé avec succès!');
+      });
+    }
+    this.crudApi.list.splice(i, 1);
+    this.calculMontantTotal();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+}
+
+
+/*
   public avoir = new Avoir();
   formDataAvoir = new Avoir();
   listFournisseurs: Fournisseur[];
@@ -79,7 +198,7 @@ export class CreateAvoirComponent implements OnInit {
     }else {
       this.updateAvoir();
     }
-  }*/
+  }
 
   saveAvoir(avoir: Avoir) {
     this.crudApi.createAvoir(avoir).
@@ -110,4 +229,4 @@ export class CreateAvoirComponent implements OnInit {
 
   }
 
-}
+}*/

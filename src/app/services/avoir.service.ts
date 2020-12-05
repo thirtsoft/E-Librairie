@@ -14,6 +14,8 @@ export class AvoirService {
 
   choixmenu : string  = 'A';
   listData : Avoir[];
+  formData:  FormGroup;
+  list: any={};
 
   public dataForm:  FormGroup;
 
