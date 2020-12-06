@@ -14,14 +14,13 @@
             [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-               <th>Id</th><th>Numéro</th><th>Montant</th>
+               <th>Numéro</th><th>Montant</th>
                 <th>Status</th><th>Date</th>
                 <th>Action</th>
               </tr>
             </thead>
           <tbody>
             <tr *ngFor="let vent of listData; let i=index;">
-              <td>{{vent.id}}</td>
               <td>{{vent.numeroVente}}</td>
               <td>{{vent.totalVente}}</td>
               <td>{{vent.status}}</td>

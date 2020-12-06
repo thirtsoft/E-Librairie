@@ -16,8 +16,8 @@
 
           <thead>
             <tr>
-              <th>Prénom et Nom</th><th>cni</th><th>Adresse</th>
-              <th>Telephone</th><th>Telephone2</th><th>Email</th>
+              <th>Prénom et Nom</th><th>cni</th><th>Telephone</th><th>Telephone2</th>
+              <th>Email</th><th>Adresse</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -26,10 +26,10 @@
             <tr *ngFor="let emp of listData">
               <td>{{emp.prenom}}  {{emp.nom}}</td>
               <td>{{emp.cni}}</td>
-              <td>{{emp.adresse}}</td>
               <td>{{emp.telephone}}</td>
               <td>{{emp.telephone2}}</td>
               <td>{{emp.email}}</td>
+              <td>{{emp.adresse}}</td>
               <td>
                 <button class="btn btn-info btn-lg" (click)="editEmploye(emp)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteEmploye(emp.id)"><i class="fa fa-trash-o"></i>  </button>

@@ -10,6 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateFournisseurComponent } from '../create-fournisseur/create-fournisseur.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
+import { ViewFournisseurComponent } from '../view-fournisseur/view-fournisseur.component';
 
 @Component({
   selector: 'app-list-fournisseur',
@@ -107,7 +108,17 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     this.crudApi.getAllFournisseurs().subscribe(
       response =>{this.listData = response;}
     );
+  }
 
+  viewFournisseur(item: Fournisseur) {
+   // this.router.navigateByUrl('fournisseurView/' + item.id);
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(ViewFournisseurComponent, dialogConfig);
   }
 
   onCreateFournisseur(){

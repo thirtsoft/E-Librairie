@@ -32,7 +32,7 @@
 
 
       <div class="form-group col-md-3">
-        <label>Total Commande : </label>
+        <label>P.Total : </label>
         <input type="text" class="form-control" name="" [value]="this.totalCommande" id="total" readonly>
       </div>
 
@@ -48,7 +48,7 @@
       [dtTrigger]="dtTrigger">
       <thead>
         <tr>
-          <th>Article</th><th>Price</th><th>Quantite</th><th>Total</th>
+          <th>Désignation</th><th>Quantite</th><th>P.Unitaire</th><th>P.Total</th>
             <!--  <th>Status</th><th>Date</th>
              <th>Action</th> -->
         </tr>
@@ -56,8 +56,8 @@
       <tbody>
         <tr *ngFor="let item of this.lcmdService.listData">
           <td>{{item.produit.designation}}</td>
-          <td>{{item.prix}}</td>
           <td>{{item.quantite}}</td>
+          <td>{{item.prix}}</td>
           <td>{{(item.prix)*(item.quantite)}} </td>
         </tr>
       </tbody>

@@ -63,7 +63,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllScategories().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );

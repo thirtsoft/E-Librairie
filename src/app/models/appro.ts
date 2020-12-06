@@ -5,6 +5,7 @@ export class Appro {
     id: number;
     code: number;
     total: number;
+    montantAvance: number;
     totalAppro: number;
     status: string;
     observation: string;

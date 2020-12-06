@@ -24,6 +24,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { style } from '@angular/animations';
 import { DataTableDirective } from 'angular-datatables';
+import { ViewArticleComponent } from '../view-article/view-article.component';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -77,7 +78,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllArticles().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -116,16 +117,26 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateArticleComponent, dialogConfig);
   }
 
-  addEditArticle(artId?: number) {
+  addEditArticle(id?: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     dialogConfig.data = {
-      artId
+      id
     };
     this.matDialog.open(CreateArticleComponent, dialogConfig);
+  }
 
+  viewArticle(id?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      id
+    };
+    this.matDialog.open(ViewArticleComponent, dialogConfig);
   }
 
   editerArticle(item : Article) {

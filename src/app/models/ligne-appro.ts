@@ -10,6 +10,7 @@ export class LigneAppro {
   quantite: number;
   qteStock: number;
   prix: number;
+  prixAppro: number;
   total: number;
 
   approvisionnement: Appro;

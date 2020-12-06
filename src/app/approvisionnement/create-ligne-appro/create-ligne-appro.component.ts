@@ -75,7 +75,7 @@ export class CreateLigneApproComponent implements OnInit {
       quantite: 0,
       qteStock: 0,
       ItemName: '',
-     // code_article: '',
+      prixAppro: 0,
       total: 0,
       produit: new Article(),
      // commande: new CommandeClient(),
@@ -103,7 +103,7 @@ export class CreateLigneApproComponent implements OnInit {
   }
 
   calculTotal() {
-    this.total = parseFloat((this.formData.value.quantite * this.formData.value.prix).toFixed(2));
+    this.total = parseFloat((this.formData.value.quantite * this.formData.value.prixAppro).toFixed(2));
     this.f['total'].setValue(this.total);
   }
 

@@ -15,23 +15,20 @@
           [dtTrigger]="dtTrigger">
           <thead>
             <tr>
-              <th>Code</th><th>Raison Sociale</th><th>Prénom et Nom</th><th>Numero Compte</th><th>NomBank</th>
-              <th>Adresse</th><th>Telephone</th><th>Fax</th><th>Email</th>
+              <th>Prénom et Nom</th><th>Numero Compte</th><th>NomBank</th>
+              <th>Telephone</th><th>Email</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let four of listData; let i=index;">
-              <td>{{four.code}}</td>
-              <td>{{four.raisonSociale}}</td>
               <td>{{four.prenom}}  {{four.nom}}</td>
               <td>{{four.numeroCompte}}</td>
               <td>{{four.nomBank}}</td>
-              <td>{{four.adresse}}</td>
               <td>{{four.telephone}}</td>
-              <td>{{four.fax}}</td>
               <td>{{four.email}}</td>
               <td>
+                <button class="btn btn-success btn-lg" (click)="viewFournisseur(four)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-info btn-lg" (click)="editFournisseur(four)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteFournisseur(four.id)"><i class="fa fa-trash-o"></i>  </button>
               </td>

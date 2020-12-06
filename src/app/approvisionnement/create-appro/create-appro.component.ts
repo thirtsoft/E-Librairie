@@ -114,6 +114,7 @@ export class CreateApproComponent implements OnInit {
     id: null,
     code: Math.floor(100000 + Math.random() * 900000).toString(),
     total: [0, Validators.required],
+    montantAvance: [0, Validators.required],
     totalAppro: [0, Validators.required],
     status: ['', Validators.required],
     observation: ['', Validators.required],

@@ -14,7 +14,7 @@
             [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-               <th>Id</th><th>Code</th><th>Fournisseur</th><th>Montant</th>
+                <th>Code</th><th>Fournisseur</th><th>Montant</th><th>MontantAvancée</th><th>Relicat</th>
                 <th>Status</th><th>Observation</th><th>Date</th>
                 <th>Action</th>
 
@@ -22,18 +22,18 @@
             </thead>
           <tbody>
             <tr *ngFor="let appro of listData; let i=index;">
-              <td>{{appro.id}}</td>
               <td>{{appro.code}}</td>
-          <!--    <td>{{appro.fournisseur.raisonSociale}} - {{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}} </td> -->
               <td>{{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}}</td>
               <td>{{appro.totalAppro}}</td>
+              <td>{{appro.montantAvance}}</td>
+              <td>{{(appro.totalAppro)-(appro.montantAvance)}}</td>
               <td>{{appro.status}}</td>
               <td>{{appro.observation}}</td>
               <td>{{appro.dateApprovisionnement| date:'dd/MM/yyyy'}}</td>
               <td>
           <!--      <button class="btn btn-info btn-lg" (click)="editeAppro(appro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
                 <button class="btn btn-success btn-lg" (click)="viewAppro(appro)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-danger btn-lg" (click)="deleteAppro(appro.id)"><i class="fa fa-trash-o"></i>  </button>
+            <!--    <button class="btn btn-danger btn-lg" (click)="deleteAppro(appro.id)"><i class="fa fa-trash-o"></i>  </button> -->
               </td>
             </tr>
           </tbody>

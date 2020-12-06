@@ -11,6 +11,7 @@ import { CreateVersementComponent } from '../create-versement/create-versement.c
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { DatePipe } from '@angular/common';
+import { ViewVersementComponent } from '../view-versement/view-versement.component';
 
 @Component({
   selector: 'app-list-versement',
@@ -98,7 +99,17 @@ export class ListVersementComponent implements OnDestroy, OnInit {
       verId
     };
     this.matDialog.open(CreateVersementComponent, dialogConfig);
+  }
 
+  viewVersement(verId?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      verId
+    };
+    this.matDialog.open(ViewVersementComponent, dialogConfig);
   }
 
   editerVersement(item : Versement) {

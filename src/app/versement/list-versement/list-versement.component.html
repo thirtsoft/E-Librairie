@@ -15,21 +15,18 @@
           [dtTrigger]="dtTrigger">
           <thead>
             <tr>
-              <th>Numéro</th><th>Nature</th><th>Reçu</th><th>Bank</th><th>Employé</th><th>Montant</th><th>Motif</th><th>Date</th>
+              <th>Numéro</th><th>Employé</th><th>Montant</th><th>Date</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let versmnt of crudApi.listData; let i=index;">
               <td>{{versmnt.numVersement}}</td>
-              <td>{{versmnt.nature}}</td>
-              <td>{{versmnt.numeroRecu}}</td>
-              <td>{{versmnt.nomBank}}</td>
               <td>{{versmnt.employe.prenom}}  {{versmnt.employe.nom}}</td>
               <td>{{versmnt.montantVersement}}</td>
-              <td>{{versmnt.motif}}</td>
               <td>{{versmnt.dateVersement| date:'dd/MM/yyyy'}}</td>
               <td>
+                <button class="btn btn-success btn-lg" (click)="viewVersement(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-info btn-lg" (click)="addEditVersement(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteVersement(versmnt.id)"><i class="fa fa-trash-o"></i>  </button>
               </td>

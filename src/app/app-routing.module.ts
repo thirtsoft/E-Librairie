@@ -64,6 +64,10 @@ import { ListLigneCreanceComponent } from './creance/list-ligne-creance/list-lig
 import { ViewAvoirComponent } from './avoir/view-avoir/view-avoir.component';
 import { ListLigneAvoirComponent } from './avoir/list-ligne-avoir/list-ligne-avoir.component';
 import { CreateLigneAvoirComponent } from './avoir/create-ligne-avoir/create-ligne-avoir.component';
+import { ViewFournisseurComponent } from './fournisseur/view-fournisseur/view-fournisseur.component';
+import { ViewArticleComponent } from './article/view-article/view-article.component';
+import { ViewVersementComponent } from './versement/view-versement/view-versement.component';
+import { ViewContratComponent } from './contrat/view-contrat/view-contrat.component';
 
 const routes: Routes = [
 
@@ -104,6 +108,7 @@ const routes: Routes = [
     { path: 'articles', children: [
         { path: '', component: ListArticleComponent},
         { path:'edit/:id',component:ListArticleComponent },
+        { path:'articleView/:id',component: ViewArticleComponent }
       ]
     },
 
@@ -111,11 +116,7 @@ const routes: Routes = [
     { path: 'client', component: CreateClientComponent},
 
 /*
-    { path: 'clients', children: [
-        { path: '', component: ListClientComponent},
-        { path:'edit/:id',component:ListClientComponent },
-      ]
-    },
+
 
     { path: 'commandeclients', component: ListCommandeClientComponent},
 
@@ -209,19 +210,13 @@ const routes: Routes = [
     { path: 'contrats', children: [
         { path: '', component: ListContratComponent},
         { path:'edit/:id',component: ListContratComponent },
+        { path:'viewContrat/:id',component: ViewContratComponent },
       ]
     },
-
-  /*
-    { path: 'fournisseurs', children: [
-        { path: '', component: ListFournisseurComponent},
-        { path:'edit/:id',component:ListFournisseurComponent },
-      ]
-    },
-    */
 
     { path: 'fournisseurs', component: ListFournisseurComponent},
     { path: 'fournisseur', component: CreateFournisseurComponent},
+    { path: 'fournisseurView', component: ViewFournisseurComponent},
 
     { path: 'employes', component: ListEmployeComponent},
     { path: 'employe', component: CreateEmployeComponent},
@@ -230,6 +225,7 @@ const routes: Routes = [
     { path: 'versements', children: [
         { path: '', component: ListVersementComponent},
         { path:'edit/:id',component: ListVersementComponent },
+        { path:'viewVersement/:id',component: ViewVersementComponent },
       ]
     },
 

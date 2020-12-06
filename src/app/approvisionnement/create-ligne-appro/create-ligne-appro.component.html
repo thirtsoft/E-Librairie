@@ -18,10 +18,18 @@
         </div>
 
         <div class="form-group">
-          <label>Prix Achat</label>
+          <label>Prix</label>
           <div class="form-group">
             <input name="prix" formControlName="prix" id="prix" class="form-control"  (keyup)="calculTotal()"
               [class.is-invalid]="!isValid && formData.value.prix==0"  readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Prix Achat</label>
+          <div class="form-group">
+            <input type="number" name="prixAppro" formControlName="prixAppro" id="prixAppro" class="form-control"  (keyup)="calculTotal()"
+              [class.is-invalid]="!isValid && formData.value.prixAppro==0">
           </div>
         </div>
         <!--
@@ -42,7 +50,7 @@
         </div>
 
         <div class="form-group">
-          <label>Total</label>
+          <label>P.Total</label>
           <div class="form-group">
             <input name="total" formControlName="total" id="total" class="form-control" readonly>
           </div>

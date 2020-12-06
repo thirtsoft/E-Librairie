@@ -15,13 +15,12 @@
           [dtTrigger]="dtTrigger">
           <thead>
             <tr>
-              <th>ID</th><th>Article</th><th>Scategorie</th><th>Quantite</th><th>Qté Initial</th><th>Etat</th><th>Date</th>
+              <th>Article</th><th>Scategorie</th><th>StockRéel</th><th>StockInitial</th><th>Etat</th><th>Date</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let stock of listArticle; let i=index;">
-              <td>{{stock.id}}</td>
               <td>{{stock.designation}}</td>
               <td>{{stock.scategorie?.libelle}}</td>
               <td>{{stock.qtestock}}</td>

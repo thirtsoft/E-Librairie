@@ -1,36 +1,28 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { Scategorie } from 'src/app/models/scategorie';
-import { Categorie } from 'src/app/models/categorie';
 import { ArticleService } from 'src/app/services/article.service';
 import { ScategorieService } from 'src/app/services/scategorie.service';
-import { CategorieService } from 'src/app/services/categorie.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { isNullOrUndefined } from 'util';
 
 @Component({
-  selector: 'app-create-article',
-  templateUrl: './create-article.component.html',
-  styleUrls: ['./create-article.component.scss']
+  selector: 'app-view-article',
+  templateUrl: './view-article.component.html',
+  styleUrls: ['./view-article.component.scss']
 })
-export class CreateArticleComponent implements OnInit {
+export class ViewArticleComponent implements OnInit {
 
   formDataArticle = new Article();
   listScategories: Scategorie[];
 
-//  dropDownForm: FormGroup;
-
-  submitted = false;
-
   constructor(public crudApi: ArticleService, public scatService: ScategorieService ,
-    private catService: CategorieService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateArticleComponent>,
+    public dialogRef:MatDialogRef<ViewArticleComponent>,
   ) { }
 
   ngOnInit() {
@@ -45,13 +37,6 @@ export class CreateArticleComponent implements OnInit {
   getScategories() {
     this.scatService.getAllScategories().subscribe((response) => {
       this.listScategories = response as Scategorie[];});
-  }
-
-  onChangeScategories(event) {
-    console.log(event);
-    this.scatService.getListScategoriesByCategoryId(event.target.value).subscribe(response => {
-      this.listScategories = response as Scategorie[];
-    });
   }
 
   ResetForm() {
@@ -119,14 +104,6 @@ export class CreateArticleComponent implements OnInit {
       );
       this.router.navigate(['/articles']);
     });
-  }
-
-  onChangeCtegorie(id: number) {
-    this.scatService.getScategorieById(id).subscribe(
-      (response: Scategorie[]) => {
-        this.listScategories = response;
-      }
-    );
   }
 
 }

@@ -90,6 +90,10 @@ import { ListLigneAvoirComponent } from './avoir/list-ligne-avoir/list-ligne-avo
 import { CreateLigneAvoirComponent } from './avoir/create-ligne-avoir/create-ligne-avoir.component';
 import { ViewAvoirComponent } from './avoir/view-avoir/view-avoir.component';
 import { ViewCreanceComponent } from './creance/view-creance/view-creance.component';
+import { ViewFournisseurComponent } from './fournisseur/view-fournisseur/view-fournisseur.component';
+import { ViewArticleComponent } from './article/view-article/view-article.component';
+import { ViewVersementComponent } from './versement/view-versement/view-versement.component';
+import { ViewContratComponent } from './contrat/view-contrat/view-contrat.component';
 
 @NgModule({
   declarations: [
@@ -165,6 +169,10 @@ import { ViewCreanceComponent } from './creance/view-creance/view-creance.compon
     CreateLigneAvoirComponent,
     ViewAvoirComponent,
     ViewCreanceComponent,
+    ViewFournisseurComponent,
+    ViewArticleComponent,
+    ViewVersementComponent,
+    ViewContratComponent,
   ],
   imports: [
     BrowserModule,

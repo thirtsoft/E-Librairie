@@ -41,10 +41,10 @@
     <!-- Debut Ligne de commandes -->
     <table class="table table-borderless">
       <thead class="thead-light">
-        <th>Article</th>
-        <th>Price</th>
+        <th>Désignation</th>
+        <th>P.Unitaire</th>
         <th>Quantite</th>
-        <th>Total</th>
+        <th>P.Total</th>
         <th>
           <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
               <i class="fa fa-plus"></i>Ajouter
@@ -59,7 +59,7 @@
         </tr>
         <tr *ngFor="let item of crudApi.list;let i=index;">
           <td>{{item.ItemName}}</td>
-          <td>{{item.prix}}</td>
+          <td>{{item.prixVente}}</td>
           <td>{{item.quantite}}</td>
           <td>{{item.total}}</td>
           <td>

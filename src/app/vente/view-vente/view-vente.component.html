@@ -38,16 +38,16 @@
       [dtTrigger]="dtTrigger">
       <thead>
         <tr>
-          <th>Article</th><th>Price</th><th>Quantite</th><th>Total</th>
+          <th>Quantite</th><th>Désignation</th><th>P.Unitaire</th><th>P.Total</th>
             <!--  <th>Status</th><th>Date</th>
              <th>Action</th> -->
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of this.lventeService.listData">
+          <td>{{item.quantite}}</td>
           <td>{{item.produit?.designation}}</td>
           <td>{{item.prixVente}}</td>
-          <td>{{item.quantite}}</td>
           <td>{{(item.prixVente)*(item.quantite)}} </td>
         </tr>
       </tbody>

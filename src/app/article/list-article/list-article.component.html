@@ -34,20 +34,20 @@
             <thead>
               <tr>
                 <th>Reference</th><th>Designation</th><th>Scategorie</th>
-                <th>P.Achat</th><th>P.Vente</th><th>Quantité</th><th>Status</th>
+                <th>P.Achat</th><th>P.Vente</th><th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
           <tbody>
-            <tr *ngFor="let art of listData; let i=index;">
+            <tr *ngFor="let art of crudApi.listData; let i=index;">
               <td>{{art.reference}}</td>
               <td>{{art.designation}}</td>
               <td>{{art.scategorie?.libelle}}</td>
               <td>{{art.prixAchat}}</td>
               <td>{{art.prixVente}}</td>
-              <td>{{art.qtestock}}</td>
               <td>{{art.qtestock < art.stockInitial ? "epuisé": "encours"}}</td>
               <td>
+                <button class="btn btn-success btn-lg" (click)="viewArticle(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-info btn-lg" (click)="addEditArticle(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteArticle(art.id)"><i class="fa fa-trash-o"></i>  </button>
               </td>

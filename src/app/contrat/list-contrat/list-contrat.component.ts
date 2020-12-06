@@ -13,6 +13,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { EditContratComponent } from '../edit-contrat/edit-contrat.component';
 import { Client } from 'src/app/models/client';
 import { DatePipe } from '@angular/common';
+import { ViewContratComponent } from '../view-contrat/view-contrat.component';
 
 @Component({
   selector: 'app-list-contrat',
@@ -104,8 +105,19 @@ export class ListContratComponent implements OnDestroy, OnInit {
       id
     };
     this.matDialog.open(CreateContratComponent, dialogConfig);
-
   }
+
+  viewContrat(id?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      id
+    };
+    this.matDialog.open(ViewContratComponent, dialogConfig);
+  }
+
 /*
   downloadFile(fileName){
 

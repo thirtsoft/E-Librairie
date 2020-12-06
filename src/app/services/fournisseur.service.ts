@@ -14,7 +14,7 @@ export class FournisseurService {
 
    choixmenu : string  = 'A';
    listData : Fournisseur[];
-   public formData:  Fournisseur;
+   formData:  Fournisseur;
 
    public dataForm:  FormGroup;
 
