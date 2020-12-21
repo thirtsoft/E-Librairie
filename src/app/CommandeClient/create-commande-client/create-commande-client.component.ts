@@ -11,7 +11,6 @@ import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/di
 import { MatDialogRef } from "@angular/material/dialog";
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { CommandeClient } from 'src/app/models/commande-client';
-import { EditLigneCmdClientComponent } from '../edit-ligne-cmd-client/edit-ligne-cmd-client.component';
 import { CreanceService } from 'src/app/services/creance.service';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 

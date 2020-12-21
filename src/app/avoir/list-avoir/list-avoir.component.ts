@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angu
 import { CreateAvoirComponent } from '../create-avoir/create-avoir.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-avoir',
@@ -24,8 +25,9 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: AvoirService, private dialogService: DialogService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+  constructor(public crudApi: AvoirService, private dialogService: DialogService,
+    private datePipe : DatePipe, public toastr: ToastrService,
+    public fb: FormBuilder, private router : Router,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateAvoirComponent>
     ) {
@@ -65,11 +67,14 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
       this.dtTrigger.next();
 
     });
-
   }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
   getListAvoirs() {

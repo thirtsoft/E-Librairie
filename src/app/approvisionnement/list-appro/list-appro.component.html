@@ -25,9 +25,17 @@
               <td>{{appro.code}}</td>
               <td>{{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}}</td>
               <td>{{appro.totalAppro}}</td>
-              <td>{{appro.montantAvance}}</td>
+              <td>{{appro.montantAvance}}
+                <span class="btn btn-success btn-sm pull-right" (click)="addEditMontantAvance()">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </span>
+              </td>
               <td>{{(appro.totalAppro)-(appro.montantAvance)}}</td>
-              <td>{{appro.status}}</td>
+              <td>{{appro.status}}
+                <span class="btn btn-success btn-sm pull-right" (click)="addEditStatus()">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </span>
+              </td>
               <td>{{appro.observation}}</td>
               <td>{{appro.dateApprovisionnement| date:'dd/MM/yyyy'}}</td>
               <td>

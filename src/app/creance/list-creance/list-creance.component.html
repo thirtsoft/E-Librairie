@@ -15,19 +15,30 @@
 
   <thead>
     <tr>
-      <th>Reference</th><th>Libelle</th><th>Raison Social</th><th>Chef Service</th>
-      <th>Solde</th><th>Nbre Jours</th>
+      <th>Reference</th><th>Client</th><th>Solde</th><th>Total</th><th>Restant A Payer</th><th>Status</th><th>Nbre Jours</th><th>Date</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let cont of crudApi.listData; let i=index;">
       <td>{{cont.reference}}</td>
-      <td>{{cont.libelle}}</td>
-      <td>{{cont.client.raisonSocial}}</td>
       <td>{{cont.client.chefService}}</td>
-      <td>{{cont.soldeCreance}}</td>
+      <td>{{cont.soldeCreance}}
+        <span class="btn btn-info btn-sm pull-right" (click)="addEditSolde(cont)">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </span>
+      </td>
+      <td>{{cont.totalCreance}}</td>
+      <td>{{(cont.totalCreance)-(cont.soldeCreance)}}</td>
+      <td>{{cont.status}}
+        <span class="btn btn-info btn-sm pull-right" (click)="addEditStatus(cont)">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </span>
+
+      </td>
       <td>{{cont.nbreJours}}</td>
+
+      <td>{{cont.dateCreance | date:'dd-MM-yyyy à h:mm:ss'}}</td>
 
       <td>
         <!--<button class="btn btn-info btn-lg" (click)="addEditCreance(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->

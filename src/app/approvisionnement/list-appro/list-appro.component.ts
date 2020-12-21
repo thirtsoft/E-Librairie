@@ -90,6 +90,14 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl("approvisionnement");
   }
 
+  addEditMontantAvance() {
+
+  }
+
+  addEditStatus() {
+    
+  }
+
 /*  deleteAppro(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Approvisionnement ?')) {
     this.crudApi.deleteApprovisionnement(id)

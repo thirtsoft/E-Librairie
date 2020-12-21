@@ -10,6 +10,7 @@ export class Avoir {
   nbreJours: number;
   totalAvoir: number;
   status: string;
+  dateAvoir: Date;
 
   fournisseur: Fournisseur;
   lavoirs :Array<LigneAvoir>=[];

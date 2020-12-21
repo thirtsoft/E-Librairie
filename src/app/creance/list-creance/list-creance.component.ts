@@ -10,6 +10,8 @@ import { CreateCreanceComponent } from '../create-creance/create-creance.compone
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { DatePipe } from '@angular/common';
+import { UpdateStatusCreanceComponent } from '../update-status-creance/update-status-creance.component';
+import { UpdateSoldeCreanceComponent } from '../update-solde-creance/update-solde-creance.component';
 
 @Component({
   selector: 'app-list-creance',
@@ -19,6 +21,7 @@ import { DatePipe } from '@angular/common';
 export class ListCreanceComponent implements OnDestroy, OnInit {
 
   listData : Creance[];
+  status = "Valider";
 
   private editForm: FormGroup;
 
@@ -27,8 +30,9 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: CreanceService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router, private dialogService: DialogService,
+  constructor(public crudApi: CreanceService, private datePipe : DatePipe,
+    public toastr: ToastrService, private dialogService: DialogService,
+    public fb: FormBuilder, private router : Router,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateCreanceComponent>,
     ) {
@@ -83,6 +87,31 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
   viewCreance(item: Creance) {
     this.router.navigateByUrl('creanceView/' + item.id);
   }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
+  }
+
+  addEditStatus(item : Creance) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(UpdateStatusCreanceComponent, dialogConfig);
+  }
+
+  addEditSolde(item : Creance) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(UpdateSoldeCreanceComponent, dialogConfig);
+  }
+
   /*
   onCreateCreance(){
     this.crudApi.choixmenu = "A";

@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommandeClient } from '../models/commande-client';
 import { Client } from '../models/client';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class DashboardService {
    getNumberOfCommandes(): Observable<any> {
      return this.http.get(`${this.baseUrl}/NumberOfCommande`);
    }
+
+   getNumberOfVentesByDay(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/NumberOfVenteByDay`);
+  }
 
    getSumTotalOfCommandes(): Observable<any> {
     return this.http.get(`${this.baseUrl}/NumbersOfCommandes`);
@@ -80,9 +85,13 @@ export class DashboardService {
    updateCreance(id: number, value: any): Observable<Object> {
      return this.http.put(`${this.baseUrl}/creances/${id}`, value);
    }
-
    deleteCreance(id: number): Observable<any> {
      return this.http.delete(`${this.baseUrl}/creances/${id}`, { responseType: 'text' });
+   }
+
+   dailyForecast() {
+     return this.http.get("https://samples.openweathermap.org/data/2.5/history/city?q=Warren,OH&appid=b6907d289e10d714a6e88b30761fae22")
+     .pipe(map(result => result));
    }
 
 }

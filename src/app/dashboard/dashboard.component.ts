@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   sumVentes;
   numberCommandes;
   numberClients;
+  numberVentesByDay;
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -20,6 +21,7 @@ export class DashboardComponent implements OnInit {
     this.getNumberOfCommandes();
     this.getNumberOfClients();
     this.getSumOfVentes();
+    this.getNumberOfVentesByDay();
   }
 
   getSumOfCommandes(): void {
@@ -40,8 +42,13 @@ export class DashboardComponent implements OnInit {
      this.dashboardService.getNumberOfCommandes().subscribe(data => {
       this.numberCommandes = data;
      });
-
   }
+
+  getNumberOfVentesByDay(): void {
+    this.dashboardService.getNumberOfVentesByDay().subscribe(data => {
+     this.numberVentesByDay = data;
+    });
+ }
 
   getNumberOfClients(): void {
     this.dashboardService.getNumbersOfClients().subscribe(data => {

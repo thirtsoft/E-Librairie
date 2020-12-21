@@ -15,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,10 +52,8 @@ import { ListCreanceComponent } from './creance/list-creance/list-creance.compon
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
 import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
 import { CreateCommandeClientComponent } from './CommandeClient/create-commande-client/create-commande-client.component';
-import { EditCommandeClientComponent } from './CommandeClient/edit-commande-client/edit-commande-client.component';
 import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
 import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
-import { EditLigneCmdClientComponent } from './CommandeClient/edit-ligne-cmd-client/edit-ligne-cmd-client.component';
 import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
@@ -94,6 +93,12 @@ import { ViewFournisseurComponent } from './fournisseur/view-fournisseur/view-fo
 import { ViewArticleComponent } from './article/view-article/view-article.component';
 import { ViewVersementComponent } from './versement/view-versement/view-versement.component';
 import { ViewContratComponent } from './contrat/view-contrat/view-contrat.component';
+import { BarchartComponent } from './chartJs/barchart/barchart.component';
+import { LinechartComponent } from './chartJs/linechart/linechart.component';
+import { PiechartComponent } from './chartJs/piechart/piechart.component';
+import { ChartComponent } from './chartJs/chart/chart.component';
+import { UpdateStatusCreanceComponent } from './creance/update-status-creance/update-status-creance.component';
+import { UpdateSoldeCreanceComponent } from './creance/update-solde-creance/update-solde-creance.component';
 
 @NgModule({
   declarations: [
@@ -131,10 +136,8 @@ import { ViewContratComponent } from './contrat/view-contrat/view-contrat.compon
     CreateCreanceComponent,
     ListCommandeClientComponent,
     CreateCommandeClientComponent,
-    EditCommandeClientComponent,
     ListLigneCmdClientComponent,
     CreateLigneCmdClientComponent,
-    EditLigneCmdClientComponent,
     ListVenteComponent,
     CreateVenteComponent,
     ListLigneVenteComponent,
@@ -173,6 +176,12 @@ import { ViewContratComponent } from './contrat/view-contrat/view-contrat.compon
     ViewArticleComponent,
     ViewVersementComponent,
     ViewContratComponent,
+    BarchartComponent,
+    LinechartComponent,
+    PiechartComponent,
+    ChartComponent,
+    UpdateStatusCreanceComponent,
+    UpdateSoldeCreanceComponent,
   ],
   imports: [
     BrowserModule,
@@ -185,6 +194,8 @@ import { ViewContratComponent } from './contrat/view-contrat/view-contrat.compon
     CommonModule,
     DataTablesModule,
     NgbModule,
+
+    ChartsModule,
 
     MatDialogModule,
     MatToolbarModule,

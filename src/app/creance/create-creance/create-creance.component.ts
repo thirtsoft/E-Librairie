@@ -67,6 +67,7 @@ export class CreateCreanceComponent implements OnInit {
       reference: Math.floor(100000 + Math.random() * 900000).toString(),
       total: [0, Validators.required],
       libelle: ['', Validators.required],
+      codeCreance: ['', Validators.required],
       soldeCreance: [0, Validators.required],
       nbreJours: [0, Validators.required],
       totalCreance: [0, Validators.required],

@@ -3,12 +3,18 @@
     <div class="panel-heading">
       <h2>GESTION DES VENTES</h2>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px;">
+    <div class="form-group col-md-6" style="padding-left: 20px; padding-top: 10px;">
       <a type="button" (click)="onCreateVente()" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
       <!-- <a type="button" [routerLink]="['/createArticle']" class="btn btn-primary btn-lg" (click)="onCreateCategorie()"><i class="fa fa-download" aria-hidden="true"></i> Import</a>&nbsp;&nbsp;
       <a type="button" class="btn btn-warning btn-lg" (click)="onCreateCategorie()"><i class="fa fa-upload" aria-hidden="true"></i> Export</a> -->
     </div>
+    <div class="form-group col-md-4 col-md-offset-2"  style="padding-top: 10px;">
+      <label><strong>Montant Vente/Jour : </strong></label>
+      <div class="count">{{this.sumVenteByDay}}</div>
     </div>
+
+    </div>
+
     <div class="panel-body">
         <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
             [dtTrigger]="dtTrigger">
@@ -24,7 +30,7 @@
               <td>{{vent.numeroVente}}</td>
               <td>{{vent.totalVente}}</td>
               <td>{{vent.status}}</td>
-              <td>{{vent.dateVente | date:'dd/MM/yyyy'}}</td>
+              <td>{{vent.dateVente | date:'dd-MM-yyyy à h:mm:ss'}}</td>
               <td>
           <!--  <button class="btn btn-info btn-lg" (click)="editerVente(vent)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
                 <button class="btn btn-success btn-lg" (click)="viewVente(vent)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;

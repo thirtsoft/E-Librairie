@@ -115,7 +115,7 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
   /*  deleteCommandeClient(id: number) {

@@ -16,7 +16,7 @@
   <thead>
     <tr>
       <th>Reference</th><th>Libelle</th><th>Raison Social</th><th>Fournisseur</th>
-      <th>Solde</th><th>Nbre Jours</th>
+      <th>Solde</th><th>Nbre Jours</th><th>Date</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -28,6 +28,7 @@
       <td>{{avoir.fournisseur.prenom}} {{avoir.fournisseur.nom}}</td>
       <td>{{avoir.soldeAvoir}}</td>
       <td>{{avoir.nbreJours}}</td>
+      <td>{{avoir.dateAvoir| date:'dd-MM-yyyy à h:mm:ss'}}</td>
 
       <td>
         <!--

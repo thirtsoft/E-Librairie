@@ -20,7 +20,9 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   //listData: Vente[];
   listData;
+  sumVenteByDay;
  // private editForm: FormGroup;
+
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -51,6 +53,15 @@ export class ListVenteComponent implements OnDestroy, OnInit {
       }
     );
 
+    this.getSumOfVenteByDay();
+
+  }
+
+  getSumOfVenteByDay(): void {
+    this.crudApi.getSumVenteByDay().subscribe(data => {
+      this.sumVenteByDay = data;
+      console.log(this.sumVenteByDay);
+    });
   }
 
    /**
@@ -117,7 +128,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
 }

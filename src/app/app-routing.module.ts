@@ -33,10 +33,8 @@ import { ListCreanceComponent } from './creance/list-creance/list-creance.compon
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
 import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
 import { CreateCommandeClientComponent } from './CommandeClient/create-commande-client/create-commande-client.component';
-import { EditCommandeClientComponent } from './CommandeClient/edit-commande-client/edit-commande-client.component';
 import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
 import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
-import { EditLigneCmdClientComponent } from './CommandeClient/edit-ligne-cmd-client/edit-ligne-cmd-client.component';
 import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
@@ -68,6 +66,12 @@ import { ViewFournisseurComponent } from './fournisseur/view-fournisseur/view-fo
 import { ViewArticleComponent } from './article/view-article/view-article.component';
 import { ViewVersementComponent } from './versement/view-versement/view-versement.component';
 import { ViewContratComponent } from './contrat/view-contrat/view-contrat.component';
+import { BarchartComponent } from './chartJs/barchart/barchart.component';
+import { PiechartComponent } from './chartJs/piechart/piechart.component';
+import { LinechartComponent } from './chartJs/linechart/linechart.component';
+import { ChartComponent } from './chartJs/chart/chart.component';
+import { UpdateStatusCreanceComponent } from './creance/update-status-creance/update-status-creance.component';
+import { UpdateSoldeCreanceComponent } from './creance/update-solde-creance/update-solde-creance.component';
 
 const routes: Routes = [
 
@@ -134,12 +138,10 @@ const routes: Routes = [
 
     { path: 'detailsCommandeClients', component: ListLigneCmdClientComponent},
     { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent},
-    { path:'detailsCommandeClient/:id',component:EditCommandeClientComponent },
 
     { path: 'ventes', component: ListVenteComponent},
     { path:'vente',children:[
         {path:'',component:CreateVenteComponent},
-        {path:'edit/:id',component:EditLigneCmdClientComponent}
       ]
     },
     {path:'venteView/:id', component: ViewVenteComponent},
@@ -147,7 +149,6 @@ const routes: Routes = [
     { path: 'detailsVentes', component: ListLigneVenteComponent},
     { path:'detailsVente',children:[
         {path:'',component:CreateLigneVenteComponent},
-        {path:'edit/:id',component:EditLigneCmdClientComponent}
       ]
     },
 
@@ -176,6 +177,8 @@ const routes: Routes = [
 
     { path: 'creances', component: ListCreanceComponent},
     { path:'creance',component: CreateCreanceComponent},
+    { path:'creance',component: UpdateStatusCreanceComponent},
+    { path:'creance',component: UpdateSoldeCreanceComponent},
 
     {path:'creanceView/:id', component: ViewCreanceComponent},
 
@@ -230,6 +233,11 @@ const routes: Routes = [
     },
 
     { path: 'dashboard', component: DashboardComponent},
+
+    { path: 'chart', component: ChartComponent },
+    { path: 'barchart', component: BarchartComponent},
+    { path: 'piechart', component: PiechartComponent},
+    { path: 'linechart', component: LinechartComponent},
 
    /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
     { path: '**', component: PageNotFoundComponent },

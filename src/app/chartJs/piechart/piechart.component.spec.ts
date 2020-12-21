@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditLigneCmdClientComponent } from './edit-ligne-cmd-client.component';
+import { PiechartComponent } from './piechart.component';
 
-describe('EditLigneCmdClientComponent', () => {
-  let component: EditLigneCmdClientComponent;
-  let fixture: ComponentFixture<EditLigneCmdClientComponent>;
+describe('PiechartComponent', () => {
+  let component: PiechartComponent;
+  let fixture: ComponentFixture<PiechartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditLigneCmdClientComponent ]
+      declarations: [ PiechartComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditLigneCmdClientComponent);
+    fixture = TestBed.createComponent(PiechartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

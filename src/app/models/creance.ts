@@ -5,10 +5,12 @@ export class Creance {
   reference: number;
   total: number;
   libelle: string;
+  codeCreance: string;
   soldeCreance: number;
   nbreJours: number;
 	totalCreance: number;
-	status: string;
+  status: string;
+  dateCreance: Date;
 
   client: Client;
 

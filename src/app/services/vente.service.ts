@@ -43,6 +43,10 @@ export class VenteService {
      return this.http.get(`${this.baseUrl}/ventes/${id}`).toPromise();
    }
 
+   getSumVenteByDay(): Observable<any> {
+     return this.http.get(`${this.baseUrl}/searchSumsOfVenteByDay`);
+   }
+
    /* createCommandeClient(info: Object): Observable<Object> {
      return this.http.post(`${this.baseUrl}/commandesClientes`, info);
    } */
