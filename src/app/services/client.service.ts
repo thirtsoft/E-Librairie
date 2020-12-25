@@ -29,7 +29,6 @@ export class ClientService {
   constructor(private http: HttpClient) { }
 
   getAllClients(): Observable<any> {
-
     return this.http.get(`${this.baseUrl}/clients`);
   }
 
@@ -44,7 +43,6 @@ export class ClientService {
   getClientByID(id:number):any {
     return this.http.get(`${this.baseUrl}/clients/`+id).toPromise();
   }
-
 
   createClient(info: Object): Observable<Object> {
     return this.http.post<Object>(`${this.baseUrl}/clients`, info);
@@ -73,8 +71,11 @@ export class ClientService {
   }
 
   deleteClient(id: number): Observable<any> {
-
     return this.http.delete(`${this.baseUrl}/clients/${id}`, { responseType: 'text' });
+  }
+
+  getClientGroupByRaisonSocial() {
+    return this.http.get(`${this.baseUrl}/ListClientGroupByRaisonSocial`);
   }
 
 }
