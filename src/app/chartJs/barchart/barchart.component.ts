@@ -23,36 +23,37 @@ export class BarchartComponent implements OnInit {
   ];
 */
   Barchart: any = [];
-  ChiffreAffaire: number[] = [];
-  Month: Date[] = [];
+  ChiffreAffaireAnnees: number[] = [];
+  Year: Date[] = [];
 
-  list: any={}
+  listAnnes: any={}
 
   constructor(private statService: DashboardService) { }
 
   ngOnInit() {
   //  this.statService.getSumTotalOfVenteByMonth().subscribe((result: Vente[]) => {
-    this.statService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
-      this.list = result;
+   // this.statService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
+    this.statService.getSumTotalOfVenteByYear().subscribe((result: Vente[]) => {
+      this.listAnnes = result;
       const n = 1;
       const m = 0;
-      console.log(this.list);
-      for (let i=0; i<this.list.length; i++) {
-        this.ChiffreAffaire.push(this.list[i][n]);
-        this.Month.push(this.list[i][m]);
+      console.log(this.listAnnes);
+      for (let i=0; i<this.listAnnes.length; i++) {
+        this.ChiffreAffaireAnnees.push(this.listAnnes[i][n]);
+        this.Year.push(this.listAnnes[i][m]);
       }
-      this
+    //  this
       this.Barchart = new Chart('canvas', {
         type: 'bar',
         data: {
-          labels: this.Month,
+          labels: this.Year,
 
           datasets: [
             {
-              data: this.ChiffreAffaire,
+              data: this.ChiffreAffaireAnnees,
               borderColor: '#3cb371',
               backgroundColor: "#0000FF",
-              fill: true
+
             }
           ]
         },

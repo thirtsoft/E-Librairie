@@ -204,7 +204,6 @@ const routes: Routes = [
 
     { path: 'charges', component: ListChargeComponent},
     { path:'charge',component: CreateChargeComponent },
-    { path:'lineChart',component: LinechartComponent },
 
     { path: 'categorieCharges', component: ListCategorieChargeComponent},
     { path:'categorieCharge', component: CreateCategorieChargeComponent },

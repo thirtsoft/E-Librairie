@@ -99,6 +99,7 @@ import { PiechartComponent } from './chartJs/piechart/piechart.component';
 import { ChartComponent } from './chartJs/chart/chart.component';
 import { UpdateStatusCreanceComponent } from './creance/update-status-creance/update-status-creance.component';
 import { UpdateSoldeCreanceComponent } from './creance/update-solde-creance/update-solde-creance.component';
+import { BarcharComVenteComponent } from './chartJs/barchar-com-vente/barchar-com-vente.component';
 
 @NgModule({
   declarations: [
@@ -182,6 +183,7 @@ import { UpdateSoldeCreanceComponent } from './creance/update-solde-creance/upda
     ChartComponent,
     UpdateStatusCreanceComponent,
     UpdateSoldeCreanceComponent,
+    BarcharComVenteComponent,
   ],
   imports: [
     BrowserModule,

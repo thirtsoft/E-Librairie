@@ -30,43 +30,6 @@ export class LinechartComponent implements OnInit {
     private statService: DashboardService) { }
 
   ngOnInit() {
-    /*
-    this.crudApi.getAllClients().subscribe((result: Client[]) => {
-      result.forEach(x => {
-        this.ChefService.push(x.chefService);
-        this.Number.push(x.id);
-        console.log(this.Number);
-      });
-      this
-      this.Linechart = new Chart('canvas', {
-        type: 'line',
-        data: {
-          labels: this.ChefService,
-
-          datasets: [
-            {
-              data: this.Number,
-              borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              display: true
-            }],
-            yAxes: [{
-              display: true
-            }],
-          }
-        }
-      });
-    });
-    */
     this.statService.getSumTotalOfVenteByMonth().subscribe((result: Vente[]) => {
       this.list = result;
       const n = 1;
@@ -79,7 +42,7 @@ export class LinechartComponent implements OnInit {
         this.Month.push(this.list[i][m]);
       //  console.log(this.ChiffreAffaire.push(result[this.list[i]].totalVente));
       }
-      this
+    //  this
       this.Linechart = new Chart('canvas', {
         type: 'line',
         data: {
@@ -110,46 +73,4 @@ export class LinechartComponent implements OnInit {
     });
   }
 
-
-      /*
-      let test = this.ChefService.push(result.forEach(x=> {
-        this.ChefService.push(x.chefService);
-        this.Number.push( x.raisonSocial);
-      }));
-      console.log(test);
-      */
-
-
-
-
-/*
-      this.data.forEach(y => {
-        this.RaisonSocial.push(y.raisonSocial);
-        this.ChefService.push(y.chefService);
-      })
-    });
-
-  }
-
-  public lineChartData: Array<any> = [
-    {data: this.RaisonSocial, label: 'Raison Social'},
-  ];
-  public lineChartLabels: Array<any> = this.ChefService;
-  public lineChartOptions: any = {
-    responsive: true
-  };
-  public lineChartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'red',
-      pointBorderColor: 'red',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend: Boolean = true;
-  public lineChartType: String = 'line';
-
-*/
 }

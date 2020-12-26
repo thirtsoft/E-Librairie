@@ -32,6 +32,10 @@ export class DashboardService {
   }
 
   constructor(private http: HttpClient) { }
+  getNumberOfProduitByStock(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchCountProduitsByStock`);
+  }
+
   getNumberOfCommandes(): Observable<any> {
     return this.http.get(`${this.baseUrl}/NumberOfCommande`);
   }
@@ -64,6 +68,10 @@ export class DashboardService {
 
   getSumTotalOfVenteByMonth(): Observable<any> {
     return this.http.get(`${this.baseUrl}/searchSumVenteByMonth`);
+  }
+
+  getSumTotalOfVenteByYear(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchSumVenteByYears`);
   }
 
 }
