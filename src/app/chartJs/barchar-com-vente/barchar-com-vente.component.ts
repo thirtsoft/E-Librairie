@@ -32,7 +32,6 @@ list: any={}
 constructor(private statService: DashboardService) { }
 
 ngOnInit() {
-//  this.statService.getSumTotalOfVenteByMonth().subscribe((result: Vente[]) => {
   this.statService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
     this.list = result;
     const n = 1;

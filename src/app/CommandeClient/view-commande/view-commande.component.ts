@@ -12,7 +12,11 @@ import { Client } from 'src/app/models/client';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { Article } from 'src/app/models/article';
-import * as jsPDF from 'jspdf';
+import { map } from 'rxjs/operators';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-view-commande',
@@ -139,22 +143,195 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl('commandeclients');
   }
 
-  onGeneratePdf() {
-    let content=this.content.nativeElement;
-    let doc = new jsPDF();
-    let _elementHandlers =
-    {
-      '#editor':function(element,renderer){
-        return true;
+  Imprimer() {
+    this.crudApi.generateReport(this.comId).subscribe(
+      (result) => {
+        this.toastr.success("Commande are successfully exported")
+        },(error) => {
+          this.toastr.warning("Commande are not successfully exported")
+        }
+    );
+
+  }
+
+  Imprimers() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).download();
+  }
+
+  ImprimerPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).download();
+  }
+
+  getDocument() {
+    return {
+      content: [
+        {
+          text: 'AL AMINE',
+          fontSize: 50,
+          alignment: 'center',
+          color: '#0000ff',
+          decoration: 'underline',
+          style: 'name',
+        },
+        {
+          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+          fontSize: 12,
+          bold: true,
+          color: '#0000ff'
+        },
+        {
+          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
+          fontSize: 10.5,
+          bold: true,
+          color: '#0000ff'
+        },
+        {
+          text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 12,
+          bold: true,
+          alignment: 'center',
+          color: '#0000ff'
+        },
+        {
+
+        },
+
+        {
+          text: ' FACTURE PROFORMAT',
+          alignment: 'center',
+          fontSize: 14,
+          color: '#0000ff'
+        },
+        {},
+
+        {
+          columns: [
+
+            [
+              {
+                text: `FACTURE N° : ${this.lcmdService.listData[0].numero}`,
+                fontSize: 14,
+                bold: true,
+
+              },
+
+            ],
+
+            [
+              {
+                text: `Date: ${this.lcmdService.listData[0].commande.dateCommande.toLocaleString()}`,
+                alignment: 'right'
+              },
+            ],
+
+          ]
+        },
+        {
+          bold:true,
+          text: 'M  : ' +this.lcmdService.listData[0].commande.client.chefService
+        },
+        {
+          text: 'LA LISTE DES ARTICLES COMMANDES',
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+
+        },
+
+        this.getListArticle(this.lcmdService.listData),
+        {
+
+        },
+
+        {
+          text: 'Signature',
+          style: 'sign',
+          alignment: 'right'
+        },
+
+
+      ],
+
+      styles: {
+        header: {
+          fontSize: 14,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 14,
+          bold: true
+        },
+        total: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        ligne: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 14,
+          alignment: 'center'
+        },
+
       }
     };
-    doc.fromHTML(content.innerHTML,15,15,{
 
-      'width':190,
-      'elementHandlers':_elementHandlers
-    });
+  }
+  getListArticle(item: LigneCmdClient[]) {
+    return {
+      table: {
+        widths: ['auto', '*', 'auto', 'auto'],
+        body: [
+          [
+            {
+              text: 'QUANTITE',
+              style: 'tableHeader'
+            },
+            {
+              text: 'DESIGNATION',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.UNITAIRE',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.TOTAL',
+              style: 'tableHeader'
+            },
 
-    doc.save('test.pdf');
+          ],
+          ...item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prixCommande,
+              (x.quantite*x.prixCommande).toFixed(2)])
+          }),
+          [
+            {
+              text: 'MONTANT TOTAL',
+              alignment: 'center',
+              colSpan: 3
+            }, {}, {},
+            this.lcmdService.listData.reduce((sum, x)=> sum + (x.quantite * x.prixCommande), 0).toFixed(2)
+          ]
+        ]
+      }
+    }
 
   }
 

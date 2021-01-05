@@ -11,6 +11,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LigneCreanceService } from 'src/app/services/ligne-creance.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateCreanceComponent } from '../create-creance/create-creance.component';
+import { map } from 'rxjs/operators';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-view-creance',
@@ -103,6 +107,203 @@ export class ViewCreanceComponent implements OnInit {
           this.getListCreances();
       },
         error => console.log(error));
+    }
+
+  }
+
+  ImprimerPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).download();
+  }
+
+  getDocument() {
+    return {
+      content: [
+        {
+          text: 'AL AMINE',
+          fontSize: 50,
+          alignment: 'center',
+          color: '#0000ff',
+          decoration: 'underline',
+          style: 'name',
+        },
+        {
+          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+          fontSize: 12,
+          bold: true,
+          color: '#0000ff'
+        },
+        {
+          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
+          fontSize: 10.5,
+          bold: true,
+          color: '#0000ff'
+        },
+        {
+          text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 12,
+          bold: true,
+          alignment: 'center',
+          color: '#0000ff'
+        },
+        {
+
+        },
+
+        {
+          text: ' FACTURE PROFORMAT',
+          alignment: 'center',
+          fontSize: 14,
+          color: '#0000ff'
+        },
+        {},
+
+        {
+          columns: [
+
+            [
+              {
+                text: `FACTURE N° : ${this.lcreanceService.listData[0].numero}`,
+                fontSize: 14,
+                bold: true,
+
+              },
+
+            ],
+
+            [
+              {
+                text: `Date : ${this.lcreanceService.listData[0].creance.dateCreance.toLocaleString()}`,
+                alignment: 'right'
+              },
+            ],
+
+          ]
+        },
+        {
+          bold:true,
+          text: 'M  : ' +this.lcreanceService.listData[0].creance.client.chefService
+        },
+        {
+          text: 'LA LISTE DES ARTICLES COMMANDES',
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+
+        },
+
+        this.getListLigneCreances(this.lcreanceService.listData),
+        {
+
+        },
+
+        {
+          bold:true,
+          alignment: 'right',
+          fontSize: 14,
+          text: 'Sole Creance  : ' +this.lcreanceService.listData[0].creance.soldeCreance
+        },
+
+        {
+          bold:true,
+          alignment: 'right',
+          fontSize: 14,
+          text: 'Somme Reste A Payer  : ' +((this.lcreanceService.listData[0].creance.totalCreance)-(this.lcreanceService.listData[0].creance.soldeCreance))
+        },
+
+        {
+          bold:true,
+          alignment: 'right',
+          fontSize: 14,
+          text: 'Montant Total : ' +this.lcreanceService.listData[0].creance.totalCreance
+        },
+
+        {
+          text: 'Signature',
+          style: 'sign',
+          alignment: 'right'
+        },
+
+
+      ],
+
+      styles: {
+        header: {
+          fontSize: 14,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 14,
+          bold: true
+        },
+        total: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        ligne: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 14,
+          alignment: 'center'
+        },
+
+      }
+    };
+
+  }
+  getListLigneCreances(item: LigneCreance[]) {
+    return {
+      table: {
+        widths: ['auto', '*', 'auto', 'auto'],
+        body: [
+          [
+            {
+              text: 'QUANTITE',
+              style: 'tableHeader'
+            },
+            {
+              text: 'DESIGNATION',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.UNITAIRE',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.TOTAL',
+              style: 'tableHeader'
+            },
+
+          ],
+          ...item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prix,
+              (x.quantite*x.prix).toFixed(2)])
+          }),
+          [
+            {
+              text: 'MONTANT TOTAL',
+              alignment: 'center',
+              colSpan: 3
+            }, {}, {},
+            this.lcreanceService.listData.reduce((sum, x)=> sum + (x.quantite * x.prix), 0).toFixed(2)
+          ]
+        ]
+      }
     }
 
   }

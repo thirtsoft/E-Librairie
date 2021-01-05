@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, Input } fr
 import { Article } from 'src/app/models/article';
 import { Categorie } from 'src/app/models/categorie';
 import { Scategorie } from 'src/app/models/scategorie';
+import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ArticleService } from 'src/app/services/article.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, pipe } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateArticleComponent } from '../create-article/create-article.component';
@@ -275,6 +276,11 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   }
 
+  Imprimer() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).download();
+  }
+
   getDocument() {
     return {
       content: [
@@ -297,13 +303,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
               {
                 text: 'Email : alamine@gmail.com',
               },
-              {
-                text: 'LA LISTE DES ARTICLES',
-                bold: true,
-                fontSize: 16,
-                alignment: 'center',
-                margin: [0, 0, 0, 20]
-              }
+
             ],
 
           ]
@@ -311,14 +311,95 @@ export class ListArticleComponent implements OnDestroy, OnInit {
         {
           text: 'LA LISTE DES ARTICLES',
           bold: true,
-          fontSize: 16,
+          fontSize: 14,
           alignment: 'center',
           margin: [0, 0, 0, 20]
         },
-        this.getList(this.crudApi.listData),
 
-      ]
+        this.getListArticle(this.crudApi.listData),
+        {
 
+        },
+
+        {
+          text: 'Signature',
+          style: 'sign',
+          alignment: 'right'
+        },
+
+      ],
+      styles: {
+        header: {
+          fontSize: 14,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 14,
+          bold: true
+        },
+        total: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        ligne: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 14,
+          alignment: 'center'
+        }
+      }
+    };
+
+  }
+
+  getListArticle(item: Article[]) {
+    return {
+      table: {
+        widths: ['*','*','*','*','*','*'],
+        body: [
+          [
+            {
+              text: 'Designation',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Scategorie',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.Achat',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.Vente',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.Details',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Quantité',
+              style: 'tableHeader'
+            },
+          ],
+          ...item.map(x => {
+            return [x.designation, x.scategorie.libelle, x.prixAchat, x.prixVente, x.prixDetail, x.qtestock];
+          })
+        ]
+      }
     }
 
   }
@@ -366,7 +447,8 @@ export class ListArticleComponent implements OnDestroy, OnInit {
                   alignment: 'right'
                 },
 
-              ]
+              ],
+
             ],
 
             styles: {

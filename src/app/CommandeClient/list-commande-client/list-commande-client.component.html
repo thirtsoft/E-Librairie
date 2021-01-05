@@ -20,7 +20,7 @@
               </tr>
             </thead>
           <tbody>
-            <tr *ngFor="let cmd of listData; let i=index;">
+            <tr *ngFor="let cmd of crudApi.listData; let i=index;">
               <td>{{cmd.numeroCommande}}</td>
               <td>{{cmd.client.raisonSocial}} - {{cmd.client.chefService}} </td>
               <td>{{cmd.totalCommande}}</td>
@@ -29,7 +29,10 @@
               <td>
           <!--      <button class="btn btn-info btn-lg" (click)="editCommandeClient(cmd)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
                 <button class="btn btn-success btn-lg" (click)="viewCommandeClient(cmd)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-danger btn-lg" (click)="deleteCommandeClient(cmd.id)"><i class="fa fa-trash-o"></i>  </button>
+                <button class="btn btn-danger btn-lg" (click)="deleteCommandeClient(cmd.id)"><i class="fa fa-trash-o"></i>  </button>&nbsp;
+                <button class="btn btn-warning btn-lg" (click)="ImprimerFacture()">
+                  <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                </button>
               </td>
             </tr>
           </tbody>
