@@ -10,6 +10,8 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { CreateClientComponent } from '../create-client/create-client.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
+import { EnvoiEmailClientComponent } from '../envoi-email-client/envoi-email-client.component';
+import { EnvoiSMSClientComponent } from '../envoi-smsclient/envoi-smsclient.component';
 
 @Component({
   selector: 'app-list-client',
@@ -64,7 +66,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
     };
     this.crudApi.getAllClients().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -96,14 +98,16 @@ export class ListClientComponent implements OnDestroy, OnInit {
       chefService: '',
       adresse: '',
       email: '',
-      telephone:''
+      telephone:'',
+      subject: '',
+      message: ''
     };
 
   }
 
   getListClients() {
     this.crudApi.getAllClients().subscribe(
-      response =>{this.listData = response;}
+      response =>{this.crudApi.listData = response;}
     );
 
   }
@@ -127,6 +131,25 @@ export class ListClientComponent implements OnDestroy, OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     this.matDialog.open(CreateClientComponent, dialogConfig);
+  }
+
+  envoiEmail(item: Client) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(EnvoiEmailClientComponent, dialogConfig);
+  }
+
+  envoiSMS() {
+    this.crudApi.choixmenu = "A";
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(EnvoiSMSClientComponent, dialogConfig);
   }
 /*
   deleteClient(id: number) {

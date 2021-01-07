@@ -21,13 +21,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let four of listData; let i=index;">
+            <tr *ngFor="let four of crudApi.listData; let i=index;">
               <td>{{four.prenom}}  {{four.nom}}</td>
               <td>{{four.numeroCompte}}</td>
               <td>{{four.nomBank}}</td>
               <td>{{four.telephone}}</td>
               <td>{{four.email}}</td>
               <td>
+                <button class="btn btn-warning btn-lg" (click)="envoiEmail(four)">
+                  <i class="fa fa-envelope" aria-hidden="true"></i> </button>&nbsp;
+                <button class="btn btn-primary btn-lg" (click)="envoiSMS(four)">
+                  <i class="fa fa-mobile" aria-hidden="true"></i>
+                      </button>&nbsp;
                 <button class="btn btn-success btn-lg" (click)="viewFournisseur(four)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-info btn-lg" (click)="editFournisseur(four)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteFournisseur(four.id)"><i class="fa fa-trash-o"></i>  </button>

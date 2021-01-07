@@ -72,6 +72,12 @@ import { LinechartComponent } from './chartJs/linechart/linechart.component';
 import { ChartComponent } from './chartJs/chart/chart.component';
 import { UpdateStatusCreanceComponent } from './creance/update-status-creance/update-status-creance.component';
 import { UpdateSoldeCreanceComponent } from './creance/update-solde-creance/update-solde-creance.component';
+import { EnvoiEmailClientComponent } from './client/envoi-email-client/envoi-email-client.component';
+import { EnvoiSMSClientComponent } from './client/envoi-smsclient/envoi-smsclient.component';
+import { EnvoiEmailFournisseurComponent } from './fournisseur/envoi-email-fournisseur/envoi-email-fournisseur.component';
+import { EnvoiSMSFournisseurComponent } from './fournisseur/envoi-smsfournisseur/envoi-smsfournisseur.component';
+import { EnvoiEmailEmployeComponent } from './employe/envoi-email-employe/envoi-email-employe.component';
+import { EnvoiSMSEmployeComponent } from './employe/envoi-smsemploye/envoi-smsemploye.component';
 
 const routes: Routes = [
 
@@ -118,6 +124,8 @@ const routes: Routes = [
 
     { path: 'clients', component: ListClientComponent},
     { path: 'client', component: CreateClientComponent},
+    { path: 'sendEmailToCustomer', component: EnvoiEmailClientComponent},
+    { path: 'sendSMSToCustomer', component: EnvoiSMSClientComponent},
 
 /*
 
@@ -220,9 +228,14 @@ const routes: Routes = [
     { path: 'fournisseurs', component: ListFournisseurComponent},
     { path: 'fournisseur', component: CreateFournisseurComponent},
     { path: 'fournisseurView', component: ViewFournisseurComponent},
+    { path: 'sendEmailToFournisseur', component: EnvoiEmailFournisseurComponent},
+    { path: 'sendSMSToFournisseur', component: EnvoiSMSFournisseurComponent},
 
     { path: 'employes', component: ListEmployeComponent},
     { path: 'employe', component: CreateEmployeComponent},
+    { path: 'sendEmailToEmploye', component: EnvoiEmailEmployeComponent},
+    { path: 'sendSMSToEmploye', component: EnvoiSMSEmployeComponent},
+
 
 
     { path: 'versements', children: [

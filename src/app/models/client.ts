@@ -6,6 +6,8 @@ export class Client {
   adresse: string;
   telephone: string;
   email: string;
+  subject: string;
+  message: string;
 
 }
 

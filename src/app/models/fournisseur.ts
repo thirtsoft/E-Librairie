@@ -11,4 +11,7 @@ export class Fournisseur {
   fax: string;
   email: string;
 
+  subject: string;
+  message: string;
+
 }

@@ -11,6 +11,8 @@ import { CreateFournisseurComponent } from '../create-fournisseur/create-fournis
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ViewFournisseurComponent } from '../view-fournisseur/view-fournisseur.component';
+import { EnvoiSMSFournisseurComponent } from '../envoi-smsfournisseur/envoi-smsfournisseur.component';
+import { EnvoiEmailFournisseurComponent } from '../envoi-email-fournisseur/envoi-email-fournisseur.component';
 
 @Component({
   selector: 'app-list-fournisseur',
@@ -20,7 +22,6 @@ import { ViewFournisseurComponent } from '../view-fournisseur/view-fournisseur.c
 export class ListFournisseurComponent implements OnDestroy, OnInit {
 
   fournisseur: Fournisseur;
-  listData : Fournisseur[];
   FourID: number;
 
   private editForm: FormGroup;
@@ -62,8 +63,8 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     };
     this.crudApi.getAllFournisseurs().subscribe(
       response =>{
-        this.listData = response;
-        console.log(this.listData);
+        this.crudApi.listData = response;
+        console.log(this.crudApi.listData);
         this.dtTrigger.next();
       }
     );
@@ -99,14 +100,16 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
       adresse: '',
       email: '',
       fax: '',
-      telephone: ''
+      telephone: '',
+      subject: '',
+      message: '',
     };
 
   }
 
   getListFournisseurs() {
     this.crudApi.getAllFournisseurs().subscribe(
-      response =>{this.listData = response;}
+      response =>{this.crudApi.listData = response;}
     );
   }
 
@@ -139,6 +142,26 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     this.matDialog.open(CreateFournisseurComponent, dialogConfig);
+  }
+
+  envoiEmail(item: Fournisseur) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(EnvoiEmailFournisseurComponent, dialogConfig);
+  }
+
+  envoiSMS(item: Fournisseur) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(EnvoiSMSFournisseurComponent, dialogConfig);
   }
 /*
   deleteFournisseur(id: number) {

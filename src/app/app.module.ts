@@ -100,6 +100,12 @@ import { ChartComponent } from './chartJs/chart/chart.component';
 import { UpdateStatusCreanceComponent } from './creance/update-status-creance/update-status-creance.component';
 import { UpdateSoldeCreanceComponent } from './creance/update-solde-creance/update-solde-creance.component';
 import { BarcharComVenteComponent } from './chartJs/barchar-com-vente/barchar-com-vente.component';
+import { EnvoiEmailFournisseurComponent } from './fournisseur/envoi-email-fournisseur/envoi-email-fournisseur.component';
+import { EnvoiSMSFournisseurComponent } from './fournisseur/envoi-smsfournisseur/envoi-smsfournisseur.component';
+import { EnvoiSMSClientComponent } from './client/envoi-smsclient/envoi-smsclient.component';
+import { EnvoiEmailClientComponent } from './client/envoi-email-client/envoi-email-client.component';
+import { EnvoiEmailEmployeComponent } from './employe/envoi-email-employe/envoi-email-employe.component';
+import { EnvoiSMSEmployeComponent } from './employe/envoi-smsemploye/envoi-smsemploye.component';
 
 @NgModule({
   declarations: [
@@ -184,6 +190,12 @@ import { BarcharComVenteComponent } from './chartJs/barchar-com-vente/barchar-co
     UpdateStatusCreanceComponent,
     UpdateSoldeCreanceComponent,
     BarcharComVenteComponent,
+    EnvoiEmailFournisseurComponent,
+    EnvoiSMSFournisseurComponent,
+    EnvoiSMSClientComponent,
+    EnvoiEmailClientComponent,
+    EnvoiEmailEmployeComponent,
+    EnvoiSMSEmployeComponent,
   ],
   imports: [
     BrowserModule,

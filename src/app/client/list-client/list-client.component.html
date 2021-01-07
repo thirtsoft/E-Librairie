@@ -22,15 +22,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let clt of listData">
+    <tr *ngFor="let clt of crudApi.listData; let i=index;">
       <td>{{clt.raisonSocial}}</td>
       <td>{{clt.chefService}}</td>
       <td>{{clt.telephone}}</td>
       <td>{{clt.email}}</td>
       <td>{{clt.adresse}}</td>
       <td>
-        <button class="btn btn-info btn-lg" (click)="editClient(clt)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
-        <button class="btn btn-danger btn-lg" (click)="deleteClient(clt.id)"><i class="fa fa-trash-o"></i>  </button>
+
+        <button class="btn btn-warning btn-lg" (click)="envoiEmail(clt)">
+            <i class="fa fa-envelope" aria-hidden="true"></i> </button>&nbsp;
+        <button class="btn btn-primary btn-lg" (click)="envoiSMS(clt)">
+          <i class="fa fa-mobile" aria-hidden="true"></i>
+                </button>&nbsp;
+        <button class="btn btn-info btn-lg" (click)="editClient(clt)">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
+        <button class="btn btn-danger btn-lg" (click)="deleteClient(clt.id)">
+          <i class="fa fa-trash-o"></i>  </button>
       </td>
     </tr>
   </tbody>
