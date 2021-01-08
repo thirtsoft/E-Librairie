@@ -106,6 +106,9 @@ import { EnvoiSMSClientComponent } from './client/envoi-smsclient/envoi-smsclien
 import { EnvoiEmailClientComponent } from './client/envoi-email-client/envoi-email-client.component';
 import { EnvoiEmailEmployeComponent } from './employe/envoi-email-employe/envoi-email-employe.component';
 import { EnvoiSMSEmployeComponent } from './employe/envoi-smsemploye/envoi-smsemploye.component';
+import { ListEmailComponent } from './email/list-email/list-email.component';
+import { EmailClientComponent } from './email/email-client/email-client.component';
+import { EmailFournisseurComponent } from './email/email-fournisseur/email-fournisseur.component';
 
 @NgModule({
   declarations: [
@@ -196,6 +199,9 @@ import { EnvoiSMSEmployeComponent } from './employe/envoi-smsemploye/envoi-smsem
     EnvoiEmailClientComponent,
     EnvoiEmailEmployeComponent,
     EnvoiSMSEmployeComponent,
+    ListEmailComponent,
+    EmailClientComponent,
+    EmailFournisseurComponent,
   ],
   imports: [
     BrowserModule,

@@ -143,14 +143,16 @@ export class ListClientComponent implements OnDestroy, OnInit {
     this.matDialog.open(EnvoiEmailClientComponent, dialogConfig);
   }
 
-  envoiSMS() {
-    this.crudApi.choixmenu = "A";
+  envoiSMS(item: Client) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     this.matDialog.open(EnvoiSMSClientComponent, dialogConfig);
   }
+
 /*
   deleteClient(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Client ?')) {
