@@ -109,6 +109,8 @@ import { EnvoiSMSEmployeComponent } from './employe/envoi-smsemploye/envoi-smsem
 import { ListEmailComponent } from './email/list-email/list-email.component';
 import { EmailClientComponent } from './email/email-client/email-client.component';
 import { EmailFournisseurComponent } from './email/email-fournisseur/email-fournisseur.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -220,7 +222,8 @@ import { EmailFournisseurComponent } from './email/email-fournisseur/email-fourn
     MatDialogModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
 
   ],
