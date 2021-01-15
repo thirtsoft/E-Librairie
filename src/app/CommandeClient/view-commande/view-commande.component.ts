@@ -118,48 +118,18 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("commandeclient");
   }
-  deleteCommandeClient(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette Commande ?')) {
-    this.crudApi.deleteCommandeClient(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Commande supprimé avec succès!');
-          this.rerender();
-          this.getListCommandeClients();
-      },
-        error => console.log(error));
-    }
 
-  }
-
-  editerCommandeClient(item : CommandeClient) {
-
-    this.router.navigateByUrl('commandeclient/'+item.id);
-
-  }
-
-  onGoBack() {
-    this.router.navigateByUrl('commandeclients');
-  }
-
-  Imprimer() {
-    this.crudApi.generateReport(this.comId).subscribe(
-      (result) => {
-        this.toastr.success("Commande are successfully exported")
-        },(error) => {
-          this.toastr.warning("Commande are not successfully exported")
-        }
-    );
-
-  }
-
-  Imprimers() {
+  OpenPdf() {
     const document = this.getDocument();
-    pdfMake.createPdf(document).download();
+    pdfMake.createPdf(document).open();
   }
 
-  ImprimerPdf() {
+  PrintPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).print();
+  }
+
+  TelechargerPdf() {
     const document = this.getDocument();
     pdfMake.createPdf(document).download();
   }
@@ -198,12 +168,12 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
         },
 
-        {
+        /* {
           text: ' FACTURE PROFORMAT',
           alignment: 'center',
           fontSize: 14,
           color: '#0000ff'
-        },
+        }, */
         {},
 
         {
@@ -233,12 +203,20 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
           text: 'M  : ' +this.lcmdService.listData[0].commande.client.chefService
         },
         {
+          text: ' FACTURE PROFORMAT',
+          alignment: 'center',
+          fontSize: 14,
+          color: '#0000ff',
+          bold: true,
+          margin: [0, 0, 0, 20]
+        },
+        /* {
           text: 'LA LISTE DES ARTICLES COMMANDES',
           bold: true,
           fontSize: 14,
           alignment: 'center',
           margin: [0, 0, 0, 20]
-        },
+        }, */
         {
 
         },
@@ -334,5 +312,47 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
     }
 
   }
+
+  editerCommandeClient(item : CommandeClient) {
+    this.router.navigateByUrl('commandeclient/'+item.id);
+  }
+
+  onGoBack() {
+    this.router.navigateByUrl('commandeclients');
+  }
+  deleteCommandeClient(id: number) {
+    if (window.confirm('Etes-vous sure de vouloir supprimer cette Commande ?')) {
+    this.crudApi.deleteCommandeClient(id)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.warning('Commande supprimé avec succès!');
+          this.rerender();
+          this.getListCommandeClients();
+      },
+        error => console.log(error));
+    }
+  }
+  Imprimer() {
+    this.crudApi.generateReport(this.comId).subscribe(
+      (result) => {
+        this.toastr.success("Commande are successfully exported")
+        },(error) => {
+          this.toastr.warning("Commande are not successfully exported")
+        }
+    );
+
+  }
+
+  Imprimers() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).download();
+  }
+
+  ImprimerPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).download();
+  }
+
 
 }

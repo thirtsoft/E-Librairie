@@ -69,6 +69,7 @@ export class CreateCreanceComponent implements OnInit {
       libelle: ['', Validators.required],
       codeCreance: ['', Validators.required],
       soldeCreance: [0, Validators.required],
+      avanceCreance: [0, Validators.required],
       nbreJours: [0, Validators.required],
       totalCreance: [0, Validators.required],
       status: ['', Validators.required],

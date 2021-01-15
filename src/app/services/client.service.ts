@@ -45,7 +45,7 @@ export class ClientService {
   }
 
   createClient(info: Object): Observable<Object> {
-    return this.http.post<Object>(`${this.baseUrl}/clients`, info);
+    return this.http.post(`${this.baseUrl}/clients`, info);
   }
 
   /**

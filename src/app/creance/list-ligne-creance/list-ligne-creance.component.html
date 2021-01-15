@@ -16,7 +16,7 @@
               <tr>
                 <th>Numéro</th> <th>Produit</th><th>Prix</th><th>Quantité</th>
                 <th>Total</th>
-                <th>Action</th>
+                <th>Client</th>
               </tr>
             </thead>
           <tbody >
@@ -26,10 +26,12 @@
               <td>{{lcreance.prix}}</td>
               <td>{{lcreance.quantite}}</td>
               <td>{{(lcreance.prix)*(lcreance.quantite)}} </td>
-              <td>
-           <!-- <button class="btn btn-info btn-lg" (click)="editerLigneCmdClient(lcomClient)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
+              <td>{{lcreance.creance?.client.chefService}}</td>
+            <!--  <td>
+                <button class="btn btn-info btn-lg" (click)="editerLigneCmdClient(lcomClient)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteLigneCreance(lcreance.id)"><i class="fa fa-trash-o"></i>  </button>
               </td>
+              -->
             </tr>
           </tbody>
         </table>

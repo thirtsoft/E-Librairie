@@ -42,7 +42,7 @@ export class FournisseurService {
 
 
    createFournisseur(info: Object): Observable<Object> {
-     return this.http.post<Object>(`${this.baseUrl}/fournisseurs`, info);
+     return this.http.post(`${this.baseUrl}/fournisseurs`, info);
    }
 
    /**

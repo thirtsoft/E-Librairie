@@ -25,15 +25,14 @@
         <div class="form-group">
           <select name="categorie"
               [(ngModel)]="formDataScategorie.categorie" class="form-control">
-
             <option *ngFor="let cat of listCategorie" [ngValue]="cat.id == formDataScategorie.categorie?.id ? formDataScategorie.categorie : cat">{{cat.designation}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>
     </form>
  </div>

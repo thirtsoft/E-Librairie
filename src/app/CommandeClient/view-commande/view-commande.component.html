@@ -4,9 +4,15 @@
       <h1>DETAILS D'UNE COMMANDE</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="ImprimerPdf()" class="btn btn-success btn-lg">
-        <i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp;
-      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" > <span class="fa fa-arrow-left"></span>&nbsp; Retour</a>
+      <a type="button" (click)="OpenPdf()" class="btn btn-success btn-sm">
+        <i class="fa fa-plus" aria-hidden="true"></i> Ouvrir</a>&nbsp;
+      <a type="button" (click)="PrintPdf()" class="btn btn-success btn-sm">
+          <i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp;
+      <a type="button" (click)="TelechargerPdf()" class="btn btn-success btn-sm">
+        <i class="fa fa-plus" aria-hidden="true"></i> Telecharger</a>&nbsp;
+     <!--  <a type="button" (click)="ImprimerPdf()" class="btn btn-success btn-lg">
+        <i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp; -->
+      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-sm" > <span class="fa fa-arrow-left"></span>&nbsp; Retour</a>
 
     </div>
   </div>
@@ -58,8 +64,8 @@
         <tr *ngFor="let item of this.lcmdService.listData">
           <td>{{item.produit.designation}}</td>
           <td>{{item.quantite}}</td>
-          <td>{{item.prix}}</td>
-          <td>{{(item.prix)*(item.quantite)}} </td>
+          <td>{{item.prixCommande}}</td>
+          <td>{{(item.prixCommande)*(item.quantite)}} </td>
         </tr>
       </tbody>
     </table>

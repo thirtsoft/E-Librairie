@@ -7,6 +7,7 @@ export class Creance {
   libelle: string;
   codeCreance: string;
   soldeCreance: number;
+  avanceCreance: number;
   nbreJours: number;
 	totalCreance: number;
   status: string;

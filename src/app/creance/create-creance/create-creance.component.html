@@ -16,11 +16,11 @@
         <input type="text" formControlName="codeCreance" class="form-control" id="codeCreance">
       </div>
       <div class="form-group col-sm-4 mb-3 mb-sm-0">
-        <label>Solde</label>
+        <label>Somme Empruntée</label>
         <input type="text" formControlName="soldeCreance" class="form-control" id="soldeCreance">
       </div>
 
-      <div class="form-group col-sm-4 mb-3 mb-sm-0">
+      <div class="form-group col-sm-3 mb-3 mb-sm-0">
         <label>Client</label>
         <div class="form-group">
           <select name="client" formControlName="client" id="client" class="form-control"
@@ -31,11 +31,15 @@
         </div>
       </div>
 
-      <div class="form-group col-sm-4 mb-3 mb-sm-0">
+      <div class="form-group col-sm-3 mb-3 mb-sm-0">
+        <label>Avance</label>
+        <input type="text" formControlName="avanceCreance" class="form-control" id="nbreJours">
+      </div>
+      <div class="form-group col-sm-2 mb-3 mb-sm-0">
         <label>Délais</label>
         <input type="text" formControlName="nbreJours" class="form-control" id="nbreJours">
       </div>
-      <div class="form-group col-sm-4 mb-3 mb-sm-0">
+      <div class="form-group col-sm-3 mb-3 mb-sm-0">
         <label>Status</label>
         <select name="client" formControlName="status" id="status" class="form-control"
           [compareWith]="compareClient">

@@ -14,9 +14,9 @@
             [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-                <th>Numéro Commande</th> <th>Article</th><th>Quantité</th><th>P.Unitaire</th>
+                <th>Numéro</th> <th>Article</th><th>Quantité</th><th>P.Unitaire</th>
                 <th>P.Total</th>
-                <th>Action</th>
+                <th>Client</th>
               </tr>
             </thead>
           <tbody >
@@ -26,10 +26,13 @@
               <td>{{lcomClient.quantite}}</td>
               <td>{{lcomClient.prixCommande}}</td>
               <td>{{(lcomClient.prixCommande)*(lcomClient.quantite)}} </td>
+              <td>{{lcomClient.commande?.client.chefService}}</td>
+ <!--
               <td>
-           <!-- <button class="btn btn-info btn-lg" (click)="editerLigneCmdClient(lcomClient)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
+            <button class="btn btn-info btn-lg" (click)="editerLigneCmdClient(lcomClient)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteLigneCmdClient(lcomClient.id)"><i class="fa fa-trash-o"></i>  </button>
               </td>
+            -->
             </tr>
           </tbody>
         </table>

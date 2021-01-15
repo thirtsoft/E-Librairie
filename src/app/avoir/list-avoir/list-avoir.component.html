@@ -15,8 +15,8 @@
 
   <thead>
     <tr>
-      <th>Reference</th><th>Libelle</th><th>Raison Social</th><th>Fournisseur</th>
-      <th>Solde</th><th>Nbre Jours</th><th>Date</th>
+      <th>Reference</th><th>Libelle</th><th>Fournisseur</th>
+      <th>Solde Avoir</th><th>Nbre Jours</th><th>Date</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -24,7 +24,7 @@
     <tr *ngFor="let avoir of crudApi.listData; let i=index;">
       <td>{{avoir.reference}}</td>
       <td>{{avoir.libelle}}</td>
-      <td>{{avoir.fournisseur.raisonSociale}}</td>
+    <!--   <td>{{avoir.fournisseur.raisonSociale}}</td> -->
       <td>{{avoir.fournisseur.prenom}} {{avoir.fournisseur.nom}}</td>
       <td>{{avoir.soldeAvoir}}</td>
       <td>{{avoir.nbreJours}}</td>
@@ -33,8 +33,8 @@
       <td>
         <!--
         <button class="btn btn-info btn-lg" (click)="addEditAvoir(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp; -->
-        <button class="btn btn-success btn-lg" (click)="viewAvoir(avoir)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-        <button class="btn btn-danger btn-lg" (click)="deleteAvoir(avoir.id)"><i class="fa fa-trash-o"></i>  </button>
+        <button class="btn btn-success btn-sm" (click)="viewAvoir(avoir)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
+        <button class="btn btn-danger btn-sm" (click)="deleteAvoir(avoir.id)"><i class="fa fa-trash-o"></i>  </button>
       </td>
     </tr>
   </tbody>

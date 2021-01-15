@@ -11,7 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateAvoirComponent } from '../create-avoir/create-avoir.component';
-
+import { map } from 'rxjs/operators';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-view-avoir',
   templateUrl: './view-avoir.component.html',
@@ -88,6 +91,201 @@ export class ViewAvoirComponent implements OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("avoir");
   }
+
+  OpenPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).open();
+  }
+
+  PrintPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).print();
+  }
+
+  TelechargerPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).download();
+  }
+
+  getDocument() {
+    return {
+      content: [
+        {
+          text: 'AL AMINE',
+          fontSize: 50,
+          alignment: 'center',
+          color: '#0000ff',
+          decoration: 'underline',
+          style: 'name',
+        },
+        {
+          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+          fontSize: 12,
+          bold: true,
+          color: '#0000ff'
+        },
+        {
+          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
+          fontSize: 10.5,
+          bold: true,
+          color: '#0000ff'
+        },
+        {
+          text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 12,
+          bold: true,
+          alignment: 'center',
+          color: '#0000ff'
+        },
+        {
+
+        },
+
+        {
+          text: ' FACTURE PROFORMAT',
+          alignment: 'center',
+          fontSize: 14,
+          color: '#0000ff'
+        },
+        {},
+
+        {
+          columns: [
+
+            [
+              {
+                text: `FACTURE N° : ${this.lavoirService.listData[0].numero}`,
+                fontSize: 14,
+                bold: true,
+
+              },
+
+            ],
+
+            [
+              {
+                text: `Date: ${this.lavoirService.listData[0].avoir.dateAvoir.toLocaleString()}`,
+                alignment: 'right'
+              },
+            ],
+
+          ]
+        },
+        {
+          bold:true,
+          text: 'Prénom  : ' +this.lavoirService.listData[0].avoir.fournisseur.prenom
+        },
+        {
+          bold:true,
+          text: 'Nom  : ' +this.lavoirService.listData[0].avoir.fournisseur.nom
+        },
+        {
+          text: 'LA LISTE DES ARTICLES COMMANDES',
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+
+        },
+
+        this.getListAvoir(this.lavoirService.listData),
+        {
+
+        },
+
+        {
+          text: 'Signature',
+          style: 'sign',
+          alignment: 'right'
+        },
+
+
+      ],
+
+      styles: {
+        header: {
+          fontSize: 14,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 14,
+          bold: true
+        },
+        total: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        ligne: {
+          fontSize: 12,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 14,
+          alignment: 'center'
+        },
+
+      }
+    };
+
+  }
+  getListAvoir(item: LigneAvoir[]) {
+    return {
+      table: {
+        widths: ['auto', '*', 'auto', 'auto'],
+        body: [
+          [
+            {
+              text: 'QUANTITE',
+              style: 'tableHeader'
+            },
+            {
+              text: 'DESIGNATION',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.UNITAIRE',
+              style: 'tableHeader'
+            },
+            {
+              text: 'P.TOTAL',
+              style: 'tableHeader'
+            },
+
+          ],
+          ...item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prix,
+              (x.quantite*x.prix).toFixed(2)])
+          }),
+          [
+            {
+              text: 'MONTANT TOTAL',
+              alignment: 'center',
+              colSpan: 3
+            }, {}, {},
+            this.lavoirService.listData.reduce((sum, x)=> sum + (x.quantite * x.prix), 0).toFixed(2)
+          ]
+        ]
+      }
+    }
+
+  }
+
+  onGoBack() {
+    this.router.navigateByUrl('avoirs');
+  }
+
   deleteAvoir(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Avoir ?')) {
     this.crudApi.deleteAvoir(id)
@@ -100,12 +298,6 @@ export class ViewAvoirComponent implements OnInit {
       },
         error => console.log(error));
     }
-
   }
-
-  onGoBack() {
-    this.router.navigateByUrl('avoirs');
-  }
-
 
 }

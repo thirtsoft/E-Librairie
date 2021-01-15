@@ -21,7 +21,7 @@ import { UpdateSoldeCreanceComponent } from '../update-solde-creance/update-sold
 export class ListCreanceComponent implements OnDestroy, OnInit {
 
   listData : Creance[];
-  status = "Valider";
+  status: string = "PAYEE";
 
   private editForm: FormGroup;
 

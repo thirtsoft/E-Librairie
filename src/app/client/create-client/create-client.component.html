@@ -2,7 +2,12 @@
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Client</h1>
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
-      <!--  <input type="hidden"  formControlName="id" id="id"> -->
+        <input type="hidden"  formControlName="id" id="id">
+      <div class="form-group">
+        <label>code Client</label>
+        <input type="text" class="form-control" formControlName="codeClient" id="codeClient">
+      </div>
+
       <div class="form-group">
         <label>Raison Social</label>
         <input type="text" class="form-control" formControlName="raisonSocial" id="raisonSocial">
@@ -29,8 +34,8 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]>
+        <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
           <i class="fa fa-close"></i> Close</button>
       </div>
 

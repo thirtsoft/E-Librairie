@@ -15,16 +15,7 @@ export class Article {
   photo: string;
   add_date: Date;
 
-//  categorie: Categorie;
-
-  scategorie: Scategorie;
-
-  public constructor() {
-    /*
-    this.scategorie = new Scategorie();
-    this.categorie = new Categorie();
-    */
-  }
+  scategorie = new Scategorie();
 
 
 

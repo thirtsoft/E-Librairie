@@ -20,7 +20,8 @@ export class ArticleService {
   choixmenu : string  = 'A';
   listData : Article[];
   list : Article[];
-  public dataForm:  FormGroup;
+  dataForm: FormGroup;
+  formData: Article;
 
   private listners = new Subject<any>();
   listen(): Observable<any> {

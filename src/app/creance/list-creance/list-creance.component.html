@@ -24,14 +24,14 @@
       <td>{{cont.reference}}</td>
       <td>{{cont.client.chefService}}</td>
       <td>{{cont.soldeCreance}}
-        <span class="btn btn-info btn-sm pull-right" (click)="addEditSolde(cont)">
+        <span [ngClass]="{ 'disabled': cont.status=='PAYEE' }" class="btn btn-info btn-sm pull-right" (click)="addEditSolde(cont)">
           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </span>
       </td>
       <td>{{cont.totalCreance}}</td>
       <td>{{(cont.totalCreance)-(cont.soldeCreance)}}</td>
       <td>{{cont.status}}
-        <span class="btn btn-info btn-sm pull-right" (click)="addEditStatus(cont)">
+        <span [ngClass]="{ 'disabled': cont.status=='PAYEE' }" class="btn btn-info btn-sm pull-right" (click)="addEditStatus(cont)">
           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </span>
 
@@ -42,8 +42,8 @@
 
       <td>
         <!--<button class="btn btn-info btn-lg" (click)="addEditCreance(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
-        <button class="btn btn-success btn-lg" (click)="viewCreance(cont)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-        <button class="btn btn-danger btn-lg" (click)="deleteCreance(cont.id)"><i class="fa fa-trash-o"></i>  </button>
+        <button class="btn btn-success btn-sm" (click)="viewCreance(cont)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
+        <button class="btn btn-danger btn-sm" (click)="deleteCreance(cont.id)"><i class="fa fa-trash-o"></i>  </button>
       </td>
     </tr>
   </tbody>
