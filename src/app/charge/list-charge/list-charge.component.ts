@@ -155,7 +155,7 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   }
  */
 
-  deleteCharge(id: number){
+deleteCharge(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
       if(res){

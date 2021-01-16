@@ -26,9 +26,9 @@
               <td>{{versmnt.montantVersement}}</td>
               <td>{{versmnt.dateVersement| date:'dd/MM/yyyy'}}</td>
               <td>
-                <button class="btn btn-success btn-lg" (click)="viewVersement(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-info btn-lg" (click)="addEditVersement(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-danger btn-lg" (click)="deleteVersement(versmnt.id)"><i class="fa fa-trash-o"></i>  </button>
+                <button class="btn btn-success btn-sm" (click)="viewVersement(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
+                <button class="btn btn-info btn-sm" (click)="addEditVersement(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
+                <button class="btn btn-danger btn-sm" (click)="deleteVersement(versmnt.id)"><i class="fa fa-trash-o"></i>  </button>
               </td>
             </tr>
           </tbody>

@@ -30,7 +30,7 @@
         <div class="form-group">
           <select name="employe" id="employe" [(ngModel)]="formDataVersement.employe" class="form-control">
             <option [ngValue]="null">--Select--</option>
-            <option *ngFor="let emp of listEmployes" [ngValue]="emp.id == formDataVersement.employe?.id ? formDataVersement.employe : emp">{{emp.cni}}</option>
+            <option *ngFor="let emp of listEmployes" [ngValue]="emp.id == formDataVersement.employe?.id ? formDataVersement.employe : emp">{{emp.prenom}}  {{emp.nom}}</option>
           </select>
         </div>
       </div>
@@ -51,8 +51,8 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-        <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
       </div>
     </form>
  </div>
