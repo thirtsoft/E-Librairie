@@ -19,9 +19,9 @@ export class CreateEmployeComponent implements OnInit {
     public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<CreateEmployeComponent>,
-    ) {
+    ) {}
 
-  }
+  get f() { return this.crudApi.dataForm.controls; }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
@@ -52,10 +52,14 @@ export class CreateEmployeComponent implements OnInit {
     this.crudApi.dataForm.reset();
   }
   onSubmit() {
-    if (this.crudApi.choixmenu == "A"){
-      this.saveEmploye();
-    }else{
-      this.updateEmploye();
+    if (this.crudApi.dataForm.valid) {
+      if (this.crudApi.choixmenu == "A"){
+        this.saveEmploye();
+      }else{
+        this.updateEmploye();
+      }
+    } else {
+      return;
     }
   }
 

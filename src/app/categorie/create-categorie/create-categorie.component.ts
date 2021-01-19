@@ -22,6 +22,8 @@ export class CreateCategorieComponent implements OnInit {
     public dialogRef:MatDialogRef<CreateCategorieComponent>,
     ) { }
 
+  get f() { return this.crudApi.dataForm.controls; }
+
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
@@ -46,10 +48,14 @@ export class CreateCategorieComponent implements OnInit {
       this.crudApi.dataForm.reset();
   }
   onSubmit() {
-    if (this.crudApi.choixmenu == "A"){
-      this.saveCategorie();
-    }else{
-      this.updateCategorie();
+    if (this.crudApi.dataForm.valid) {
+      if (this.crudApi.choixmenu == "A"){
+        this.saveCategorie();
+      }else{
+        this.updateCategorie();
+      }
+    } else {
+      return;
     }
   }
 

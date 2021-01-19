@@ -20,6 +20,8 @@ export class CreateCategorieChargeComponent implements OnInit {
     public dialogRef:MatDialogRef<CreateCategorieChargeComponent>,
     ) { }
 
+  get f() { return this.crudApi.dataForm.controls; }
+
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
@@ -44,10 +46,14 @@ export class CreateCategorieChargeComponent implements OnInit {
       this.crudApi.dataForm.reset();
   }
   onSubmit() {
-    if (this.crudApi.choixmenu == "A"){
-      this.saveCategorieCharge();
-    }else{
-      this.updateCategorieCharge();
+    if (this.crudApi.dataForm.valid) {
+      if (this.crudApi.choixmenu == "A"){
+        this.saveCategorieCharge();
+      }else{
+        this.updateCategorieCharge();
+      }
+    } else {
+      return;
     }
   }
 

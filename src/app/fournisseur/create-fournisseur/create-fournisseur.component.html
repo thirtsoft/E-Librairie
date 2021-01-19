@@ -6,6 +6,11 @@
       <div class="form-group">
         <label>Code</label>
         <input type="text" class="form-control" formControlName="code" name="code" id="code">
+        <div *ngIf="f['code'].invalid && (f['code'].dirty || f['code'].touched)" class="alert alert-danger">
+          <span *ngIf="f['code'].errors.required">
+            Code obligatoire.
+         </span>
+        </div>
       </div>
 
       <div class="form-group">
@@ -16,11 +21,21 @@
         <div class="form-group col-md-6">
           <label>Prénom</label>
           <input type="text" class="form-control" formControlName="prenom" name="prenom" id="prenom">
+          <div *ngIf="f['prenom'].invalid && (f['prenom'].dirty || f['prenom'].touched)" class="alert alert-danger">
+            <span *ngIf="f['prenom'].errors.required">
+              Prénom obligatoire.
+           </span>
+          </div>
         </div>
 
         <div class="form-group col-md-6">
           <label>Nom</label>
           <input type="text" class="form-control" formControlName="nom" name="nom" id="nom">
+          <div *ngIf="f['nom'].invalid && (f['nom'].dirty || f['nom'].touched)" class="alert alert-danger">
+            <span *ngIf="f['nom'].errors.required">
+              Nom obligatoire.
+           </span>
+          </div>
         </div>
 
       </div>
@@ -28,11 +43,21 @@
         <div class="form-group col-md-6">
           <label>Bank</label>
           <input type="text" class="form-control" formControlName="nomBank" name="nomBank" id="nomBank">
+          <div *ngIf="f['nomBank'].invalid && (f['nomBank'].dirty || f['nomBank'].touched)" class="alert alert-danger">
+            <span *ngIf="f['nomBank'].errors.required">
+              Banque obligatoire.
+           </span>
+          </div>
         </div>
 
         <div class="form-group col-md-6">
           <label>Compte</label>
           <input type="text" class="form-control" formControlName="numeroCompte" name="numeroCompte" id="numeroCompte">
+          <div *ngIf="f['numeroCompte'].invalid && (f['numeroCompte'].dirty || f['numeroCompte'].touched)" class="alert alert-danger">
+            <span *ngIf="f['numeroCompte'].errors.required">
+              Compte obligatoire.
+           </span>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -50,10 +75,20 @@
         <div class="form-group col-md-6">
           <label>Telephone</label>
           <input type="text" class="form-control" formControlName="telephone" name="telephone" id="telephone">
+          <div *ngIf="f['telephone'].invalid && (f['telephone'].dirty || f['telephone'].touched)" class="alert alert-danger">
+            <span *ngIf="f['telephone'].errors.required">
+              Telephone obligatoire.
+           </span>
+          </div>
         </div>
         <div class="form-group col-md-6">
           <label for="email">Email</label>
-          <input type="text" class="form-control" formControlName="email" id="email">
+          <input type="email" class="form-control" formControlName="email" id="email">
+          <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="alert alert-danger">
+            <span *ngIf="f['email'].errors.required">
+              Email obligatoire.
+           </span>
+          </div>
         </div>
 
       </div>

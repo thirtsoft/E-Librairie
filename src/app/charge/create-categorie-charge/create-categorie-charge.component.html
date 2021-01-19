@@ -5,12 +5,22 @@
         <input type="hidden"  formControlName="id" id="id">
         <div class="form-group">
           <label>Code </label>
-          <input type="text" class="form-control" formControlName="codeCategorieCharge" id="codeCategorieCharge">
+          <input type="text" class="form-control" formControlName="codeCategorieCharge" id="codeCategorieCharge" />
+          <div *ngIf="f['codeCategorieCharge'].invalid && (f['codeCategorieCharge'].dirty || f['codeCategorieCharge'].touched)" class="alert alert-danger">
+            <span *ngIf="f['codeCategorieCharge'].errors.required">
+              Code obligatoire.
+           </span>
+          </div>
         </div>
 
         <div class="form-group">
           <label>Designation</label>
-          <input type="text" class="form-control" formControlName="nomCategorieCharge" id="nomCategorieCharge">
+          <input type="text" class="form-control" formControlName="nomCategorieCharge" id="nomCategorieCharge" />
+          <div *ngIf="f['nomCategorieCharge'].invalid && (f['nomCategorieCharge'].dirty || f['nomCategorieCharge'].touched)" class="alert alert-danger">
+            <span *ngIf="f['nomCategorieCharge'].errors.required">
+              Designation obligatoire.
+           </span>
+          </div>
         </div>
 
         <div class="form-group">

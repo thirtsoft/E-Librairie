@@ -6,17 +6,32 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label>Prénom</label>
-          <input type="text" class="form-control" formControlName="prenom" name="prenom" id="prenom">
+          <input type="text" class="form-control" formControlName="prenom" name="prenom" id="prenom" />
+          <div *ngIf="f['prenom'].invalid && (f['prenom'].dirty || f['prenom'].touched)" class="alert alert-danger">
+            <span *ngIf="f['prenom'].errors.required">
+               Prénom obligatoire.
+           </span>
+          </div>
         </div>
         <div class="form-group col-md-6">
           <label>Nom</label>
           <input type="text" class="form-control" formControlName="nom" name="nom" id="nom">
+          <div *ngIf="f['nom'].invalid && (f['nom'].dirty || f['nom'].touched)" class="alert alert-danger">
+            <span *ngIf="f['nom'].errors.required">
+               Nom obligatoire.
+           </span>
+          </div>
         </div>
       </div>
 
       <div class="form-group">
         <label>CNI</label>
         <input type="text" class="form-control" formControlName="cni" name="cni" id="cni">
+        <div *ngIf="f['cni'].invalid && (f['cni'].dirty || f['cni'].touched)" class="alert alert-danger">
+          <span *ngIf="f['cni'].errors.required">
+            Cni obligatoire.
+         </span>
+        </div>
       </div>
 
       <div class="form-group">
@@ -28,6 +43,11 @@
         <div class="form-group col-md-6">
           <label>Telephone</label>
           <input type="text" class="form-control" formControlName="telephone" name="telephone" id="telephone">
+          <div *ngIf="f['telephone'].invalid && (f['telephone'].dirty || f['telephone'].touched)" class="alert alert-danger">
+            <span *ngIf="f['telephone'].errors.required">
+              Telephone obligatoire.
+           </span>
+          </div>
         </div>
 
         <div class="form-group col-md-6">

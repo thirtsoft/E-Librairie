@@ -21,6 +21,8 @@ export class CreateFournisseurComponent implements OnInit {
     public dialogRef:MatDialogRef<CreateFournisseurComponent>,
     ) { }
 
+  get f() { return this.crudApi.dataForm.controls; }
+
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
@@ -55,10 +57,14 @@ export class CreateFournisseurComponent implements OnInit {
       this.crudApi.dataForm.reset();
   }
   onSubmit() {
-    if (this.crudApi.choixmenu == "A"){
-      this.saveFournisseur();
-    }else{
-      this.updateFournisseur();
+    if (this.crudApi.dataForm.valid) {
+      if (this.crudApi.choixmenu == "A"){
+        this.saveFournisseur();
+      }else{
+        this.updateFournisseur();
+      }
+    }else {
+      return;
     }
 
   }

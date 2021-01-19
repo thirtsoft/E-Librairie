@@ -21,6 +21,8 @@ export class CreateClientComponent implements OnInit {
     public dialogRef:MatDialogRef<CreateClientComponent>,
     ) { }
 
+  get f() { return this.crudApi.dataForm.controls; }
+
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
       this.infoForm()
@@ -49,10 +51,14 @@ export class CreateClientComponent implements OnInit {
       this.crudApi.dataForm.reset();
   }
   onSubmit() {
-    if (this.crudApi.choixmenu == "A"){
-      this.saveClient();
-    }else{
-      this.updateClient();
+    if (this.crudApi.dataForm.valid) {
+      if (this.crudApi.choixmenu == "A"){
+        this.saveClient();
+      }else{
+        this.updateClient();
+      }
+    } else {
+      return;
     }
   }
 
