@@ -34,9 +34,9 @@ export class CreateAvoirComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private crudApi: AvoirService, private dialog:MatDialog,
+  constructor(public crudApi: AvoirService, private dialog:MatDialog,
     public fb: FormBuilder, public fourService: FournisseurService,
-    private lavoirService: LigneAvoirService, private datePipe : DatePipe,
+    public lavoirService: LigneAvoirService, private datePipe : DatePipe,
     private toastr :ToastrService, private router :Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,

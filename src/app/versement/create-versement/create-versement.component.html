@@ -1,17 +1,27 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Versement</h1>
-    <form #addVersmentForm="ngForm" (ngSubmit)="onSubmit(addVersmentForm)">
+    <form #addVersmentForm="ngForm" name="form" (ngSubmit)="addVersmentForm.form.valid && onSubmit()">
       <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataVersement.id">
       <div class="row">
         <div class="form-group col-md-6">
           <label>Numéro </label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numVersement" name="numVersement" id="numVersement">
+          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numVersement"
+            name="numVersement" id="numVersement" #numVersement="ngModel" required>
+          <span class="text-danger"
+              *ngIf="(numVersement.touched || addVersmentForm.submitted) && numVersement.errors?.required">
+              Numéro est obligatoire
+          </span>
         </div>
 
         <div class="form-group col-md-6">
           <label>Numéro Reçu</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numeroRecu" name="numeroRecu"  id="numeroRecu">
+          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numeroRecu"
+            name="numeroRecu" id="numeroRecu" #numeroRecu="ngModel" required>
+          <span class="text-danger"
+              *ngIf="(numeroRecu.touched || addVersmentForm.submitted) && numeroRecu.errors?.required">
+              Numéro Reçu est obligatoire
+          </span>
         </div>
       </div>
 
@@ -22,7 +32,12 @@
         </div>
         <div class="form-group col-md-6">
           <label>Bank</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nomBank" name="nomBank"  id="nomBank">
+          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nomBank"
+            name="nomBank" id="nomBank" #nomBank="ngModel" required>
+          <span class="text-danger"
+              *ngIf="(nomBank.touched || addVersmentForm.submitted) && nomBank.errors?.required">
+              Nom Bank est obligatoire
+          </span>
         </div>
       </div>
       <div class="form-group">
@@ -37,17 +52,32 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataVersement.montantVersement" name="montantVersement"  id="montantVersement">
+          <input type="number" class="form-control" [(ngModel)]="formDataVersement.montantVersement"
+            name="montantVersement" id="nomBank" #montantVersement="ngModel" required>
+          <span class="text-danger"
+            *ngIf="(montantVersement.touched || addVersmentForm.submitted) && montantVersement.errors?.required">
+             Montant Versement obligatoire
+          </span>
         </div>
         <div class="form-group col-md-6">
           <label>Date</label>
-          <input type="date" class="form-control" [(ngModel)]="formDataVersement.dateVersement" name="dateVersement"  id="dateVersement">
+          <input type="date" class="form-control" [(ngModel)]="formDataVersement.dateVersement"
+            name="dateVersement" id="dateVersement" #dateVersement="ngModel" required>
+          <span class="text-danger"
+            *ngIf="(dateVersement.touched || addVersmentForm.submitted) && dateVersement.errors?.required">
+            Date Versement est obligatoire
+          </span>
         </div>
       </div>
 
       <div class="form-group">
         <label>Motif</label>
-        <textarea class="form-control" [(ngModel)]="formDataVersement.motif" name="motif"  id="motif" cols="6" rows="5"></textarea>
+        <textarea class="form-control" [(ngModel)]="formDataVersement.motif"
+          name="motif" #motif="ngModel" required  id="motif" cols="6" rows="5"></textarea>
+          <span class="text-danger"
+          *ngIf="(motif.touched || addVersmentForm.submitted) && motif.errors?.required">
+          Motif est obligatoire
+        </span>
       </div>
 
       <div class="form-group">

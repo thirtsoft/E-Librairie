@@ -38,10 +38,10 @@ export class CreateApproComponent implements OnInit {
   orderItem: LigneAppro[];
   OrderId: number;
 
-  constructor(private crudApi: ApproService, private dialog:MatDialog,
+  constructor(public crudApi: ApproService, private dialog:MatDialog,
     public fb: FormBuilder, public fourService: FournisseurService,
-    private lapproService: LigneApproService, private datePipe : DatePipe,
-    private toastr :ToastrService, private router :Router,
+    public lapproService: LigneApproService, private datePipe : DatePipe,
+    public toastr :ToastrService, private router :Router,
     private currentRoute: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
    // public dialogRef:MatDialogRef<CreateLigneApproComponent>,

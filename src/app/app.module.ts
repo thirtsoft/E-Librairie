@@ -10,8 +10,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
-
 import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -50,10 +48,6 @@ import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
 import { ListCreanceComponent } from './creance/list-creance/list-creance.component';
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
-import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
-import { CreateCommandeClientComponent } from './CommandeClient/create-commande-client/create-commande-client.component';
-import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
@@ -65,21 +59,14 @@ import { CreateStockComponent } from './stock/create-stock/create-stock.componen
 import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appro/create-ligne-appro.component';
 import { ListLigneApproComponent } from './approvisionnement/list-ligne-appro/list-ligne-appro.component';
 import { ListVenteJounalierComponent } from './vente/list-vente-jounalier/list-vente-jounalier.component';
-import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 import { ViewApprovisionnementComponent } from './approvisionnement/view-approvisionnement/view-approvisionnement.component';
 import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
 import { ListChargeComponent } from './charge/list-charge/list-charge.component';
 import { CreateChargeComponent } from './charge/create-charge/create-charge.component';
 import { MatConfirmDialogComponent } from './matdialog/mat-confirm-dialog/mat-confirm-dialog.component';
 import { MatButtonModule } from '@angular/material';
-import { OrderItemComponent } from './order/order-item/order-item.component';
-import { OrderComponent } from './order/order/order.component';
-import { OrdersComponent } from './order/orders/orders.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ListRegisterComponent } from './authentication/list-register/list-register.component';
 import { CreateCategorieChargeComponent } from './charge/create-categorie-charge/create-categorie-charge.component';
 import { ListCategorieChargeComponent } from './charge/list-categorie-charge/list-categorie-charge.component';
@@ -111,6 +98,12 @@ import { EmailClientComponent } from './email/email-client/email-client.componen
 import { EmailFournisseurComponent } from './email/email-fournisseur/email-fournisseur.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
+import { CreateCommandeClientComponent } from './commandeClient/create-commande-client/create-commande-client.component';
+import { ListLigneCmdClientComponent } from './commandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
+
 
 @NgModule({
   declarations: [
@@ -167,14 +160,8 @@ import { environment } from '../environments/environment';
     ListChargeComponent,
     CreateChargeComponent,
     MatConfirmDialogComponent,
-    OrdersComponent,
-    OrderItemComponent,
-    OrderComponent,
     LoginComponent,
     RegisterComponent,
-    SidebarComponent,
-    FooterComponent,
-    NavbarComponent,
     ListRegisterComponent,
     CreateCategorieChargeComponent,
     ListCategorieChargeComponent,
@@ -215,7 +202,6 @@ import { environment } from '../environments/environment';
     ToastrModule.forRoot(),
     CommonModule,
     DataTablesModule,
-    NgbModule,
 
     ChartsModule,
 
@@ -224,12 +210,17 @@ import { environment } from '../environments/environment';
     MatIconModule,
     MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-
+  //  ServiceWorkerModule.register('ngsw-worker.js'),
 
   ],
 
   providers: [DatePipe,{ provide: MAT_DIALOG_DATA, useValue: {} ,},
-    { provide: MatDialogRef, useValue: {} }],
+    { provide: MatDialogRef, useValue: {} },
+    /*{
+      provide: SwRegistrationOptions,
+      useFactory: () => ({enabled: location.search.includes('sw=true')}),
+    },*/
+  ],
 
   bootstrap: [AppComponent],
   entryComponents: [CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent, CreateFournisseurComponent,

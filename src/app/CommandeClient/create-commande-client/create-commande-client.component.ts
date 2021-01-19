@@ -45,9 +45,9 @@ export class CreateCommandeClientComponent implements OnInit {
 
   defaultClient: Client;
 
-  constructor(private crudApi: CommandeClientService, private dialog:MatDialog,
+  constructor(public crudApi: CommandeClientService, public dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService, public creanceService: CreanceService,
-    private lcomService: LigneCmdClientService, private datePipe : DatePipe,
+    public lcomService: LigneCmdClientService, private datePipe : DatePipe,
     private toastr :ToastrService, private router :Router,
     private route: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,

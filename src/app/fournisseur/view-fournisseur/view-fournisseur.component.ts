@@ -33,7 +33,7 @@ export class ViewFournisseurComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(private crudApi: FournisseurService, private fb: FormBuilder,
+  constructor(public crudApi: FournisseurService, private fb: FormBuilder,
     private toastr: ToastrService,
     private router : Router, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
@@ -105,6 +105,10 @@ export class ViewFournisseurComponent implements OnInit {
   onCreateCreance() {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("creance");
+  }
+
+  onSubmit() {
+
   }
   deleteCreance(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette données ?')) {

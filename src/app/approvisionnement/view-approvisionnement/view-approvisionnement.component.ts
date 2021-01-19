@@ -45,7 +45,7 @@ export class ViewApprovisionnementComponent implements OnInit {
 
   constructor(public crudApi: ApproService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, private lapproService: LigneApproService,
+    private matDialog: MatDialog, public lapproService: LigneApproService,
     @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateVenteComponent>,
     ) { }

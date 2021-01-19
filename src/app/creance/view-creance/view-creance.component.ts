@@ -30,6 +30,7 @@ export class ViewCreanceComponent implements OnInit {
   creanceId: number;
   numeroCreance;
   totalCreance;
+  dateCreance;
   client;
 
   produit: Article = new Article();
@@ -43,7 +44,7 @@ export class ViewCreanceComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: CreanceService,public fb: FormBuilder,
-    public toastr: ToastrService,  private lcreanceService: LigneCreanceService,
+    public toastr: ToastrService,  public lcreanceService: LigneCreanceService,
     private router : Router, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateCreanceComponent>,
@@ -61,6 +62,7 @@ export class ViewCreanceComponent implements OnInit {
       this.numeroCreance = this.lcreanceService.listData[0].numero;
       console.log(this.lcreanceService.listData[0].creance.totalCreance);
       this.totalCreance = this.lcreanceService.listData[0].creance.totalCreance;
+      this.dateCreance = this.lcreanceService.listData[0].creance.dateCreance;
       this.client = this.lcreanceService.listData[0].creance.client.chefService;
      // this.dtTrigger.next();
     }, err => {

@@ -49,8 +49,8 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: CommandeClientService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, private lcmdService: LigneCmdClientService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
+    private matDialog: MatDialog, public lcmdService: LigneCmdClientService,
+    @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateCommandeClientComponent>,
     ) { }
 

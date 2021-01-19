@@ -28,6 +28,7 @@ export class ViewAvoirComponent implements OnInit {
   numeroAvoir;
   totalAvoir;
   fournisseur;
+  dateAvoir;
 
   produit: Article = new Article();
 
@@ -37,10 +38,10 @@ export class ViewAvoirComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: AvoirService, private lavoirService: LigneAvoirService,
+  constructor(public crudApi: AvoirService, public lavoirService: LigneAvoirService,
     public toastr: ToastrService, public fb: FormBuilder,
     private router : Router, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateAvoirComponent>,
     ) { }
 
@@ -56,6 +57,7 @@ export class ViewAvoirComponent implements OnInit {
       this.numeroAvoir = this.lavoirService.listData[0].numero;
       console.log(this.lavoirService.listData[0].avoir.totalAvoir);
       this.totalAvoir = this.lavoirService.listData[0].avoir.totalAvoir;
+      this.dateAvoir = this.lavoirService.listData[0].avoir.dateAvoir;
       this.fournisseur = this.lavoirService.listData[0].avoir.fournisseur.raisonSociale;
      // this.dtTrigger.next();
     }, err => {

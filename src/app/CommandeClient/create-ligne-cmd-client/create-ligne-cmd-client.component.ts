@@ -7,7 +7,7 @@ import { ArticleService } from 'src/app/services/article.service';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-import { CommandeClient } from 'src/app/models/commande-client';
+//import { CommandeClient } from 'src/app/models/commande-client';
 
 @Component({
   selector: 'app-create-ligne-cmd-client',

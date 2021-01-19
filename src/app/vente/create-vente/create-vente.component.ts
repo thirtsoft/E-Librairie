@@ -32,8 +32,8 @@ export class CreateVenteComponent implements OnInit {
   orderItem: LigneVente[];
   OrderId: number;
 
-  constructor(private crudApi: VenteService, private dialog:MatDialog,
-    private lventeService: LigneVenteService, private datePipe : DatePipe,
+  constructor(public crudApi: VenteService, private dialog:MatDialog,
+    public lventeService: LigneVenteService, private datePipe : DatePipe,
     public fb: FormBuilder, private toastr :ToastrService, private router :Router,
     private currentRoute: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,

@@ -71,16 +71,6 @@ export class ViewArticleComponent implements OnInit {
 
   }
 
-  /*
-  onSubmit() {
-    if (this.crudApi.choixmenu == "A") {
-      this.saveArticle(this.article);
-    }else {
-      this.updateArticle();
-    }
-
-  }*/
-
   saveArticle(art: Article) {
     this.crudApi.createArticle(art).
     subscribe( data => {

@@ -44,8 +44,8 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: VenteService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, private lventeService: LigneVenteService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
+    private matDialog: MatDialog, public lventeService: LigneVenteService,
+    @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateVenteComponent>,
     ) { }
 

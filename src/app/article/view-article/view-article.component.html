@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <h1>Détail Article</h1>
-    <form #addArticleForm="ngForm" (ngSubmit)="onSubmit(addArticleForm)">
+    <form #addArticleForm="ngForm" (ngSubmit)="onSubmit()">
       <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataArticle.id">
       <div class="form-group">
         <label>Référence </label>

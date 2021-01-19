@@ -37,10 +37,10 @@ export class CreateCreanceComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private crudApi: CreanceService, private dialog:MatDialog,
+  constructor(public crudApi: CreanceService, private dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService,
-    private lcreanceService: LigneCreanceService, private datePipe : DatePipe,
-    private toastr :ToastrService, private router :Router,
+    public lcreanceService: LigneCreanceService, private datePipe : DatePipe,
+    public toastr :ToastrService, private router :Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }

@@ -2,28 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListClientComponent } from './client/list-client/list-client.component';
 import { CreateClientComponent } from './client/create-client/create-client.component';
-import { EditClientComponent } from './client/edit-client/edit-client.component';
 import { ListEmployeComponent } from './employe/list-employe/list-employe.component';
 import { CreateEmployeComponent } from './employe/create-employe/create-employe.component';
-import { EditEmployeComponent } from './employe/edit-employe/edit-employe.component';
 import { ListFournisseurComponent } from './fournisseur/list-fournisseur/list-fournisseur.component';
 import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/create-fournisseur.component';
-import { EditFournisseurComponent } from './fournisseur/edit-fournisseur/edit-fournisseur.component';
 import { ListCategorieComponent } from './categorie/list-categorie/list-categorie.component';
 import { CreateCategorieComponent } from './categorie/create-categorie/create-categorie.component';
-import { EditCategorieComponent } from './categorie/edit-categorie/edit-categorie.component';
+//import { EditCategorieComponent } from './categorie/edit-categorie/edit-categorie.component';
 import { ListScategorieComponent } from './scategorie/list-scategorie/list-scategorie.component';
 import { CreateScategorieComponent } from './scategorie/create-scategorie/create-scategorie.component';
-import { EditScategorieComponent } from './scategorie/edit-scategorie/edit-scategorie.component';
+//import { EditScategorieComponent } from './scategorie/edit-scategorie/edit-scategorie.component';
 import { ListArticleComponent } from './article/list-article/list-article.component';
 import { CreateArticleComponent } from './article/create-article/create-article.component';
-import { EditArticleComponent } from './article/edit-article/edit-article.component';
+//import { EditArticleComponent } from './article/edit-article/edit-article.component';
 import { ListContratComponent } from './contrat/list-contrat/list-contrat.component';
 import { CreateContratComponent } from './contrat/create-contrat/create-contrat.component';
-import { EditContratComponent } from './contrat/edit-contrat/edit-contrat.component';
+//import { EditContratComponent } from './contrat/edit-contrat/edit-contrat.component';
 import { CreateVersementComponent } from './versement/create-versement/create-versement.component';
 import { ListVersementComponent } from './versement/list-versement/list-versement.component';
-import { EditVersementComponent } from './versement/edit-versement/edit-versement.component';
+//import { EditVersementComponent } from './versement/edit-versement/edit-versement.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -32,9 +29,9 @@ import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.componen
 import { ListCreanceComponent } from './creance/list-creance/list-creance.component';
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
 import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
-import { CreateCommandeClientComponent } from './CommandeClient/create-commande-client/create-commande-client.component';
-import { ListLigneCmdClientComponent } from './CommandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './CommandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+import { CreateCommandeClientComponent } from './commandeClient/create-commande-client/create-commande-client.component';
+import { ListLigneCmdClientComponent } from './commandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
@@ -49,8 +46,6 @@ import { CreateChargeComponent } from './charge/create-charge/create-charge.comp
 import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
 import { ViewApprovisionnementComponent } from './approvisionnement/view-approvisionnement/view-approvisionnement.component';
-import { OrdersComponent } from './order/orders/orders.component';
-import { OrderComponent } from './order/order/order.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { ListRegisterComponent } from './authentication/list-register/list-register.component';
 import { RegisterComponent } from './authentication/register/register.component';
@@ -255,11 +250,11 @@ const routes: Routes = [
    /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
     { path: '**', component: PageNotFoundComponent },
 
-    {path:'orders',component: OrdersComponent},
+   /*  {path:'orders',component: OrdersComponent},
     {path:'order',children:[
       {path:'',component: OrderComponent},
       {path:'edit/:id',component: OrderComponent}
-    ]}
+    ]} */
 
   ]}
 
