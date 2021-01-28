@@ -37,6 +37,4 @@ export class SmsService {
     return this.http.post(`${this.baseUrl}/sendSMSToCustomer`, info);
   }
 
-
-
 }

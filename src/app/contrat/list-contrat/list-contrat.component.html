@@ -5,8 +5,6 @@
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
       <a type="button" (click)="addEditContrat(null)" class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Create</a>&nbsp;
-      <!-- <a type="button" [routerLink]="['/createArticle']" class="btn btn-primary btn-lg" (click)="onCreateCategorie()"><i class="fa fa-download" aria-hidden="true"></i> Import</a>&nbsp;&nbsp;
-      <a type="button" class="btn btn-warning btn-lg" (click)="onCreateCategorie()"><i class="fa fa-upload" aria-hidden="true"></i> Export</a> -->
     </div>
     </div>
     <div class="panel-body">
@@ -27,12 +25,6 @@
       <td>{{cont.montantContrat}}</td>
       <td>{{cont.dateDebutContrat| date:'dd/MM/yyyy'}}</td>
       <td>{{cont.dateFinContrat| date:'dd/MM/yyyy'}}</td>
-      <!--
-      <td>{{cont.fileContrat}}
-        <a href="http://localhost:8080/alamine/downloadFile/{{contrat.fileContrat}}"
-        class="cv"> <i class="fa fa-download"></i></a>
-      </td>
-      -->
       <td>
         <button class="btn btn-success btn-sm" (click)="viewContrat(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
         <button class="btn btn-info btn-sm" (click)="addEditContrat(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;

@@ -5,8 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LigneCmdClient } from '../models/ligne-cmd-client';
 import { ClientService } from './client.service';
-import { ReportCommande } from '../models/commandeReport';
-import { StringResult } from '../models/stringResult';
+
 
 @Injectable({
   providedIn: 'root'
@@ -58,25 +57,6 @@ export class CommandeClientService {
   saveCommande(info: Object) {
     return this.http.post(`${this.baseUrl}/commandesClientes`, info);
   }
-
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllCommandeClientParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/commandes/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getCommandeClientByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/commandes`, info);
-  }
-
   updateCommandeClient(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/commandes/${id}`, value);
   }
@@ -266,17 +246,6 @@ export class CommandeClientService {
         ]
       }
     };
-  }
-
-  reportCommande = (report: ReportCommande): Observable<StringResult> => {
-    const data = JSON.stringify(report);
-    const urlSend = this.baseUrl+ "/reports/commande/pdf";
-    return this.http.post<StringResult>(urlSend, data, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
-
   }
 
   public generateReport(id: number){

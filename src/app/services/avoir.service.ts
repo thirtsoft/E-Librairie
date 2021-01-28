@@ -45,24 +45,6 @@ export class AvoirService {
     return this.http.post(`${this.baseUrl}/avoirs`, info);
   }
 
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllAvoirParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/avoirs/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getAvoirByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/avoirs`, info);
-  }
-
   updateAvoir(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/avoirs/${id}`, value);
   }

@@ -22,11 +22,6 @@ export class VenteService {
    listLigneVente: LigneVente[];
 
 
-   //public dataForm:  FormGroup;
-
-  // list: LigneVente[] = [];
-
-  // public formData:  Vente;
    orderItems: LigneVente[];
 
    constructor(private http: HttpClient) { }
@@ -47,10 +42,6 @@ export class VenteService {
      return this.http.get(`${this.baseUrl}/searchSumsOfVenteByDay`);
    }
 
-   /* createCommandeClient(info: Object): Observable<Object> {
-     return this.http.post(`${this.baseUrl}/commandesClientes`, info);
-   } */
-
    createVente() {
      var body = {
        ...this.formData,
@@ -63,19 +54,6 @@ export class VenteService {
     return this.http.post(`${this.baseUrl}/ventes`, info);
   }
 
-   /**
-    * Methode pour afficher la liste des categories par pages
-    */
-   public getAllVenteParPage(page: number, size: number) {
-     return this.http.get(this.baseUrl+"/ventes/chercherCategoriesParPages?page="+page+"&size="+size);
-   }
-   /**
-    * Methode pour chercher des categories par nom
-    */
-   public getVenteByKeyWord(mc: string, page: number, size: number) {
-     return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-   }
 
    createData(info: Object): Observable<Object> {
      return this.http.post(`${this.baseUrl}/ventes`, info);

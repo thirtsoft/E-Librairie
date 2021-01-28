@@ -22,20 +22,5 @@
         ]
       }
     }
-  ],
-  "dataGroups": [
-    {
-      "name": "apiCategories",
-      "urls": [
-        "http://localhost:8080/alAmine/**"
-      ],
-      "cacheConfig": {
-        "maxSize": 10000,
-        "maxAge": "2d",
-        "timeout": "10s",
-        "strategy": "freshness"
-      }
-    }
   ]
-
 }

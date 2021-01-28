@@ -119,23 +119,10 @@ export class CreateScategorieComponent implements OnInit {
 
   saveScategories() {
     console.log(this.crudApi.dataForm.value);
-   /* this.crudApi.createScategorie(this.crudApi.dataForm.value).
-  //  this.crudApi.createScategorie(Scat).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.crudApi.filter('Register click');
-      this.toastr.success("Scategorie Ajouté avec Succès");
-      this.crudApi.getAllScategories().subscribe(
-        response =>{this.crudApi.listData = response;},
-      );
-      this.router.navigate(['/scategories']);
-    }); */
   }
 
   updateScategories(){
-  //  const scatId =  this.crudApi.dataForm.value.id;
     this.crudApi.updateScategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
-  //  this.crudApi.updateScategorie(this.crudApi.formData.id, cat).
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Scategorie Modifier avec Succès");

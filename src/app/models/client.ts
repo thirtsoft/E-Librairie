@@ -11,12 +11,5 @@ export class Client {
 
 }
 
-export class Customer {
-  CustomerID: number;
-  raisonSocial: string;
-  chefService: string;
-
-}
-
 
 

@@ -12,9 +12,6 @@ import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateArticleComponent } from '../create-article/create-article.component';
 import { DialogService } from 'src/app/services/dialog.service';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import autoTable from 'jspdf-autotable';
 /* import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx'; */
 
@@ -543,30 +540,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   }
 
-  public openPdf2():void {
-    let DATA = this.htmlData.nativeElement;
-    let doc = new jsPDF('p','pt', 'a4');
-    doc.fromHTML(DATA.innerHTML,15,15);
-    doc.output('dataurlnewwindow');
-  }
-
-  public downloadPDF():void {
-    let DATA = this.htmlData.nativeElement;
-    let doc = new jsPDF('p','pt', 'a4');
-
-    let handleElement = {
-      '#editor':function(element,renderer){
-        return true;
-      }
-    };
-    doc.fromHTML(DATA.innerHTML,15,15,{
-      'width': 200,
-      'elementHandlers': handleElement
-    });
-
-    doc.save('angular-demo.pdf');
-  }
-
   getAllArticlees(){
     this.crudApi.getAllArticles().subscribe((res: any) => {
       this.listData = res.data.lisData;
@@ -597,30 +570,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
         }
       ]
     };
-  }
-
-  openPdf() {
-    var doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.text('My Team Detail', 11, 8);
-    doc.setFontSize(11);
-    doc.setTextColor(100);
-    autoTable(doc, { html: '#my-htmlData' });
-
-    autoTable(doc, {
-      head: this.headRows(), //define head rows
-      body: this.bodyRows(this.listData.length, this.listData),
-     // head: [['Reference', 'Designation', 'PU', 'Scategorie']],
-    //  body: [
-      //  ['Tairou', 'Diallo', 'M2', 'SEN']
-     // ]
-    }),
-
-    // below line for Open PDF document in new tab
-    doc.output('dataurlnewwindow')
-
-    // below line for Download PDF document
-    doc.save('myteamdetail.pdf');
   }
 
   headRows() {

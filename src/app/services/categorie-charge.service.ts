@@ -30,11 +30,7 @@ export class CategorieChargeService {
   }
 
   constructor(private http: HttpClient) { }
-/*
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-*/
+
   getAllCategorieCharges(): Observable<any> {
     return this.http.get(`${this.baseUrl}/categorieCharges`);
   }
@@ -51,10 +47,6 @@ export class CategorieChargeService {
     return this.http.post(`${this.baseUrl}/categorieCharges`, info);
   }
 
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/categorieCharges`, info);
-  }
-
   updateCategorieCharge(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/categorieCharges/${id}`, value);
   }
@@ -62,6 +54,5 @@ export class CategorieChargeService {
   deleteCategorieCharge(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/categorieCharges/${id}`, { responseType: 'text' });
   }
-
 
 }

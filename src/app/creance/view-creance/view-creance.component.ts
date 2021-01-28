@@ -110,7 +110,6 @@ export class ViewCreanceComponent implements OnInit {
       },
         error => console.log(error));
     }
-
   }
 
   ImprimerPdf() {

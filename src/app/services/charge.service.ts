@@ -44,20 +44,6 @@ export class ChargeService {
     return this.http.post(`${this.baseUrl}/charges`, info);
   }
 
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllChargeParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/charges/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getChargeByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
   createData(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/charges`, info);
   }

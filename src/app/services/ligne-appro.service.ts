@@ -27,10 +27,6 @@ export class LigneApproService {
     return this.http.get(`${this.baseUrl}/lappros/${id}`);
   }
 
-  /* getAllLigneAppros(): Observable<LigneAppro[]> {
-    return this.http.get<LigneAppro[]>(`${this.baseUrl}/ligneApprovisionnements`);
-  } */
-
   public getLigneApproId(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/ligneApprovisionnements/${id}`);
   }
@@ -40,31 +36,11 @@ export class LigneApproService {
    */
   public getAllLigneApproByAppro(approId: number) {
     return this.http.get(`${this.baseUrl}/searchListLigneApproByApprovisionnementId/${approId}`);
-   // return this.http.get(this.baseUrl+'/searchListLigneCmdClientByCommandeId/' + comId);
   }
 
   createLigneAppro(info: LigneAppro): Observable<Object> {
     return this.http.post(`${this.baseUrl}/ligneApprovisionnements`, info);
   }
-
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllLigneApproParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/ligneApprovisionnements/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getLigneApproByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/ligneApprovisionnements`, info);
-  }
-
   updateLigneAppro(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/ligneApprovisionnements/${id}`, value);
   }

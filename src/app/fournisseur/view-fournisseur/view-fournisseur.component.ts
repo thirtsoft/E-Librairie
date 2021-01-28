@@ -7,7 +7,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ListFournisseurComponent } from '../list-fournisseur/list-fournisseur.component';
 
 @Component({
   selector: 'app-view-fournisseur',
@@ -44,22 +43,6 @@ export class ViewFournisseurComponent implements OnInit {
     if (this.crudApi.choixmenu == "A") {
       this.infoForm();
     }
-
-    /*
-    this.fourId = this.route.snapshot.params.id;
-    console.log(this.fourId);
-    this.crudApi.getFournisseurById(this.fourId).subscribe((data: any) => {
-      this.crudApi.dataForm = data;
-
-      console.log(this.currentFournisseur);
-/*
-      console.log(this.lcreanceService.listData[0].numero);
-      this.numeroCreance = this.lcreanceService.listData[0].numero;
-      console.log(this.lcreanceService.listData[0].creance.totalCreance);
-      this.totalCreance = this.lcreanceService.listData[0].creance.totalCreance;
-      this.client = this.lcreanceService.listData[0].creance.client.chefService;
-     */
-
   }
 
   infoForm() {

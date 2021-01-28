@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Article } from 'src/app/models/article';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { ToastrService } from 'ngx-toastr';
@@ -23,6 +23,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
   produit: any;
   total = 0;
   lcom: LigneCmdClient;
+  isInvalidQte;
 
   formData: FormGroup;
 
@@ -32,14 +33,14 @@ export class CreateLigneCmdClientComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateLigneCmdClientComponent>,
    ) { }
 
-  get f() { return this.formData.controls; }
+  get f() { return this.lcmdService.dataForm.controls; }
 
   ngOnInit() {
     if (this.data.lcommandeIndex == null) {
       this.infoForm();
     }else {
-      this.formData = this.fb.group(Object.assign({}, this.cmdService.list[this.data.lcommandeIndex]));
-      console.log(this.formData);
+      this.lcmdService.dataForm = this.fb.group(Object.assign({}, this.cmdService.list[this.data.lcommandeIndex]));
+      console.log(this.lcmdService.dataForm);
     }
 
     this.articleService.getAllArticles().subscribe(
@@ -47,41 +48,23 @@ export class CreateLigneCmdClientComponent implements OnInit {
         this.listArticle = response;
       }
     );
-  /*
-    if (this.data.lcommandeIndex == null)
-      this.formData = {
-        OrderItemId: null,
-        OrderId: this.data.OrderId,
-        ItemId: 0,
-        numero: '',
-        prix: 0,
-        quantite: 0,
-        ItemName: '',
-        total: 0,
-        produit: new Article(),
-        commande: new CommandeClient(),
 
-      }
-    else
-      this.formData = Object.assign({}, this.cmdService.orderItems[this.data.lcommandeIndex]);
-      console.log(this.formData);
-      */
   }
 
   infoForm() {
-    this.formData = this.fb.group({
+    this.lcmdService.dataForm = this.fb.group({
      // OrderItemId: null,
       id: null,
-      OrderId: this.data.OrderId,
-      ItemId: 0,
-      numero: this.data.numeroCommande,
-      prix: 0,
-      quantite: 0,
-      qteStock: 0,
-      ItemName: '',
-      prixCommande: 0,
-      total: 0,
-      produit: new Article(),
+      OrderId: [this.data.OrderId, [Validators.required]],
+      ItemId:  [, [Validators.required]],
+      numero:  [this.data.numeroCommande, [Validators.required]],
+      prix: [ , [Validators.required]],
+      quantite: [ , [Validators.required]],
+      qteStock: [ , [Validators.required]],
+      ItemName: ['', [Validators.required]],
+      prixCommande: [, [Validators.required]],
+      total: [0, [Validators.required]],
+      produit: [, [Validators.required]],
      // commande: new CommandeClient(),
     });
   }
@@ -106,53 +89,24 @@ export class CreateLigneCmdClientComponent implements OnInit {
     this.calculTotal();
   }
 
+  matchQuantite() {
+    this.isInvalidQte = this.lcmdService.dataForm.value.qtestock < this.lcmdService.dataForm.value.quantite
+  }
+
   calculTotal() {
-    this.total = parseFloat((this.formData.value.quantite * this.formData.value.prixCommande).toFixed(2));
+    this.total = parseFloat((this.lcmdService.dataForm.value.quantite * this.lcmdService.dataForm.value.prixCommande).toFixed(2));
     this.f['total'].setValue(this.total);
   }
-  /*
-  selectPrice(ctrl) {
-    if (ctrl.selectedIndex==0) {
-      this.formData.prix = 0;
-      this.formData.ItemName = '';
-    }
-    else {
-      this.formData.prix = this.listArticle[ctrl.selectedIndex-1].prixVente;
-      this.formData.ItemName = this.listArticle[ctrl.selectedIndex-1].designation;
 
-    }
-
-    this.calculTotal();
-
-  }
-
-  calculTotal() {
-    this.formData.total = parseFloat((this.formData.quantite * this.formData.prix).toFixed(2));
-  }
-*/
   onSubmit() {
-    if (this.data.lcommandeIndex == null) {
-      this.cmdService.list.push(this.formData.value);
+    if ((this.data.lcommandeIndex == null)  || (this.lcmdService.dataForm.invalid)) {
+      this.cmdService.list.push(this.lcmdService.dataForm.value);
       this.dialogRef.close();
     }else {
-      this.cmdService.list[this.data.lcommandeIndex] = this.formData.value;
+      this.cmdService.list[this.data.lcommandeIndex] = this.lcmdService.dataForm.value;
     }
     this.dialogRef.close();
   }
-  /*
-  onSubmit(form: NgForm) {
-    if (this.validateForm(form.value)) {
-      if (this.data.lcommandeIndex == null) {
-        this.cmdService.orderItems.push(form.value);
-      }
-      else {
-        this.cmdService.orderItems[this.data.lcommandeIndex] = form.value;
-      }
-      this.dialogRef.close();
-    }
-
-  }
-  */
 
  validateForm(formData: LigneCmdClient){
   this.isValid=true;
@@ -162,15 +116,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
     this.isValid=false;
     return this.isValid;
 }
-/*
-  validateForm(formData: LigneCmdClient) {
-    this.isValid = true;
-    if (formData.ItemId==0)
-      this.isValid = false;
-    else if (formData.quantite==0)
-      this.isValid = false;
-    return this.isValid;
-  }
-*/
+
 }
 

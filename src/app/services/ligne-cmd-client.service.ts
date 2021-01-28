@@ -22,7 +22,6 @@ export class LigneCmdClientService {
 
   constructor(private http: HttpClient) { }
 
-
   getAllLigneCmdClients(): Observable<any> {
     return this.http.get(`${this.baseUrl}/ligneCommandes`);
   }
@@ -43,27 +42,7 @@ export class LigneCmdClientService {
    */
   public getAllLigneCmdClientByCommande(comId: number) {
     return this.http.get(`${this.baseUrl}/searchListLigneCmdClientByCommandeId/${comId}`);
-   // return this.http.get(this.baseUrl+'/searchListLigneCmdClientByCommandeId/' + comId);
   }
-
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllLigneCmdClientParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/ligneCommandes/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getLigneCmdClientByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/ligneCommandes`, info);
-  }
-
   updateLigneCmdClient(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/ligneCommandes/${id}`, value);
   }

@@ -46,11 +46,6 @@ export class CreateVenteComponent implements OnInit {
     if (this.crudApi.choixmenu == "A") {
       this.infoForm();
       this.crudApi.list = [];
-    /*
-    let OrderId = this.currentRoute.snapshot.paramMap.get('id');
-    if (OrderId == null) {
-      this.resetForm();
-      */
     }else {
       this.lventeService.getAllByNumero(this.crudApi.formData.value.numeroVente).subscribe(
         response => {
@@ -67,30 +62,10 @@ export class CreateVenteComponent implements OnInit {
         }
       );
       this.f['dateVente'].setValue(this.crudApi.formData.value.dateVente);
-      /*
-      this.crudApi.getVenteID(parseInt(OrderId)).then(res =>{
-         this.orders = res.order;
-        this.crudApi.orderItems = res.orderItems;
-      });
-      */
     }
 
   }
-/*
-  resetForm(form?: NgForm) {
-    if (form = null)
-      form.resetForm();
-    this.crudApi.formData = {
-      venteId: null,
-      numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
-      totalVente: 0,
-      status: '',
-      dateVente: new Date(),
-      DeletedOrderItemIDs: ''
-    };
-    this.crudApi.orderItems=[];
-  }
-  */
+
   infoForm() {
     this.crudApi.formData = this.fb.group({
       venteId: null,
@@ -121,34 +96,6 @@ export class CreateVenteComponent implements OnInit {
       return prev + curr.total;
     }, 0));
   }
-/*
-  AddOrderItem(lcommandeIndex, OrderId){
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    dialogConfig.data={lcommandeIndex, OrderId};
-    this.dialog.open(CreateLigneVenteComponent, dialogConfig).afterClosed().subscribe(res =>{
-        this.calculMontantTotal();
-    });
-
-  }
-
-  calculMontantTotal() {
-    this.crudApi.formData.totalVente = this.crudApi.orderItems.reduce((prev, curr) => {
-      return prev + curr.total ;
-    }, 0);
-    this.crudApi.formData.totalVente = parseFloat(this.crudApi.formData.totalVente.toFixed(2));
-
-  }
-
-  validateForm() {
-    this.isValid = true;
-    if (this.crudApi.orderItems.length==0)
-      this.isValid = false;
-    return this.isValid;
-  }
-  */
 
   validateForm() {
     this.isValid = true;
@@ -171,25 +118,6 @@ export class CreateVenteComponent implements OnInit {
       }
     );
   }
-
-  /*
-  onSubmit(form: NgForm) {
-    if (this.validateForm()) {
-      this.crudApi.createVente().subscribe(res => {
-        this.resetForm();
-        this.toastr.success('Vente Ajoutée avec succès');
-        this.router.navigate(['/ventes']);
-      })
-    }
-  }
-
-  onDeleteOrderItem(orderItemID: number, i: number) {
-    if (orderItemID != null)
-      this.crudApi.formData.DeletedOrderItemIDs += orderItemID + ",";
-    this.crudApi.orderItems.splice(i, 1);
-    this.calculMontantTotal();
-  }
-*/
 
   onDeleteOrderItem(id: number, i: number) {
     if (id != null) {

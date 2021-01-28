@@ -68,13 +68,6 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
     }, err => {
       console.log(err);
     })
-/*
-    this.cmdVente = new Vente();
-    this.cmdVente = {
-      venteId: null, numeroVente: 0, totalVente: 0,
-      status: '', dateVente: new Date(), DeletedOrderItemIDs: ''
-    }
-    */
   }
 
   /**
@@ -97,11 +90,6 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
     this.crudApi.getAllVentes().subscribe(
       response =>{this.listData = response;}
     );
-  }
-
-  onCreateVente() {
-    this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("vente");
   }
 
   ImprimerPdf() {

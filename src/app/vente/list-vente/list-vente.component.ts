@@ -5,8 +5,6 @@ import { Subject } from 'rxjs';
 import { VenteService } from 'src/app/services/vente.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CreateVenteComponent } from '../create-vente/create-vente.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { DatePipe } from '@angular/common';
@@ -18,11 +16,8 @@ import { DatePipe } from '@angular/common';
 })
 export class ListVenteComponent implements OnDestroy, OnInit {
 
-  //listData: Vente[];
   listData;
   sumVenteByDay;
- // private editForm: FormGroup;
-
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -31,9 +26,6 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   constructor(public crudApi: VenteService,public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private dialogService: DialogService, private datePipe : DatePipe,
-   /* @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog,
-    public dialogRef:MatDialogRef<CreateVenteComponent>,
-    */
     ) { }
 
   ngOnInit(): void {
@@ -90,21 +82,6 @@ export class ListVenteComponent implements OnDestroy, OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("vente");
   }
-/*
-  deleteVente(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette vente ?')) {
-    this.crudApi.deleteVente(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Vente supprimé avec succès!');
-          this.rerender();
-          this.getListVentes();
-      },
-        error => console.log(error));
-    }
-
-  } */
 
   deleteVente(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')

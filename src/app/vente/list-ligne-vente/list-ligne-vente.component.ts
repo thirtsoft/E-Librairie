@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { LigneVente } from 'src/app/models/ligne-vente';
 import { Vente } from 'src/app/models/vente';
 import { Article } from 'src/app/models/article';
-import { Scategorie } from 'src/app/models/scategorie';
-import { Categorie } from 'src/app/models/categorie';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { LigneVenteService } from 'src/app/services/ligne-vente.service';
@@ -23,21 +21,10 @@ import { VenteService } from 'src/app/services/vente.service';
 export class ListLigneVenteComponent implements OnDestroy, OnInit {
 
   listData : LigneVente[];
- // listData: LigneVente[] = [];
 
   vente: Vente = new Vente();
   produit: Article = new Article();
-/*
-  produit: Article = {
-    id: null, reference: '',
-    designation: '', photo: '', add_date: new Date(),
-    prixAchat: 0, prixVente: 0, prixDetail: 0,
-    promo: false, tva: 0, qtestock: 0, stockInitial: 0,
-    scategorie: new Scategorie(), categorie: new Categorie(),
-  };
-  produit1;
-  commande1;
-*/
+
   private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
@@ -67,9 +54,6 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
-
-   // this.commande1 = new Vente();
-   // this.produit1= new Article() = {}
   }
 
    /**
@@ -98,22 +82,6 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("vente");
   }
-/*
-  deleteLigneVente(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Détails Vente ?')) {
-    this.crudApi.deleteLigneVente(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Détails Vente supprimé avec succès!');
-          this.rerender();
-          this.getListLigneVentes();
-      },
-        error => console.log(error));
-    }
-
-  } */
-
   deleteLigneVente(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
@@ -126,10 +94,5 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
       }
     });
   }
-
-  editerLigneVente(item : LigneVente) {
-    this.router.navigateByUrl('detailsVente/'+item.id);
-  }
-
 
 }

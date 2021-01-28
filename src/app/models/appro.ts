@@ -16,9 +16,5 @@ export class Appro {
     fournisseur: Fournisseur;
 
     ligneApprovisionnements :Array<LigneAppro>=[];
-/*
-    public constructor() {
-        this.fournisseur = new Fournisseur();
-    }
-    */
+
 }

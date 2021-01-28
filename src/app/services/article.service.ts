@@ -53,19 +53,6 @@ export class ArticleService {
     return this.http.post(`${this.baseUrl}/produits`, info);
   }
 
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllArticleParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/produits/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getArticleByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
 
   createData(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/produits`, info);

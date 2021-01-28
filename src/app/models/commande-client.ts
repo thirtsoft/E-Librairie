@@ -19,12 +19,3 @@ export class CommandeClient {
 
 }
 
-export class Order {
-  OrderID: number;
-  OrderNo: string;
-  CustomerID: number;
-  numeroCommande: number;
-  total: number;
-  DeletedOrderItemIDs: string;
-}
-

@@ -76,15 +76,6 @@ export class CreateVersementComponent implements OnInit {
     }
 
   }
-/*
-  onSubmit() {
-    if (this.crudApi.choixmenu == "A") {
-      this.saveVersement(this.versement);
-    }else {
-      this.updateVersement();
-    }
-  }
-  */
 
   saveVersement(versment: Versement) {
     this.crudApi.createVersement(versment).

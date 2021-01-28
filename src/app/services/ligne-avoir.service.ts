@@ -43,11 +43,6 @@ export class LigneAvoirService {
   public getAllLigneAvoirByAvoir(avoirId: number) {
     return this.http.get(`${this.baseUrl}/searchListLigneAvoirByAvoirId/${avoirId}`);
   }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/ligneAvoirs`, info);
-  }
-
   updateLigneAvoir(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/ligneAvoirs/${id}`, value);
   }

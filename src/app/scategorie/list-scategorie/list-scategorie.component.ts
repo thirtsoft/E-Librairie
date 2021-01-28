@@ -3,14 +3,12 @@ import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { ScategorieService } from 'src/app/services/scategorie.service';
-//import { CategorieService } from 'src/app/services/categorie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateScategorieComponent } from '../create-scategorie/create-scategorie.component';
-import { EditScategorieComponent } from '../edit-scategorie/edit-scategorie.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 
@@ -22,7 +20,6 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class ListScategorieComponent implements OnDestroy, OnInit {
 
   listData : Scategorie[];
-//  listCategorie : Categorie[];
   scat: Scategorie;
   ScatID: number;
 
@@ -103,8 +100,6 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   }
 
   onCreateScategorie(){
-  //  this.crudApi.choixmenu = "A";
-   // this.router.navigateByUrl("scategorie");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -123,23 +118,6 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateScategorieComponent, dialogConfig);
 
   }
-
-
-
-  /*
-  deleteScategorie(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette Sous-Categorie ?')) {
-    this.crudApi.deleteScategorie(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Scategorie supprimé avec succès!');
-          this.rerender();
-          this.getListScategories();
-      },
-        error => console.log(error));
-    }
-  }*/
 
   deleteScategorie(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')

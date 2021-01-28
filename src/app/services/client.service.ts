@@ -32,10 +32,6 @@ export class ClientService {
     return this.http.get(`${this.baseUrl}/clients`);
   }
 
-  /* getClientById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/clients/${id}`);
-  } */
-
   public getClientById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/clients/${id}`);
   }
@@ -46,20 +42,6 @@ export class ClientService {
 
   createClient(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/clients`, info);
-  }
-
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllClientParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/categories/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getClientByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
   }
 
   createData(info: Object): Observable<Object> {

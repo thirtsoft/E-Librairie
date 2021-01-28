@@ -44,24 +44,6 @@ export class ContratService {
     return this.http.post(`${this.baseUrl}/contrats`, info);
   }
 
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllContratParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/contrats/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getContratByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/contrats`, info);
-  }
-
   public createContrat2(contrat, file:File) {
 
     const data:FormData= new FormData();

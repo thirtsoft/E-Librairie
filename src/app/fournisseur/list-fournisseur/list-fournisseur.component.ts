@@ -44,16 +44,6 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    /*
-    this.FourID = this.route.snapshot.params.id;
-    if (this.FourID == null) {
-      this.resetForm();
-    }else {
-      this.crudApi.getFournisseurByID(this.FourID).then(res => {
-        this.listData = res.fournisseur;
-      });
-    }
-    */
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -163,21 +153,6 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(EnvoiSMSFournisseurComponent, dialogConfig);
   }
-/*
-  deleteFournisseur(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Fournisseur ?')) {
-    this.crudApi.deleteFournisseur(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Fournisseur supprimé avec succès!');
-          this.rerender();
-          this.getListFournisseurs();
-      },
-        error => console.log(error));
-    }
-  } */
-
   deleteFournisseur(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe(res =>{

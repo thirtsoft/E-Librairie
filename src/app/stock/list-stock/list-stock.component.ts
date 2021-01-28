@@ -46,14 +46,6 @@ export class ListStockComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    /*
-    this.crudApi.getAllStocks().subscribe(
-      response =>{
-        this.listData = response;
-        console.log(this.listData);
-        this.dtTrigger.next();
-      }
-    ); */
     this.artService.getAllArticles().subscribe(
       response => {
         this.listArticle = response;
@@ -95,17 +87,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("approvisionnement");
   }
-/*
-  onCreateStock(){
-    this.crudApi.choixmenu = "A";
-   // this.router.navigateByUrl("scategorie");
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    this.matDialog.open(CreateApproComponent, dialogConfig);
-  }
-*/
+
   editeStock(item : Stock) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
@@ -129,11 +111,5 @@ export class ListStockComponent implements OnDestroy, OnInit {
     }
 
   }
-  editScategorie(item : Stock) {
-
-    this.router.navigateByUrl('stock/'+item.id);
-
-  }
-
 
 }

@@ -112,16 +112,6 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     this.matDialog.open(UpdateSoldeCreanceComponent, dialogConfig);
   }
 
-  /*
-  onCreateCreance(){
-    this.crudApi.choixmenu = "A";
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    this.matDialog.open(CreateCreanceComponent, dialogConfig);
-  }
-*/
   onCreateCreance() {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("creance");
@@ -148,21 +138,6 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateCreanceComponent, dialogConfig);
   }
-
-  /*
-  deleteCreance(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette Creance ?')) {
-    this.crudApi.deleteCreance(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Creance supprimé avec succès!');
-          this.rerender();
-          this.getListCreances();
-      },
-        error => console.log(error));
-    }
-  }*/
 
   deleteCreance(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')

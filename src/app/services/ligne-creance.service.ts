@@ -42,11 +42,6 @@ export class LigneCreanceService {
    */
   public getAllLigneCreanceByCreance(creanceId: number) {
     return this.http.get(`${this.baseUrl}/searchListLigneCreanceByCreanceId/${creanceId}`);
-   // return this.http.get(this.baseUrl+'/searchListLigneCmdClientByCommandeId/' + comId);
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/ligneCreances`, info);
   }
 
   updateLigneCreance(id: number, value: any): Observable<Object> {

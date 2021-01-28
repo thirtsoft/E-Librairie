@@ -17,12 +17,4 @@ export class Article {
 
   scategorie = new Scategorie();
 
-
-
-}
-
-export class Item {
-  ItemID: number;
-  designation: string;
-  prixVente: number;
 }

@@ -2,10 +2,7 @@
   <div class="col-md-8 col-md-offset-2">
     <h4 class="dislay-4">Lignes Commandes </h4>
     <hr>
-    <form [formGroup]="this.formData" (ngSubmit)="onSubmit()">
-        <input type="hidden" formControlName="OrderId" id="OrderId" class="form-control">
-        <input type="hidden" formControlName="ItemName" id="ItemName" class="form-control">
-
+    <form [formGroup]="this.lcmdService.dataForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label>Article</label>
           <select formControlName="produit" id="produit" class="form-control"
@@ -13,45 +10,54 @@
             <option value="0">-Select-</option>
             <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
           </select>
-        </div>
-
-        <div class="form-group">
-          <label>P.Unitaire</label>
-          <div class="form-group">
-            <input name="prix" formControlName="prix" id="prix" class="form-control"  (keyup)="calculTotal()"
-              [class.is-invalid]="!isValid && formData.value.prix==0"  readonly>
+          <div *ngIf="f['produit'].invalid && (f['produit'].dirty || f['produit'].touched)" class="alert alert-danger">
+            <span *ngIf="f['produit'].errors.required">
+                selectionner un article.
+            </span>
           </div>
         </div>
 
         <div class="form-group">
+          <label>P.Unitaire</label>
+            <input name="prix" formControlName="prix" id="prix" class="form-control"  (keyup)="calculTotal()"
+              [class.is-invalid]="!isValid && formData.value.prix==0"  readonly>
+        </div>
+
+        <div class="form-group">
           <label>P.Commande</label>
-          <div class="form-group">
             <input type="number" name="prixCommande" formControlName="prixCommande" class="form-control"
-            (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.prixCommande==0" id="prixCommande">
+            (keyup)="calculTotal()" id="prixCommande">
+          <div *ngIf="f['prixCommande'].invalid && (f['prixCommande'].dirty || f['prixCommande'].touched)" class="alert alert-danger">
+            <span *ngIf="f['prixCommande'].errors.required">
+              prix Commande obligatoire.
+            </span>
           </div>
         </div>
 
         <div class="form-group">
           <label>QtéStock</label>
-          <div class="form-group">
             <input formControlName="qteStock" id="qteStock" class="form-control"
-              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.qteStock==0" readonly>
-          </div>
+              (keyup)="calculTotal()" [class.is-invalid]="!isValid && this.formData.value.qteStock==0"
+             readonly>
         </div>
 
         <div class="form-group">
           <label>Quantité</label>
-          <div class="form-group">
             <input type="number" formControlName="quantite" id="quantite" class="form-control"
               (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.quantite==0">
+          <div *ngIf="f['quantite'].invalid && (f['quantite'].dirty || f['quantite'].touched)" class="alert alert-danger">
+            <span *ngIf="f['quantite'].errors.required">
+              quantite obligatoire.
+            </span>
+            <span *ngIf="this.isInvalidQte">
+              quantite stock insuffisante.
+            </span>
           </div>
         </div>
 
         <div class="form-group">
           <label>P.Total</label>
-          <div class="form-group">
             <input name="total" formControlName="total" id="total" class="form-control" readonly>
-          </div>
         </div>
 
         <div class="form-group">
@@ -62,109 +68,4 @@
     </form>
   </div>
 </div>
-
-
-<!--
-<div class="row justify-content-center">
-  <div class="col-md-8 col-md-offset-2">
-    <h4 class="dislay-4">Lignes Commandes </h4>
-    <hr>
-    <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
-
-        <input type="hidden" name="OrderItemId" #OrderItemId="ngModel" [(ngModel)]="formData.OrderItemId" class="form-control">
-        <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="formData.OrderId" class="form-control">
-        <input type="hidden" name="ItemName" #ItemName="ngModel" [(ngModel)]="formData.ItemName" class="form-control">
-
-        <div class="form-group">
-          <label>Article</label>
-          <select name="ItemId" #ItemId="ngModel" [(ngModel)]="formData.ItemId" class="form-control"
-            (change)="selectPrice($event)" [class.is-invalid]="!isValid && formData.ItemId==0">
-            <option value="0">-Select-</option>
-            <option *ngFor="let item of listArticle" value="{{item.id}}">{{item.reference}}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Prix Unitaire</label>
-          <div class="form-group">
-            <input name="prix" #prix="ngModel" [(ngModel)]="formData.prix" class="form-control" readonly>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Quantité</label>
-          <div class="form-group">
-            <input type="number" name="quantite" #quantite="ngModel" [(ngModel)]="formData.quantite" class="form-control"
-              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.quantite==0">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Total</label>
-          <div class="form-group">
-            <input name="total" #total="ngModel" [(ngModel)]="formData.total" class="form-control" readonly>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
-        </div>
-
-    </form>
-  </div>
-</div>
--->
-
-<!--
-<div class="row justify-content-center">
-  <div class="col-md-8 col-md-offset-2">
-    <h4 class="dislay-4">Commande </h4>
-    <hr>
-    <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
-
-        <input type="hidden" name="OrderItemId" #OrderItemId="ngModel" [(ngModel)]="formData.OrderItemId" class="form-control">
-        <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="formData.OrderId" class="form-control">
-        <input type="hidden" name="ItemName" #ItemName="ngModel" [(ngModel)]="formData.ItemName" class="form-control">
-        <div class="form-group">
-          <label>Article</label>
-          <select name="produit" #ItemId="ngModel" [(ngModel)]="formData.produit" class="form-control"
-            (change)="selectPrice($event.target)" [class.is-invalid]="!isValid && formData.produit.id==0">
-            <option value="0">-Select-</option>
-            <option *ngFor="let item of listArticle" [ngValue]="item.id">{{item.reference}}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Prix Unitaire</label>
-          <div class="form-group">
-            <input name="prix" #prix="ngModel" [(ngModel)]="formData.prix" class="form-control" readonly>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Quantité</label>
-          <div class="form-group">
-            <input type="number" name="quantite" #quantite="ngModel" [(ngModel)]="formData.quantite" class="form-control"
-              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.quantite==0">
-
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Total</label>
-          <div class="form-group">
-            <input name="total" #total="ngModel" [(ngModel)]="formData.total" class="form-control" readonly>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
-        </div>
-
-    </form>
-  </div>
-</div> -->
-
 

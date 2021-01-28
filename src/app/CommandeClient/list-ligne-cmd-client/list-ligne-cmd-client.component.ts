@@ -10,8 +10,6 @@ import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CommandeClient } from 'src/app/models/commande-client';
 import { Article } from 'src/app/models/article';
-import { Categorie } from 'src/app/models/categorie';
-import { Scategorie } from 'src/app/models/scategorie';
 import { DataTableDirective } from 'angular-datatables';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
@@ -29,26 +27,7 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
 
   commande: CommandeClient = new CommandeClient();
   produit: Article = new Article();
-  /*
-  produit21: Article = {
-    id: null,
-    reference: '',
-    designation: '',
-    photo: '',
-    add_date: new Date(),
-    prixAchat: 0,
-    prixVente: 0,
-    prixDetail: 0,
-    promo: false,
-    tva: 0,
-    qtestock: 0,
-    stockInitial: 0,
-    scategorie: new Scategorie(),
-    categorie: new Categorie(),
 
-
-  };
-*/
   produit1;
   commande1;
 
@@ -115,23 +94,6 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("commandeclient");
   }
-/*
-  deleteLigneCmdClient(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Détails Commande ?')) {
-    this.crudApi.deleteLigneCmdClient(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Détails Commande supprimé avec succès!');
-          this.rerender();
-          this.getListLigneCmdClients();
-        },
-        error => console.log(error)
-      );
-    }
-
-  }
-*/
   deleteLigneCmdClient(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
@@ -143,10 +105,6 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
         });
       }
     });
-  }
-
-  editerLigneCmdClient(item : LigneCmdClient) {
-    this.router.navigateByUrl('detailsCommandeClient/'+item.id);
   }
 
 }

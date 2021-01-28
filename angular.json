@@ -35,8 +35,6 @@
             ],
             "scripts": [
               "node_modules/datatables.net/js/jquery.dataTables.js",
-              "node_modules/jspdf/dist/jspdf.min.js",
-              "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js",
               "node_modules/chart.js/dist/Chart.min.js"
             ]
           },
@@ -60,12 +58,11 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "11mb"
                 }
               ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              "serviceWorker": true
             }
           }
         },

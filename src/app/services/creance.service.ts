@@ -44,25 +44,6 @@ export class CreanceService {
   createCreance(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/creances`, info);
   }
-
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllCreanceParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/creances/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getCreanceByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/creances`, info);
-  }
-
   updateCreance(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/creances/${id}`, value);
   }

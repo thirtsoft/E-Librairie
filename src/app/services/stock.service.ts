@@ -42,25 +42,6 @@ export class StockService {
   createStock(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/stocks`, info);
   }
-
-   /**
-    * Methode pour afficher la liste des categories par pages
-    */
-  public getAllStockParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/stocks/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-   /**
-    * Methode pour chercher des categories par nom
-    */
-  public getStockByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/stocks`, info);
-  }
-
   updateStock(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/stocks/${id}`, value);
   }

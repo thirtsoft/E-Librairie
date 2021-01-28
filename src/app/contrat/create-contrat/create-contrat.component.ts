@@ -104,17 +104,6 @@ export class CreateContratComponent implements OnInit {
 
   }
 
-  /*
-  onSubmit() {
-    if (this.crudApi.choixmenu == "A") {
-      this.saveContrat(this.contrat);
-    }else {
-      this.updateContrat();
-    }
-
-  }
-  */
-
   saveContrat(cont: Contrat) {
     this.crudApi.createContrat(cont).
     subscribe( data => {

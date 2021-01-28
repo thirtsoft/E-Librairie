@@ -42,16 +42,6 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    /*
-    this.empID = this.route.snapshot.params.id;
-    if (this.empID == null) {
-      this.resetForm();
-    }else {
-      this.crudApi.getEmployeByID(this.empID).then(res => {
-        this.listData = res.client;
-      });
-    }
-  */
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -125,22 +115,6 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateEmployeComponent, dialogConfig);
   }
-/*
-  deleteEmploye(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cet Employe ?')) {
-    this.crudApi.deleteEmploye(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Employe supprimé avec succès!');
-          this.rerender();
-          this.getListEmployes();
-      },
-        error => console.log(error));
-    }
-
-  } */
-
   deleteEmploye(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe(res =>{
@@ -153,9 +127,4 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
       }
     });
   }
-
-  editerEmploye(item : Employe) {
-    this.router.navigateByUrl('employes/'+item.id);
-  }
-
 }

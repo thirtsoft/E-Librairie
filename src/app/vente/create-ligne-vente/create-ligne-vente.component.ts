@@ -16,7 +16,6 @@ import { Vente } from 'src/app/models/vente';
 })
 export class CreateLigneVenteComponent implements OnInit {
 
- // formData: LigneVente;
   listArticle: Article[];
 
   isValid: boolean = true;
@@ -47,22 +46,10 @@ export class CreateLigneVenteComponent implements OnInit {
         this.listArticle = response;
       }
     );
-  /*
-    if (this.data.orderItemIndex == null)
-      this.formData = {
-        OrderItemId: null, OrderId: this.data.OrderId,
-        ItemId: 0, numero: '', prixVente: 0, quantite: 0,
-        ItemName: '', total: 0, produit: new Article(), vente: new Vente(),
-      }
-    else
-      this.formData = Object.assign({}, this.venteService.orderItems[this.data.orderItemIndex]);
-  }
-  */
   }
 
   infoForm() {
     this.formData = this.fb.group({
-     // OrderItemId: null,
       id: null,
       OrderId: this.data.OrderId,
       ItemId: 0,
@@ -102,25 +89,6 @@ export class CreateLigneVenteComponent implements OnInit {
     this.total = parseFloat((this.formData.value.quantite * this.formData.value.prixVente).toFixed(2));
     this.f['total'].setValue(this.total);
   }
-
-/*
-  selectPrice(ctrl) {
-    if (ctrl.selectedIndex==0) {
-      this.formData.prixVente = 0;
-      this.formData.ItemName = '';
-    }
-    else {
-      this.formData.prixVente = this.listArticle[ctrl.selectedIndex-1].prixDetail;
-      this.formData.ItemName = this.listArticle[ctrl.selectedIndex-1].designation;
-    }
-    this.calculTotal();
-  }
-
-  calculTotal() {
-    this.formData.total = parseFloat((this.formData.quantite * this.formData.prixVente).toFixed(2));
-  }
-  */
-
   onSubmit() {
     if (this.data.lcommandeIndex == null) {
       this.venteService.list.push(this.formData.value);
@@ -139,27 +107,5 @@ export class CreateLigneVenteComponent implements OnInit {
       this.isValid=false;
       return this.isValid;
   }
-
-  /*
-  onSubmit(form: NgForm) {
-    if (this.validateForm(form.value)) {
-      if (this.data.orderItemIndex == null) {
-        this.venteService.orderItems.push(form.value);
-      }
-      else {
-        this.venteService.orderItems[this.data.orderItemIndex] = form.value;
-      }
-      this.dialogRef.close();
-    }
-  }
-  validateForm(formData: LigneVente) {
-    this.isValid = true;
-    if (formData.ItemId==0)
-      this.isValid = false;
-    else if (formData.quantite==0)
-      this.isValid = false;
-    return this.isValid;
-  }
-  */
 
 }

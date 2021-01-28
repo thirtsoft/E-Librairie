@@ -81,7 +81,6 @@ export class ListVersementComponent implements OnDestroy, OnInit {
 
   onCreateVersement(){
     this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("versements/new");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -121,20 +120,6 @@ export class ListVersementComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateVersementComponent, dialogConfig);
   }
-  /*
-  deleteVersement(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Versement ?')) {
-    this.crudApi.deleteVersement(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Versement supprimé avec succès!');
-          this.rerender();
-          this.getListVersements();
-      },
-        error => console.log(error));
-    }
-  }*/
 
   transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd');
@@ -150,10 +135,6 @@ export class ListVersementComponent implements OnDestroy, OnInit {
         });
       }
     });
-  }
-
-  editVersement(item : Versement) {
-    this.router.navigateByUrl('versements/'+item.id);
   }
 
 }

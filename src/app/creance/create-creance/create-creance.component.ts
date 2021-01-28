@@ -32,9 +32,6 @@ export class CreateCreanceComponent implements OnInit {
   total = 0;
   refProd = '';
 
-  //listClients:  Client[];
-
-
   submitted = false;
 
   constructor(public crudApi: CreanceService, private dialog:MatDialog,
@@ -54,11 +51,6 @@ export class CreateCreanceComponent implements OnInit {
     } else {
 
     }
-    /*
-    this.getClients();
-    if (!isNullOrUndefined(this.data.creanceId)) {
-      this.formDataCreance = Object.assign({},this.crudApi.listData[this.data.creanceId])
-    }*/
   }
 
   infoForm() {
@@ -142,73 +134,3 @@ export class CreateCreanceComponent implements OnInit {
   }
 
 }
-
-/*
-  onSubmit() {
-    if(isNullOrUndefined(this.data.creanceId)) {
-      this.crudApi.createCreance(this.formDataCreance).
-      subscribe( data => {
-        this.dialogRef.close();
-        this.crudApi.filter('Register click');
-        this.toastr.success("Creance Ajouté avec Succès");
-        this.crudApi.getAllCreances().subscribe(
-          response =>{this.crudApi.listData = response;},
-        );
-        this.router.navigate(['/creances']);
-      });
-
-    }else {
-      this.crudApi.updateCreance(this.formDataCreance.id, this.formDataCreance).
-      subscribe( data => {
-        this.dialogRef.close();
-        this.crudApi.filter('Register click');
-        this.toastr.success("Creance Modifiée avec Succès");
-        this.crudApi.getAllCreances().subscribe(
-          response =>{this.crudApi.listData = response;},
-        );
-        this.router.navigate(['/creances']);
-      });
-    }
-
-  }
-*/
-  /*
-  onSubmit() {
-    if (this.crudApi.choixmenu == "A") {
-      this.saveCreance(this.creance);
-    }else {
-      this.updateCreance();
-    }
-
-  }*/
-/*
-  saveCreance(cont: Creance) {
-    this.crudApi.createCreance(cont).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.crudApi.filter('Register click');
-      this.toastr.success("Creance Ajouté avec Succès");
-      this.crudApi.getAllCreances().subscribe(
-        response =>{this.crudApi.listData = response;},
-
-      );
-      this.router.navigate(['/creances']);
-    });
-  }
-
-  updateCreance(){
-    this.crudApi.updateCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.toastr.success("Creance Modifier avec Succès");
-      this.crudApi.getAllCreances().subscribe(
-        response =>{this.crudApi.listData = response;}
-      );
-      this.router.navigate(['/creances']);
-    });
-
-  }
-
-
-}
-*/

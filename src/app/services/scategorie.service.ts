@@ -57,24 +57,6 @@ export class ScategorieService {
      return this.http.post(`${this.baseUrl}/scategories`, info);
    }
 
-   /**
-    * Methode pour afficher la liste des categories par pages
-    */
-   public getAllScategorieParPage(page: number, size: number) {
-     return this.http.get(this.baseUrl+"/scategories/chercherCategoriesParPages?page="+page+"&size="+size);
-   }
-   /**
-    * Methode pour chercher des categories par nom
-    */
-   public getScategorieByKeyWord(mc: string, page: number, size: number) {
-     return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-   }
-
-   createData(info: Object): Observable<Object> {
-     return this.http.post(`${this.baseUrl}/scategories`, info);
-   }
-
    updateScategorie(id: number, value: any): Observable<Object> {
      return this.http.put(`${this.baseUrl}/scategories/${id}`, value);
    }

@@ -43,24 +43,6 @@ export class VersementService {
     return this.http.post(`${this.baseUrl}/versements`, info);
   }
 
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllVersementParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/versements/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getVersementByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/versements`, info);
-  }
-
   updateVersement(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/versements/${id}`, value);
   }

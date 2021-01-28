@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
 import { map } from 'rxjs/operators';
 import { Client } from 'src/app/models/client';
 import { DataTableDirective } from 'angular-datatables';
@@ -16,9 +15,7 @@ import { DatePipe } from '@angular/common';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-import { ClientService } from 'src/app/services/client.service';
-import { ReportCommande } from 'src/app/models/commandeReport';
-import { StringResult } from 'src/app/models/stringResult';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -34,9 +31,6 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
   orderItems: LigneCmdClient;
 
   private editForm: FormGroup;
-
-  report: ReportCommande = new ReportCommande();
-  reportName: StringResult = new StringResult();
 
   id: number ;
 
@@ -102,10 +96,6 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl("commandeclient");
   }
 
-  editerCommandeClient(item : CommandeClient) {
-    this.router.navigateByUrl('commandeclient/'+item.id);
-  }
-
   editCommandeClient(item: CommandeClient) {
     this.crudApi.formData = this.fb.group(Object.assign({}, item));
     this.crudApi.choixmenu = "M"
@@ -131,31 +121,6 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
 
   transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
-  }
-
-  /*  deleteCommandeClient(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette Commande ?')) {
-    this.crudApi.deleteCommandeClient(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Commande supprimé avec succès!');
-          this.rerender();
-          this.getListCommandeClients();
-      },
-        error => console.log(error));
-    }
-
-  } */
-
-  ImprimerFactures() {
-    this.report.name = 'FactureCommande';
-    this.crudApi.reportCommande(this.report).subscribe(
-      result => {
-        this.reportName = result;
-      }
-    );
-
   }
 
   ImprimerFacture(){
@@ -338,7 +303,5 @@ export class ListCommandeClientComponent implements OnDestroy, OnInit {
     }
 
   }
-
-
 
 }

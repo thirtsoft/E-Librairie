@@ -73,22 +73,7 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
     }, err => {
       console.log(err);
     })
-  /*
-    this.cmdClient = new CommandeClient();
-    this.cmdClient = {
-      id: null,
-      numeroCommande: 0,
-      total: 0,
-   //   libArticle: '',
-      totalCommande: 0,
-      status: '',
-    //  refClient: '',
-      lib_client: '',
-      lcomms: [],
-      dateCommande: new Date(),
-      DeletedOrderItemIDs: '',
-      client: new Client()
-    }*/
+
   }
 
   /**
@@ -313,26 +298,10 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
   }
 
-  editerCommandeClient(item : CommandeClient) {
-    this.router.navigateByUrl('commandeclient/'+item.id);
-  }
-
   onGoBack() {
     this.router.navigateByUrl('commandeclients');
   }
-  deleteCommandeClient(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette Commande ?')) {
-    this.crudApi.deleteCommandeClient(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Commande supprimé avec succès!');
-          this.rerender();
-          this.getListCommandeClients();
-      },
-        error => console.log(error));
-    }
-  }
+
   Imprimer() {
     this.crudApi.generateReport(this.comId).subscribe(
       (result) => {
@@ -353,6 +322,5 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
     const document = this.getDocument();
     pdfMake.createPdf(document).download();
   }
-
 
 }

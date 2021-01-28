@@ -10,7 +10,6 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { CreateContratComponent } from '../create-contrat/create-contrat.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
-import { EditContratComponent } from '../edit-contrat/edit-contrat.component';
 import { Client } from 'src/app/models/client';
 import { DatePipe } from '@angular/common';
 import { ViewContratComponent } from '../view-contrat/view-contrat.component';
@@ -117,37 +116,6 @@ export class ListContratComponent implements OnDestroy, OnInit {
     };
     this.matDialog.open(ViewContratComponent, dialogConfig);
   }
-
-/*
-  downloadFile(fileName){
-
-    this.fileDownloadService.downloadFile({'filename':fileName})
-    .subscribe(data => {
-
-      saveAs(new Blob([data],{type:"application/pdf"}),fileName);
-
-    })
-
-  }
-*/
-
-
-
-/*   deleteContrat(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Contrat ?')) {
-    this.crudApi.deleteContrat(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Contrat supprimé avec succès!');
-          this.rerender();
-          this.getListContrats();
-      },
-        error => console.log(error));
-    }
-
-  } */
-
   deleteContrat(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe(res =>{

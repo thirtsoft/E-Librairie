@@ -35,11 +35,7 @@ export class CategorieService {
   }
 
   constructor(private http: HttpClient) { }
-/*
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-*/
+
   getAllCategories(): Observable<any> {
     return this.http.get(`${this.baseUrl}/categories`);
   }
@@ -53,24 +49,6 @@ export class CategorieService {
   }
 
   createCategorie(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/categories`, info);
-  }
-
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllCategorieParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/categories/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getCategorieByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
-  createData(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/categories`, info);
   }
 

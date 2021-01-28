@@ -66,20 +66,6 @@ export class ApproService {
     return this.http.post(`${this.baseUrl}/approvisionnements`, info);
   }
 
-  /**
-   * Methode pour afficher la liste des categories par pages
-   */
-  public getAllApprovisionnementParPage(page: number, size: number) {
-    return this.http.get(this.baseUrl+"/approvisionnements/chercherCategoriesParPages?page="+page+"&size="+size);
-  }
-  /**
-   * Methode pour chercher des categories par nom
-   */
-  public getApprovisionnementByKeyWord(mc: string, page: number, size: number) {
-    return this.http.get(this.baseUrl+"/chercherCategoryParMotCleParPage?mc="+mc+"&page="+page+"&size="+size);
-
-  }
-
   createData(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/approvisionnements`, info);
   }
@@ -87,11 +73,7 @@ export class ApproService {
   updateApprovisionnement(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/approvisionnements/${id}`, value);
   }
-/*
-  deleteApprovisionnement(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/approvisionnements/${id}`, { responseType: 'text' });
-  }
-*/
+
   deleteApprovisionnement(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/approvisionnements/${id}`, { responseType: 'text' });
   }
