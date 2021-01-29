@@ -4,13 +4,14 @@
       <h1>DETAILS D'UN DEVIS</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="OpenPdf()" class="btn btn-success btn-sm">
-        <i class="fa fa-plus" aria-hidden="true"></i> Ouvrir</a>&nbsp;
-      <a type="button" (click)="PrintPdf()" class="btn btn-success btn-sm">
-          <i class="fa fa-plus" aria-hidden="true"></i> Imprimer</a>&nbsp;
-      <a type="button" (click)="TelechargerPdf()" class="btn btn-success btn-sm">
-        <i class="fa fa-plus" aria-hidden="true"></i> Telecharger</a>&nbsp;
-      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-sm" > <span class="fa fa-arrow-left"></span>&nbsp; Retour</a>
+      <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
+        <i class="fa fa-folder-open" aria-hidden="true"></i></a>&nbsp;
+      <a (click)="PrintPdf()" class="btn btn-success btn-lg">
+        <i class="fa fa-print" aria-hidden="true"></i></a>&nbsp;
+      <a type="button" (click)="DownloadPdf()" class="btn btn-danger btn-lg">
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>&nbsp;
+      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" >
+        <span class="fa fa-arrow-left"></span>&nbsp; </a>
 
     </div>
   </div>

@@ -92,7 +92,17 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
     );
   }
 
-  ImprimerPdf() {
+  OpenPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).open();
+  }
+
+  PrintPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).print();
+  }
+
+  DownloadPdf() {
     const document = this.getDocument();
     pdfMake.createPdf(document).download();
   }

@@ -25,9 +25,9 @@ export class LigneDevisService {
    getAllLigneDevis(): Observable<any> {
      return this.http.get(`${this.baseUrl}/ligneDevis`);
    }
-  /*  getAllByNumero(id: number): Observable<Object> {
+   getAllByNumero(id: number): Observable<Object> {
      return this.http.get(`${this.baseUrl}/ligneDevis/${id}`);
-   } */
+   }
 
     /**
    * Methode pour afficher la liste des categories par pages

@@ -112,7 +112,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
     pdfMake.createPdf(document).print();
   }
 
-  TelechargerPdf() {
+  DownloadPdf() {
     const document = this.getDocument();
     pdfMake.createPdf(document).download();
   }

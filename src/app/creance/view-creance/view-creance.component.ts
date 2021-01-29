@@ -112,7 +112,17 @@ export class ViewCreanceComponent implements OnInit {
     }
   }
 
-  ImprimerPdf() {
+  OpenPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).open();
+  }
+
+  PrintPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).print();
+  }
+
+  DownloadPdf() {
     const document = this.getDocument();
     pdfMake.createPdf(document).download();
   }
@@ -151,12 +161,12 @@ export class ViewCreanceComponent implements OnInit {
 
         },
 
-        {
+        /* {
           text: ' FACTURE PROFORMAT',
           alignment: 'center',
           fontSize: 14,
           color: '#0000ff'
-        },
+        }, */
         {},
 
         {
@@ -174,7 +184,7 @@ export class ViewCreanceComponent implements OnInit {
 
             [
               {
-                text: `Date : ${this.lcreanceService.listData[0].creance.dateCreance.toLocaleString()}`,
+                text: `Date: ${this.lcreanceService.listData[0].creance.dateCreance.toLocaleString()}`,
                 alignment: 'right'
               },
             ],
@@ -186,40 +196,27 @@ export class ViewCreanceComponent implements OnInit {
           text: 'M  : ' +this.lcreanceService.listData[0].creance.client.chefService
         },
         {
+          text: ' FACTURE PROFORMAT',
+          alignment: 'center',
+          fontSize: 14,
+          color: '#0000ff',
+          bold: true,
+          margin: [0, 0, 0, 20]
+        },
+        /* {
           text: 'LA LISTE DES ARTICLES COMMANDES',
           bold: true,
           fontSize: 14,
           alignment: 'center',
           margin: [0, 0, 0, 20]
-        },
+        }, */
         {
 
         },
 
-        this.getListLigneCreances(this.lcreanceService.listData),
+        this.getListArticle(this.lcreanceService.listData),
         {
 
-        },
-
-        {
-          bold:true,
-          alignment: 'right',
-          fontSize: 14,
-          text: 'Sole Creance  : ' +this.lcreanceService.listData[0].creance.soldeCreance
-        },
-
-        {
-          bold:true,
-          alignment: 'right',
-          fontSize: 14,
-          text: 'Somme Reste A Payer  : ' +((this.lcreanceService.listData[0].creance.totalCreance)-(this.lcreanceService.listData[0].creance.soldeCreance))
-        },
-
-        {
-          bold:true,
-          alignment: 'right',
-          fontSize: 14,
-          text: 'Montant Total : ' +this.lcreanceService.listData[0].creance.totalCreance
         },
 
         {
@@ -267,7 +264,7 @@ export class ViewCreanceComponent implements OnInit {
     };
 
   }
-  getListLigneCreances(item: LigneCreance[]) {
+  getListArticle(item: LigneCreance[]) {
     return {
       table: {
         widths: ['auto', '*', 'auto', 'auto'],
