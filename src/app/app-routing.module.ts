@@ -73,6 +73,11 @@ import { EnvoiEmailFournisseurComponent } from './fournisseur/envoi-email-fourni
 import { EnvoiSMSFournisseurComponent } from './fournisseur/envoi-smsfournisseur/envoi-smsfournisseur.component';
 import { EnvoiEmailEmployeComponent } from './employe/envoi-email-employe/envoi-email-employe.component';
 import { EnvoiSMSEmployeComponent } from './employe/envoi-smsemploye/envoi-smsemploye.component';
+import { ListDevisComponent } from './devis/list-devis/list-devis.component';
+import { CreateDevisComponent } from './devis/create-devis/create-devis.component';
+import { ViewDevisComponent } from './devis/view-devis/view-devis.component';
+import { ListLigneDevisComponent } from './devis/list-ligne-devis/list-ligne-devis.component';
+import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
 
 const routes: Routes = [
 
@@ -106,7 +111,7 @@ const routes: Routes = [
 
     { path: 'scategories', children: [
         { path: '', component: ListScategorieComponent},
-        { path:'edit/:id',component:ListScategorieComponent },
+        { path:'edit/:id',component:CreateScategorieComponent },
       ]
     },
 
@@ -135,12 +140,16 @@ const routes: Routes = [
 */
     { path: 'commandeclients', component: ListCommandeClientComponent},
     { path:'commandeclient',component: CreateCommandeClientComponent},
-    { path:'commandeclient',component:CreateCommandeClientComponent},
-
-    {path:'commandeView/:id', component: ViewCommandeComponent},
+    { path:'commandeView/:id', component: ViewCommandeComponent },
 
     { path: 'detailsCommandeClients', component: ListLigneCmdClientComponent},
     { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent},
+
+    { path: 'listdevis', component: ListDevisComponent },
+    { path:'devis',component: CreateDevisComponent },
+    { path:'devisView/:id', component: ViewDevisComponent },
+    { path: 'detailsDevis', component: ListLigneDevisComponent },
+    { path:'detailsDevis',component: CreateLigneDevisComponent },
 
     { path: 'ventes', component: ListVenteComponent},
     { path:'vente',children:[

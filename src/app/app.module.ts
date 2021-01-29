@@ -95,6 +95,11 @@ import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd
 import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CreateDevisComponent } from './devis/create-devis/create-devis.component';
+import { ListLigneDevisComponent } from './devis/list-ligne-devis/list-ligne-devis.component';
+import { ListDevisComponent } from './devis/list-devis/list-devis.component';
+import { ViewDevisComponent } from './devis/view-devis/view-devis.component';
+import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
 
 
 @NgModule({
@@ -175,6 +180,11 @@ import { environment } from '../environments/environment';
     ListEmailComponent,
     EmailClientComponent,
     EmailFournisseurComponent,
+    CreateDevisComponent,
+    ListLigneDevisComponent,
+    ListDevisComponent,
+    ViewDevisComponent,
+    CreateLigneDevisComponent,
   ],
   imports: [
     BrowserModule,
