@@ -22,5 +22,19 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "apiCategorie",
+      "urls": [
+        "http://localhost:8081/api/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "2d",
+        "timeout": "20s",
+        "strategy": "freshness"
+      }
+    }
   ]
 }

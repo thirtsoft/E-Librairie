@@ -67,15 +67,11 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2><strong>Diagramme en Barre des Ventes et Commandes Par mois</strong></h2>
-          <!--
-          <div class="panel-actions">
-            <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-            <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-          </div>-->
-
-        </div><br><br><br>
+        </div>
         <div class="panel-body">
-          <app-barchar-com-vente></app-barchar-com-vente>
+          <div style="display: block">
+            <canvas id="myChart" height="300" width="500"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -84,16 +80,13 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="pull-left">Diagramme Circulaire Stock Marchandises</div>
-          <!--
-          <div class="widget-icons pull-right">
-            <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-            <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-          </div> -->
           <div class="clearfix"></div>
         </div>
         <div class="panel-body">
           <div class="padd">
-            <app-piechart></app-piechart>
+            <div style="display: block">
+              <canvas id="myChart1"  height="300" width="500"></canvas>
+            </div>
           </div>
         </div>
       </div>
