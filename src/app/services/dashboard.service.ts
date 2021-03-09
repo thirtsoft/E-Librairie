@@ -12,7 +12,9 @@ import { map } from 'rxjs/operators';
 })
 export class DashboardService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl = 'http://localhost:8081/alAmine';
+
+ // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
