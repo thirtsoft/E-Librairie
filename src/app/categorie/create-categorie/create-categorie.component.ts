@@ -32,7 +32,7 @@ export class CreateCategorieComponent implements OnInit {
 
   infoForm() {
     this.crudApi.dataForm = this.fb.group({
-      id: null,
+    //  id: 0,
       code: ['', [Validators.required]],
       designation: ['', [Validators.required]],
     });
@@ -48,26 +48,23 @@ export class CreateCategorieComponent implements OnInit {
       this.crudApi.dataForm.reset();
   }
   onSubmit() {
-    if (this.crudApi.dataForm.valid) {
+   /*  if (this.crudApi.dataForm.valid) { */
       if (this.crudApi.choixmenu == "A"){
-        this.saveCategorie();
+        this.crudApi.createCategorie(this.crudApi.dataForm.value);
+        this.dialogRef.close();
       }else{
-        this.updateCategorie();
+        console.log('non ajouter');
       }
-    } else {
-      return;
-    }
+
   }
 
   saveCategorie() {
-    this.crudApi.createCategorie(this.crudApi.dataForm.value).
-    subscribe( data => {
-      this.dialogRef.close();
+    this.crudApi.createCategorie(this.crudApi.dataForm.value);
+       this.dialogRef.close();
       this.crudApi.filter('Register click');
       this.toastr.success("Categorie Ajouté avec Succès");
       this.getListCategories();
       this.router.navigate(['/categories']);
-    });
   }
   updateCategorie(){
     this.crudApi.updateCategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).

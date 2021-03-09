@@ -142,12 +142,14 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: ' FACTURE PROFORMAT',
+         /*  text: ' FACTURE PROFORMAT',
           alignment: 'center',
           fontSize: 14,
-          color: '#0000ff'
+          color: '#0000ff' */
         },
-        {},
+        {
+
+        },
 
         {
           columns: [
@@ -157,7 +159,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
                 text: `FACTURE N° : ${this.lventeService.listData[0].numero}`,
                 fontSize: 14,
                 bold: true,
-
+                margin: [0, 15, 0, 15]
               },
 
             ],
@@ -165,7 +167,8 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
             [
               {
                 text: `Date : ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
-                alignment: 'right'
+                alignment: 'right',
+                margin: [0, 15, 0, 15]
               },
             ],
 
@@ -176,11 +179,20 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
           text: 'M  : ' +this.lcmdService.listData[0].commande.client.chefService
         }, */
         {
-          text: 'LA LISTE DES ARTICLES COMMANDES',
+          text: 'FACTURE PREFORMAT',
           bold: true,
           fontSize: 14,
+          decoration: 'underline',
           alignment: 'center',
-          margin: [0, 0, 0, 20]
+          color: '#0000ff',
+          margin: [0, 8, 0, 8]
+        },
+        {
+          text: 'M.',
+          bold: true,
+          fontSize: 13,
+          alignment: 'left',
+          margin: [0, 5, 0, 5]
         },
         {
 

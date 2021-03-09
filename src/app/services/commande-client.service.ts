@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LigneCmdClient } from '../models/ligne-cmd-client';
 import { ClientService } from './client.service';
+import Dexie from 'dexie';
+import { OnlineofflineService } from './onlineoffline.service';
 
 
 @Injectable({
@@ -12,8 +14,16 @@ import { ClientService } from './client.service';
 })
 export class CommandeClientService {
 
-  private baseUrl = 'http://localhost:8080/alAmine';
- // private baseUrl = window["cfgApiBaseUrl"];
+  private baseUrl_1 = 'http://localhost:8081/prodApi';
+  private db: Dexie;
+  private tableCmdClient: Dexie.Table<CommandeClient, number>;
+
+  Data;
+  listDataCmd: any[] = [];
+
+
+ // private baseUrl_1 = 'http://localhost:8080/alAmine';
+ // private baseUrl_1 = window["cfgApibaseUrl_1"];
 
   choixmenu : string  = 'A';
   listData : CommandeClient[];
@@ -28,22 +38,27 @@ export class CommandeClientService {
   livr    : any={};
   client : any={};
 
-  constructor(private http: HttpClient,  private clientService: ClientService) { }
+  constructor(private http: HttpClient,  private clientService: ClientService,
+    private offlineService: OnlineofflineService) {
+     /*  this.ouvrirStatusConnexion();
+      this.connectToDatabase();
+     this.addAllDataCommandeToIndexeddb(); */
+  }
 
   getAllCommandeClients(): Observable<CommandeClient[]> {
-    return this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes`);
+    return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes`);
   }
 
   public getCommandeClientById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/commandes/${id}`);
+    return this.http.get(`${this.baseUrl_1}/commandes/${id}`);
   }
 
   getOrderByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/commandes/`+id).toPromise();
+    return this.http.get(`${this.baseUrl_1}/commandes/`+id).toPromise();
   }
 
   /* createCommandeClient(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/commandesClientes`, info);
+    return this.http.post(`${this.baseUrl_1}/commandesClientes`, info);
   } */
 
   createCommandeClient() {
@@ -51,22 +66,22 @@ export class CommandeClientService {
       ...this.formData,
       lcomms: this.orderItems
     };
-    return this.http.post(`${this.baseUrl}/commandesClientes`, body);
+    return this.http.post(`${this.baseUrl_1}/commandesClientes`, body);
   }
 
   saveCommande(info: Object) {
-    return this.http.post(`${this.baseUrl}/commandesClientes`, info);
+    return this.http.post(`${this.baseUrl_1}/commandesClientes`, info);
   }
   updateCommandeClient(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/commandes/${id}`, value);
+    return this.http.put(`${this.baseUrl_1}/commandes/${id}`, value);
   }
 
   deleteCommandeClient(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/commandes/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl_1}/commandes/${id}`, { responseType: 'text' });
   }
 
   deleteCommande(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/commandes/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl_1}/commandes/${id}`, { responseType: 'text' });
   }
 
   getDocument(id :number) {
@@ -251,6 +266,50 @@ export class CommandeClientService {
   public generateReport(id: number){
     return this.http.get<any>("http://localhost:8080/alAmine/report/pdf"+"/"+ id);
   }
+
+  // ouvrir la base de données
+  connectToDatabase(): void {
+    this.db.open().catch((error) => {
+      alert("Errod during connecting to database : " + error);
+    });
+
+  }
+
+  async addAllDataCommandeToIndexeddb() {
+    await this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes`).subscribe(response => {
+      this.listDataCmd = response;
+      this.db.transaction('rw', this.tableCmdClient, async ()=> {
+        console.log(this.listDataCmd);
+        for (let i = 0; i < this.listDataCmd.length; i++) {
+          this.tableCmdClient.put(this.listDataCmd[i]);
+        }
+      });
+    })
+  }
+
+  private async sendDataFromIndexedDbToAPI() {
+    const todosCategorie: CommandeClient[] = await this.tableCmdClient.toArray();
+    console.log(todosCategorie);
+    for(const categorie of todosCategorie) {
+      console.log(categorie);
+ //     this.createCategorieAPI(categorie);
+      await this.tableCmdClient.delete(categorie.id);
+      console.log('Categorie com id ${categorie.id} foi excluddo com successfull');
+    }
+  }
+
+
+  private ouvrirStatusConnexion() {
+    this.offlineService.statusConnexion
+      .subscribe(online => {
+        if(online) {
+         this.sendDataFromIndexedDbToAPI();
+        }else {
+          console.log('Mode offline active');
+        }
+      });
+  }
+
 
 
 }

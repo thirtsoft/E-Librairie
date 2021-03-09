@@ -50,7 +50,7 @@ export class CreateLigneVenteComponent implements OnInit {
 
   infoForm() {
     this.formData = this.fb.group({
-      id: null,
+    //  id: null,
       OrderId: this.data.OrderId,
       ItemId: 0,
       numero: this.data.numeroVente,

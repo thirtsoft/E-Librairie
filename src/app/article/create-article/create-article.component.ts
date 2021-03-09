@@ -60,17 +60,19 @@ export class CreateArticleComponent implements OnInit {
 
   onSubmit() {
     if (isNullOrUndefined(this.data.id)) {
-      this.crudApi.createArticle(this.formDataArticle).
-      subscribe( data => {
+      console.log(this.formDataArticle);
+    //  this.crudApi.createProduit(this.formDataArticle);
+   /*   subscribe( data => {
         this.dialogRef.close();
+        console.log(this.formDataArticle)
         this.crudApi.filter('Register click');
         this.toastr.success("Article Ajouté avec Succès");
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/articles']);
-      });
-
+ //     });
+          */
     }else {
       console.log(this.formDataArticle.id, this.formDataArticle);
       this.crudApi.updateArticle(this.formDataArticle.id, this.formDataArticle).

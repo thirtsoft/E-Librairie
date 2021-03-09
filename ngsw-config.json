@@ -27,12 +27,14 @@
     {
       "name": "apiCategorie",
       "urls": [
-        "http://localhost:8081/api/**"
+        "http://localhost:8081/api/**",
+        "http://localhost:8081/prodApi/**",
+        "http://localhost:8081/apiSeller/**"
       ],
       "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "2d",
-        "timeout": "20s",
+        "maxSize": 10000,
+        "maxAge": "20m",
+        "timeout": "10m",
         "strategy": "freshness"
       }
     }

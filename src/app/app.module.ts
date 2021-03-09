@@ -13,7 +13,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -196,8 +195,6 @@ import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-lig
     ToastrModule.forRoot(),
     CommonModule,
     DataTablesModule,
-
-    ChartsModule,
 
     MatDialogModule,
     MatToolbarModule,

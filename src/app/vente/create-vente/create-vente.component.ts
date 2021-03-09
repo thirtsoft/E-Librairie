@@ -9,6 +9,7 @@ import { CreateLigneVenteComponent } from '../create-ligne-vente/create-ligne-ve
 import { LigneVente } from 'src/app/models/ligne-vente';
 import { DatePipe } from '@angular/common';
 import { LigneVenteService } from 'src/app/services/ligne-vente.service';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
   selector: 'app-create-vente',
@@ -33,7 +34,8 @@ export class CreateVenteComponent implements OnInit {
   OrderId: number;
 
   constructor(public crudApi: VenteService, private dialog:MatDialog,
-    public lventeService: LigneVenteService, private datePipe : DatePipe,
+    public lventeService: LigneVenteService, private catService: CategorieService,
+    private datePipe : DatePipe,
     public fb: FormBuilder, private toastr :ToastrService, private router :Router,
     private currentRoute: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -68,7 +70,7 @@ export class CreateVenteComponent implements OnInit {
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
-      venteId: null,
+    //  venteId: null,
       numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
       total: [0, Validators.required],
       totalVente: [0, Validators.required],
@@ -105,7 +107,7 @@ export class CreateVenteComponent implements OnInit {
       this.isValid = false;
     return this.isValid;
   }
-
+/*
   onSubmit() {
     this.f['ligneVentes'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
@@ -117,6 +119,21 @@ export class CreateVenteComponent implements OnInit {
         this.router.navigate(['/ventes']);
       }
     );
+  }
+*/
+  onSubmit() {
+    this.f['ligneVentes'].setValue(this.crudApi.list);
+    console.log(this.crudApi.formData.value);
+
+    this.catService.creerVente(this.crudApi.formData.value);
+    console.log(this.crudApi.formData.value);
+
+    /*
+
+    this.toastr.success('Vente Effectuée avec succès');
+    console.log(this.crudApi.formData.value);
+    this.router.navigate(['/ventes']);
+*/
   }
 
   onDeleteOrderItem(id: number, i: number) {
