@@ -151,12 +151,6 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
         },
 
-        /* {
-          text: ' FACTURE PROFORMAT',
-          alignment: 'center',
-          fontSize: 14,
-          color: '#0000ff'
-        }, */
         {},
 
         {
@@ -164,9 +158,10 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
             [
               {
-                text: `FACTURE N° : ${this.ldevService.listData[0].numero}`,
-                fontSize: 14,
+                text: `DEVIS N° : ${this.ldevService.listData[0].numero}`,
+                fontSize: 12,
                 bold: true,
+                margin: [0, 15, 0, 15]
 
               },
 
@@ -175,31 +170,29 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
             [
               {
                 text: `Date: ${this.ldevService.listData[0].devis.dateDevis.toLocaleString()}`,
-                alignment: 'right'
+                alignment: 'right',
+                margin: [0, 15, 0, 15]
               },
             ],
 
           ]
         },
+
         {
-          bold:true,
-          text: 'M  : ' +this.ldevService.listData[0].devis.client.chefService
-        },
-        {
-          text: ' FACTURE PROFORMAT',
+          text: ' DEVIS',
           alignment: 'center',
-          fontSize: 14,
+          fontSize: 20,
           color: '#0000ff',
           bold: true,
-          margin: [0, 0, 0, 20]
+          margin: [0, 5, 0, 5],
+
         },
-        /* {
-          text: 'LA LISTE DES ARTICLES COMMANDES',
-          bold: true,
-          fontSize: 14,
-          alignment: 'center',
-          margin: [0, 0, 0, 20]
-        }, */
+        {
+          text: 'CLIENT  : ' +this.ldevService.listData[0].devis.client.chefService,
+          alignment: 'left',
+          margin: [0, 8, 0, 8]
+        },
+
         {
 
         },
@@ -212,7 +205,8 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
         {
           text: 'Signature',
           style: 'sign',
-          alignment: 'right'
+          alignment: 'right',
+          decoration: 'underline',
         },
 
 

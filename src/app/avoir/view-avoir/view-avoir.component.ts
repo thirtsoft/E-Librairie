@@ -104,7 +104,7 @@ export class ViewAvoirComponent implements OnInit {
     pdfMake.createPdf(document).print();
   }
 
-  TelechargerPdf() {
+  DownloadPdf() {
     const document = this.getDocument();
     pdfMake.createPdf(document).download();
   }
@@ -143,12 +143,7 @@ export class ViewAvoirComponent implements OnInit {
 
         },
 
-        {
-          text: ' FACTURE PROFORMAT',
-          alignment: 'center',
-          fontSize: 14,
-          color: '#0000ff'
-        },
+
         {},
 
         {
@@ -156,10 +151,10 @@ export class ViewAvoirComponent implements OnInit {
 
             [
               {
-                text: `FACTURE N° : ${this.lavoirService.listData[0].numero}`,
-                fontSize: 14,
+                text: `AVOIR N° : ${this.lavoirService.listData[0].numero}`,
+                fontSize: 12,
                 bold: true,
-
+                margin: [0, 15, 0, 15]
               },
 
             ],
@@ -167,27 +162,31 @@ export class ViewAvoirComponent implements OnInit {
             [
               {
                 text: `Date: ${this.lavoirService.listData[0].avoir.dateAvoir.toLocaleString()}`,
-                alignment: 'right'
+                alignment: 'right',
+                margin: [0, 15, 0, 15]
               },
             ],
 
           ]
         },
         {
-          bold:true,
-          text: 'Prénom  : ' +this.lavoirService.listData[0].avoir.fournisseur.prenom
+          text: 'AVOIR',
+          alignment: 'center',
+          fontSize: 20,
+          color: '#0000ff',
+          bold: true,
+          margin: [0, 5, 0, 5],
         },
         {
+          text: 'Fournisseur  : ' +[(this.lavoirService.listData[0].avoir.fournisseur.prenom)+" "+(this.lavoirService.listData[0].avoir.fournisseur.nom)],
+          alignment: 'left',
+          margin: [0, 8, 0, 8]
+        },
+       /*  {
           bold:true,
           text: 'Nom  : ' +this.lavoirService.listData[0].avoir.fournisseur.nom
-        },
-        {
-          text: 'LA LISTE DES ARTICLES COMMANDES',
-          bold: true,
-          fontSize: 14,
-          alignment: 'center',
-          margin: [0, 0, 0, 20]
-        },
+        }, */
+
         {
 
         },
@@ -200,7 +199,8 @@ export class ViewAvoirComponent implements OnInit {
         {
           text: 'Signature',
           style: 'sign',
-          alignment: 'right'
+          alignment: 'right',
+          decoration: 'underline',
         },
 
 

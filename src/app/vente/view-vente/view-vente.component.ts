@@ -156,7 +156,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
             [
               {
-                text: `FACTURE N° : ${this.lventeService.listData[0].numero}`,
+                text: `VENTE N° : ${this.lventeService.listData[0].numero}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]

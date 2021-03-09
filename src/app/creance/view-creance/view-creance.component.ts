@@ -161,12 +161,6 @@ export class ViewCreanceComponent implements OnInit {
 
         },
 
-        /* {
-          text: ' FACTURE PROFORMAT',
-          alignment: 'center',
-          fontSize: 14,
-          color: '#0000ff'
-        }, */
         {},
 
         {
@@ -174,10 +168,10 @@ export class ViewCreanceComponent implements OnInit {
 
             [
               {
-                text: `FACTURE N° : ${this.lcreanceService.listData[0].numero}`,
-                fontSize: 14,
+                text: `CREANCE N° : ${this.lcreanceService.listData[0].numero}`,
+                fontSize: 12,
                 bold: true,
-
+                margin: [0, 15, 0, 15]
               },
 
             ],
@@ -185,31 +179,28 @@ export class ViewCreanceComponent implements OnInit {
             [
               {
                 text: `Date: ${this.lcreanceService.listData[0].creance.dateCreance.toLocaleString()}`,
-                alignment: 'right'
+                alignment: 'right',
+                margin: [0, 15, 0, 15]
               },
             ],
 
           ]
         },
+
         {
-          bold:true,
-          text: 'M  : ' +this.lcreanceService.listData[0].creance.client.chefService
-        },
-        {
-          text: ' FACTURE PROFORMAT',
+          text: 'CREANCE',
           alignment: 'center',
-          fontSize: 14,
+          fontSize: 20,
           color: '#0000ff',
           bold: true,
-          margin: [0, 0, 0, 20]
+          margin: [0, 5, 0, 5],
         },
-        /* {
-          text: 'LA LISTE DES ARTICLES COMMANDES',
-          bold: true,
-          fontSize: 14,
-          alignment: 'center',
-          margin: [0, 0, 0, 20]
-        }, */
+        {
+          text: 'CLIENT  : ' +this.lcreanceService.listData[0].creance.client.chefService,
+          alignment: 'left',
+          margin: [0, 8, 0, 8]
+        },
+
         {
 
         },
@@ -218,11 +209,45 @@ export class ViewCreanceComponent implements OnInit {
         {
 
         },
+        {
+          text: 'Montant Emprunté : ' +this.lcreanceService.listData[0].creance.soldeCreance,
+          alignment: 'right',
+          margin: [0, 8, 0, 8],
+          fontSize: 12,
+          bold: true,
+          colSpan: 3
+        },
+        {
+          text: 'Montant Total : ' +this.lcreanceService.listData[0].creance.totalCreance,
+          alignment: 'right',
+          margin: [0, 5, 0, 5],
+          fontSize: 12,
+          bold: true,
+          colSpan: 3
+        },
+        {
+          text: 'Montant Avancée : ' +this.lcreanceService.listData[0].creance.avanceCreance,
+          alignment: 'right',
+          margin: [0, 5, 0, 5],
+          fontSize: 12,
+          bold: true,
+          colSpan: 3
+        },
+
+        {
+          text: 'Montant à Payer : ' +[(this.lcreanceService.listData[0].creance.totalCreance)-(this.lcreanceService.listData[0].creance.avanceCreance)],
+          alignment: 'right',
+          margin: [0, 5, 0, 5],
+          fontSize: 12,
+          bold: true,
+          colSpan: 3
+        },
 
         {
           text: 'Signature',
           style: 'sign',
-          alignment: 'right'
+          alignment: 'right',
+          decoration: 'underline',
         },
 
 
@@ -300,7 +325,8 @@ export class ViewCreanceComponent implements OnInit {
             }, {}, {},
             this.lcreanceService.listData.reduce((sum, x)=> sum + (x.quantite * x.prix), 0).toFixed(2)
           ]
-        ]
+        ],
+
       }
     }
 
