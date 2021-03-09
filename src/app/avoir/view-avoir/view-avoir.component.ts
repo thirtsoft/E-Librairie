@@ -182,10 +182,6 @@ export class ViewAvoirComponent implements OnInit {
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },
-       /*  {
-          bold:true,
-          text: 'Nom  : ' +this.lavoirService.listData[0].avoir.fournisseur.nom
-        }, */
 
         {
 

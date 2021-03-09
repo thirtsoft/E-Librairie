@@ -155,12 +155,6 @@ export class ViewApprovisionnementComponent implements OnInit {
 
         },
 
-        {
-          text: ' FACTURE PROFORMAT',
-          alignment: 'center',
-          fontSize: 14,
-          color: '#0000ff'
-        },
         {},
 
         {
@@ -168,9 +162,10 @@ export class ViewApprovisionnementComponent implements OnInit {
 
             [
               {
-                text: `FACTURE N° : ${this.lapproService.listData[0].numero}`,
+                text: `APPROVISIONNEMENT N° : ${this.lapproService.listData[0].numero}`,
                 fontSize: 14,
                 bold: true,
+                margin: [0, 15, 0, 15]
 
               },
 
@@ -179,27 +174,28 @@ export class ViewApprovisionnementComponent implements OnInit {
             [
               {
                 text: `Date: ${this.lapproService.listData[0].approvisionnement.dateApprovisionnement.toLocaleString()}`,
-                alignment: 'right'
+                alignment: 'right',
+                margin: [0, 15, 0, 15]
               },
             ],
 
           ]
         },
         {
-          bold:true,
-          text: 'Prénom  : ' +this.lapproService.listData[0].approvisionnement.fournisseur.prenom
-        },
-        {
-          bold:true,
-          text: 'Nom  : ' +this.lapproService.listData[0].approvisionnement.fournisseur.nom
-        },
-        {
-          text: 'LA LISTE DES ARTICLES COMMANDES',
-          bold: true,
-          fontSize: 14,
+          text: ' FACTURE APPROVISIONNEMENT',
           alignment: 'center',
-          margin: [0, 0, 0, 20]
+          fontSize: 20,
+          color: '#0000ff',
+          bold: true,
+          margin: [0, 5, 0, 5],
         },
+        {
+          bold:true,
+          text: 'Fournisseur  : ' +[(this.lapproService.listData[0].approvisionnement.fournisseur.prenom)+" "+(this.lapproService.listData[0].approvisionnement.fournisseur.nom)],
+          alignment: 'left',
+          margin: [0, 8, 0, 8]
+        },
+
         {
 
         },
@@ -212,7 +208,8 @@ export class ViewApprovisionnementComponent implements OnInit {
         {
           text: 'Signature',
           style: 'sign',
-          alignment: 'right'
+          alignment: 'right',
+          decoration: 'underline',
         },
 
 
