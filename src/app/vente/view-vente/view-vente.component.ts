@@ -157,7 +157,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
             [
               {
                 text: `FACTURE N° : ${this.lventeService.listData[0].numero}`,
-                fontSize: 14,
+                fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]
               },
@@ -179,17 +179,15 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
           text: 'M  : ' +this.lcmdService.listData[0].commande.client.chefService
         }, */
         {
-          text: 'FACTURE PREFORMAT',
+          text: 'FACTURE VENTE',
           bold: true,
-          fontSize: 14,
-          decoration: 'underline',
+          fontSize: 20,
           alignment: 'center',
           color: '#0000ff',
           margin: [0, 8, 0, 8]
         },
         {
           text: 'M.',
-          bold: true,
           fontSize: 13,
           alignment: 'left',
           margin: [0, 5, 0, 5]
@@ -206,7 +204,8 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         {
           text: 'Signature',
           style: 'sign',
-          alignment: 'right'
+          alignment: 'right',
+          decoration: 'underline',
         },
 
 

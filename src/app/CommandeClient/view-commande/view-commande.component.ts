@@ -153,13 +153,6 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
         },
 
-        /* {
-          text: ' FACTURE PROFORMAT',
-          alignment: 'center',
-          fontSize: 14,
-          color: '#0000ff'
-        }, */
-        {},
 
         {
           columns: [
@@ -167,41 +160,39 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
             [
               {
                 text: `FACTURE N° : ${this.lcmdService.listData[0].numero}`,
-                fontSize: 14,
+                fontSize: 12,
                 bold: true,
-
+                margin: [0, 15, 0, 15]
               },
 
             ],
 
             [
               {
-                text: `Date: ${this.lcmdService.listData[0].commande.dateCommande.toLocaleString()}`,
-                alignment: 'right'
+                text: `Date : ${this.lcmdService.listData[0].commande.dateCommande.toLocaleString()}`,
+                alignment: 'right',
+                margin: [0, 15, 0, 15]
               },
             ],
 
           ]
         },
+
         {
-          bold:true,
-          text: 'M  : ' +this.lcmdService.listData[0].commande.client.chefService
-        },
-        {
-          text: ' FACTURE PROFORMAT',
+          text: ' FACTURE',
           alignment: 'center',
-          fontSize: 14,
+          fontSize: 20,
           color: '#0000ff',
           bold: true,
-          margin: [0, 0, 0, 20]
+          margin: [0, 5, 0, 5]
         },
-        /* {
-          text: 'LA LISTE DES ARTICLES COMMANDES',
-          bold: true,
-          fontSize: 14,
-          alignment: 'center',
-          margin: [0, 0, 0, 20]
-        }, */
+        {
+        //  bold:true,
+          text: 'CLIENT : ' +this.lcmdService.listData[0].commande.client.chefService,
+          alignment: 'left',
+          margin: [0, 8, 0, 8]
+        },
+
         {
 
         },
@@ -214,7 +205,8 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
         {
           text: 'Signature',
           style: 'sign',
-          alignment: 'right'
+          alignment: 'right',
+          decoration: 'underline',
         },
 
 
