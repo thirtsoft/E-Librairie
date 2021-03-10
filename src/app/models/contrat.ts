@@ -9,6 +9,7 @@ export class Contrat {
   dateDebutContrat: Date;
   dateFinContrat: Date;
   fileContrat: string;
+//  content: Blob;
 
   client: Client;
 
@@ -18,6 +19,7 @@ export class Contrat {
     this.nature = this.nature;
     this.montantContrat = this.montantContrat;
     this.description = this.description;
+    this.fileContrat = this.fileContrat;
     this.dateDebutContrat = this.dateDebutContrat;
     this.dateFinContrat = this.dateFinContrat;
     this.client = new Client();

@@ -11,7 +11,7 @@ import { OnlineofflineService } from './onlineoffline.service';
 })
 export class ClientService {
 
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
+  private baseUrl_1 = 'http://localhost:8081/alAmine';
  /*  private db: Dexie;
   private tableClient: Dexie.Table<Client, number>; */
 

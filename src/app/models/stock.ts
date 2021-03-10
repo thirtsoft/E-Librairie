@@ -3,7 +3,7 @@ import { Article } from './article';
 export class Stock {
   id: number;
 	quantite: number;
-	dateMiseAJour: Date;
+  dateMiseAJour: Date;
 
 	produit: Article;
 

@@ -14,6 +14,11 @@ import { Client } from 'src/app/models/client';
 import { DatePipe } from '@angular/common';
 import { ViewContratComponent } from '../view-contrat/view-contrat.component';
 
+import { map } from 'rxjs/operators';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-list-contrat',
   templateUrl: './list-contrat.component.html',
@@ -127,6 +132,34 @@ export class ListContratComponent implements OnDestroy, OnInit {
         });
       }
     });
+  }
+
+  OpenPdf() {
+    const document = this.getDocument();
+    pdfMake.createPdf(document).open();
+  }
+
+  getDocument() {
+    return {
+      content: [
+
+        {
+          columns: [
+
+            [
+              {
+                text: `: ${this.crudApi.listData[0].fileContrat}`,
+
+              },
+
+            ],
+
+          ]
+        },
+
+      ],
+    };
+
   }
 
 

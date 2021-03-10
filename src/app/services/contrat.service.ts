@@ -50,9 +50,9 @@ export class ContratService {
 
     const data:FormData= new FormData();
     data.append('contrat',JSON.stringify(contrat));
-    data.append('file_contrat',file);
+    data.append('file',file);
 
-    return this.http.post<Contrat>(`${this.baseUrl}/createContrat`, data);
+    return this.http.post<Contrat>(`${this.baseUrl}/createContrats`, data);
   }
 
   public downloadFile(pathContrat: String){

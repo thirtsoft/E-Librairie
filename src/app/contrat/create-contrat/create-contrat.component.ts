@@ -21,7 +21,8 @@ export class CreateContratComponent implements OnInit {
   formDataContrat = new Contrat();
   listClient:  Client[];
 
-  contratFile: any = File;
+
+  fileContrat: File;
 
   submitted = false;
 
@@ -72,13 +73,17 @@ export class CreateContratComponent implements OnInit {
 
   // selectionner une image et la garder
   selectFileContrat(event) {
+
+    /*
     const file = event.target.files[0];
     this.contratFile = file;
+    */
+    this.fileContrat = event.target.files[0];
   }
 
   onSubmit() {
     if(isNullOrUndefined(this.data.id)) {
-      this.crudApi.createContrat(this.formDataContrat).
+      this.crudApi.createContrat2(this.formDataContrat, this.fileContrat).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
