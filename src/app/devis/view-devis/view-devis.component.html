@@ -39,12 +39,12 @@
 
       <div class="form-group col-md-3">
         <label>P.Total : </label>
-        <input type="text" class="form-control" name="" [value]="this.totalDevis" id="total" readonly>
+        <input type="text" class="form-control" name="totalDevis" [value]="this.totalDevis" id="total" readonly>
       </div>
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="date"  name="date" [value]="this.dateDevis"   class="form-control" readonly>
+        <input type="datetime"  name="dateDevis" [value]="[this.dateDevis | date:'yyyy-MM-dd à h:mm:ss']"   class="form-control" readonly>
       </div>
     </div>
     <div></div>

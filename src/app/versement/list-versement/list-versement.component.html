@@ -12,7 +12,7 @@
           [dtTrigger]="dtTrigger">
           <thead>
             <tr>
-              <th>Numéro</th><th>Employé</th><th>Montant</th><th>Date</th>
+              <th>Numéro</th><th>Employé</th><th>Montant</th><th>Versement</th><th>Date</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -21,6 +21,11 @@
               <td>{{versmnt.numVersement}}</td>
               <td>{{versmnt.employe.prenom}}  {{versmnt.employe.nom}}</td>
               <td>{{versmnt.montantVersement}}</td>
+              <td>{{versmnt.fileVersement}}
+                <a href="http://localhost:8081/alAmine/downloadVersementFile/{{versmnt.fileVersement}}"
+                        class="cv">&nbsp;&nbsp; <i class="fa fa-download" style="cursor:pointer; align-items: flex-end;"></i>&nbsp;&nbsp;
+                        <!-- <i class="fa fa-eye" style="cursor:pointer;"></i> --></a>
+              </td>
               <td>{{versmnt.dateVersement| date:'dd/MM/yyyy'}}</td>
               <td>
                 <button class="btn btn-success btn-sm" (click)="viewVersement(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;

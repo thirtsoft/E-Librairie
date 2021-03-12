@@ -17,6 +17,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-view-approvisionnement',
   templateUrl: './view-approvisionnement.component.html',
@@ -44,7 +46,7 @@ export class ViewApprovisionnementComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: ApproService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
     private matDialog: MatDialog, public lapproService: LigneApproService,
     @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateVenteComponent>,
@@ -93,6 +95,10 @@ export class ViewApprovisionnementComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
   getListVentes() {

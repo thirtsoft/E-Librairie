@@ -15,8 +15,8 @@
             <thead>
               <tr>
                 <th>Numéro Appro</th> <th>Article</th><th>P.Unitaire</th><th>Quantité</th>
-                <th>P.Total</th>
-                <th>Action</th>
+                <th>P.Total</th><th>Fournisseur</th>
+               <!--  <th>Action</th> -->
               </tr>
             </thead>
           <tbody>
@@ -26,10 +26,13 @@
               <td>{{lAppro.prix}}</td>
               <td>{{lAppro.quantite}}</td>
               <td>{{(lAppro.prix)*(lAppro.quantite)}} </td>
+              <td>{{lAppro.approvisionnement?.fournisseur.prenom}}.{{lAppro.approvisionnement?.fournisseur.nom}} </td>
+             <!--
               <td>
-           <!-- <button class="btn btn-info btn-lg" (click)="editerLigneAppro(lAppro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
+                <button class="btn btn-info btn-lg" (click)="editerLigneAppro(lAppro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;
                 <button class="btn btn-danger btn-lg" (click)="deleteLigneAppro(lAppro.id)"><i class="fa fa-trash-o"></i>  </button>
               </td>
+            -->
             </tr>
           </tbody>
         </table>

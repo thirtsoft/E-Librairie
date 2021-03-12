@@ -33,7 +33,7 @@
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="date"  name="date" [value]="this.dateCreance"   class="form-control" readonly>
+        <input type="datetime"  name="dateCreance" [value]="[this.dateCreance|date:'yyyy-MM-dd à h:mm:ss']"   class="form-control" readonly>
       </div>
     </div>
     <div></div>

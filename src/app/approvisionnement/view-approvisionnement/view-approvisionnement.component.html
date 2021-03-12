@@ -39,7 +39,7 @@
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="date"  name="dateAppro" [value]="this.dateAppro" id="dateAppro"   class="form-control" readonly>
+        <input type="datetime"  name="dateAppro" [value]="[this.dateAppro | date:'yyyy-MM-dd à h:mm:ss']" id="dateAppro"   class="form-control" readonly>
       </div>
     </div>
     <div></div>

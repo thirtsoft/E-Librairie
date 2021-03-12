@@ -134,6 +134,12 @@ export class ListContratComponent implements OnDestroy, OnInit {
     });
   }
 
+  viewPDF() {
+    window.open("http://localhost:8081/alAmine/viewPdf/{this.crudApi.formData.fileContrat}");
+
+  //  window.open("http://localhost:8080/ViewPdfProject/viewPdf","_blank");
+  }
+
   OpenPdf() {
     const document = this.getDocument();
     pdfMake.createPdf(document).open();

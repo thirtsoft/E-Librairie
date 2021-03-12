@@ -28,12 +28,12 @@
 
       <div class="form-group col-md-3">
         <label>Total Vente : </label>
-        <input type="text" class="form-control" [value]="this.totalVente" name="" id="totalVente" readonly>
+        <input type="text" class="form-control" [value]="this.totalVente" name="totalVente" id="totalVente" readonly>
       </div>
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="date"  name="dateVente" [value]="this.dateVente" class="form-control" readonly>
+        <input type="datetime"  name="dateVente" [value]="[this.dateVente | date:'yyyy-MM-dd à h:mm:ss']" class="form-control" readonly>
       </div>
     </div>
     <div></div>

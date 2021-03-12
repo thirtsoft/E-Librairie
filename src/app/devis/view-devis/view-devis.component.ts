@@ -11,6 +11,7 @@ import { LigneDevis } from 'src/app/models/ligne-devis';
 import { DevisService } from 'src/app/services/devis.service';
 import { LigneDevisService } from 'src/app/services/ligne-devis.service';
 import { CreateDevisComponent } from '../create-devis/create-devis.component';
+import { DatePipe } from '@angular/common';
 
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -46,7 +47,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: DevisService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
     private matDialog: MatDialog, public ldevService: LigneDevisService,
     @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateDevisComponent>,
@@ -88,6 +89,10 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
   getListDevis() {

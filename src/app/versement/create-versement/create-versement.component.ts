@@ -21,6 +21,8 @@ export class CreateVersementComponent implements OnInit {
   listEmployes: Employe[];
   submitted = false;
 
+  fileVersement: File;
+
   constructor(public crudApi: VersementService, public empService: EmployeService ,
     public toastr: ToastrService, private datePipe : DatePipe,
     private router : Router, public fb: FormBuilder,
@@ -49,9 +51,13 @@ export class CreateVersementComponent implements OnInit {
     return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 
+  selectFileVersement(event) {
+    this.fileVersement = event.target.files[0];
+  }
+
   onSubmit() {
     if(isNullOrUndefined(this.data.verId)) {
-      this.crudApi.createVersement(this.formDataVersement).
+      /* this.crudApi.createVersementWithFile(this.formDataVersement, this.fileVersement).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
@@ -60,10 +66,12 @@ export class CreateVersementComponent implements OnInit {
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/versements']);
-      });
+      }); */
+
+      this.saveVersement();
 
     }else {
-      this.crudApi.updateVersement(this.formDataVersement.id, this.formDataVersement).
+      /* this.crudApi.updateVersement(this.formDataVersement.id, this.formDataVersement).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
@@ -72,19 +80,20 @@ export class CreateVersementComponent implements OnInit {
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/versements']);
-      });
+      }); */
+      this.updateVersement();
     }
 
   }
 
-  saveVersement(versment: Versement) {
-    this.crudApi.createVersement(versment).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.crudApi.filter('Register click');
-      this.toastr.success("Versement Ajouté avec Succès");
-      this.router.navigate(['/versements']);
-    });
+  saveVersement() {
+    this.crudApi.createVersementWithFile(this.formDataVersement, this.fileVersement).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Versement Ajouté avec Succès");
+        this.router.navigate(['/versements']);
+      });
   }
 
   updateVersement(){

@@ -16,6 +16,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-view-creance',
   templateUrl: './view-creance.component.html',
@@ -43,7 +45,7 @@ export class ViewCreanceComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: CreanceService,public fb: FormBuilder,
+  constructor(public crudApi: CreanceService,public fb: FormBuilder,private datePipe : DatePipe,
     public toastr: ToastrService,  public lcreanceService: LigneCreanceService,
     private router : Router, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
@@ -63,6 +65,7 @@ export class ViewCreanceComponent implements OnInit {
       console.log(this.lcreanceService.listData[0].creance.totalCreance);
       this.totalCreance = this.lcreanceService.listData[0].creance.totalCreance;
       this.dateCreance = this.lcreanceService.listData[0].creance.dateCreance;
+      console.log(this.dateCreance);
       this.client = this.lcreanceService.listData[0].creance.client.chefService;
      // this.dtTrigger.next();
     }, err => {
@@ -334,6 +337,10 @@ export class ViewCreanceComponent implements OnInit {
 
   onGoBack() {
     this.router.navigateByUrl('creances');
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
 

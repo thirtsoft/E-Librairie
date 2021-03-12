@@ -95,7 +95,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
   }
 
   addEditStatus() {
-    
+
   }
 
 /*  deleteAppro(id: number) {
@@ -136,7 +136,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
 }

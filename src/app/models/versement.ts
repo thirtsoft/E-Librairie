@@ -9,6 +9,7 @@ export class Versement {
   montantVersement: number;
   dateVersement: Date;
   motif: string;
+  fileVersement: string;
 
   employe: Employe;
 

@@ -6,7 +6,7 @@ export class Devis {
   numeroDevis: number;
   total: number;
 	totalDevis: number;
-  String: string;
+  status: string;
   dateDevis: Date;
 
   client: Client;

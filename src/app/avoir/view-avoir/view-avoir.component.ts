@@ -15,6 +15,8 @@ import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-view-avoir',
   templateUrl: './view-avoir.component.html',
@@ -39,7 +41,7 @@ export class ViewAvoirComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: AvoirService, public lavoirService: LigneAvoirService,
-    public toastr: ToastrService, public fb: FormBuilder,
+    public toastr: ToastrService, public fb: FormBuilder, private datePipe : DatePipe,
     private router : Router, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateAvoirComponent>,
@@ -58,7 +60,7 @@ export class ViewAvoirComponent implements OnInit {
       console.log(this.lavoirService.listData[0].avoir.totalAvoir);
       this.totalAvoir = this.lavoirService.listData[0].avoir.totalAvoir;
       this.dateAvoir = this.lavoirService.listData[0].avoir.dateAvoir;
-      this.fournisseur = this.lavoirService.listData[0].avoir.fournisseur.raisonSociale;
+      this.fournisseur = [(this.lavoirService.listData[0].avoir.fournisseur.prenom) +" "+ (this.lavoirService.listData[0].avoir.fournisseur.nom)];
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
@@ -80,6 +82,10 @@ export class ViewAvoirComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
   getListAvoirs() {

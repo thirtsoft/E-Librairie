@@ -30,7 +30,7 @@
         <div class="form-group">
           <select name="employe" id="employe" [(ngModel)]="formDataVersement.employe" class="form-control" readonly>
             <option [ngValue]="null">--Select--</option>
-            <option *ngFor="let emp of listEmployes" [ngValue]="emp.id == formDataVersement.employe?.id ? formDataVersement.employe : emp">{{emp.cni}}</option>
+            <option *ngFor="let emp of listEmployes" [ngValue]="emp.id == formDataVersement.employe?.id ? formDataVersement.employe : emp">{{emp.prenom}}.{{emp.nom}}</option>
           </select>
         </div>
       </div>

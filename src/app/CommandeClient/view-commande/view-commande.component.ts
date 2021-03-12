@@ -17,6 +17,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-view-commande',
@@ -48,7 +50,7 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: CommandeClientService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
     private matDialog: MatDialog, public lcmdService: LigneCmdClientService,
     @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateCommandeClientComponent>,
@@ -90,6 +92,10 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  transformDate(date){
+    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
   getListCommandeClients() {

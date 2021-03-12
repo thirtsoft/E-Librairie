@@ -45,6 +45,14 @@ export class VersementService {
     return this.http.post(`${this.baseUrl}/versements`, info);
   }
 
+  public createVersementWithFile(versement, file:File) {
+    const data:FormData= new FormData();
+    data.append('versement',JSON.stringify(versement));
+    data.append('file',file);
+
+    return this.http.post<Versement>(`${this.baseUrl}/createVersement`, data);
+  }
+
   updateVersement(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/versements/${id}`, value);
   }

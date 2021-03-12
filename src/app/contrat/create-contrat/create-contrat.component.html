@@ -40,7 +40,7 @@
           <div class="form-group">
             <select name="client" id="client" [(ngModel)]="formDataContrat.client" class="form-control">
               <option [ngValue]="0">Client</option>
-              <option *ngFor="let client of listClient" [ngValue]="client.id == formDataContrat.client?.id ? formDataContrat.client : client">{{client.raisonSocial}}</option>
+              <option *ngFor="let client of listClient" [ngValue]="client.id == formDataContrat.client?.id ? formDataContrat.client : client">{{client.chefService}}</option>
             </select>
           </div>
         </div>
