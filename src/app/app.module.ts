@@ -99,6 +99,7 @@ import { ListLigneDevisComponent } from './devis/list-ligne-devis/list-ligne-dev
 import { ListDevisComponent } from './devis/list-devis/list-devis.component';
 import { ViewDevisComponent } from './devis/view-devis/view-devis.component';
 import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
+import { ProgressBarModule } from 'angular-progress-bar';
 
 
 @NgModule({
@@ -195,6 +196,7 @@ import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-lig
     ToastrModule.forRoot(),
     CommonModule,
     DataTablesModule,
+    ProgressBarModule,
 
     MatDialogModule,
     MatToolbarModule,

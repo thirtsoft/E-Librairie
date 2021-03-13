@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild, Input } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { Article } from 'src/app/models/Article';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -30,6 +30,9 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
   closeResult: string;
 
+  val = 1000;
+
+
   constructor(public crudApi: StockService, private artService: ArticleService,
     public toastr: ToastrService, private router : Router, public fb: FormBuilder,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -52,6 +55,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
+  //  this.getValueProgressBar();
 
   }
 
@@ -69,6 +73,14 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  getRandomNumber(){
+    return Math.floor(Math.random()*(100)+1);
+  }
+
+  get number() {
+    return this.getRandomNumber();
   }
 
   getListArticle() {
