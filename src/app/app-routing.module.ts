@@ -82,6 +82,7 @@ import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-lig
 const routes: Routes = [
 
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
 
   {path: '', component: HomeComponent, children : [
 

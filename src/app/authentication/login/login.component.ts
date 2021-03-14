@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { Login } from 'src/app/auth/login';
 
 @Component({
   selector: 'app-login',
@@ -9,27 +11,53 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  mode: number = 0;
-  constructor(private authService: AuthenticationService,
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+  private loginInfo: Login;
+
+  constructor(private authService: AuthService,
+    private tokenStorage: TokenStorageService,
     private router: Router) { }
 
   ngOnInit() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getAuthorities();
+    }
   }
 
-  onLogin(user) {
-    this.authService.login(user)
-      .subscribe(resp => {
-        let jwt = resp.headers.get('Authorization');
-        //console.log(jwt);
-        this.authService.saveToken(jwt);
+  onSubmit() {
+    console.log(this.form);
+
+    this.loginInfo = new Login(
+      this.form.username,
+      this.form.password);
+
+    this.authService.attemptAuth(this.loginInfo).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUsername(data.username);
+        this.tokenStorage.saveAuthorities(data.authorities);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getAuthorities();
+       // this.reloadPage();
+        console.log("Login Success");
         this.router.navigateByUrl("/");
-      }, err=> {
-        this.mode = 1;
-      });
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isLoginFailed = true;
+      }
+    );
   }
 
-  onRegister() {
-
+  reloadPage() {
+    window.location.reload();
   }
-
 }

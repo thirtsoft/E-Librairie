@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Register } from 'src/app/auth/register';
 
 @Component({
   selector: 'app-register',
@@ -8,17 +10,39 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class RegisterComponent implements OnInit {
 
-  registerList;
+  form: any = {};
+  signupInfo: Register;
+  isSignedUp = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthService, private router : Router) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  onSubmit() {
+    console.log(this.form);
+
+    this.signupInfo = new Register(
+      this.form.name,
+      this.form.username,
+      this.form.email,
+      this.form.password
+    );
+
+    this.authService.signUp(this.signupInfo).subscribe(
+      data => {
+        console.log(data);
+        this.isSignedUp = true;
+        this.isSignUpFailed = false;
+        console.log("User register Succeffuly");
+        this.router.navigateByUrl("login");
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
   }
-
-  onSubmit(dataform) {
-    this.authService.register(dataform).subscribe(data => {
-      this.registerList = data;
-    });
-  }
-
 }

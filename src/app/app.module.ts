@@ -101,6 +101,7 @@ import { ViewDevisComponent } from './devis/view-devis/view-devis.component';
 import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
 import { ProgressBarModule } from 'angular-progress-bar';
 
+import { httpInterceptorProviders } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -208,6 +209,8 @@ import { ProgressBarModule } from 'angular-progress-bar';
 
   providers: [DatePipe,{ provide: MAT_DIALOG_DATA, useValue: {} ,},
     { provide: MatDialogRef, useValue: {} },
+
+    httpInterceptorProviders,
 
   ],
 
