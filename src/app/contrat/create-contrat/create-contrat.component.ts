@@ -18,7 +18,8 @@ import { DatePipe } from '@angular/common';
 export class CreateContratComponent implements OnInit {
 
   public contrat = new Contrat();
-  formDataContrat = new Contrat();
+  formDataContrat: Contrat  = new Contrat();
+
   listClient:  Client[];
 
 
@@ -83,9 +84,9 @@ export class CreateContratComponent implements OnInit {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Contrat Ajouté avec Succès");
-        this.crudApi.getAllContrats().subscribe(
+       /*  this.crudApi.getAllContrats().subscribe(
           response =>{this.crudApi.listData = response;},
-        );
+        ); */
         this.router.navigate(['/contrats']);
       });
 

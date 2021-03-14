@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contrat } from '../models/contrat';
 import { FormGroup } from '@angular/forms';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ContratService {
 
   choixmenu: string  = 'A';
   listData: Contrat[];
-  formData: Contrat;
+  formData: Contrat = new Contrat();
 
   dataForm:  FormGroup;
 
@@ -46,10 +46,10 @@ export class ContratService {
     return this.http.post(`${this.baseUrl}/contrats`, info);
   }
 
-  public createContrat2(contrat, file:File) {
-
+  public createContrat2(formData, file:File): Observable<Contrat> {
+    const headers = new HttpHeaders(); //.set('Content-Type', 'multipart/form-data; charset=utf-8');
     const data:FormData= new FormData();
-    data.append('contrat',JSON.stringify(contrat));
+    data.append('contrat',JSON.stringify(formData));
     data.append('file',file);
 
     return this.http.post<Contrat>(`${this.baseUrl}/createContrats`, data);
