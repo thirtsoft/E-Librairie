@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form);
-
     this.loginInfo = new Login(
       this.form.username,
       this.form.password);
@@ -40,14 +39,17 @@ export class LoginComponent implements OnInit {
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUsername(data.username);
+        console.log(data.username);
         this.tokenStorage.saveAuthorities(data.authorities);
+        console.log(data.authorities);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-       // this.reloadPage();
         console.log("Login Success");
-        this.router.navigateByUrl("/");
+        console.log(this.router.navigate(['']));
+        this.router.navigateByUrl("");
+       // this.reloadPage();
       },
       error => {
         console.log(error);

@@ -17,15 +17,29 @@ export class AuthService {
   private loginUrl = 'http://localhost:8081/api/auth/signin';
   private signupUrl = 'http://localhost:8081/api/auth/signup';
 
+  private baseUrl = 'http://localhost:8081/api/auth';
+
+  islogin = false ;
+
   constructor(private http: HttpClient) {
 
   }
 
   attemptAuth(credentials: Login): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions)
+    return this.http.post<JwtResponse>(this.loginUrl, {
+      username: credentials.username,
+      password: credentials.password
+    }, httpOptions);
+
+    this.islogin = true;
   }
 
-  signUp(info: Register): Observable<string> {
-    return this.http.post<string>(this.signupUrl, info, httpOptions);
+  signUp(info: Register): Observable<Register> {
+    return this.http.post<Register>(this.signupUrl, info, httpOptions);
   }
+
+  getUserByUsername(username: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + `/getUserByUsername/${username}`);
+  }
+
 }

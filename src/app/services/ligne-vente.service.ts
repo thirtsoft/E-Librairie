@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 export class LigneVenteService {
 
 
-  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+//  private baseUrl_1 = 'http://localhost:8081/apiSeller';
 
-  // private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl_1 = 'http://localhost:8081/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -23,7 +23,7 @@ export class LigneVenteService {
   constructor(private http: HttpClient) { }
 
   getAllLigneVentes(): Observable<LigneVente[]> {
-    return this.http.get<LigneVente[]>('http://localhost:8081/apiSeller/ligneVentes');
+    return this.http.get<LigneVente[]>( `${this.baseUrl_1}/ligneVentes`);
   }
 
   getAllByNumero(id: number): Observable<Object> {

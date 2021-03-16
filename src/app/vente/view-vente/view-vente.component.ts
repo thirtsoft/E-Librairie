@@ -17,6 +17,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import { DatePipe } from '@angular/common';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-view-vente',
@@ -40,20 +41,23 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
   private editForm: FormGroup;
 
+  info: any;
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: VenteService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
-    private matDialog: MatDialog, public lventeService: LigneVenteService,
+  constructor(public crudApi: VenteService, public lventeService: LigneVenteService,
+    private tokenService: TokenStorageService, public toastr: ToastrService,
+    public fb: FormBuilder, private router : Router,
+    private datePipe : DatePipe, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
     public dialogRef:MatDialogRef<CreateVenteComponent>,
     ) { }
 
   ngOnInit(): void {
     this.venteId = this.route.snapshot.params.id;
-    console.log(this.venteId);
+//    console.log(this.venteId);
     this.lventeService.getLigneVentesByVente(this.venteId).subscribe((data: LigneVente[]) => {
       this.lventeService.listData = data;
       //this.currentVente = data;
@@ -69,7 +73,14 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
-    })
+    });
+
+    this.info = {
+      token: this.tokenService.getToken(),
+      username: this.tokenService.getUsername(),
+      authorities: this.tokenService.getAuthorities(),
+
+    }
   }
 
   /**
@@ -162,7 +173,8 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
             [
               {
-                text: `VENTE N° : ${this.lventeService.listData[0].numero}`,
+              //  text: `VENTE N° : ${this.lventeService.listData[0].numero}`,
+                text: `VENDEUR  : ${this.info.username}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]

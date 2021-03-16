@@ -102,6 +102,13 @@ import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-lig
 import { ProgressBarModule } from 'angular-progress-bar';
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
+import { ProfilComponent } from './authentication/profil/profil.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { UpdateUsernameComponent } from './authentication/update-username/update-username.component';
+import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
+import { UpdateProfileComponent } from './authentication/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -186,6 +193,13 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
     ListDevisComponent,
     ViewDevisComponent,
     CreateLigneDevisComponent,
+    ProfilComponent,
+    SidebarComponent,
+    NavbarComponent,
+    FooterComponent,
+    UpdateUsernameComponent,
+    UpdatePasswordComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     BrowserModule,

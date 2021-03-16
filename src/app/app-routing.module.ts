@@ -78,13 +78,19 @@ import { CreateDevisComponent } from './devis/create-devis/create-devis.componen
 import { ViewDevisComponent } from './devis/view-devis/view-devis.component';
 import { ListLigneDevisComponent } from './devis/list-ligne-devis/list-ligne-devis.component';
 import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
+import { AuthGuardService } from './auth/auth-guard.service';
+import { ProfilComponent } from './authentication/profil/profil.component';
 
 const routes: Routes = [
 
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
 
   {path: '', component: HomeComponent, children : [
+
+
+    {path:'', redirectTo:'dashboard' , pathMatch:'full'},
 
   /*  { path: 'articles', component: ListArticleComponent},
     { path: 'article', component: CreateArticleComponent},
@@ -257,8 +263,12 @@ const routes: Routes = [
     { path: 'piechart', component: PiechartComponent},
     { path: 'linechart', component: LinechartComponent},
 
+    { path: 'profile/:username', component: ProfilComponent },
+
    /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
     { path: '**', component: PageNotFoundComponent },
+
+
 
    /*  {path:'orders',component: OrdersComponent},
     {path:'order',children:[

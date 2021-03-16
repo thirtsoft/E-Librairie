@@ -1,23 +1,23 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Creance } from 'src/app/models/creance';
 import { CreanceService } from 'src/app/services/creance.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-update-status-creance',
-  templateUrl: './update-status-creance.component.html',
-  styleUrls: ['./update-status-creance.component.scss']
+  selector: 'app-update-password',
+  templateUrl: './update-password.component.html',
+  styleUrls: ['./update-password.component.scss']
 })
-export class UpdateStatusCreanceComponent implements OnInit {
+export class UpdatePasswordComponent implements OnInit {
 
   listData : Creance[];
 
   constructor(public crudApi: CreanceService, public toastr: ToastrService, public fb: FormBuilder,
     private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<UpdateStatusCreanceComponent>,
+    public dialogRef:MatDialogRef<UpdatePasswordComponent>,
     ) { }
 
   ngOnInit() {

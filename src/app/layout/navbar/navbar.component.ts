@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Router } from '@angular/router';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class NavbarComponent implements OnInit {
 
   info: any;
   private roles: string[];
@@ -42,17 +42,9 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl("login");
   }
 
-  isAdmin() {
-    return this.authService.isAdmin();
+  getProfile() {
+    let profil = this.tokenService.getUsername();
+    this.router.navigate(['/profile/'+profil]);
   }
-
-  isUser() {
-    return this.authService.isUser();
-  }
-
-  isAuthenticated() {
-    this.authService.isAuthenticated();
-  }
-
 
 }
