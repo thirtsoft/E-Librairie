@@ -15,6 +15,6 @@ export class UpdateUsernameInfo {
 
 export class UpdatePasswordInfo {
   username: string;
-  password: string;
+  oldPassword: string;
   newPassword: string;
 }

@@ -50,7 +50,7 @@ export class AuthService {
   getUserByUsername(username: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + `/getUserByUsername/${username}`);
   }
-  UpdatePasswordInfo
+
   updateUsername(item: UpdateUsernameInfo): Observable<UpdateUsernameInfo> {
     return this.http.patch<UpdateUsernameInfo>("//localhost:8081/alAmine/updateUsername", {
       username: item.username,
@@ -60,9 +60,9 @@ export class AuthService {
   }
 
   updatePassword(item: UpdatePasswordInfo): Observable<UpdatePasswordInfo> {
-    return this.http.patch <UpdatePasswordInfo>("//localhost:8081/alAmine/updateUsername", {
+    return this.http.patch<UpdatePasswordInfo>("//localhost:8081/alAmine/updatePassword", {
       username: item.username,
-      password: item.password,
+      oldPassword: item.oldPassword,
       newPassword: item.newPassword
     }, httpOptions);
   }

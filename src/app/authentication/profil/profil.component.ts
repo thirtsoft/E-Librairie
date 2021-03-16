@@ -35,10 +35,11 @@ export class ProfilComponent implements OnInit {
     this.username = this.route.snapshot.params.username;
     this.authService.getUserByUsername(this.username).subscribe(info => {
       this.profileInfo = info;
-    //  console.log(this.profileInfo);
     });
 
-    console.log(this.password);
+  //  const user = this.tokenService.getUser();
+  //  this.password = user.password
+
   }
 /*
   addEditUsername(item : ProfileInfo) {
@@ -53,7 +54,7 @@ export class ProfilComponent implements OnInit {
   }
 */
   addEditUsername(item : ProfileInfo) {
-    console.log(item.password);
+  //  console.log(item.password);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -66,7 +67,7 @@ export class ProfilComponent implements OnInit {
   }
 
   addEditPassword(item : ProfileInfo) {
-    console.log(item);
+   console.log(item);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;

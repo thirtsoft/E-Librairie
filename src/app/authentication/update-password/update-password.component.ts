@@ -31,7 +31,7 @@ export class UpdatePasswordComponent implements OnInit {
       form.resetForm();
     this.formDataProfile = {
       username: '',
-      password: '',
+      oldPassword: '',
       newPassword: '',
     };
   }
@@ -41,14 +41,15 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formDataProfile.username);
-    console.log(this.formDataProfile.password);
+    console.log(this.formDataProfile);
     this.crudApi.updatePassword(this.formDataProfile).
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Password Modifier avec Succès");
       console.log(data);
     });
+
   }
+
 
 }
