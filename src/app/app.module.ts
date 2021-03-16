@@ -229,9 +229,12 @@ import { UpdateProfileComponent } from './authentication/update-profile/update-p
   ],
 
   bootstrap: [AppComponent],
-  entryComponents: [CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent, CreateFournisseurComponent,
-    CreateVersementComponent, CreateCreanceComponent, CreateContratComponent, CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent,
-    CreateApproComponent, CreateVenteComponent,
-    CreateEmployeComponent, MatConfirmDialogComponent]
+  entryComponents: [
+    CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
+    CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
+    CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent, CreateApproComponent,
+    CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
+    UpdateUsernameComponent
+  ]
 })
 export class AppModule { }

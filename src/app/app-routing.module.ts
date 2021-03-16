@@ -80,6 +80,8 @@ import { ListLigneDevisComponent } from './devis/list-ligne-devis/list-ligne-dev
 import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { ProfilComponent } from './authentication/profil/profil.component';
+import { UpdateUsernameComponent } from './authentication/update-username/update-username.component';
+import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
 
 const routes: Routes = [
 
@@ -264,6 +266,8 @@ const routes: Routes = [
     { path: 'linechart', component: LinechartComponent},
 
     { path: 'profile/:username', component: ProfilComponent },
+    { path: 'profile/:username', component: UpdateUsernameComponent },
+    { path: 'profile/:username', component: UpdatePasswordComponent },
 
    /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
     { path: '**', component: PageNotFoundComponent },

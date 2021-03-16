@@ -34,6 +34,12 @@
                             </h6>
             </div>
             <div class="col-lg-2 col-sm-6 follow-info weather-category">
+              <label>Username : {{profileInfo.username}}</label>&nbsp;
+              <!-- <button (click)="addEditUsername()" class="btn btn-white btn-sm" style="width: 70px;">
+                <i class="fa fa-pencil"></i>
+                  edit
+              </button> -->
+              <br />
               <label>Nom : {{profileInfo.name}}</label><br />
               <label>Prenom: {{profileInfo.username}}</label><br />
               <label>Telephone 1: {{profileInfo.username}}</label>
@@ -86,7 +92,19 @@
                                   </a>
               </li>
               <li class="">
-                <a data-toggle="tab" href="#edit-profile">
+                <a data-toggle="tab" (click)="addEditUsername(profileInfo.username)" style="cursor: pointer;">
+                                      <i class="icon-envelope"></i>
+                                      Edit Username
+                                  </a>
+              </li>
+              <li class="">
+                <a data-toggle="tab" (click)="addEditPassword(profileInfo.password)" style="cursor: pointer;">
+                                      <i class="icon-envelope"></i>
+                                      Edit Password {{profileInfo.password}}
+                                  </a>
+              </li>
+              <li class="">
+                <a data-toggle="tab" href="#edit-profile" style="cursor: pointer;">
                                       <i class="icon-envelope"></i>
                                       Edit Profile
                                   </a>
@@ -174,7 +192,7 @@
                         <p><span>Mobile </span>: {{profileInfo.username}}</p>
                       </div>
                       <div class="bio-row">
-                        <p><span>Phone </span>: {{profileInfo.username}}</p>
+                        <p><span>Phone </span>: {{profileInfo.password}}</p>
                       </div>
                     </div>
                   </div>

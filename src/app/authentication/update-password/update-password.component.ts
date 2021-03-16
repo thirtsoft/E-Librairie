@@ -1,10 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Creance } from 'src/app/models/creance';
 import { CreanceService } from 'src/app/services/creance.service';
+import { UpdatePasswordInfo } from 'src/app/auth/profile-info';
 
 @Component({
   selector: 'app-update-password',
@@ -13,57 +15,39 @@ import { CreanceService } from 'src/app/services/creance.service';
 })
 export class UpdatePasswordComponent implements OnInit {
 
-  listData : Creance[];
+  formDataProfile: UpdatePasswordInfo  = new UpdatePasswordInfo();
 
-  constructor(public crudApi: CreanceService, public toastr: ToastrService, public fb: FormBuilder,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
+  constructor(public crudApi: AuthService, public toastr: ToastrService, public fb: FormBuilder,
+    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,  private route: ActivatedRoute,
     public dialogRef:MatDialogRef<UpdatePasswordComponent>,
     ) { }
 
   ngOnInit() {
-    if (this.crudApi.choixmenu == "A"){
-      this.infoForm()
+
+  }
+
+  infoForm(form?: NgForm) {
+    if (form = null)
+      form.resetForm();
+    this.formDataProfile = {
+      username: '',
+      password: '',
+      newPassword: '',
     };
   }
 
-  infoForm() {
-    this.crudApi.dataForm = this.fb.group({
-      id: null,
-      status: ['', [Validators.required]],
-    });
-  }
-
-  getListCreances() {
-    this.crudApi.getAllCreances().subscribe(
-      response =>{this.listData = response;}
-    );
-  }
-
   ResetForm() {
-      this.crudApi.dataForm.reset();
+    this.crudApi.dataForm.reset();
   }
 
   onSubmit() {
-    console.log(this.crudApi.dataForm);
-    console.log(this.crudApi.dataForm.value.status);
-    this.crudApi.updateStatusCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value.status).
+    console.log(this.formDataProfile.username);
+    console.log(this.formDataProfile.password);
+    this.crudApi.updatePassword(this.formDataProfile).
     subscribe( data => {
       this.dialogRef.close();
-      this.toastr.success("Status Creance Modifier avec Succès");
-      this.crudApi.filter('Register click');
-      this.getListCreances();
-      this.router.navigate(['/creances']);
-    });
-  }
-
-  updateStatusCreance(){
-    this.crudApi.updateStatusCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.toastr.success("Status Creance Modifier avec Succès");
-      this.crudApi.filter('Register click');
-      this.getListCreances();
-      this.router.navigate(['/creances']);
+      this.toastr.success("Password Modifier avec Succès");
+      console.log(data);
     });
   }
 
