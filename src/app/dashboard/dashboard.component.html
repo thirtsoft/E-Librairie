@@ -56,11 +56,12 @@
           <div class="col-md-6 portlets">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2><strong>Diagramme en Barre des Ventes et Commandes Par mois</strong></h2>
+                <h2><strong>Diagramme en Barre des Nombre de Ventes Par mois</strong></h2>
               </div>
               <div class="panel-body">
                 <div style="display: block">
-                  <canvas id="myChart" height="300" width="500"></canvas>
+                  <!-- <canvas id="myChart" height="300" width="500"></canvas> -->
+                  <app-barchar-com-vente></app-barchar-com-vente>
                 </div>
               </div>
             </div>
@@ -68,13 +69,15 @@
           <div class="col-md-6 portlets">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <div class="pull-left">Diagramme Circulaire Stock Marchandises</div>
+                <div class="pull-left">Diagramme en Barre des Nombre Commandes Par mois</div>
                 <div class="clearfix"></div>
               </div>
               <div class="panel-body">
                 <div class="padd">
                   <div style="display: block">
-                    <canvas id="myChart1"  height="300" width="500"></canvas>
+                   <!--  <canvas id="myChart1"  height="300" width="500"><app-linechart></app-linechart></canvas> -->
+                    <app-barchar-commande></app-barchar-commande>
+
                   </div>
                 </div>
               </div>

@@ -23,6 +23,7 @@ export class BarchartComponent implements OnInit {
   ];
 */
   Barchart: any = [];
+ // Barchart = [];
   ChiffreAffaireAnnees: number[] = [];
   Year: Date[] = [];
 
@@ -43,7 +44,7 @@ export class BarchartComponent implements OnInit {
         this.Year.push(this.listAnnes[i][m]);
       }
     //  this
-      this.Barchart = new Chart('canvas', {
+      this.Barchart = new Chart('barChart', {
         type: 'bar',
         data: {
           labels: this.Year,
@@ -52,7 +53,7 @@ export class BarchartComponent implements OnInit {
             {
               data: this.ChiffreAffaireAnnees,
               borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
+              backgroundColor: "#5F9EA0",
 
             }
           ]
@@ -63,10 +64,16 @@ export class BarchartComponent implements OnInit {
           },
           scales: {
             xAxes: [{
-              display: true
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
             }],
             yAxes: [{
-              display: true
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
             }],
           }
         }

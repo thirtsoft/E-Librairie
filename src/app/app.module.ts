@@ -100,6 +100,7 @@ import { ListDevisComponent } from './devis/list-devis/list-devis.component';
 import { ViewDevisComponent } from './devis/view-devis/view-devis.component';
 import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
 import { ProgressBarModule } from 'angular-progress-bar';
+//import { ChartsModule } from 'ng2-charts';
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { ProfilComponent } from './authentication/profil/profil.component';
@@ -109,6 +110,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { UpdateUsernameComponent } from './authentication/update-username/update-username.component';
 import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
 import { UpdateProfileComponent } from './authentication/update-profile/update-profile.component';
+import { BarcharCommandeComponent } from './chartJs/barchar-commande/barchar-commande.component';
 
 @NgModule({
   declarations: [
@@ -200,6 +202,7 @@ import { UpdateProfileComponent } from './authentication/update-profile/update-p
     UpdateUsernameComponent,
     UpdatePasswordComponent,
     UpdateProfileComponent,
+    BarcharCommandeComponent,
   ],
   imports: [
     BrowserModule,
@@ -212,6 +215,7 @@ import { UpdateProfileComponent } from './authentication/update-profile/update-p
     CommonModule,
     DataTablesModule,
     ProgressBarModule,
+  //  ChartsModule,
 
     MatDialogModule,
     MatToolbarModule,

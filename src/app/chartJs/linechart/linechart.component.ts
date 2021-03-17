@@ -43,7 +43,7 @@ export class LinechartComponent implements OnInit {
       //  console.log(this.ChiffreAffaire.push(result[this.list[i]].totalVente));
       }
     //  this
-      this.Linechart = new Chart('canvas', {
+      this.Linechart = new Chart('lineChart', {
         type: 'line',
         data: {
           labels: this.Month,
@@ -52,7 +52,7 @@ export class LinechartComponent implements OnInit {
             {
               data: this.ChiffreAffaire,
               borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
+              backgroundColor: "#FF7F50",
             }
           ]
         },
@@ -62,10 +62,16 @@ export class LinechartComponent implements OnInit {
           },
           scales: {
             xAxes: [{
-              display: true
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
             }],
             yAxes: [{
-              display: true
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
             }],
           }
         }

@@ -10,6 +10,7 @@ import { Chart } from 'chart.js';
 })
 export class BarcharComVenteComponent implements OnInit {
 
+
   /*
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -23,55 +24,107 @@ export class BarcharComVenteComponent implements OnInit {
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
   ];
 */
-Barchart: any = [];
-NumberVenteByMonth: number[] = [];
-VenteOfMonth: Date[] = [];
+  Barchart: any = [];
+  NumberVenteByMonth: number[] = [];
+  VenteOfMonth: Date[] = [];
 
-list: any={}
+  list: any={}
 
-constructor(private statService: DashboardService) { }
+  constructor(private statService: DashboardService) { }
 
-ngOnInit() {
-  this.statService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
-    this.list = result;
-    const n = 1;
-    const m = 0;
-    console.log(this.list);
-    for (let i=0; i<this.list.length; i++) {
-      this.NumberVenteByMonth.push(this.list[i][n]);
-      this.VenteOfMonth.push(this.list[i][m]);
-    }
-    this
-    this.Barchart = new Chart('canvas', {
-      type: 'bar',
-      data: {
-        labels: this.VenteOfMonth,
-
-        datasets: [
-          {
-            data: this.NumberVenteByMonth,
-            borderColor: '#3cb371',
-            backgroundColor: "#0000FF",
-            fill: true
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [{
-            display: true
-          }],
-          yAxes: [{
-            display: true
-          }],
-        }
+  ngOnInit() {
+    this.statService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
+      this.list = result;
+      const n = 1;
+      const m = 0;
+      console.log(this.list);
+      for (let i=0; i<this.list.length; i++) {
+        this.NumberVenteByMonth.push(this.list[i][n]);
+        this.VenteOfMonth.push(this.list[i][m]);
       }
-    });
-  });
-}
+      this
+      this.Barchart = new Chart('barChartVente', {
+        type: 'bar',
+        data: {
+          labels: this.VenteOfMonth,
 
+          datasets: [
+            {
+              data: this.NumberVenteByMonth,
+              borderColor: '#3cb371',
+              backgroundColor: "#008000",
+              fill: true
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            yAxes: [{
+              display: true,
+              ticks: {
+                beginAtZero: false
+              }
+            }],
+          }
+        }
+      });
+    });
+
+  }
+/*
+  getVenteByMonth() {
+    this.statService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
+      this.list = result;
+      const n = 1;
+      const m = 0;
+      console.log(this.list);
+      for (let i=0; i<this.list.length; i++) {
+        this.NumberVenteByMonth.push(this.list[i][n]);
+        this.VenteOfMonth.push(this.list[i][m]);
+      }
+      this
+      this.Barchart = new Chart('canvas', {
+        type: 'bar',
+        data: {
+          labels: this.VenteOfMonth,
+
+          datasets: [
+            {
+              data: this.NumberVenteByMonth,
+              borderColor: '#3cb371',
+              backgroundColor: "#0000FF",
+              fill: true
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }],
+            yAxes: [{
+              display: true
+            }],
+          }
+        }
+      });
+    });
+
+  }
+
+
+*/
 
 }
