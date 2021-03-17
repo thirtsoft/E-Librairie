@@ -41,18 +41,15 @@ export class ProfilComponent implements OnInit {
   //  this.password = user.password
 
   }
-/*
-  addEditUsername(item : ProfileInfo) {
-    console.log(item);
-    this.authService.choixmenu = "M";
-    this.authService.dataForm = this.fb.group(Object.assign({},item));
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    this.matDialog.open(UpdateUsernameComponent, dialogConfig);
+
+  processForm() {
+
   }
-*/
+
+  onSelectFile(event) {
+    
+  }
+
   addEditUsername(item : ProfileInfo) {
   //  console.log(item.password);
     const dialogConfig = new MatDialogConfig();
