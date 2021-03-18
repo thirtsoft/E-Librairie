@@ -33,6 +33,8 @@ export class CreateVenteComponent implements OnInit {
   orderItem: LigneVente[];
   OrderId: number;
 
+  numVente;
+
   constructor(public crudApi: VenteService, private dialog:MatDialog,
     public lventeService: LigneVenteService, private catService: CategorieService,
     private datePipe : DatePipe,
@@ -66,12 +68,24 @@ export class CreateVenteComponent implements OnInit {
       this.f['dateVente'].setValue(this.crudApi.formData.value.dateVente);
     }
 
+    this.getNumeroVente();
+
+  }
+
+  getNumeroVente() {
+    this.crudApi.generateNumeroVente().subscribe(
+      response =>{
+        this.numVente = response;
+        console.log("Numero Vente:" + response);
+      }
+    );
   }
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
     //  venteId: null,
-      numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
+    //  numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
+      numeroVente: [0, Validators.required],
       total: [0, Validators.required],
       totalVente: [0, Validators.required],
       status: ['', Validators.required],

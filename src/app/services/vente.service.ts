@@ -12,8 +12,8 @@ import { OnlineofflineService } from './onlineoffline.service';
 })
 export class VenteService {
 
- // private baseUrl_1 = 'http://localhost:8081/apiSeller';
-  private baseUrl_1 = 'http://localhost:8081/alAmine';
+  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+ // private baseUrl_1 = 'http://localhost:8081/alAmine';
   private db: Dexie;
   private tableVent: Dexie.Table<Vente, number>;
   private tableLvent: Dexie.Table<LigneVente, number>;
@@ -175,6 +175,10 @@ export class VenteService {
           console.log('Mode offline active');
         }
       });
+  }
+
+  generateNumeroVente(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl_1}/generateNumeroVente`);
   }
 
 }
