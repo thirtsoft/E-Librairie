@@ -155,7 +155,7 @@ export class CategorieService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl}/download/categories.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+    this.http.get(`${this.baseUrl}/categories/download/categories.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
       FileSaver.saveAs(blob, 'categories.xlsx');
     });
@@ -165,7 +165,7 @@ export class CategorieService {
    * methode permettant de generer un pdf depuis API Spring boot
    */
   exportPdfCategories(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/createCategoriePdf`, {responseType: 'blob'});
+    return this.http.get(`${this.baseUrl}/categories/createCategoriePdf`, {responseType: 'blob'});
   }
   // Methode pour Offline&Online et DexieJS
 
