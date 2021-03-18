@@ -38,6 +38,8 @@ export class CreateApproComponent implements OnInit {
   orderItem: LigneAppro[];
   OrderId: number;
 
+  codeAppro;
+
   constructor(public crudApi: ApproService, private dialog:MatDialog,
     public fb: FormBuilder, public fourService: FournisseurService,
     public lapproService: LigneApproService, private datePipe : DatePipe,
@@ -88,31 +90,24 @@ export class CreateApproComponent implements OnInit {
       }
     );
 
-  }
-/*
-  resetForm(form?: NgForm) {
-    if (form = null)
-      form.resetForm();
-    this.crudApi.formData = {
-      id: null,
-      code: Math.floor(100000 + Math.random() * 900000).toString(),
-      totalAppro: 0,
-      status: '',
-      observation: '',
-      dateAppro: new Date(),
-      fournisseur: new Fournisseur(),
-      DeletedOrderItemIDs: ''
-
-    };
-
-    this.crudApi.orderItems=[];
+    this.getCodeApprovisionnement();
 
   }
-  */
+
+  getCodeApprovisionnement() {
+    this.crudApi.generateCodeApprovisionnement().subscribe(
+      response =>{
+        this.codeAppro = response;
+        console.log("CodeAppro:" + response);
+      }
+    );
+  }
+
  infoForm() {
   this.crudApi.formData = this.fb.group({
     id: null,
-    code: Math.floor(100000 + Math.random() * 900000).toString(),
+  //  code: Math.floor(100000 + Math.random() * 900000).toString(),
+    code: [0, Validators.required],
     total: [0, Validators.required],
     montantAvance: [0, Validators.required],
     totalAppro: [0, Validators.required],

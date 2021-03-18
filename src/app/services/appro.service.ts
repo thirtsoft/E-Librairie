@@ -79,5 +79,8 @@ export class ApproService {
   deleteApprovisionnement(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/approvisionnements/${id}`, { responseType: 'text' });
   }
+  generateCodeApprovisionnement(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/generateCodeAppro`);
+  }
 
 }
