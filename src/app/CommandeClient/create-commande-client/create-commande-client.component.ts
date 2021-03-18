@@ -31,6 +31,9 @@ export class CreateCommandeClientComponent implements OnInit {
   client: any={};
   annee  = 0;
 
+  numCommande;
+  numero;
+
   total = 0;
   refProd = '';
 
@@ -39,6 +42,8 @@ export class CreateCommandeClientComponent implements OnInit {
   OrderId: number;
 
   defaultClient: Client;
+
+  compt = 1;
 
   constructor(public crudApi: CommandeClientService, public dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService, public creanceService: CreanceService,
@@ -78,13 +83,31 @@ export class CreateCommandeClientComponent implements OnInit {
       response =>{
         this.ClientList = response;
         console.log(response);
-      });
+      }
+    );
+    this.crudApi.generateNumCommande().subscribe(
+      response =>{
+        this.numero = response;
+        console.log("NumCommande:" + response);
+      }
+    );
   }
+/*
+  getNumCommande() {
+    this.crudApi.generateNumCommande().subscribe(
+      response =>{
+        this.numero = response;
+        console.log("NumCommande:" + response);
+      }
+    );
+  }
+*/
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: null,
-      numeroCommande: Math.floor(100000 + Math.random() * 900000).toString(),
+    //  numeroCommande: Math.floor(100000 + Math.random() * 900000).toString(),
+      numeroCommande: this.crudApi.numero,
       total: [0, Validators.required],
       totalCommande: [0, Validators.required],
       status: ['', Validators.required],

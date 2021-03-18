@@ -38,6 +38,8 @@ export class CommandeClientService {
   livr    : any={};
   client : any={};
 
+  numero;
+
   constructor(private http: HttpClient,  private clientService: ClientService,
     private offlineService: OnlineofflineService) {
      /*  this.ouvrirStatusConnexion();
@@ -265,6 +267,10 @@ export class CommandeClientService {
 
   public generateReport(id: number){
     return this.http.get<any>("http://localhost:8080/alAmine/report/pdf"+"/"+ id);
+  }
+
+  generateNumCommande(): Observable<any> {
+    return this.http.get<any>("http://localhost:8081/prodApi/generateCodeCommand");
   }
 
   // ouvrir la base de données
