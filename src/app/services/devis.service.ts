@@ -48,8 +48,12 @@ export class DevisService {
   updateDevis(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/devis/${id}`, value);
   }
-
   deleteDevis(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/devis/${id}`, { responseType: 'text' });
   }
+
+  generateNumeroDevis(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/generateNumeroDevis`);
+  }
+
 }

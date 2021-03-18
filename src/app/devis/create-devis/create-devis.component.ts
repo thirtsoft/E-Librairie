@@ -36,6 +36,8 @@ export class CreateDevisComponent implements OnInit {
 
   defaultClient: Client;
 
+  numeroDevis;
+
   constructor(public crudApi: DevisService, public dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService,
     public ldevService: LigneDevisService, private datePipe : DatePipe,
@@ -65,7 +67,7 @@ export class CreateDevisComponent implements OnInit {
             this.crudApi.list[i].ItemName = this.crudApi.list[i].produit.reference;
             console.log(this.crudApi.list[i].ItemName);
           }
-      }
+        }
       );
       this.f['dateDevis'].setValue(this.crudApi.formData.value.dateDevis);
     }
@@ -74,13 +76,27 @@ export class CreateDevisComponent implements OnInit {
       response =>{
         this.ClientList = response;
         console.log(response);
-      });
+      }
+    );
+
+    this.getNumeroDevis();
+
+  }
+
+  getNumeroDevis() {
+    this.crudApi.generateNumeroDevis().subscribe(
+      response =>{
+        this.numeroDevis = response;
+        console.log("Numero Devis:" + response);
+      }
+    );
   }
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: null,
-      numeroDevis: Math.floor(100000 + Math.random() * 900000).toString(),
+    //  numeroDevis: Math.floor(100000 + Math.random() * 900000).toString(),
+      numeroDevis: [0, Validators.required],
       total: [0, Validators.required],
       totalDevis: [0, Validators.required],
       status: ['', Validators.required],
