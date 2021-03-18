@@ -90,4 +90,8 @@ export class CreanceService {
     return this.http.delete(`${this.baseUrl}/creances/${id}`, { responseType: 'text' });
   }
 
+  generateReferenceCreance(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/generateReferenceCreance`);
+  }
+
 }

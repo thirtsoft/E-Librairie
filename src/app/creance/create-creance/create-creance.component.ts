@@ -34,6 +34,8 @@ export class CreateCreanceComponent implements OnInit {
 
   submitted = false;
 
+  referenceCreance;
+
   constructor(public crudApi: CreanceService, private dialog:MatDialog,
     public fb: FormBuilder, public clientService: ClientService,
     public lcreanceService: LigneCreanceService, private datePipe : DatePipe,
@@ -49,14 +51,26 @@ export class CreateCreanceComponent implements OnInit {
       this.infoForm();
       this.crudApi.list = [];
     } else {
-
     }
+
+    this.getReferenceCreance();
+
+  }
+
+  getReferenceCreance() {
+    this.crudApi.generateReferenceCreance().subscribe(
+      response =>{
+        this.referenceCreance = response;
+        console.log("Reference Creance:" + response);
+      }
+    );
   }
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: null,
-      reference: Math.floor(100000 + Math.random() * 900000).toString(),
+    //  reference: Math.floor(100000 + Math.random() * 900000).toString(),
+      reference: [0, Validators.required],
       total: [0, Validators.required],
       libelle: ['', Validators.required],
       codeCreance: ['', Validators.required],
