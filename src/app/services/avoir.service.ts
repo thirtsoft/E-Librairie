@@ -55,4 +55,8 @@ export class AvoirService {
     return this.http.delete(`${this.baseUrl}/avoirs/${id}`, { responseType: 'text' });
   }
 
+  generateReferneceAvoir(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/generateReferneceAvoir`);
+  }
+
 }

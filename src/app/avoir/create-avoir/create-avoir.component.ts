@@ -34,6 +34,8 @@ export class CreateAvoirComponent implements OnInit {
 
   submitted = false;
 
+  referencAvoir;
+
   constructor(public crudApi: AvoirService, private dialog:MatDialog,
     public fb: FormBuilder, public fourService: FournisseurService,
     public lavoirService: LigneAvoirService, private datePipe : DatePipe,
@@ -49,14 +51,26 @@ export class CreateAvoirComponent implements OnInit {
       this.infoForm();
       this.crudApi.list = [];
     } else {
-
     }
+
+    this.getReferenceAvoir();
+
+  }
+
+  getReferenceAvoir() {
+    this.crudApi.generateReferneceAvoir().subscribe(
+      response =>{
+        this.referencAvoir = response;
+        console.log("Reference Avoir:" + response);
+      }
+    );
   }
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: null,
-      reference: Math.floor(100000 + Math.random() * 900000).toString(),
+    //  reference: Math.floor(100000 + Math.random() * 900000).toString(),
+      reference: [0, Validators.required],
       total: [0, Validators.required],
       libelle: ['', Validators.required],
       soldeAvoir: [0, Validators.required],
