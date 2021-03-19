@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Appro } from '../models/appro';
 import { LigneAppro } from '../models/ligne-appro';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -35,6 +35,14 @@ export class ApproService {
 
 
   orderItems: LigneAppro[];
+
+  private listners = new Subject<any>();
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -82,5 +90,22 @@ export class ApproService {
   generateCodeApprovisionnement(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/generateCodeAppro`);
   }
+  updateStatusApproCreance(id: number, status: string): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    let data = {"status":status};
+    return this.http.patch<any>("http://localhost:8081/alAmine/updateStatusApproById/"+id+"?status="+data.status, {headers: headers});
+  }
+
+  updateMontantAvanceAppro(id: number, montantAvance: number): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    let data = {"montantAvance":montantAvance};
+
+    return this.http.patch<any>("http://localhost:8081/alAmine/updateMontantAvanceApproById/"+id+"?montantAvance="+data.montantAvance, {headers: headers});
+
+  }
+
+
 
 }

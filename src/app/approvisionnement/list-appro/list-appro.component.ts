@@ -5,13 +5,15 @@ import { Subject } from 'rxjs';
 import { ApproService } from 'src/app/services/appro.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { CreateApproComponent } from '../create-appro/create-appro.component';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { DatePipe } from '@angular/common';
+import { UpdateMontantApproComponent } from '../update-montant-appro/update-montant-appro.component';
+import { UpdateStatusApproComponent } from '../update-status-appro/update-status-appro.component';
 
 @Component({
   selector: 'app-list-appro',
@@ -35,9 +37,8 @@ export class ListApproComponent implements OnDestroy, OnInit {
   constructor(public crudApi: ApproService, private dialogService: DialogService,
     private datePipe : DatePipe, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
-   /* private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
+    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<CreateApproComponent>,
-    */
     ) { }
 
   ngOnInit(): void {
@@ -72,7 +73,6 @@ export class ListApproComponent implements OnDestroy, OnInit {
     });
   }
 
-
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -90,11 +90,25 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl("approvisionnement");
   }
 
-  addEditMontantAvance() {
+  addEditMontantAvanceAppro(item : Appro) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.formData = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(UpdateMontantApproComponent, dialogConfig);
 
   }
 
-  addEditStatus() {
+  addEditStatusAppro(item : Appro) {
+    this.crudApi.choixmenu = "M";
+    this.crudApi.formData = this.fb.group(Object.assign({},item));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.matDialog.open(UpdateStatusApproComponent, dialogConfig);
 
   }
 

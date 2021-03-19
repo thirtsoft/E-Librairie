@@ -33,9 +33,16 @@
           <label>Montant Avancée</label>
           <input type="number" formControlName="montantAvance" class="form-control" id="montantAvance">
       </div>
-      <div class="form-group col-sm-4" style="margin-top: 10px;">
+     <!--  <div class="form-group col-sm-4" style="margin-top: 10px;">
           <label>Status</label>
           <input type="text" formControlName="status" class="form-control" id="status">
+      </div> -->
+      <div class="form-group col-sm-4" style="margin-top: 10px;">
+        <label>Status</label>
+        <select name="status" formControlName="status" id="status" class="form-control">
+          <option value="VALIDE">VALIDE</option>
+          <option value="ENCOURS">ENCOURS</option>
+        </select>
       </div>
       <div class="form-group col-sm-4" style="margin-top: 10px;">
           <label>Observation</label>

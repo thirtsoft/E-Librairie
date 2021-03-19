@@ -26,13 +26,15 @@
               <td>{{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}}</td>
               <td>{{appro.totalAppro}}</td>
               <td>{{appro.montantAvance}}
-                <span class="btn btn-success btn-sm pull-right" (click)="addEditMontantAvance()">
+                <span [ngClass]="{ 'disabled': appro.montantAvance=='VALIDE' }"
+                  class="btn btn-success btn-sm pull-right" (click)="addEditMontantAvanceAppro(appro)">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </span>
               </td>
               <td>{{(appro.totalAppro)-(appro.montantAvance)}}</td>
               <td>{{appro.status}}
-                <span class="btn btn-success btn-sm pull-right" (click)="addEditStatus()">
+                <span [ngClass]="{ 'disabled': appro.status=='VALIDE' }"
+                    class="btn btn-success btn-sm pull-right" (click)="addEditStatusAppro(appro)">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </span>
               </td>

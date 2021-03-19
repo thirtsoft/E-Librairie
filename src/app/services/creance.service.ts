@@ -50,9 +50,6 @@ export class CreanceService {
     return this.http.put(`${this.baseUrl}/creances/${id}`, value);
   }
 
-  updateCreanceStatus(codeCreance: string, status: string): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/updateStatusCreance/${codeCreance}`, status);
-  }
   updateStatusCreance(id: number, status: string): Observable<any> {
    let params = new HttpParams();
    const headers = new HttpHeaders();
