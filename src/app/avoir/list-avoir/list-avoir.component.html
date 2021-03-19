@@ -24,7 +24,6 @@
     <tr *ngFor="let avoir of crudApi.listData; let i=index;">
       <td>{{avoir.reference}}</td>
       <td>{{avoir.libelle}}</td>
-    <!--   <td>{{avoir.fournisseur.raisonSociale}}</td> -->
       <td>{{avoir.fournisseur.prenom}} {{avoir.fournisseur.nom}}</td>
       <td>{{avoir.soldeAvoir}}</td>
       <td>{{avoir.nbreJours}}</td>

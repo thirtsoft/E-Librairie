@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 export class LigneVenteService {
 
 
-//  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+  private baseUrl_1 = 'http://localhost:8081/apiSeller';
 
-  private baseUrl_1 = 'http://localhost:8081/alAmine';
+//  private baseUrl_1 = 'http://localhost:8081/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';

@@ -26,7 +26,7 @@
             <select name="fournisseur" formControlName="fournisseur" id="fournisseur" class="form-control"
                 [compareWith]="compareFournisseur">
               <option value="0">-Select-</option>
-              <option *ngFor="let item of FourList" [ngValue]="item">{{item.prenom}}.{{item.nom}}</option>
+              <option *ngFor="let item of FourList" [ngValue]="item">{{item.prenom}} {{item.nom}}</option>
             </select>
           </div>
         </div>

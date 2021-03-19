@@ -111,6 +111,8 @@ import { UpdateUsernameComponent } from './authentication/update-username/update
 import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
 import { UpdateProfileComponent } from './authentication/update-profile/update-profile.component';
 import { BarcharCommandeComponent } from './chartJs/barchar-commande/barchar-commande.component';
+import { UpdateStatusApproComponent } from './approvisionnement/update-status-appro/update-status-appro.component';
+import { UpdateMontantApproComponent } from './approvisionnement/update-montant-appro/update-montant-appro.component';
 
 @NgModule({
   declarations: [
@@ -203,6 +205,8 @@ import { BarcharCommandeComponent } from './chartJs/barchar-commande/barchar-com
     UpdatePasswordComponent,
     UpdateProfileComponent,
     BarcharCommandeComponent,
+    UpdateStatusApproComponent,
+    UpdateMontantApproComponent,
   ],
   imports: [
     BrowserModule,

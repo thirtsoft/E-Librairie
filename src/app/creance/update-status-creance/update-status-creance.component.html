@@ -8,14 +8,24 @@
           <input type="text" class="form-control" formControlName="id" id="id" disabled>
         </div>
 
-        <div class="form-group">
+       <!--  <div class="form-group">
           <label>Status</label>
           <input type="text" class="form-control" formControlName="status" id="status">
         </div>
-
+ -->
         <div class="form-group">
-          <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+          <label>Status</label>
+          <select name="status" formControlName="status" id="status" class="form-control">
+            <option value="MORATOIRE">MORATOIRE</option>
+            <option value="NONPAYEE">NONPAYEE</option>
+            <option value="PAYEE">PAYEE</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-sm">
+            <i class="fa fa-database"></i> Submit</button>&nbsp;
+          <button type="button" class="btn btn-danger btn-sm ml-1" [mat-dialog-close]>
+            <i class="fa fa-close"></i> Close</button>
         </div>
 
     </form>

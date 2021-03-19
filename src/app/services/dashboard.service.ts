@@ -12,9 +12,13 @@ import { map } from 'rxjs/operators';
 })
 export class DashboardService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl_Seller = 'http://localhost:8081/apiSeller';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
+  private baseUrl_Com = 'http://localhost:8081/prodApi';
+
+ // private baseUrl_Custom = 'http://localhost:8081/prodApi';
+
+ // private baseUrl_Prod = 'http://localhost:8081/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -35,45 +39,45 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
   getNumberOfProduitByStock(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchCountProduitsByStock`);
+    return this.http.get(`${this.baseUrl_Com}/searchCountProduitsByStock`);
   }
 
   getNumberOfCommandes(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/NumberOfCommande`);
+    return this.http.get(`${this.baseUrl_Com}/NumberOfCommande`);
   }
 
   getNumberOfVentesByDay(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/NumberOfVenteByDay`);
+    return this.http.get(`${this.baseUrl_Seller}/NumberOfVenteByDay`);
   }
 
   getSumTotalOfCommandes(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/NumbersOfCommandes`);
+    return this.http.get(`${this.baseUrl_Com}/NumbersOfCommandes`);
   }
   getNumbersOfClients(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/NumberOfClients`);
+    return this.http.get(`${this.baseUrl_Com}/NumberOfClients`);
   }
   getSumTotalOfVentes(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/SumsOfVentes`);
+    return this.http.get(`${this.baseUrl_Seller}/SumsOfVentes`);
   }
 
   getNumberTotalOfCommandeByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchNumberOfCommandeByMonth`);
+    return this.http.get(`${this.baseUrl_Com}/searchNumberOfCommandeByMonth`);
   }
 
   getNumberTotalOfVenteByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchNumberOfVenteByMonth`);
+    return this.http.get(`${this.baseUrl_Seller}/searchNumberOfVenteByMonth`);
   }
 
   getSumTotalOfCommandeByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchSumCommandeByMonth`);
+    return this.http.get(`${this.baseUrl_Com}/searchSumCommandeByMonth`);
   }
 
   getSumTotalOfVenteByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchSumVenteByMonth`);
+    return this.http.get(`${this.baseUrl_Seller}/searchSumVenteByMonth`);
   }
 
   getSumTotalOfVenteByYear(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchSumVenteByYears`);
+    return this.http.get(`${this.baseUrl_Seller}/searchSumVenteByYears`);
   }
 
 }

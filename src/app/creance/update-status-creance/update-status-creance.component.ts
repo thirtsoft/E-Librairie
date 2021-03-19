@@ -15,6 +15,8 @@ export class UpdateStatusCreanceComponent implements OnInit {
 
   listData : Creance[];
 
+  StatusList= ['PAYEE','MORATOIRE','NONPAYEE'];
+
   constructor(public crudApi: CreanceService, public toastr: ToastrService, public fb: FormBuilder,
     private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
     public dialogRef:MatDialogRef<UpdateStatusCreanceComponent>,
