@@ -14,6 +14,8 @@ export class DashboardService {
 
   private baseUrl_Seller = 'http://localhost:8081/apiSeller';
 
+  private baseUrl_Creance = 'http://localhost:8081/alAmine';
+
   private baseUrl_Com = 'http://localhost:8081/prodApi';
 
  // private baseUrl_Custom = 'http://localhost:8081/prodApi';
@@ -38,26 +40,56 @@ export class DashboardService {
   }
 
   constructor(private http: HttpClient) { }
-  getNumberOfProduitByStock(): Observable<any> {
+  getNumberOfProduitByScategorie(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/searchCountProduitsByStock`);
   }
-
+  getNumberOfProductByStock(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Com}/countProduitsByStock`);
+  }
+  getNumberOfProductWhenStockEqualStockInit(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Com}/countProduitsWhenQStockEqualStockInit`);
+  }
+  getNumberOfProductWhenStockInfStockInit(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Com}/countProduitsWhenQStockInfStockInit`);
+  }
   getNumberOfCommandes(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/NumberOfCommande`);
   }
-
   getNumberOfVentesByDay(): Observable<any> {
     return this.http.get(`${this.baseUrl_Seller}/NumberOfVenteByDay`);
   }
 
-  getSumTotalOfCommandes(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/NumbersOfCommandes`);
-  }
   getNumbersOfClients(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/NumberOfClients`);
   }
+
+  getNumbersOfFournisseurs(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Creance}/countFournisseurs`);
+  }
+  getSumTotalOfCommandes(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Com}/NumbersOfCommandes`);
+  }
+
   getSumTotalOfVentes(): Observable<any> {
     return this.http.get(`${this.baseUrl_Seller}/SumsOfVentes`);
+  }
+
+  getSumsOfVentesByMonth(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Seller}/SumsOfVentesByMonth`);
+  }
+
+  getSumsOfVentesByYear(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Seller}/SumsOfVentesByYear`);
+  }
+  getSumsOfCommandesByMonth(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Com}/SumsOfCommandesByMonth`);
+  }
+  getSumsOfCommandesByYear(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Com}/SumsOfCommandesByYear`);
+  }
+
+  getSumListOfCreancesByMonth(): Observable<any> {
+    return this.http.get(`${this.baseUrl_Creance}/sumTotalOfCreanceByMonth`);
   }
 
   getNumberTotalOfCommandeByMonth(): Observable<any> {

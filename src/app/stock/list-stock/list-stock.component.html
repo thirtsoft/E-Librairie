@@ -22,7 +22,7 @@
               <td>{{stock.scategorie?.libelle}}</td>
               <td>{{stock.qtestock}}</td>
               <td>{{stock.stockInitial}}</td>
-              <td>{{stock.qtestock < stock.stockInitial ? "epuisé": "encours"}}</td>
+              <td>{{stock.qtestock <= stock.stockInitial ? "epuisé": "encours"}}</td>
                <td >
 
                 <!-- <progress-bar [progress]="100" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">

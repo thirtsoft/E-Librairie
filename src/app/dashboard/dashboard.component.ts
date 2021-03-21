@@ -13,130 +13,80 @@ export class DashboardComponent implements OnInit {
 
   sumCommandes;
   sumVentes;
+  sumVenteByMonth;
+  sumCommandeByMonth;
+
   numberCommandes;
   numberClients;
+  numberOfFournisseurs;
   numberVentesByDay;
-
-  // barchart Vente/mois variable
-  Barchart: any = [];
-  NumberVenteByMonth: number[] = [];
-  VenteOfMonth: Date[] = [];
-  list: any={};
-
-  // Total sum Vente/mois variables
-  data: Client[];
-  RaisonSocial = [];
-  ChefService = [];
-  Linechart: any = [];
-  Number = [];
-  ChiffreAffaire: number[] = [];
-  Month: Date[] = [];
-  list1: any={};
-
-  canvas  : any;
-  ctx     : any;
-  canvas1 : any;
-  ctx1    : any;
+  numberOfVenteByMonth;
+  numberProductByScategorie;
+  numberOfProductByStock;
+  numberOfProductWhenStockEqualStockInit;
+  numberOfProductWhenStockInfStockInit;
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    this.getSumOfCommandes();
+
     this.getNumberOfCommandes();
     this.getNumberOfClients();
+    this.getNumberOfFournisseurs();
+
+    this.getSumOfCommandesByMonth();
+    this.getSumOfCommandes();
     this.getSumOfVentes();
+    this.getSumOfVentesByMonth();
+
     this.getNumberOfVentesByDay();
+    this.getNumberOfVentesByMonth();
 
-    // Statistique
-    this.canvas = document.getElementById('myChart');
-    this.ctx = this.canvas.getContext('2d');
-    this.dashboardService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
-      this.list = result;
-      const n = 1;
-      const m = 0;
-      console.log(this.list);
-      for (let i=0; i<this.list.length; i++) {
-        this.NumberVenteByMonth.push(this.list[i][n]);
-        this.VenteOfMonth.push(this.list[i][m]);
-      }
-      this
-      let myChart = new Chart(this.ctx, {
-        type: 'bar',
-        data: {
-          labels: this.VenteOfMonth,
+  //  this.getNumberOfProductsByScategorie();
+    this.getNumberOfProductsByStock();
+    this.getNumberOfProductsWhenQStockEqualStockInital();
+    this.getNumberOfProductsWhenQStockInfStockInital();
 
-          datasets: [
-            {
-              data: this.NumberVenteByMonth,
-              borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
-              fill: true
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              display: true
-            }],
-            yAxes: [{
-              display: true,
-              ticks: {
-                beginAtZero:true
-              }
-            }],
-          }
-        }
-      });
+
+
+  }
+
+  getNumberOfClients(): void {
+    this.dashboardService.getNumbersOfClients().subscribe(data => {
+      this.numberClients = data;
     });
+  }
 
-    this.canvas1 = document.getElementById('myChart1');
-    this.ctx1 = this.canvas.getContext('2d');
-    this.dashboardService.getSumTotalOfVenteByMonth().subscribe((result: Vente[]) => {
-      this.list1 = result;
-      const n = 1;
-      const m = 0;
-      console.log(this.list1);
-      for (let i=0; i<this.list1.length; i++) {
-      //  console.log(this.list[i][n]);
-      //  console.log(this.list[i][0]);
-        this.ChiffreAffaire.push(this.list1[i][n]);
-        this.Month.push(this.list1[i][m]);
-      //  console.log(this.ChiffreAffaire.push(result[this.list[i]].totalVente));
-      }
-    //  this
-      this.Linechart = new Chart(this.ctx1, {
-        type: 'line',
-        data: {
-          labels: this.Month,
-
-          datasets: [
-            {
-              data: this.ChiffreAffaire,
-              borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              display: false
-            }],
-            yAxes: [{
-              display: false
-            }],
-          }
-        }
-      });
+  getNumberOfFournisseurs(): void {
+    this.dashboardService.getNumbersOfFournisseurs().subscribe(data => {
+      this.numberOfFournisseurs = data;
     });
+  }
 
+  getNumberOfProductsByScategorie(): void {
+    this.dashboardService.getNumberOfProduitByScategorie().subscribe(response => {
+      this.numberProductByScategorie = response;
+    });
+  }
+
+  getNumberOfProductsByStock(): void {
+    this.dashboardService.getNumberOfProductByStock().subscribe(response => {
+      this.numberOfProductByStock = response;
+    });
+  }
+
+  getNumberOfProductsWhenQStockEqualStockInital(): void {
+    this.dashboardService.getNumberOfProductWhenStockEqualStockInit()
+      .subscribe(response => {
+      this.numberOfProductWhenStockEqualStockInit = response;
+    });
+  }
+
+  getNumberOfProductsWhenQStockInfStockInital(): void {
+    this.dashboardService.getNumberOfProductWhenStockInfStockInit()
+      .subscribe(response => {
+      this.numberOfProductWhenStockInfStockInit = response;
+    });
   }
 
   getSumOfCommandes(): void {
@@ -146,6 +96,24 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getNumberOfCommandes(): void {
+    this.dashboardService.getNumberOfCommandes().subscribe(data => {
+     this.numberCommandes = data;
+    });
+ }
+
+ getNumberOfVentesByDay(): void {
+   this.dashboardService.getNumberOfVentesByDay().subscribe(data => {
+    this.numberVentesByDay = data;
+   });
+ }
+
+ getNumberOfVentesByMonth(): void {
+   this.dashboardService.getNumberTotalOfVenteByMonth().subscribe(response => {
+     this.numberOfVenteByMonth = response;
+   });
+ }
+
   getSumOfVentes(): void {
     this.dashboardService.getSumTotalOfVentes().subscribe(data => {
       this.sumVentes = data;
@@ -153,114 +121,21 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getNumberOfCommandes(): void {
-     this.dashboardService.getNumberOfCommandes().subscribe(data => {
-      this.numberCommandes = data;
-     });
-  }
-
-  getNumberOfVentesByDay(): void {
-    this.dashboardService.getNumberOfVentesByDay().subscribe(data => {
-     this.numberVentesByDay = data;
-    });
- }
-
-  getNumberOfClients(): void {
-    this.dashboardService.getNumbersOfClients().subscribe(data => {
-      this.numberClients = data;
+  getSumOfVentesByMonth(): void {
+    this.dashboardService.getSumsOfVentesByMonth().subscribe(data => {
+      this.sumVenteByMonth = data;
+      console.log("Vente Par mois " +this.sumVenteByMonth);
     });
   }
 
- /*  getVenteParMois() {
-    this.canvas = document.getElementById('myChart');
-    this.ctx = this.canvas.getContext('2d');
-    this.dashboardService.getNumberTotalOfVenteByMonth().subscribe((result: Vente[]) => {
-      this.list = result;
-      const n = 1;
-      const m = 0;
-      console.log(this.list);
-      for (let i=0; i<this.list.length; i++) {
-        this.NumberVenteByMonth.push(this.list[i][n]);
-        this.VenteOfMonth.push(this.list[i][m]);
-      }
-      this
-      this.Barchart = new Chart(this.ctx, {
-        type: 'bar',
-        data: {
-          labels: this.VenteOfMonth,
-
-          datasets: [
-            {
-              data: this.NumberVenteByMonth,
-              borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
-              fill: true
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              display: true
-            }],
-            yAxes: [{
-              display: true
-            }],
-          }
-        }
-      });
+  getSumOfCommandesByMonth(): void {
+    this.dashboardService.getSumsOfCommandesByMonth().subscribe(data => {
+      this.sumCommandeByMonth = data;
+      console.log("Commande Par mois " +this.sumCommandeByMonth);
     });
   }
 
-  getSumTotalVenteParMois() {
-    this.canvas1 = document.getElementById('myChart1');
-    this.ctx1 = this.canvas.getContext('2d');
-    this.dashboardService.getSumTotalOfVenteByMonth().subscribe((result: Vente[]) => {
-      this.list1 = result;
-      const n = 1;
-      const m = 0;
-      console.log(this.list1);
-      for (let i=0; i<this.list1.length; i++) {
-      //  console.log(this.list[i][n]);
-      //  console.log(this.list[i][0]);
-        this.ChiffreAffaire.push(this.list1[i][n]);
-        this.Month.push(this.list1[i][m]);
-      //  console.log(this.ChiffreAffaire.push(result[this.list[i]].totalVente));
-      }
-    //  this
-      this.Linechart = new Chart(this.ctx1, {
-        type: 'line',
-        data: {
-          labels: this.Month,
 
-          datasets: [
-            {
-              data: this.ChiffreAffaire,
-              borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              display: false
-            }],
-            yAxes: [{
-              display: false
-            }],
-          }
-        }
-      });
-    });
-  }
- */
 
 
 }

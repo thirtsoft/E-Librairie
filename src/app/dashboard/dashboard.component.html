@@ -18,40 +18,49 @@
               <div class="count">{{this.numberClients}}</div>
               <div class="title">Clients</div>
             </div>
-            <!--/.info-box-->
           </div>
-          <!--/.col-->
 
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box brown-bg">
               <i class="fa fa-shopping-cart"></i>
               <div class="count">{{this.sumVentes}}</div>
               <div class="title">Ventes</div>
             </div>
-            <!--/.info-box-->
           </div>
-          <!--/.col-->
-
+ -->
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box dark-bg">
               <i class="fa fa-thumbs-o-up"></i>
               <div class="count">{{this.numberVentesByDay}}</div>
-              <div class="title">Vente/Jours</div>
+              <div class="title">NbreVente/Jours</div>
             </div>
-            <!--/.info-box-->
           </div>
-          <!--/.col-->
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="info-box brown-bg">
+              <i class="fa fa-shopping-cart"></i>
+              <div class="count">{{this.sumVenteByMonth}} f</div>
+              <div class="title">MontantVentes/Mois</div>
+            </div>
+          </div>
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.sumCommandeByMonth}}</div>
+              <div class="title">MontantCommandes/Mois</div>
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box green-bg">
               <i class="fa fa-cubes"></i>
               <div class="count">{{this.sumCommandes}}</div>
               <div class="title">Commandes</div>
             </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
+          </div> -->
+
         </div>
+
         <div class="row">
           <div class="col-md-6 portlets">
             <div class="panel panel-default">
@@ -83,6 +92,48 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.numberOfProductByStock}}</div>
+              <div class="title">QtéStock > QtéInital</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.numberOfProductWhenStockEqualStockInit}}</div>
+              <div class="title">QtéStock = QtéInital</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.numberOfProductWhenStockInfStockInit}}</div>
+              <div class="title">QtéStock < QtéInital</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.numberOfFournisseurs}}</div>
+              <div class="title">Fournisseur</div>
+             <!--  <a class="card-footer text-white clearfix small z-1" href="client/listeClient.php">
+                <span class="float-left">Voir Details</span>
+                <span class="float-right">
+                  <i class="fas fa-angle-right"></i>
+                </span>
+              </a> -->
+            </div>
+          </div>
+
         </div>
 </section>
 <!--main content end-->

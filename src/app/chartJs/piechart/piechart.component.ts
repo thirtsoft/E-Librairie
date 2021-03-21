@@ -28,7 +28,7 @@ export class PiechartComponent implements OnInit {
   constructor(private statService: DashboardService) { }
 
   ngOnInit() {
-    this.statService.getNumberOfProduitByStock().subscribe((result: Article[]) => {
+    this.statService.getNumberOfProduitByScategorie().subscribe((result: Article[]) => {
       this.list = result;
       const n = 1;
       const m = 0;
@@ -38,7 +38,7 @@ export class PiechartComponent implements OnInit {
         this.LibelleScategorie.push(this.list[i][m]);
       }
       this
-      this.PieChart = new Chart('canvas', {
+      this.PieChart = new Chart('pieChatProductScat', {
         type: 'pie',
         data: {
           labels: this.LibelleScategorie,
@@ -46,11 +46,21 @@ export class PiechartComponent implements OnInit {
           datasets: [
             {
               data: this.NumberProduitByStock,
-              borderColor: '#3cb371',
-              backgroundColor: "#0000FF",
+            //  borderColor: '#3cb371',
+             // backgroundColor: "#0000FF",
+              backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+              ],
+              borderWidth: 1,
             }
           ]
         },
+        options: {
+          responsive: false,
+        //  display:true
+        }
 
       });
     });

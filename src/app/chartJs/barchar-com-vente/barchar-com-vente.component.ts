@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { Vente } from 'src/app/models/vente';
 import { Chart } from 'chart.js';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-barchar-com-vente',
@@ -71,7 +72,7 @@ export class BarcharComVenteComponent implements OnInit {
             yAxes: [{
               display: true,
               ticks: {
-                beginAtZero: false
+                beginAtZero: true
               }
             }],
           }

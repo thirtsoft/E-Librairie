@@ -113,6 +113,8 @@ import { UpdateProfileComponent } from './authentication/update-profile/update-p
 import { BarcharCommandeComponent } from './chartJs/barchar-commande/barchar-commande.component';
 import { UpdateStatusApproComponent } from './approvisionnement/update-status-appro/update-status-appro.component';
 import { UpdateMontantApproComponent } from './approvisionnement/update-montant-appro/update-montant-appro.component';
+import { PiechartStockComponent } from './chartJs/piechart-stock/piechart-stock.component';
+import { BarcharCreanceComponent } from './chartJs/barchar-creance/barchar-creance.component';
 
 @NgModule({
   declarations: [
@@ -207,6 +209,8 @@ import { UpdateMontantApproComponent } from './approvisionnement/update-montant-
     BarcharCommandeComponent,
     UpdateStatusApproComponent,
     UpdateMontantApproComponent,
+    PiechartStockComponent,
+    BarcharCreanceComponent,
   ],
   imports: [
     BrowserModule,
