@@ -4,7 +4,7 @@
     <!-- sidebar menu start-->
     <ul class="sidebar-menu">
       <li class="active">
-        <a class="" routerLink="/dashboard" routerLinkActive="router-link-active" >
+        <a class="" routerLink="/home/dashboard" routerLinkActive="router-link-active" >
                       <i class="icon_house_alt"></i>
                       <span>Tableau de Bord</span>
                   </a>
@@ -18,9 +18,9 @@
                       <span class="menu-arrow arrow_carrot-right"></span>
                   </a>
         <ul class="sub">
-          <li><a class="" [routerLink]="['/categories']" routerLinkActive="router-link-active" >Catégories</a></li>
-          <li><a class="" [routerLink]="['/scategories']" routerLinkActive="router-link-active" >Scatégories</a></li>
-          <li><a class="" [routerLink]="['/articles']" routerLinkActive="router-link-active" >Articles</a></li>
+          <li><a class="" [routerLink]="['/home/categories']" routerLinkActive="router-link-active" >Catégories</a></li>
+          <li><a class="" [routerLink]="['/home/scategories']" routerLinkActive="router-link-active" >Scatégories</a></li>
+          <li><a class="" [routerLink]="['/home/articles']" routerLinkActive="router-link-active" >Articles</a></li>
         </ul>
       </li>
       <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
@@ -32,10 +32,10 @@
                       <span class="menu-arrow arrow_carrot-right"></span>
                   </a>
         <ul class="sub">
-          <li><a class="" routerLink="/commandeclients" routerLinkActive="router-link-active">Commande</a></li>
-          <li><a class="" routerLink="/detailsCommandeClients" routerLinkActive="router-link-active">Détails Commandes</a></li>
-          <li><a class="" routerLink="/listdevis" routerLinkActive="router-link-active">Devis</a></li>
-          <li><a class="" routerLink="/detailsDevis" routerLinkActive="router-link-active">Détails Devis</a></li>
+          <li><a class="" routerLink="/home/commandeclients" routerLinkActive="router-link-active">Commande</a></li>
+          <li><a class="" routerLink="/home/detailsCommandeClients" routerLinkActive="router-link-active">Détails Commandes</a></li>
+          <li><a class="" routerLink="/home/listdevis" routerLinkActive="router-link-active">Devis</a></li>
+          <li><a class="" routerLink="/home/detailsDevis" routerLinkActive="router-link-active">Détails Devis</a></li>
         </ul>
       </li>
       <!--
@@ -63,8 +63,8 @@
                       <span class="menu-arrow arrow_carrot-right"></span>
                   </a>
         <ul class="sub">
-          <li><a class="" routerLink="/ventes" routerLinkActive="router-link-active">Ventes</a></li>
-          <li><a class="" routerLink="/detailsVentes" routerLinkActive="router-link-active">Details Vente</a></li>
+          <li><a class="" routerLink="/home/ventes" routerLinkActive="router-link-active">Ventes</a></li>
+          <li><a class="" routerLink="/home/detailsVentes" routerLinkActive="router-link-active">Details Vente</a></li>
         </ul>
       </li>
 
@@ -76,10 +76,10 @@
                       <span class="menu-arrow arrow_carrot-right"></span>
                   </a>
         <ul class="sub">
-          <li><a class="" routerLink="/creances">Creance</a></li>
-          <li><a class="" routerLink="/detailsCreances">Détails-Créance</a></li>
-          <li><a class="" routerLink="/avoirs">Avoirs</a></li>
-          <li><a class="" routerLink="/detailsAvoirs">Détails-Avoir</a></li>
+          <li><a class="" routerLink="/home/creances">Creance</a></li>
+          <li><a class="" routerLink="/home/detailsCreances">Détails-Créance</a></li>
+          <li><a class="" routerLink="/home/avoirs">Avoirs</a></li>
+          <li><a class="" routerLink="/home/detailsAvoirs">Détails-Avoir</a></li>
         </ul>
       </li>
 
@@ -91,9 +91,9 @@
                       <span class="menu-arrow arrow_carrot-right"></span>
                   </a>
         <ul class="sub">
-          <li><a class="" routerLink="/approvisionnements" routerLinkActive="router-link-active">Entrées</a></li>
-          <li><a class="" routerLink="/detailsApprovisionnements" routerLinkActive="router-link-active">Détails Entrées</a></li>
-          <li><a class="" routerLink="/stocks" routerLinkActive="router-link-active">Stock</a></li>
+          <li><a class="" routerLink="/home/approvisionnements" routerLinkActive="router-link-active">Entrées</a></li>
+          <li><a class="" routerLink="/home/detailsApprovisionnements" routerLinkActive="router-link-active">Détails Entrées</a></li>
+          <li><a class="" routerLink="/home/stocks" routerLinkActive="router-link-active">Stock</a></li>
         </ul>
       </li>
 
@@ -105,15 +105,15 @@
                       <span class="menu-arrow arrow_carrot-right"></span>
                   </a>
         <ul class="sub">
-          <li><a class="" routerLink="/versements">Versement</a></li>
-          <li><a class="" routerLink="/contrats">Contrat</a></li>
-          <li><a class="" routerLink="/categorieCharges">Categorie-Charge</a></li>
-          <li><a class="" routerLink="/charges">Charges</a></li>
+          <li><a class="" routerLink="/home/versements">Versement</a></li>
+          <li><a class="" routerLink="/home/contrats">Contrat</a></li>
+          <li><a class="" routerLink="/home/categorieCharges">Categorie-Charge</a></li>
+          <li><a class="" routerLink="/home/charges">Charges</a></li>
         </ul>
       </li>
 
       <li>
-        <a class="" routerLink="/chart">
+        <a class="" routerLink="/home/chart">
           <!-- <i class="icon_piechart"></i> -->
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           <span>Graphiques</span>
@@ -128,9 +128,9 @@
                       <span class="menu-arrow arrow_carrot-right"></span>
                   </a>
         <ul class="sub">
-          <li><a class="" [routerLink]="['/clients']" routerLinkActive="router-link-active" >Client</a></li>
-          <li><a class="" [routerLink]="['/fournisseurs']" routerLinkActive="router-link-active" >Fournisseur</a></li>
-          <li><a class="" routerLink="/employes" routerLinkActive="router-link-active">Employee</a></li>
+          <li><a class="" [routerLink]="['/home/clients']" routerLinkActive="router-link-active" >Client</a></li>
+          <li><a class="" [routerLink]="['/home/fournisseurs']" routerLinkActive="router-link-active" >Fournisseur</a></li>
+          <li><a class="" routerLink="/home/employes" routerLinkActive="router-link-active">Employee</a></li>
         </ul>
       </li>
 

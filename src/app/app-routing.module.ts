@@ -85,11 +85,16 @@ import { UpdatePasswordComponent } from './authentication/update-password/update
 
 const routes: Routes = [
 
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent, children: [
+    { path:'', redirectTo:'login' , pathMatch:'full'},
+
+  ] },
+
+
   { path: 'register', component: RegisterComponent },
 
 
-  {path: '', component: HomeComponent, children : [
+  {path: 'home', component: HomeComponent, children : [
 
 
     {path:'', redirectTo:'dashboard' , pathMatch:'full'},

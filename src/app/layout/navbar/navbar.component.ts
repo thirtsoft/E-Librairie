@@ -46,12 +46,12 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.tokenService.signOut();
   //  window.location.reload();
-    this.router.navigateByUrl("login");
+    this.router.navigateByUrl("");
   }
 
   getProfile() {
     let profil = this.tokenService.getUsername();
-    this.router.navigate(['/profile/'+profil]);
+    this.router.navigate(['/home/profile/'+profil]);
   }
 
 
