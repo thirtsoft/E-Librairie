@@ -127,7 +127,7 @@ export class CreateAvoirComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Avoir Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
-        this.router.navigate(['/avoirs']);
+        this.router.navigate(['/home/avoirs']);
       });
   }
 

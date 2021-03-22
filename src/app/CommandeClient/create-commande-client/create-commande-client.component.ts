@@ -160,7 +160,7 @@ export class CreateCommandeClientComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Commande Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
-        this.router.navigate(['/commandeclients']);
+        this.router.navigate(['/home/commandeclients']);
       });
 
   }

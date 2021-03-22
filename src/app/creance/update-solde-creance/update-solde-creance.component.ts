@@ -52,7 +52,7 @@ export class UpdateSoldeCreanceComponent implements OnInit {
       this.toastr.success("Solde Creance Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListCreances();
-      this.router.navigate(['/creances']);
+      this.router.navigate(['/home/creances']);
     });
   }
 
@@ -63,7 +63,7 @@ export class UpdateSoldeCreanceComponent implements OnInit {
       this.toastr.success("Status Creance Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListCreances();
-      this.router.navigate(['/creances']);
+      this.router.navigate(['/home/creances']);
     });
   }
 

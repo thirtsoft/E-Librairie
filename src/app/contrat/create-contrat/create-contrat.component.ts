@@ -87,7 +87,7 @@ export class CreateContratComponent implements OnInit {
        /*  this.crudApi.getAllContrats().subscribe(
           response =>{this.crudApi.listData = response;},
         ); */
-        this.router.navigate(['/contrats']);
+        this.router.navigate(['/home/contrats']);
       });
 
     }else {
@@ -99,7 +99,7 @@ export class CreateContratComponent implements OnInit {
         this.crudApi.getAllContrats().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/contrats']);
+        this.router.navigate(['/home/contrats']);
       });
     }
 
@@ -115,7 +115,7 @@ export class CreateContratComponent implements OnInit {
         response =>{this.crudApi.listData = response;},
 
       );
-      this.router.navigate(['/contrats']);
+      this.router.navigate(['/home/contrats']);
     });
   }
 
@@ -127,7 +127,7 @@ export class CreateContratComponent implements OnInit {
       this.crudApi.getAllContrats().subscribe(
         response =>{this.crudApi.listData = response;}
       );
-      this.router.navigate(['/contrats']);
+      this.router.navigate(['/home/contrats']);
     });
 
   }

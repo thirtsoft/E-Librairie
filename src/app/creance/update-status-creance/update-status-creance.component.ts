@@ -54,7 +54,7 @@ export class UpdateStatusCreanceComponent implements OnInit {
       this.toastr.success("Status Creance Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListCreances();
-      this.router.navigate(['/creances']);
+      this.router.navigate(['/home/creances']);
     });
   }
 
@@ -65,7 +65,7 @@ export class UpdateStatusCreanceComponent implements OnInit {
       this.toastr.success("Status Creance Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListCreances();
-      this.router.navigate(['/creances']);
+      this.router.navigate(['/home/creances']);
     });
   }
 

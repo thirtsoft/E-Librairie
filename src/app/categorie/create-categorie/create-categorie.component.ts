@@ -64,7 +64,7 @@ export class CreateCategorieComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Categorie Ajouté avec Succès");
       this.getListCategories();
-      this.router.navigate(['/categories']);
+      this.router.navigate(['/home/categories']);
   }
   updateCategorie(){
     this.crudApi.updateCategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
@@ -73,7 +73,7 @@ export class CreateCategorieComponent implements OnInit {
       this.toastr.success("Categorie Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListCategories();
-      this.router.navigate(['/categories']);
+      this.router.navigate(['/home/categories']);
     });
   }
 

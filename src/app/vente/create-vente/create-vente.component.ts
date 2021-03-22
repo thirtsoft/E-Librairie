@@ -121,7 +121,7 @@ export class CreateVenteComponent implements OnInit {
       this.isValid = false;
     return this.isValid;
   }
-/*
+
   onSubmit() {
     this.f['ligneVentes'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
@@ -130,11 +130,11 @@ export class CreateVenteComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Vente Effectuée avec succès');
         console.log(this.crudApi.formData.value);
-        this.router.navigate(['/ventes']);
+        this.router.navigate(['/home/ventes']);
       }
     );
   }
-*/
+/*
   onSubmit() {
     this.f['ligneVentes'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
@@ -147,9 +147,9 @@ export class CreateVenteComponent implements OnInit {
     this.toastr.success('Vente Effectuée avec succès');
     console.log(this.crudApi.formData.value);
     this.router.navigate(['/ventes']);
-*/
-  }
 
+  }
+*/
   onDeleteOrderItem(id: number, i: number) {
     if (id != null) {
       this.lventeService.deleteLigneVente(id).subscribe(data => {

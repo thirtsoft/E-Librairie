@@ -90,7 +90,7 @@ export class CreateChargeComponent implements OnInit {
         this.crudApi.getAllCharges().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/charges']);
+        this.router.navigate(['/home/charges']);
       });
 
     }else {
@@ -102,7 +102,7 @@ export class CreateChargeComponent implements OnInit {
         this.crudApi.getAllCharges().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/charges']);
+        this.router.navigate(['/home/charges']);
       });
     }
 
@@ -126,7 +126,7 @@ export class CreateChargeComponent implements OnInit {
         this.crudApi.filter('Register click');
         this.toastr.success("Charge Ajouté avec Succès");
         this.getListCharges();
-        this.router.navigate(['/charges']);
+        this.router.navigate(['/home/charges']);
     });
   }
 
@@ -137,7 +137,7 @@ export class CreateChargeComponent implements OnInit {
       this.toastr.success("Charge Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListCharges();
-      this.router.navigate(['/charges']);
+      this.router.navigate(['/home/charges']);
     });
 
   }

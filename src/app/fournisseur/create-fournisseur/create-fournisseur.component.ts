@@ -76,7 +76,7 @@ export class CreateFournisseurComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Fournisseur Ajouté avec Succès");
       this.getListFournisseurs();
-      this.router.navigate(['/fournisseurs']);
+      this.router.navigate(['/home/fournisseurs']);
     });
   }
 
@@ -87,7 +87,7 @@ export class CreateFournisseurComponent implements OnInit {
       this.toastr.success("Fournisseur Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListFournisseurs();
-      this.router.navigate(['/fournisseurs']);
+      this.router.navigate(['/home/fournisseurs']);
     });
   }
 

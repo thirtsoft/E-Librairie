@@ -129,7 +129,7 @@ export class CreateCreanceComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Creance Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
-        this.router.navigate(['/creances']);
+        this.router.navigate(['/home/creances']);
       });
   }
 

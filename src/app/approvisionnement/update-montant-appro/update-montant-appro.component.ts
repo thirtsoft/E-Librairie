@@ -50,7 +50,7 @@ export class UpdateMontantApproComponent implements OnInit {
       this.toastr.success("MontantAvancée Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListAppros();
-      this.router.navigate(['/appros']);
+      this.router.navigate(['/home/approvisionnements']);
     });
   }
 
@@ -61,7 +61,7 @@ export class UpdateMontantApproComponent implements OnInit {
       this.toastr.success("MontantAvancée Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListAppros();
-      this.router.navigate(['/appros']);
+      this.router.navigate(['/home/approvisionnements']);
     });
   }
 

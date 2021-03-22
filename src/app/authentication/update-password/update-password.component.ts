@@ -46,6 +46,7 @@ export class UpdatePasswordComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Password Modifier avec Succès");
+    //  this.router.navigate(['/home/profile'])
       console.log(data);
     });
 

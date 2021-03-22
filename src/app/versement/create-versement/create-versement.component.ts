@@ -92,7 +92,7 @@ export class CreateVersementComponent implements OnInit {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Versement Ajouté avec Succès");
-        this.router.navigate(['/versements']);
+        this.router.navigate(['/home/versements']);
       });
   }
 
@@ -104,7 +104,7 @@ export class CreateVersementComponent implements OnInit {
       this.crudApi.getAllVersements().subscribe(
         response =>{this.crudApi.listData = response;}
       );
-      this.router.navigate(['/versements']);
+      this.router.navigate(['/home/versements']);
     });
 
   }

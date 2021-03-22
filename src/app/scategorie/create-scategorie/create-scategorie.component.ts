@@ -66,7 +66,7 @@ export class CreateScategorieComponent implements OnInit {
         this.crudApi.getAllScategories().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/scategories']);
+        this.router.navigate(['/home/scategories']);
       });
 
     }else {
@@ -79,7 +79,7 @@ export class CreateScategorieComponent implements OnInit {
         this.crudApi.getAllScategories().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/scategories']);
+        this.router.navigate(['/home/scategories']);
       });
 
     }
@@ -96,7 +96,7 @@ export class CreateScategorieComponent implements OnInit {
         this.crudApi.getAllScategories().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/scategories']);
+        this.router.navigate(['/home/scategories']);
       });
     }
   }
@@ -111,7 +111,7 @@ export class CreateScategorieComponent implements OnInit {
         this.crudApi.getAllScategories().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/scategories']);
+        this.router.navigate(['/home/scategories']);
       });
     }
   }
@@ -130,7 +130,7 @@ export class CreateScategorieComponent implements OnInit {
       this.crudApi.getAllScategories().subscribe(
         response =>{this.crudApi.listData = response;}
       );
-      this.router.navigate(['/scategories']);
+      this.router.navigate(['/home/scategories']);
     });
   }
 

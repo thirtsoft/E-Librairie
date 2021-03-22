@@ -180,7 +180,7 @@ export class CreateApproComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Approvisionnement Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
-        this.router.navigate(['/approvisionnements']);
+        this.router.navigate(['/home/approvisionnements']);
       });
 
   }

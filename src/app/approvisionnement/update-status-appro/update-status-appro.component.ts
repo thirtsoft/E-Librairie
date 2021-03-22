@@ -52,7 +52,7 @@ export class UpdateStatusApproComponent implements OnInit {
       this.toastr.success("Status Appro Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListAppro();
-      this.router.navigate(['/appros']);
+      this.router.navigate(['/home/approvisionnements']);
     });
   }
 
@@ -63,7 +63,7 @@ export class UpdateStatusApproComponent implements OnInit {
       this.toastr.success("Status Appro Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListAppro();
-      this.router.navigate(['/appros']);
+      this.router.navigate(['/home/approvisionnements']);
     });
   }
 

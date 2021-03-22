@@ -41,7 +41,7 @@ export class EnvoiSMSClientComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Sms Envoyé avec Succès");
     //  this.getListFournisseurs();
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/home/clients']);
     });
   }
 

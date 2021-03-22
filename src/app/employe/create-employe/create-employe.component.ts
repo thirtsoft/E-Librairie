@@ -70,7 +70,7 @@ export class CreateEmployeComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Employe Ajouté avec Succès");
       this.getListEmployes();
-      this.router.navigate(['/employes']);
+      this.router.navigate(['/home/employes']);
     });
   }
 
@@ -81,7 +81,7 @@ export class CreateEmployeComponent implements OnInit {
       this.toastr.success("Employe Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListEmployes();
-      this.router.navigate(['/employes']);
+      this.router.navigate(['/home/employes']);
     });
   }
 

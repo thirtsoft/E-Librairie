@@ -147,7 +147,7 @@ export class CreateDevisComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Devis Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
-        this.router.navigate(['/listdevis']);
+        this.router.navigate(['/home/listdevis']);
       });
   }
 

@@ -97,7 +97,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
   onCreateStock() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("approvisionnement");
+    this.router.navigateByUrl("/home/approvisionnement");
   }
 
   editeStock(item : Stock) {

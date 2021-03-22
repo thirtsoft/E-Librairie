@@ -70,7 +70,7 @@ export class CreateClientComponent implements OnInit {
       this.toastr.success("Client Ajouté avec Succès");
       //this.ResetForm();
       this.getListClients();
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/home/clients']);
     //  this.router.navigate(['/clients']);
     });
   }
@@ -82,7 +82,7 @@ export class CreateClientComponent implements OnInit {
       this.toastr.success("Client Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListClients();
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/home/clients']);
     });
   }
 

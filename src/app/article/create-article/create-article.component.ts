@@ -57,12 +57,12 @@ export class CreateArticleComponent implements OnInit {
   ResetForm() {
     this.crudApi.dataForm.reset();
   }
-
+/*
   onSubmit() {
     if (isNullOrUndefined(this.data.id)) {
       console.log(this.formDataArticle);
     //  this.crudApi.createProduit(this.formDataArticle);
-   /*   subscribe( data => {
+      subscribe( data => {
         this.dialogRef.close();
         console.log(this.formDataArticle)
         this.crudApi.filter('Register click');
@@ -72,7 +72,7 @@ export class CreateArticleComponent implements OnInit {
         );
         this.router.navigate(['/articles']);
  //     });
-          */
+
     }else {
       console.log(this.formDataArticle.id, this.formDataArticle);
       this.crudApi.updateArticle(this.formDataArticle.id, this.formDataArticle).
@@ -83,15 +83,15 @@ export class CreateArticleComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/home/articles']);
       });
 
     }
 
   }
+*/
 
-
-/*   onSubmits() {
+  onSubmits() {
     if(isNullOrUndefined(this.data.artId)) {
       this.crudApi.createArticle(this.formDataArticle).
       subscribe( data => {
@@ -101,7 +101,7 @@ export class CreateArticleComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/home/articles']);
       });
 
     }else {
@@ -114,12 +114,12 @@ export class CreateArticleComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/home/articles']);
       });
     }
 
   }
- */
+
 
   /* onSubmit() {
     if (this.crudApi.choixmenu == "A") {
@@ -140,7 +140,7 @@ export class CreateArticleComponent implements OnInit {
         response =>{this.crudApi.listData = response;},
 
       );
-      this.router.navigate(['/articles']);
+      this.router.navigate(['/home/articles']);
     });
   }
   updateArticle(id: number, art: Article){
@@ -151,7 +151,7 @@ export class CreateArticleComponent implements OnInit {
       this.crudApi.getAllArticles().subscribe(
         response =>{this.crudApi.listData = response;}
       );
-      this.router.navigate(['/articles']);
+      this.router.navigate(['/home/articles']);
     });
   }
 

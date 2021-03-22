@@ -64,7 +64,7 @@ export class CreateCategorieChargeComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("CategorieCharge Ajouté avec Succès");
       this.getListCategorieCharges();
-      this.router.navigate(['/categorieCharges']);
+      this.router.navigate(['/home/categorieCharges']);
     });
   }
   updateCategorieCharge(){
@@ -74,7 +74,7 @@ export class CreateCategorieChargeComponent implements OnInit {
       this.toastr.success("CategorieCharge Modifier avec Succès");
       this.crudApi.filter('Register click');
       this.getListCategorieCharges();
-      this.router.navigate(['/categorieCharges']);
+      this.router.navigate(['/home/categorieCharges']);
     });
   }
 

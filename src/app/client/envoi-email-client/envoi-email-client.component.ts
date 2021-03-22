@@ -43,7 +43,7 @@ export class EnvoiEmailClientComponent implements OnInit {
       this.crudApi.filter('Register click');
       this.toastr.success("Email Envoyé avec Succès");
     //  this.getListFournisseurs();
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/home/clients']);
     });
   }
 
