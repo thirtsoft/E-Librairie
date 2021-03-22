@@ -91,7 +91,7 @@ export class CreateArticleComponent implements OnInit {
   }
 */
 
-  onSubmits() {
+  onSubmit() {
     if(isNullOrUndefined(this.data.artId)) {
       this.crudApi.createArticle(this.formDataArticle).
       subscribe( data => {
