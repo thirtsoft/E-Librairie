@@ -112,8 +112,8 @@ import { BarcharCreanceComponent } from './chartJs/barchar-creance/barchar-crean
 import { ListCommandeClientComponent } from './commandeclient/list-commande-client/list-commande-client.component';
 import { CreateCommandeClientComponent } from './commandeclient/create-commande-client/create-commande-client.component';
 import { ListLigneCmdClientComponent } from './commandeclient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 import { ViewCommandeComponent } from './commandeclient/view-commande/view-commande.component';
+import { CreateLigneCommandeClientComponent } from './commandeclient/create-ligne-commande-client/create-ligne-commande-client.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +144,7 @@ import { ViewCommandeComponent } from './commandeclient/view-commande/view-comma
     ListCommandeClientComponent,
     CreateCommandeClientComponent,
     ListLigneCmdClientComponent,
-    CreateLigneCmdClientComponent,
+    CreateLigneCommandeClientComponent,
     ViewCommandeComponent,
     ListVenteComponent,
     CreateVenteComponent,
@@ -210,6 +210,7 @@ import { ViewCommandeComponent } from './commandeclient/view-commande/view-comma
     UpdateMontantApproComponent,
     PiechartStockComponent,
     BarcharCreanceComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -222,7 +223,6 @@ import { ViewCommandeComponent } from './commandeclient/view-commande/view-comma
     CommonModule,
     DataTablesModule,
     ProgressBarModule,
-  //  ChartsModule,
 
     MatDialogModule,
     MatToolbarModule,
@@ -243,7 +243,7 @@ import { ViewCommandeComponent } from './commandeclient/view-commande/view-comma
   entryComponents: [
     CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
-    CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent, CreateLigneCmdClientComponent, CreateApproComponent,
+    CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
     UpdateUsernameComponent
   ]

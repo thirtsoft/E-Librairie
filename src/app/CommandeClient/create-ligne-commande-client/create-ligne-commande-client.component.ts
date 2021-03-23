@@ -1,21 +1,20 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { Article } from 'src/app/models/article';
-import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { Article } from 'src/app/models/article';
+import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { ArticleService } from 'src/app/services/article.service';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
+import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 
 @Component({
-  selector: 'app-create-ligne-cmd-client',
-  templateUrl: './create-ligne-cmd-client.component.html',
-  styleUrls: ['./create-ligne-cmd-client.component.scss']
+  selector: 'app-create-ligne-commande-client',
+  templateUrl: './create-ligne-commande-client.component.html',
+  styleUrls: ['./create-ligne-commande-client.component.scss']
 })
-export class CreateLigneCmdClientComponent implements OnInit {
+export class CreateLigneCommandeClientComponent implements OnInit {
 
-//  formData: LigneCmdClient;
   listArticle: Article[];
   isValid: boolean = true;
   approvisionnement: any;
@@ -30,7 +29,7 @@ export class CreateLigneCmdClientComponent implements OnInit {
     private articleService: ArticleService,
     public fb: FormBuilder, private toastr :ToastrService,
     @Inject(MAT_DIALOG_DATA) public data,
-    private dialogRef: MatDialogRef<CreateLigneCmdClientComponent>,
+    private dialogRef: MatDialogRef<CreateLigneCommandeClientComponent>,
    ) { }
 
   get f() { return this.lcmdService.dataForm.controls; }
@@ -107,7 +106,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
     }
     this.dialogRef.close();
   }
-
  validateForm(formData: LigneCmdClient){
   this.isValid=true;
   if(formData.produit.id==0)
@@ -115,7 +113,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
     else if(formData.quantite==0)
     this.isValid=false;
     return this.isValid;
-}
+  }
 
 }
-

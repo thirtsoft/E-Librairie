@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
-import { CreateLigneCmdClientComponent } from '../create-ligne-cmd-client/create-ligne-cmd-client.component';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CommandeClient } from 'src/app/models/commande-client';

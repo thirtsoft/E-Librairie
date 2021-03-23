@@ -6,12 +6,12 @@ import { ClientService } from 'src/app/services/client.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { CreateLigneCmdClientComponent } from '../create-ligne-cmd-client/create-ligne-cmd-client.component';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { CommandeClient } from 'src/app/models/commande-client';
 import { CreanceService } from 'src/app/services/creance.service';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
+import { CreateLigneCommandeClientComponent } from '../create-ligne-commande-client/create-ligne-commande-client.component';
 
 @Component({
   selector: 'app-create-commande-client',
@@ -133,7 +133,7 @@ export class CreateCommandeClientComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width = "50%";
     dialogConfig.data={lcommandeIndex, OrderId};
-    this.dialog.open(CreateLigneCmdClientComponent, dialogConfig).afterClosed().subscribe(res =>{
+    this.dialog.open(CreateLigneCommandeClientComponent, dialogConfig).afterClosed().subscribe(res =>{
       this.calculMontantTotal();
     });
 
