@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, NgForm, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Article } from 'src/app/models/article';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { ToastrService } from 'ngx-toastr';
@@ -7,7 +7,6 @@ import { ArticleService } from 'src/app/services/article.service';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-//import { CommandeClient } from 'src/app/models/commande-client';
 
 @Component({
   selector: 'app-create-ligne-cmd-client',
