@@ -87,11 +87,6 @@ import { EnvoiSMSEmployeComponent } from './employe/envoi-smsemploye/envoi-smsem
 import { ListEmailComponent } from './email/list-email/list-email.component';
 import { EmailClientComponent } from './email/email-client/email-client.component';
 import { EmailFournisseurComponent } from './email/email-fournisseur/email-fournisseur.component';
-import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
-import { CreateCommandeClientComponent } from './commandeClient/create-commande-client/create-commande-client.component';
-import { ListLigneCmdClientComponent } from './commandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
-import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CreateDevisComponent } from './devis/create-devis/create-devis.component';
@@ -100,7 +95,6 @@ import { ListDevisComponent } from './devis/list-devis/list-devis.component';
 import { ViewDevisComponent } from './devis/view-devis/view-devis.component';
 import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-ligne-devis.component';
 import { ProgressBarModule } from 'angular-progress-bar';
-//import { ChartsModule } from 'ng2-charts';
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { ProfilComponent } from './authentication/profil/profil.component';
@@ -115,6 +109,11 @@ import { UpdateStatusApproComponent } from './approvisionnement/update-status-ap
 import { UpdateMontantApproComponent } from './approvisionnement/update-montant-appro/update-montant-appro.component';
 import { PiechartStockComponent } from './chartJs/piechart-stock/piechart-stock.component';
 import { BarcharCreanceComponent } from './chartJs/barchar-creance/barchar-creance.component';
+import { CreateCommandeClientComponent } from './commandeclient/create-commande-client/create-commande-client.component';
+import { ListCommandeClientComponent } from './commandeclient/list-commande-client/list-commande-client.component';
+import { ListLigneCmdClientComponent } from './commandeclient/list-ligne-cmd-client/list-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './commandeclient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+import { ViewCommandeComponent } from './commandeclient/view-commande/view-commande.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +145,7 @@ import { BarcharCreanceComponent } from './chartJs/barchar-creance/barchar-crean
     CreateCommandeClientComponent,
     ListLigneCmdClientComponent,
     CreateLigneCmdClientComponent,
+    ViewCommandeComponent,
     ListVenteComponent,
     CreateVenteComponent,
     ListLigneVenteComponent,
@@ -157,7 +157,6 @@ import { BarcharCreanceComponent } from './chartJs/barchar-creance/barchar-crean
     CreateLigneApproComponent,
     ListLigneApproComponent,
     ListVenteJounalierComponent,
-    ViewCommandeComponent,
     ViewApprovisionnementComponent,
     ViewVenteComponent,
     ListChargeComponent,

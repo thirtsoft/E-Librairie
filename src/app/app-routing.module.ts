@@ -28,10 +28,6 @@ import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
 import { ListCreanceComponent } from './creance/list-creance/list-creance.component';
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
-import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
-import { CreateCommandeClientComponent } from './commandeClient/create-commande-client/create-commande-client.component';
-import { ListLigneCmdClientComponent } from './commandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
@@ -43,7 +39,6 @@ import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appr
 import { ListStockComponent } from './stock/list-stock/list-stock.component';
 import { ListChargeComponent } from './charge/list-charge/list-charge.component';
 import { CreateChargeComponent } from './charge/create-charge/create-charge.component';
-import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
 import { ViewApprovisionnementComponent } from './approvisionnement/view-approvisionnement/view-approvisionnement.component';
 import { LoginComponent } from './authentication/login/login.component';
@@ -82,6 +77,11 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { ProfilComponent } from './authentication/profil/profil.component';
 import { UpdateUsernameComponent } from './authentication/update-username/update-username.component';
 import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
+import { ListCommandeClientComponent } from './commandeclient/list-commande-client/list-commande-client.component';
+import { CreateCommandeClientComponent } from './commandeclient/create-commande-client/create-commande-client.component';
+import { ViewCommandeComponent } from './commandeclient/view-commande/view-commande.component';
+import { ListLigneCmdClientComponent } from './commandeclient/list-ligne-cmd-client/list-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './commandeclient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 
 const routes: Routes = [
 
@@ -90,39 +90,17 @@ const routes: Routes = [
 
   ] },
 
-
   { path: 'register', component: RegisterComponent },
-
 
   {path: 'home', component: HomeComponent, children : [
 
-
     {path:'', redirectTo:'dashboard' , pathMatch:'full'},
 
-  /*  { path: 'articles', component: ListArticleComponent},
-    { path: 'article', component: CreateArticleComponent},
-    { path:'article/:id',component:EditArticleComponent },
-
-    { path: 'scategories', component: ListScategorieComponent},
-    { path: 'scategorie', component: CreateScategorieComponent},
-    { path:'scategorie/:id',component:EditScategorieComponent }, */
-/*
-    { path: 'categories', children: [
-        { path: '', component: ListCategorieComponent},
-        { path:'edit/:id',component:ListCategorieComponent },
-      ]
-    },
-*/
     { path: 'categories', component: ListCategorieComponent},
     { path:'categorie',component: CreateCategorieComponent },
 
     { path: 'registers', component: ListRegisterComponent},
-    { path: 'register', component: RegisterComponent},
-
-  /*  { path: 'scategories', component: ListScategorieComponent},
-    { path:'scategorie',component: CreateScategorieComponent }, */
-
-
+   
     { path: 'scategories', children: [
         { path: '', component: ListScategorieComponent},
         { path:'edit/:id',component:CreateScategorieComponent },
@@ -141,22 +119,10 @@ const routes: Routes = [
     { path: 'sendEmailToCustomer', component: EnvoiEmailClientComponent},
     { path: 'sendSMSToCustomer', component: EnvoiSMSClientComponent},
 
-/*
-
-
-    { path: 'commandeclients', component: ListCommandeClientComponent},
-
-    { path:'commandeclient',children:[
-        {path:'',component:CreateCommandeClientComponent},
-        {path:'edit/:id',component:CreateCommandeClientComponent},
-      ]
-    },
-*/
     { path: 'commandeclients', component: ListCommandeClientComponent},
     { path:'commandeclient',component: CreateCommandeClientComponent},
     { path:'commandeView/:id', component: ViewCommandeComponent },
-
-    { path: 'detailsCommandeClients', component: ListLigneCmdClientComponent},
+    { path: 'detailsCommandeClient', component: ListLigneCmdClientComponent},
     { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent},
 
     { path: 'listdevis', component: ListDevisComponent },
@@ -200,41 +166,25 @@ const routes: Routes = [
       ]
     },
 
-
     { path: 'creances', component: ListCreanceComponent},
     { path:'creance',component: CreateCreanceComponent},
     { path:'creance',component: UpdateStatusCreanceComponent},
     { path:'creance',component: UpdateSoldeCreanceComponent},
-
     {path:'creanceView/:id', component: ViewCreanceComponent},
-
     { path: 'detailsCreances', component: ListLigneCreanceComponent},
     { path: 'detailsCreance', component: CreateLigneCreanceComponent},
 
     { path: 'avoirs', component: ListAvoirComponent},
     { path:'avoir',component: CreateAvoirComponent},
-
     {path:'avoirView/:id', component: ViewAvoirComponent},
-
     { path: 'detailsAvoirs', component: ListLigneAvoirComponent},
     { path: 'detailsAvoir', component: CreateLigneAvoirComponent},
-
-
-  /*
-    { path: 'charges', component: ListChargeComponent},
-    { path:'charge',children:[
-        {path:'',component: CreateChargeComponent},
-        {path:'edit/:id',component: CreateChargeComponent}
-      ]
-    }, */
 
     { path: 'charges', component: ListChargeComponent},
     { path:'charge',component: CreateChargeComponent },
 
     { path: 'categorieCharges', component: ListCategorieChargeComponent},
     { path:'categorieCharge', component: CreateCategorieChargeComponent },
-
-
 
     { path: 'contrats', children: [
         { path: '', component: ListContratComponent},
@@ -254,8 +204,6 @@ const routes: Routes = [
     { path: 'sendEmailToEmploye', component: EnvoiEmailEmployeComponent},
     { path: 'sendSMSToEmploye', component: EnvoiSMSEmployeComponent},
 
-
-
     { path: 'versements', children: [
         { path: '', component: ListVersementComponent},
         { path:'edit/:id',component: ListVersementComponent },
@@ -274,16 +222,30 @@ const routes: Routes = [
     { path: 'profile/:username', component: UpdateUsernameComponent },
     { path: 'profile/:username', component: UpdatePasswordComponent },
 
-   /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
     { path: '**', component: PageNotFoundComponent },
 
+    /*  { path: 'articles', component: ListArticleComponent},
+    { path: 'article', component: CreateArticleComponent},
+    { path:'article/:id',component:EditArticleComponent },
 
+    { path: 'scategories', component: ListScategorieComponent},
+    { path: 'scategorie', component: CreateScategorieComponent},
+    { path:'scategorie/:id',component:EditScategorieComponent }, */
+/*
+    { path: 'categories', children: [
+        { path: '', component: ListCategorieComponent},
+        { path:'edit/:id',component:ListCategorieComponent },
+      ]
+    },
+*/
 
-   /*  {path:'orders',component: OrdersComponent},
-    {path:'order',children:[
-      {path:'',component: OrderComponent},
-      {path:'edit/:id',component: OrderComponent}
-    ]} */
+   /*
+    { path: 'charges', component: ListChargeComponent},
+    { path:'charge',children:[
+        {path:'',component: CreateChargeComponent},
+        {path:'edit/:id',component: CreateChargeComponent}
+      ]
+    }, */
 
   ]}
 

@@ -1,8 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, Input } from '@angular/core';
 import { Article } from 'src/app/models/article';
-import { Categorie } from 'src/app/models/categorie';
-import { Scategorie } from 'src/app/models/scategorie';
-import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ArticleService } from 'src/app/services/article.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,12 +14,11 @@ import * as XLSX from 'xlsx'; */
 
 import * as XLSX from 'xlsx';
 
-
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { style } from '@angular/animations';
 import { DataTableDirective } from 'angular-datatables';
 import { ViewArticleComponent } from '../view-article/view-article.component';
+import { map } from 'rxjs/operators';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({

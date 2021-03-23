@@ -15,7 +15,6 @@ import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
 @Component({
   selector: 'app-list-devis',
   templateUrl: './list-devis.component.html',
