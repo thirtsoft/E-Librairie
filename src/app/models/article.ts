@@ -1,6 +1,4 @@
-import { Categorie } from './categorie';
 import { Scategorie } from './scategorie';
-
 export class Article {
   id: number;
   reference: string;

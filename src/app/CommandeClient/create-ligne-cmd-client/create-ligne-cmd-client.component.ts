@@ -27,10 +27,11 @@ export class CreateLigneCmdClientComponent implements OnInit {
 
   formData: FormGroup;
 
-  constructor(public lcmdService: LigneCmdClientService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ArticleService,
-    private cmdService: CommandeClientService,public fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateLigneCmdClientComponent>,
+  constructor(public lcmdService: LigneCmdClientService, private cmdService: CommandeClientService,
+    private articleService: ArticleService,
+    public fb: FormBuilder, private toastr :ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data,
+    private dialogRef: MatDialogRef<CreateLigneCmdClientComponent>,
    ) { }
 
   get f() { return this.lcmdService.dataForm.controls; }

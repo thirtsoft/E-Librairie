@@ -81,7 +81,8 @@ import { ListCommandeClientComponent } from './commandeclient/list-commande-clie
 import { CreateCommandeClientComponent } from './commandeclient/create-commande-client/create-commande-client.component';
 import { ViewCommandeComponent } from './commandeclient/view-commande/view-commande.component';
 import { ListLigneCmdClientComponent } from './commandeclient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './commandeclient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+
 
 const routes: Routes = [
 
@@ -119,11 +120,11 @@ const routes: Routes = [
     { path: 'sendEmailToCustomer', component: EnvoiEmailClientComponent},
     { path: 'sendSMSToCustomer', component: EnvoiSMSClientComponent},
 
-    { path: 'commandeclients', component: ListCommandeClientComponent},
-    { path:'commandeclient',component: CreateCommandeClientComponent},
+    { path: 'listcommandes', component: ListCommandeClientComponent },
+    { path:'commandeclient',component: CreateCommandeClientComponent },
     { path:'commandeView/:id', component: ViewCommandeComponent },
-    { path: 'detailsCommandeClient', component: ListLigneCmdClientComponent},
-    { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent},
+    { path: 'detailsCommandeClient', component: ListLigneCmdClientComponent },
+    { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent },
 
     { path: 'listdevis', component: ListDevisComponent },
     { path:'devis',component: CreateDevisComponent },

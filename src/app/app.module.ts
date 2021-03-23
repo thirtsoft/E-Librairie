@@ -109,10 +109,10 @@ import { UpdateStatusApproComponent } from './approvisionnement/update-status-ap
 import { UpdateMontantApproComponent } from './approvisionnement/update-montant-appro/update-montant-appro.component';
 import { PiechartStockComponent } from './chartJs/piechart-stock/piechart-stock.component';
 import { BarcharCreanceComponent } from './chartJs/barchar-creance/barchar-creance.component';
-import { CreateCommandeClientComponent } from './commandeclient/create-commande-client/create-commande-client.component';
 import { ListCommandeClientComponent } from './commandeclient/list-commande-client/list-commande-client.component';
+import { CreateCommandeClientComponent } from './commandeclient/create-commande-client/create-commande-client.component';
 import { ListLigneCmdClientComponent } from './commandeclient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './commandeclient/create-ligne-cmd-client/create-ligne-cmd-client.component';
+import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 import { ViewCommandeComponent } from './commandeclient/view-commande/view-commande.component';
 
 @NgModule({
@@ -243,7 +243,7 @@ import { ViewCommandeComponent } from './commandeclient/view-commande/view-comma
   entryComponents: [
     CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
-    CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent, CreateApproComponent,
+    CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent, CreateLigneCmdClientComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
     UpdateUsernameComponent
   ]
