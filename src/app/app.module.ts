@@ -109,11 +109,6 @@ import { UpdateStatusApproComponent } from './approvisionnement/update-status-ap
 import { UpdateMontantApproComponent } from './approvisionnement/update-montant-appro/update-montant-appro.component';
 import { PiechartStockComponent } from './chartJs/piechart-stock/piechart-stock.component';
 import { BarcharCreanceComponent } from './chartJs/barchar-creance/barchar-creance.component';
-import { ListCommandeClientComponent } from './commandeclient/list-commande-client/list-commande-client.component';
-import { CreateCommandeClientComponent } from './commandeclient/create-commande-client/create-commande-client.component';
-import { ListLigneCmdClientComponent } from './commandeclient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { ViewCommandeComponent } from './commandeclient/view-commande/view-commande.component';
-import { CreateLigneCommandeClientComponent } from './commandeclient/create-ligne-commande-client/create-ligne-commande-client.component';
 
 @NgModule({
   declarations: [
@@ -141,11 +136,6 @@ import { CreateLigneCommandeClientComponent } from './commandeclient/create-lign
     CreateAvoirComponent,
     ListCreanceComponent,
     CreateCreanceComponent,
-    ListCommandeClientComponent,
-    CreateCommandeClientComponent,
-    ListLigneCmdClientComponent,
-    CreateLigneCommandeClientComponent,
-    ViewCommandeComponent,
     ListVenteComponent,
     CreateVenteComponent,
     ListLigneVenteComponent,
@@ -243,7 +233,7 @@ import { CreateLigneCommandeClientComponent } from './commandeclient/create-lign
   entryComponents: [
     CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
-    CreateAvoirComponent, CreateChargeComponent, CreateCommandeClientComponent, CreateApproComponent,
+    CreateAvoirComponent, CreateChargeComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
     UpdateUsernameComponent
   ]
