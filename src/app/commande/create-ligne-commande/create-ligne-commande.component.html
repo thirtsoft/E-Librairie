@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-md-offset-2">
+    <h4 class="dislay-4">Lignes Commandes </h4>
+    <hr>
+    <form [formGroup]="this.lcmdService.dataForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Article</label>
+          <select formControlName="produit" id="produit" class="form-control"
+            (change)="selectPrice($event.target)" [compareWith]="compareProduit">
+            <option value="0">-Select-</option>
+            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
+          </select>
+          <div *ngIf="f['produit'].invalid && (f['produit'].dirty || f['produit'].touched)" class="alert alert-danger">
+            <span *ngIf="f['produit'].errors.required">
+                selectionner un article.
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>P.Unitaire</label>
+            <input name="prix" formControlName="prix" id="prix" class="form-control"  (keyup)="calculTotal()"
+              [class.is-invalid]="!isValid && formData.value.prix==0"  readonly>
+        </div>
+
+        <div class="form-group">
+          <label>P.Commande</label>
+            <input type="number" name="prixCommande" formControlName="prixCommande" class="form-control"
+            (keyup)="calculTotal()" id="prixCommande">
+          <div *ngIf="f['prixCommande'].invalid && (f['prixCommande'].dirty || f['prixCommande'].touched)" class="alert alert-danger">
+            <span *ngIf="f['prixCommande'].errors.required">
+              prix Commande obligatoire.
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>QtéStock</label>
+            <input formControlName="qteStock" id="qteStock" class="form-control"
+              (keyup)="calculTotal()" [class.is-invalid]="!isValid && this.formData.value.qteStock==0"
+             readonly>
+        </div>
+
+        <div class="form-group">
+          <label>Quantité</label>
+            <input type="number" formControlName="quantite" id="quantite" class="form-control"
+              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.quantite==0">
+          <div *ngIf="f['quantite'].invalid && (f['quantite'].dirty || f['quantite'].touched)" class="alert alert-danger">
+            <span *ngIf="f['quantite'].errors.required">
+              quantite obligatoire.
+            </span>
+            <span *ngIf="this.isInvalidQte">
+              quantite stock insuffisante.
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>P.Total</label>
+            <input name="total" formControlName="total" id="total" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
+          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        </div>
+
+    </form>
+  </div>
+</div>
+

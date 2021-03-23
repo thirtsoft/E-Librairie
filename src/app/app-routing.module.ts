@@ -76,6 +76,11 @@ import { CreateLigneDevisComponent } from './devis/create-ligne-devis/create-lig
 import { ProfilComponent } from './authentication/profil/profil.component';
 import { UpdateUsernameComponent } from './authentication/update-username/update-username.component';
 import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
+import { CreateLigneCommandeComponent } from './commande/create-ligne-commande/create-ligne-commande.component';
+import { ListLigneCommandeComponent } from './commande/list-ligne-commande/list-ligne-commande.component';
+import { ListCommandeComponent } from './commande/list-commande/list-commande.component';
+import { CreateCommandeComponent } from './commande/create-commande/create-commande.component';
+import { ViewCommandeComponent } from './commande/view-commande/view-commande.component';
 
 
 const routes: Routes = [
@@ -113,13 +118,13 @@ const routes: Routes = [
     { path: 'client', component: CreateClientComponent},
     { path: 'sendEmailToCustomer', component: EnvoiEmailClientComponent},
     { path: 'sendSMSToCustomer', component: EnvoiSMSClientComponent},
-/*
-    { path: 'listcommandes', component: ListCommandeClientComponent },
-    { path:'commandeclient',component: CreateCommandeClientComponent },
+
+    { path: 'listcommandes', component: ListCommandeComponent },
+    { path:'commande',component: CreateCommandeComponent },
     { path:'commandeView/:id', component: ViewCommandeComponent },
-    { path: 'detailsCommandeClient', component: ListLigneCmdClientComponent },
-    { path: 'detailsCommandeClient', component: CreateLigneCommandeClientComponent },
-*/
+    { path: 'detailsCommande', component: ListLigneCommandeComponent },
+    { path: 'detailsCommande', component: CreateLigneCommandeComponent },
+
     { path: 'listdevis', component: ListDevisComponent },
     { path:'devis',component: CreateDevisComponent },
     { path:'devisView/:id', component: ViewDevisComponent },
