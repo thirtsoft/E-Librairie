@@ -9,7 +9,11 @@ import { ProfileInfo, UpdateUsernameInfo, UpdatePasswordInfo } from './profile-i
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Origin': '*'
+  })
 };
 @Injectable({
   providedIn: 'root'
