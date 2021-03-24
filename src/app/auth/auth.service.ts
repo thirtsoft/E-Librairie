@@ -20,8 +20,9 @@ export class AuthService {
   private loginUrl = 'http://localhost:8081/api/auth/signin';
   private signupUrl = 'http://localhost:8081/api/auth/signup';
 */
-  private loginUrl = 'https://alamine-admin.herokuapp.com/api/auth/signin';
+  private loginUrl = ' https://alamine-admin.herokuapp.com/api/auth/signin';
   private signupUrl = 'https://alamine-admin.herokuapp.com/api/auth/signup';
+
 
 
 
