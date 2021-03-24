@@ -12,11 +12,14 @@ import { map } from 'rxjs/operators';
 })
 export class DashboardService {
 
-  private baseUrl_Seller = 'http://localhost:8081/apiSeller';
+  private baseUrl_Seller = 'https://alamine-admin.herokuapp.com/apiSeller';
+ // private baseUrl_Seller = 'http://localhost:8081/apiSeller';
 
-  private baseUrl_Creance = 'http://localhost:8081/alAmine';
+  private baseUrl_Creance = 'https://alamine-admin.herokuapp.com/alAmine';
+//  private baseUrl_Creance = 'http://localhost:8081/alAmine';
 
-  private baseUrl_Com = 'http://localhost:8081/prodApi';
+  private baseUrl_Com = 'https://alamine-admin.herokuapp.com/prodApi';
+//  private baseUrl_Com = 'http://localhost:8081/prodApi';
 
  // private baseUrl_Custom = 'http://localhost:8081/prodApi';
 

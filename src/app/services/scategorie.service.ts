@@ -14,7 +14,8 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ScategorieService {
 
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
+  private baseUrl_1 = 'https://alamine-admin.herokuapp.com/prodApi';
+ // private baseUrl_1 = 'http://localhost:8081/prodApi';
 
   //  private baseUrl = window["cfgApiBaseUrl"];
   // private baseUrl = '/api/categories';

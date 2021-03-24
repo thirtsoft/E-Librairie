@@ -29,9 +29,12 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class CategorieService {
 
-  private baseUrl = 'http://localhost:8081/api';
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
-  private baseUrl_2 = 'http://localhost:8081/apiSeller';
+//  private baseUrl = 'http://localhost:8081/api';
+  private baseUrl = 'https://alamine-admin.herokuapp.com/api';
+  private baseUrl_1 = 'https://alamine-admin.herokuapp.com/prodApi';
+ // private baseUrl_1 = 'http://localhost:8081/prodApi';
+  private baseUrl_2 = 'https://alamine-admin.herokuapp.com/apiSeller';
+ // private baseUrl_2 = 'http://localhost:8081/apiSeller';
   private db: Dexie;
   private tableCat: Dexie.Table<Categorie, number>;
   private tableProd: Dexie.Table<Article, number>;

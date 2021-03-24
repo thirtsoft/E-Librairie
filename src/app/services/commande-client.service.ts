@@ -14,7 +14,8 @@ import { OnlineofflineService } from './onlineoffline.service';
 })
 export class CommandeClientService {
 
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
+  private baseUrl_1 = 'https://alamine-admin.herokuapp.com/prodApi';
+//  private baseUrl_1 = 'http://localhost:8081/prodApi';
   private db: Dexie;
   private tableCmdClient: Dexie.Table<CommandeClient, number>;
 

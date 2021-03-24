@@ -9,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CategorieChargeService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = 'https://alamine-admin.herokuapp.com/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];

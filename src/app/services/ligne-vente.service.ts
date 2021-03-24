@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class LigneVenteService {
 
-
-  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+  private baseUrl_1 = 'https://alamine-admin.herokuapp.com/apiSeller';
+//  private baseUrl_1 = 'http://localhost:8081/apiSeller';
 
 //  private baseUrl_1 = 'http://localhost:8081/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];

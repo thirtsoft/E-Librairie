@@ -16,12 +16,18 @@ const httpOptions = {
 })
 export class AuthService {
 
+  /*
   private loginUrl = 'http://localhost:8081/api/auth/signin';
   private signupUrl = 'http://localhost:8081/api/auth/signup';
+*/
+  private loginUrl = 'https://alamine-admin.herokuapp.com/api/auth/signin';
+  private signupUrl = 'https://alamine-admin.herokuapp.com/api/auth/signup';
 
-  private baseUrl = 'http://localhost:8081/api/auth';
 
-  private baseUrl_1 = 'http://localhost:8081/alAmine';
+
+ // private baseUrl = 'http://localhost:8081/api/auth';
+
+ // private baseUrl_1 = 'http://localhost:8081/alAmine';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;
@@ -44,12 +50,14 @@ export class AuthService {
   }
 
   signUp(info: Register): Observable<Register> {
+    console.log("Serveur: " +this.signupUrl);
     return this.http.post<Register>(this.signupUrl, info, httpOptions);
   }
 
   getUserByUsername(username: string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + `/getUserByUsername/${username}`);
+    return this.http.get<any>(this.signupUrl + `/getUserByUsername/${username}`);
   }
+
 
   updateUsername(item: UpdateUsernameInfo): Observable<UpdateUsernameInfo> {
     return this.http.patch<UpdateUsernameInfo>("//localhost:8081/alAmine/updateUsername", {
