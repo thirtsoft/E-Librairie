@@ -26,7 +26,7 @@ export class LigneCreanceService {
   constructor(private http: HttpClient) { }
 
   getAllLigneCreances(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/ligneCreances`);
+    return this.http.get(`${this.baseUrl}/ligneCreances`); 
   }
   getAllByNumero(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/lcreances/${id}`);
