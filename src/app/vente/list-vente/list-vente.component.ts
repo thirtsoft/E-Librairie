@@ -80,7 +80,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   onCreateVente() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("vente");
+    this.router.navigateByUrl("home/vente");
   }
 
   deleteVente(id: number){
@@ -101,7 +101,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   }
 
   viewVente(item: Vente) {
-    this.router.navigateByUrl('venteView/' + item.id);
+    this.router.navigateByUrl('home/venteView/' + item.id);
   }
 
   transformDate(date){

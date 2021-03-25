@@ -87,7 +87,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
 
   onCreateAppro() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("approvisionnement");
+    this.router.navigateByUrl("home/approvisionnement");
   }
 
   addEditMontantAvanceAppro(item : Appro) {
@@ -142,11 +142,11 @@ export class ListApproComponent implements OnDestroy, OnInit {
   }
 
   editeAppro(item : Appro) {
-    this.router.navigateByUrl('approvisionnement/'+item.id);
+    this.router.navigateByUrl('home/approvisionnement/'+item.id);
   }
 
   viewAppro(item : Appro) {
-    this.router.navigateByUrl('approView/'+item.id);
+    this.router.navigateByUrl('home/approView/'+item.id);
   }
 
   transformDate(date){

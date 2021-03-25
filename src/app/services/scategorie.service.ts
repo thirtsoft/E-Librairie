@@ -17,7 +17,7 @@ export class ScategorieService {
   private baseUrl_1 = 'https://alamine-admin.herokuapp.com/prodApi';
  // private baseUrl_1 = 'http://localhost:8081/prodApi';
 
-  //  private baseUrl = window["cfgApiBaseUrl"];
+  //  private baseUrl = window["cfgApiBaseUrl"]; prodApi scategories
   // private baseUrl = '/api/categories';
    choixmenu : string  = 'A';
    listData : Scategorie[];
@@ -36,9 +36,13 @@ export class ScategorieService {
    constructor(private http: HttpClient) { }
 
    getAllScategories(): Observable<any> {
-     return this.http.get('http://localhost:8081/prodApi/scategories');
+     return this.http.get(`${this.baseUrl_1}/scategories/`);
    }
-
+/*
+   getAllScategories(): Observable<any> {
+    return this.http.get('http://localhost:8081/prodApi/scategories');
+  }
+*/
    getScategorieByID(id:number):any {
     return this.http.get(`${this.baseUrl_1}/scategories/`+id).toPromise();
   }

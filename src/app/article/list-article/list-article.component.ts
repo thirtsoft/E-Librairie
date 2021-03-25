@@ -172,7 +172,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   editArticle(item : Article) {
-    this.router.navigateByUrl('article/'+item.id);
+    this.router.navigateByUrl('home/article/'+item.id);
   }
 
   uploadExcelFile() {
@@ -213,7 +213,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       }, 100)
 
     });
-    this.toastr.warning("Fichier exporté avec succès");
+    this.toastr.warning("Fichier Pdf téléchargé avec succès");
 
   }
 

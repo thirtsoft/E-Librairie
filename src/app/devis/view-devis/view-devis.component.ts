@@ -104,7 +104,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
   onCreateDevis() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("devis");
+    this.router.navigateByUrl("home/devis");
   }
 
   OpenPdf() {
@@ -296,7 +296,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
   }
 
   onGoBack() {
-    this.router.navigateByUrl('listdevis');
+    this.router.navigateByUrl('home/listdevis');
   }
 
 }

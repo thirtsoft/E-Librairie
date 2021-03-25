@@ -216,7 +216,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
       }, 100)
 
     });
-    this.toastr.warning('Fichier Exportée avec succès!');
+    this.toastr.warning('Fichier PDf téléchargé avec succès!');
 
   }
 

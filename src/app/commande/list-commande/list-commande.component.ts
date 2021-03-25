@@ -73,17 +73,17 @@ export class ListCommandeComponent implements OnInit {
 
   onCreateCommandeClient() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("commandes");
+    this.router.navigateByUrl("home/commande");
   }
 
   editCommandeClient(item: CommandeClient) {
     this.crudApi.formData = this.fb.group(Object.assign({}, item));
     this.crudApi.choixmenu = "M"
-    this.router.navigate(['/commandeclient']);
+    this.router.navigate(['/home/commandeclient']);
   }
 
   viewCommandeClient(item: CommandeClient) {
-    this.router.navigateByUrl('commandeView/' + item.id);
+    this.router.navigateByUrl('home/commandeView/' + item.id);
   }
   deleteCommandeClient(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
@@ -93,7 +93,7 @@ export class ListCommandeComponent implements OnInit {
           this.toastr.warning('Commande supprimé avec succès!');
           this.rerender();
           this.getListCommandeClients();
-          this.router.navigate(['/listcommandes']);
+          this.router.navigate(['/home/listcommandes']);
         });
       }
     });

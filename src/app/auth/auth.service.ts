@@ -65,7 +65,7 @@ export class AuthService {
 
 
   updateUsername(item: UpdateUsernameInfo): Observable<UpdateUsernameInfo> {
-    return this.http.patch<UpdateUsernameInfo>("//localhost:8081/alAmine/updateUsername", {
+    return this.http.patch<UpdateUsernameInfo>("https://alamine-admin.herokuapp.com/alAmine/updateUsername", {
       username: item.username,
       newUsername: item.newUsername
     }, httpOptions);
@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   updatePassword(item: UpdatePasswordInfo): Observable<UpdatePasswordInfo> {
-    return this.http.patch<UpdatePasswordInfo>("//localhost:8081/alAmine/updatePassword", {
+    return this.http.patch<UpdatePasswordInfo>("https://alamine-admin.herokuapp.com/alAmine/updatePassword", {
       username: item.username,
       oldPassword: item.oldPassword,
       newPassword: item.newPassword

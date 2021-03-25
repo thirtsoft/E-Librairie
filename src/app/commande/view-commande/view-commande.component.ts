@@ -276,7 +276,7 @@ export class ViewCommandeComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigateByUrl('commandeclients');
+    this.router.navigateByUrl('home/listcommandes');
   }
 
   Imprimer() {
