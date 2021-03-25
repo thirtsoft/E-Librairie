@@ -22,7 +22,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ListDevisComponent implements OnDestroy, OnInit {
 
-  listData;
+  listData: Devis[];
   client: Client;
   devis: Devis;
   devisItems: LigneDevis;

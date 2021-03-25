@@ -31,7 +31,7 @@
               <td>{{vent.dateVente | date:'dd-MM-yyyy à h:mm:ss'}}</td>
               <td>
                 <button class="btn btn-success btn-sm" (click)="viewVente(vent)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-danger btn-sm" (click)="deleteVente(vent.VenteId)"><i class="fa fa-trash-o"></i>  </button>
+                <button class="btn btn-danger btn-sm" (click)="deleteVente(vent.numeroVente)"><i class="fa fa-trash-o"></i>  </button>
               </td>
             </tr>
           </tbody>

@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
 })
 export class ListVenteComponent implements OnDestroy, OnInit {
 
-  listData;
+  listData: Vente[];
   sumVenteByDay;
 
   dtOptions: DataTables.Settings = {};
