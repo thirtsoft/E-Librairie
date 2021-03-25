@@ -64,23 +64,21 @@ export class CreanceService {
   let data = {"status":status};
   console.log(data);
   console.log(data.status);
-  return this.http.patch<any>("http://localhost:8080/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
+  return this.http.patch<any>("https://alamine-admin.herokuapp.com/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
 
   }
-  updateSoldeCreance(id: number, soldeCreance: number): Observable<any> {
-
-    let params = new HttpParams();
+  updateAvanceCreance(id: number, avanceCreance: number): Observable<any> {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
+    /*
     const param = new HttpParams().set("soldeCreance",soldeCreance.toString());
-
     const fullURL = `${this.baseUrl}/${id}?${param.toString()}`;
     console.log({ fullURL });
-
-    let data = {"soldeCreance":soldeCreance};
+    */
+    let data = {"avanceCreance":avanceCreance};
     console.log(data);
-    console.log(data.soldeCreance);
-    return this.http.patch<any>("http://localhost:8080/alAmine/setCreanceOnlySolde/"+id+"?soldeCreance="+data.soldeCreance, {headers: headers});
+    return this.http.patch<any>("https://alamine-admin.herokuapp.com/alAmine/setCreanceOnlySoldeAvance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
+   // return this.http.patch<any>("http://localhost:8080/alAmine/setCreanceOnlySoldeAvance/"+id+"?soldeCreance="+data.soldeCreance, {headers: headers});
 
    }
 

@@ -46,7 +46,7 @@ export class UpdateSoldeCreanceComponent implements OnInit {
   onSubmit() {
     console.log(this.crudApi.dataForm);
     console.log(this.crudApi.dataForm.value.soldeCreance);
-    this.crudApi.updateSoldeCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value.soldeCreance).
+    this.crudApi.updateAvanceCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value.soldeCreance).
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Solde Creance Modifier avec Succès");
