@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const cors = require('cors');
+//const cors = require('cors');
 const request = require("request");
 
 // add this code
-const whitelist = ['https://alamine.herokuapp.com']; // list of allow domain
-
+//const whitelist = ['https://alamine.herokuapp.com']; // list of allow domain
+/*
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin) {
@@ -21,7 +21,7 @@ const corsOptions = {
     }
 }
 app.use(cors(corsOptions));
-
+*/
 app.use(express.static(__dirname + "/dist/E-Librairie"));
 
 
