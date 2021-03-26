@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Register } from 'src/app/auth/register';
 import { Login } from 'src/app/auth/login';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private router : Router,
-    private tokenService: TokenStorageService) { }
+    private tokenService: TokenStorageService,
+    private toastr :ToastrService) { }
 
   ngOnInit() { }
 
@@ -41,7 +43,8 @@ export class RegisterComponent implements OnInit {
         this.isSignedUp = true;
         this.isSignUpFailed = false;
         console.log("User register Succeffuly");
-        this.router.navigateByUrl("");
+        this.toastr.warning("User register Succeffuly");
+        this.router.navigateByUrl("/");
       },
       error => {
         console.log(error);
