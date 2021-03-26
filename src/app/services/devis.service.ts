@@ -16,9 +16,10 @@ export class DevisService {
   choixmenu : string  = 'A';
   listData: Devis[];
 
-  public formData:  FormGroup;
+  formData:  FormGroup;
   list: any={}
-  public dataForm:  FormGroup;
+  dataForm:  FormGroup;
+  numDevis;
 
   private listners = new Subject<any>();
   listen(): Observable<any> {
@@ -53,7 +54,16 @@ export class DevisService {
   }
 
   generateNumeroDevis(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/generateNumeroDevis`);
+    return this.http.get(`${this.baseUrl}/generateNumeroDevis`);
+  }
+
+  getNumeroDevis() {
+    this.generateNumeroDevis().subscribe(
+      response =>{
+        this.numDevis = response;
+        console.log("Numero Vente:" + this.numDevis);
+      }
+    );
   }
 
 }

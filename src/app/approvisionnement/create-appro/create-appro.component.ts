@@ -90,24 +90,15 @@ export class CreateApproComponent implements OnInit {
       }
     );
 
-    this.getCodeApprovisionnement();
+    this.crudApi.getCodeApprovisionnement();
 
-  }
-
-  getCodeApprovisionnement() {
-    this.crudApi.generateCodeApprovisionnement().subscribe(
-      response =>{
-        this.codeAppro = response;
-        console.log("CodeAppro:" + response);
-      }
-    );
   }
 
  infoForm() {
   this.crudApi.formData = this.fb.group({
     id: null,
   //  code: Math.floor(100000 + Math.random() * 900000).toString(),
-    code: [0, Validators.required],
+    code: this.crudApi.codeAppro,
     total: [0, Validators.required],
     montantAvance: [0, Validators.required],
     totalAppro: [0, Validators.required],

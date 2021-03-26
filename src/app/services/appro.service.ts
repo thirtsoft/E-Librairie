@@ -36,6 +36,8 @@ export class ApproService {
 
   orderItems: LigneAppro[];
 
+  codeAppro;
+
   private listners = new Subject<any>();
   listen(): Observable<any> {
     return this.listners.asObservable();
@@ -88,7 +90,16 @@ export class ApproService {
     return this.http.delete(`${this.baseUrl}/approvisionnements/${id}`, { responseType: 'text' });
   }
   generateCodeApprovisionnement(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/generateCodeAppro`);
+    return this.http.get(`${this.baseUrl}/generateCodeAppro`);
+  }
+
+  getCodeApprovisionnement() {
+    this.generateCodeApprovisionnement().subscribe(
+      response =>{
+        this.codeAppro = response;
+        console.log("Numero Vente:" + this.codeAppro);
+      }
+    );
   }
   updateStatusApproCreance(id: number, status: string): Observable<any> {
     const headers = new HttpHeaders();
@@ -105,7 +116,6 @@ export class ApproService {
     return this.http.patch<any>("http://localhost:8081/alAmine/updateMontantAvanceApproById/"+id+"?montantAvance="+data.montantAvance, {headers: headers});
 
   }
-
 
 
 }

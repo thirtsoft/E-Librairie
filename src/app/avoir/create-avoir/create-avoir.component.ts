@@ -53,24 +53,15 @@ export class CreateAvoirComponent implements OnInit {
     } else {
     }
 
-    this.getReferenceAvoir();
+    this.crudApi.getReferenceAvoir();
 
-  }
-
-  getReferenceAvoir() {
-    this.crudApi.generateReferneceAvoir().subscribe(
-      response =>{
-        this.referencAvoir = response;
-        console.log("Reference Avoir:" + response);
-      }
-    );
   }
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: null,
     //  reference: Math.floor(100000 + Math.random() * 900000).toString(),
-      reference: [0, Validators.required],
+      reference: this.crudApi.refAvoir,
       total: [0, Validators.required],
       libelle: ['', Validators.required],
       soldeAvoir: [0, Validators.required],

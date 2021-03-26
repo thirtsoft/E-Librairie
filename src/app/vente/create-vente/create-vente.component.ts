@@ -33,7 +33,7 @@ export class CreateVenteComponent implements OnInit {
   orderItem: LigneVente[];
   OrderId: number;
 
-  numVente;
+  numVente: number;
 
   constructor(public crudApi: VenteService, private dialog:MatDialog,
     public lventeService: LigneVenteService, private catService: CategorieService,
@@ -68,24 +68,26 @@ export class CreateVenteComponent implements OnInit {
       this.f['dateVente'].setValue(this.crudApi.formData.value.dateVente);
     }
 
-    this.getNumeroVente();
+    this.crudApi.getNumeroVente();
 
   }
-
+/*
   getNumeroVente() {
     this.crudApi.generateNumeroVente().subscribe(
       response =>{
-        this.numVente = response;
-        console.log("Numero Vente:" + response);
+        this.crudApi.NumVente = response;
+        console.log("Numero Vente:" + this.crudApi.NumVente);
       }
     );
   }
+*/
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
     //  venteId: null,
     //  numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
-      numeroVente: [0, Validators.required],
+
+      numeroVente: this.crudApi.NumVente,
       total: [0, Validators.required],
       totalVente: [0, Validators.required],
       status: ['', Validators.required],
@@ -125,14 +127,17 @@ export class CreateVenteComponent implements OnInit {
   onSubmit() {
     this.f['ligneVentes'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
+    console.log(this.crudApi.formData.value.numeroVente);
     this.crudApi.saveVente(this.crudApi.formData.value).subscribe(
       data => {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Vente Effectuée avec succès');
         console.log(this.crudApi.formData.value);
+        console.log(this.crudApi.formData.value.numeroVente);
         this.router.navigate(['/home/ventes']);
       }
     );
+
   }
 /*
   onSubmit() {

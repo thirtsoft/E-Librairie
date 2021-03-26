@@ -27,7 +27,7 @@ export class CommandeClientService {
 
   choixmenu : string  = 'A';
   listData : CommandeClient[];
-  public formData:  FormGroup;
+  formData:  FormGroup;
   list: any={}
 
   commande: CommandeClient;
@@ -39,6 +39,7 @@ export class CommandeClientService {
   client : any={};
 
   numero;
+  numCommande;
 
   constructor(private http: HttpClient,  private clientService: ClientService,
     private offlineService: OnlineofflineService) {
@@ -270,7 +271,16 @@ export class CommandeClientService {
   }
 
   generateNumCommande(): Observable<any> {
-    return this.http.get<any>("http://localhost:8081/prodApi/generateCodeCommand");
+    return this.http.get("http://localhost:8081/prodApi/generateCodeCommand");
+  }
+
+  getNumeroCommande() {
+    this.generateNumCommande().subscribe(
+      response =>{
+        this.numCommande = response;
+        console.log("Numero Vente:" + this.numCommande);
+      }
+    );
   }
 
   // ouvrir la base de données

@@ -53,7 +53,7 @@ export class CreateCreanceComponent implements OnInit {
     } else {
     }
 
-    this.getReferenceCreance();
+    this.crudApi.generateReferenceCreance();
 
   }
 
@@ -70,7 +70,7 @@ export class CreateCreanceComponent implements OnInit {
     this.crudApi.formData = this.fb.group({
       id: null,
     //  reference: Math.floor(100000 + Math.random() * 900000).toString(),
-      reference: [0, Validators.required],
+      reference: this.crudApi.refCreance,
       total: [0, Validators.required],
       libelle: ['', Validators.required],
       codeCreance: ['', Validators.required],

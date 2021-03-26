@@ -28,9 +28,10 @@ export class VenteService {
 
    choixmenu : string  = 'A';
    listData : Vente[];
-   public formData:  FormGroup;
+   formData:  FormGroup;
    list: any={};
    vente: Vente;
+   NumVente;
 
    listLigneVente: LigneVente[];
 
@@ -178,7 +179,16 @@ export class VenteService {
   }
 
   generateNumeroVente(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl_1}/generateNumeroVente`);
+    return this.http.get(`${this.baseUrl_1}/generateNumeroVente`);
+  }
+
+  getNumeroVente() {
+    this.generateNumeroVente().subscribe(
+      response =>{
+        this.NumVente = response;
+        console.log("Numero Vente:" + this.NumVente);
+      }
+    );
   }
 
 }

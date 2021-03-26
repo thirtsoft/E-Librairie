@@ -59,17 +59,13 @@ export class CreateCommandeComponent implements OnInit {
       }
     );
 
-    this.crudApi.generateNumCommande().subscribe(
-      response =>{
-        this.numero = response;
-      }
-    );
+    this.crudApi.getNumeroCommande();
   }
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: null,
-      numeroCommande: this.crudApi.numero,
+      numeroCommande: this.crudApi.numCommande,
       total: [0, Validators.required],
       totalCommande: [0, Validators.required],
       status: ['', Validators.required],

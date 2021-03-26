@@ -19,7 +19,8 @@ export class AvoirService {
   formData:  FormGroup;
   list: any={};
 
-  public dataForm:  FormGroup;
+  dataForm:  FormGroup;
+  refAvoir;
 
   private listners = new Subject<any>();
   listen(): Observable<any> {
@@ -57,6 +58,15 @@ export class AvoirService {
 
   generateReferneceAvoir(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/generateReferneceAvoir`);
+  }
+
+  getReferenceAvoir() {
+    this.generateReferneceAvoir().subscribe(
+      response =>{
+        this.refAvoir = response;
+        console.log("Numero Vente:" + this.refAvoir);
+      }
+    );
   }
 
 }

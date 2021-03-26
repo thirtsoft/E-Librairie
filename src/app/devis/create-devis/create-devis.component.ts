@@ -79,7 +79,7 @@ export class CreateDevisComponent implements OnInit {
       }
     );
 
-    this.getNumeroDevis();
+    this.crudApi.generateNumeroDevis();
 
   }
 
@@ -96,7 +96,7 @@ export class CreateDevisComponent implements OnInit {
     this.crudApi.formData = this.fb.group({
       id: null,
     //  numeroDevis: Math.floor(100000 + Math.random() * 900000).toString(),
-      numeroDevis: [0, Validators.required],
+      numeroDevis: this.crudApi.numDevis,
       total: [0, Validators.required],
       totalDevis: [0, Validators.required],
       status: ['', Validators.required],

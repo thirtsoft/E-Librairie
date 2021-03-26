@@ -17,9 +17,10 @@ export class CreanceService {
   choixmenu : string  = 'A';
   listData : Creance[];
 
-  public formData:  FormGroup;
+  formData:  FormGroup;
   list: any={}
-  public dataForm:  FormGroup;
+  dataForm:  FormGroup;
+  refCreance;
 
   private listners = new Subject<any>();
   listen(): Observable<any> {
@@ -69,7 +70,15 @@ export class CreanceService {
   }
 
   generateReferenceCreance(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/generateReferenceCreance`);
+    return this.http.get(`${this.baseUrl}/generateReferenceCreance`);
   }
 
+  getReferenceCreance() {
+    this.generateReferenceCreance().subscribe(
+      response =>{
+        this.refCreance = response;
+        console.log("Numero Vente:" + this.refCreance);
+      }
+    );
+  }
 }
