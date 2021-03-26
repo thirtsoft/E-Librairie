@@ -75,7 +75,7 @@ export class ListLigneCommandeComponent implements OnInit {
 
   onCreateLigneCmdClient() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("commande");
+    this.router.navigateByUrl("home/commande");
   }
   deleteLigneCmdClient(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')

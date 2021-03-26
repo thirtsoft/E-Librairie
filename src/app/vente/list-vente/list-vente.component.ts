@@ -80,7 +80,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   onCreateVente() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("vente");
+    this.router.navigateByUrl("home/vente");
   }
 
   deleteVente(id: number){
@@ -91,17 +91,18 @@ export class ListVenteComponent implements OnDestroy, OnInit {
           this.toastr.warning('Vente supprimé avec succès!');
           this.rerender();
           this.getListVentes();
+          this.router.navigateByUrl('home/ventes')
         });
       }
     });
   }
 
   editerVente(item : Vente) {
-    this.router.navigateByUrl('vente/'+item.id);
+    this.router.navigateByUrl('home/vente/'+item.id);
   }
 
   viewVente(item: Vente) {
-    this.router.navigateByUrl('venteView/' + item.id);
+    this.router.navigateByUrl('home/venteView/' + item.id);
   }
 
   transformDate(date){

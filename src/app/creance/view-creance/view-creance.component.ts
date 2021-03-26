@@ -99,7 +99,7 @@ export class ViewCreanceComponent implements OnInit {
 
   onCreateCreance() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("creance");
+    this.router.navigateByUrl("home/creance");
   }
   deleteCreance(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Commande ?')) {
@@ -336,7 +336,7 @@ export class ViewCreanceComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigateByUrl('creances');
+    this.router.navigateByUrl('home/creances');
   }
 
   transformDate(date){

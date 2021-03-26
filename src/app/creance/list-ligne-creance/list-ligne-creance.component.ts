@@ -78,7 +78,7 @@ export class ListLigneCreanceComponent implements OnInit {
 
   onCreateCreance() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("creance");
+    this.router.navigateByUrl("home/creance");
   }
 
   deleteLigneCreance(id: number){
@@ -89,6 +89,7 @@ export class ListLigneCreanceComponent implements OnInit {
           this.toastr.warning('Détails Creance supprimé avec succès!');
           this.rerender();
           this.getListLigneCreances();
+          this.router.navigateByUrl('home/creances');
         });
       }
     });

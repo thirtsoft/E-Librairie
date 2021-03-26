@@ -87,17 +87,17 @@ export class ListDevisComponent implements OnDestroy, OnInit {
 
   onCreateDevis() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("devis");
+    this.router.navigateByUrl("home/devis");
   }
 
   editDevis(item: Devis) {
     this.crudApi.formData = this.fb.group(Object.assign({}, item));
     this.crudApi.choixmenu = "M"
-    this.router.navigate(['/devis']);
+    this.router.navigate(['/home/devis']);
   }
 
   viewDevis(item: Devis) {
-    this.router.navigateByUrl('devisView/' + item.id);
+    this.router.navigateByUrl('home/devisView/' + item.id);
   }
   deleteDevis(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
@@ -107,7 +107,7 @@ export class ListDevisComponent implements OnDestroy, OnInit {
           this.toastr.warning('Devis supprimé avec succès!');
           this.rerender();
           this.getListDevis();
-          this.router.navigate(['/devis']);
+          this.router.navigate(['/home/listdevis']);
         });
       }
     });

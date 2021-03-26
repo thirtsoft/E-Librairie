@@ -308,7 +308,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
   }
 
   onGoBack() {
-    this.router.navigateByUrl('ventes');
+    this.router.navigateByUrl('home/ventes');
   }
 
 

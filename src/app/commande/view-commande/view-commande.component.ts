@@ -86,7 +86,7 @@ export class ViewCommandeComponent implements OnInit {
 
   onCreateCommandeClient() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("commande");
+    this.router.navigateByUrl("home/commande");
   }
 
   OpenPdf() {
@@ -278,17 +278,5 @@ export class ViewCommandeComponent implements OnInit {
   onGoBack() {
     this.router.navigateByUrl('home/listcommandes');
   }
-
-  Imprimer() {
-    this.crudApi.generateReport(this.comId).subscribe(
-      (result) => {
-        this.toastr.success("Commande are successfully exported")
-        },(error) => {
-          this.toastr.warning("Commande are not successfully exported")
-        }
-    );
-
-  }
-
 
 }

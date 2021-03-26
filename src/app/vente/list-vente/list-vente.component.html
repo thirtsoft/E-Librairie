@@ -19,7 +19,7 @@
             <thead>
               <tr>
                <th>Numéro</th><th>Montant</th>
-                <th>Status</th><th>Date</th>
+                <th>Status</th><th>Date</th><th>Vendeur</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -29,6 +29,7 @@
               <td>{{vent.totalVente}}</td>
               <td>{{vent.status}}</td>
               <td>{{vent.dateVente | date:'dd-MM-yyyy à h:mm:ss'}}</td>
+              <td>{{vent.status}}</td>
               <td>
                 <button class="btn btn-success btn-sm" (click)="viewVente(vent)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
                 <button class="btn btn-danger btn-sm" (click)="deleteVente(vent.VenteId)"><i class="fa fa-trash-o"></i>  </button>

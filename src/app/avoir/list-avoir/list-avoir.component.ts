@@ -86,11 +86,11 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
   onCreateAvoir(){
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("avoir");
+    this.router.navigateByUrl("home/avoir");
   }
 
   viewAvoir(item: Avoir) {
-    this.router.navigateByUrl('avoirView/' + item.id);
+    this.router.navigateByUrl('home/avoirView/' + item.id);
   }
 
   addEditAvoir(avoirId?: number) {
@@ -128,13 +128,14 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
           this.toastr.warning('Avoir supprimé avec succès!');
           this.rerender();
           this.getListAvoirs();
+          this.router.navigateByUrl('home/avoirs');
         });
       }
     });
   }
 
   editAvoir(item : Avoir) {
-    this.router.navigateByUrl('avoirs/'+item.id);
+    this.router.navigateByUrl('home/avoirs/'+item.id);
   }
 
 

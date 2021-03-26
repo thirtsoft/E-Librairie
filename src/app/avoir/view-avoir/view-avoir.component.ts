@@ -97,7 +97,7 @@ export class ViewAvoirComponent implements OnInit {
 
   onCreateAvoir() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("avoir");
+    this.router.navigateByUrl("home/avoir");
   }
 
   OpenPdf() {
@@ -287,7 +287,7 @@ export class ViewAvoirComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigateByUrl('avoirs');
+    this.router.navigateByUrl('home/avoirs');
   }
 
   deleteAvoir(id: number) {

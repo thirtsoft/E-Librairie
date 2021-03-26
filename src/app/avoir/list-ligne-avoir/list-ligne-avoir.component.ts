@@ -74,7 +74,7 @@ export class ListLigneAvoirComponent implements OnInit {
 
   onCreateAvoir() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("avoir");
+    this.router.navigateByUrl("home/avoir");
   }
 
   deleteLigneAvoir(id: number){

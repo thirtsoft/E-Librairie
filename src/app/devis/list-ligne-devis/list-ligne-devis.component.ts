@@ -86,7 +86,7 @@ export class ListLigneDevisComponent implements OnInit {
 
   onCreateLigneDevis() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("devis");
+    this.router.navigateByUrl("home/devis");
   }
   deleteLigneDevis(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
@@ -96,6 +96,7 @@ export class ListLigneDevisComponent implements OnInit {
           this.toastr.warning('Détails Devis supprimé avec succès!');
           this.rerender();
           this.getListLigneDevis();
+          this.router.navigateByUrl('home/lisDevis')
         });
       }
     });

@@ -109,7 +109,7 @@ export class ViewApprovisionnementComponent implements OnInit {
 
   onCreateAppro() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("approvisionnement");
+    this.router.navigateByUrl("home/approvisionnement");
   }
 
   OpenPdf() {
@@ -300,7 +300,7 @@ export class ViewApprovisionnementComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigateByUrl('approvisionnements');
+    this.router.navigateByUrl('home/approvisionnements');
   }
 
 

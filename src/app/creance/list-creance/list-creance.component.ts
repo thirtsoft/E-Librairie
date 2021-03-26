@@ -147,6 +147,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
           this.toastr.warning('Creance supprimé avec succès!');
           this.rerender();
           this.getListCreances();
+          this.router.navigateByUrl('home/creances');
         });
       }
     });
