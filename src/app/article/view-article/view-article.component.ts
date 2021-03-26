@@ -53,7 +53,7 @@ export class ViewArticleComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/home/articles']);
       });
 
     }else {
@@ -65,7 +65,7 @@ export class ViewArticleComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/home/articles']);
       });
     }
 
@@ -81,7 +81,7 @@ export class ViewArticleComponent implements OnInit {
         response =>{this.crudApi.listData = response;},
 
       );
-      this.router.navigate(['/articles']);
+      this.router.navigate(['/home/articles']);
     });
   }
   updateArticle(){
@@ -92,7 +92,7 @@ export class ViewArticleComponent implements OnInit {
       this.crudApi.getAllArticles().subscribe(
         response =>{this.crudApi.listData = response;}
       );
-      this.router.navigate(['/articles']);
+      this.router.navigate(['/home/articles']);
     });
   }
 

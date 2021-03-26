@@ -80,7 +80,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
 
   onCreateLigneVente() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("vente");
+    this.router.navigateByUrl("home/vente");
   }
   deleteLigneVente(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')

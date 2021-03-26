@@ -194,7 +194,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   generateExcel() {
     this.crudApi.generateExcelFile();
-    this.toastr.warning("Fichier téléchargé avec succès");
+    this.toastr.warning("Fichier Excel téléchargé avec succès");
   }
 
   generatePdf() {
@@ -203,7 +203,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
         window.navigator.msSaveOrOpenBlob(blob);
         return;
-
       }
       const data = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -217,7 +216,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       }, 100)
 
     });
-    this.toastr.warning("Fichier exporté avec succès");
+    this.toastr.warning("Pdf générer avec succès");
 
   }
 
@@ -242,7 +241,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       };
     }
 
-
   }
 
   getBindheadersDataModelistArray(headers: any[]) {
@@ -254,7 +252,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
         if (dataModel.reference == header) {
           dataType = dataModel.reference;
         }
-
       });
       return dataType;
     })
@@ -360,7 +357,6 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     };
 
   }
-
   getListArticle(item: Article[]) {
     return {
       table: {

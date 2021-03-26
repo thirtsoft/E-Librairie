@@ -184,7 +184,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     this.crudApi.uploadCategorieExcelFile(formData).subscribe(result => {
       console.log(result);
       this.mesagge = result.toString();
-      this.toastr.warning('Fichier Importé avec succès!');
+      this.toastr.warning('Fichier Excel Importé avec succès!');
       this.rerender();
       this.getListCategories();
     })
@@ -192,17 +192,14 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
   generateExcel() {
     this.crudApi.generateExcelFile();
-    this.toastr.warning('Fichier Télécharger avec succès!');
+    this.toastr.warning('Excel Télécharger avec succès!');
   }
-
-
   generatePdf() {
     this.crudApi.exportPdfCategories().subscribe(x => {
       const blob = new Blob([x], {type: 'application/pdf'});
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
         window.navigator.msSaveOrOpenBlob(blob);
         return;
-
       }
       const data = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -216,7 +213,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
       }, 100)
 
     });
-    this.toastr.warning('Fichier Exportée avec succès!');
+    this.toastr.warning('Pdf Télécharger avec succès!');
 
   }
 
@@ -268,7 +265,6 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
         {
 
         },
-
 
         {
           columns: [
@@ -367,7 +363,6 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     }
 
   }
-
 
 
 }

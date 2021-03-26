@@ -138,7 +138,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     this.crudApi.uploadScategorieExcelFile(formData).subscribe(result => {
       console.log(result);
       this.mesagge = result.toString();
-      this.toastr.warning('Fichier importé avec succès!');
+      this.toastr.warning('Fichier Excel importé avec succès!');
       this.rerender();
       this.getListScategories();
     })
@@ -146,17 +146,14 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
   generateExcel() {
     this.crudApi.generateExcelFile();
-    this.toastr.warning("Fichier téléchargé avec succès");
+    this.toastr.warning("Excel téléchargé avec succès");
   }
-
-
   generatePdf() {
     this.crudApi.exportPdfScategories().subscribe(x => {
       const blob = new Blob([x], {type: 'application/pdf'});
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
         window.navigator.msSaveOrOpenBlob(blob);
         return;
-
       }
       const data = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -170,7 +167,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
       }, 100)
 
     });
-    this.toastr.warning("Fichier exporté avec succès");
+    this.toastr.warning("Pdf Télécharger avec succès");
 
   }
 
