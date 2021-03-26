@@ -85,7 +85,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
   }
 
   viewCreance(item: Creance) {
-    this.router.navigateByUrl('creanceView/' + item.id);
+    this.router.navigateByUrl('home/creanceView/' + item.id);
   }
 
   transformDate(date){
@@ -114,7 +114,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
   onCreateCreance() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("creance");
+    this.router.navigateByUrl("home/creance");
   }
 
   addEditCreance(creanceId?: number) {
@@ -153,7 +153,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
   }
 
   editContrat(item : Creance) {
-    this.router.navigateByUrl('creances/'+item.id);
+    this.router.navigateByUrl('home/creances/'+item.id);
   }
 
 

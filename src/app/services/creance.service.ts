@@ -34,7 +34,6 @@ export class CreanceService {
   getAllCreances(): Observable<any> {
     return this.http.get(`${this.baseUrl}/creances`);
   }
-
   getCreancetByID(id:number):any {
     return this.http.get(`${this.baseUrl}/creances/`+id).toPromise();
   }
@@ -51,36 +50,18 @@ export class CreanceService {
   }
 
   updateStatusCreance(id: number, status: string): Observable<any> {
-   let params = new HttpParams();
-   const headers = new HttpHeaders();
-   headers.set('Content-Type', 'application/json; charset=utf-8');
-   const param = new HttpParams()
-    .set("status",status);
-
-  const fullURL = `${this.baseUrl}/${id}?${param.toString()}`;
-  console.log({ fullURL });
-
-  let data = {"status":status};
-  console.log(data);
-  console.log(data.status);
-  return this.http.patch<any>("http://localhost:8080/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
-
-  }
-  updateSoldeCreance(id: number, soldeCreance: number): Observable<any> {
-
-    let params = new HttpParams();
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
-    const param = new HttpParams().set("soldeCreance",soldeCreance.toString());
+    let data = {"status":status};
 
-    const fullURL = `${this.baseUrl}/${id}?${param.toString()}`;
-    console.log({ fullURL });
+    return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
+  }
+  updateAvanceCreance(id: number, avanceCreance: number): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    let data = {"avanceCreance":avanceCreance};
 
-    let data = {"soldeCreance":soldeCreance};
-    console.log(data);
-    console.log(data.soldeCreance);
-    return this.http.patch<any>("http://localhost:8080/alAmine/setCreanceOnlySolde/"+id+"?soldeCreance="+data.soldeCreance, {headers: headers});
-
+    return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyAvanceCreance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
    }
 
   deleteCreance(id: number): Observable<any> {

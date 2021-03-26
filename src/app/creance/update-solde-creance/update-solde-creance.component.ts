@@ -29,7 +29,7 @@ export class UpdateSoldeCreanceComponent implements OnInit {
   infoForm() {
     this.crudApi.dataForm = this.fb.group({
       id: null,
-      soldeCreance: ['', [Validators.required]],
+      avanceCreance: ['', [Validators.required]],
     });
   }
 
@@ -40,13 +40,11 @@ export class UpdateSoldeCreanceComponent implements OnInit {
   }
 
   ResetForm() {
-      this.crudApi.dataForm.reset();
+    this.crudApi.dataForm.reset();
   }
 
   onSubmit() {
-    console.log(this.crudApi.dataForm);
-    console.log(this.crudApi.dataForm.value.soldeCreance);
-    this.crudApi.updateSoldeCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value.soldeCreance).
+    this.crudApi.updateAvanceCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value.avanceCreance).
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Solde Creance Modifier avec Succès");
@@ -55,7 +53,7 @@ export class UpdateSoldeCreanceComponent implements OnInit {
       this.router.navigate(['/home/creances']);
     });
   }
-
+/*
   updateStatusCreance(){
     this.crudApi.updateStatusCreance(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
@@ -66,6 +64,6 @@ export class UpdateSoldeCreanceComponent implements OnInit {
       this.router.navigate(['/home/creances']);
     });
   }
-
+*/
 
 }
