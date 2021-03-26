@@ -1,54 +1,32 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Client } from 'src/app/models/client';
-import { FormGroup, FormBuilder, NgForm, Validators } from '@angular/forms';
-import { CommandeClientService } from 'src/app/services/commande-client.service';
-import { ClientService } from 'src/app/services/client.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { CreateLigneCmdClientComponent } from '../create-ligne-cmd-client/create-ligne-cmd-client.component';
-import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-import { CommandeClient } from 'src/app/models/commande-client';
-import { CreanceService } from 'src/app/services/creance.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Client } from 'src/app/models/client';
+import { ClientService } from 'src/app/services/client.service';
+import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
+import { CreateLigneCommandeComponent } from '../create-ligne-commande/create-ligne-commande.component';
 
 @Component({
-  selector: 'app-create-commande-client',
-  templateUrl: './create-commande-client.component.html',
-  styleUrls: ['./create-commande-client.component.scss']
+  selector: 'app-create-commande',
+  templateUrl: './create-commande.component.html',
+  styleUrls: ['./create-commande.component.scss']
 })
-export class CreateCommandeClientComponent implements OnInit {
+export class CreateCommandeComponent implements OnInit {
 
-  public ClientList: Client[];
-  date;
-  public order = new CommandeClient();
-  orders: CommandeClient[];
-
+  ClientList: Client[];
   isValid:boolean = true;
-  articleService: any;
-  compteur : any={};
-  client: any={};
-  annee  = 0;
-
-  numCommande;
   numero;
 
   total = 0;
-  refProd = '';
 
-  isChecked = false;
-  orderItem: LigneCmdClient[];
-  OrderId: number;
-
-  defaultClient: Client;
-
-  compt = 1;
-
-  constructor(public crudApi: CommandeClientService, public dialog:MatDialog,
-    public fb: FormBuilder, public clientService: ClientService, public creanceService: CreanceService,
-    public lcomService: LigneCmdClientService, private datePipe : DatePipe,
-    private toastr :ToastrService, private router :Router,
+  constructor(public crudApi: CommandeClientService, public clientService: ClientService,
+    public lcomService: LigneCmdClientService, private toastr :ToastrService,
+    private datePipe : DatePipe, private router :Router,
+    public dialog:MatDialog, public fb: FormBuilder,
     private route: ActivatedRoute, private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
   //  public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
@@ -60,21 +38,17 @@ export class CreateCommandeClientComponent implements OnInit {
     if (this.crudApi.choixmenu == "A") {
       this.infoForm();
       this.crudApi.list = [];
-    //  this.date = this.transformDate(new this.date(Date.now()));
     }else {
       this.lcomService.getAllByNumero(this.crudApi.formData.value.numeroCommande).subscribe(
         response=> {
           this.crudApi.list = response;
           let i;
           for (i=0; i<this.crudApi.list.length; i++) {
-          //  console.log( this.crudApi.list);
             this.total = parseFloat((this.crudApi.list[i].quantite * this.crudApi.list[i].prix).toFixed(2));
             this.crudApi.list[i].total = this.total;
-          //  console.log(this.total);
             this.crudApi.list[i].ItemName = this.crudApi.list[i].produit.reference;
-            console.log(this.crudApi.list[i].ItemName);
           }
-      }
+        }
       );
       this.f['dateCommande'].setValue(this.crudApi.formData.value.dateCommande);
     }
@@ -82,31 +56,19 @@ export class CreateCommandeClientComponent implements OnInit {
     this.clientService.getAllClients().subscribe(
       response =>{
         this.ClientList = response;
-        console.log(response);
       }
     );
+
     this.crudApi.generateNumCommande().subscribe(
       response =>{
         this.numero = response;
-        console.log("NumCommande:" + response);
       }
     );
   }
-/*
-  getNumCommande() {
-    this.crudApi.generateNumCommande().subscribe(
-      response =>{
-        this.numero = response;
-        console.log("NumCommande:" + response);
-      }
-    );
-  }
-*/
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: null,
-    //  numeroCommande: Math.floor(100000 + Math.random() * 900000).toString(),
       numeroCommande: this.crudApi.numero,
       total: [0, Validators.required],
       totalCommande: [0, Validators.required],
@@ -133,7 +95,7 @@ export class CreateCommandeClientComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width = "50%";
     dialogConfig.data={lcommandeIndex, OrderId};
-    this.dialog.open(CreateLigneCmdClientComponent, dialogConfig).afterClosed().subscribe(res =>{
+    this.dialog.open(CreateLigneCommandeComponent, dialogConfig).afterClosed().subscribe(res =>{
       this.calculMontantTotal();
     });
 
@@ -160,7 +122,7 @@ export class CreateCommandeClientComponent implements OnInit {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Commande Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
-        this.router.navigate(['/home/commandeclients']);
+        this.router.navigate(['/home/listcommandes']);
       });
 
   }
@@ -173,12 +135,8 @@ export class CreateCommandeClientComponent implements OnInit {
       this.f['lib_client'].setValue(this.ClientList[ctrl.selectedIndex-1].raisonSocial);
       this.f['client'].setValue(this.ClientList[ctrl.selectedIndex-1].id);
     //  this.f['refClient'].setValue(this.clientList[ctrl.selectedIndex-1].raisonSocial);
-
     }
-  }
 
-  checked() {
-    this.isChecked = true;
   }
 
   onDeleteOrderItem(id: number, i: number) {
@@ -196,5 +154,3 @@ export class CreateCommandeClientComponent implements OnInit {
   }
 
 }
-
-

@@ -28,10 +28,6 @@ import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
 import { ListCreanceComponent } from './creance/list-creance/list-creance.component';
 import { CreateCreanceComponent } from './creance/create-creance/create-creance.component';
-import { ListCommandeClientComponent } from './commandeClient/list-commande-client/list-commande-client.component';
-import { CreateCommandeClientComponent } from './commandeClient/create-commande-client/create-commande-client.component';
-import { ListLigneCmdClientComponent } from './commandeClient/list-ligne-cmd-client/list-ligne-cmd-client.component';
-import { CreateLigneCmdClientComponent } from './commandeClient/create-ligne-cmd-client/create-ligne-cmd-client.component';
 import { ListVenteComponent } from './vente/list-vente/list-vente.component';
 import { CreateVenteComponent } from './vente/create-vente/create-vente.component';
 import { ListLigneVenteComponent } from './vente/list-ligne-vente/list-ligne-vente.component';
@@ -43,7 +39,6 @@ import { CreateLigneApproComponent } from './approvisionnement/create-ligne-appr
 import { ListStockComponent } from './stock/list-stock/list-stock.component';
 import { ListChargeComponent } from './charge/list-charge/list-charge.component';
 import { CreateChargeComponent } from './charge/create-charge/create-charge.component';
-import { ViewCommandeComponent } from './commandeClient/view-commande/view-commande.component';
 import { ViewVenteComponent } from './vente/view-vente/view-vente.component';
 import { ViewApprovisionnementComponent } from './approvisionnement/view-approvisionnement/view-approvisionnement.component';
 import { LoginComponent } from './authentication/login/login.component';
@@ -82,6 +77,11 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { ProfilComponent } from './authentication/profil/profil.component';
 import { UpdateUsernameComponent } from './authentication/update-username/update-username.component';
 import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
+import { ListCommandeComponent } from './commande/list-commande/list-commande.component';
+import { CreateCommandeComponent } from './commande/create-commande/create-commande.component';
+import { ListLigneCommandeComponent } from './commande/list-ligne-commande/list-ligne-commande.component';
+import { CreateLigneCommandeComponent } from './commande/create-ligne-commande/create-ligne-commande.component';
+import { ViewCommandeComponent } from './commande/view-commande/view-commande.component';
 
 const routes: Routes = [
 
@@ -152,12 +152,11 @@ const routes: Routes = [
       ]
     },
 */
-    { path: 'commandeclients', component: ListCommandeClientComponent},
-    { path:'commandeclient',component: CreateCommandeClientComponent},
+    { path: 'listcommandes', component: ListCommandeComponent },
+    { path:'commande',component: CreateCommandeComponent },
     { path:'commandeView/:id', component: ViewCommandeComponent },
-
-    { path: 'detailsCommandeClients', component: ListLigneCmdClientComponent},
-    { path: 'detailsCommandeClient', component: CreateLigneCmdClientComponent},
+    { path: 'detailsCommande', component: ListLigneCommandeComponent },
+    { path: 'detailsCommande', component: CreateLigneCommandeComponent },
 
     { path: 'listdevis', component: ListDevisComponent },
     { path:'devis',component: CreateDevisComponent },

@@ -1,59 +1,44 @@
-import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
-import { CommandeClient } from 'src/app/models/commande-client';
-import { Subject } from 'rxjs';
+import { DatePipe } from '@angular/common';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
-import { CommandeClientService } from 'src/app/services/commande-client.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
-import { Client } from 'src/app/models/client';
-import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
+import { Subject } from 'rxjs';
+import { CommandeClient } from 'src/app/models/commande-client';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-import { Article } from 'src/app/models/article';
+import { CommandeClientService } from 'src/app/services/commande-client.service';
+import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
+import { CreateCommandeComponent } from '../create-commande/create-commande.component';
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-import { DatePipe } from '@angular/common';
-
 
 @Component({
   selector: 'app-view-commande',
   templateUrl: './view-commande.component.html',
   styleUrls: ['./view-commande.component.scss']
 })
-export class ViewCommandeComponent implements OnDestroy, OnInit {
+export class ViewCommandeComponent implements OnInit {
 
   listData: CommandeClient[];
-  listDatalcmd: LigneCmdClient[];
-  cmdClient: CommandeClient;
-  currentCmdClient;
-
   comId: number;
-  currentCommande;
   numeroCommande;
   totalCommande;
   dateCommande;
   client;
 
-  produit: Article = new Article();
-
-  private editForm: FormGroup;
-
-  @ViewChild('content') content: ElementRef;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: CommandeClientService,public fb: FormBuilder,
+  constructor(public crudApi: CommandeClientService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
-    private matDialog: MatDialog, public lcmdService: LigneCmdClientService,
+    public lcmdService: LigneCmdClientService,
     @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateCommandeClientComponent>,
+    public dialogRef:MatDialogRef<CreateCommandeComponent>,
     ) { }
 
   ngOnInit(): void {
@@ -61,14 +46,8 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
     console.log(this.comId);
     this.lcmdService.getAllLigneCmdClientByCommande(this.comId).subscribe((data: LigneCmdClient[]) => {
       this.lcmdService.listData = data;
-    //  this.currentCommande = data;
-      console.log(this.lcmdService.listData);
-
-      console.log(this.lcmdService.listData[0].numero);
       this.numeroCommande = this.lcmdService.listData[0].numero;
-      console.log(this.lcmdService.listData[0].commande.totalCommande);
       this.totalCommande = this.lcmdService.listData[0].commande.totalCommande;
-      console.log(this.lcmdService.listData[0].commande.dateCommande);
       this.dateCommande = this.lcmdService.listData[0].commande.dateCommande;
       this.client = this.lcmdService.listData[0].commande.client.chefService;
      // this.dtTrigger.next();
@@ -107,7 +86,7 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
   onCreateCommandeClient() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("commandeclient");
+    this.router.navigateByUrl("commande");
   }
 
   OpenPdf() {
@@ -297,7 +276,7 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
   }
 
   onGoBack() {
-    this.router.navigateByUrl('commandeclients');
+    this.router.navigateByUrl('home/listcommandes');
   }
 
   Imprimer() {
@@ -311,14 +290,5 @@ export class ViewCommandeComponent implements OnDestroy, OnInit {
 
   }
 
-  Imprimers() {
-    const document = this.getDocument();
-    pdfMake.createPdf(document).download();
-  }
-
-  ImprimerPdf() {
-    const document = this.getDocument();
-    pdfMake.createPdf(document).download();
-  }
 
 }

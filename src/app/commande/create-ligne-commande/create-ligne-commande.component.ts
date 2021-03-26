@@ -1,36 +1,32 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, NgForm, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Article } from 'src/app/models/article';
-import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { Article } from 'src/app/models/article';
+import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { ArticleService } from 'src/app/services/article.service';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-//import { CommandeClient } from 'src/app/models/commande-client';
+import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 
 @Component({
-  selector: 'app-create-ligne-cmd-client',
-  templateUrl: './create-ligne-cmd-client.component.html',
-  styleUrls: ['./create-ligne-cmd-client.component.scss']
+  selector: 'app-create-ligne-commande',
+  templateUrl: './create-ligne-commande.component.html',
+  styleUrls: ['./create-ligne-commande.component.scss']
 })
-export class CreateLigneCmdClientComponent implements OnInit {
+export class CreateLigneCommandeComponent implements OnInit {
 
-//  formData: LigneCmdClient;
   listArticle: Article[];
   isValid: boolean = true;
-  approvisionnement: any;
-  produit: any;
-  total = 0;
-  lcom: LigneCmdClient;
+  formData: FormGroup;
   isInvalidQte;
 
-  formData: FormGroup;
+  total = 0;
 
-  constructor(public lcmdService: LigneCmdClientService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ArticleService,
-    private cmdService: CommandeClientService,public fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateLigneCmdClientComponent>,
+  constructor(public lcmdService: LigneCmdClientService, private cmdService: CommandeClientService,
+    private articleService: ArticleService,
+    public fb: FormBuilder, private toastr :ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data,
+    private dialogRef: MatDialogRef<CreateLigneCommandeComponent>,
    ) { }
 
   get f() { return this.lcmdService.dataForm.controls; }
@@ -53,7 +49,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
 
   infoForm() {
     this.lcmdService.dataForm = this.fb.group({
-     // OrderItemId: null,
       id: null,
       OrderId: [this.data.OrderId, [Validators.required]],
       ItemId:  [, [Validators.required]],
@@ -89,10 +84,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
     this.calculTotal();
   }
 
-  matchQuantite() {
-    this.isInvalidQte = this.lcmdService.dataForm.value.qtestock < this.lcmdService.dataForm.value.quantite
-  }
-
   calculTotal() {
     this.total = parseFloat((this.lcmdService.dataForm.value.quantite * this.lcmdService.dataForm.value.prixCommande).toFixed(2));
     this.f['total'].setValue(this.total);
@@ -107,7 +98,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
     }
     this.dialogRef.close();
   }
-
  validateForm(formData: LigneCmdClient){
   this.isValid=true;
   if(formData.produit.id==0)
@@ -115,7 +105,6 @@ export class CreateLigneCmdClientComponent implements OnInit {
     else if(formData.quantite==0)
     this.isValid=false;
     return this.isValid;
-}
+  }
 
 }
-

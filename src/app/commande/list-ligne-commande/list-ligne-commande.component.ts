@@ -1,37 +1,24 @@
-import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
-import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
-import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
-import { CreateLigneCmdClientComponent } from '../create-ligne-cmd-client/create-ligne-cmd-client.component';
-import {MatDialog, MatDialogConfig } from '@angular/material';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CommandeClient } from 'src/app/models/commande-client';
-import { Article } from 'src/app/models/article';
 import { DataTableDirective } from 'angular-datatables';
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
+import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
-import { CreateCommandeClientComponent } from '../create-commande-client/create-commande-client.component';
 import { DialogService } from 'src/app/services/dialog.service';
-
+import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
+import { CreateCommandeComponent } from '../create-commande/create-commande.component';
 
 @Component({
-  selector: 'app-list-ligne-cmd-client',
-  templateUrl: './list-ligne-cmd-client.component.html',
-  styleUrls: ['./list-ligne-cmd-client.component.scss']
+  selector: 'app-list-ligne-commande',
+  templateUrl: './list-ligne-commande.component.html',
+  styleUrls: ['./list-ligne-commande.component.scss']
 })
-export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
+export class ListLigneCommandeComponent implements OnInit {
 
   listData: LigneCmdClient[] = [];
-
-  commande: CommandeClient = new CommandeClient();
-  produit: Article = new Article();
-
-  produit1;
-  commande1;
-
-  private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -41,7 +28,7 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog, public comService: CommandeClientService,
     @Inject(MAT_DIALOG_DATA) public data: any, private dialogService: DialogService,
-    public dialogRef:MatDialogRef<CreateCommandeClientComponent>,
+    public dialogRef:MatDialogRef<CreateCommandeComponent>,
     ) { }
 
   ngOnInit(): void {
@@ -61,10 +48,6 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
       }
     );
 
-    this.commande1 = new CommandeClient();
-    this.produit = new Article();
-    console.log(this.produit.designation);
-   console.log(this.comService.orderItems);
   }
 
   /**
@@ -92,7 +75,7 @@ export class ListLigneCmdClientComponent implements OnDestroy, OnInit {
 
   onCreateLigneCmdClient() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("commandeclient");
+    this.router.navigateByUrl("commande");
   }
   deleteLigneCmdClient(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
