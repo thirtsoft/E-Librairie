@@ -1,4 +1,5 @@
 import { LigneVente } from './ligne-vente';
+import { Utilisateur } from './utilisateur';
 
 export class Vente {
   id: number;
@@ -10,5 +11,7 @@ export class Vente {
   DeletedOrderItemIDs: string;
 
   ligneVentes :Array<LigneVente>=[];
+
+  utilisateur: Utilisateur;
 
 }

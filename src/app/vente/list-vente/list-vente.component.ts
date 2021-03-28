@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { DatePipe } from '@angular/common';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-list-vente',
@@ -18,13 +19,15 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   listData;
   sumVenteByDay;
+  info: any;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: VenteService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
+  constructor(public crudApi: VenteService, public toastr: ToastrService,
+    private tokenService: TokenStorageService,
+    public fb: FormBuilder, private router : Router,
     private dialogService: DialogService, private datePipe : DatePipe,
     ) { }
 
@@ -46,6 +49,13 @@ export class ListVenteComponent implements OnDestroy, OnInit {
     );
 
     this.getSumOfVenteByDay();
+
+    this.info = {
+      token: this.tokenService.getToken(),
+      username: this.tokenService.getUsername(),
+      authorities: this.tokenService.getAuthorities(),
+
+    }
 
   }
 
@@ -80,7 +90,10 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   onCreateVente() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("home/vente");
+    let profil = this.tokenService.getUsername();
+    this.router.navigateByUrl("home/vente/"+profil);
+
+   // this.router.navigate(['/home/profile/'+profil]);
   }
 
   deleteVente(id: number){

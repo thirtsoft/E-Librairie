@@ -10,6 +10,10 @@ import { LigneVente } from 'src/app/models/ligne-vente';
 import { DatePipe } from '@angular/common';
 import { LigneVenteService } from 'src/app/services/ligne-vente.service';
 import { CategorieService } from 'src/app/services/categorie.service';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { ProfileInfo } from 'src/app/auth/profile-info';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-create-vente',
@@ -35,11 +39,16 @@ export class CreateVenteComponent implements OnInit {
 
   numVente: number;
 
-  constructor(public crudApi: VenteService, private dialog:MatDialog,
-    public lventeService: LigneVenteService, private catService: CategorieService,
-    private datePipe : DatePipe,
-    public fb: FormBuilder, private toastr :ToastrService, private router :Router,
-    private currentRoute: ActivatedRoute, private matDialog: MatDialog,
+  username = '';
+  profileInfo: ProfileInfo = {} as ProfileInfo;
+  info;
+
+  constructor(public crudApi: VenteService, public lventeService: LigneVenteService,
+    private toastr :ToastrService, private tokenService: TokenStorageService,
+    private authService: AuthService,
+    private dialog:MatDialog, private datePipe : DatePipe,
+    public fb: FormBuilder , private router :Router,
+    private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
    // public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
     ) { }
@@ -70,17 +79,17 @@ export class CreateVenteComponent implements OnInit {
 
     this.crudApi.getNumeroVente();
 
-  }
+    this.crudApi.getUserId();
+    this.authService.getUserId();
 /*
-  getNumeroVente() {
-    this.crudApi.generateNumeroVente().subscribe(
-      response =>{
-        this.crudApi.NumVente = response;
-        console.log("Numero Vente:" + this.crudApi.NumVente);
-      }
-    );
+    this.username = this.route.snapshot.params.username;
+    this.authService.getUserByUsername(this.username).subscribe(info => {
+      this.profileInfo = info;
+      console.log("User info: " + this.profileInfo.id);
+    });
+   */
+
   }
-*/
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
@@ -94,6 +103,8 @@ export class CreateVenteComponent implements OnInit {
       dateVente: [new Date(), Validators.required],
       DeletedOrderItemIDs: '',
       ligneVentes: [[], Validators.required],
+      utilisateur: this.crudApi.idUser,
+
     });
 
   }

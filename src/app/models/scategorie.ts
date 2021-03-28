@@ -1,5 +1,4 @@
 import { Categorie } from './categorie';
-
 export class Scategorie {
   id: number;
   code: string;

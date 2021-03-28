@@ -165,10 +165,12 @@ const routes: Routes = [
     { path:'detailsDevis',component: CreateLigneDevisComponent },
 
     { path: 'ventes', component: ListVenteComponent},
-    { path:'vente',children:[
+    { path: 'vente/:username', component: CreateVenteComponent},
+   /* { path:'vente/:username',children:[
         {path:'',component:CreateVenteComponent},
       ]
     },
+    */
     {path:'venteView/:id', component: ViewVenteComponent},
 
     { path: 'detailsVentes', component: ListLigneVenteComponent},

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Login } from 'src/app/auth/login';
 import { Register } from 'src/app/auth/register';
@@ -30,7 +31,12 @@ export class AuthService {
 
   islogin = false ;
 
-  constructor(private http: HttpClient) {
+  profileInfo: ProfileInfo = {} as ProfileInfo;
+  userId;
+  user;
+
+  constructor(private http: HttpClient,
+    private route: ActivatedRoute) {
 
   }
 
@@ -49,6 +55,16 @@ export class AuthService {
 
   getUserByUsername(username: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + `/getUserByUsername/${username}`);
+  }
+
+  getUserId() {
+    this.user = this.route.snapshot.params.username;
+    this.getUserByUsername(this.user).subscribe(info => {
+      this.profileInfo = info;
+      this.userId = this.profileInfo.id;
+      console.log("Profil Info Id : " + this.userId);
+    });
+
   }
 
   updateUsername(item: UpdateUsernameInfo): Observable<UpdateUsernameInfo> {

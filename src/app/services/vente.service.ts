@@ -6,6 +6,12 @@ import { LigneVente } from '../models/ligne-vente';
 import { FormGroup } from '@angular/forms';
 import Dexie from 'dexie';
 import { OnlineofflineService } from './onlineoffline.service';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { UtilisateurService } from './utilisateur.service';
+import { Utilisateur } from '../models/utilisateur';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { ProfileInfo } from '../auth/profile-info';
 
 @Injectable({
   providedIn: 'root'
@@ -26,24 +32,30 @@ export class VenteService {
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
-   choixmenu : string  = 'A';
-   listData : Vente[];
-   formData:  FormGroup;
-   list: any={};
-   vente: Vente;
-   NumVente;
+  choixmenu : string  = 'A';
+  listData : Vente[];
+  formData:  FormGroup;
+  list: any={};
+  vente: Vente;
+  NumVente;
+  idUser;
+  username;
 
-   listLigneVente: LigneVente[];
+  listLigneVente: LigneVente[];
 
+  profileInfo: ProfileInfo = {} as ProfileInfo;
 
-   orderItems: LigneVente[];
+  orderItems: LigneVente[];
 
-   constructor(private http: HttpClient,
-    private offlineService: OnlineofflineService) {
-      this.ouvrirStatusConnexion();
-
-      this.addAllDataVenteToIndexeddb();
-      this.addAllDataLigneVenteToIndexeddb();
+  constructor(private http: HttpClient,
+    private offlineService: OnlineofflineService,
+    private userService: UtilisateurService,
+    private tokenService: TokenStorageService,
+    private authService: AuthService,
+    public route: ActivatedRoute) {
+    this.ouvrirStatusConnexion();
+    this.addAllDataVenteToIndexeddb();
+    this.addAllDataLigneVenteToIndexeddb();
   }
 
    getAllVentes(): Observable<Vente[]> {
@@ -190,5 +202,18 @@ export class VenteService {
       }
     );
   }
+
+  getUserId() {
+    this.username = this.route.snapshot.params.username;
+    this.authService.getUserByUsername(this.username).subscribe(info => {
+      this.profileInfo = info;
+      this.idUser = this.profileInfo.id;
+      console.log("Profil Info Id : " + this.idUser);
+    });
+
+  }
+
+
+
 
 }

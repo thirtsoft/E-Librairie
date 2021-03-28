@@ -47,7 +47,7 @@ export class ProfilComponent implements OnInit {
   }
 
   onSelectFile(event) {
-    
+
   }
 
   addEditUsername(item : ProfileInfo) {

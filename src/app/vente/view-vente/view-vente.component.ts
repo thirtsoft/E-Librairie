@@ -39,7 +39,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
   produit: Article = new Article();
 
-  private editForm: FormGroup;
+  editForm: FormGroup;
 
   info: any;
 
@@ -75,12 +75,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
       console.log(err);
     });
 
-    this.info = {
-      token: this.tokenService.getToken(),
-      username: this.tokenService.getUsername(),
-      authorities: this.tokenService.getAuthorities(),
 
-    }
   }
 
   /**
