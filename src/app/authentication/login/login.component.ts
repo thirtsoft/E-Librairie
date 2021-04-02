@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Login } from 'src/app/auth/login';
+import { Utilisateur } from 'src/app/models/utilisateur';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,40 +18,44 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  private loginInfo: Login;
+  loginInfo: Login;
+ // loginInfo: any;
 
   constructor(private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    private router: Router) { }
+    private router: Router) {
+     
+     }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getAuthorities();
+     // this.roles = this.tokenStorage.getAuthorities();
+      this.roles = this.tokenStorage.getUser().roles;
+      console.log("Login start : " + this.roles);
     }
+    
   }
 
   onSubmit() {
     console.log(this.form);
     this.loginInfo = new Login(
       this.form.username,
-      this.form.password);
-
-    this.authService.attemptAuth(this.loginInfo).subscribe(
-      data => {
+      this.form.password,
+      );
+    
+    this.authService.attemptAuth(this.loginInfo).subscribe(data => {
         this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
         this.tokenStorage.saveUsername(data.username);
-        console.log(data.username);
-        this.tokenStorage.saveAuthorities(data.authorities);
-        console.log(data.authorities);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getAuthorities();
+        this.roles = this.tokenStorage.getUser().roles;
         console.log("Login Success");
-        console.log(this.router.navigate(['']));
-      //  this.reloadPage();
+        console.log(this.roles);
         this.router.navigateByUrl("home");
+      //  this.reloadPage();
 
       },
       error => {

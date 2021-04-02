@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    /*
     this.info = {
       token: this.tokenService.getToken(),
       username: this.tokenService.getUsername(),
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
     this.showAdminBoard = this.roles.includes("ROLE_ADMIN");
     this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
     this.showUserBoard = this.roles.includes("ROLE_USER");
-
+    */
   }
 
   logout() {

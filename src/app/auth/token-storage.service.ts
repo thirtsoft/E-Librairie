@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Utilisateur } from '../models/utilisateur';
 
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
 const AUTHORITIES_KEY = 'AuthAuthorities';
 const NAME_KEY = 'AuthName';
 const EMAIL_KEY = 'AuthEmail';
-const USER_KEY = 'AuthUser';
-
+const USER_KEY = 'auth-user';
+const USER_ID = 'aut-userId';
 @Injectable({
   providedIn: 'root'
 })
 export class TokenStorageService {
+
   private roles: Array<string> = [];
 
   constructor() { }
@@ -25,18 +27,39 @@ export class TokenStorageService {
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
+    return token;
   }
-
-  public saveUser(user) {
+/*
+  public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
-    console.log(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    console.log(JSON.stringify(user));
+  }
+*/
+  public saveUser(user: any): void {
+    window.sessionStorage.removeItem(USER_KEY);
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
+  public getUser(): any {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return JSON.parse(user);
+    }
+
+    return {};
+  }
+/*
   public getUser() {
     return JSON.parse(sessionStorage.getItem(USER_KEY));
+  }
+*/
+  public saveUserId(id) {
+    window.sessionStorage.removeItem(USER_ID);
+    window.sessionStorage.setItem(USER_ID, id);
+  }
+  public getUserId() {
+    return sessionStorage.getItem(USER_ID);
   }
 
   public saveUsername(username: string) {
@@ -66,6 +89,7 @@ export class TokenStorageService {
     return sessionStorage.getItem(EMAIL_KEY);
   }
 
+
   public saveAuthorities(autorities: string[]) {
     window.sessionStorage.removeItem(AUTHORITIES_KEY);
     window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(autorities));
@@ -83,4 +107,5 @@ export class TokenStorageService {
     }
     return this.roles;
   }
+
 }

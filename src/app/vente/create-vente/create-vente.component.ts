@@ -80,7 +80,6 @@ export class CreateVenteComponent implements OnInit {
     this.crudApi.getNumeroVente();
 
     this.crudApi.getUserId();
-    this.authService.getUserId();
 /*
     this.username = this.route.snapshot.params.username;
     this.authService.getUserByUsername(this.username).subscribe(info => {

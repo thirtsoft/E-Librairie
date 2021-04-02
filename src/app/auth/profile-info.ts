@@ -6,6 +6,7 @@ export class ProfileInfo {
   email: string;
   password: string;
   newPassword: string;
+  photo: string;
 }
 
 export class UpdateUsernameInfo {

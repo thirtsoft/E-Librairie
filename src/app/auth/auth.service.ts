@@ -1,13 +1,18 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
 import { Login } from 'src/app/auth/login';
 import { Register } from 'src/app/auth/register';
 import { JwtResponse } from './jwt-response';
+import { catchError, map } from 'rxjs/operators';
 import { ProfileInfo, UpdateUsernameInfo, UpdatePasswordInfo } from './profile-info';
+import { TokenStorageService } from './token-storage.service';
 
+const AUTH_API = 'http://localhost:8081/api/auth/';
+
+const TOKEN_KEY = 'AuthToken';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,7 +27,7 @@ export class AuthService {
 
   private baseUrl = 'http://localhost:8081/api/auth';
 
-  private baseUrl_1 = 'http://localhost:8081/alAmine';
+  private baseUrl_1 = 'http://localhost:8081/alAmine/';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;
@@ -34,37 +39,57 @@ export class AuthService {
   profileInfo: ProfileInfo = {} as ProfileInfo;
   userId;
   user;
+  currentUser = {};
 
   constructor(private http: HttpClient,
-    private route: ActivatedRoute) {
+    private tokenService: TokenStorageService,
+    private route: ActivatedRoute,
+    private router: Router) {
 
   }
+  signUp(info: Register): Observable<Register> {
+    return this.http.post<Register>(AUTH_API + 'signup', info , httpOptions);
+  }
 
-  attemptAuth(credentials: Login): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl, {
+  attemptAuth(credentials: Login): Observable<any> {
+    return this.http.post(this.loginUrl, {
       username: credentials.username,
       password: credentials.password
     }, httpOptions);
-
     this.islogin = true;
   }
 
-  signUp(info: Register): Observable<Register> {
-    return this.http.post<Register>(this.signupUrl, info, httpOptions);
+ 
+ 
+/*
+  attemptAuth(user: Utilisateur) {
+    return this.http.post<any>(this.loginUrl, user)
+      .subscribe((res: any) => {
+        window.sessionStorage.setItem(TOKEN_KEY, res.token);
+        this.getUserProfile(res.id).subscribe((res) => {
+          this.currentUser = res;
+          this.router.navigate(['home/profile/' + res.msg.id]);
+        })
+      })
+  }
+*/
+ 
+ 
+
+  getUserProfile(id): Observable<any> {
+    return this.http.get(`${this.baseUrl_1}/utilisateurs/${id}`, httpOptions).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
   }
 
   getUserByUsername(username: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + `/getUserByUsername/${username}`);
   }
-
-  getUserId() {
-    this.user = this.route.snapshot.params.username;
-    this.getUserByUsername(this.user).subscribe(info => {
-      this.profileInfo = info;
-      this.userId = this.profileInfo.id;
-      console.log("Profil Info Id : " + this.userId);
-    });
-
+  getUserById(id: any) {
+    return this.http.get(`${this.baseUrl_1}/utilisateurs/${id}`);
   }
 
   updateUsername(item: UpdateUsernameInfo): Observable<UpdateUsernameInfo> {
@@ -82,6 +107,19 @@ export class AuthService {
       newPassword: item.newPassword
     }, httpOptions);
   }
+
+  handleError(error: HttpErrorResponse) {
+    let msg = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      msg = error.error.message;
+    } else {
+      // server-side error
+      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(msg);
+  }
+
 
 
 }

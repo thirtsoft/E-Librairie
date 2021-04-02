@@ -271,7 +271,8 @@ const routes: Routes = [
     { path: 'piechart', component: PiechartComponent},
     { path: 'linechart', component: LinechartComponent},
 
-    { path: 'profile/:username', component: ProfilComponent },
+  //  { path: 'profile/:username', component: ProfilComponent },
+    { path: 'profile/:id', component: ProfilComponent }, 
     { path: 'profile/:username', component: UpdateUsernameComponent },
     { path: 'profile/:username', component: UpdatePasswordComponent },
 

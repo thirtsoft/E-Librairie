@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent implements OnInit {
 
   form: any = {};
-  signupInfo: Register;
+  signupInfo;
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
@@ -29,14 +29,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
-    console.log(this.form);
+  //  console.log(this.form);
     this.signupInfo = new Register(
       this.form.name,
       this.form.username,
       this.form.email,
-      this.form.password
+      this.form.password,
     );
-
+    
     this.authService.signUp(this.signupInfo).subscribe(
       data => {
         console.log(data);
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = false;
         console.log("User register Succeffuly");
         this.toastr.warning("User register Succeffuly");
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("home");
       },
       error => {
         console.log(error);

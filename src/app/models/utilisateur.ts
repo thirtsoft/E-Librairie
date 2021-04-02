@@ -5,6 +5,6 @@ export class Utilisateur {
   email: string;
   password: string;
   photo: string;
-  isActive: boolean;
+//  isActive: boolean;
 
 }

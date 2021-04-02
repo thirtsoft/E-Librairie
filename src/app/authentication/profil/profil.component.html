@@ -19,20 +19,24 @@
               <!-- <h4>Jenifer Smith</h4> -->
               <form (ngSubmit)="processForm()">
                 <div class="follow-ava col-lg-4">
-                  <img src="assets/menu/img/profile-widget-avatar.jpg" alt="">&nbsp;&nbsp;
+                 <!--  <img src="assets/menu/img/profile-widget-avatar.jpg" alt="">&nbsp;&nbsp; -->
+                  <img [src]="this.userService.baseUrl+'/photoUser/'+this.id+'?ts='+getTS()"/>
                   <br>
-
-                  <input class="select" type="file" accept="image/*" (change)="onSelectFile($event)">&nbsp;&nbsp;
-
-                  <input type="submit" value="save" class="btn-photo">
+                  <!-- <p *ngIf="editPhoto && currentProfile==profileInfo"> -->
+                    <input type="file" (change)="onSelectedFile($event)" class="select" accept="image/*">&nbsp;&nbsp;
+                    <input type="submit" value="save" class="btn-photo" style="cursor: pointer;">
+                    {{progress}}
+                  <!-- </p> -->
                 </div>
 
                 <!-- <h6>Administrator</h6> -->
               </form>
             </div>
             <div class="col-lg-4 col-sm-4 follow-info">
-              <p>Hello I’m {{profileInfo.name}}, employé à la librairie AL-AMINE.</p>
-              <p>Email : {{profileInfo.email}}</p>
+            <!--   <p>Hello I’m {{profileInfo.name}}, employé à la librairie AL-AMINE.</p>
+              <p>Email : {{profileInfo.email}}</p> -->
+              <p>Hello I’m {{this.username}}, employé à la librairie AL-AMINE.</p>
+              <p>Email : {{this.email}}</p>
               <p><i class="fa fa-twitter">jenifertweet</i></p>
               <h6>
                                 <span><i class="icon_clock_alt"></i>11:05 AM</span>
@@ -41,41 +45,17 @@
                             </h6>
             </div>
             <div class="col-lg-2 col-sm-6 follow-info weather-category">
-              <label>Username : {{profileInfo.username}}</label>&nbsp;
+              <label>Username : {{this.username}}</label>&nbsp;
               <!-- <button (click)="addEditUsername()" class="btn btn-white btn-sm" style="width: 70px;">
                 <i class="fa fa-pencil"></i>
                   edit
               </button> -->
                 <br />
-                <label>Nom : {{profileInfo.name}}</label><br />
-                <label>Prenom: {{profileInfo.username}}</label><br />
-                <label>Telephone 1: {{profileInfo.username}}</label>
-              <!-- <ul>
-                <li class="active">
+                <label>Nom : {{listDataProfil.name}}</label><br />
+                <label>Prenom: {{listDataProfil.username}}</label><br />
+                <label>Telephone 1: {{listDataProfil.username}}</label>
 
-                  <i class="fa fa-comments fa-2x"> </i><br> Contrary to popular belief, Lorem Ipsum is not simply
-                </li>
-
-              </ul> -->
             </div>
-            <!-- <div class="col-lg-2 col-sm-6 follow-info weather-category">
-              <ul>
-                <li class="active">
-
-                  <i class="fa fa-bell fa-2x"> </i><br> Contrary to popular belief, Lorem Ipsum is not simply
-                </li>
-
-              </ul>
-            </div> -->
-            <!-- <div class="col-lg-2 col-sm-6 follow-info weather-category">
-              <ul>
-                <li class="active">
-
-                  <i class="fa fa-tachometer fa-2x"> </i><br> Contrary to popular belief, Lorem Ipsum is not simply
-                </li>
-
-              </ul>
-            </div> -->
           </div>
         </div>
       </div>
@@ -99,13 +79,13 @@
                                   </a>
               </li>
               <li class="">
-                <a data-toggle="tab" (click)="addEditUsername(profileInfo.username)" style="cursor: pointer;">
+                <a data-toggle="tab" (click)="addEditUsername(listDataProfil.username)" style="cursor: pointer;">
                                       <i class="icon-envelope"></i>
                                       Edit Username
                                   </a>
               </li>
               <li class="">
-                <a data-toggle="tab" (click)="addEditPassword(profileInfo.password)" style="cursor: pointer;">
+                <a data-toggle="tab" (click)="addEditPassword(listDataProfil.password)" style="cursor: pointer;">
                                       <i class="icon-envelope"></i>
                                       Edit Password
                                   </a>
@@ -178,10 +158,10 @@
                     <h1>Bio Graph</h1>
                     <div class="row">
                       <div class="bio-row">
-                        <p><span>First Name </span>: {{profileInfo.username}} </p>
+                        <p><span>First Name </span>: {{listDataProfil.username}} </p>
                       </div>
                       <div class="bio-row">
-                        <p><span>Last Name </span>: {{profileInfo.name}}</p>
+                        <p><span>Last Name </span>: {{listDataProfil.name}}</p>
                       </div>
                       <div class="bio-row">
                         <p><span>Birthday</span>: 27 August 1987</p>
@@ -193,13 +173,13 @@
                         <p><span>Occupation </span>: UI Designer</p>
                       </div>
                       <div class="bio-row">
-                        <p><span>Email </span>:{{profileInfo.email}}</p>
+                        <p><span>Email </span>:{{listDataProfil.email}}</p>
                       </div>
                       <div class="bio-row">
-                        <p><span>Mobile </span>: {{profileInfo.username}}</p>
+                        <p><span>Mobile </span>: {{listDataProfil.username}}</p>
                       </div>
                       <div class="bio-row">
-                        <p><span>Phone </span>: {{profileInfo.id}}</p>
+                        <p><span>Phone </span>: {{listDataProfil.id}}</p>
                       </div>
                     </div>
                   </div>

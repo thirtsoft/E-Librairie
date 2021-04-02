@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { Utilisateur } from 'src/app/models/utilisateur';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,11 +19,29 @@ export class SidebarComponent implements OnInit {
   showUserBoard = false;
   showVendeurBoard = false;
 
+  username: string;
+  email : String ;
+  user : Utilisateur = new Utilisateur();
+  id : number;
+
   constructor(private authService: AuthenticationService,
     private tokenService: TokenStorageService,
     private router: Router) { }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+
+      this.username = user.username;
+      this.id = user.id;
+    }
+    /*
     this.info = {
       token: this.tokenService.getToken(),
       username: this.tokenService.getUsername(),
@@ -33,6 +52,8 @@ export class SidebarComponent implements OnInit {
     this.showAdminBoard = this.roles.includes("ROLE_ADMIN");
     this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
     this.showUserBoard = this.roles.includes("ROLE_USER");
+
+    */
 
   }
 

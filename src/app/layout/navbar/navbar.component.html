@@ -179,12 +179,12 @@
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                         <i class="icon-bell-l"></i>
-                        <span class="badge bg-important">{{this.notification}}</span>
+                        <span class="badge bg-important">{{notification}}</span>
                     </a>
         <ul class="dropdown-menu extended notification">
           <div class="notify-arrow notify-arrow-blue"></div>
           <li>
-            <p class="blue">You have {{this.notification}} new notifications</p>
+            <p class="blue">You have {{notification}} new notifications</p>
           </li>
           <li>
             <a href="#">
@@ -221,13 +221,15 @@
       </li>
       <!-- alert notification end-->
       <!-- user login dropdown start-->
-      <li class="dropdown" *ngIf="info.token;">
+      <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="profile-ava">
                             <img alt="" src="assets/menu/img/avatar1_small.jpg">
+                            <!-- <img [src]="this.catService.host+'/photoProduct/'+info.id+'?ts='+getTS()" alt=""
+                            class="card-img-top" style="cursor: pointer;"> -->
                         </span>
                         <!-- <span class="username">Jenifer Smith</span> -->
-                        <span class="username">{{info.username}}</span>
+                        <span class="username">{{username}}</span>
                         <b class="caret"></b>
                     </a>
         <ul class="dropdown-menu extended logout">
@@ -238,9 +240,7 @@
           <li>
             <a (click)="getProfile()" style="cursor: pointer;"><i class="icon_mail_alt"></i> My Inbox</a>
           </li>
-          <!-- <li>
-            <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
-          </li>
+          <!--
           <li>
             <a href="#"><i class="icon_chat_alt"></i> Chats</a>
           </li> -->

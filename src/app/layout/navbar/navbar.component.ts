@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { Utilisateur } from 'src/app/models/utilisateur';
 
 @Component({
   selector: 'app-navbar',
@@ -16,18 +18,40 @@ export class NavbarComponent implements OnInit {
   private roles: string[];
   listData : Article[];
   notification = 0;
+  currentTime: number = 0;
 
   isLoggedIn = false;
   showAdminBoard = false;
   showUserBoard = false;
   showVendeurBoard = false;
 
+  username: string;
+  email : String ;
+  userId;
+ 
   constructor(private authService: AuthenticationService,
     private tokenService: TokenStorageService,
+    private userService: UtilisateurService,
     public crudApi: ArticleService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+
+      this.username = user.username;
+      this.userId = user.id;
+    
+    }
+
+    /*
     this.info = {
       token: this.tokenService.getToken(),
       username: this.tokenService.getUsername(),
@@ -38,11 +62,13 @@ export class NavbarComponent implements OnInit {
     this.showAdminBoard = this.roles.includes("ROLE_ADMIN");
     this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
     this.showUserBoard = this.roles.includes("ROLE_USER");
-
+  */
+    
     this.getAllArticlees();
 
   }
 
+ 
   logout() {
     this.tokenService.signOut();
   //  window.location.reload();
@@ -50,8 +76,11 @@ export class NavbarComponent implements OnInit {
   }
 
   getProfile() {
-    let profil = this.tokenService.getUsername();
-    this.router.navigate(['/home/profile/'+profil]);
+    this.router.navigate(['/home/profile/'+this.userId]);
+  }
+
+  getTS() {
+    return this.currentTime;
   }
 
 

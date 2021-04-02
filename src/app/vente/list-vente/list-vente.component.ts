@@ -49,13 +49,14 @@ export class ListVenteComponent implements OnDestroy, OnInit {
     );
 
     this.getSumOfVenteByDay();
-
+/*
     this.info = {
       token: this.tokenService.getToken(),
       username: this.tokenService.getUsername(),
       authorities: this.tokenService.getAuthorities(),
 
     }
+    */
 
   }
 

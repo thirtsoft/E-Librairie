@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
@@ -10,7 +10,7 @@ import { Utilisateur } from '../models/utilisateur';
 })
 export class UtilisateurService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  public baseUrl = 'http://localhost:8081/alAmine';
 
   choixmenu : string  = 'A';
   listData : Utilisateur[];
@@ -29,14 +29,31 @@ export class UtilisateurService {
   }
 
   constructor(private http: HttpClient) { }
-
-  getAllUtilisateurs() {
+  getAllUtilisateurs(): Observable<any> {
     return this.http.get(`${this.baseUrl}/utilisateurs`);
   }
-
   getUtilisateurById(id: number) {
-    return this.http.get(`${this.baseUrl}/utilisateurs/${id}`);
+    return this.http.get<any>(`${this.baseUrl}/utilisateurs/${id}`);
   }
+
+  getPhotoUtilisateur() {
+    return this.http.get(`${this.baseUrl}/photoUser`);
+  }
+
+  uploadPhotoUtilisateur(file: File, userId): Observable<HttpEvent<{}>> {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const req = new HttpRequest('POST', this.baseUrl+'/uploadUserPhoto/'+userId, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+  }
+
+
+
+
 
 
 }

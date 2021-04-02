@@ -36,6 +36,7 @@ export class CreateCommandeComponent implements OnInit {
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A") {
+
       this.infoForm();
       this.crudApi.list = [];
     }else {
@@ -59,10 +60,11 @@ export class CreateCommandeComponent implements OnInit {
       }
     );
 
-    this.crudApi.getNumeroCommande();
+
   }
 
   infoForm() {
+    this.crudApi.getNumeroCommande();
     this.crudApi.formData = this.fb.group({
       id: null,
       numeroCommande: this.crudApi.numCommande,
