@@ -44,7 +44,7 @@ export class ProfilComponent implements OnInit {
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef:MatDialogRef<ProfilComponent>,
   ) {
-    
+
   }
 
   ngOnInit(): void {
@@ -86,7 +86,8 @@ export class ProfilComponent implements OnInit {
     this.progress = 0;
     this.currentFileUpload = this.selectedFiles.item(0);
     console.log(this.currentFileUpload);
-    this.userService.uploadPhotoUtilisateur(this.currentFileUpload, this.currentProfile.id)
+    console.log(this.id);
+    this.userService.uploadPhotoUtilisateur(this.currentFileUpload, this.id)
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);

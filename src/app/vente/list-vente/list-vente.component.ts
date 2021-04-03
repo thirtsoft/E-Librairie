@@ -91,8 +91,8 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   onCreateVente() {
     this.crudApi.choixmenu = "A";
-    let profil = this.tokenService.getUsername();
-    this.router.navigateByUrl("home/vente/"+profil);
+  //  let profil = this.tokenService.getUsername();
+    this.router.navigateByUrl("home/vente");
 
    // this.router.navigate(['/home/profile/'+profil]);
   }

@@ -27,7 +27,7 @@ export class AuthService {
 
   private baseUrl = 'http://localhost:8081/api/auth';
 
-  private baseUrl_1 = 'http://localhost:8081/alAmine/';
+  private baseUrl_1 = 'http://localhost:8081/alAmine';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;
@@ -59,8 +59,8 @@ export class AuthService {
     this.islogin = true;
   }
 
- 
- 
+
+
 /*
   attemptAuth(user: Utilisateur) {
     return this.http.post<any>(this.loginUrl, user)
@@ -73,8 +73,8 @@ export class AuthService {
       })
   }
 */
- 
- 
+
+
 
   getUserProfile(id): Observable<any> {
     return this.http.get(`${this.baseUrl_1}/utilisateurs/${id}`, httpOptions).pipe(

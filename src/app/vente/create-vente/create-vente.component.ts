@@ -9,11 +9,9 @@ import { CreateLigneVenteComponent } from '../create-ligne-vente/create-ligne-ve
 import { LigneVente } from 'src/app/models/ligne-vente';
 import { DatePipe } from '@angular/common';
 import { LigneVenteService } from 'src/app/services/ligne-vente.service';
-import { CategorieService } from 'src/app/services/categorie.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
-import { UtilisateurService } from 'src/app/services/utilisateur.service';
-import { ProfileInfo } from 'src/app/auth/profile-info';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Utilisateur } from 'src/app/models/utilisateur';
 
 @Component({
   selector: 'app-create-vente',
@@ -22,7 +20,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class CreateVenteComponent implements OnInit {
 
-  public order = new Vente();
+  order = new Vente();
 
   orders: Vente[];
 
@@ -38,17 +36,14 @@ export class CreateVenteComponent implements OnInit {
   OrderId: number;
 
   numVente: number;
-
-  username = '';
-  profileInfo: ProfileInfo = {} as ProfileInfo;
-  info;
+  currentUser: any = {};
+  id: number;
 
   constructor(public crudApi: VenteService, public lventeService: LigneVenteService,
     private toastr :ToastrService, private tokenService: TokenStorageService,
     private authService: AuthService,
     private dialog:MatDialog, private datePipe : DatePipe,
     public fb: FormBuilder , private router :Router,
-    private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
    // public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
     ) { }
@@ -80,13 +75,7 @@ export class CreateVenteComponent implements OnInit {
     this.crudApi.getNumeroVente();
 
     this.crudApi.getUserId();
-/*
-    this.username = this.route.snapshot.params.username;
-    this.authService.getUserByUsername(this.username).subscribe(info => {
-      this.profileInfo = info;
-      console.log("User info: " + this.profileInfo.id);
-    });
-   */
+
 
   }
 
@@ -102,7 +91,7 @@ export class CreateVenteComponent implements OnInit {
       dateVente: [new Date(), Validators.required],
       DeletedOrderItemIDs: '',
       ligneVentes: [[], Validators.required],
-      utilisateur: this.crudApi.idUser,
+     // utilisateur: this.crudApi.id,
 
     });
 
@@ -138,12 +127,14 @@ export class CreateVenteComponent implements OnInit {
     this.f['ligneVentes'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
     console.log(this.crudApi.formData.value.numeroVente);
-    this.crudApi.saveVente(this.crudApi.formData.value).subscribe(
+    console.log(this.crudApi.formData.value, this.crudApi.id);
+    this.crudApi.saveVente(this.crudApi.formData.value, this.crudApi.id).subscribe(
       data => {
-        console.log(this.crudApi.formData.value);
+        console.log(data);
+      //  console.log(this.crudApi.formData.value);
         this.toastr.success('Vente Effectuée avec succès');
-        console.log(this.crudApi.formData.value);
-        console.log(this.crudApi.formData.value.numeroVente);
+      //  console.log(this.crudApi.formData.value);
+      //  console.log(this.crudApi.formData.value.numeroVente);
         this.router.navigate(['/home/ventes']);
       }
     );

@@ -36,8 +36,12 @@ export class UtilisateurService {
     return this.http.get<any>(`${this.baseUrl}/utilisateurs/${id}`);
   }
 
-  getPhotoUtilisateur() {
-    return this.http.get(`${this.baseUrl}/photoUser`);
+  getPhotoUtilisateur(id: number) {
+    return this.http.get(`${this.baseUrl}/photoUser/`+ id);
+  }
+
+  public getUserAvatar(id: number){
+    return this.http.get("http://localhost:8080/avatar/"+ id);
   }
 
   uploadPhotoUtilisateur(file: File, userId): Observable<HttpEvent<{}>> {

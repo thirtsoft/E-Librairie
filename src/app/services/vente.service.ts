@@ -47,12 +47,15 @@ export class VenteService {
 
   orderItems: LigneVente[];
 
+  id;
+  currentUser: any = {};
+
   constructor(private http: HttpClient,
     private offlineService: OnlineofflineService,
-    private userService: UtilisateurService,
     private tokenService: TokenStorageService,
     private authService: AuthService,
     public route: ActivatedRoute) {
+
     this.ouvrirStatusConnexion();
     this.addAllDataVenteToIndexeddb();
     this.addAllDataLigneVenteToIndexeddb();
@@ -79,16 +82,17 @@ export class VenteService {
        ...this.formData,
        ligneVentes: this.orderItems
      };
-     return this.http.post(`${this.baseUrl_1}/ventes`, body);
+     let id: number;
+     return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, body);
    }
 
-   saveVente(info: Object) {
-    return this.http.post(`${this.baseUrl_1}/ventes`, info);
+   saveVente(info: Vente, id:number) {
+    return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, info);
   }
 
 
-   createData(info: Object): Observable<Object> {
-     return this.http.post(`${this.baseUrl_1}/ventes`, info);
+   createData(info: Object, id: number): Observable<Object> {
+     return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, info);
    }
 
    updateVente(id: number, value: any): Observable<Object> {
@@ -128,15 +132,15 @@ export class VenteService {
 
   }
 
-  createVenteAPI(vente: Vente) {
-    return this.http.post(`${this.baseUrl_1}/ventes`, vente);
+  createVenteAPI(vente: Vente, id: number) {
+    return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, vente);
   }
 
 
-  creerVente(info: Vente)  {
+  creerVente(info: Vente, id: number)  {
     if (this.offlineService.isOnLine) {
       console.log("Debut Ajout via API");
-      this.createVenteAPI(info);
+      this.createVenteAPI(info, id);
       console.log('Vente ajouter via API');
     }else {
       console.log(info);
@@ -172,7 +176,7 @@ export class VenteService {
     console.log(todosVente);
     for(const vente of todosVente) {
       console.log(vente);
-      this.createVenteAPI(vente);
+      this.createVenteAPI(vente, this.idUser);
       await this.tableVent.delete(vente.id);
       console.log('Categorie com id ${categorie.id} foi excluddo com successfull');
     }
@@ -203,17 +207,19 @@ export class VenteService {
     );
   }
 
-  getUserId() {
-    this.username = this.route.snapshot.params.username;
-    this.authService.getUserByUsername(this.username).subscribe(info => {
-      this.profileInfo = info;
-      this.idUser = this.profileInfo.id;
-      console.log("Profil Info Id : " + this.idUser);
-    });
-
+  getCurrentUser(): Observable<any> {
+    return this.tokenService.getUser();
   }
 
-
+  getUserId() {
+    const user = this.tokenService.getUser();
+    this.id = user.id
+    /* this.authService.getUserById(this.id).subscribe(arg => {
+      this.currentUser = arg;
+      console.log(this.currentUser);
+    });
+    ; */
+  }
 
 
 }

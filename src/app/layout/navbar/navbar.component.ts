@@ -28,10 +28,11 @@ export class NavbarComponent implements OnInit {
   username: string;
   email : String ;
   userId;
- 
+  photo;
+
   constructor(private authService: AuthenticationService,
     private tokenService: TokenStorageService,
-    private userService: UtilisateurService,
+    public userService: UtilisateurService,
     public crudApi: ArticleService,
     private route: ActivatedRoute,
     private router: Router) { }
@@ -48,7 +49,8 @@ export class NavbarComponent implements OnInit {
 
       this.username = user.username;
       this.userId = user.id;
-    
+      this.photo = user.photo;
+
     }
 
     /*
@@ -63,12 +65,12 @@ export class NavbarComponent implements OnInit {
     this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
     this.showUserBoard = this.roles.includes("ROLE_USER");
   */
-    
+
     this.getAllArticlees();
 
   }
 
- 
+
   logout() {
     this.tokenService.signOut();
   //  window.location.reload();

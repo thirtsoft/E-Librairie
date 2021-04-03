@@ -165,7 +165,7 @@ const routes: Routes = [
     { path:'detailsDevis',component: CreateLigneDevisComponent },
 
     { path: 'ventes', component: ListVenteComponent},
-    { path: 'vente/:username', component: CreateVenteComponent},
+    { path: 'vente', component: CreateVenteComponent},
    /* { path:'vente/:username',children:[
         {path:'',component:CreateVenteComponent},
       ]
@@ -272,9 +272,9 @@ const routes: Routes = [
     { path: 'linechart', component: LinechartComponent},
 
   //  { path: 'profile/:username', component: ProfilComponent },
-    { path: 'profile/:id', component: ProfilComponent }, 
-    { path: 'profile/:username', component: UpdateUsernameComponent },
-    { path: 'profile/:username', component: UpdatePasswordComponent },
+    { path: 'profile/:id', component: ProfilComponent },
+    { path: 'profile/:id', component: UpdateUsernameComponent },
+    { path: 'profile/:id', component: UpdatePasswordComponent },
 
    /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
     { path: '**', component: PageNotFoundComponent },

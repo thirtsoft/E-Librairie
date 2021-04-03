@@ -19,8 +19,10 @@
               <!-- <h4>Jenifer Smith</h4> -->
               <form (ngSubmit)="processForm()">
                 <div class="follow-ava col-lg-4">
-                 <!--  <img src="assets/menu/img/profile-widget-avatar.jpg" alt="">&nbsp;&nbsp; -->
-                  <img [src]="this.userService.baseUrl+'/photoUser/'+this.id+'?ts='+getTS()"/>
+                 <!-- <img src="assets/menu/img/profile-widget-avatar.jpg" alt="">&nbsp;&nbsp; -->
+                 <img [src]="this.userService.baseUrl+'/photoUser/'+this.id+'?ts='+getTS()">
+                  <!-- <img [src]="this.userService.baseUrl+'/photoUser/'+listDataProfil.id+'?ts='+getTS()" width="90"> -->
+
                   <br>
                   <!-- <p *ngIf="editPhoto && currentProfile==profileInfo"> -->
                     <input type="file" (change)="onSelectedFile($event)" class="select" accept="image/*">&nbsp;&nbsp;
@@ -45,7 +47,7 @@
                             </h6>
             </div>
             <div class="col-lg-2 col-sm-6 follow-info weather-category">
-              <label>Username : {{this.username}}</label>&nbsp;
+              <label>Username : {{listDataProfil.username}}</label>&nbsp;
               <!-- <button (click)="addEditUsername()" class="btn btn-white btn-sm" style="width: 70px;">
                 <i class="fa fa-pencil"></i>
                   edit
@@ -79,13 +81,13 @@
                                   </a>
               </li>
               <li class="">
-                <a data-toggle="tab" (click)="addEditUsername(listDataProfil.username)" style="cursor: pointer;">
+                <a data-toggle="tab" (click)="addEditUsername(listDataProfil)" style="cursor: pointer;">
                                       <i class="icon-envelope"></i>
                                       Edit Username
                                   </a>
               </li>
               <li class="">
-                <a data-toggle="tab" (click)="addEditPassword(listDataProfil.password)" style="cursor: pointer;">
+                <a data-toggle="tab" (click)="addEditPassword(listDataProfil)" style="cursor: pointer;">
                                       <i class="icon-envelope"></i>
                                       Edit Password
                                   </a>

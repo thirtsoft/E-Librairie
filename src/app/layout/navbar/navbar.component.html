@@ -224,7 +224,10 @@
       <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="profile-ava">
-                            <img alt="" src="assets/menu/img/avatar1_small.jpg">
+                          <!-- <img alt="" src="assets/menu/img/avatar1_small.jpg"> -->
+                          <img [src]="this.userService.baseUrl+'/photoUser/'+this.userId+'?ts='+getTS()" class="img-circle" width="80">
+
+                           <!--  <img src="http://localhost:8081/photoUser/{{userId}}" class="img-circle" width="80"> -->
                             <!-- <img [src]="this.catService.host+'/photoProduct/'+info.id+'?ts='+getTS()" alt=""
                             class="card-img-top" style="cursor: pointer;"> -->
                         </span>
