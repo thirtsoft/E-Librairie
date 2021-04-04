@@ -5,6 +5,8 @@ import { Register } from 'src/app/auth/register';
 import { Login } from 'src/app/auth/login';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { RoleService } from 'src/app/services/role.service';
+import { Role } from 'src/app/models/role';
 
 @Component({
   selector: 'app-register',
@@ -18,15 +20,29 @@ export class RegisterComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
-  roles: string[] = [];
-  loginInfo: Login;
+//  roles: string[] = [];
+//  loginInfo: Login;
+
+ // listDataRole: Role[];
+  listDataRole = ["admin","user","vendeur","employe"];
 
   constructor(private authService: AuthService,
-    private router : Router,
-    private tokenService: TokenStorageService,
-    private toastr :ToastrService) { }
+    private roleService: RoleService,
+    private toastr :ToastrService,
+    private router : Router,) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+   // this.getRoles();
+  }
+
+  /* getRoles() {
+    this.roleService.getListOfRoles().subscribe(
+      response => {
+        this.listDataRole = response;
+      }
+    );
+
+  } */
 
   onSubmit() {
   //  console.log(this.form);
@@ -36,7 +52,7 @@ export class RegisterComponent implements OnInit {
       this.form.email,
       this.form.password,
     );
-    
+
     this.authService.signUp(this.signupInfo).subscribe(
       data => {
         console.log(data);
@@ -53,4 +69,5 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+
 }

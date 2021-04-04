@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Vente } from '../models/vente';
 import { HttpClient } from '@angular/common/http';
 import { LigneVente } from '../models/ligne-vente';
@@ -49,6 +49,14 @@ export class VenteService {
 
   id;
   currentUser: any = {};
+
+  private listners = new Subject<any>();
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
   constructor(private http: HttpClient,
     private offlineService: OnlineofflineService,
@@ -219,6 +227,10 @@ export class VenteService {
       console.log(this.currentUser);
     });
     ; */
+  }
+
+  listOfVenteByUsers(): Observable<any> {
+    return this.http.get(`${this.baseUrl_1}/searchListVenteByEmpId`);
   }
 
 

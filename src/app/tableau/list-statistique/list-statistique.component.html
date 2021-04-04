@@ -1,0 +1,47 @@
+<!--main content start-->
+<section id="container">
+  <!--overview start-->
+  <div class="row">
+    <div class="col-lg-12">
+      <ol class="breadcrumb">
+        <li><i class="fa fa-home"></i><a routerLink="/">Home</a></li>
+        <li><i class="fa fa-laptop"></i>Tableau</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 portlets">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2><strong>Tableau des Ventes par Employées</strong></h2>
+        </div>
+        <div class="panel-body">
+          <div style="display: block">
+            <app-list-vente-of-user></app-list-vente-of-user>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 portlets">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="pull-left">Tableau des Versements par Employées</div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+          <div class="padd">
+            <div style="display: block">
+
+              <app-list-versement-of-employe></app-list-versement-of-employe>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--main content end-->
+
+

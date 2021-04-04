@@ -121,14 +121,14 @@ export class CreateArticleComponent implements OnInit {
   }
 
 
-  /* onSubmit() {
+  onSubmit() {
     if (this.crudApi.choixmenu == "A") {
       this.saveArticle(this.formDataArticle);
     }else {
       this.updateArticle(this.formDataArticle.id, this.formDataArticle);
     }
 
-  } */
+  }
 
   saveArticle(art: Article) {
     this.crudApi.createArticle(art).

@@ -56,9 +56,12 @@ export class VersementService {
   updateVersement(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/versements/${id}`, value);
   }
-
   deleteVersement(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/versements/${id}`, { responseType: 'text' });
+  }
+
+  listOfVersementeByEmploye(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchListVersementsByEmployeId`);
   }
 
 }

@@ -115,6 +115,9 @@ import { ListCommandeComponent } from './commande/list-commande/list-commande.co
 import { CreateLigneCommandeComponent } from './commande/create-ligne-commande/create-ligne-commande.component';
 import { ListLigneCommandeComponent } from './commande/list-ligne-commande/list-ligne-commande.component';
 import { ViewCommandeComponent } from './commande/view-commande/view-commande.component';
+import { ListVenteOfUserComponent } from './tableau/list-vente-of-user/list-vente-of-user.component';
+import { ListVersementOfEmployeComponent } from './tableau/list-versement-of-employe/list-versement-of-employe.component';
+import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
 
 @NgModule({
   declarations: [
@@ -211,6 +214,9 @@ import { ViewCommandeComponent } from './commande/view-commande/view-commande.co
     ViewCommandeComponent,
     CreateLigneCommandeComponent,
     ListLigneCommandeComponent,
+    ListVenteOfUserComponent,
+    ListVersementOfEmployeComponent,
+    ListStatistiqueComponent,
   ],
   imports: [
     BrowserModule,
