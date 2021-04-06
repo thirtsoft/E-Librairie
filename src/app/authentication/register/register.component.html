@@ -30,18 +30,22 @@
           </div>
         </div>
 
-        <div class="input-group">
+    <!--     <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-at"></i></span>
           <select name="role" id="role" [(ngModel)]="form.role" class="form-control"
                  #role="ngModel" required>
               <option value="0" selected disabled>-Select-</option>
-              <option  *ngFor="let r of listDataRole">{{r}}</option>
+              <option  *ngFor="let r of this.listDataRole">{{r}}</option>
+              <option value="admin">Administrateur</option>
+              <option value="user">Utilisateur</option>
+              <option value="vendeur">Vendeur</option>
+              <option value="employe">Employe</option>
             </select>
             <span class="text-danger"
             *ngIf="(role.touched || f.submitted) && form.errors?.required">
               Role est obligatoire
           </span>
-        </div>
+        </div> -->
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
           <input type="password" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" class="form-control" placeholder="Password">

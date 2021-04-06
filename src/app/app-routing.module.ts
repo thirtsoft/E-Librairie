@@ -82,6 +82,7 @@ import { CreateCommandeComponent } from './commande/create-commande/create-comma
 import { ListLigneCommandeComponent } from './commande/list-ligne-commande/list-ligne-commande.component';
 import { CreateLigneCommandeComponent } from './commande/create-ligne-commande/create-ligne-commande.component';
 import { ViewCommandeComponent } from './commande/view-commande/view-commande.component';
+import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
 
 const routes: Routes = [
 
@@ -265,6 +266,8 @@ const routes: Routes = [
     },
 
     { path: 'dashboard', component: DashboardComponent},
+
+    { path: 'tableau', component: ListStatistiqueComponent },
 
     { path: 'chart', component: ChartComponent },
     { path: 'barchart', component: BarchartComponent},

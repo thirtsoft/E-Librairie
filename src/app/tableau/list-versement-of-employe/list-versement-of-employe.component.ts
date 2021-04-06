@@ -40,6 +40,7 @@ export class ListVersementOfEmployeComponent implements OnInit {
     this.crudApi.listOfVersementeByEmploye().subscribe(
       response =>{
         this.crudApi.listData = response;
+        console.log(this.crudApi.listData);
         this.dtTrigger.next();
       }
     );
