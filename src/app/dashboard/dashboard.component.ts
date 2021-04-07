@@ -48,6 +48,8 @@ export class DashboardComponent implements OnInit {
     this.getNumberOfProductsWhenQStockEqualStockInital();
     this.getNumberOfProductsWhenQStockInfStockInital();
 
+   // this.reloadPage();
+
 
 
   }
@@ -134,6 +136,10 @@ export class DashboardComponent implements OnInit {
       this.sumCommandeByMonth = data;
       console.log("Commande Par mois " +this.sumCommandeByMonth);
     });
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
 

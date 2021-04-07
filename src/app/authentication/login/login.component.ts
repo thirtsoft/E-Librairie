@@ -6,6 +6,7 @@ import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Login } from 'src/app/auth/login';
 import { Utilisateur } from 'src/app/models/utilisateur';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    private router: Router) {
+    private router: Router,
+    private location: Location) {
 
      }
 
@@ -54,8 +56,13 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
         console.log("Login Success");
         console.log(this.roles);
-        this.router.navigateByUrl("home");
+        this.router.navigateByUrl("home").then(() => {
+          window.location.reload();
+        });
+      //  this.reloadHomePage();
+
       //  this.reloadPage();
+
 
       },
       error => {
@@ -67,6 +74,15 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage() {
-    window.location.reload();
+    location.reload();
   }
+
+  reloadHomePage() {
+    this.router.navigateByUrl("/home", { skipLocationChange: true }).then(() => {
+      this.router.navigate(['login']);
+    });
+  }
+
 }
+
+

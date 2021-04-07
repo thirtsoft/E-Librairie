@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +21,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
     private tokenService: TokenStorageService,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) {}
 
   ngOnInit() {
+  //  this.reloadCurrentRoute();
+
+
     /*
     this.info = {
       token: this.tokenService.getToken(),
@@ -39,7 +44,7 @@ export class HomeComponent implements OnInit {
 
   logout() {
     this.tokenService.signOut();
-  //  window.location.reload();
+   // window.location.reload();
     this.router.navigateByUrl("login");
   }
 
@@ -55,5 +60,15 @@ export class HomeComponent implements OnInit {
     this.authService.isAuthenticated();
   }
 
+  reloadPage() {
+    window.location.reload();
+  }
+
+  reloadCurrentRoute() {
+    location.reload();
+  }
 
 }
+
+
+
