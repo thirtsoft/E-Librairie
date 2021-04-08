@@ -83,6 +83,8 @@ import { ListLigneCommandeComponent } from './commande/list-ligne-commande/list-
 import { CreateLigneCommandeComponent } from './commande/create-ligne-commande/create-ligne-commande.component';
 import { ViewCommandeComponent } from './commande/view-commande/view-commande.component';
 import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
+import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.component';
+import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
 
 const routes: Routes = [
 
@@ -238,12 +240,16 @@ const routes: Routes = [
 
 
 
-    { path: 'contrats', children: [
+    /* { path: 'contrats', children: [
         { path: '', component: ListContratComponent},
         { path:'edit/:id',component: ListContratComponent },
         { path:'viewContrat/:id',component: ViewContratComponent },
       ]
-    },
+    }, */
+    { path: 'contrats', component: ListContratComponent },
+    { path: 'contrat', component: CreateContratComponent },
+    { path: 'contrat', component: UploadContratComponent },
+    { path: 'contratView', component: ViewContratComponent },
 
     { path: 'fournisseurs', component: ListFournisseurComponent},
     { path: 'fournisseur', component: CreateFournisseurComponent},
@@ -257,13 +263,19 @@ const routes: Routes = [
     { path: 'sendSMSToEmploye', component: EnvoiSMSEmployeComponent},
 
 
-
+    /*
     { path: 'versements', children: [
         { path: '', component: ListVersementComponent},
         { path:'edit/:id',component: ListVersementComponent },
         { path:'viewVersement/:id',component: ViewVersementComponent },
       ]
-    },
+    },*/
+
+    { path: 'versements', component: ListVersementComponent },
+    { path: 'versement', component: CreateVersementComponent },
+    { path: 'versement', component: UploadFileVersementComponent },
+    { path: 'viewVersement', component: ViewVersementComponent },
+
 
     { path: 'dashboard', component: DashboardComponent},
 

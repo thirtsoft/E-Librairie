@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contrat } from '../models/contrat';
 import { FormGroup } from '@angular/forms';
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -39,42 +39,35 @@ export class ContratService {
   }
 
   public getContratById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/contrats/${id}`);
+    return this.http.get(`${this.baseUrl}/contrats/${id}`, { responseType: 'text' });
   }
 
   createContrat(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/contrats`, info);
   }
 
-  public createContrat2(formData, file:File): Observable<Contrat> {
-    const headers = new HttpHeaders(); //.set('Content-Type', 'multipart/form-data; charset=utf-8');
+  public createContrat2(formData, fileContrat:File) {
     const data:FormData= new FormData();
     data.append('contrat',JSON.stringify(formData));
-    data.append('file',file);
+    data.append('file',fileContrat);
 
-    return this.http.post<Contrat>(`${this.baseUrl}/createContrats`, data);
+    return this.http.post(`${this.baseUrl}/createContrats`, data,  {responseType: 'text'});
   }
 
-  public downloadFile(pathContrat: String){
-
-    return this.http.get<any>("http://localhost:8080/alAmine//downloadFile"+"/"+ pathContrat);
-  }
-
-  /**
-   * Methode pour ajouter un nouveau produit avec sa photo
-   */
-  public saveContrat(formData, file:File): Observable<any> {
-    const data:FormData= new FormData();
-    data.append('contrat',JSON.stringify(formData));
-    data.append('file',file);
-    const req = new HttpRequest('POST', this.baseUrl+"/saveContrat", formData, {
-      reportProgress: true,
+  uploadContratFile(file: File, contId) {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const req = new HttpRequest('POST', this.baseUrl+'/uploadFilePdf/'+contId, formdata, {
       responseType: 'text'
     });
+
     return this.http.request(req);
 
   }
 
+  public downloadFile(pathContrat: String){
+    return this.http.get<any>("http://localhost:8081/alAmine/downloadContratFile"+"/"+ pathContrat);
+  }
 
   updateContrat(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/contrats/${id}`, value);

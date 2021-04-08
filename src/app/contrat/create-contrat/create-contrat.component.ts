@@ -17,11 +17,9 @@ import { DatePipe } from '@angular/common';
 })
 export class CreateContratComponent implements OnInit {
 
-  public contrat = new Contrat();
   formDataContrat: Contrat  = new Contrat();
 
   listClient:  Client[];
-
 
   fileContrat: File;
 
@@ -79,18 +77,17 @@ export class CreateContratComponent implements OnInit {
 
   onSubmit() {
     if(isNullOrUndefined(this.data.id)) {
+      console.log(this.formDataContrat, this.fileContrat);
       this.crudApi.createContrat2(this.formDataContrat, this.fileContrat).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Contrat Ajouté avec Succès");
-       /*  this.crudApi.getAllContrats().subscribe(
-          response =>{this.crudApi.listData = response;},
-        ); */
-        this.router.navigate(['/home/contrats']);
       });
+      this.router.navigate(['/home/contrats']);
 
-    }else {
+    }
+    else {
       this.crudApi.updateContrat(this.formDataContrat.id, this.formDataContrat).
       subscribe( data => {
         this.dialogRef.close();
@@ -102,6 +99,26 @@ export class CreateContratComponent implements OnInit {
         this.router.navigate(['/home/contrats']);
       });
     }
+
+  }
+
+  saveContratWithPdf() {
+    this.crudApi.createContrat2(this.formDataContrat, this.fileContrat).
+    subscribe( data => {
+      this.dialogRef.close();
+      this.toastr.success("Contrat Ajouté avec Succès");
+      this.crudApi.filter('Register click');
+    });
+    this.router.navigate(['/home/contrats']);
+  }
+
+  updateContratWithPdf(){
+    this.crudApi.updateContrat(this.formDataContrat.id,this.formDataContrat).
+    subscribe( data => {
+      this.dialogRef.close();
+      this.toastr.success("Contrat Modifier avec Succès");
+    });
+    this.router.navigate(['/home/contrats']);
 
   }
 
@@ -131,6 +148,7 @@ export class CreateContratComponent implements OnInit {
     });
 
   }
+
 
 
 }

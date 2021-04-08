@@ -22,9 +22,13 @@
               <td>{{versmnt.employe.prenom}}  {{versmnt.employe.nom}}</td>
               <td>{{versmnt.montantVersement}}</td>
               <td>{{versmnt.fileVersement}}
+                &nbsp;<a (click)="addEditVersementFile(i)" style="cursor:pointer; align-items: flex-end;">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>&nbsp;&nbsp;
                 <a href="http://localhost:8081/alAmine/downloadVersementFile/{{versmnt.fileVersement}}"
-                        class="cv">&nbsp;&nbsp; <i class="fa fa-download" style="cursor:pointer; align-items: flex-end;"></i>&nbsp;&nbsp;
-                        <!-- <i class="fa fa-eye" style="cursor:pointer;"></i> --></a>
+                        class="cv">&nbsp;&nbsp;
+                  <i class="fa fa-download" style="cursor:pointer; align-items: flex-end;"></i>&nbsp;&nbsp;
+                </a>
               </td>
               <td>{{versmnt.dateVersement| date:'dd/MM/yyyy'}}</td>
               <td>

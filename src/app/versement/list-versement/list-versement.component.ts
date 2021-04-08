@@ -12,6 +12,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { DatePipe } from '@angular/common';
 import { ViewVersementComponent } from '../view-versement/view-versement.component';
+import { UploadFileVersementComponent } from '../upload-file-versement/upload-file-versement.component';
 
 @Component({
   selector: 'app-list-versement',
@@ -98,6 +99,17 @@ export class ListVersementComponent implements OnDestroy, OnInit {
       verId
     };
     this.matDialog.open(CreateVersementComponent, dialogConfig);
+  }
+
+  addEditVersementFile(id?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      id
+    };
+    this.matDialog.open(UploadFileVersementComponent, dialogConfig);
   }
 
   viewVersement(verId?: number) {

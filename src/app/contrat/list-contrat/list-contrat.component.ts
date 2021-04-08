@@ -17,6 +17,7 @@ import { ViewContratComponent } from '../view-contrat/view-contrat.component';
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { UploadContratComponent } from '../upload-contrat/upload-contrat.component';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -92,7 +93,6 @@ export class ListContratComponent implements OnDestroy, OnInit {
 
   onCreateContrat(){
     this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("contrats/new");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -109,6 +109,18 @@ export class ListContratComponent implements OnDestroy, OnInit {
       id
     };
     this.matDialog.open(CreateContratComponent, dialogConfig);
+  }
+
+  addEditContratFile(id?: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      id
+    };
+    this.matDialog.open(UploadContratComponent, dialogConfig);
+
   }
 
   viewContrat(id?: number) {

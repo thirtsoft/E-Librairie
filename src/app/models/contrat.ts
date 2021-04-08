@@ -1,5 +1,4 @@
 import { Client } from './client';
-
 export class Contrat {
   id: number;
   reference: string;
@@ -9,10 +8,10 @@ export class Contrat {
   dateDebutContrat: Date;
   dateFinContrat: Date;
   fileContrat: string;
-//  content: Blob;
 
   client: Client;
 
+  /*
   public constructor() {
     this.id = this.id;
     this.reference = this.reference;
@@ -24,6 +23,6 @@ export class Contrat {
     this.dateFinContrat = this.dateFinContrat;
     this.client = new Client();
   }
-
+*/
 
 }

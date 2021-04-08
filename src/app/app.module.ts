@@ -118,6 +118,8 @@ import { ViewCommandeComponent } from './commande/view-commande/view-commande.co
 import { ListVenteOfUserComponent } from './tableau/list-vente-of-user/list-vente-of-user.component';
 import { ListVersementOfEmployeComponent } from './tableau/list-versement-of-employe/list-versement-of-employe.component';
 import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
+import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.component';
+import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
 
 @NgModule({
   declarations: [
@@ -217,6 +219,8 @@ import { ListStatistiqueComponent } from './tableau/list-statistique/list-statis
     ListVenteOfUserComponent,
     ListVersementOfEmployeComponent,
     ListStatistiqueComponent,
+    UploadContratComponent,
+    UploadFileVersementComponent,
   ],
   imports: [
     BrowserModule,

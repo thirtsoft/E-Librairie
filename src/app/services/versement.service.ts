@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Versement } from '../models/versement';
 import { FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -50,8 +50,32 @@ export class VersementService {
     data.append('versement',JSON.stringify(versement));
     data.append('file',file);
 
-    return this.http.post<Versement>(`${this.baseUrl}/createVersement`, data);
+    return this.http.post(`${this.baseUrl}/createVersement`, data, {responseType: 'text'});
   }
+/*
+  public createVersementWithFile(formData, fileContrat:File) {
+    const data:FormData= new FormData();
+    data.append('versement',JSON.stringify(formData));
+    data.append('file',fileContrat);
+
+    return this.http.post(`${this.baseUrl}/createContrats`, data,  {responseType: 'text'});
+  }
+  */
+
+  uploadVersementFile(file: File, verId) {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const req = new HttpRequest('POST', this.baseUrl+'/uploadPdfFile/'+verId, formdata, {
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+
+  }
+  public downloadFile(pathContrat: String){
+    return this.http.get<any>("http://localhost:8081/alAmine/downloadVersementFile"+"/"+ pathContrat);
+  }
+
 
   updateVersement(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/versements/${id}`, value);

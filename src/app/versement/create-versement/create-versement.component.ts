@@ -57,31 +57,23 @@ export class CreateVersementComponent implements OnInit {
 
   onSubmit() {
     if(isNullOrUndefined(this.data.verId)) {
-      /* this.crudApi.createVersementWithFile(this.formDataVersement, this.fileVersement).
+      this.crudApi.createVersementWithFile(this.formDataVersement, this.fileVersement).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Versement Ajouté avec Succès");
-        this.crudApi.getAllVersements().subscribe(
-          response =>{this.crudApi.listData = response;},
-        );
-        this.router.navigate(['/versements']);
-      }); */
-
-      this.saveVersement();
+        this.router.navigate(['/home/versements']);
+      });
 
     }else {
-      /* this.crudApi.updateVersement(this.formDataVersement.id, this.formDataVersement).
+      this.crudApi.updateVersement(this.formDataVersement.id, this.formDataVersement).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Versement Modifiée avec Succès");
-        this.crudApi.getAllVersements().subscribe(
-          response =>{this.crudApi.listData = response;},
-        );
-        this.router.navigate(['/versements']);
-      }); */
-      this.updateVersement();
+        this.router.navigate(['/home/versements']);
+      });
+
     }
 
   }
