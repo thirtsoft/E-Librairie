@@ -17,7 +17,7 @@ import { TokenStorageService } from 'src/app/auth/token-storage.service';
 })
 export class ListVenteComponent implements OnDestroy, OnInit {
 
-  listData;
+  listData: Vente[];
   sumVenteByDay;
   info: any;
 

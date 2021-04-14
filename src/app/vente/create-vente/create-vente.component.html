@@ -12,15 +12,33 @@
         <input type="text" class="form-control" formControlName="numeroVente" id="numeroVente" readonly>
       </div>
 
-      <div class="form-group col-sm-4 mb-3 mb-sm-0">
+     <!--  <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Status</label>
         <input type="text" formControlName="status" class="form-control" id="status">
+      </div> -->
+
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
+        <label>Type Réglement</label>
+        <select name="typeReglement"
+          formControlName="typeReglement"
+          id="typeReglement"
+          class="form-control"
+          [compareWith]="compareVente"
+        >
+          <option value="0">-Select-</option>
+          <option *ngFor="let item of listDataReglement" [ngValue]="item">{{item}}</option>
+        </select>
       </div>
 
       <div class="form-group col-sm-4 mb-3 mb-sm-0">
+        <label>Montant Réglement</label>
+        <input type="number" formControlName="montantReglement" class="form-control" id="status">
+      </div>
+
+      <!-- <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Vendeur</label>
         <input type="number" formControlName="utilisateur" id="utilisateur" class="form-control" readonly>
-      </div>
+      </div> -->
 
       <!--
       <div class="form-group col-sm-4 mb-sm-0">

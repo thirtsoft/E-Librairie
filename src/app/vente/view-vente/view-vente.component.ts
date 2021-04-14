@@ -176,7 +176,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
               {
               //  text: `VENTE N° : ${this.lventeService.listData[0].numero}`,
                 text: `VENDEUR  : ${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
-                fontSize: 14,
+                fontSize: 16,
                 bold: true,
                 margin: [0, 15, 0, 15]
               },
@@ -218,6 +218,32 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         this.getListLigneVentes(this.lventeService.listData),
         {
 
+        },
+
+        {
+          text: `Total en F CFA : ${this.lventeService.listData[0].vente.totalVente}`,
+          alignment: 'right',
+          margin: [0, 8, 0, 8],
+          bold: true,
+          fontSize: 12,
+        },
+
+        {
+          text: 'Réglement '
+           + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
+          alignment: 'right',
+          margin: [0, 5, 0, 15],
+          bold: true,
+          fontSize: 12,
+        },
+
+        {
+          text: 'Somme Rendu : '
+           +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
+          alignment: 'right',
+          margin: [0, 5, 0, 15],
+          bold: true,
+          fontSize: 12,
         },
 
         {

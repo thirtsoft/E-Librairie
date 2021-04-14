@@ -7,6 +7,8 @@ export class Vente {
   total: number;
   totalVente: number;
   status: string;
+  typeReglement: string;
+  montantReglement: number;
   dateVente: Date;
   DeletedOrderItemIDs: string;
 

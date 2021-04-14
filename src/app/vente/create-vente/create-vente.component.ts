@@ -39,6 +39,8 @@ export class CreateVenteComponent implements OnInit {
   currentUser: any = {};
   id: number;
 
+  listDataReglement = ["ESPECES", "CHEQUE", "VIREMENT"];
+
   constructor(public crudApi: VenteService, public lventeService: LigneVenteService,
     private toastr :ToastrService, private tokenService: TokenStorageService,
     private authService: AuthService,
@@ -88,12 +90,18 @@ export class CreateVenteComponent implements OnInit {
       total: [0, Validators.required],
       totalVente: [0, Validators.required],
       status: ['', Validators.required],
+      typeReglement: ['', Validators.required],
+      montantReglement: [0, Validators.required],
       dateVente: [new Date(), Validators.required],
       DeletedOrderItemIDs: '',
       ligneVentes: [[], Validators.required],
      // utilisateur: this.crudApi.id,
 
     });
+
+  }
+
+  compareVente() {
 
   }
 
