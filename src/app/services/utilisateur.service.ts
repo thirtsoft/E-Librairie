@@ -55,6 +55,11 @@ export class UtilisateurService {
     return this.http.request(req);
   }
 
+  getAuthorities(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/utilisateurs/authorities`);
+
+  }
+
 
 
 

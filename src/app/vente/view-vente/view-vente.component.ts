@@ -43,6 +43,9 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
   info: any;
 
+  username = '';
+  name = '';
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -69,11 +72,14 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
       this.totalVente = this.lventeService.listData[0].vente.totalVente;
       console.log(this.lventeService.listData[0].vente.dateVente);
       this.dateVente = this.lventeService.listData[0].vente.dateVente;
+      this.username = this.lventeService.listData[0].vente.utilisateur.name;
 
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
     });
+
+
 
 
   }
@@ -169,8 +175,8 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
             [
               {
               //  text: `VENTE N° : ${this.lventeService.listData[0].numero}`,
-                text: `VENDEUR  : ${this.info.username}`,
-                fontSize: 12,
+                text: `VENDEUR  : ${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
+                fontSize: 14,
                 bold: true,
                 margin: [0, 15, 0, 15]
               },

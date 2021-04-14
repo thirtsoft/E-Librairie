@@ -1,6 +1,100 @@
+<div class="login-img3-body">
+  <div class="container">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="login-wrap">
+        <p class="login-img"><i class="icon_lock_alt"></i></p>
+
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+          <input type="text" class="form-control" id="name"
+          formControlName="name" placeholder="Nom et Prénom" required />
+          <div class="alert alert-danger" *ngIf="registrationForm.get('name').invalid
+            && registrationForm.get('name').touched">
+            <div *ngIf="registrationForm.get('name').errors.required">Name is required</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <input type="text" id="username"
+            formControlName="username" class="form-control"
+            placeholder="Username" autofocus required
+          />
+          <div class="alert alert-danger" *ngIf="registrationForm.get('username').invalid
+            && registrationForm.get('username').touched ">
+            <div *ngIf="registrationForm.get('username').errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-at"></i></span>
+          <input type="text" class="form-control"
+            id="email"
+            formControlName="email"
+            required email
+          />
+          <div class="alert alert-danger" *ngIf="registrationForm.get('email').invalid
+            && registrationForm.get('email').touched">
+            <!-- <div *ngIf="registrationForm.get('email').errors.required">Email is required</div> -->
+            <div *ngIf="registrationForm.get('email').errors.required">Email must be a valid email address</div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" id="password"
+            formControlName="password"
+            required minlength="6"
+            class="form-control"
+            placeholder="Password"
+          />
+          <div class="alert alert-danger" *ngIf="registrationForm.get('password').invalid
+            && registrationForm.get('password').touched">
+            <div *ngIf="registrationForm.get('password').errors.required">Password is required</div>
+            <div *ngIf="registrationForm.get('password').errors.minlength">
+              Password must be at least 6 characters long
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>User Roles</label>
+            <div class="form-check"
+            *ngFor="let role of registrationForm.get('roleSelection')['controls']; let i = index;">
+              <label class="form-check-label">
+                  <input type="checkbox"
+                    class="form-check-input"
+                    [formControl]="role"
+                  />
+                  {{roles[i].name}}
+              </label>
+            </div>
+        </div>
+
+        <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+            </label>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" >Signup</button>
+        <div *ngIf="submitted && isSignUpFailed" class="alert alert-warning">
+          Signup failed!<br/>{{errorMessage}}
+        </div>
+        <button class="btn btn-info btn-lg btn-block" routerLink="/login">login</button>
+      </div>
+    </form>
+    <div class="text-right">
+      <div class="credits">
+          Copy right <a href="https://bootstrapmade.com/">Al-AMINE 2021</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <!-- <div *ngIf="isSignedUp; else signupForm">
   Your registration is successful. Please login!
 </div> -->
+<!--
 <div class="login-img3-body" #signupForm>
   <div class="container">
     <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate class="login-form">
@@ -29,14 +123,14 @@
             <div *ngIf="email.errors.email">Email must be a valid email address</div>
           </div>
         </div>
-
-    <!--     <div class="input-group">
+-->
+       <!--  <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-at"></i></span>
           <select name="role" id="role" [(ngModel)]="form.role" class="form-control"
                  #role="ngModel" required>
               <option value="0" selected disabled>-Select-</option>
-              <option  *ngFor="let r of this.listDataRole">{{r}}</option>
-              <option value="admin">Administrateur</option>
+              <option  *ngFor="let r of roles; let i=index;">{{r.name}}</option>
+               <option value="admin">Administrateur</option>
               <option value="user">Utilisateur</option>
               <option value="vendeur">Vendeur</option>
               <option value="employe">Employe</option>
@@ -46,6 +140,7 @@
               Role est obligatoire
           </span>
         </div> -->
+<!--
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
           <input type="password" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" class="form-control" placeholder="Password">
@@ -73,3 +168,4 @@
     </div>
   </div>
 </div>
+-->

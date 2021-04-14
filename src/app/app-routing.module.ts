@@ -96,7 +96,6 @@ const routes: Routes = [
 
   { path: 'register', component: RegisterComponent },
 
-
   {path: 'home', component: HomeComponent, children : [
 
 
@@ -120,7 +119,7 @@ const routes: Routes = [
     { path:'categorie',component: CreateCategorieComponent },
 
     { path: 'registers', component: ListRegisterComponent},
-    { path: 'register', component: RegisterComponent},
+
 
   /*  { path: 'scategories', component: ListScategorieComponent},
     { path:'scategorie',component: CreateScategorieComponent }, */

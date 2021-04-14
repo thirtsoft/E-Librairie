@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { JwtResponse } from './jwt-response';
 import { catchError, map } from 'rxjs/operators';
 import { ProfileInfo, UpdateUsernameInfo, UpdatePasswordInfo } from './profile-info';
 import { TokenStorageService } from './token-storage.service';
+import { IUser } from '../models/utilisateur';
 
 const AUTH_API = 'http://localhost:8081/api/auth/';
 
@@ -47,9 +48,11 @@ export class AuthService {
     private router: Router) {
 
   }
+
   signUp(info: Register): Observable<Register> {
     return this.http.post<Register>(AUTH_API + 'signup', info , httpOptions);
   }
+
 
   attemptAuth(credentials: Login): Observable<any> {
     return this.http.post(this.loginUrl, {
