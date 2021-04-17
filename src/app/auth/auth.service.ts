@@ -7,7 +7,7 @@ import { Login } from 'src/app/auth/login';
 import { Register } from 'src/app/auth/register';
 import { JwtResponse } from './jwt-response';
 import { catchError, map } from 'rxjs/operators';
-import { ProfileInfo, UpdateUsernameInfo, UpdatePasswordInfo } from './profile-info';
+import { ProfileInfo, UpdateUsernameInfo, UpdatePasswordInfo, UpdateProfilInfo } from './profile-info';
 import { TokenStorageService } from './token-storage.service';
 import { IUser } from '../models/utilisateur';
 
@@ -93,6 +93,17 @@ export class AuthService {
   }
   getUserById(id: any) {
     return this.http.get(`${this.baseUrl_1}/utilisateurs/${id}`);
+  }
+
+  updateProfil(item: UpdateProfilInfo): Observable<UpdateProfilInfo> {
+    return this.http.patch<UpdateProfilInfo>("//localhost:8081/alAmine/updateProfil", {
+      name: item.name,
+      username: item.username,
+      email: item.email,
+      password: item.password,
+      confirmPassword: item.confirmPassword
+    }, httpOptions);
+
   }
 
   updateUsername(item: UpdateUsernameInfo): Observable<UpdateUsernameInfo> {

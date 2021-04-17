@@ -6,6 +6,8 @@ import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 import { Utilisateur } from 'src/app/models/utilisateur';
+import { CreanceService } from 'src/app/services/creance.service';
+import { Creance } from 'src/app/models/creance';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +18,12 @@ export class NavbarComponent implements OnInit {
 
   info: any;
   private roles: string[];
-  listData : Article[];
+  listData: Article[];
+  listDataCreance: Creance[];
   notification = 0;
+  creanceInit = 0;
+  creanceLimit = 10;
+  nbcreanceRef = 10;
   currentTime: number = 0;
 
   isLoggedIn = false;
@@ -26,15 +32,14 @@ export class NavbarComponent implements OnInit {
   showVendeurBoard = false;
 
   username: string;
-  email : String ;
+  email: String;
   userId;
   photo;
 
-  constructor(private authService: AuthenticationService,
-    private tokenService: TokenStorageService,
+  constructor(private tokenService: TokenStorageService,
     public userService: UtilisateurService,
     public crudApi: ArticleService,
-    private route: ActivatedRoute,
+    public creanceService: CreanceService,
     private router: Router) { }
 
   ngOnInit() {
@@ -53,57 +58,57 @@ export class NavbarComponent implements OnInit {
 
     }
 
-    /*
-    this.info = {
-      token: this.tokenService.getToken(),
-      username: this.tokenService.getUsername(),
-      authorities: this.tokenService.getAuthorities(),
+    this.getListArticlesSoldOut();
 
-    }
-    this.roles = this.tokenService.getAuthorities();
-    this.showAdminBoard = this.roles.includes("ROLE_ADMIN");
-    this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
-    this.showUserBoard = this.roles.includes("ROLE_USER");
-  */
-
-    this.getAllArticlees();
+    this.getListCreancesSoldOut();
 
   }
 
 
   logout() {
     this.tokenService.signOut();
-  //  window.location.reload();
+    //  window.location.reload();
     this.router.navigateByUrl("");
   }
 
   getProfile() {
-    this.router.navigate(['/home/profile/'+this.userId]);
+    this.router.navigate(['/home/profile/' + this.userId]);
   }
 
   getTS() {
     return this.currentTime;
   }
-
-
-  getListArticles() {
-    this.crudApi.getAllArticles().subscribe(
-      response =>{this.listData = response;
-    });
-  }
-
-  getAllArticlees(){
+  getListArticlesSoldOut() {
     this.crudApi.getAllArticles().subscribe(res => {
       this.listData = res;
-      for(var i = 0; i< this.listData.length; i++) {
-       // console.log(this.listData[i]);
+      for (var i = 0; i < this.listData.length; i++) {
         if ((this.listData[i].qtestock) < (this.listData[i].stockInitial)) {
           this.notification++;
-       //   console.log(this.notification);
         }
 
       }
     });
+  }
+
+  getListCreancesSoldOut() {
+    this.creanceService.getAllCreances().subscribe(response => {
+      this.listDataCreance = response;
+      for (let i = 0; i < this.listDataCreance.length; i++) {
+        this.nbcreanceRef = this.listDataCreance[i].nbreJours;
+        if ((this.listDataCreance[i].nbreJours) == this.creanceLimit) {
+          this.creanceInit++;
+          this.nbcreanceRef--;
+        }
+      }
+    })
+  }
+
+  goToListArticles() {
+    this.router.navigate(['/home/articles']);
+  }
+
+  goToStockArticles() {
+    this.router.navigate(['/home/stocks']);
   }
 
 

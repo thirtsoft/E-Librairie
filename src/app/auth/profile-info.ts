@@ -9,6 +9,14 @@ export class ProfileInfo {
   photo: string;
 }
 
+export class UpdateProfilInfo {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export class UpdateUsernameInfo {
   username: string;
   newUsername: string;

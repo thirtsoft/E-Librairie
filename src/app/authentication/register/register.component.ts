@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   roles: any = [
     { name: 'User', id:1, selected: true },
-//    { name: 'Vendeur', id:2, selected: false },
+    { name: 'Vendeur', id:2, selected: false },
     { name: 'Admin', id:3, selected: false },
   ];
   selectedRoles: string[];

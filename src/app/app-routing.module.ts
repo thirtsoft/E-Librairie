@@ -1,3 +1,4 @@
+import { UpdateProfileComponent } from './authentication/update-profile/update-profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListClientComponent } from './client/list-client/list-client.component';
@@ -287,6 +288,7 @@ const routes: Routes = [
 
   //  { path: 'profile/:username', component: ProfilComponent },
     { path: 'profile/:id', component: ProfilComponent },
+    { path: 'profile/:id', component: UpdateProfileComponent },
     { path: 'profile/:id', component: UpdateUsernameComponent },
     { path: 'profile/:id', component: UpdatePasswordComponent },
 

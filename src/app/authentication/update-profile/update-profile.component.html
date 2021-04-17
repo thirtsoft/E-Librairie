@@ -1,3 +1,86 @@
-<p>
-  update-profile works!
-</p>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2">
+    <h1>Modifier Profil</h1>
+    <!-- <form [formGroup]="this.crudApi.listData" (ngSubmit)="onSubmit()"> -->
+    <form
+      #addUsernameForm="ngForm"
+      name="form"
+      (ngSubmit)="addUsernameForm.form.valid && onSubmit()"
+    >
+      <!-- <input type="hidden"  formControlName="id" id="id"> -->
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataProfile.name"
+          name="name"
+          id="name"
+          #name="ngModel"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Username</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataProfile.username"
+          name="username"
+          id="username"
+          #username="ngModel"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataProfile.email"
+          name="email"
+          id="email"
+          #email="ngModel"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Ancien Password</label>
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="formDataProfile.password"
+          name="password"
+          id="password"
+          #password="ngModel"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Paasword</label>
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="formDataProfile.confirmPassword"
+          name="confirmPassword"
+          id="confirmPassword"
+          #confirmPassword="ngModel"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">
+          <i class="fa fa-database"></i> Submit</button
+        >&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+          <i class="fa fa-close"></i> Close
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

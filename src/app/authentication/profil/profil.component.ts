@@ -1,3 +1,5 @@
+import { Register } from './../../auth/register';
+import { UpdateProfileComponent } from './../update-profile/update-profile.component';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -30,19 +32,19 @@ export class ProfilComponent implements OnInit {
   selectedFiles;
   progress: number;
   currentFileUpload: any;
-  title:string;
-  currentRequest:string;
-  currentTime: number=0;
+  title: string;
+  currentRequest: string;
+  currentTime: number = 0;
   id;
   listDataProfil;
 
   constructor(private authService: AuthService, private tokenService: TokenStorageService,
     public toastr: ToastrService, private dialogService: DialogService,
     public userService: UtilisateurService,
-    public fb: FormBuilder, private router : Router,
+    public fb: FormBuilder, private router: Router,
     private route: ActivatedRoute,
     private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<ProfilComponent>,
+    public dialogRef: MatDialogRef<ProfilComponent>,
   ) {
 
   }
@@ -56,6 +58,7 @@ export class ProfilComponent implements OnInit {
     this.username = user.username;
     this.email = user.email;
     this.password = user.password;
+    // this.name = user.name;
 
   }
 
@@ -64,7 +67,8 @@ export class ProfilComponent implements OnInit {
     console.log(user.id);
     this.userService.getUtilisateurById(user.id).subscribe(
       response => {
-        this.listDataProfil = response ;
+        console.log(response);
+        this.listDataProfil = response;
       }
     );
   }
@@ -91,22 +95,22 @@ export class ProfilComponent implements OnInit {
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
-        }else if (event instanceof HttpResponse) {
+        } else if (event instanceof HttpResponse) {
           this.currentTime = Date.now();
         }
-      }, err=> {
+      }, err => {
         this.toastr.warning("Problème de chargment de la photo");
       }
       );
-      this.selectedFiles = undefined;
+    this.selectedFiles = undefined;
   }
 
-  addEditUsername(item : ProfileInfo) {
-  //  console.log(item.password);
+  addEditUsername(item: ProfileInfo) {
+    //  console.log(item.password);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
+    dialogConfig.width = "50%";
     this.authService.listData = Object.assign({}, item)
     /* dialogConfig.data = {
       item
@@ -114,12 +118,12 @@ export class ProfilComponent implements OnInit {
     this.matDialog.open(UpdateUsernameComponent, dialogConfig);
   }
 
-  addEditPassword(item : ProfileInfo) {
-   console.log(item);
+  addEditPassword(item: ProfileInfo) {
+    console.log(item);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
+    dialogConfig.width = "50%";
     this.authService.listData = Object.assign({}, item)
     /* dialogConfig.data = {
       item
@@ -133,7 +137,21 @@ export class ProfilComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
-  editProfil() {
+  addEditProfil() {
+
+  }
+
+  editProfil(item: ProfileInfo) {
+    console.log(item);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "50%";
+    this.authService.listData = Object.assign({}, item)
+    /* dialogConfig.data = {
+      item
+    }; */
+    this.matDialog.open(UpdateProfileComponent, dialogConfig);
 
   }
 
