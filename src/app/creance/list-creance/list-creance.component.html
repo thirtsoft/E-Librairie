@@ -13,7 +13,7 @@
 
   <thead>
     <tr>
-      <th>Reference</th><th>Client</th><th>Solde</th><th>Total</th><th>Restant A Payer</th><th>Status</th><th>Nbre Jours</th><th>Date</th>
+      <th>Reference</th><th>Client</th><th>Solde</th><th>Total</th><th>Restant A Payer</th><th>Status</th><th>Nbre Jours</th><th>DateDebut</th><th>DateFin</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -37,6 +37,8 @@
       <td>{{cont.nbreJours}}</td>
 
       <td>{{cont.dateCreance | date:'dd-MM-yyyy à h:mm:ss'}}</td>
+
+      <td>{{this.dateResult2 | date:'dd-MM-yyyy à h:mm:ss'}}</td>
 
       <td>
         <!--<button class="btn btn-info btn-lg" (click)="addEditCreance(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->

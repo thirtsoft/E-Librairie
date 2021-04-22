@@ -25,6 +25,11 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
   private editForm: FormGroup;
 
+  endDate: Date;
+  dateResult: Date;
+  dateResult2: Date;
+  numberDay;
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
@@ -55,6 +60,17 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     this.crudApi.getAllCreances().subscribe(
       response =>{
         this.crudApi.listData = response;
+        for (let i=0; i<this.crudApi.listData.length; i++) {
+          this.endDate = new Date(this.crudApi.listData[i].dateCreance);
+          this.numberDay = this.crudApi.listData[i].nbreJours
+          console.log("End Date : " +this.endDate);
+        //  this.dateResult.setDate((this.endDate.getDate())+(this.numberDay));
+          this.dateResult = new Date(this.endDate);
+          this.dateResult2 = new Date(this.dateResult.setDate(this.dateResult.getDate() + this.numberDay));
+          console.log("Data Result : " +this.dateResult2);
+
+        }
+
         this.dtTrigger.next();
       }
     );

@@ -29,78 +29,28 @@
         <li id="task_notificatoin_bar" class="dropdown">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <i class="icon-task-l"></i>
-            <span class="badge bg-important">6</span>
+            <span class="badge bg-important" style="background-color:darkorange;">{{compteurCreance}}</span>
           </a>
           <ul class="dropdown-menu extended tasks-bar">
             <div class="notify-arrow notify-arrow-blue"></div>
             <li>
-              <p class="blue">You have 6 pending letter</p>
+              <p class="blue">Vous avez {{compteurCreance}} creances limites</p>
             </li>
             <li>
-              <a href="#">
-                <div class="task-info">
-                  <div class="desc">Design PSD </div>
-                  <div class="percent">90%</div>
-                </div>
-                <div class="progress progress-striped">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                    aria-valuemax="100" style="width: 90%">
-                    <span class="sr-only">90% Complete (success)</span>
-                  </div>
-                </div>
+              <a (click)="goToListCreances()" style="cursor: pointer;">
+                <span class="label label-primary"><i class="icon_profile"></i></span>
+                  Voir détails creances
               </a>
             </li>
             <li>
-              <a href="#">
-                <div class="task-info">
-                  <div class="desc">
-                    Project 1
-                  </div>
-                  <div class="percent">30%</div>
-                </div>
-                <div class="progress progress-striped">
-                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0"
-                    aria-valuemax="100" style="width: 30%">
-                    <span class="sr-only">30% Complete (warning)</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div class="task-info">
-                  <div class="desc">Digital Marketing</div>
-                  <div class="percent">80%</div>
-                </div>
-                <div class="progress progress-striped">
-                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-                    aria-valuemax="100" style="width: 80%">
-                    <span class="sr-only">80% Complete</span>
-                  </div>
-                </div>
+              <a (click)="goToResume()" style="cursor: pointer;">
+                <span class="label label-warning"><i class="icon_pin"></i></span>
+                  Voir résumé creances.
               </a>
             </li>
           </ul>
         </li>
         <!-- task notificatoin end -->
-        <!-- inbox notificatoin start-->
-        <li id="mail_notificatoin_bar" class="dropdown">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <i class="icon-envelope-l"></i>
-            <span class="badge bg-important">5</span>
-            <span class="badge bg-important">{{creanceInit}}</span>
-          </a>
-          <ul class="dropdown-menu extended inbox">
-            <div class="notify-arrow notify-arrow-blue"></div>
-            <li>
-              <p class="blue">You have {{creanceInit}} new messages</p>
-            </li>
-            <li>
-              <a href="#">See all messages</a>
-            </li>
-          </ul>
-        </li>
-        <!-- inbox notificatoin end -->
         <!-- alert notification start-->
         <li id="alert_notificatoin_bar" class="dropdown">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -110,24 +60,20 @@
 
           <ul class="dropdown-menu extended notification">
             <div class="notify-arrow notify-arrow-blue"></div>
-
             <li>
               <p class="blue">Vous avez {{notification}} articles épuisés</p>
             </li>
 
             <li>
-              <a (click)="goToListArticles()">
+              <a (click)="goToListArticles()" style="cursor: pointer;">
                 <span class="label label-primary"><i class="icon_profile"></i></span>
                 Voir détails articles
-                <span class="small italic pull-right">5 mins</span>
               </a>
             </li>
-
             <li>
-              <a (click)="goToStockArticles()">
+              <a (click)="goToStockArticles()" style="cursor: pointer;">
                 <span class="label label-warning"><i class="icon_pin"></i></span>
                 Voir votre stock.
-                <span class="small italic pull-right">50 mins</span>
               </a>
             </li>
 
