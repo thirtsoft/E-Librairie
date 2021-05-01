@@ -120,6 +120,7 @@ import { ListVersementOfEmployeComponent } from './tableau/list-versement-of-emp
 import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
 import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.component';
 import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
+import { ClientRoutingModule } from './client-routing.module';
 
 @NgModule({
   declarations: [
@@ -240,6 +241,7 @@ import { UploadFileVersementComponent } from './versement/upload-file-versement/
     MatIconModule,
     MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ClientRoutingModule,
 
   ],
 
