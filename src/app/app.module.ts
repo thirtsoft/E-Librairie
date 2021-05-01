@@ -18,8 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListClientComponent } from './client/list-client/list-client.component';
 import { CreateClientComponent } from './client/create-client/create-client.component';
+/*
 import { CreateCategorieComponent } from './categorie/create-categorie/create-categorie.component';
 import { ListCategorieComponent } from './categorie/list-categorie/list-categorie.component';
+
+*/
 import { ListScategorieComponent } from './scategorie/list-scategorie/list-scategorie.component';
 import { CreateScategorieComponent } from './scategorie/create-scategorie/create-scategorie.component';
 import { ListArticleComponent } from './article/list-article/list-article.component';
@@ -120,15 +123,16 @@ import { ListVersementOfEmployeComponent } from './tableau/list-versement-of-emp
 import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
 import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.component';
 import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
-import { ClientRoutingModule } from './client-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListClientComponent,
     CreateClientComponent,
+/*
     CreateCategorieComponent,
     ListCategorieComponent,
+    */
     ListScategorieComponent,
     CreateScategorieComponent,
     ListArticleComponent,
@@ -241,7 +245,6 @@ import { ClientRoutingModule } from './client-routing.module';
     MatIconModule,
     MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    ClientRoutingModule,
 
   ],
 
@@ -254,7 +257,8 @@ import { ClientRoutingModule } from './client-routing.module';
 
   bootstrap: [AppComponent],
   entryComponents: [
-    CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
+  //  CreateCategorieComponent,
+    CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
     CreateAvoirComponent, CreateChargeComponent, CreateCommandeComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,

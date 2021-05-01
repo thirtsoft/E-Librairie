@@ -7,8 +7,10 @@ import { ListEmployeComponent } from './employe/list-employe/list-employe.compon
 import { CreateEmployeComponent } from './employe/create-employe/create-employe.component';
 import { ListFournisseurComponent } from './fournisseur/list-fournisseur/list-fournisseur.component';
 import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/create-fournisseur.component';
+/*
 import { ListCategorieComponent } from './categorie/list-categorie/list-categorie.component';
 import { CreateCategorieComponent } from './categorie/create-categorie/create-categorie.component';
+*/
 //import { EditCategorieComponent } from './categorie/edit-categorie/edit-categorie.component';
 import { ListScategorieComponent } from './scategorie/list-scategorie/list-scategorie.component';
 import { CreateScategorieComponent } from './scategorie/create-scategorie/create-scategorie.component';
@@ -87,6 +89,7 @@ import { ListStatistiqueComponent } from './tableau/list-statistique/list-statis
 import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.component';
 import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
 
+
 const routes: Routes = [
 
   { path: '', component: LoginComponent, children: [
@@ -116,9 +119,15 @@ const routes: Routes = [
       ]
     },
 */
+    {
+      path: 'categories',
+      loadChildren: () => import('./categorie/categorie.module').then(m => m.CategorieModule)
+    },
+
+  /*
     { path: 'categories', component: ListCategorieComponent},
     { path:'categorie',component: CreateCategorieComponent },
-
+*/
     { path: 'registers', component: ListRegisterComponent},
 
 
