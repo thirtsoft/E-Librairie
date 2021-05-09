@@ -2,8 +2,6 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { LigneAppro } from 'src/app/models/ligne-appro';
 import { Appro } from 'src/app/models/appro';
 import { Article } from 'src/app/models/article';
-import { Scategorie } from 'src/app/models/scategorie';
-import { Categorie } from 'src/app/models/categorie';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { LigneApproService } from 'src/app/services/ligne-appro.service';
@@ -98,7 +96,7 @@ export class ListLigneApproComponent implements OnInit {
 
   onCreateLigneAppro() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("home/approvisionnement");
+    this.router.navigateByUrl("alamine/approvisionnements/approvisionnement");
   }
 
 /*  deleteLigneAppro(id: number) {

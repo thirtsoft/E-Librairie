@@ -1,101 +1,101 @@
 <mat-toolbar color="success">
-  <div><h1>Gestion Approvisionnement</h1>
-  </div>
+    <div>
+        <h1>Gestion Approvisionnement</h1>
+    </div>
 </mat-toolbar>
 
 <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()">
-  <!--  <input  type="hidden"  class="form-control" formControlName="lib_client" id="lib_client" > -->
-  <input  type="hidden"  class="form-control" formControlName="fournisseur" id="fournisseur" >
+    <!--  <input  type="hidden"  class="form-control" formControlName="lib_client" id="lib_client" > -->
+    <input type="hidden" class="form-control" formControlName="fournisseur" id="fournisseur">
 
-  <div class="row col-md-12">
-    <div class="row">
-      <div class="form-row col-sm-4 mb-3 mb-sm-0">
-        <label><strong>Code Approvisionnement : </strong></label>
-        <input type="text" class="form-control" formControlName="code" id="code" readonly>
-      </div>
+    <div class="row col-md-12">
+        <div class="row">
+            <div class="form-row col-sm-4 mb-3 mb-sm-0">
+                <label><strong>Code Approvisionnement : </strong></label>
+                <input type="text" class="form-control" formControlName="code" id="code" readonly>
+            </div>
 
-      <div class="form-group col-sm-4 mb-3 mb-sm-0">
-        <label>Fournisseur</label>
-        <div class="form-group">
-          <select name="client" formControlName="fournisseur" id="fournisseur" class="form-control"
-              [compareWith]="compareFournisseur">
+            <div class="form-group col-sm-4 mb-3 mb-sm-0">
+                <label>Fournisseur</label>
+                <div class="form-group">
+                    <select name="client" formControlName="fournisseur" id="fournisseur" class="form-control" [compareWith]="compareFournisseur">
             <option value="0">-Select-</option>
             <option *ngFor="let item of fournisseurList" [ngValue]="item"><td>{{item.prenom}} {{item.nom}}</td></option>
           </select>
-        </div>
-      </div>
-     <!--  <div class="form-group col-sm-4 mb-sm-0">
+                </div>
+            </div>
+            <!--  <div class="form-group col-sm-4 mb-sm-0">
         <label>Date</label>
         <input  type="date"  class="form-control" formControlName="dateAppro"  id="dateAppro">
       </div> -->
 
-      <div class="form-group col-sm-4" style="margin-top: 10px;">
-          <label>Montant Avancée</label>
-          <input type="number" formControlName="montantAvance" class="form-control" id="montantAvance">
-      </div>
-     <!--  <div class="form-group col-sm-4" style="margin-top: 10px;">
+            <div class="form-group col-sm-4" style="margin-top: 10px;">
+                <label>Montant Avancée</label>
+                <input type="number" formControlName="montantAvance" class="form-control" id="montantAvance">
+            </div>
+            <!--  <div class="form-group col-sm-4" style="margin-top: 10px;">
           <label>Status</label>
           <input type="text" formControlName="status" class="form-control" id="status">
       </div> -->
-      <div class="form-group col-sm-4" style="margin-top: 10px;">
-        <label>Status</label>
-        <select name="status" formControlName="status" id="status" class="form-control">
+            <div class="form-group col-sm-4" style="margin-top: 10px;">
+                <label>Status</label>
+                <select name="status" formControlName="status" id="status" class="form-control">
           <option value="VALIDE">VALIDE</option>
           <option value="ENCOURS">ENCOURS</option>
         </select>
-      </div>
-      <div class="form-group col-sm-4" style="margin-top: 10px;">
-          <label>Observation</label>
-          <textarea type="text" rows="2" cols="5" formControlName="observation"  id="observation" class="form-control"></textarea>
-      </div>
+            </div>
+            <div class="form-group col-sm-4" style="margin-top: 10px;">
+                <label>Observation</label>
+                <textarea type="text" rows="2" cols="5" formControlName="observation" id="observation" class="form-control"></textarea>
+            </div>
 
+        </div>
+        <!--</div> -->
+
+        <!-- Debut Ligne de commandes -->
+        <table class="table table-borderless" style="margin-top: 10px;">
+            <thead class="thead-light">
+                <th>Article</th>
+                <th>Quantite</th>
+                <th>P.Unitiare</th>
+                <th>P.Total</th>
+                <th>
+                    <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
+                        <i class="fa fa-plus"></i>Ajouter
+                    </a>
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngIf="crudApi.list.length==0" [class.text-danger]="!isValid && crudApi.list.length ==0">
+                    <td class="font-italic text-center" colspan="4">
+                        Aucun Article pour cet Approvisionnement ...
+                    </td>
+                </tr>
+                <tr *ngFor="let item of crudApi.list;let i=index;">
+                    <td>{{item.ItemName}}</td>
+                    <td>{{item.quantite}}</td>
+                    <td>{{item.prixAppro}}</td>
+                    <td>{{item.total}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
+                            <i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.id,i)">
+                            <i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Fin  Ligne de commandes -->
+        <div class="form-group col-sm-4 mb-sm-0" style="padding-left: 0px;">
+            <label><strong>P.Total : </strong></label>
+            <input type="text" formControlName="totalAppro" id="totalAppro" class="form-control" readonly>
+        </div>
     </div>
-  <!--</div> -->
 
-    <!-- Debut Ligne de commandes -->
-    <table class="table table-borderless" style="margin-top: 10px;">
-      <thead class="thead-light">
-        <th>Article</th>
-        <th>Quantite</th>
-        <th>P.Unitiare</th>
-        <th>P.Total</th>
-        <th>
-          <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
-              <i class="fa fa-plus"></i>Ajouter
-          </a>
-        </th>
-      </thead>
-      <tbody>
-        <tr *ngIf="crudApi.list.length==0" [class.text-danger]="!isValid && crudApi.list.length ==0">
-          <td class="font-italic text-center" colspan="4">
-              Aucun Article pour cet Approvisionnement ...
-          </td>
-        </tr>
-        <tr *ngFor="let item of crudApi.list;let i=index;">
-          <td>{{item.ItemName}}</td>
-          <td>{{item.quantite}}</td>
-          <td>{{item.prixAppro}}</td>
-          <td>{{item.total}}</td>
-          <td>
-            <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
-                <i class="fa fa-pencil"></i></a>
-            <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.id,i)">
-                <i class="fa fa-trash"></i></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- Fin  Ligne de commandes -->
-    <div class="form-group col-sm-4 mb-sm-0" style="padding-left: 0px;">
-      <label><strong>P.Total : </strong></label>
-      <input type="text" formControlName="totalAppro" id="totalAppro" class="form-control" readonly>
+    <div class="form-group" style="margin-top: 10px;">
+        <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;&nbsp;
+        <a class="btn btn-sm btn-primary ml-1" routerLink="/alamine/approvisionnements/detailsApprovisionnements"><i class="fa fa-plus-square"></i> Liste </a>
     </div>
-  </div>
-
-  <div class="form-group" style="margin-top: 10px;">
-    <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;&nbsp;
-    <a class="btn btn-sm btn-primary ml-1" routerLink="/home/detailsApprovisionnements"><i class="fa fa-plus-square"></i> Liste </a>
-  </div>
 
 </form>
 
@@ -138,8 +138,8 @@
   </div>
   -->
 
-  <!-- Debut Ligne de commandes -->
-  <!--
+<!-- Debut Ligne de commandes -->
+<!--
   <table class="table table-borderless">
     <thead class="thead-light">
       <th>Article</th>
@@ -172,7 +172,7 @@
       </tr>
     </tbody>
   </table> -->
-  <!-- Fin  Ligne de commandes -->
+<!-- Fin  Ligne de commandes -->
 <!--
   <div class="form-group row">
     <div class="col-sm-4 mb-3 mb-sm-0">

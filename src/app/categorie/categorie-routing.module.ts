@@ -1,8 +1,7 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { CreateCategorieComponent } from './create-categorie/create-categorie.component';
 import { ListCategorieComponent } from './list-categorie/list-categorie.component';
-import { NgModule } from '@angular/core';
-//import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
@@ -10,7 +9,6 @@ const routes: Routes = [
     path: '',
     component: ListCategorieComponent
   },
-
   {
     path:'categorie',
     component: CreateCategorieComponent
@@ -19,11 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    RouterModule.forChild(routes),
-   // CommonModule
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class CategorieRoutingModule { }

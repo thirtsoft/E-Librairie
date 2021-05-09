@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { Vente } from 'src/app/models/vente';
+import { Vente } from '../../models/vente';
 import { Chart } from 'chart.js';
-import { Client } from '../models/client';
+import { Client } from '../../models/client';
 declare var $: any;
 
 @Component({
