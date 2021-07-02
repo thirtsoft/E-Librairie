@@ -1,7 +1,7 @@
+import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, Input } from '@angular/core';
 import { pdfMake } from 'pdfmake/build/pdfmake';
 import { ViewArticleWithQrcodeBarcodeComponent } from '../view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
 import { CreateArticleWithBarcodeComponent } from '../create-article-with-barcode/create-article-with-barcode.component';
-import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, Input } from '@angular/core';
 import { Product } from 'src/app/models/article';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -10,16 +10,16 @@ import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import {MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
-  selector: 'app-list-article-with-barrcode',
-  templateUrl: './list-article-with-barrcode.component.html',
-  styleUrls: ['./list-article-with-barrcode.component.scss']
+  selector: 'app-list-article-with-bar-code',
+  templateUrl: './list-article-with-bar-code.component.html',
+  styleUrls: ['./list-article-with-bar-code.component.scss']
 })
-export class ListArticleWithBarrcodeComponent implements OnInit {
+export class ListArticleWithBarCodeComponent implements OnInit {
 
   // @Input()
   listData : Product[];
@@ -582,5 +582,6 @@ export class ListArticleWithBarrcodeComponent implements OnInit {
       return body;
   }
   }
+
 
 }

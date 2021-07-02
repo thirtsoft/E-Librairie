@@ -19,9 +19,9 @@
                 <label>Client</label>
                 <div class="form-group">
                     <select name="client" formControlName="client" id="client" class="form-control" [compareWith]="compareClient">
-            <option value="0">-Select-</option>
-            <option *ngFor="let item of ClientList" [ngValue]="item">{{item.chefService}}</option>
-          </select>
+          <option value="0">-Select-</option>
+          <option *ngFor="let item of ClientList" [ngValue]="item">{{item.chefService}}</option>
+        </select>
                 </div>
             </div>
 

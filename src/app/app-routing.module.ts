@@ -1,6 +1,3 @@
-import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
-import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
-import { ListArticleWithBarrcodeComponent } from './article/list-article-with-barcode/list-article-with-barrcode.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -87,6 +84,12 @@ import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.
 import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
 import { UpdateProfileComponent } from './authentication/update-profile/update-profile.component';
 
+import { CreateVentewithQrcodeBarCodeComponent } from './vente/create-ventewith-qrcode-bar-code/create-ventewith-qrcode-bar-code.component';
+import { CreateCommandewithQrcodeBarCodeComponent } from './commande/create-commandewith-qrcode-bar-code/create-commandewith-qrcode-bar-code.component';
+import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
+import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
+import { ListArticleWithBarCodeComponent } from './article/list-article-with-bar-code/list-article-with-bar-code.component';
+
 
 const routes: Routes = [
 
@@ -139,8 +142,8 @@ const routes: Routes = [
       ]
     },
 
-    { path: 'articlesQrCodes', component: ListArticleWithBarrcodeComponent},
-    { path: 'articleQrcode', component: CreateArticleWithBarcodeComponent},
+    { path: 'articlesQrCodes', component: ListArticleWithBarCodeComponent },
+    { path: 'articleQrcode', component: CreateArticleWithBarcodeComponent },
     { path:'articleQrcode/:id',component: ViewArticleWithQrcodeBarcodeComponent }
 
 
@@ -163,6 +166,7 @@ const routes: Routes = [
     { path:'commandeView/:id', component: ViewCommandeComponent },
     { path: 'detailsCommande', component: ListLigneCommandeComponent },
     { path: 'detailsCommande', component: CreateLigneCommandeComponent },
+    { path: 'commandeQrcode', component: CreateCommandewithQrcodeBarCodeComponent },
 
     { path: 'listdevis', component: ListDevisComponent },
     { path:'devis',component: CreateDevisComponent },
@@ -172,6 +176,7 @@ const routes: Routes = [
 
     { path: 'ventes', component: ListVenteComponent},
     { path: 'vente', component: CreateVenteComponent},
+    { path: 'venteQrcode', component: CreateVentewithQrcodeBarCodeComponent },
    /* { path:'vente/:username',children:[
         {path:'',component:CreateVenteComponent},
       ]

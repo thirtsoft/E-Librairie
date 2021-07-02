@@ -125,8 +125,10 @@ import { UploadFileVersementComponent } from './versement/upload-file-versement/
 import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
 import { CreateArticleWithQrcodeComponent } from './article/create-article-with-qrcode/create-article-with-qrcode.component';
 import { ListArticleWithQrcodeComponent } from './article/list-article-with-qrcode/list-article-with-qrcode.component';
-import { ListArticleWithBarrcodeComponent } from './article/list-article-with-barcode/list-article-with-barrcode.component';
 import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
+import { CreateCommandewithQrcodeBarCodeComponent } from './commande/create-commandewith-qrcode-bar-code/create-commandewith-qrcode-bar-code.component';
+import { CreateVentewithQrcodeBarCodeComponent } from './vente/create-ventewith-qrcode-bar-code/create-ventewith-qrcode-bar-code.component';
+import { ListArticleWithBarCodeComponent } from './article/list-article-with-bar-code/list-article-with-bar-code.component';
 
 
 @NgModule({
@@ -232,8 +234,10 @@ import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-wi
     CreateArticleWithBarcodeComponent,
     CreateArticleWithQrcodeComponent,
     ListArticleWithQrcodeComponent,
-    ListArticleWithBarrcodeComponent,
     ViewArticleWithQrcodeBarcodeComponent,
+    CreateCommandewithQrcodeBarCodeComponent,
+    CreateVentewithQrcodeBarCodeComponent,
+    ListArticleWithBarCodeComponent,
 
   ],
   imports: [
@@ -267,11 +271,12 @@ import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-wi
   bootstrap: [AppComponent],
 
   entryComponents: [
-  CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
+    CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
     CreateAvoirComponent, CreateChargeComponent, CreateCommandeComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
-    UpdateUsernameComponent
+    UpdateUsernameComponent, CreateArticleWithBarcodeComponent, CreateVentewithQrcodeBarCodeComponent,
+    CreateCommandewithQrcodeBarCodeComponent
   ]
 
 })
