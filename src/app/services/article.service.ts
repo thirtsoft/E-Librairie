@@ -212,5 +212,22 @@ export class ArticleService {
   }
 
 */
+  createArticleWithBarCode(info: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl_1}/produits/createProduitWithBarcode`, info);
+  }
+
+  public getArticleByBarcode(barCode: string): Observable<Object> {
+    return this.http.get(`${this.baseUrl_1}/produits/searchProduitByBarCode/${barCode}`);
+  }
+
+  createArticleWithQrCode(info: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl_1}/produits/createProduitWithQrcode`, info);
+  }
+
+
+  public getArticleByQrcode(qrCode: string): Observable<Object> {
+    return this.http.get(`${this.baseUrl_1}/produits/searchProduitByQrCode/${qrCode}`);
+  }
+
 
 }
