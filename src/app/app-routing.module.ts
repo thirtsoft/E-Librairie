@@ -144,7 +144,7 @@ const routes: Routes = [
 
     { path: 'articlesQrCodes', component: ListArticleWithBarCodeComponent },
     { path: 'articleQrcode', component: CreateArticleWithBarcodeComponent },
-    { path:'articleQrcode/:id',component: ViewArticleWithQrcodeBarcodeComponent }
+    { path:'articleQrcode/:id',component: ViewArticleWithQrcodeBarcodeComponent },
 
 
 
