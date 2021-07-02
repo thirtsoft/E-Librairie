@@ -1,3 +1,4 @@
+import { Product } from './../models/article';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -33,6 +34,10 @@ export class ArticleService {
   list : Article[];
   dataForm: FormGroup;
   formData: Article;
+
+  listDataArticle : Product[];
+  listArticle : Product[];
+  formDataArticle: Product;
 
   private listners = new Subject<any>();
   listen(): Observable<any> {

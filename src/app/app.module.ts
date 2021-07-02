@@ -122,6 +122,11 @@ import { ListVersementOfEmployeComponent } from './tableau/list-versement-of-emp
 import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
 import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.component';
 import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
+import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
+import { CreateArticleWithQrcodeComponent } from './article/create-article-with-qrcode/create-article-with-qrcode.component';
+import { ListArticleWithQrcodeComponent } from './article/list-article-with-qrcode/list-article-with-qrcode.component';
+import { ListArticleWithBarrcodeComponent } from './article/list-article-with-barrcode/list-article-with-barrcode.component';
+import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
 
 
 @NgModule({
@@ -224,6 +229,11 @@ import { UploadFileVersementComponent } from './versement/upload-file-versement/
     ListStatistiqueComponent,
     UploadContratComponent,
     UploadFileVersementComponent,
+    CreateArticleWithBarcodeComponent,
+    CreateArticleWithQrcodeComponent,
+    ListArticleWithQrcodeComponent,
+    ListArticleWithBarrcodeComponent,
+    ViewArticleWithQrcodeBarcodeComponent,
 
   ],
   imports: [

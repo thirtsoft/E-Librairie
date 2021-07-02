@@ -1,24 +1,25 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Article } from 'src/app/models/article';
 import { Scategorie } from 'src/app/models/scategorie';
+import { Product } from './../../models/article';
 import { ArticleService } from 'src/app/services/article.service';
 import { ScategorieService } from 'src/app/services/scategorie.service';
 import { CategorieService } from 'src/app/services/categorie.service';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatDialogRef } from "@angular/material/dialog";
 import { isNullOrUndefined } from 'util';
 
-@Component({
-  selector: 'app-create-article',
-  templateUrl: './create-article.component.html',
-  styleUrls: ['./create-article.component.scss']
-})
-export class CreateArticleComponent implements OnInit {
 
-  formDataArticle = new Article();
+@Component({
+  selector: 'app-create-article-with-barcode',
+  templateUrl: './create-article-with-barcode.component.html',
+  styleUrls: ['./create-article-with-barcode.component.scss']
+})
+export class CreateArticleWithBarcodeComponent implements OnInit {
+
+  formDataArticle = new Product();
   listScategories: Scategorie[];
   addArticleForm: NgForm;
 
@@ -30,13 +31,13 @@ export class CreateArticleComponent implements OnInit {
     private catService: CategorieService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateArticleComponent>,
+    public dialogRef:MatDialogRef<CreateArticleWithBarcodeComponent>,
   ) { }
 
   ngOnInit() {
     this.getScategories();
     if (!isNullOrUndefined(this.data.id)) {
-      this.formDataArticle = Object.assign({},this.crudApi.listData[this.data.id])
+      this.formDataArticle = Object.assign({},this.crudApi.listArticle[this.data.id])
       console.log(this.formDataArticle);
     }
   }
@@ -129,8 +130,8 @@ export class CreateArticleComponent implements OnInit {
 
   }
 
-  saveArticle(art: Article) {
-    this.crudApi.createArticle(art).
+  saveArticle(art: Product) {
+    this.crudApi.createArticleWithBarCode(art).
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
@@ -142,7 +143,7 @@ export class CreateArticleComponent implements OnInit {
       this.router.navigate(['/home/articles']);
     });
   }
-  updateArticle(id: number, art: Article){
+  updateArticle(id: number, art: Product){
     this.crudApi.updateArticle(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.toastr.success("Article Modifier avec Succès");
