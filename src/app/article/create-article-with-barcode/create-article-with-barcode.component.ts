@@ -93,7 +93,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   onSubmits() {
     if(isNullOrUndefined(this.data.artId)) {
-      this.crudApi.createArticle(this.formDataArticle).
+      this.crudApi.createArticleWithBarCode(this.formDataArticle).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
@@ -101,7 +101,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/home/articles']);
+        this.router.navigate(['/home/articlesQrCodes']);
       });
 
     }else {
@@ -114,7 +114,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/home/articles']);
+        this.router.navigate(['/home/articlesQrCodes']);
       });
     }
 

@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ArticleService } from 'src/app/services/article.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Subject, pipe } from 'rxjs';
+import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CreateArticleComponent } from '../create-article/create-article.component';

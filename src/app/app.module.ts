@@ -125,7 +125,7 @@ import { UploadFileVersementComponent } from './versement/upload-file-versement/
 import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
 import { CreateArticleWithQrcodeComponent } from './article/create-article-with-qrcode/create-article-with-qrcode.component';
 import { ListArticleWithQrcodeComponent } from './article/list-article-with-qrcode/list-article-with-qrcode.component';
-import { ListArticleWithBarrcodeComponent } from './article/list-article-with-barrcode/list-article-with-barrcode.component';
+import { ListArticleWithBarrcodeComponent } from './article/list-article-with-barcode/list-article-with-barrcode.component';
 import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
 
 

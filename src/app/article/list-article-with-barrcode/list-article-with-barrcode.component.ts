@@ -9,10 +9,9 @@ import { ArticleService } from 'src/app/services/article.service';
 import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Subject, pipe } from 'rxjs';
+import { Subject } from 'rxjs';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CreateArticleComponent } from '../create-article/create-article.component';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
