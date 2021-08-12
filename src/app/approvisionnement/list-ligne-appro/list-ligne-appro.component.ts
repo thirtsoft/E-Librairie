@@ -96,7 +96,9 @@ export class ListLigneApproComponent implements OnInit {
 
   onCreateLigneAppro() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("alamine/approvisionnements/approvisionnement");
+  //  this.router.navigateByUrl("alamine/approvisionnements/approvisionnement");
+    this.router.navigateByUrl("home/approvisionnement");
+
   }
 
 /*  deleteLigneAppro(id: number) {

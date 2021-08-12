@@ -87,7 +87,8 @@ export class ListApproComponent implements OnDestroy, OnInit {
 
   onCreateAppro() {
     this.crudApi.choixmenu = "A";
-    this.router.navigateByUrl("alamine/approvisionnements/approvisionnement");
+  //  this.router.navigateByUrl("alamine/approvisionnements/approvisionnement");
+    this.router.navigateByUrl("home/approvisionnement");
   }
 
   addEditMontantAvanceAppro(item : Appro) {
