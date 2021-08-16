@@ -44,12 +44,13 @@
     "jquery": "^3.5.1",
     "ng2-charts": "^2.4.2",
     "ngx-toastr": "^10.2.0",
+    "node-sass": "^4.14.1",
     "pdfmake": "^0.1.68",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.6.3",
     "serve": "^11.3.2",
     "tslib": "^1.9.0",
-    "xlsx": "^0.16.7",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
