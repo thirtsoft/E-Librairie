@@ -117,7 +117,7 @@ export class CategorieService {
     return this.http.post(`${this.baseUrl}/categories`, info);
   } */
 
-  private createCategorieAPI(info: Categorie) {
+  public createCategorieAPI(info: Categorie) {
     this.http.post(`${this.baseUrl}/categories`, info)
       .subscribe(
         ()=> alert('Categorie ajouté avec succes'),

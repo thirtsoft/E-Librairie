@@ -1,3 +1,5 @@
+import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
+import { ListArticleWithBarArcodeComponent } from './article/list-article-with-bar-arcode/list-article-with-bar-arcode.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -86,9 +88,6 @@ import { UpdateProfileComponent } from './authentication/update-profile/update-p
 
 import { CreateVentewithQrcodeBarCodeComponent } from './vente/create-ventewith-qrcode-bar-code/create-ventewith-qrcode-bar-code.component';
 import { CreateCommandewithQrcodeBarCodeComponent } from './commande/create-commandewith-qrcode-bar-code/create-commandewith-qrcode-bar-code.component';
-import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
-import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
-import { ListArticleWithBarCodeComponent } from './article/list-article-with-bar-code/list-article-with-bar-code.component';
 
 
 const routes: Routes = [
@@ -142,10 +141,8 @@ const routes: Routes = [
       ]
     },
 
-    { path: 'articlesQrCodes', component: ListArticleWithBarCodeComponent },
-    { path: 'articleQrcode', component: CreateArticleWithBarcodeComponent },
-    { path:'articleQrcode/:id',component: ViewArticleWithQrcodeBarcodeComponent },
-
+    { path: 'listArticleWithBarcode', component: ListArticleWithBarArcodeComponent},
+    { path: 'articleWithBarcode', component: CreateArticleWithBarcodeComponent},
 
 
     { path: 'clients', component: ListClientComponent},

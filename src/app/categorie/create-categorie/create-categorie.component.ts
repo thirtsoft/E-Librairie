@@ -17,10 +17,12 @@ export class CreateCategorieComponent implements OnInit {
 
   listData : Categorie[];
 
-  constructor(public crudApi: CategorieService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateCategorieComponent>,
-    ) { }
+  constructor(public crudApi: CategorieService ,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateCategorieComponent>,
+  ) { }
 
   get f() { return this.crudApi.dataForm.controls; }
 
@@ -50,7 +52,8 @@ export class CreateCategorieComponent implements OnInit {
   onSubmit() {
    /*  if (this.crudApi.dataForm.valid) { */
       if (this.crudApi.choixmenu == "A"){
-        this.crudApi.createCategorie(this.crudApi.dataForm.value);
+  //      this.crudApi.createCategorie(this.crudApi.dataForm.value);
+        this.saveCategorie();
         this.dialogRef.close();
       }else{
         console.log('non ajouter');
@@ -59,7 +62,7 @@ export class CreateCategorieComponent implements OnInit {
   }
 
   saveCategorie() {
-    this.crudApi.createCategorie(this.crudApi.dataForm.value);
+    this.crudApi.createCategorieAPI(this.crudApi.dataForm.value);
        this.dialogRef.close();
       this.crudApi.filter('Register click');
       this.toastr.success("Categorie Ajouté avec Succès");

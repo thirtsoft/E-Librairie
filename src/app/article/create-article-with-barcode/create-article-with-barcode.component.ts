@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Scategorie } from 'src/app/models/scategorie';
-import { Product } from './../../models/article';
-import { ArticleService } from 'src/app/services/article.service';
-import { ScategorieService } from 'src/app/services/scategorie.service';
-import { CategorieService } from 'src/app/services/categorie.service';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { isNullOrUndefined } from 'util';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatDialogRef } from "@angular/material/dialog";
-import { isNullOrUndefined } from 'util';
+import { CategorieService } from 'src/app/services/categorie.service';
+import { ScategorieService } from 'src/app/services/scategorie.service';
+import { ArticleService } from 'src/app/services/article.service';
+import { NgForm, FormBuilder } from '@angular/forms';
+import { Scategorie } from 'src/app/models/scategorie';
+import { Article } from 'src/app/models/article';
+import { Product } from './../../models/article';
 
 
 @Component({
@@ -19,7 +19,7 @@ import { isNullOrUndefined } from 'util';
 })
 export class CreateArticleWithBarcodeComponent implements OnInit {
 
-  formDataArticle = new Product();
+  formDataArticle = new Article();
   listScategories: Scategorie[];
   addArticleForm: NgForm;
 
@@ -27,7 +27,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   submitted = false;
 
-  constructor(public crudApi: ArticleService, public scatService: ScategorieService ,
+  constructor(public crudApi: ArticleService, public scatService: ScategorieService,
     private catService: CategorieService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
@@ -37,7 +37,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
   ngOnInit() {
     this.getScategories();
     if (!isNullOrUndefined(this.data.id)) {
-      this.formDataArticle = Object.assign({},this.crudApi.listArticle[this.data.id])
+      this.formDataArticle = Object.assign({},this.crudApi.listData[this.data.id])
       console.log(this.formDataArticle);
     }
   }
@@ -101,7 +101,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/home/articlesQrCodes']);
+        this.router.navigate(['/home/listArticleWithBarcode']);
       });
 
     }else {
@@ -114,7 +114,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
         this.crudApi.getAllArticles().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/home/articlesQrCodes']);
+        this.router.navigate(['/home/listArticleWithBarcode']);
       });
     }
 
@@ -130,7 +130,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   }
 
-  saveArticle(art: Product) {
+  saveArticle(art: Article) {
     this.crudApi.createArticleWithBarCode(art).
     subscribe( data => {
       this.dialogRef.close();
@@ -140,10 +140,10 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
         response =>{this.crudApi.listData = response;},
 
       );
-      this.router.navigate(['/home/articles']);
+      this.router.navigate(['/home/listArticleWithBarcode']);
     });
   }
-  updateArticle(id: number, art: Product){
+  updateArticle(id: number, art: Article){
     this.crudApi.updateArticle(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.toastr.success("Article Modifier avec Succès");
@@ -151,7 +151,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
       this.crudApi.getAllArticles().subscribe(
         response =>{this.crudApi.listData = response;}
       );
-      this.router.navigate(['/home/articles']);
+      this.router.navigate(['/home/listArticleWithBarcode']);
     });
   }
 

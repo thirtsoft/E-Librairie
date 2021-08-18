@@ -1,28 +1,39 @@
-import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, Input } from '@angular/core';
-import { pdfMake } from 'pdfmake/build/pdfmake';
-import { ViewArticleWithQrcodeBarcodeComponent } from '../view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
-import { CreateArticleWithBarcodeComponent } from '../create-article-with-barcode/create-article-with-barcode.component';
-import { Product } from 'src/app/models/article';
+import { CreateArticleWithBarcodeComponent } from './../create-article-with-barcode/create-article-with-barcode.component';
+import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Article } from 'src/app/models/article';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ArticleService } from 'src/app/services/article.service';
-import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CreateArticleComponent } from '../create-article/create-article.component';
 import { DialogService } from 'src/app/services/dialog.service';
+/* import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx'; */
+
+import * as XLSX from 'xlsx';
+
+
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { style } from '@angular/animations';
+import { DataTableDirective } from 'angular-datatables';
+import { ViewArticleComponent } from '../view-article/view-article.component';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
-  selector: 'app-list-article-with-bar-code',
-  templateUrl: './list-article-with-bar-code.component.html',
-  styleUrls: ['./list-article-with-bar-code.component.scss']
+  selector: 'app-list-article-with-bar-arcode',
+  templateUrl: './list-article-with-bar-arcode.component.html',
+  styleUrls: ['./list-article-with-bar-arcode.component.scss']
 })
-export class ListArticleWithBarCodeComponent implements OnInit {
+export class ListArticleWithBarArcodeComponent implements OnInit {
 
   // @Input()
-  listData : Product[];
+  listData : Article[];
 
   @ViewChild('htmlData') htmlData:ElementRef;
 
@@ -45,7 +56,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateArticleWithBarcodeComponent>,
+    public dialogRef:MatDialogRef<CreateArticleComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
@@ -101,7 +112,18 @@ export class ListArticleWithBarCodeComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     //dialogConfig.data="gdddd";
+    this.matDialog.open(CreateArticleComponent, dialogConfig);
+  }
+
+  onCreateArticleWithBarCoder(){
+    this.crudApi.choixmenu = "A";
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    //dialogConfig.data="gdddd";
     this.matDialog.open(CreateArticleWithBarcodeComponent, dialogConfig);
+
   }
 
   addEditArticle(id?: number) {
@@ -112,7 +134,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
     dialogConfig.data = {
       id
     };
-    this.matDialog.open(CreateArticleWithBarcodeComponent, dialogConfig);
+    this.matDialog.open(CreateArticleComponent, dialogConfig);
   }
 
   viewArticle(id?: number) {
@@ -123,10 +145,10 @@ export class ListArticleWithBarCodeComponent implements OnInit {
     dialogConfig.data = {
       id
     };
-    this.matDialog.open(ViewArticleWithQrcodeBarcodeComponent, dialogConfig);
+    this.matDialog.open(ViewArticleComponent, dialogConfig);
   }
 
-  editerArticle(item : Product) {
+  editerArticle(item : Article) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
@@ -134,7 +156,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
 
-    this.matDialog.open(CreateArticleWithBarcodeComponent, dialogConfig);
+    this.matDialog.open(CreateArticleComponent, dialogConfig);
   }
 /*
   deleteArticle(id: number) {
@@ -164,8 +186,8 @@ export class ListArticleWithBarCodeComponent implements OnInit {
     });
   }
 
-  editArticle(item : Product) {
-    this.router.navigateByUrl('articleQrcode/'+item.id);
+  editArticle(item : Article) {
+    this.router.navigateByUrl('article/'+item.id);
   }
 
   uploadExcelFile() {
@@ -299,7 +321,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
           margin: [0, 0, 0, 20]
         },
 
-        this.getListArticle(this.crudApi.listArticle),
+        this.getListArticle(this.crudApi.listData),
         {
 
         },
@@ -346,7 +368,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
     };
 
   }
-  getListArticle(item: Product[]) {
+  getListArticle(item: Article[]) {
     return {
       table: {
         widths: ['*','*','*','*','*','*'],
@@ -377,9 +399,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
               style: 'tableHeader'
             },
           ],
-          ...item.map(x => {
-            return [x.designation, x.scategorie.libelle, x.prixAchat, x.prixVente, x.prixDetail, x.qtestock];
-          })
+
         ]
       }
     }
@@ -418,7 +438,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
                 margin: [0, 0, 0, 20]
               },
 
-              this.getList(this.crudApi.listArticle),
+              this.getList(this.crudApi.listData),
               {
 
               },
@@ -471,7 +491,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
 
   }
 
-  getList(item: Product[]) {
+  getList(item: Article[]) {
     let officersIds = [];
     return {
       table: {
@@ -568,7 +588,7 @@ export class ListArticleWithBarCodeComponent implements OnInit {
 
   }
 
-  bodyRows(rowCount, listData: Product[]) {
+  bodyRows(rowCount, listData: Article[]) {
    // rowCount = rowCount || 10;
     let body = [];
     for (var j = 0; j < listData.length; j++) {
@@ -582,6 +602,5 @@ export class ListArticleWithBarCodeComponent implements OnInit {
       return body;
   }
   }
-
 
 }

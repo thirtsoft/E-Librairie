@@ -4,7 +4,6 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
             <li class="active">
-                <!-- <a class="" routerLink="/home/dashboard" routerLinkActive="router-link-active"> -->
                 <a class="" routerLink="/alamine/dashboard" routerLinkActive="router-link-active">
                     <i class="icon_house_alt"></i>
                     <span>Tableau de Bord</span>
@@ -13,21 +12,20 @@
             <!-- <li class="sub-menu" *ngIf="showAdminBoard"> -->
             <li class="sub-menu">
                 <a href="javascript:0;" class="">
-                    <!-- <i class="icon_document_alt"></i> -->
                     <i class="fa fa-book fa-fw" aria-hidden="true"></i>
                     <span>Library</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
-                    <li><a class="" routerLink="/alamine/categories" routerLinkActive="router-link-active">Catégories</a></li>
-                    <li><a class="" routerLink="/alamine/scategories" routerLinkActive="router-link-active">Scatégories</a></li>
-                    <li><a class="" routerLink="/alamine/articles" routerLinkActive="router-link-active">Articles</a></li>
+                    <li><a class="" routerLink="/home/categories" routerLinkActive="router-link-active">Catégories</a></li>
+                    <li><a class="" routerLink="/home/scategories" routerLinkActive="router-link-active">Scatégories</a></li>
+                     <li><a class="" routerLink="/home/articles" routerLinkActive="router-link-active">Articles</a></li>
+                    <li><a class="" routerLink="/home/articlesQrCodes" routerLinkActive="router-link-active">ArticlesBarCode</a></li>
                 </ul>
             </li>
             <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
             <li class="sub-menu">
                 <a href="javascript:0;" class="">
-                    <!--  <i class="icon_desktop"></i> -->
                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                     <span>Commandes</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
@@ -58,7 +56,6 @@
             <!-- <li class="sub-menu" *ngIf="showVendeurBoard"> -->
             <li class="sub-menu">
                 <a href="javascript:;" class="">
-                    <!--  <i class="icon_table"></i> -->
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     <span>Ventes</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
@@ -86,7 +83,6 @@
 
             <li class="sub-menu">
                 <a href="javascript:;" class="">
-                    <!--    <i class="icon_documents_alt"></i> -->
                     <i class="fa fa-line-chart" aria-hidden="true"></i>
                     <span>Mouvement</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
@@ -100,7 +96,6 @@
 
             <li class="sub-menu">
                 <a href="javascript:;" class="">
-                    <!--  <i class="icon_documents_alt"></i> -->
                     <i class="fa fa-usd" aria-hidden="true"></i>
                     <span>Réglement</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
@@ -115,7 +110,6 @@
 
             <li>
                 <a class="" routerLink="/home/chart">
-                    <!-- <i class="icon_piechart"></i> -->
                     <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     <span>Graphiques</span>
                 </a>
@@ -123,15 +117,19 @@
 
             <li>
                 <a class="" routerLink="/home/tableau">
-                    <!-- <i class="icon_piechart"></i> -->
                     <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     <span>Résumés</span>
                 </a>
             </li>
+            <li>
+              <a class="" routerLink="/home/articlesQrCodes">
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                  <span>CodeBarArticle</span>
+              </a>
+          </li>
 
             <li class="sub-menu">
                 <a href="javascript:;" class="">
-                    <!--  <i class="icon_documents_alt"></i> -->
                     <i class="fa fa-users" aria-hidden="true"></i>
                     <span>Personnes</span>
                     <span class="menu-arrow arrow_carrot-right"></span>

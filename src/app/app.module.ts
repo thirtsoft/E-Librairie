@@ -122,13 +122,10 @@ import { ListVersementOfEmployeComponent } from './tableau/list-versement-of-emp
 import { ListStatistiqueComponent } from './tableau/list-statistique/list-statistique.component';
 import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.component';
 import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
-import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
-import { CreateArticleWithQrcodeComponent } from './article/create-article-with-qrcode/create-article-with-qrcode.component';
-import { ListArticleWithQrcodeComponent } from './article/list-article-with-qrcode/list-article-with-qrcode.component';
-import { ViewArticleWithQrcodeBarcodeComponent } from './article/view-article-with-qrcode-barcode/view-article-with-qrcode-barcode.component';
 import { CreateCommandewithQrcodeBarCodeComponent } from './commande/create-commandewith-qrcode-bar-code/create-commandewith-qrcode-bar-code.component';
 import { CreateVentewithQrcodeBarCodeComponent } from './vente/create-ventewith-qrcode-bar-code/create-ventewith-qrcode-bar-code.component';
-import { ListArticleWithBarCodeComponent } from './article/list-article-with-bar-code/list-article-with-bar-code.component';
+import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
+import { ListArticleWithBarArcodeComponent } from './article/list-article-with-bar-arcode/list-article-with-bar-arcode.component';
 
 
 @NgModule({
@@ -231,13 +228,10 @@ import { ListArticleWithBarCodeComponent } from './article/list-article-with-bar
     ListStatistiqueComponent,
     UploadContratComponent,
     UploadFileVersementComponent,
-    CreateArticleWithBarcodeComponent,
-    CreateArticleWithQrcodeComponent,
-    ListArticleWithQrcodeComponent,
-    ViewArticleWithQrcodeBarcodeComponent,
     CreateCommandewithQrcodeBarCodeComponent,
     CreateVentewithQrcodeBarCodeComponent,
-    ListArticleWithBarCodeComponent,
+    CreateArticleWithBarcodeComponent,
+    ListArticleWithBarArcodeComponent,
 
   ],
   imports: [
@@ -271,11 +265,11 @@ import { ListArticleWithBarCodeComponent } from './article/list-article-with-bar
   bootstrap: [AppComponent],
 
   entryComponents: [
-    CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateClientComponent,
+    CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateArticleWithBarcodeComponent, CreateClientComponent,
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
     CreateAvoirComponent, CreateChargeComponent, CreateCommandeComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
-    UpdateUsernameComponent, CreateArticleWithBarcodeComponent, CreateVentewithQrcodeBarCodeComponent,
+    UpdateUsernameComponent, CreateVentewithQrcodeBarCodeComponent,
     CreateCommandewithQrcodeBarCodeComponent
   ]
 

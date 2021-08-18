@@ -4,6 +4,8 @@ import { Scategorie } from './scategorie';
 export class Article {
   id: number;
   reference: string;
+  barCode: string;
+  qrCode: string;
   designation: string;
   prixAchat: number;
   prixVente: number;

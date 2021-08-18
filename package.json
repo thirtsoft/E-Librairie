@@ -46,6 +46,7 @@
     "ngx-toastr": "^10.2.0",
     "node-sass": "^4.14.1",
     "pdfmake": "^0.1.68",
+    "popper.js": "^1.14.3",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.6.3",
     "serve": "^11.3.2",

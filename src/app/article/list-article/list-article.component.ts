@@ -1,3 +1,4 @@
+import { CreateArticleWithBarcodeComponent } from './../create-article-with-barcode/create-article-with-barcode.component';
 import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { map } from 'rxjs/operators';
@@ -111,6 +112,17 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     //dialogConfig.data="gdddd";
     this.matDialog.open(CreateArticleComponent, dialogConfig);
+  }
+
+  onCreateArticleWithBarCoder(){
+    this.crudApi.choixmenu = "A";
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    //dialogConfig.data="gdddd";
+    this.matDialog.open(CreateArticleWithBarcodeComponent, dialogConfig);
+
   }
 
   addEditArticle(id?: number) {
@@ -386,9 +398,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
               style: 'tableHeader'
             },
           ],
-          ...item.map(x => {
-            return [x.designation, x.scategorie.libelle, x.prixAchat, x.prixVente, x.prixDetail, x.qtestock];
-          })
+
         ]
       }
     }
