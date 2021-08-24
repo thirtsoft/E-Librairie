@@ -50,7 +50,7 @@ export class CreateVenteComponent implements OnInit {
    // public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
     ) { }
 
-    get f() { return this.crudApi.formData.controls; }
+  get f() { return this.crudApi.formData.controls; }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A") {

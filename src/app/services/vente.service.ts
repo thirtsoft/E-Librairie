@@ -100,6 +100,10 @@ export class VenteService {
     return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, info);
   }
 
+  saveVenteWithBarcode(info: Vente, id:number) {
+    return this.http.post(`${this.baseUrl_1}/ventes/venteWithbarCode?id=`+id, info);
+  }
+
 
    createData(info: Object, id: number): Observable<Object> {
      return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, info);

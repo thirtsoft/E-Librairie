@@ -4,19 +4,19 @@
     </div>
 </mat-toolbar>
 
-<form>
+<form [formGroup]="formDataVente" (ngSubmit)="onSubmit()">
     <div class="row">
 
         <div class="form-row col-sm-4 mb-3 mb-sm-0">
             <label><strong>Numéro Vente : </strong></label>
-            <input type="text" class="form-control" (keypress)="onKey($event)">
+            <input type="text" class="form-control" (keypress)="onKey($event)" formControlName="barcode">
         <!--     <input type="text" (window:keypress)="onKey($event)"  autofocus />-->
             <p>barcode: {{ barcode }}</p>
         </div>
 
         <div class="form-group col-sm-4 mb-3 mb-sm-0">
             <label>Type Réglement</label>
-            <select name="typeReglement" id="typeReglement" class="form-control">
+            <select name="typeReglement" formControlName="typeReglement" id="typeReglement" [compareWith]="compareVente" class="form-control">
                 <option value="0">-Select-</option>
                 <option *ngFor="let item of listDataReglement" [ngValue]="item">{{item}}</option>
               </select>
@@ -24,7 +24,7 @@
 
         <div class="form-group col-sm-4 mb-3 mb-sm-0">
             <label>Montant Réglement</label>
-            <input type="number" class="form-control" id="status">
+            <input type="number" formControlName="montantReglement" class="form-control" id="status">
         </div>
     </div>
     <div class="cart transition is-open">
@@ -40,10 +40,7 @@
                 <div class="col">Action</div>
             </div>
 
-
-            {{this.lastScannedBarCode}}
-
-            <div class="layout-inline row" *ngIf="this.listOfScannedBarCodes.length == 0">No items added yet. Scan barcode of products.</div>
+            <div class="layout-inline row align-center" *ngIf="this.listOfScannedBarCodes.length == 0">No items added yet. Scan barcode of products.</div>
 
             <div *ngIf="this.listOfScannedBarCodes.length > 0">
 
@@ -57,18 +54,24 @@
                       <p>{{item.price}}</p>
                   </div>
 
-                  <div class="col col-qty layout-inline">
+                  <!-- <div class="col col-qty layout-inline">
                       <a href="#" class="qty qty-minus">-</a>
                       <input type="numeric" value={{item.quantity}} />
                       <a href="#" class="qty qty-plus">+</a>
-                  </div>
+                  </div> -->
+
+                  <div class="col col-qty layout-inline">
+                    <a (click)="decrementQuantity(item)" class="qty qty-minus" style="cursor: pointer;">-</a>
+                    <input type="numeric" value={{item.quantity}} />
+                    <a (click)="inCrementQuantity(item)" class="qty qty-plus" style="cursor: pointer;">+</a>
+                </div>
 
                   <div class="col col-total col-numeric">
                       <p> {{item.quantity * item.price}}</p>
                   </div>
 
                   <div class="col col-total col-numeric">
-                      <a class="btn btn-sm btn-danger text-white ml-1">
+                      <a (click)="removeCart(item)" class="btn btn-sm btn-danger text-white ml-1" style="cursor: pointer;">
                           <i class="fa fa-trash"></i></a>
                   </div>
 
@@ -186,7 +189,7 @@
                 <div class="row layout-inline">
                     <div class="col">
                         <p>Total :
-                            <input type="text" value="{{this.totalAmount}}" id="totalVente" class="form-control" readonly>
+                            <input type="text" value="{{this.totalAmount}}" id="totalAmount" formControlName="totalAmount" class="form-control" readonly>
                         </p>
                     </div>
                     <div class="col"></div>

@@ -4,7 +4,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Vente } from 'src/app/models/vente';
 import { VenteService } from 'src/app/services/vente.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
-import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateLigneVenteComponent } from '../create-ligne-vente/create-ligne-vente.component';
@@ -52,6 +52,8 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   barcode;
   values: string[] = [];
 
+  formDataVente:  FormGroup;
+
   constructor(public crudApi: VenteService,
               private artService: ArticleService,
               public lventeService: LigneVenteService,
@@ -62,50 +64,28 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
               private router :Router
   ) { }
 
-  get f() { return this.crudApi.formData.controls; }
+  get f() { return this.formDataVente.controls; }
 
   ngOnInit() {
-   /*  if (this.crudApi.choixmenu == "A") {
+    if (this.crudApi.choixmenu == "A") {
       this.infoForm();
-      this.crudApi.list = [];
+      this.listOfScannedBarCodes = [];
     }else {
-      this.lventeService.getAllByNumero(this.crudApi.formData.value.numeroVente).subscribe(
-        response => {
-          this.crudApi.list = response;
-          let i;
-          for (i=0; i<this.crudApi.list.length; i++) {
-            this.total = parseFloat((this.crudApi.list[i].quantite * this.crudApi.list[i].prix).toFixed(2));
-            this.crudApi.list[i].total = this.total;
-            this.crudApi.list[i].ItemName = this.crudApi.list[i].produit.reference;
-            console.log(this.crudApi.list[i].ItemName);
-          }
-        }
-      );
-      this.f['dateVente'].setValue(this.crudApi.formData.value.dateVente);
+     /*  this.f['dateVente'].setValue(this.formDataVente.value.dateVente); */
     }
 
-    this.crudApi.getNumeroVente();
-
     this.crudApi.getUserId();
- */
-
   }
 
   infoForm() {
-    this.crudApi.formData = this.fb.group({
-    //  venteId: null,
-    //  numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
-
-      numeroVente: this.crudApi.NumVente,
-      total: [0, Validators.required],
-      totalVente: [0, Validators.required],
-      status: ['', Validators.required],
+    this.formDataVente = this.fb.group({
+      // total: [0, Validators.required],
+      totalAmount: [0, Validators.required],
+      // status: ['', Validators.required],
       typeReglement: ['', Validators.required],
       montantReglement: [0, Validators.required],
       dateVente: [new Date(), Validators.required],
       DeletedOrderItemIDs: '',
-      ligneVentes: [[], Validators.required],
-     // utilisateur: this.crudApi.id,
 
     });
 
@@ -115,38 +95,24 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
   }
 
-  AddData(lcommandeIndex, OrderId){
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    dialogConfig.data={lcommandeIndex, OrderId};
-    this.dialog.open(CreateLigneVenteComponent, dialogConfig).afterClosed().subscribe(res =>{
-        this.calculMontantTotal();
-    });
 
-  }
-  calculMontantTotal() {
-    this.f['totalVente'].setValue(this.crudApi.list.reduce((prev, curr) => {
-      return prev + curr.total;
-    }, 0));
-  }
 
   validateForm() {
     this.isValid = true;
-    if (this.crudApi.formData.value.id_client==0)
+    if (this.formDataVente.value.id_client === 0)
       this.isValid = false
-    else if (this.crudApi.list.length==0)
+    else if (this.listOfScannedBarCodes.length === 0)
       this.isValid = false;
     return this.isValid;
   }
 
   onSubmit() {
-    this.f['ligneVentes'].setValue(this.crudApi.list);
-    console.log(this.crudApi.formData.value);
-    console.log(this.crudApi.formData.value.numeroVente);
-    console.log(this.crudApi.formData.value, this.crudApi.id);
-    this.crudApi.saveVente(this.crudApi.formData.value, this.crudApi.id).subscribe(
+   /*  this.f['ligneVentes'].setValue(this.listOfScannedBarCodes); */
+    console.log(this.formDataVente.value);
+    console.log(this.formDataVente.value.numeroVente);
+    console.log(this.formDataVente.value, this.crudApi.id);
+    console.log("Identité user " + this.crudApi.id)
+    this.crudApi.saveVenteWithBarcode(this.formDataVente.value, this.crudApi.id).subscribe(
       data => {
         console.log(data);
         this.toastr.success('Vente Effectuée avec succès');
@@ -154,16 +120,6 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       }
     );
 
-  }
-
-  onDeleteOrderItem(id: number, i: number) {
-    if (id != null) {
-      this.lventeService.deleteLigneVente(id).subscribe(data => {
-        this.toastr.warning('Détails Vente supprimé avec succès!');
-      });
-    }
-    this.crudApi.list.splice(i, 1);
-    this.calculMontantTotal();
   }
 
   transformDate(date){
@@ -194,7 +150,6 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     if (this.barcode) {
       this.artService.getArticleByBarcode(this.barcode).subscribe(
         (data: Product)=> {
-          console.log("Article by barcode is " + data);
           if (this.barcode === data.barCode) {
             console.log("Barcode of barcode is " + this.barcode);
             this.listOfScannedBarCodes.push({barcode: this.barcode, designation: data.designation, price: data.prixDetail, quantity: 1});
@@ -206,6 +161,25 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
     }
 
+  }
+
+  addTocart(theCartItem){
+    let alreadyExistsInCart: boolean = false;
+    let existingCartItem = undefined;
+
+    if (this.listOfScannedBarCodes.length > 0) {
+      existingCartItem = this.listOfScannedBarCodes.find(tempCartItem => tempCartItem.id === theCartItem.id);
+
+      alreadyExistsInCart = (existingCartItem != undefined)
+    }
+    if (alreadyExistsInCart) {
+      existingCartItem.quantity++;
+    }else {
+      // add to the cart item array
+      this.listOfScannedBarCodes.push(theCartItem);
+    }
+
+    this.updateTotals();
   }
 
   updateTotals() {
@@ -225,7 +199,31 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     }
 
     return undefined;
-}
+  }
+
+  inCrementQuantity(item) {
+    this.addTocart(item);
+  }
+
+  decrementQuantity(item) {
+    item.quantity--;
+    if (item.quantity === 0) {
+      this.removeCart(item);
+    } else {
+      this.updateTotals();
+    }
+
+  }
+
+  removeCart(item) {
+    const itemIndex = this.listOfScannedBarCodes.findIndex((tempCartItem) => tempCartItem.id === item.id);
+    if (itemIndex > -1) {
+      this.listOfScannedBarCodes.splice(itemIndex, 1);
+      this.updateTotals();
+
+    }
+
+  }
 
 
 
