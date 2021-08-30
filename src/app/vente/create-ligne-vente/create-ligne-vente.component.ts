@@ -1,12 +1,12 @@
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
 import { Component, OnInit, Inject } from '@angular/core';
 import { LigneVente } from 'src/app/models/ligne-vente';
-import { Article } from 'src/app/models/article';
 import { LigneVenteService } from 'src/app/services/ligne-vente.service';
 import { ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ArticleService } from 'src/app/services/article.service';
 import { VenteService } from 'src/app/services/vente.service';
-import { FormBuilder, NgForm, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Vente } from 'src/app/models/vente';
 
 @Component({
@@ -16,7 +16,7 @@ import { Vente } from 'src/app/models/vente';
 })
 export class CreateLigneVenteComponent implements OnInit {
 
-  listArticle: Article[];
+  listArticle: Produit[];
 
   isValid: boolean = true;
   approvisionnement: any;
@@ -25,13 +25,16 @@ export class CreateLigneVenteComponent implements OnInit {
   lvente: LigneVente;
   formData: FormGroup;
 
-  constructor(public lventeService: LigneVenteService, private toastr :ToastrService,
-    private articleService: ArticleService, private venteService: VenteService,
-    @Inject(MAT_DIALOG_DATA) public data, public fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateLigneVenteComponent>,
-   ) { }
+  constructor(public lventeService: LigneVenteService,
+              private toastr :ToastrService,
+              private articleService: ProduitService,
+              private venteService: VenteService,
+              @Inject(MAT_DIALOG_DATA) public data,
+              public fb: FormBuilder,
+              public dialogRef: MatDialogRef<CreateLigneVenteComponent>,
+  ) { }
 
-   get f() { return this.formData.controls; }
+  get f() { return this.formData.controls; }
 
   ngOnInit() {
     if (this.data.lcommandeIndex == null) {
@@ -41,7 +44,7 @@ export class CreateLigneVenteComponent implements OnInit {
       console.log(this.formData);
     }
 
-    this.articleService.getAllArticles().subscribe(
+    this.articleService.getAllProduits().subscribe(
       response =>{
         this.listArticle = response;
       }
@@ -59,13 +62,13 @@ export class CreateLigneVenteComponent implements OnInit {
       qteStock: 0,
       ItemName: '',
       total: 0,
-      produit: new Article(),
+      produit: new Produit(),
       vente: new Vente(),
     });
 
   }
 
-  compareProduit(prod1: Article, prod2: Article) : boolean {
+  compareProduit(prod1: Produit, prod2: Produit) : boolean {
     return prod1 && prod2 ? prod1.id === prod2.id : prod1 === prod2;
   }
 

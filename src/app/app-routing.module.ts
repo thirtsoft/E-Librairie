@@ -174,6 +174,7 @@ const routes: Routes = [
     { path: 'ventes', component: ListVenteComponent},
     { path: 'vente', component: CreateVenteComponent},
     { path: 'venteQrcode', component: CreateVentewithQrcodeBarCodeComponent },
+    { path: 'venteQrcode/:barcode', component: CreateVentewithQrcodeBarCodeComponent },
    /* { path:'vente/:username',children:[
         {path:'',component:CreateVenteComponent},
       ]

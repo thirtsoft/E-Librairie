@@ -1,14 +1,14 @@
-import { Article } from './article';
+import { Produit } from './produit';
 
 export class Stock {
   id: number;
 	quantite: number;
   dateMiseAJour: Date;
 
-	produit: Article;
+  produit: Produit;
 
   public constructor() {
-    this.produit = new Article();
+    this.produit = new Produit();
   }
 
 }

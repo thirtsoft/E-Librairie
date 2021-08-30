@@ -1,10 +1,10 @@
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
 import { Component, OnInit, Inject } from '@angular/core';
 import { LigneAppro } from 'src/app/models/ligne-appro';
-import { Article } from 'src/app/models/article';
 import { LigneApproService } from 'src/app/services/ligne-appro.service';
 import { ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ArticleService } from 'src/app/services/article.service';
 import { ApproService } from 'src/app/services/appro.service';
 import { FormBuilder, NgForm, FormGroup } from '@angular/forms';
 import { Appro } from 'src/app/models/appro';
@@ -17,7 +17,7 @@ import { Appro } from 'src/app/models/appro';
 export class CreateLigneApproComponent implements OnInit {
 
  // formData: LigneAppro;
-  listArticle: Article[];
+  listArticle: Produit[];
 
   isValid: boolean = true;
   approvisionnement: any;
@@ -27,7 +27,7 @@ export class CreateLigneApproComponent implements OnInit {
   formData: FormGroup;
 
   constructor(public lApproService: LigneApproService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ArticleService,
+    @Inject(MAT_DIALOG_DATA) public data, private articleService: ProduitService,
     private AppService: ApproService,public fb: FormBuilder,
     public dialogRef: MatDialogRef<CreateLigneApproComponent>,
    ) { }
@@ -42,7 +42,7 @@ export class CreateLigneApproComponent implements OnInit {
       console.log(this.formData);
     }
 
-    this.articleService.getAllArticles().subscribe(
+    this.articleService.getAllProduits().subscribe(
       response =>{
         this.listArticle = response;
       }
@@ -77,12 +77,12 @@ export class CreateLigneApproComponent implements OnInit {
       ItemName: '',
       prixAppro: 0,
       total: 0,
-      produit: new Article(),
+      produit: new Produit(),
      // commande: new CommandeClient(),
     });
   }
 
-  compareProduit(prod1: Article, prod2: Article) : boolean {
+  compareProduit(prod1: Produit, prod2: Produit) : boolean {
     return prod1 && prod2 ? prod1.id === prod2.id : prod1 === prod2;
   }
 

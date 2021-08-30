@@ -1,10 +1,10 @@
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
-import { Article } from 'src/app/models/article';
 import { LigneDevis } from 'src/app/models/ligne-devis';
-import { ArticleService } from 'src/app/services/article.service';
 import { DevisService } from 'src/app/services/devis.service';
 import { LigneDevisService } from 'src/app/services/ligne-devis.service';
 
@@ -16,7 +16,7 @@ import { LigneDevisService } from 'src/app/services/ligne-devis.service';
 export class CreateLigneDevisComponent implements OnInit {
 
   //  formData: LigneCmdClient;
-  listArticle: Article[];
+  listArticle: Produit[];
   isValid: boolean = true;
   approvisionnement: any;
   produit: any;
@@ -26,11 +26,14 @@ export class CreateLigneDevisComponent implements OnInit {
 
   formData: FormGroup;
 
-  constructor(public ldevisService: LigneDevisService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ArticleService,
-    private devisService: DevisService,public fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateLigneDevisComponent>,
-   ) { }
+  constructor(public ldevisService: LigneDevisService,
+              private toastr :ToastrService,
+              private articleService: ProduitService,
+              private devisService: DevisService,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data,
+              public dialogRef: MatDialogRef<CreateLigneDevisComponent>,
+  ) { }
 
   get f() { return this.ldevisService.dataForm.controls; }
 
@@ -42,7 +45,7 @@ export class CreateLigneDevisComponent implements OnInit {
       console.log(this.ldevisService.dataForm);
     }
 
-    this.articleService.getAllArticles().subscribe(
+    this.articleService.getAllProduits().subscribe(
       response =>{
         this.listArticle = response;
       }
@@ -68,7 +71,7 @@ export class CreateLigneDevisComponent implements OnInit {
     });
   }
 
-  compareProduit(prod1: Article, prod2: Article) : boolean {
+  compareProduit(prod1: Produit, prod2: Produit) : boolean {
     return prod1 && prod2 ? prod1.id === prod2.id : prod1 === prod2;
   }
 

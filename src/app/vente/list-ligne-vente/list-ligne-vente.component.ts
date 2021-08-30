@@ -1,7 +1,7 @@
+import { Produit } from './../../models/produit';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { LigneVente } from 'src/app/models/ligne-vente';
 import { Vente } from 'src/app/models/vente';
-import { Article } from 'src/app/models/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { LigneVenteService } from 'src/app/services/ligne-vente.service';
@@ -23,7 +23,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
   listData : LigneVente[];
 
   vente: Vente = new Vente();
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   private editForm: FormGroup;
 

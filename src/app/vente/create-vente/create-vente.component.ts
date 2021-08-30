@@ -136,16 +136,16 @@ export class CreateVenteComponent implements OnInit {
     console.log(this.crudApi.formData.value);
     console.log(this.crudApi.formData.value.numeroVente);
     console.log(this.crudApi.formData.value, this.crudApi.id);
+
     this.crudApi.saveVente(this.crudApi.formData.value, this.crudApi.id).subscribe(
       data => {
         console.log(data);
-      //  console.log(this.crudApi.formData.value);
         this.toastr.success('Vente Effectuée avec succès');
-      //  console.log(this.crudApi.formData.value);
-      //  console.log(this.crudApi.formData.value.numeroVente);
+
         this.router.navigate(['/home/ventes']);
       }
     );
+
 
   }
 /*

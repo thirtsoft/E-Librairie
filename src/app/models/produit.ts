@@ -1,7 +1,7 @@
 import { Categorie } from './categorie';
 import { Scategorie } from './scategorie';
 
-export class Article {
+/* export class Article {
   id: number;
   reference: string;
   barCode: string;
@@ -20,8 +20,8 @@ export class Article {
   scategorie = new Scategorie();
 
 }
-
-export class Product {
+ */
+export class Produit {
   id: number;
   reference: string;
   barCode: string;

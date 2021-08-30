@@ -1,9 +1,8 @@
-import { Product } from './../models/article';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { Article } from '../models/article';
+import { Produit } from '../models/produit';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -15,12 +14,12 @@ const EXCEL_EXTENSION = '.xlsx';
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleService {
+export class ProduitService {
 
  // private baseUrl_1 = 'http://localhost:8081/prodApi';
   private baseUrl_1 = 'http://localhost:8081/prodApi';
   /* private db: Dexie;
-  private tableProd: Dexie.Table<Article, number>; */
+  private tableProd: Dexie.Table<Produit, number>; */
 
   Data;
   listDataProd: any[] = [];
@@ -30,14 +29,14 @@ export class ArticleService {
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
-  listData : Article[];
-  list : Article[];
+  listData : Produit[];
+  list : Produit[];
   dataForm: FormGroup;
-  formData: Article;
+  formData: Produit;
 
-  listDataArticle : Product[];
-  listArticle : Product[];
-  formDataArticle: Product;
+  listDataProduit : Produit[];
+  listProduit : Produit[];
+  formDataProduit: Produit;
 
   private listners = new Subject<any>();
   listen(): Observable<any> {
@@ -54,30 +53,30 @@ export class ArticleService {
     //  this.addAllDataProdToIndexeddb();
    }
 
-  getAllArticles(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/produits`);
+  getAllProduits(): Observable<Produit[]> {
+    return this.http.get<Produit[]>(`${this.baseUrl_1}/produits`);
   }
 
-  getArticleByID(id:number):any {
+  getProduitByID(id:number):any {
     return this.http.get(`${this.baseUrl_1}/produits/`+id).toPromise();
   }
 
-  public getArticleById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/produits/${id}`);
+  public getProduitById(id: number): Observable<Produit> {
+    return this.http.get<Produit>(`${this.baseUrl_1}/produits/${id}`);
   }
 
-  exportPdfArticle(): Observable<Blob> {
+  exportPdfProduit(): Observable<Blob> {
     return this.http.get(`${this.baseUrl_1}/createPdf`,{responseType: 'blob'});
   }
 
-  createArticle(info: Object): Observable<Object> {
+  createProduits(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl_1}/produits`, info);
   }
 
-  private createArticleAPI(info: Article) {
+  private createProduitAPI(info: Produit) {
     this.http.post(`${this.baseUrl_1}/produits`, info)
       .subscribe(
-        ()=> alert('Article ajouté avec succes'),
+        ()=> alert('Produit ajouté avec succes'),
         (err) => console.log('Erreur lors de ajout')
     );
   }
@@ -86,10 +85,12 @@ export class ArticleService {
   createData(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl_1}/produits`, info);
   }
-  updateArticle(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl_1}/produits/${id}`, value);
+
+  updateProduit(id: number, value: Produit): Observable<Produit> {
+    return this.http.put<Produit>(`${this.baseUrl_1}/produits/${id}`, value);
   }
-  deleteArticle(id: number): Observable<any> {
+
+  deleteProduit(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl_1}/produits/${id}`, { responseType: 'text' });
   }
   /**
@@ -128,9 +129,9 @@ export class ArticleService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl_1}/download/articles.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+    this.http.get(`${this.baseUrl_1}/download/Produits.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
-      FileSaver.saveAs(blob, 'articles.xlsx');
+      FileSaver.saveAs(blob, 'Produits.xlsx');
     });
 
   }
@@ -172,33 +173,33 @@ export class ArticleService {
 
   } */
 
-  createProduit(info: Article)  {
+  createProduit(info: Produit)  {
     if (this.offlineService.isOnLine) {
-      this.createArticleAPI(info);
-      console.log('Article ajouter via API');
+      this.createProduitAPI(info);
+      console.log('Produit ajouter via API');
     }else {
-    //  this.createArticleToIndexedDb(info);
+    //  this.createProduitToIndexedDb(info);
       console.log(info);
-      console.log('Article ajouter via IndexedDb');
+      console.log('Produit ajouter via IndexedDb');
     }
   }
 
- /*  private async createArticleToIndexedDb(categorie: Article) {
+ /*  private async createProduitToIndexedDb(categorie: Produit) {
     try {
       console.log(categorie);
       await this.tableProd.add(categorie);
-      const todosCategorie: Article[] = await this.tableProd.toArray();
+      const todosCategorie: Produit[] = await this.tableProd.toArray();
       console.log(categorie);
-      console.log('Article ajouté non IndexedDb', todosCategorie);
+      console.log('Produit ajouté non IndexedDb', todosCategorie);
     } catch (error) {
       console.log('erreur ajout categorie no indexedDb', error);
     }
   }
 
   private async sendDataFromIndexedDbToAPI() {
-    const todosCategorie: Article[] = await this.tableProd.toArray();
+    const todosCategorie: Produit[] = await this.tableProd.toArray();
     for(const categorie of todosCategorie) {
-      this.createArticleAPI(categorie);
+      this.createProduitAPI(categorie);
       await this.tableProd.delete(categorie.id);
       console.log('Categorie com id ${categorie.id} foi excluddo com successfull');
     }
@@ -217,21 +218,21 @@ export class ArticleService {
   }
 
 */
-  createArticleWithBarCode(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/produits/createProduitWithBarcode`, info);
+  createProduitWithBarCode(info: Object): Observable<Produit> {
+    return this.http.post<Produit>(`${this.baseUrl_1}/produits/createProduitWithBarcode`, info);
   }
 
-  public getArticleByBarcode(barCode: string): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/produits/searchProduitByBarCode/${barCode}`);
+  public getProduitByBarcode(barCode: string): Observable<Produit> {
+    return this.http.get<Produit> ('http://localhost:8081/prodApi/produits/searchProduitByBarCode/' + barCode);
   }
 
-  createArticleWithQrCode(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/produits/createProduitWithQrcode`, info);
+  createProduitWithQrCode(info: Object): Observable<Produit> {
+    return this.http.post<Produit>(`${this.baseUrl_1}/produits/createProduitWithQrcode`, info);
   }
 
 
-  public getArticleByQrcode(qrCode: string): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/produits/searchProduitByQrCode/${qrCode}`);
+  public getProduitByQrcode(qrCode: string): Observable<Produit> {
+    return this.http.get<Produit>(`${this.baseUrl_1}/produits/searchProduitByQrCode/${qrCode}`);
   }
 
 

@@ -1,16 +1,16 @@
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
 import { Component, OnInit, OnDestroy, Inject, ViewChild, Input } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
-import { Article } from 'src/app/models/Article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { StockService } from 'src/app/services/stock.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
-import { CreateArticleComponent } from 'src/app/article/create-article/create-article.component';
 import { CreateApproComponent } from 'src/app/approvisionnement/create-appro/create-appro.component';
 import { DataTableDirective } from 'angular-datatables';
-import { ArticleService } from 'src/app/services/article.service';
+
 
 @Component({
   selector: 'app-list-stock',
@@ -20,7 +20,7 @@ import { ArticleService } from 'src/app/services/article.service';
 export class ListStockComponent implements OnDestroy, OnInit {
 
   listData : Stock[];
-  listArticle : Article[];
+  listArticle : Produit[];
 
   private editForm: FormGroup;
 
@@ -33,10 +33,14 @@ export class ListStockComponent implements OnDestroy, OnInit {
   val = 1000;
 
 
-  constructor(public crudApi: StockService, private artService: ArticleService,
-    public toastr: ToastrService, private router : Router, public fb: FormBuilder,
-    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateApproComponent>,
+  constructor(public crudApi: StockService,
+              private artService: ProduitService,
+              public toastr: ToastrService,
+              private router : Router,
+              public fb: FormBuilder,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateApproComponent>,
 
   ) { }
 
@@ -49,7 +53,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    this.artService.getAllArticles().subscribe(
+    this.artService.getAllProduits().subscribe(
       response => {
         this.listArticle = response;
         this.dtTrigger.next();
@@ -84,7 +88,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
   }
 
   getListArticle() {
-    this.artService.getAllArticles().subscribe(
+    this.artService.getAllProduits().subscribe(
       response =>{this.listArticle = response;}
     );
   }

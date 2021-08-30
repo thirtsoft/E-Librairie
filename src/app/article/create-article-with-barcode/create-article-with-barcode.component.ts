@@ -1,15 +1,14 @@
+import { Router } from '@angular/router';
+import { CategorieService } from 'src/app/services/categorie.service';
+import { ScategorieService } from 'src/app/services/scategorie.service';
+import { NgForm, FormBuilder } from '@angular/forms';
+import { Scategorie } from 'src/app/models/scategorie';
+import { Produit } from './../../models/produit';
+import { ProduitService } from './../../services/article.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { CategorieService } from 'src/app/services/categorie.service';
-import { ScategorieService } from 'src/app/services/scategorie.service';
-import { ArticleService } from 'src/app/services/article.service';
-import { NgForm, FormBuilder } from '@angular/forms';
-import { Scategorie } from 'src/app/models/scategorie';
-import { Article } from 'src/app/models/article';
-import { Product } from './../../models/article';
 
 
 @Component({
@@ -19,7 +18,7 @@ import { Product } from './../../models/article';
 })
 export class CreateArticleWithBarcodeComponent implements OnInit {
 
-  formDataArticle = new Article();
+  formDataArticle = new Produit();
   listScategories: Scategorie[];
   addArticleForm: NgForm;
 
@@ -27,7 +26,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   submitted = false;
 
-  constructor(public crudApi: ArticleService, public scatService: ScategorieService,
+  constructor(public crudApi: ProduitService, public scatService: ScategorieService,
     private catService: CategorieService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
@@ -93,12 +92,12 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   onSubmits() {
     if(isNullOrUndefined(this.data.artId)) {
-      this.crudApi.createArticleWithBarCode(this.formDataArticle).
+      this.crudApi.createProduitWithBarCode(this.formDataArticle).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Articel Ajouté avec Succès");
-        this.crudApi.getAllArticles().subscribe(
+        this.crudApi.getAllProduits().subscribe(
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/listArticleWithBarcode']);
@@ -106,12 +105,12 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
     }else {
       console.log(this.formDataArticle.id, this.formDataArticle);
-      this.crudApi.updateArticle(this.formDataArticle.id, this.formDataArticle).
+      this.crudApi.updateProduit(this.formDataArticle.id, this.formDataArticle).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Article Modifiée avec Succès");
-        this.crudApi.getAllArticles().subscribe(
+        this.crudApi.getAllProduits().subscribe(
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/listArticleWithBarcode']);
@@ -130,25 +129,26 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   }
 
-  saveArticle(art: Article) {
-    this.crudApi.createArticleWithBarCode(art).
+  saveArticle(art: Produit) {
+    this.crudApi.createProduitWithBarCode(art).
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
       this.toastr.success("Article Ajouté avec Succès");
-      this.crudApi.getAllArticles().subscribe(
+      this.crudApi.getAllProduits().subscribe(
         response =>{this.crudApi.listData = response;},
 
       );
       this.router.navigate(['/home/listArticleWithBarcode']);
     });
   }
-  updateArticle(id: number, art: Article){
-    this.crudApi.updateArticle(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
+
+  updateArticle(id: number, art: Produit){
+    this.crudApi.updateProduit(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.toastr.success("Article Modifier avec Succès");
       this.dialogRef.close();
-      this.crudApi.getAllArticles().subscribe(
+      this.crudApi.getAllProduits().subscribe(
         response =>{this.crudApi.listData = response;}
       );
       this.router.navigate(['/home/listArticleWithBarcode']);

@@ -1,5 +1,5 @@
 import { Avoir } from './avoir';
-import { Article } from './article';
+import { Produit } from './produit';
 import { Creance } from './creance';
 
 export class LigneCreance {
@@ -15,5 +15,5 @@ export class LigneCreance {
 
   creance: Creance;
 
-  produit: Article;
+  produit: Produit;
 }

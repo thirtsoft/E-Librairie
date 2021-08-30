@@ -1,9 +1,9 @@
+import { Produit } from './../../models/produit';
+import { ProduitService } from './../../services/article.service';
 import { CreateArticleWithBarcodeComponent } from './../create-article-with-barcode/create-article-with-barcode.component';
 import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
-import { Article } from 'src/app/models/article';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ArticleService } from 'src/app/services/article.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -32,7 +32,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class ListArticleComponent implements OnDestroy, OnInit {
 
  // @Input()
-  listData : Article[];
+  listData : Produit[];
 
   @ViewChild('htmlData') htmlData:ElementRef;
 
@@ -51,7 +51,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   logObject: any;
   array;
 
-  constructor(public crudApi: ArticleService, private dialogService: DialogService, public fb: FormBuilder,
+  constructor(public crudApi: ProduitService, private dialogService: DialogService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -73,7 +73,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllArticles().subscribe(
+    this.crudApi.getAllProduits().subscribe(
       response =>{
         this.crudApi.listData = response;
         this.dtTrigger.next();
@@ -98,7 +98,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   getListArticles() {
-    this.crudApi.getAllArticles().subscribe(
+    this.crudApi.getAllProduits().subscribe(
       response =>{this.listData = response;
       });
   }
@@ -147,7 +147,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.matDialog.open(ViewArticleComponent, dialogConfig);
   }
 
-  editerArticle(item : Article) {
+  editerArticle(item : Produit) {
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
@@ -176,7 +176,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
       if(res){
-        this.crudApi.deleteArticle(id).subscribe(data => {
+        this.crudApi.deleteProduit(id).subscribe(data => {
           this.toastr.warning('Article supprimé avec succès!');
           this.rerender();
           this.getListArticles();
@@ -185,7 +185,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     });
   }
 
-  editArticle(item : Article) {
+  editArticle(item : Produit) {
     this.router.navigateByUrl('article/'+item.id);
   }
 
@@ -367,7 +367,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
     };
 
   }
-  getListArticle(item: Article[]) {
+  getListArticle(item: Produit[]) {
     return {
       table: {
         widths: ['*','*','*','*','*','*'],
@@ -490,7 +490,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   }
 
-  getList(item: Article[]) {
+  getList(item: Produit[]) {
     let officersIds = [];
     return {
       table: {
@@ -545,7 +545,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   getAllArticlees(){
-    this.crudApi.getAllArticles().subscribe((res: any) => {
+    this.crudApi.getAllProduits().subscribe((res: any) => {
       this.listData = res.data.lisData;
       for(var i = 0; i< this.listData.length; i++) {
         this.array = this.listData[i]
@@ -587,7 +587,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   }
 
-  bodyRows(rowCount, listData: Article[]) {
+  bodyRows(rowCount, listData: Produit[]) {
    // rowCount = rowCount || 10;
     let body = [];
     for (var j = 0; j < listData.length; j++) {

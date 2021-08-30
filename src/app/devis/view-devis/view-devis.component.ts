@@ -1,3 +1,4 @@
+import { Produit } from './../../models/produit';
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -5,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { Article } from 'src/app/models/article';
 import { Devis } from 'src/app/models/devis';
 import { LigneDevis } from 'src/app/models/ligne-devis';
 import { DevisService } from 'src/app/services/devis.service';
@@ -36,7 +36,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
   dateDevis;
   client;
 
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   private editForm: FormGroup;
 
@@ -46,12 +46,17 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: DevisService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
-    private matDialog: MatDialog, public ldevService: LigneDevisService,
-    @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateDevisComponent>,
-    ) { }
+  constructor(public crudApi: DevisService,
+              public toastr: ToastrService,
+              public ldevService: LigneDevisService,
+              private router : Router,
+              public fb: FormBuilder,
+              private datePipe : DatePipe,
+              private matDialog: MatDialog,
+              public route: ActivatedRoute,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateDevisComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.devId = this.route.snapshot.params.id;
@@ -277,7 +282,12 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
             },
 
           ],
+          /*
           ...item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prixDevis,
+              (x.quantite*x.prixDevis).toFixed(2)])
+          }),*/
+          item.map(x => {
             return ([x.quantite, x.produit.designation, x.prixDevis,
               (x.quantite*x.prixDevis).toFixed(2)])
           }),

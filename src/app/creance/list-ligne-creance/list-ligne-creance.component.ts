@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { LigneCreance } from 'src/app/models/ligne-creance';
-import { Creance } from 'src/app/models/creance';
-import { Article } from 'src/app/models/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';

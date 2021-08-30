@@ -1,4 +1,4 @@
-import { Article } from "./article";
+import { Produit } from "./produit";
 import { Devis } from "./devis";
 
 export class LigneDevis {
@@ -13,5 +13,5 @@ export class LigneDevis {
 
   devis: Devis;
 
-  produit: Article;
+  produit: Produit;
 }

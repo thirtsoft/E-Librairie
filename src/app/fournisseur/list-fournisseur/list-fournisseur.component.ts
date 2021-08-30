@@ -336,7 +336,13 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
             },
 
           ],
+          /*
           ...item.map(x => {
+            return ([x.raisonSociale, x.prenom, x.nom, x.numeroCompte,
+              x.nomBank, x.adresse, x.telephone, x.email])
+          }), */
+
+          item.map(x => {
             return ([x.raisonSociale, x.prenom, x.nom, x.numeroCompte,
               x.nomBank, x.adresse, x.telephone, x.email])
           }),

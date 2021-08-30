@@ -1,19 +1,14 @@
-import { Product } from './../../models/article';
-import { ArticleService } from 'src/app/services/article.service';
+import { ProduitService } from './../../services/article.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { Vente } from 'src/app/models/vente';
 import { VenteService } from 'src/app/services/vente.service';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
-import { FormBuilder, NgForm, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CreateLigneVenteComponent } from '../create-ligne-vente/create-ligne-vente.component';
-import { LigneVente } from 'src/app/models/ligne-vente';
 import { DatePipe } from '@angular/common';
 import { LigneVenteService } from 'src/app/services/ligne-vente.service';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
-import { AuthService } from 'src/app/auth/auth.service';
-import { Utilisateur } from 'src/app/models/utilisateur';
+import { Observable } from 'rxjs';
+import { Produit } from '../../models/produit';
+
 
 @Component({
   selector: 'app-create-ventewith-qrcode-bar-code',
@@ -22,84 +17,93 @@ import { Utilisateur } from 'src/app/models/utilisateur';
 })
 export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
-  order = new Vente();
-
-  orders: Vente[];
-
   isValid:boolean = true;
-  articleService: any;
-  date;
-  compteur : any={};
-  client: any;
-  annee  = 0;
-  total = 0;
-  refProd = '';
-  orderItem: LigneVente[];
-  OrderId: number;
 
-  numVente: number;
-  currentUser: any = {};
-  id: number;
-
-  listArticle: Product[];
+  barcodeArticle: any;
+  listArticleBarcode;
 
   lastScannedBarCode = "";
-  listOfScannedBarCodes = [];
+ // listOfScannedBarCodes = [];
+  listOfScannedBarCodes: any={};
   totalAmount: 0.
 
   listDataReglement = ["ESPECES", "CHEQUE", "VIREMENT"];
 
-  barcode;
-  values: string[] = [];
+  barcode: string='';
+  total;
+
+  products: any[] = [];
+  selectedProduct: any;
+  productFound:boolean = false;
 
   formDataVente:  FormGroup;
+  listArticle: Produit[];
 
   constructor(public crudApi: VenteService,
-              private artService: ArticleService,
+              private artService: ProduitService,
               public lventeService: LigneVenteService,
               private toastr :ToastrService,
-              private dialog:MatDialog,
               private datePipe : DatePipe,
               public fb: FormBuilder ,
-              private router :Router
+              private router :Router,
+              private route: ActivatedRoute,
   ) { }
 
-  get f() { return this.formDataVente.controls; }
+  get f() { return this.crudApi.formData.controls; }
+
+
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A") {
       this.infoForm();
       this.listOfScannedBarCodes = [];
-    }else {
-     /*  this.f['dateVente'].setValue(this.formDataVente.value.dateVente); */
+    /* else {
+      this.lventeService.getAllByNumero(this.crudApi.formData.value.numeroVente).subscribe(
+        response => {
+          this.listOfScannedBarCodes = response;
+          console.log("Lignes de vente est " + response);
+          let i;
+          for (i=0; i<this.listOfScannedBarCodes.length; i++) {
+            this.total = parseFloat((this.listOfScannedBarCodes[i].quantite * this.listOfScannedBarCodes[i].prix).toFixed(2));
+            console.log("Le total " + this.total);
+            this.listOfScannedBarCodes[i].total = this.total;
+            this.listOfScannedBarCodes[i].ItemName = this.listOfScannedBarCodes[i].produit.reference;
+            console.log("Ref produits " + this.listOfScannedBarCodes[i].produit.reference);
+            console.log("ProductName name " + this.listOfScannedBarCodes[i].ItemName);
+          }
+        }
+      ); */
+      this.f['dateVente'].setValue(this.crudApi.formData.value.dateVente);
     }
-
     this.crudApi.getUserId();
+    this.crudApi.getNumeroVente();
+
+    this.artService.getAllProduits().subscribe(
+      response =>{
+        this.listArticle = response;
+      }
+    );
   }
 
   infoForm() {
-    this.formDataVente = this.fb.group({
-      // total: [0, Validators.required],
-      totalAmount: [0, Validators.required],
-      // status: ['', Validators.required],
+    this.crudApi.formData = this.fb.group({
+      numeroVente: this.crudApi.NumVente,
+      total: [0, Validators.required],
+      totalVente: [0, Validators.required],
+      status: ['', Validators.required],
       typeReglement: ['', Validators.required],
       montantReglement: [0, Validators.required],
       dateVente: [new Date(), Validators.required],
       DeletedOrderItemIDs: '',
+      ligneVentes: [[], Validators.required],
 
     });
 
   }
 
-  compareVente() {
-
-  }
-
-
-
   validateForm() {
     this.isValid = true;
-    if (this.formDataVente.value.id_client === 0)
+    if (this.crudApi.formData.value.id_client==0)
       this.isValid = false
     else if (this.listOfScannedBarCodes.length === 0)
       this.isValid = false;
@@ -107,18 +111,20 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   }
 
   onSubmit() {
-   /*  this.f['ligneVentes'].setValue(this.listOfScannedBarCodes); */
-    console.log(this.formDataVente.value);
-    console.log(this.formDataVente.value.numeroVente);
-    console.log(this.formDataVente.value, this.crudApi.id);
-    console.log("Identité user " + this.crudApi.id)
-    this.crudApi.saveVenteWithBarcode(this.formDataVente.value, this.crudApi.id).subscribe(
+    this.f['totalVente'].setValue(this.totalAmount);
+    this.f['ligneVentes'].setValue(this.listOfScannedBarCodes);
+    console.log(this.crudApi.formData.value);
+    console.log(this.crudApi.formData.value.numeroVente);
+    console.log(this.crudApi.formData.value, this.crudApi.id);
+    this.crudApi.saveVenteWithBarcode(this.crudApi.formData.value, this.crudApi.id).subscribe(
       data => {
         console.log(data);
         this.toastr.success('Vente Effectuée avec succès');
+
         this.router.navigate(['/home/ventes']);
       }
     );
+
 
   }
 
@@ -127,32 +133,35 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   }
 
   getArticleByBarcode(barcode: string) {
-    this.artService.getArticleByBarcode(barcode).subscribe(
-      (data: Product[]) => {
-        this.listArticle = data;
+    this.artService.getProduitByBarcode(barcode).subscribe(
+      (data: Produit) => {
+        this.listArticleBarcode = data;
         console.log("Product By barcode is +++", data);
       });
 
   }
 
-  getArticleByQrcode(qrcode: string) {
-    this.artService.getArticleByQrcode(qrcode).subscribe(
-      (data: Product[]) => {
-        this.listArticle = data;
-        console.log("Product By qrcode is +++", data);
-      });
+  getArticleBySearchCodebarre()  {
+    const keyword: string = this.route.snapshot.paramMap.get('keyword');
+    this.artService.getProduitByBarcode(keyword).subscribe(
+      data  => {
+        this.barcodeArticle = data;
+      }
+
+    )
 
   }
 
+  /*
   onKey(event: any) {
     console.log("EVENT!!!!!!!!!!!!!!" + event)
-    this.barcode=event.target.value;
-    if (this.barcode) {
+    this.barcode = event.target.value;
+    if (this.barcode.length == 13) {
       this.artService.getArticleByBarcode(this.barcode).subscribe(
         (data: Product)=> {
           if (this.barcode === data.barCode) {
             console.log("Barcode of barcode is " + this.barcode);
-            this.listOfScannedBarCodes.push({barcode: this.barcode, designation: data.designation, price: data.prixDetail, quantity: 1});
+            this.listOfScannedBarCodes.push({barcode: this.barcode, designation: data.designation, prixVente: data.prixDetail, quantite: 1});
             this.updateTotals();
           }
         }
@@ -162,6 +171,30 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     }
 
   }
+  */
+
+
+  onKey(event: any) {
+    this.barcode = event.target.value;
+    if (this.barcode.length == 13) {
+      this.artService.getProduitByBarcode(this.barcode).subscribe(
+        (data: Produit)=> {
+          if (this.barcode === data.barCode) {
+              console.log("Barcode of barcode is " + this.barcode);
+           //   this.listOfScannedBarCodes.push({barcode: this.barcode, designation: data.designation, prixVente: data.prixDetail, quantite: 1});
+              this.listOfScannedBarCodes.push({produit: data, prixVente: data.prixDetail, quantite: 1});
+              this.updateTotals();
+
+
+          }
+        }
+
+      )
+
+    }
+
+  }
+
 
   addTocart(theCartItem){
     let alreadyExistsInCart: boolean = false;
@@ -173,7 +206,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       alreadyExistsInCart = (existingCartItem != undefined)
     }
     if (alreadyExistsInCart) {
-      existingCartItem.quantity++;
+      existingCartItem.quantite++;
     }else {
       // add to the cart item array
       this.listOfScannedBarCodes.push(theCartItem);
@@ -186,7 +219,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     this.totalAmount = 0;
     for (let i = 0; i < this.listOfScannedBarCodes.length; i++) {
         let obj = this.listOfScannedBarCodes[i];
-        this.totalAmount += obj.quantity * obj.price;
+        this.totalAmount += obj.quantite * obj.prixVente;
     }
 
   }
@@ -206,8 +239,8 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   }
 
   decrementQuantity(item) {
-    item.quantity--;
-    if (item.quantity === 0) {
+    item.quantite--;
+    if (item.quantite === 0) {
       this.removeCart(item);
     } else {
       this.updateTotals();

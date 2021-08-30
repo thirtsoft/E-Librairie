@@ -1,5 +1,5 @@
 import { Vente } from './vente';
-import { Article } from './article';
+import { Produit } from './produit';
 
 export class LigneVente {
   id: number;
@@ -14,6 +14,6 @@ export class LigneVente {
 
   vente: Vente;
 
-  produit: Article;
+  produit: Produit;
 
 }

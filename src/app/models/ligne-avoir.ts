@@ -1,5 +1,5 @@
 import { Avoir } from './avoir';
-import { Article } from './article';
+import { Produit } from './produit';
 
 export class LigneAvoir {
   id: number;
@@ -13,6 +13,6 @@ export class LigneAvoir {
   total: number;
 
   avoir: Avoir;
-  produit: Article
+  produit: Produit
 
 }

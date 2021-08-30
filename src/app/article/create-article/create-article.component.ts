@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Article } from 'src/app/models/article';
 import { Scategorie } from 'src/app/models/scategorie';
-import { ArticleService } from 'src/app/services/article.service';
 import { ScategorieService } from 'src/app/services/scategorie.service';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Produit } from './../../models/produit';
+import { ProduitService } from './../../services/article.service';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatDialogRef } from "@angular/material/dialog";
@@ -18,7 +18,7 @@ import { isNullOrUndefined } from 'util';
 })
 export class CreateArticleComponent implements OnInit {
 
-  formDataArticle = new Article();
+  formDataArticle = new Produit();
   listScategories: Scategorie[];
   addArticleForm: NgForm;
 
@@ -26,7 +26,7 @@ export class CreateArticleComponent implements OnInit {
 
   submitted = false;
 
-  constructor(public crudApi: ArticleService, public scatService: ScategorieService ,
+  constructor(public crudApi: ProduitService, public scatService: ScategorieService ,
     private catService: CategorieService, public fb: FormBuilder,
     public toastr: ToastrService, private router : Router,
     @Inject(MAT_DIALOG_DATA)  public data,
@@ -92,12 +92,12 @@ export class CreateArticleComponent implements OnInit {
 
   onSubmits() {
     if(isNullOrUndefined(this.data.artId)) {
-      this.crudApi.createArticle(this.formDataArticle).
+      this.crudApi.createProduits(this.formDataArticle).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Articel Ajouté avec Succès");
-        this.crudApi.getAllArticles().subscribe(
+        this.crudApi.getAllProduits().subscribe(
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/articles']);
@@ -105,12 +105,12 @@ export class CreateArticleComponent implements OnInit {
 
     }else {
       console.log(this.formDataArticle.id, this.formDataArticle);
-      this.crudApi.updateArticle(this.formDataArticle.id, this.formDataArticle).
+      this.crudApi.updateProduit(this.formDataArticle.id, this.formDataArticle).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
         this.toastr.success("Article Modifiée avec Succès");
-        this.crudApi.getAllArticles().subscribe(
+        this.crudApi.getAllProduits().subscribe(
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/articles']);
@@ -129,25 +129,25 @@ export class CreateArticleComponent implements OnInit {
 
   }
 
-  saveArticle(art: Article) {
-    this.crudApi.createArticle(art).
+  saveArticle(art: Produit) {
+    this.crudApi.createProduits(art).
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
       this.toastr.success("Article Ajouté avec Succès");
-      this.crudApi.getAllArticles().subscribe(
+      this.crudApi.getAllProduits().subscribe(
         response =>{this.crudApi.listData = response;},
 
       );
       this.router.navigate(['/home/articles']);
     });
   }
-  updateArticle(id: number, art: Article){
-    this.crudApi.updateArticle(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
+  updateArticle(id: number, art: Produit){
+    this.crudApi.updateProduit(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.toastr.success("Article Modifier avec Succès");
       this.dialogRef.close();
-      this.crudApi.getAllArticles().subscribe(
+      this.crudApi.getAllProduits().subscribe(
         response =>{this.crudApi.listData = response;}
       );
       this.router.navigate(['/home/articles']);

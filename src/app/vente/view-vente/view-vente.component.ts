@@ -1,3 +1,4 @@
+import { Produit } from './../../models/produit';
 import { Component, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Vente } from 'src/app/models/vente';
@@ -9,7 +10,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Article } from 'src/app/models/article';
 import { CreateVenteComponent } from '../create-vente/create-vente.component';
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -37,7 +37,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
   totalVente;
   dateVente;
 
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   editForm: FormGroup;
 
@@ -50,13 +50,18 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: VenteService, public lventeService: LigneVenteService,
-    private tokenService: TokenStorageService, public toastr: ToastrService,
-    public fb: FormBuilder, private router : Router,
-    private datePipe : DatePipe, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateVenteComponent>,
-    ) { }
+  constructor(public crudApi: VenteService,
+              public lventeService: LigneVenteService,
+              private tokenService: TokenStorageService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              private datePipe : DatePipe,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public route: ActivatedRoute,
+              public dialogRef:MatDialogRef<CreateVenteComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.venteId = this.route.snapshot.params.id;
@@ -316,10 +321,15 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
             },
 
           ],
-          ...item.map(x => {
+          item.map(x => {
             return ([x.quantite, x.produit.designation, x.prixVente,
               (x.quantite*x.prixVente).toFixed(2)])
           }),
+/*
+          ...item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prixVente,
+              (x.quantite*x.prixVente).toFixed(2)])
+          }),*/
           [
             {
               text: 'MONTANT TOTAL',

@@ -1,5 +1,5 @@
 import { CommandeClient } from './commande-client';
-import { Article } from './article';
+import { Produit } from './produit';
 
 export class LigneCmdClient {
   id: number;
@@ -17,7 +17,7 @@ export class LigneCmdClient {
 
   commande: CommandeClient;
 
-  produit: Article;
+  produit: Produit;
 
 
 }

@@ -1,7 +1,7 @@
+import { Produit } from './../../models/produit';
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { LigneAppro } from 'src/app/models/ligne-appro';
 import { Appro } from 'src/app/models/appro';
-import { Article } from 'src/app/models/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { LigneApproService } from 'src/app/services/ligne-appro.service';
@@ -27,7 +27,7 @@ export class ListLigneApproComponent implements OnInit {
 
   appro: Appro = new Appro();
 
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   /* produit1: Article = {
     id: null, reference: '', designation: '', photo: '',

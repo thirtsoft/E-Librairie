@@ -1,10 +1,10 @@
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
-import { Article } from 'src/app/models/article';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
-import { ArticleService } from 'src/app/services/article.service';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 
@@ -15,7 +15,7 @@ import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service
 })
 export class CreateLigneCommandeComponent implements OnInit {
 
-  listArticle: Article[];
+  listArticle: Produit[];
   isValid: boolean = true;
   formData: FormGroup;
   isInvalidQte;
@@ -23,7 +23,7 @@ export class CreateLigneCommandeComponent implements OnInit {
   total = 0;
 
   constructor(public lcmdService: LigneCmdClientService, private cmdService: CommandeClientService,
-    private articleService: ArticleService,
+    private articleService: ProduitService,
     public fb: FormBuilder, private toastr :ToastrService,
     @Inject(MAT_DIALOG_DATA) public data,
     private dialogRef: MatDialogRef<CreateLigneCommandeComponent>,
@@ -39,7 +39,7 @@ export class CreateLigneCommandeComponent implements OnInit {
       console.log(this.lcmdService.dataForm);
     }
 
-    this.articleService.getAllArticles().subscribe(
+    this.articleService.getAllProduits().subscribe(
       response =>{
         this.listArticle = response;
       }
@@ -64,7 +64,7 @@ export class CreateLigneCommandeComponent implements OnInit {
     });
   }
 
-  compareProduit(prod1: Article, prod2: Article) : boolean {
+  compareProduit(prod1: Produit, prod2: Produit) : boolean {
     return prod1 && prod2 ? prod1.id === prod2.id : prod1 === prod2;
   }
 

@@ -1,3 +1,4 @@
+import { Produit } from './../../models/produit';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -5,7 +6,6 @@ import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { Article } from 'src/app/models/article';
 import { Devis } from 'src/app/models/devis';
 import { LigneDevis } from 'src/app/models/ligne-devis';
 import { DevisService } from 'src/app/services/devis.service';
@@ -23,7 +23,7 @@ export class ListLigneDevisComponent implements OnInit {
   listData: LigneDevis[] = [];
 
   devis: Devis = new Devis();
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   editForm: FormGroup;
 
@@ -56,7 +56,7 @@ export class ListLigneDevisComponent implements OnInit {
     );
 
     this.devis = new Devis();
-    this.produit = new Article();
+    this.produit = new Produit();
     console.log(this.produit.designation);
   // console.log(this.devService.orderItems);
   }

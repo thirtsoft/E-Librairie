@@ -1,5 +1,5 @@
+import { Produit } from './../../models/produit';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
-import { Article } from 'src/app/models/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Creance } from 'src/app/models/creance';
 import { LigneCreance } from 'src/app/models/ligne-creance';
@@ -35,7 +35,7 @@ export class ViewCreanceComponent implements OnInit {
   dateCreance;
   client;
 
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   private editForm: FormGroup;
 
@@ -316,7 +316,13 @@ export class ViewCreanceComponent implements OnInit {
             },
 
           ],
+          /*
           ...item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prix,
+              (x.quantite*x.prix).toFixed(2)])
+          }),*/
+
+          item.map(x => {
             return ([x.quantite, x.produit.designation, x.prix,
               (x.quantite*x.prix).toFixed(2)])
           }),

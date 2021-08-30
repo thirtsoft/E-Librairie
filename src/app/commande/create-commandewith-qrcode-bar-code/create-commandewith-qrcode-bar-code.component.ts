@@ -1,5 +1,3 @@
-import { Product } from './../../models/article';
-import { ArticleService } from 'src/app/services/article.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
@@ -11,6 +9,8 @@ import { CommandeClientService } from 'src/app/services/commande-client.service'
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { CreateLigneCommandeComponent } from '../create-ligne-commande/create-ligne-commande.component';
 import { DatePipe } from '@angular/common';
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
 
 @Component({
   selector: 'app-create-commandewith-qrcode-bar-code',
@@ -20,17 +20,19 @@ import { DatePipe } from '@angular/common';
 export class CreateCommandewithQrcodeBarCodeComponent implements OnInit {
 
   ClientList: Client[];
-  listArticle: Product[];
-  articlesSelected: Product[] = [];
+  listArticle: Produit[];
+  articlesSelected: Produit[] = [];
   isArticleSelected: boolean = false;
   isValid:boolean = true;
   numero;
 
   total = 0;
 
+  listArticleWithBarcode: any;
+
   constructor(public crudApi: CommandeClientService,
               public clientService: ClientService,
-              private artService: ArticleService,
+              private artService: ProduitService,
               public lcomService: LigneCmdClientService,
               private toastr :ToastrService,
               private datePipe : DatePipe,
@@ -162,18 +164,18 @@ export class CreateCommandewithQrcodeBarCodeComponent implements OnInit {
   }
 
   getArticleByBarcode(barcode: string) {
-    this.artService.getArticleByBarcode(barcode).subscribe(
-      (data: Product[]) => {
-        this.listArticle = data;
+    this.artService.getProduitByBarcode(barcode).subscribe(
+      (data: Produit) => {
+        this.listArticleWithBarcode = data;
         console.log("Product By barcode is +++", data);
       });
 
   }
 
   getArticleByQrcode(qrcode: string) {
-    this.artService.getArticleByQrcode(qrcode).subscribe(
-      (data: Product[]) => {
-        this.listArticle = data;
+    this.artService.getProduitByQrcode(qrcode).subscribe(
+      (data: Produit) => {
+        this.listArticleWithBarcode = data;
         console.log("Product By qrcode is +++", data);
       });
 

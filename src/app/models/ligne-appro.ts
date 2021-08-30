@@ -1,5 +1,5 @@
 import { Appro } from './appro';
-import { Article } from './article';
+import { Produit } from './produit';
 
 export class LigneAppro {
   id: number;
@@ -15,7 +15,7 @@ export class LigneAppro {
 
   approvisionnement: Appro;
 
-  produit: Article;
+  produit: Produit;
 
 /*
   public constructor() {

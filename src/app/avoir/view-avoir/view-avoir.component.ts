@@ -1,7 +1,7 @@
+import { Produit } from './../../models/produit';
 import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { Avoir } from 'src/app/models/avoir';
 import { LigneAvoir } from 'src/app/models/ligne-avoir';
-import { Article } from 'src/app/models/article';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { AvoirService } from 'src/app/services/avoir.service';
@@ -32,7 +32,7 @@ export class ViewAvoirComponent implements OnInit {
   fournisseur;
   dateAvoir;
 
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   @ViewChild('content') content: ElementRef;
 

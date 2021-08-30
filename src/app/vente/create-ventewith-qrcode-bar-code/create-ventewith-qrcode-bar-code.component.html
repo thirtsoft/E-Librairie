@@ -4,19 +4,24 @@
     </div>
 </mat-toolbar>
 
-<form [formGroup]="formDataVente" (ngSubmit)="onSubmit()">
+ <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()" novalidate>
+  <!-- <form> -->
     <div class="row">
+
+        <input type="text" class="form-control" formControlName="numeroVente" id="numeroVente" readonly>
 
         <div class="form-row col-sm-4 mb-3 mb-sm-0">
             <label><strong>Numéro Vente : </strong></label>
-            <input type="text" class="form-control" (keypress)="onKey($event)" formControlName="barcode">
-        <!--     <input type="text" (window:keypress)="onKey($event)"  autofocus />-->
-            <p>barcode: {{ barcode }}</p>
+          <!--  <input type="text" class="form-control" (keypress)="onKey($event)" autofocus> -->
+
+         <input type="text" class="form-control" (window:keypress)="onKey($event)"  autofocus />
+<!--
+         <input type="text" class="form-control" (KeyboardEvent)="onKey($event)"  autofocus /> -->
         </div>
 
         <div class="form-group col-sm-4 mb-3 mb-sm-0">
             <label>Type Réglement</label>
-            <select name="typeReglement" formControlName="typeReglement" id="typeReglement" [compareWith]="compareVente" class="form-control">
+            <select name="typeReglement" formControlName="typeReglement" id="typeReglement" class="form-control">
                 <option value="0">-Select-</option>
                 <option *ngFor="let item of listDataReglement" [ngValue]="item">{{item}}</option>
               </select>
@@ -40,9 +45,10 @@
                 <div class="col">Action</div>
             </div>
 
-            <div class="layout-inline row align-center" *ngIf="this.listOfScannedBarCodes.length == 0">No items added yet. Scan barcode of products.</div>
+            <div class="layout-inline row align-center" *ngIf="this.listOfScannedBarCodes.length === 0" [class.text-danger]="!isValid && this.listOfScannedBarCodes.length === 0">
+              Aucun Article scanné pour cette Vente.</div>
 
-            <div *ngIf="this.listOfScannedBarCodes.length > 0">
+            <div *ngIf="listOfScannedBarCodes.length > 0">
 
               <div  class="layout-inline row" *ngFor="let item of listOfScannedBarCodes; let i=index;">
 
@@ -51,23 +57,17 @@
                   </div>
 
                   <div class="col col-price col-numeric align-center ">
-                      <p>{{item.price}}</p>
+                      <p>{{item.prixVente}}</p>
                   </div>
-
-                  <!-- <div class="col col-qty layout-inline">
-                      <a href="#" class="qty qty-minus">-</a>
-                      <input type="numeric" value={{item.quantity}} />
-                      <a href="#" class="qty qty-plus">+</a>
-                  </div> -->
 
                   <div class="col col-qty layout-inline">
                     <a (click)="decrementQuantity(item)" class="qty qty-minus" style="cursor: pointer;">-</a>
-                    <input type="numeric" value={{item.quantity}} />
+                    <input type="numeric" value={{item.quantite}} />
                     <a (click)="inCrementQuantity(item)" class="qty qty-plus" style="cursor: pointer;">+</a>
                 </div>
 
                   <div class="col col-total col-numeric">
-                      <p> {{item.quantity * item.price}}</p>
+                      <p> {{item.quantite * item.prixVente}}</p>
                   </div>
 
                   <div class="col col-total col-numeric">
@@ -77,119 +77,13 @@
 
               </div>
 
-            </div>
-
-            <!-- <div class="layout-inline row row-bg2">
-
-                <div class="col col-pro layout-inline">
-                    <p>Scared Little Kittie</p>
-                </div>
-
-                <div class="col col-price col-numeric align-center ">
-                    <p>£23.99</p>
-                </div>
-
-                <div class="col col-qty  layout-inline">
-                    <a href="#" class="qty qty-minus ">-</a>
-                    <input type="numeric" value="1" />
-                    <a href="#" class="qty qty-plus">+</a>
-                </div>
-                <div class="col col-total col-numeric">
-                    <p>£25.94</p>
-                </div>
-
-                <div class="col col-total col-numeric">
-                    <a class="btn btn-sm btn-danger text-white ml-1">
-                        <i class="fa fa-trash"></i></a>
-                </div>
-
-            </div>
-
-            <div class="layout-inline row row-bg2">
-
-                <div class="col col-pro layout-inline">
-                    <p>Scared Little Kittie</p>
-                </div>
-
-                <div class="col col-price col-numeric align-center ">
-                    <p>£23.99</p>
-                </div>
-
-                <div class="col col-qty  layout-inline">
-                    <a href="#" class="qty qty-minus ">-</a>
-                    <input type="numeric" value="1" />
-                    <a href="#" class="qty qty-plus">+</a>
-                </div>
-                <div class="col col-total col-numeric">
-                    <p>£25.94</p>
-                </div>
-
-                <div class="col col-total col-numeric">
-                    <a class="btn btn-sm btn-danger text-white ml-1">
-                        <i class="fa fa-trash"></i></a>
-                </div>
-
-            </div>
-
-            <div class="layout-inline row row-bg2">
-
-                <div class="col col-pro layout-inline">
-                    <p>Scared Little Kittie</p>
-                </div>
-
-                <div class="col col-price col-numeric align-center ">
-                    <p>£23.99</p>
-                </div>
-
-                <div class="col col-qty  layout-inline">
-                    <a href="#" class="qty qty-minus ">-</a>
-                    <input type="numeric" value="1" />
-                    <a href="#" class="qty qty-plus">+</a>
-                </div>
-                <div class="col col-total col-numeric">
-                    <p>£25.94</p>
-                </div>
-
-                <div class="col col-total col-numeric">
-                    <a class="btn btn-sm btn-danger text-white ml-1">
-                        <i class="fa fa-trash"></i></a>
-                </div>
-
-            </div>
-
-            <div class="layout-inline row row-bg2">
-
-                <div class="col col-pro layout-inline">
-                    <p>Scared Little Kittie</p>
-                </div>
-
-                <div class="col col-price col-numeric align-center ">
-                    <p>£23.99</p>
-                </div>
-
-                <div class="col col-qty  layout-inline">
-                    <a href="#" class="qty qty-minus">-</a>
-                    <input type="numeric" value="1" />
-                    <a href="#" class="qty qty-plus">+</a>
-                </div>
-                <div class="col col-total col-numeric">
-                    <p>£25.94</p>
-                </div>
-
-                <div class="col col-total col-numeric">
-                    <a class="btn btn-sm btn-danger text-white ml-1">
-                        <i class="fa fa-trash"></i></a>
-                </div>
-
-
-
-            </div> -->
+          </div>
 
             <div class="tf">
                 <div class="row layout-inline">
                     <div class="col">
                         <p>Total :
-                            <input type="text" value="{{this.totalAmount}}" id="totalAmount" formControlName="totalAmount" class="form-control" readonly>
+                            <input type="text" value="{{this.totalAmount}}" id="totalVente" formControlName="totalVente" class="form-control" readonly>
                         </p>
                     </div>
                     <div class="col"></div>
@@ -197,6 +91,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-database"></i> Submit</button>
+        <button type="submit" class="btn btn-lg btn-success"
+          ><i class="fa fa-database"></i> Submit</button>
     </div>
 </form>

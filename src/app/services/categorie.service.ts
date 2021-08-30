@@ -9,7 +9,7 @@ import relationships from 'dexie-relationships';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import { OnlineofflineService } from './onlineoffline.service';
-import { Article } from '../models/article';
+import { Produit } from '../models/produit';
 import { Scategorie } from '../models/scategorie';
 import { CommandeClient } from '../models/commande-client';
 import { LigneCmdClient } from '../models/ligne-cmd-client';
@@ -34,7 +34,7 @@ export class CategorieService {
   private baseUrl_2 = 'http://localhost:8081/apiSeller';
   private db: Dexie;
   private tableCat: Dexie.Table<Categorie, number>;
-  private tableProd: Dexie.Table<Article, number>;
+  private tableProd: Dexie.Table<Produit, number>;
   private tableScat: Dexie.Table<Scategorie, number>;
   private tableCmdClient: Dexie.Table<CommandeClient, number>;
   private tableLcmd: Dexie.Table<LigneCmdClient, number>;
@@ -244,7 +244,7 @@ export class CategorieService {
   }
 
   private async addAllDataProdToIndexeddb() {
-    await this.http.get<Article[]>('http://localhost:8081/prodApi/produits').subscribe(response => {
+    await this.http.get<Produit[]>('http://localhost:8081/prodApi/produits').subscribe(response => {
       this.listDataProd = response;
       this.db.transaction('rw', this.tableProd, async ()=> {
         console.log("Produit :" +this.listDataProd);
