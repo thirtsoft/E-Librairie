@@ -86,6 +86,11 @@ export class ProduitService {
     return this.http.post(`${this.baseUrl_1}/produits`, info);
   }
 
+  saveProduit(info: Produit): Observable<Produit> {
+    return this.http.post<Produit>(`${this.baseUrl_1}/produits`, info);
+  }
+
+
   updateProduit(id: number, value: Produit): Observable<Produit> {
     return this.http.put<Produit>(`${this.baseUrl_1}/produits/${id}`, value);
   }

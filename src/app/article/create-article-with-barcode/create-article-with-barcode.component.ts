@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { ScategorieService } from 'src/app/services/scategorie.service';
@@ -26,11 +27,13 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   submitted = false;
 
-  constructor(public crudApi: ProduitService, public scatService: ScategorieService,
-    private catService: CategorieService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateArticleWithBarcodeComponent>,
+  constructor(public crudApi: ProduitService,
+              public scatService: ScategorieService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateArticleWithBarcodeComponent>,
   ) { }
 
   ngOnInit() {
@@ -101,7 +104,10 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/listArticleWithBarcode']);
-      });
+      },
+        (error: HttpErrorResponse) => {
+        this.toastr.error("Ce Article exist déjà, veuillez changez la référence");
+        });
 
     }else {
       console.log(this.formDataArticle.id, this.formDataArticle);

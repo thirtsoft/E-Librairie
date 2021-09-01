@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Scategorie } from 'src/app/models/scategorie';
 import { ScategorieService } from 'src/app/services/scategorie.service';
@@ -26,11 +27,13 @@ export class CreateArticleComponent implements OnInit {
 
   submitted = false;
 
-  constructor(public crudApi: ProduitService, public scatService: ScategorieService ,
-    private catService: CategorieService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateArticleComponent>,
+  constructor(public crudApi: ProduitService,
+              public scatService: ScategorieService ,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateArticleComponent>,
   ) { }
 
   ngOnInit() {
@@ -56,52 +59,25 @@ export class CreateArticleComponent implements OnInit {
   ResetForm() {
     this.crudApi.dataForm.reset();
   }
-/*
+
   onSubmit() {
     if (isNullOrUndefined(this.data.id)) {
       console.log(this.formDataArticle);
-    //  this.crudApi.createProduit(this.formDataArticle);
+      this.crudApi.saveProduit(this.formDataArticle).
       subscribe( data => {
         this.dialogRef.close();
         console.log(this.formDataArticle)
         this.crudApi.filter('Register click');
         this.toastr.success("Article Ajouté avec Succès");
-        this.crudApi.getAllArticles().subscribe(
-          response =>{this.crudApi.listData = response;},
-        );
-        this.router.navigate(['/articles']);
- //     });
-
-    }else {
-      console.log(this.formDataArticle.id, this.formDataArticle);
-      this.crudApi.updateArticle(this.formDataArticle.id, this.formDataArticle).
-      subscribe( data => {
-        this.dialogRef.close();
-        this.crudApi.filter('Register click');
-        this.toastr.success("Article Modifiée avec Succès");
-        this.crudApi.getAllArticles().subscribe(
-          response =>{this.crudApi.listData = response;},
-        );
-        this.router.navigate(['/home/articles']);
-      });
-
-    }
-
-  }
-*/
-
-  onSubmits() {
-    if(isNullOrUndefined(this.data.artId)) {
-      this.crudApi.createProduits(this.formDataArticle).
-      subscribe( data => {
-        this.dialogRef.close();
-        this.crudApi.filter('Register click');
-        this.toastr.success("Articel Ajouté avec Succès");
         this.crudApi.getAllProduits().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/home/articles']);
-      });
+        this.router.navigate(['/articles']);
+      },
+        (error: HttpErrorResponse) => {
+        this.toastr.error("Ce Article exist déjà, veuillez changez la référence");
+        }
+      );
 
     }else {
       console.log(this.formDataArticle.id, this.formDataArticle);
@@ -115,33 +91,29 @@ export class CreateArticleComponent implements OnInit {
         );
         this.router.navigate(['/home/articles']);
       });
-    }
 
-  }
-
-
-  onSubmit() {
-    if (this.crudApi.choixmenu == "A") {
-      this.saveArticle(this.formDataArticle);
-    }else {
-      this.updateArticle(this.formDataArticle.id, this.formDataArticle);
     }
 
   }
 
   saveArticle(art: Produit) {
-    this.crudApi.createProduits(art).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.crudApi.filter('Register click');
-      this.toastr.success("Article Ajouté avec Succès");
-      this.crudApi.getAllProduits().subscribe(
-        response =>{this.crudApi.listData = response;},
+    if (isNullOrUndefined(this.data.id)) {
+      console.log(this.formDataArticle);
+      this.crudApi.saveProduit(this.formDataArticle).
+      subscribe( data => {
+        this.dialogRef.close();
+        console.log(this.formDataArticle)
+        this.crudApi.filter('Register click');
+        this.toastr.success("Article Ajouté avec Succès");
+        this.crudApi.getAllProduits().subscribe(
+          response =>{this.crudApi.listData = response;},
+        );
+        this.router.navigate(['/articles']);
+      });
 
-      );
-      this.router.navigate(['/home/articles']);
-    });
+    }
   }
+
   updateArticle(id: number, art: Produit){
     this.crudApi.updateProduit(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
