@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Client } from 'src/app/models/client';
@@ -15,11 +16,13 @@ export class CreateClientComponent implements OnInit {
 
   listData : Client[];
 
-  constructor(public crudApi: ClientService ,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateClientComponent>,
-    ) { }
+  constructor(public crudApi: ClientService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateClientComponent>,
+  ) { }
 
   get f() { return this.crudApi.dataForm.controls; }
 
@@ -30,14 +33,17 @@ export class CreateClientComponent implements OnInit {
   }
 
   infoForm() {
+    const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
       codeClient: ['', [Validators.required]],
       raisonSocial: ['', [Validators.required]],
-      chefService: ['', [Validators.required]],
+      chefService: ['', [Validators.required, Validators.pattern(validatorString)]],
       adresse: ['', [Validators.required]],
-      telephone: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
+  //    email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
+
     });
   }
 
@@ -50,6 +56,7 @@ export class CreateClientComponent implements OnInit {
   ResetForm() {
       this.crudApi.dataForm.reset();
   }
+
   onSubmit() {
     if (this.crudApi.dataForm.valid) {
       if (this.crudApi.choixmenu == "A"){
@@ -72,7 +79,11 @@ export class CreateClientComponent implements OnInit {
       this.getListClients();
       this.router.navigate(['/home/clients']);
     //  this.router.navigate(['/clients']);
-    });
+    },
+    (error: HttpErrorResponse) => {
+      this.toastr.error("Ce Client exist déjà, veuillez changez le code");
+      }
+    );
   }
 
   updateClient(){
