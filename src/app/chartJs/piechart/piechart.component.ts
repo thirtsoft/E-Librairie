@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { Article } from 'src/app/models/article';
 import { Chart } from 'chart.js';
+import { Produit } from './../../models/produit';
 
 @Component({
   selector: 'app-piechart',
@@ -28,7 +28,7 @@ export class PiechartComponent implements OnInit {
   constructor(private statService: DashboardService) { }
 
   ngOnInit() {
-    this.statService.getNumberOfProduitByScategorie().subscribe((result: Article[]) => {
+    this.statService.getNumberOfProduitByScategorie().subscribe((result: Produit[]) => {
       this.list = result;
       const n = 1;
       const m = 0;

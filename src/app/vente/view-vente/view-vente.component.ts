@@ -321,15 +321,16 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
             },
 
           ],
-          item.map(x => {
-            return ([x.quantite, x.produit.designation, x.prixVente,
-              (x.quantite*x.prixVente).toFixed(2)])
-          }),
-/*
+          /*
           ...item.map(x => {
             return ([x.quantite, x.produit.designation, x.prixVente,
               (x.quantite*x.prixVente).toFixed(2)])
           }),*/
+
+          ...item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prixVente,
+              (x.quantite*x.prixVente).toFixed(2)])
+          }),
           [
             {
               text: 'MONTANT TOTAL',

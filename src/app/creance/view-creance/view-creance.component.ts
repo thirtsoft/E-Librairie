@@ -316,16 +316,16 @@ export class ViewCreanceComponent implements OnInit {
             },
 
           ],
-          /*
+
           ...item.map(x => {
             return ([x.quantite, x.produit.designation, x.prix,
               (x.quantite*x.prix).toFixed(2)])
-          }),*/
+          }),
 
-          item.map(x => {
+         /*  item.map(x => {
             return ([x.quantite, x.produit.designation, x.prix,
               (x.quantite*x.prix).toFixed(2)])
-          }),
+          }), */
           [
             {
               text: 'MONTANT TOTAL',

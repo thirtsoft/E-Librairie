@@ -57,7 +57,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     if (this.crudApi.choixmenu == "A") {
       this.infoForm();
       this.listOfScannedBarCodes = [];
-    /* else {
+    }else {
       this.lventeService.getAllByNumero(this.crudApi.formData.value.numeroVente).subscribe(
         response => {
           this.listOfScannedBarCodes = response;
@@ -72,7 +72,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
             console.log("ProductName name " + this.listOfScannedBarCodes[i].ItemName);
           }
         }
-      ); */
+      );
       this.f['dateVente'].setValue(this.crudApi.formData.value.dateVente);
     }
     this.crudApi.getUserId();
@@ -182,7 +182,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
           if (this.barcode === data.barCode) {
               console.log("Barcode of barcode is " + this.barcode);
            //   this.listOfScannedBarCodes.push({barcode: this.barcode, designation: data.designation, prixVente: data.prixDetail, quantite: 1});
-              this.listOfScannedBarCodes.push({produit: data, prixVente: data.prixDetail, quantite: 1});
+              this.listOfScannedBarCodes.push({produit: data, itemName: data.designation, prixVente: data.prixDetail, quantite: 1});
               this.updateTotals();
 
 

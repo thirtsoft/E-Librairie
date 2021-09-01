@@ -1,13 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ArticleService } from 'src/app/services/article.service';
-import { Article } from 'src/app/models/article';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
-import { Utilisateur } from 'src/app/models/utilisateur';
 import { CreanceService } from 'src/app/services/creance.service';
 import { Creance } from 'src/app/models/creance';
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
 
 const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -20,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   info: any;
   private roles: string[];
-  listData: Article[];
+  listData: Produit[];
   listDataCreance: Creance[];
   notification = 0;
   creanceInit = 0;
@@ -53,10 +51,11 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private tokenService: TokenStorageService,
-    public userService: UtilisateurService,
-    public crudApi: ArticleService,
-    public creanceService: CreanceService,
-    private router: Router) { }
+              public userService: UtilisateurService,
+              public crudApi: ProduitService,
+              public creanceService: CreanceService,
+              private router: Router
+  ) { }
 
   ngOnInit() {
     this.isLoggedIn = !!this.tokenService.getToken();
@@ -95,7 +94,7 @@ export class NavbarComponent implements OnInit {
     return this.currentTime;
   }
   getListArticlesSoldOut() {
-    this.crudApi.getAllArticles().subscribe(res => {
+    this.crudApi.getAllProduits().subscribe(res => {
       this.listData = res;
       for (var i = 0; i < this.listData.length; i++) {
         if ((this.listData[i].qtestock) < (this.listData[i].stockInitial)) {

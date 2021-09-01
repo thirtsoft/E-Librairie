@@ -12,7 +12,6 @@ import { DevisService } from 'src/app/services/devis.service';
 import { LigneDevisService } from 'src/app/services/ligne-devis.service';
 import { CreateDevisComponent } from '../create-devis/create-devis.component';
 import { DatePipe } from '@angular/common';
-
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -282,15 +281,12 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
             },
 
           ],
-          /*
+
           ...item.map(x => {
             return ([x.quantite, x.produit.designation, x.prixDevis,
               (x.quantite*x.prixDevis).toFixed(2)])
-          }),*/
-          item.map(x => {
-            return ([x.quantite, x.produit.designation, x.prixDevis,
-              (x.quantite*x.prixDevis).toFixed(2)])
           }),
+
           [
             {
               text: 'MONTANT TOTAL',

@@ -4,7 +4,7 @@
     </div>
 </mat-toolbar>
 
- <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()" novalidate>
+ <form [formGroup]="this.crudApi.formData"  novalidate>
   <!-- <form> -->
     <div class="row">
 
@@ -53,7 +53,7 @@
               <div  class="layout-inline row" *ngFor="let item of listOfScannedBarCodes; let i=index;">
 
                   <div class="col col-pro layout-inline">
-                      <p>{{item.designation}}</p>
+                      <p>{{item.itemName}}</p>
                   </div>
 
                   <div class="col col-price col-numeric align-center ">
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-lg btn-success"
+        <button type="button" class="btn btn-lg btn-success" (click)="onSubmit()"
           ><i class="fa fa-database"></i> Submit</button>
     </div>
 </form>

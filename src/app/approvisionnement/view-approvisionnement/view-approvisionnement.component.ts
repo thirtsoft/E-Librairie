@@ -10,8 +10,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Article } from 'src/app/models/article';
 import { CreateVenteComponent } from 'src/app/vente/create-vente/create-vente.component';
+import { Produit } from './../../models/produit';
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -37,7 +37,7 @@ export class ViewApprovisionnementComponent implements OnInit {
   dateAppro;
   forunisseur;
 
-  produit: Article = new Article();
+  produit: Produit = new Produit();
 
   private editForm: FormGroup;
 
@@ -281,6 +281,11 @@ export class ViewApprovisionnementComponent implements OnInit {
             },
 
           ],
+         /*  item.map(x => {
+            return ([x.quantite, x.produit.designation, x.prix,
+              (x.quantite*x.prix).toFixed(2)])
+          }), */
+
           ...item.map(x => {
             return ([x.quantite, x.produit.designation, x.prix,
               (x.quantite*x.prix).toFixed(2)])
