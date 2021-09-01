@@ -4,29 +4,29 @@
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
       <input type="hidden"  formControlName="id" id="id">
       <div class="row">
+
         <div class="form-group col-md-6">
           <label>Prénom</label>
-          <input type="text" class="form-control" formControlName="prenom" name="prenom" id="prenom" />
+          <input type="text" class="form-control" formControlName="prenom" name="prenom" id="prenom"  placeholder="Prénom employé"/>
           <div *ngIf="f['prenom'].invalid && (f['prenom'].dirty || f['prenom'].touched)" class="alert alert-danger">
-            <span *ngIf="f['prenom'].errors.required">
-               Prénom obligatoire.
-           </span>
+            <span *ngIf="f['prenom'].errors.required">Le prénom est obligatoire.</span>
+            <span *ngIf="f['prenom'].errors?.pattern">SVP, Le prénom doit contenir des lettres de l'alphabet A-Z..</span>
           </div>
         </div>
+
         <div class="form-group col-md-6">
           <label>Nom</label>
-          <input type="text" class="form-control" formControlName="nom" name="nom" id="nom">
-          <div *ngIf="f['nom'].invalid && (f['nom'].dirty || f['nom'].touched)" class="alert alert-danger">
-            <span *ngIf="f['nom'].errors.required">
-               Nom obligatoire.
-           </span>
+          <input type="text" class="form-control" formControlName="nom" name="nom" id="nom" placeholder="Nom employé">
+          <div *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)" class="alert alert-danger">
+            <span *ngIf="f['name'].errors.required">Le name est obligatoire.</span>
+            <span *ngIf="f['name'].errors?.pattern">SVP, Le name doit contenir des lettres de l'alphabet A-Z..</span>
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label>CNI</label>
-        <input type="text" class="form-control" formControlName="cni" name="cni" id="cni">
+        <input type="text" class="form-control" formControlName="cni" name="cni" id="cni" placeholder="Numéro de carte d'identité">
         <div *ngIf="f['cni'].invalid && (f['cni'].dirty || f['cni'].touched)" class="alert alert-danger">
           <span *ngIf="f['cni'].errors.required">
             Cni obligatoire.
@@ -36,29 +36,34 @@
 
       <div class="form-group">
         <label>Adresse</label>
-        <input type="text" class="form-control" formControlName="adresse" name="adresse" id="adresse">
+        <input type="text" class="form-control" formControlName="adresse" name="adresse" id="adresse" placeholder="Addresse employé">
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
           <label>Telephone</label>
-          <input type="text" class="form-control" formControlName="telephone" name="telephone" id="telephone">
+          <input type="text" class="form-control" formControlName="telephone" name="telephone" id="telephone" placeholder="00 000 00 00">
           <div *ngIf="f['telephone'].invalid && (f['telephone'].dirty || f['telephone'].touched)" class="alert alert-danger">
-            <span *ngIf="f['telephone'].errors.required">
-              Telephone obligatoire.
-           </span>
+            <span *ngIf="f['telephone'].errors.required">Le numéro de Téléphone est obligatoire.</span>
+            <span *ngIf="f['telephone'].errors?.pattern">SVP, Entrez un numéro Telephone est valide et doit contenir 9 caractère..</span>
           </div>
         </div>
 
         <div class="form-group col-md-6">
           <label>Telephone2</label>
-          <input type="text" class="form-control" formControlName="telephone2" name="telephone2" id="telephone2">
+          <input type="text" class="form-control" formControlName="telephone2" name="telephone2" id="telephone2" placeholder="00 000 00 00">
+          <div *ngIf="f['telephone'].invalid && (f['telephone'].dirty || f['telephone'].touched)" class="alert alert-danger">
+            <span *ngIf="f['telephone'].errors?.pattern">SVP, Entrez un numéro Telephone est valide et doit contenir 9 caractère..</span>
+          </div>
         </div>
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" formControlName="email" id="email">
+        <input type="text" class="form-control" formControlName="email" id="email" placeholder="client@gmail.com">
+        <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="alert alert-danger">
+          <span *ngIf="f['email'].errors?.pattern">SVP, Donnez un email valide.</span>
+        </div>
       </div>
 
       <div class="form-group">

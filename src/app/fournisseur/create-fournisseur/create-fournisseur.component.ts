@@ -30,18 +30,19 @@ export class CreateFournisseurComponent implements OnInit {
   }
 
   infoForm() {
+    const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
       code: ['', [Validators.required]],
       raisonSociale: ['', [Validators.required]],
-      prenom: ['', [Validators.required]],
-      nom: ['', [Validators.required]],
+      prenom: ['', [Validators.required, Validators.pattern(validatorString)]],
+      nom: ['', [Validators.required, Validators.pattern(validatorString)]],
       nomBank: ['', [Validators.required]],
       numeroCompte: ['', [Validators.required]],
       adresse: ['', [Validators.required]],
-      telephone: ['', [Validators.required]],
+      telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
       fax: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
     });
 
   }

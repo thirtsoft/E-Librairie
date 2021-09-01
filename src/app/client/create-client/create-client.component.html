@@ -25,13 +25,6 @@
           <span *ngIf="f['chefService'].errors.required">Le nom et prénom du chef de service est obligatoire.</span>
           <span *ngIf="f['chefService'].errors?.pattern">SVP, Le nom et prénom doit contenir des lettres de l'alphabet A-Z..</span>
         </div>
-
-       <!--  <div *ngIf="f['chefService'].invalid && (f['chefService'].dirty || f['chefService'].touched)" class="alert alert-danger">
-          <span *ngIf="f['chefService'].errors.required">
-            Chef Service obligatoire.
-         </span>
-         <span *ngIf="f['chefService'].errors?.pattern">SVP, Le nom et prénom doit contenir des lettres de l'alphabet A-Z.</span>
-        </div> -->
       </div>
 
       <div class="form-group">
