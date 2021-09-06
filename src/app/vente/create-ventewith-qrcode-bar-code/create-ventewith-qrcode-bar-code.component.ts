@@ -86,15 +86,17 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   }
 
   infoForm() {
+    const numberRegEx = /\-?\d*\.?\d{1,2}/;
     this.crudApi.formData = this.fb.group({
       numeroVente: this.crudApi.NumVente,
       total: [0, Validators.required],
       totalVente: [0, Validators.required],
-      status: ['', Validators.required],
+//      status: ['', Validators.required],
       typeReglement: ['', Validators.required],
-      montantReglement: [0, Validators.required],
+//      montantReglement: [0, Validators.required],
+      montantReglement: ['', [Validators.required, Validators.pattern(numberRegEx)]],
       dateVente: [new Date(), Validators.required],
-      DeletedOrderItemIDs: '',
+//      DeletedOrderItemIDs: '',
       ligneVentes: [[], Validators.required],
 
     });
@@ -235,7 +237,10 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   }
 
   inCrementQuantity(item) {
-    this.addTocart(item);
+    item.quantite++;
+    this.updateTotals();
+  //  this.addTocart(item);
+
   }
 
   decrementQuantity(item) {
