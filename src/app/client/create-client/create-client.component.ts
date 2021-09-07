@@ -37,9 +37,9 @@ export class CreateClientComponent implements OnInit {
     this.crudApi.dataForm = this.fb.group({
       id: null,
       codeClient: ['', [Validators.required]],
-      raisonSocial: ['', [Validators.required]],
+      raisonSocial: ['', [Validators.required, Validators.pattern(validatorString)]],
       chefService: ['', [Validators.required, Validators.pattern(validatorString)]],
-      adresse: ['', [Validators.required]],
+      adresse: ['', [Validators.required, Validators.pattern(validatorString)]],
       telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
 

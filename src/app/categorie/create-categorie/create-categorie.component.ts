@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Categorie } from 'src/app/models/categorie';
 import { CategorieService } from 'src/app/services/categorie.service';
@@ -50,24 +51,31 @@ export class CreateCategorieComponent implements OnInit {
       this.crudApi.dataForm.reset();
   }
   onSubmit() {
-   /*  if (this.crudApi.dataForm.valid) { */
       if (this.crudApi.choixmenu == "A"){
-  //      this.crudApi.createCategorie(this.crudApi.dataForm.value);
         this.saveCategorie();
         this.dialogRef.close();
       }else{
-        console.log('non ajouter');
+    //    console.log('non ajouter');
+        this.updateCategorie();
       }
 
   }
 
   saveCategorie() {
-    this.crudApi.createCategorieAPI(this.crudApi.dataForm.value);
-       this.dialogRef.close();
-      this.crudApi.filter('Register click');
-      this.toastr.success("Categorie Ajouté avec Succès");
-      this.getListCategories();
-      this.router.navigate(['/home/categories']);
+    this.crudApi.saveCategorie(this.crudApi.dataForm.value)
+      .subscribe(response => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success("Categorie Ajouté avec Succès");
+        this.getListCategories();
+        this.router.navigate(['/home/categories']);
+      },
+      (error: HttpErrorResponse) => {
+        this.toastr.error("Cette catgory exist déjà, veuillez changez de code");
+        }
+      );
+
+
   }
   updateCategorie(){
     this.crudApi.updateCategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).

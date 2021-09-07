@@ -7,15 +7,17 @@
         <label>code Client</label>
         <input type="text" class="form-control" formControlName="codeClient" id="codeClient" placeholder="Code du client" />
         <div *ngIf="f['codeClient'].invalid && (f['codeClient'].dirty || f['codeClient'].touched)" class="alert alert-danger">
-          <span *ngIf="f['codeClient'].errors.required">
-            Code obligatoire.
-         </span>
+          <span *ngIf="f['codeClient'].errors.required">Code client obligatoire.</span>
         </div>
       </div>
 
       <div class="form-group">
         <label>Raison Social</label>
         <input type="text" class="form-control" formControlName="raisonSocial" id="raisonSocial" placeholder="Raison social du client">
+        <div *ngIf="f['raisonSocial'].invalid && (f['raisonSocial'].dirty || f['raisonSocial'].touched)" class="alert alert-danger">
+         <!--  <span *ngIf="f['raisonSocial'].errors.required">Le nom et prénom du chef de service est obligatoire.</span> -->
+          <span *ngIf="f['raisonSocial'].errors?.pattern">SVP, La raison social doit contenir des lettres de l'alphabet A-Z..</span>
+        </div>
       </div>
 
       <div class="form-group">
@@ -30,6 +32,9 @@
       <div class="form-group">
         <label>Adresse</label>
         <input type="text" class="form-control" formControlName="adresse" id="adresse" placeholder="Addresse du client">
+        <div *ngIf="f['adresse'].invalid && (f['adresse'].dirty || f['adresse'].touched)" class="alert alert-danger">
+          <span *ngIf="f['adresse'].errors?.pattern">SVP, Donner une addresse avec des lettres de l'alphabet A-Z..</span>
+        </div>
       </div>
 
       <div class="form-group">

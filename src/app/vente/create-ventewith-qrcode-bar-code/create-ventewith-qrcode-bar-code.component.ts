@@ -176,7 +176,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   */
 
 
-  onKey(event: any) {
+  onKeyS(event: any) {
     this.barcode = event.target.value;
     if (this.barcode.length == 13) {
       this.artService.getProduitByBarcode(this.barcode).subscribe(
@@ -196,6 +196,44 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     }
 
   }
+
+  onKey(event: any) {
+    let alreadyExistsInCart: boolean = false;
+    let existingCartItem: any = undefined;
+    this.barcode = event.target.value;
+    if (this.barcode.length == 13) {
+      this.artService.getProduitByBarcode(this.barcode).subscribe(
+        (data: Produit)=> {
+          const sameProduct = this.listArticle.find((prod) => prod.reference === data.reference);
+      //    console.log(sameProduct);
+          if ((this.barcode === data.barCode) && (sameProduct)) {
+            console.log("Barcode of barcode is " + this.barcode);
+
+            if (this.listOfScannedBarCodes.length > 0) {
+
+              existingCartItem = this.listOfScannedBarCodes.find(tempCartItem => tempCartItem.id === data.id);
+              console.log(existingCartItem);
+              alreadyExistsInCart = (existingCartItem != undefined)
+            }
+            if (alreadyExistsInCart) {
+             // increment the quantity
+              existingCartItem.quantite++;
+            //  this.listOfScannedBarCodes[existingCartItem].quantite++;
+            }else {
+              this.listOfScannedBarCodes.push({produit: data, itemName: data.designation, prixVente: data.prixDetail, quantite: 1});
+
+            }
+
+            this.updateTotals();
+
+         }
+      }
+    )
+
+    }
+
+  }
+
 
 
   addTocart(theCartItem){
@@ -245,16 +283,21 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
   decrementQuantity(item) {
     item.quantite--;
-    if (item.quantite === 0) {
-      this.removeCart(item);
-    } else {
-      this.updateTotals();
+    for (let i = 0; i < this.listOfScannedBarCodes.length; i++) {
+      let obj = this.listOfScannedBarCodes[i];
+      if (obj.quantite === 0) {
+        this.listOfScannedBarCodes.splice(i, 1);
+      } else {
+        this.updateTotals();
+      }
+
     }
+
 
   }
 
-  removeCart(item) {
-    const itemIndex = this.listOfScannedBarCodes.findIndex((tempCartItem) => tempCartItem.id === item.id);
+  removeCarts(item) {
+    const itemIndex = this.listOfScannedBarCodes.find((tempCartItem) => tempCartItem.id === item.id);
     if (itemIndex > -1) {
       this.listOfScannedBarCodes.splice(itemIndex, 1);
       this.updateTotals();
@@ -262,6 +305,18 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     }
 
   }
+
+  removeCart(id: number, i: number) {
+    if (id != null) {
+      this.lventeService.deleteLigneVente(id).subscribe(data => {
+        this.toastr.warning('Détails Vente supprimé avec succès!');
+      });
+    }
+    this.listOfScannedBarCodes.splice(i, 1);
+    this.updateTotals();
+  }
+
+
 
 
 

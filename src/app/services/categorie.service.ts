@@ -109,13 +109,13 @@ export class CategorieService {
     return this.http.get(`${this.baseUrl}/categories/`+id).toPromise();
   }
 
-  public getCategorieById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/categories/${id}`);
+  public getCategorieById(id: number): Observable<Categorie> {
+    return this.http.get<Categorie>(`${this.baseUrl}/categories/${id}`);
   }
-/*
-  createCategorie(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/categories`, info);
-  } */
+
+  saveCategorie(info: Categorie): Observable<Categorie> {
+    return this.http.post<Categorie>(`${this.baseUrl}/categories`, info);
+  }
 
   public createCategorieAPI(info: Categorie) {
     this.http.post(`${this.baseUrl}/categories`, info)
@@ -125,8 +125,8 @@ export class CategorieService {
     );
   }
 
-  updateCategorie(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/categories/${id}`, value);
+  updateCategorie(id: number, value: Categorie): Observable<Categorie> {
+    return this.http.put<Categorie>(`${this.baseUrl}/categories/${id}`, value);
   }
 
   deleteCategorie(id: number): Observable<any> {

@@ -16,6 +16,10 @@
       <div class="form-group">
         <label>Raison Sociale</label>
         <input type="text" class="form-control" formControlName="raisonSociale" name="raisonSociale" id="raisonSociale" placeholder="Raison social fournisseur">
+        <div *ngIf="f['raisonSociale'].invalid && (f['raisonSociale'].dirty || f['raisonSociale'].touched)" class="alert alert-danger">
+         <!--  <span *ngIf="f['raisonSociale'].errors.required">Le numéro de Téléphone est obligatoire.</span> -->
+          <span *ngIf="f['raisonSociale'].errors?.pattern">SVP, La raison social doit contenir que des lettres..</span>
+        </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
@@ -63,6 +67,10 @@
         <div class="form-group col-md-6">
           <label>Adresse</label>
           <input type="text" class="form-control" formControlName="adresse" name="adresse" id="adresse" placeholder="Address du fournisseur">
+          <div *ngIf="f['adresse'].invalid && (f['adresse'].dirty || f['adresse'].touched)" class="alert alert-danger">
+            <!-- <span *ngIf="f['adresse'].errors.required">Le  nom obligatoire est obligatoire.</span> -->
+            <span *ngIf="f['adresse'].errors?.pattern">SVP, L'addresse doit contenir des lettres de l'alphabet A-Z..</span>
+          </div>
         </div>
 
         <div class="form-group col-md-6">

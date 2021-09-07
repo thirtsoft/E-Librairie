@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Charge } from 'src/app/models/charge';
 import { ChargeService } from 'src/app/services/charge.service';
@@ -19,18 +20,20 @@ import { isNullOrUndefined } from 'util';
 })
 export class CreateChargeComponent implements OnInit {
 
- // public charge = new Charge();
   formDataContrat = new Charge();
   listData: Charge[];
   listCategorieCharge: CategorieCharge[];
   submitted = false;
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(public crudApi: ChargeService,public fb: FormBuilder,
-    public toastr: ToastrService, private catChargeService: CategorieChargeService,
-    private router : Router, private datePipe : DatePipe,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateChargeComponent>,
+  constructor(public crudApi: ChargeService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private catChargeService: CategorieChargeService,
+              private router : Router,
+              private datePipe : DatePipe,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateChargeComponent>,
 
   ) { }
 
@@ -39,11 +42,6 @@ export class CreateChargeComponent implements OnInit {
     if (!isNullOrUndefined(this.data.id)) {
       this.formDataContrat = Object.assign({},this.crudApi.listData[this.data.id])
     }
-    /*
-    if (this.crudApi.choixmenu == "A"){
-      this.infoForm()
-    };
-    */
   }
 
   infoForm() {
@@ -91,7 +89,11 @@ export class CreateChargeComponent implements OnInit {
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/charges']);
-      });
+      },
+      (error: HttpErrorResponse) => {
+        this.toastr.error("Charge existant déjà, veuillez changez de code");
+        }
+      );
 
     }else {
       this.crudApi.updateCharge(this.formDataContrat.id, this.formDataContrat).

@@ -3,6 +3,7 @@
     <h1>SOUS CATEGORIE</h1>
     <form #addScategorieForm="ngForm" (ngSubmit)="addScategorieForm.form.valid &&onSubmit()"  name="form">
       <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataScategorie.id">
+
       <div class="form-group">
         <label>Code </label>
         <input type="text" class="form-control" [(ngModel)]="formDataScategorie.code"
@@ -17,32 +18,36 @@
         <label>Libelle</label>
         <input type="text" class="form-control" [(ngModel)]="formDataScategorie.libelle"
           name="libelle"  id="libelle" #libelle="ngModel" required>
-        <span class="text-danger"
+
+          <div *ngIf="(libelle.touched || addScategorieForm.submitted)" class="alert alert-danger">
+            <span *ngIf="libelle.errors?.required">Le   Libelle est obligatoire.</span>
+            <span *ngIf="libelle.errors?.pattern">SVP,  Libelle doit contenir des lettres de l'alphabet A-Z..</span>
+          </div>
+
+       <!--  <span class="text-danger"
           *ngIf="(libelle.touched || addScategorieForm.submitted) && libelle.errors?.required">
             Libelle est obligatoire
-        </span>
+        </span>     -->
       </div>
-      <!--
-      <div class="form-group">
-        <label>Categorie</label>
-        <select class="form-control" id="categorie" name="categorie" [(ngModel)]="scat.categorie">
-          <option [ngValue]="cat.id == scat.categorie?.id ? scat.categorie : cat" *ngFor="let cat of listCategories">{{cat.designation}}</option>
-        </select>
-      </div> -->
 
       <div class="form-group">
         <label>Categorie</label>
         <div class="form-group">
-          <select name="categorie"
-              [(ngModel)]="formDataScategorie.categorie" class="form-control">
+          <select name="categorie" [(ngModel)]="formDataScategorie.categorie" class="form-control"
+                name="categorie"  id="libelle" #categorie="ngModel" required>
+            <option [ngValue]="0">--Select--</option>
             <option *ngFor="let cat of listCategorie" [ngValue]="cat.id == formDataScategorie.categorie?.id ? formDataScategorie.categorie : cat">{{cat.designation}}</option>
           </select>
+          <span class="text-danger"
+              *ngIf="(categorie.touched || addScategorieForm.submitted) && libelle.errors?.required">
+                Categorie est obligatoire
+        </span>
         </div>
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
-        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        <button type="submit" class="btn btn-success"><em class="fa fa-database"></em> Submit</button>&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><em class="fa fa-close"></em> Close</button>
       </div>
     </form>
  </div>

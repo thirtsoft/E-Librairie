@@ -1,6 +1,6 @@
 <mat-toolbar color="success">
     <div>
-        <h1>Gestion Approvisionnement</h1>
+        <h2>Gestion Approvisionnement</h2>
     </div>
 </mat-toolbar>
 
@@ -19,9 +19,9 @@
                 <label>Fournisseur</label>
                 <div class="form-group">
                     <select name="client" formControlName="fournisseur" id="fournisseur" class="form-control" [compareWith]="compareFournisseur">
-            <option value="0">-Select-</option>
-            <option *ngFor="let item of fournisseurList" [ngValue]="item"><td>{{item.prenom}} {{item.nom}}</td></option>
-          </select>
+                      <option value="0">-Select-</option>
+                      <option *ngFor="let item of fournisseurList" [ngValue]="item"><td>{{item.prenom}} {{item.nom}}</td></option>
+                    </select>
                 </div>
             </div>
             <!--  <div class="form-group col-sm-4 mb-sm-0">
@@ -40,9 +40,9 @@
             <div class="form-group col-sm-4" style="margin-top: 10px;">
                 <label>Status</label>
                 <select name="status" formControlName="status" id="status" class="form-control">
-          <option value="VALIDE">VALIDE</option>
-          <option value="ENCOURS">ENCOURS</option>
-        </select>
+                  <option value="VALIDE">VALIDE</option>
+                  <option value="ENCOURS">ENCOURS</option>
+                </select>
             </div>
             <div class="form-group col-sm-4" style="margin-top: 10px;">
                 <label>Observation</label>

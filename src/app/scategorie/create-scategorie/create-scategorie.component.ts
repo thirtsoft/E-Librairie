@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
@@ -24,13 +25,17 @@ export class CreateScategorieComponent implements OnInit {
   addScategorieForm: NgForm;
   currentCategorie;
 
-  constructor(public crudApi: ScategorieService , private catService: CategorieService,
-    public fb: FormBuilder,public toastr: ToastrService,private router : Router,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateScategorieComponent>,
-    ) {}
+  constructor(public crudApi: ScategorieService,
+              private catService: CategorieService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateScategorieComponent>,
+  ) {}
 
   ngOnInit() {
+    this.infoForm();
     this.getCategories();
     if (!isNullOrUndefined(this.data.scatId)) {
       console.log(this.crudApi.listData[this.data.scatId]);
@@ -44,11 +49,13 @@ export class CreateScategorieComponent implements OnInit {
   }
 
   infoForm() {
+    const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
         id: null,
         code: ['', [Validators.required]],
-        id_categ: ['', [Validators.required]],
-        libelle: ['', [Validators.required]]
+   //     id_categ: ['', [Validators.required]],
+    //    libelle: ['', [Validators.required]]
+        libelle: ['', [Validators.required, Validators.pattern(validatorString)]],
     });
   }
 
@@ -67,7 +74,11 @@ export class CreateScategorieComponent implements OnInit {
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/scategories']);
-      });
+      },
+      (error: HttpErrorResponse) => {
+        this.toastr.error("Cet Scategory exist déjà, veuillez changez le code");
+        }
+      );
 
     }else {
       console.log(this.formDataScategorie.id, this.formDataScategorie);

@@ -1,23 +1,24 @@
-import { Produit } from './../../models/produit';
 import { Component, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Vente } from 'src/app/models/vente';
-import { VenteService } from 'src/app/services/vente.service';
-import { LigneVenteService } from 'src/app/services/ligne-vente.service';
-import { LigneVente } from 'src/app/models/ligne-vente';
 import { DataTableDirective } from 'angular-datatables';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { DatePipe } from '@angular/common';
+
+import { Vente } from 'src/app/models/vente';
+import { VenteService } from 'src/app/services/vente.service';
+import { LigneVenteService } from 'src/app/services/ligne-vente.service';
+import { LigneVente } from 'src/app/models/ligne-vente';
 import { CreateVenteComponent } from '../create-vente/create-vente.component';
+import { Produit } from './../../models/produit';
+
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { DatePipe } from '@angular/common';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-view-vente',
@@ -27,11 +28,7 @@ import { TokenStorageService } from 'src/app/auth/token-storage.service';
 export class ViewVenteComponent implements OnDestroy, OnInit {
 
   listData: Vente[];
-  listDatalVente: LigneVente[];
-  cmdVente: Vente;
-  vente;
   venteId: number;
-  currentVente;
 
   numeroVente;
   totalVente;
@@ -39,12 +36,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
   produit: Produit = new Produit();
 
-  editForm: FormGroup;
-
-  info: any;
-
   username = '';
-  name = '';
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -52,12 +44,10 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: VenteService,
               public lventeService: LigneVenteService,
-              private tokenService: TokenStorageService,
               public toastr: ToastrService,
               public fb: FormBuilder,
               private router : Router,
               private datePipe : DatePipe,
-              private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public route: ActivatedRoute,
               public dialogRef:MatDialogRef<CreateVenteComponent>,
@@ -65,10 +55,8 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.venteId = this.route.snapshot.params.id;
-//    console.log(this.venteId);
     this.lventeService.getLigneVentesByVente(this.venteId).subscribe((data: LigneVente[]) => {
       this.lventeService.listData = data;
-      //this.currentVente = data;
       console.log(this.lventeService.listData);
 
       console.log(this.lventeService.listData[0].numero);
@@ -78,8 +66,6 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
       console.log(this.lventeService.listData[0].vente.dateVente);
       this.dateVente = this.lventeService.listData[0].vente.dateVente;
       this.username = this.lventeService.listData[0].vente.utilisateur.name;
-
-     // this.dtTrigger.next();
     }, err => {
       console.log(err);
     });
@@ -165,10 +151,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-         /*  text: ' FACTURE PROFORMAT',
-          alignment: 'center',
-          fontSize: 14,
-          color: '#0000ff' */
+
         },
         {
 
@@ -179,9 +162,8 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
             [
               {
-              //  text: `VENTE N° : ${this.lventeService.listData[0].numero}`,
-                text: `VENDEUR  : ${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
-                fontSize: 16,
+                text: `Agent Caisse  : ${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
+                fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]
               },
@@ -190,7 +172,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
             [
               {
-                text: `Date : ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
+                text: `Date : ${this.lventeService.listData[0].vente.dateVente}`,
                 alignment: 'right',
                 margin: [0, 15, 0, 15]
               },
@@ -198,14 +180,19 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
           ]
         },
-        /* {
-          bold:true,
-          text: 'M  : ' +this.lcmdService.listData[0].commande.client.chefService
-        }, */
+
         {
           text: 'FACTURE VENTE',
           bold: true,
-          fontSize: 20,
+          fontSize: 16,
+          alignment: 'center',
+          color: '#0000ff',
+          margin: [0, 8, 0, 8]
+        },
+        {
+          text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
+          bold: true,
+          fontSize: 14,
           alignment: 'center',
           color: '#0000ff',
           margin: [0, 8, 0, 8]
@@ -226,7 +213,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: `Total en F CFA : ${this.lventeService.listData[0].vente.totalVente}`,
+          text: `Total Net CFA : ${this.lventeService.listData[0].vente.totalVente}`,
           alignment: 'right',
           margin: [0, 8, 0, 8],
           bold: true,
@@ -321,11 +308,6 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
             },
 
           ],
-          /*
-          ...item.map(x => {
-            return ([x.quantite, x.produit.designation, x.prixVente,
-              (x.quantite*x.prixVente).toFixed(2)])
-          }),*/
 
           ...item.map(x => {
             return ([x.quantite, x.produit.designation, x.prixVente,
