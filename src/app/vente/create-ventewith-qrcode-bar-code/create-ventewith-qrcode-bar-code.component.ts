@@ -89,14 +89,11 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     const numberRegEx = /\-?\d*\.?\d{1,2}/;
     this.crudApi.formData = this.fb.group({
       numeroVente: this.crudApi.NumVente,
-      total: [0, Validators.required],
+ //     total: [0, Validators.required],
       totalVente: [0, Validators.required],
-//      status: ['', Validators.required],
       typeReglement: ['', Validators.required],
-//      montantReglement: [0, Validators.required],
       montantReglement: ['', [Validators.required, Validators.pattern(numberRegEx)]],
       dateVente: [new Date(), Validators.required],
-//      DeletedOrderItemIDs: '',
       ligneVentes: [[], Validators.required],
 
     });
@@ -132,26 +129,6 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
   transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd');
-  }
-
-  getArticleByBarcode(barcode: string) {
-    this.artService.getProduitByBarcode(barcode).subscribe(
-      (data: Produit) => {
-        this.listArticleBarcode = data;
-        console.log("Product By barcode is +++", data);
-      });
-
-  }
-
-  getArticleBySearchCodebarre()  {
-    const keyword: string = this.route.snapshot.paramMap.get('keyword');
-    this.artService.getProduitByBarcode(keyword).subscribe(
-      data  => {
-        this.barcodeArticle = data;
-      }
-
-    )
-
   }
 
   /*
@@ -205,20 +182,17 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       this.artService.getProduitByBarcode(this.barcode).subscribe(
         (data: Produit)=> {
           const sameProduct = this.listArticle.find((prod) => prod.reference === data.reference);
-      //    console.log(sameProduct);
           if ((this.barcode === data.barCode) && (sameProduct)) {
             console.log("Barcode of barcode is " + this.barcode);
 
             if (this.listOfScannedBarCodes.length > 0) {
-
-              existingCartItem = this.listOfScannedBarCodes.find(tempCartItem => tempCartItem.id === data.id);
+              existingCartItem = this.listOfScannedBarCodes.find(tempCartItem => tempCartItem.itemName === data.designation);
               console.log(existingCartItem);
               alreadyExistsInCart = (existingCartItem != undefined)
             }
             if (alreadyExistsInCart) {
              // increment the quantity
-              existingCartItem.quantite++;
-            //  this.listOfScannedBarCodes[existingCartItem].quantite++;
+              existingCartItem.quantite;
             }else {
               this.listOfScannedBarCodes.push({produit: data, itemName: data.designation, prixVente: data.prixDetail, quantite: 1});
 
@@ -234,51 +208,17 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
   }
 
-
-
-  addTocart(theCartItem){
-    let alreadyExistsInCart: boolean = false;
-    let existingCartItem = undefined;
-
-    if (this.listOfScannedBarCodes.length > 0) {
-      existingCartItem = this.listOfScannedBarCodes.find(tempCartItem => tempCartItem.id === theCartItem.id);
-
-      alreadyExistsInCart = (existingCartItem != undefined)
-    }
-    if (alreadyExistsInCart) {
-      existingCartItem.quantite++;
-    }else {
-      // add to the cart item array
-      this.listOfScannedBarCodes.push(theCartItem);
-    }
-
-    this.updateTotals();
-  }
-
   updateTotals() {
     this.totalAmount = 0;
-    for (let i = 0; i < this.listOfScannedBarCodes.length; i++) {
+    for(let i = 0; i < this.listOfScannedBarCodes.length; i++) {
         let obj = this.listOfScannedBarCodes[i];
         this.totalAmount += obj.quantite * obj.prixVente;
     }
-
-  }
-
-  checkIfScannedCodeExists(scannedCode) {
-    for (let i = 0; i < this.listOfScannedBarCodes.length; i++) {
-      let obj = this.listOfScannedBarCodes[i];
-      if (obj.barcode == scannedCode)
-          return i;
-    }
-
-    return undefined;
   }
 
   inCrementQuantity(item) {
     item.quantite++;
     this.updateTotals();
-  //  this.addTocart(item);
-
   }
 
   decrementQuantity(item) {
@@ -290,9 +230,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       } else {
         this.updateTotals();
       }
-
     }
-
 
   }
 
@@ -301,7 +239,6 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     if (itemIndex > -1) {
       this.listOfScannedBarCodes.splice(itemIndex, 1);
       this.updateTotals();
-
     }
 
   }
@@ -315,9 +252,6 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     this.listOfScannedBarCodes.splice(i, 1);
     this.updateTotals();
   }
-
-
-
 
 
 }
