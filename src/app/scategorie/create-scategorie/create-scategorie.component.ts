@@ -25,6 +25,11 @@ export class CreateScategorieComponent implements OnInit {
   addScategorieForm: NgForm;
   currentCategorie;
 
+  code: FormControl;
+  libelle: FormControl;
+  categorie: FormControl;
+  validatorString = '^[a-zA-Z,.!?\\s-]*$';
+
   constructor(public crudApi: ScategorieService,
               private catService: CategorieService,
               public fb: FormBuilder,
@@ -35,7 +40,8 @@ export class CreateScategorieComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.infoForm();
+    this.initForm();
+//    this.infoForm();
     this.getCategories();
     if (!isNullOrUndefined(this.data.scatId)) {
       console.log(this.crudApi.listData[this.data.scatId]);
@@ -48,15 +54,20 @@ export class CreateScategorieComponent implements OnInit {
       this.listCategorie = response as Categorie[];});
   }
 
+  initForm() {
+    this.formDataScategorie = {
+      id: null,
+      code:"",
+      libelle:"",
+      categorie: new Categorie(),
+    };
+  }
+
   infoForm() {
-    const validatorString = '^[a-zA-Z,.!?\\s-]*$';
-    this.crudApi.dataForm = this.fb.group({
-        id: null,
-        code: ['', [Validators.required]],
-   //     id_categ: ['', [Validators.required]],
-    //    libelle: ['', [Validators.required]]
-        libelle: ['', [Validators.required, Validators.pattern(validatorString)]],
-    });
+    this.code = new FormControl('', Validators.required);
+    this.libelle = new FormControl('', [Validators.required]);
+    this.categorie = new FormControl('', Validators.required);
+
   }
 
   ResetForm() {

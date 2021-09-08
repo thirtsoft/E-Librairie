@@ -19,9 +19,10 @@ export class CreateCategorieComponent implements OnInit {
   listData : Categorie[];
 
   constructor(public crudApi: CategorieService ,
-              public fb: FormBuilder,
               public toastr: ToastrService,
-              private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
+              public fb: FormBuilder,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
               public dialogRef:MatDialogRef<CreateCategorieComponent>,
   ) { }
 
@@ -34,10 +35,11 @@ export class CreateCategorieComponent implements OnInit {
   }
 
   infoForm() {
+    const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
     //  id: 0,
       code: ['', [Validators.required]],
-      designation: ['', [Validators.required]],
+      designation: ['', [Validators.required, Validators.pattern(validatorString)]],
     });
   }
 
@@ -48,8 +50,9 @@ export class CreateCategorieComponent implements OnInit {
   }
 
   ResetForm() {
-      this.crudApi.dataForm.reset();
+    this.crudApi.dataForm.reset();
   }
+
   onSubmit() {
       if (this.crudApi.choixmenu == "A"){
         this.saveCategorie();
@@ -70,13 +73,13 @@ export class CreateCategorieComponent implements OnInit {
         this.getListCategories();
         this.router.navigate(['/home/categories']);
       },
-      (error: HttpErrorResponse) => {
-        this.toastr.error("Cette catgory exist déjà, veuillez changez de code");
+        (error: HttpErrorResponse) => {
+          this.toastr.error("Cette catgory exist déjà, veuillez changez de code");
         }
       );
 
-
   }
+
   updateCategorie(){
     this.crudApi.updateCategorie(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {

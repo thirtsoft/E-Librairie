@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Scategorie } from 'src/app/models/scategorie';
 import { Categorie } from 'src/app/models/categorie';
@@ -36,11 +37,15 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
   closeResult: string;
 
-  constructor(public crudApi: ScategorieService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, private route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) public data: any, private dialogService: DialogService,
-    public dialogRef:MatDialogRef<CreateScategorieComponent>,
+  constructor(public crudApi: ScategorieService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private matDialog: MatDialog,
+              private route: ActivatedRoute,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private dialogService: DialogService,
+              public dialogRef:MatDialogRef<CreateScategorieComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
@@ -127,7 +132,11 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
           this.toastr.warning('Scategorie supprimé avec succès!');
           this.rerender();
           this.getListScategories();
-        });
+        },
+        (error: HttpErrorResponse) => {
+          this.toastr.error("Impossible de supprimer cet sous_catégorie, veuillez supprimer tous les articles lié à celle-ci");
+        }
+        );
       }
     });
   }

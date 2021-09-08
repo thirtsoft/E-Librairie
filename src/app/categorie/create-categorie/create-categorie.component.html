@@ -1,12 +1,12 @@
 <div class="row justify-content-center">
   <div class="col-md-12">
-    <h1>Nouvelle Catégorie</h1>
+    <h2>Nouvelle Catégorie</h2>
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
        <!--  <input type="hidden"  formControlName="id" id="id"> -->
         <div class="form-group">
           <label>Code </label>
-          <input type="text" class="form-control" formControlName="code"/>
-          <div *ngIf="f['code'].invalid && (f['code'].dirty || f['code'].touched)" class="alert alert-danger">
+          <input type="text" class="form-control" formControlName="code" id="code" placeholder="Code de la catégorie" required />
+           <div *ngIf="f['code'].invalid && (f['code'].dirty || f['code'].touched)" class="alert alert-danger">
             <span *ngIf="f['code'].errors.required">
               Code obligatoire.
            </span>
@@ -15,17 +15,23 @@
 
         <div class="form-group">
           <label>Designation</label>
-          <input type="text" class="form-control" formControlName="designation" id="designation" />
+          <input type="text" class="form-control" formControlName="designation" id="designation"  placeholder="Désignation de la catégorie" required />
           <div *ngIf="f['designation'].invalid && (f['designation'].dirty || f['designation'].touched)" class="alert alert-danger">
-            <span *ngIf="f['designation'].errors.required">
-              Designation obligatoire.
-           </span>
+            <span *ngIf="f['designation'].errors.required">Designation obligatoire.</span>
+           <span *ngIf="f['designation'].errors?.pattern">SVP, Donner une désignation avec des lettres de l'alphabet A-Z..</span>
           </div>
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+          <button type="submit"
+            class="btn btn-success"
+            [disabled]="!this.crudApi.dataForm.valid"
+          ><i class="fa fa-database"></i> Submit
+          </button>&nbsp;
+          <button type="button" class="btn btn-danger ml-1"
+            [mat-dialog-close]
+          ><i class="fa fa-close"></i> Close
+        </button>
         </div>
 
     </form>

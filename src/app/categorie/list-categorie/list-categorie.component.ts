@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Categorie } from 'src/app/models/categorie';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators, NgForm } from '@angular/forms';
@@ -42,12 +43,15 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   fileUploadInput: any;
   mesagge: string;
 
-  constructor(public crudApi: CategorieService, private dialogService: DialogService,
-    public toastr: ToastrService,
-    private router : Router, private route: ActivatedRoute,
-    private matDialog: MatDialog,  public fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateCategorieComponent>,
+  constructor(public crudApi: CategorieService,
+              private dialogService: DialogService,
+              public toastr: ToastrService,
+              private router : Router,
+              private route: ActivatedRoute,
+              private matDialog: MatDialog,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateCategorieComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
@@ -142,6 +146,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateCategorieComponent, dialogConfig);
   }
+
 /*
   deleteCategorie(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cet Categorie ?')) {
@@ -166,9 +171,14 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
           this.toastr.warning('Categorie supprimé avec succès!');
           this.rerender();
           this.getListCategories();
-        });
+        },
+          (error: HttpErrorResponse) => {
+            this.toastr.error("Impossible de supprimer cet catégorie, veuillez supprimer tous les sous_catégorie lié à celle-ci");
+          }
+        );
       }
     });
+
   }
 
   /*

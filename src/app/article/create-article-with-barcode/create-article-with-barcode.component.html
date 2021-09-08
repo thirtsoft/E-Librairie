@@ -13,7 +13,11 @@
     </div> -->
     <div class="form-group">
       <label>Barcode </label>
-      <input type="text" class="form-control" [(ngModel)]="formDataArticle.barCode" name="barCode" id="barCode" #barCode="ngModel" required>
+      <input type="text" class="form-control" [(ngModel)]="formDataArticle.barCode"
+        name="barCode" id="barCode" #barCode="ngModel"
+        placeholder="Sairir le code barre du produit"
+        required
+      >
      <!--  <span class="text-danger" *ngIf="(barCode.touched || addArticleForm.submitted) && barCode.errors?.required">
         barCode est obligatoire
     </span> -->
@@ -21,8 +25,12 @@
 
     <div class="form-group">
       <label>Désignation</label>
-      <input type="text" class="form-control" [(ngModel)]="formDataArticle.designation" name="designation"
-        id="designation"  #designation="ngModel" required>
+      <input type="text" class="form-control" [(ngModel)]="formDataArticle.designation"
+          name="designation"
+          id="designation"  #designation="ngModel"
+          placeholder="Désignation du produit"
+          required
+      >
       <span class="text-danger"
         *ngIf="(designation.touched || addArticleForm.submitted) && designation.errors?.required">
           Désignation est obligatoire
@@ -46,8 +54,12 @@
 
     <div class="form-group">
       <label>P.Achat</label>
-      <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixAchat" name="prixAchat"
-          id="prixAchat" #prixAchat="ngModel" required>
+      <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixAchat"
+          name="prixAchat"
+          id="prixAchat" #prixAchat="ngModel"
+          placeholder="prix achat: 20000"
+          required
+      >
       <span class="text-danger"
         *ngIf="(prixAchat.touched || addArticleForm.submitted) && prixAchat.errors?.required">
           Prix Achat obligatoire
@@ -56,18 +68,26 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label>P.Vente</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixVente" name="prixVente"
-        id="prixVente" #prixVente="ngModel" required>
+        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixVente"
+          name="prixVente"
+          id="prixVente" #prixVente="ngModel"
+          placeholder="Prix vente: 100000"
+          required
+        >
         <span class="text-danger"
-        *ngIf="(prixVente.touched || addArticleForm.submitted) && prixVente.errors?.required">
+          *ngIf="(prixVente.touched || addArticleForm.submitted) && prixVente.errors?.required">
           Prix Vente obligatoire
-      </span>
+        </span>
       </div>
 
       <div class="form-group col-md-6">
         <label>P.Détails</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixDetail" name="prixDetail"
-          id="prixDetail" #prixDetail="ngModel" required>
+        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixDetail"
+          name="prixDetail"
+          id="prixDetail" #prixDetail="ngModel"
+          placeholder="Prix détail : 300000"
+          required
+        >
         <span class="text-danger"
           *ngIf="(prixDetail.touched || addArticleForm.submitted) && prixDetail.errors?.required">
             Prix Detail obligatoire
@@ -77,8 +97,12 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label>QStock</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.qtestock" name="qtestock"
-          id="qtestock" #qtestock="ngModel" required>
+        <input type="number" class="form-control" [(ngModel)]="formDataArticle.qtestock"
+          name="qtestock"
+          id="qtestock" #qtestock="ngModel"
+          placeholder="Quantité en stock"
+          required
+        >
         <span class="text-danger"
           *ngIf="(qtestock.touched || addArticleForm.submitted) && qtestock.errors?.required">
               Quantité obligatoire
@@ -88,7 +112,10 @@
       <div class="form-group col-md-6">
         <label>QStockInitial</label>
         <input type="number" class="form-control" [(ngModel)]="formDataArticle.stockInitial" name="stockInitial"
-          id="stockInitial" #stockInitial="ngModel" required>
+          id="stockInitial" #stockInitial="ngModel"
+          placeholder="Quantité seuil de stock"
+          required
+        >
         <span class="text-danger"
           *ngIf="(stockInitial.touched || addArticleForm.submitted) && stockInitial.errors?.required">
               Stock Initial obligatoire
@@ -97,7 +124,9 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-success">
+      <button type="submit"
+        class="btn btn-success"
+        [disabled]="addArticleForm.invalid">
         <i class="fa fa-database"></i> Submit</button>&nbsp;
       <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
     </div>
