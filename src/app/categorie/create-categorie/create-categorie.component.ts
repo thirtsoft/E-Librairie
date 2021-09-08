@@ -54,13 +54,13 @@ export class CreateCategorieComponent implements OnInit {
   }
 
   onSubmit() {
-      if (this.crudApi.choixmenu == "A"){
-        this.saveCategorie();
-        this.dialogRef.close();
-      }else{
+    if (this.crudApi.choixmenu == "A"){
+      this.saveCategorie();
+      this.dialogRef.close();
+    }else{
     //    console.log('non ajouter');
         this.updateCategorie();
-      }
+    }
 
   }
 

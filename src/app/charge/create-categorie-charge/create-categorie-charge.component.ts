@@ -32,11 +32,13 @@ export class CreateCategorieChargeComponent implements OnInit {
     };
   }
 
+
   infoForm() {
+    const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
       codeCategorieCharge: ['', [Validators.required]],
-      nomCategorieCharge: ['', [Validators.required]],
+      nomCategorieCharge: ['', [Validators.required, Validators.pattern(validatorString)]],
     });
   }
 
@@ -47,8 +49,9 @@ export class CreateCategorieChargeComponent implements OnInit {
   }
 
   ResetForm() {
-      this.crudApi.dataForm.reset();
+    this.crudApi.dataForm.reset();
   }
+
   onSubmit() {
     if (this.crudApi.dataForm.valid) {
       if (this.crudApi.choixmenu == "A"){
@@ -59,6 +62,7 @@ export class CreateCategorieChargeComponent implements OnInit {
     } else {
       return;
     }
+
   }
 
   saveCategorieCharge() {
@@ -75,6 +79,7 @@ export class CreateCategorieChargeComponent implements OnInit {
       }
     );
   }
+
   updateCategorieCharge(){
     this.crudApi.updateCategorieCharge(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {

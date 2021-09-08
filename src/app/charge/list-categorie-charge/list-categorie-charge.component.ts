@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, ViewChild, Inject } from '@angular/core';
 import { CategorieCharge } from 'src/app/models/categorieCharge';
 import { FormGroup, FormControl, FormBuilder, NgForm } from '@angular/forms';
@@ -34,12 +35,15 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
   fileUploadInput: any;
   mesagge: string;
 
-  constructor(public crudApi: CategorieChargeService, private dialogService: DialogService,
-    public toastr: ToastrService,
-    private router : Router, private route: ActivatedRoute,
-    private matDialog: MatDialog,  public fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateCategorieChargeComponent>,
+  constructor(public crudApi: CategorieChargeService,
+              private dialogService: DialogService,
+              public toastr: ToastrService,
+              private router : Router,
+              private route: ActivatedRoute,
+              private matDialog: MatDialog,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateCategorieChargeComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
@@ -56,6 +60,7 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
+
     this.crudApi.getAllCategorieCharges().subscribe(
       response =>{
         this.listData = response;
@@ -123,6 +128,7 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateCategorieChargeComponent, dialogConfig);
   }
+
   deleteCategorieCharge(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
@@ -131,7 +137,11 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
           this.toastr.warning('CategorieCharge supprimé avec succès!');
           this.rerender();
           this.getListCategorieCharges();
-        });
+        },
+          (error: HttpErrorResponse) => {
+          this.toastr.error("Impossible de supprimer cet charge, veuillez supprimer tous les charges lié à cet catégorie charge");
+          }
+        );
       }
     });
   }

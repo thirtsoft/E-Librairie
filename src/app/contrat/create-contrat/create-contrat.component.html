@@ -7,7 +7,12 @@
         <div class="form-group col-md-6">
           <label>Référence </label>
           <input type="text" class="form-control" [(ngModel)]="formDataContrat.reference"
-            name="reference" id="reference" #reference="ngModel" required>
+              name="reference"
+              id="reference"
+              #reference="ngModel"
+              required
+              placeholder="Référence du contrat : 200000"
+          >
           <span class="text-danger"
               *ngIf="(reference.touched || addContratForm.submitted) && reference.errors?.required">
               Référence est obligatoire
@@ -17,7 +22,12 @@
         <div class="form-group col-md-6">
           <label>Nature</label>
           <input type="text" class="form-control" [(ngModel)]="formDataContrat.nature"
-            name="nature" id="nature" #nature="ngModel" required>
+              name="nature"
+              id="nature"
+              #nature="ngModel"
+              required
+              placeholder="Nature du contrat"
+          >
           <span class="text-danger"
             *ngIf="(nature.touched || addContratForm.submitted) && nature.errors?.required">
               Nature est obligatoire
@@ -28,7 +38,12 @@
         <div class="form-group col-md-6">
           <label>Montant</label>
           <input type="number" class="form-control" [(ngModel)]="formDataContrat.montantContrat"
-            name="montantContrat" id="montantContrat" #montantContrat="ngModel" required>
+              name="montantContrat"
+              id="montantContrat"
+              #montantContrat="ngModel"
+              required
+              placeholder="Montant contrat : 200000"
+          >
           <span class="text-danger"
             *ngIf="(montantContrat.touched || addContratForm.submitted) && montantContrat.errors?.required">
               Montant est obligatoire
@@ -48,7 +63,10 @@
 
       <div class="form-group">
         <label>Description</label>
-        <textarea type="text" class="form-control" [(ngModel)]="formDataContrat.description" name="description"  id="description"></textarea>
+        <textarea type="text" class="form-control" [(ngModel)]="formDataContrat.description"
+          name="description" id="description"
+          placeholder="Description du contrat"
+        ></textarea>
       </div>
       <div class="form-group">
         <label>Contrat</label>
@@ -70,11 +88,15 @@
           <input type="date" class="form-control" [(ngModel)]="formDataContrat.dateFinContrat" name="dateFinContrat"  id="dateFinContrat">
         </div>
       </div>
+
       <div class="form-group">
-        <button type="submit" class="btn btn-success">
-          <i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="submit"
+          class="btn btn-success"
+          [disabled]="!addContratForm.valid"
+        >
+          <em class="fa fa-database"></em> Submit</button>&nbsp;
         <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
-          <i class="fa fa-close"></i> Close</button>
+          <em class="fa fa-close"></em> Close</button>
       </div>
     </form>
  </div>

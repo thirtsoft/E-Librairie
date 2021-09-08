@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Produit } from './../../models/produit';
 import { ProduitService } from './../../services/article.service';
 import { CreateArticleWithBarcodeComponent } from './../create-article-with-barcode/create-article-with-barcode.component';
@@ -180,7 +181,12 @@ export class ListArticleComponent implements OnDestroy, OnInit {
           this.toastr.warning('Article supprimé avec succès!');
           this.rerender();
           this.getListArticles();
-        });
+        },
+
+          (error: HttpErrorResponse) => {
+          this.toastr.error("Impossible de supprimer cet article, veuillez supprimer tous les lignes de cet article");
+          }
+        );
       }
     });
   }

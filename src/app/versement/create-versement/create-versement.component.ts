@@ -23,11 +23,14 @@ export class CreateVersementComponent implements OnInit {
 
   fileVersement: File;
 
-  constructor(public crudApi: VersementService, public empService: EmployeService ,
-    public toastr: ToastrService, private datePipe : DatePipe,
-    private router : Router, public fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateVersementComponent>,
+  constructor(public crudApi: VersementService,
+              public empService: EmployeService ,
+              public toastr: ToastrService,
+              private datePipe : DatePipe,
+              private router : Router,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateVersementComponent>,
   ) { }
 
   ngOnInit() {

@@ -7,7 +7,7 @@
         <div class="form-group col-md-6">
           <label>Code Charge </label>
           <input type="text" class="form-control" [(ngModel)]="formDataContrat.codeCharge"
-            name="codeCharge" id="codeCharge" #codeCharge="ngModel" required>
+            name="codeCharge" id="codeCharge" #codeCharge="ngModel" required placeholder="code charge">
           <span class="text-danger"
               *ngIf="(codeCharge.touched || addChargeForm.submitted) && codeCharge.errors?.required">
               Code Charge est obligatoire
@@ -17,9 +17,12 @@
         <div class="form-group col-md-6">
           <label>Désignation</label>
           <input type="text" class="form-control" [(ngModel)]="formDataContrat.nature"
-           name="nature" id="nature" #nature="ngModel" required>
+            name="nature" id="nature" #nature="ngModel"
+            required
+            placeholder="Libellé charge"
+          >
           <span class="text-danger"
-              *ngIf="(nature.touched || addChargeForm.submitted) && nature.errors?.required">
+            *ngIf="(nature.touched || addChargeForm.submitted) && nature.errors?.required">
               Désignation est obligatoire
           </span>
         </div>
@@ -38,7 +41,11 @@
         <div class="form-group col-md-6">
           <label>Montant</label>
           <input type="number" class="form-control" [(ngModel)]="formDataContrat.montantCharge"
-            name="montantCharge" id="montantCharge" #montantCharge="ngModel" required>
+            name="montantCharge" id="montantCharge"
+            #montantCharge="ngModel"
+            required
+            placeholder="Montant de charge : 5000"
+          >
           <span class="text-danger"
             *ngIf="(montantCharge.touched || addChargeForm.submitted) && montantCharge.errors?.required">
               Montant est obligatoire
@@ -52,10 +59,12 @@
         </div>
       </div> -->
       <div class="form-group">
-        <button type="submit" class="btn btn-success">
-          <i class="fa fa-database"></i> Submit</button>&nbsp;
+        <button type="submit" class="btn btn-success"
+          [disabled]="!addChargeForm.valid"
+        >
+          <em class="fa fa-database"></em> Submit</button>&nbsp;
         <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
-          <i class="fa fa-close"></i> Close</button>
+          <em class="fa fa-close"></em> Close</button>
       </div>
     </form>
  </div>

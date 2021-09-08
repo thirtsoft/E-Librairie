@@ -1,31 +1,40 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-2">
-    <h1>CatégorieCharge</h1>
+    <h2>CatégorieCharge</h2>
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
         <input type="hidden"  formControlName="id" id="id">
         <div class="form-group">
           <label>Code </label>
-          <input type="text" class="form-control" formControlName="codeCategorieCharge" id="codeCategorieCharge" />
-          <div *ngIf="f['codeCategorieCharge'].invalid && (f['codeCategorieCharge'].dirty || f['codeCategorieCharge'].touched)" class="alert alert-danger">
+          <input type="text" class="form-control" formControlName="codeCategorieCharge" id="codeCategorieCharge" placeholder="code charge" />
+          <div *ngIf="f['codeCategorieCharge'].invalid && (f['codeCategorieCharge'].dirty || f['codeCategorieCharge'].touched)"
+              class="alert alert-danger">
             <span *ngIf="f['codeCategorieCharge'].errors.required">
-              Code obligatoire.
-           </span>
+                Code obligatoire.
+            </span>
           </div>
         </div>
 
         <div class="form-group">
           <label>Designation</label>
-          <input type="text" class="form-control" formControlName="nomCategorieCharge" id="nomCategorieCharge" />
+          <input type="text" class="form-control" formControlName="nomCategorieCharge" id="nomCategorieCharge" placeholder="désignation de charge" />
           <div *ngIf="f['nomCategorieCharge'].invalid && (f['nomCategorieCharge'].dirty || f['nomCategorieCharge'].touched)" class="alert alert-danger">
+            <span *ngIf="f['nomCategorieCharge'].errors.required">Designation obligatoire.</span>
+            <span *ngIf="f['nomCategorieCharge'].errors?.pattern">SVP, Donner une désignation avec des lettres de l'alphabet A-Z..</span>
+          </div>
+
+        <!--   <div *ngIf="f['nomCategorieCharge'].invalid && (f['nomCategorieCharge'].dirty || f['nomCategorieCharge'].touched)" class="alert alert-danger">
             <span *ngIf="f['nomCategorieCharge'].errors.required">
               Designation obligatoire.
-           </span>
-          </div>
+            </span>
+          </div> -->
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+          <button type="submit"
+            class="btn btn-success"
+            [disabled]="!this.crudApi.dataForm.valid"
+          ><em class="fa fa-database"></em> Submit</button>&nbsp;
+          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><em class="fa fa-close"></em> Close</button>
         </div>
     </form>
   </div>
