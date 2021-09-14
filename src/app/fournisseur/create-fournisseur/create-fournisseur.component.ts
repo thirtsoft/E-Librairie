@@ -22,7 +22,7 @@ export class CreateFournisseurComponent implements OnInit {
               private router : Router,
               @Inject(MAT_DIALOG_DATA)  public data,
               public dialogRef:MatDialogRef<CreateFournisseurComponent>,
-    ) { }
+  ) { }
 
   get f() { return this.crudApi.dataForm.controls; }
 
@@ -44,6 +44,7 @@ export class CreateFournisseurComponent implements OnInit {
       numeroCompte: ['', [Validators.required]],
       adresse: ['', [Validators.required, Validators.pattern(validatorString)]],
       telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
+      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
       fax: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
     });
@@ -58,8 +59,9 @@ export class CreateFournisseurComponent implements OnInit {
   }
 
   ResetForm() {
-      this.crudApi.dataForm.reset();
+    this.crudApi.dataForm.reset();
   }
+
   onSubmit() {
     if (this.crudApi.dataForm.valid) {
       if (this.crudApi.choixmenu == "A"){

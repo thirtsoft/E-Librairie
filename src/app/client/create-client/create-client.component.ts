@@ -41,6 +41,7 @@ export class CreateClientComponent implements OnInit {
       chefService: ['', [Validators.required, Validators.pattern(validatorString)]],
       adresse: ['', [Validators.required, Validators.pattern(validatorString)]],
       telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
+      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
 
     });
