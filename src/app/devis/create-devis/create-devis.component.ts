@@ -1,3 +1,4 @@
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -38,14 +39,18 @@ export class CreateDevisComponent implements OnInit {
 
   numeroDevis;
 
-  constructor(public crudApi: DevisService, public dialog:MatDialog,
-    public fb: FormBuilder, public clientService: ClientService,
-    public ldevService: LigneDevisService, private datePipe : DatePipe,
-    private toastr :ToastrService, private router :Router,
-    private route: ActivatedRoute, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: DevisService,
+              public clientService: ClientService,
+              public ldevService: LigneDevisService,
+              private dashboardService: DashboardService,
+              private datePipe : DatePipe,
+              private toastr :ToastrService,
+              private router :Router,
+              public dialog:MatDialog,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,
   //  public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
-    ) { }
+  ) { }
 
   get f() { return this.crudApi.formData.controls; }
 
@@ -93,13 +98,14 @@ export class CreateDevisComponent implements OnInit {
   }
 
   infoForm() {
+    this.dashboardService.getNumeroCommande();
     this.crudApi.formData = this.fb.group({
       id: null,
     //  numeroDevis: Math.floor(100000 + Math.random() * 900000).toString(),
-      numeroDevis: this.crudApi.numDevis,
+      numeroDevis: this.dashboardService.generatedNumber,
       total: [0, Validators.required],
       totalDevis: [0, Validators.required],
-      status: ['', Validators.required],
+      observation: ['', Validators.required],
       dateDevis: [new Date(), Validators.required],
       client: [new Client(), Validators.required],
       DeletedOrderItemIDs: '',

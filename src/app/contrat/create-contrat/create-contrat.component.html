@@ -1,61 +1,108 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>Nouveau Contrat</h1>
-    <form #addContratForm="ngForm" name="form" (ngSubmit)="addContratForm.form.valid && onSubmit()">
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataContrat.id">
+    <form
+      #addContratForm="ngForm"
+      name="form"
+      (ngSubmit)="addContratForm.form.valid && onSubmit()"
+    >
+      <input
+        type="hidden"
+        name="id"
+        #id="ngModel"
+        [(ngModel)]="formDataContrat.id"
+      />
       <div class="row">
         <div class="form-group col-md-6">
           <label>Référence </label>
-          <input type="text" class="form-control" [(ngModel)]="formDataContrat.reference"
-              name="reference"
-              id="reference"
-              #reference="ngModel"
-              required
-              placeholder="Référence du contrat : 200000"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataContrat.reference"
+            name="reference"
+            id="reference"
+            #reference="ngModel"
+            required
+            placeholder="Référence du contrat : 200000"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (reference.touched || addContratForm.submitted) &&
+              reference.errors?.required
+            "
           >
-          <span class="text-danger"
-              *ngIf="(reference.touched || addContratForm.submitted) && reference.errors?.required">
-              Référence est obligatoire
+            Référence est obligatoire
           </span>
         </div>
 
         <div class="form-group col-md-6">
           <label>Nature</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataContrat.nature"
-              name="nature"
-              id="nature"
-              #nature="ngModel"
-              required
-              placeholder="Nature du contrat"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataContrat.nature"
+            name="nature"
+            id="nature"
+            #nature="ngModel"
+            required
+            placeholder="Nature du contrat"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (nature.touched || addContratForm.submitted) &&
+              nature.errors?.required
+            "
           >
-          <span class="text-danger"
-            *ngIf="(nature.touched || addContratForm.submitted) && nature.errors?.required">
-              Nature est obligatoire
+            Nature est obligatoire
           </span>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataContrat.montantContrat"
-              name="montantContrat"
-              id="montantContrat"
-              #montantContrat="ngModel"
-              required
-              placeholder="Montant contrat : 200000"
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="formDataContrat.montantContrat"
+            name="montantContrat"
+            id="montantContrat"
+            #montantContrat="ngModel"
+            required
+            placeholder="Montant contrat : 200000"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (montantContrat.touched || addContratForm.submitted) &&
+              montantContrat.errors?.required
+            "
           >
-          <span class="text-danger"
-            *ngIf="(montantContrat.touched || addContratForm.submitted) && montantContrat.errors?.required">
-              Montant est obligatoire
+            Montant est obligatoire
           </span>
         </div>
 
         <div class="form-group col-md-6">
           <label>Client</label>
           <div class="form-group">
-            <select name="client" id="client" [(ngModel)]="formDataContrat.client" class="form-control">
+            <select
+              name="client"
+              id="client"
+              [(ngModel)]="formDataContrat.client"
+              class="form-control"
+            >
               <option [ngValue]="0">Client</option>
-              <option *ngFor="let client of listClient" [ngValue]="client.id == formDataContrat.client?.id ? formDataContrat.client : client">{{client.chefService}}</option>
+              <option
+                *ngFor="let client of listClient"
+                [ngValue]="
+                  client.id == formDataContrat.client?.id
+                    ? formDataContrat.client
+                    : client
+                "
+              >
+                {{ client.chefService }}
+              </option>
             </select>
           </div>
         </div>
@@ -63,41 +110,71 @@
 
       <div class="form-group">
         <label>Description</label>
-        <textarea type="text" class="form-control" [(ngModel)]="formDataContrat.description"
-          name="description" id="description"
+        <textarea
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataContrat.description"
+          name="description"
+          id="description"
           placeholder="Description du contrat"
         ></textarea>
       </div>
       <div class="form-group">
         <label>Contrat</label>
-        <input type="file"  id="contratFile" class="form-control" (change)="selectFileContrat($event)"
-        style="height:100%">
+        <input
+          type="file"
+          id="contratFile"
+          class="form-control"
+          (change)="selectFileContrat($event)"
+          style="height: 100%"
+        />
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Date-Début</label>
-          <input type="date" class="form-control" [(ngModel)]="formDataContrat.dateDebutContrat"
-            name="dateDebutContrat" id="dateDebutContrat" #dateDebutContrat="ngModel" required>
-          <span class="text-danger"
-            *ngIf="(dateDebutContrat.touched || addContratForm.submitted) && dateDebutContrat.errors?.required">
-              Date début est obligatoire
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="formDataContrat.dateDebutContrat"
+            name="dateDebutContrat"
+            id="dateDebutContrat"
+            #dateDebutContrat="ngModel"
+            required
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (dateDebutContrat.touched || addContratForm.submitted) &&
+              dateDebutContrat.errors?.required
+            "
+          >
+            Date début est obligatoire
           </span>
         </div>
         <div class="form-group col-md-6">
           <label>Date-Fin</label>
-          <input type="date" class="form-control" [(ngModel)]="formDataContrat.dateFinContrat" name="dateFinContrat"  id="dateFinContrat">
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="formDataContrat.dateFinContrat"
+            name="dateFinContrat"
+            id="dateFinContrat"
+          />
         </div>
       </div>
 
       <div class="form-group">
-        <button type="submit"
+        <button
+          type="submit"
           class="btn btn-success"
           [disabled]="!addContratForm.valid"
         >
-          <em class="fa fa-database"></em> Submit</button>&nbsp;
+          <em class="fa fa-database"></em> Submit</button
+        >&nbsp;
         <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
-          <em class="fa fa-close"></em> Close</button>
+          <em class="fa fa-close"></em> Close
+        </button>
       </div>
     </form>
- </div>
+  </div>
 </div>

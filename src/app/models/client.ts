@@ -5,6 +5,7 @@ export class Client {
   chefService: string;
   adresse: string;
   telephone: string;
+  mobile: string;
   email: string;
   subject: string;
   message: string;

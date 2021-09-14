@@ -1,3 +1,4 @@
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { Appro } from 'src/app/models/appro';
@@ -40,16 +41,20 @@ export class CreateApproComponent implements OnInit {
 
   codeAppro;
 
-  constructor(public crudApi: ApproService, private dialog:MatDialog,
-    public fb: FormBuilder, public fourService: FournisseurService,
-    public lapproService: LigneApproService, private datePipe : DatePipe,
-    public toastr :ToastrService, private router :Router,
-    private currentRoute: ActivatedRoute, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: ApproService,
+              private dashboardService: DashboardService,
+              public fourService: FournisseurService,
+              public lapproService: LigneApproService,
+              public toastr :ToastrService,
+              private router :Router,
+              private dialog:MatDialog,
+              public fb: FormBuilder,
+              private datePipe : DatePipe,
+              @Inject(MAT_DIALOG_DATA) public data: any,
    // public dialogRef:MatDialogRef<CreateLigneApproComponent>,
-    ) { }
+  ) { }
 
-    get f() { return this.crudApi.formData.controls; }
+  get f() { return this.crudApi.formData.controls; }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A") {
@@ -94,27 +99,28 @@ export class CreateApproComponent implements OnInit {
 
   }
 
- infoForm() {
-  this.crudApi.formData = this.fb.group({
-    id: null,
+  infoForm() {
+    this.dashboardService.getNumeroCommande();
+    this.crudApi.formData = this.fb.group({
+      id: null,
   //  code: Math.floor(100000 + Math.random() * 900000).toString(),
-    code: this.crudApi.codeAppro,
-    total: [0, Validators.required],
-    montantAvance: [0, Validators.required],
-    totalAppro: [0, Validators.required],
-    status: ['', Validators.required],
-    observation: ['', Validators.required],
-    dateAppro: [new Date(), Validators.required],
-    fournisseur: [new Fournisseur(), Validators.required],
-    DeletedOrderItemIDs: '',
-    ligneApprovisionnements: [[], Validators.required],
-  });
+      code: this.dashboardService.generatedNumber,
+      total: [0, Validators.required],
+      montantAvance: [0, Validators.required],
+      totalAppro: [0, Validators.required],
+      status: ['', Validators.required],
+      observation: ['', Validators.required],
+      dateAppro: [new Date(), Validators.required],
+      fournisseur: [new Fournisseur(), Validators.required],
+      DeletedOrderItemIDs: '',
+      ligneApprovisionnements: [[], Validators.required],
+    });
 
- }
+  }
 
- compareFournisseur(fournisseur1: Fournisseur, fournisseur2: Fournisseur) : boolean {
-  return fournisseur1 && fournisseur2 ? fournisseur1.id === fournisseur2.id : fournisseur1 === fournisseur2;
-}
+  compareFournisseur(fournisseur1: Fournisseur, fournisseur2: Fournisseur) : boolean {
+    return fournisseur1 && fournisseur2 ? fournisseur1.id === fournisseur2.id : fournisseur1 === fournisseur2;
+  }
 
   AddData(lcommandeIndex, OrderId){
     const dialogConfig = new MatDialogConfig();
@@ -140,12 +146,14 @@ export class CreateApproComponent implements OnInit {
 
   }
 */
+
   calculMontantTotal() {
     this.f['totalAppro'].setValue(this.crudApi.list.reduce((prev, curr) => {
       return prev + curr.total;
     }, 0));
 
   }
+
 /*
   calculMontantTotal() {
     this.crudApi.formData.totalAppro = this.crudApi.orderItems.reduce((prev, curr) => {
@@ -154,6 +162,7 @@ export class CreateApproComponent implements OnInit {
     this.crudApi.formData.totalAppro = parseFloat(this.crudApi.formData.totalAppro.toFixed(2));
   }
   */
+
   validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.fournisseur.id==0)
@@ -175,6 +184,7 @@ export class CreateApproComponent implements OnInit {
       });
 
   }
+
   /*
   onSubmit(form: NgForm) {
     if (this.validateForm()) {
@@ -204,8 +214,9 @@ export class CreateApproComponent implements OnInit {
     this.calculMontantTotal();
   }
 */
+
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
 }

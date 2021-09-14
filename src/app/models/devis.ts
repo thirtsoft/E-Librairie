@@ -6,10 +6,11 @@ export class Devis {
   numeroDevis: number;
   total: number;
 	totalDevis: number;
-  status: string;
+  observation: string;
   dateDevis: Date;
 
   client: Client;
 
   ldevis :Array<LigneDevis>=[];
+
 }

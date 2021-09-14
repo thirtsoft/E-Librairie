@@ -25,11 +25,14 @@ export class CreateContratComponent implements OnInit {
 
   submitted = false;
 
-  constructor(public crudApi: ContratService, public clientService: ClientService ,
-    public toastr: ToastrService, private datePipe : DatePipe,
-    private router : Router, public fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<CreateContratComponent>,
+  constructor(public crudApi: ContratService,
+              public clientService: ClientService ,
+              public toastr: ToastrService,
+              private datePipe : DatePipe,
+              private router : Router,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateContratComponent>,
 
   ) { }
 
@@ -43,7 +46,8 @@ export class CreateContratComponent implements OnInit {
 
   getClients() {
     this.clientService.getAllClients().subscribe((response) => {
-      this.listClient = response as Client[];});
+      this.listClient = response as Client[];
+    });
   }
 
   infoForm(form?: NgForm) {
@@ -67,7 +71,7 @@ export class CreateContratComponent implements OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
   // selectionner une image et la garder

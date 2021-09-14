@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Avoir } from 'src/app/models/avoir';
 import { Fournisseur } from 'src/app/models/fournisseur';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { AvoirService } from 'src/app/services/avoir.service';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -36,15 +37,20 @@ export class CreateAvoirComponent implements OnInit {
 
   referencAvoir;
 
-  constructor(public crudApi: AvoirService, private dialog:MatDialog,
-    public fb: FormBuilder, public fourService: FournisseurService,
-    public lavoirService: LigneAvoirService, private datePipe : DatePipe,
-    private toastr :ToastrService, private router :Router,
-    private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: AvoirService,
+              private dashboardService: DashboardService,
+              public fourService: FournisseurService,
+              public lavoirService: LigneAvoirService,
+              private toastr :ToastrService,
+              public fb: FormBuilder,
+              private datePipe : DatePipe,
+               private router :Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   get f() { return this.crudApi.formData.controls; }
+
   ngOnInit() {
     this.getListFournisseurs();
     if (this.crudApi.choixmenu == "A") {
@@ -58,10 +64,11 @@ export class CreateAvoirComponent implements OnInit {
   }
 
   infoForm() {
+    this.dashboardService.getNumeroCommande();
     this.crudApi.formData = this.fb.group({
       id: null,
     //  reference: Math.floor(100000 + Math.random() * 900000).toString(),
-      reference: this.crudApi.refAvoir,
+      reference: this.dashboardService.generatedNumber,
       total: [0, Validators.required],
       libelle: ['', Validators.required],
       soldeAvoir: [0, Validators.required],
@@ -72,6 +79,7 @@ export class CreateAvoirComponent implements OnInit {
       lavoirs: [[], Validators.required],
     });
   }
+
   compareFournisseur(four1: Fournisseur, four2: Fournisseur) : boolean {
     return four1 && four2 ? four1.id === four2.id : four1 === four2;
   }
@@ -101,6 +109,7 @@ export class CreateAvoirComponent implements OnInit {
       return prev + curr.total;
     }, 0));
   }
+
   validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
@@ -133,7 +142,7 @@ export class CreateAvoirComponent implements OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
 }

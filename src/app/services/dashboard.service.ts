@@ -28,6 +28,8 @@ export class DashboardService {
   listDataCmd : CommandeClient[];
   listDataClient : Client[];
 
+  generatedNumber;
+
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();
@@ -40,21 +42,27 @@ export class DashboardService {
   }
 
   constructor(private http: HttpClient) { }
+
   getNumberOfProduitByScategorie(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/searchCountProduitsByStock`);
   }
+
   getNumberOfProductByStock(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/countProduitsByStock`);
   }
+
   getNumberOfProductWhenStockEqualStockInit(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/countProduitsWhenQStockEqualStockInit`);
   }
+
   getNumberOfProductWhenStockInfStockInit(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/countProduitsWhenQStockInfStockInit`);
   }
+
   getNumberOfCommandes(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/NumberOfCommande`);
   }
+
   getNumberOfVentesByDay(): Observable<any> {
     return this.http.get(`${this.baseUrl_Seller}/NumberOfVenteByDay`);
   }
@@ -66,6 +74,7 @@ export class DashboardService {
   getNumbersOfFournisseurs(): Observable<any> {
     return this.http.get(`${this.baseUrl_Creance}/countFournisseurs`);
   }
+
   getSumTotalOfCommandes(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/NumbersOfCommandes`);
   }
@@ -81,9 +90,11 @@ export class DashboardService {
   getSumsOfVentesByYear(): Observable<any> {
     return this.http.get(`${this.baseUrl_Seller}/SumsOfVentesByYear`);
   }
+
   getSumsOfCommandesByMonth(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/SumsOfCommandesByMonth`);
   }
+
   getSumsOfCommandesByYear(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/SumsOfCommandesByYear`);
   }
@@ -111,5 +122,20 @@ export class DashboardService {
   getSumTotalOfVenteByYear(): Observable<any> {
     return this.http.get(`${this.baseUrl_Seller}/searchSumVenteByYears`);
   }
+
+  generateNumCommande(): Observable<any> {
+    return this.http.get("http://localhost:8081/prodApi/generateCodeCommand");
+  }
+
+  getNumeroCommande() {
+    this.generateNumCommande().subscribe(
+      response =>{
+        this.generatedNumber = response;
+        console.log("Numero Vente:" + this.generatedNumber);
+      }
+    );
+  }
+
+
 
 }

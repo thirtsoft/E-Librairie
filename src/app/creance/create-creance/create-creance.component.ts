@@ -1,3 +1,4 @@
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Creance } from 'src/app/models/creance';
 import { Client } from 'src/app/models/client';
@@ -36,15 +37,20 @@ export class CreateCreanceComponent implements OnInit {
 
   referenceCreance;
 
-  constructor(public crudApi: CreanceService, private dialog:MatDialog,
-    public fb: FormBuilder, public clientService: ClientService,
-    public lcreanceService: LigneCreanceService, private datePipe : DatePipe,
-    public toastr :ToastrService, private router :Router,
-    private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: CreanceService,
+              private dashboardService: DashboardService,
+              public clientService: ClientService,
+              public lcreanceService: LigneCreanceService,
+              public toastr :ToastrService,
+              public fb: FormBuilder,
+              private datePipe : DatePipe,
+              private router :Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   get f() { return this.crudApi.formData.controls; }
+
   ngOnInit() {
     this.getClients();
     if (this.crudApi.choixmenu == "A") {
@@ -67,10 +73,11 @@ export class CreateCreanceComponent implements OnInit {
   }
 
   infoForm() {
+    this.dashboardService.getNumeroCommande();
     this.crudApi.formData = this.fb.group({
       id: null,
     //  reference: Math.floor(100000 + Math.random() * 900000).toString(),
-      reference: this.crudApi.refCreance,
+      reference: this.dashboardService.generatedNumber,
       total: [0, Validators.required],
       libelle: ['', Validators.required],
       codeCreance: ['', Validators.required],
@@ -83,6 +90,7 @@ export class CreateCreanceComponent implements OnInit {
       lcreances: [[], Validators.required],
     });
   }
+
   compareClient(client1: Client, client2: Client) : boolean {
     return client1 && client2 ? client1.id === client2.id : client1 === client2;
   }
@@ -112,6 +120,7 @@ export class CreateCreanceComponent implements OnInit {
       return prev + curr.total;
     }, 0));
   }
+
   validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
@@ -144,7 +153,7 @@ export class CreateCreanceComponent implements OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
 }

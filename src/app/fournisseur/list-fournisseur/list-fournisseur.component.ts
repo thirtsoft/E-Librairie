@@ -34,12 +34,15 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: FournisseurService ,public fb: FormBuilder,public toastr: ToastrService,
-    private router : Router, private route: ActivatedRoute,
-    private matDialog: MatDialog, private dialogService: DialogService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateFournisseurComponent>,
-    ) {
+  constructor(public crudApi: FournisseurService,
+              private dialogService: DialogService,
+              public toastr: ToastrService,
+              private router : Router,
+              private matDialog: MatDialog,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateFournisseurComponent>,
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -95,6 +98,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
       email: '',
       fax: '',
       telephone: '',
+      mobile: '',
       subject: '',
       message: '',
     };

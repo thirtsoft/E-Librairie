@@ -41,12 +41,16 @@ export class CreateVenteComponent implements OnInit {
 
   listDataReglement = ["ESPECES", "CHEQUE", "VIREMENT"];
 
-  constructor(public crudApi: VenteService, public lventeService: LigneVenteService,
-    private toastr :ToastrService, private tokenService: TokenStorageService,
-    private authService: AuthService,
-    private dialog:MatDialog, private datePipe : DatePipe,
-    public fb: FormBuilder , private router :Router,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public crudApi: VenteService,
+              public lventeService: LigneVenteService,
+              private toastr :ToastrService,
+              private tokenService: TokenStorageService,
+              private authService: AuthService,
+              private dialog:MatDialog,
+              private datePipe : DatePipe,
+              public fb: FormBuilder ,
+              private router :Router,
+              @Inject(MAT_DIALOG_DATA) public data: any,
    // public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
     ) { }
 

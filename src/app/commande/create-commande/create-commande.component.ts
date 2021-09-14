@@ -1,3 +1,4 @@
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -23,16 +24,22 @@ export class CreateCommandeComponent implements OnInit {
 
   total = 0;
 
-  constructor(public crudApi: CommandeClientService, public clientService: ClientService,
-    public lcomService: LigneCmdClientService, private toastr :ToastrService,
-    private datePipe : DatePipe, private router :Router,
-    public dialog:MatDialog, public fb: FormBuilder,
-    private route: ActivatedRoute, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  //  public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
-    ) { }
+  listDataReglement = ["ESPECES", "CHEQUE", "VIREMENT"];
 
-    get f() { return this.crudApi.formData.controls; }
+  constructor(public crudApi: CommandeClientService,
+              public clientService: ClientService,
+              public lcomService: LigneCmdClientService,
+              private dashboardService: DashboardService,
+              private toastr :ToastrService,
+              private datePipe : DatePipe,
+              private router :Router,
+              public dialog:MatDialog,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+  //  public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
+  ) { }
+
+  get f() { return this.crudApi.formData.controls; }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A") {
@@ -64,17 +71,19 @@ export class CreateCommandeComponent implements OnInit {
   }
 
   infoForm() {
-    this.crudApi.getNumeroCommande();
+    this.dashboardService.getNumeroCommande();
     this.crudApi.formData = this.fb.group({
       id: null,
-      numeroCommande: this.crudApi.numCommande,
+      numeroCommande: this.dashboardService.generatedNumber,
       total: [0, Validators.required],
       totalCommande: [0, Validators.required],
+      typeReglement: ['', Validators.required],
+      montantReglement: [0, Validators.required],
       status: ['', Validators.required],
-      refClient: ['', Validators.required],
+  //    refClient: ['', Validators.required],
       dateCommande: [new Date(), Validators.required],
       client: [new Client(), Validators.required],
-      DeletedOrderItemIDs: '',
+ //     DeletedOrderItemIDs: '',
       lcomms: [[], Validators.required],
     });
   }
@@ -82,6 +91,8 @@ export class CreateCommandeComponent implements OnInit {
   compareClient(client1: Client, client2: Client) : boolean {
     return client1 && client2 ? client1.id === client2.id : client1 === client2;
   }
+
+  compareVente() {}
 
   resetForm() {
     this.crudApi.formData.reset();

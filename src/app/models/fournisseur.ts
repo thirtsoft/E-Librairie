@@ -8,6 +8,7 @@ export class Fournisseur {
   numeroCompte: string;
   adresse: string;
   telephone: string;
+  mobile: string;
   fax: string;
   email: string;
 

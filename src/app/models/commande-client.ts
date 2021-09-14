@@ -7,12 +7,14 @@ export class CommandeClient {
   total: number;
   //libArticle: string;
   totalCommande: number;
+  typeReglement: string;
+  montantReglement: number;
   status: string;
   dateCommande: Date;
-  DeletedOrderItemIDs: string;
+//  DeletedOrderItemIDs: string;
 
  // refClient : number;
-  lib_client : String;
+//  lib_client : String;
 
   client: Client;
   lcomms :Array<LigneCmdClient>=[];
