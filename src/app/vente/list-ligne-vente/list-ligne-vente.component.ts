@@ -1,4 +1,3 @@
-import { Produit } from './../../models/produit';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { LigneVente } from 'src/app/models/ligne-vente';
 import { Vente } from 'src/app/models/vente';
@@ -12,6 +11,8 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
 import { VenteService } from 'src/app/services/vente.service';
+import { Produit } from './../../models/produit';
+
 
 @Component({
   selector: 'app-list-ligne-vente',
@@ -31,12 +32,16 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: LigneVenteService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private dialogService: DialogService, private ventService: VenteService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog,
-    public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
-    ) { }
+  constructor(public crudApi: LigneVenteService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private dialogService: DialogService,
+              private ventService: VenteService,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private matDialog: MatDialog,
+              public dialogRef:MatDialogRef<CreateLigneVenteComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -82,6 +87,7 @@ export class ListLigneVenteComponent implements OnDestroy, OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("home/vente");
   }
+
   deleteLigneVente(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{

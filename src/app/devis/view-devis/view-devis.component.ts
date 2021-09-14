@@ -96,7 +96,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
   getListDevis() {
@@ -166,12 +166,12 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
           columns: [
 
             [
+
               {
-                text: `DEVIS N° : ${this.ldevService.listData[0].numero}`,
+                text: `Agent  : ${this.ldevService.listData[0].devis.numeroDevis}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]
-
               },
 
             ],
@@ -188,7 +188,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: ' DEVIS',
+          text: ' FACTURE PREFORMAT',
           alignment: 'center',
           fontSize: 20,
           color: '#0000ff',
@@ -197,7 +197,15 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
         },
         {
-          text: 'CLIENT  : ' +this.ldevService.listData[0].devis.client.chefService,
+          text: `N° : ${this.ldevService.listData[0].devis.numeroDevis}`,
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          color: '#0000ff',
+          margin: [0, 8, 0, 8]
+        },
+        {
+          text: 'CLIENT : ' + this.ldevService.listData[0].devis.client.chefService,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

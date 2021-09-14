@@ -36,10 +36,13 @@ export class ListDevisComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: DevisService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private dialogService: DialogService,private datePipe : DatePipe,
-    ) { }
+  constructor(public crudApi: DevisService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private dialogService: DialogService,
+              private datePipe : DatePipe,
+  ) { }
 
   ngOnInit(): void {
     this.dtOptions = {

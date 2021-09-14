@@ -14,7 +14,7 @@
             <thead>
               <tr>
                 <th>Numéro</th><th>Client</th><th>Montant</th>
-                <th>Status</th><th>Date</th>
+                <th>Observation</th><th>Date</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -23,7 +23,7 @@
               <td>{{dev.numeroDevis}}</td>
               <td>{{dev.client.raisonSocial}} - {{dev.client.chefService}} </td>
               <td>{{dev.totalDevis}}</td>
-              <td>{{dev.status}}</td>
+              <td>{{dev.observation}}</td>
               <td>{{dev.dateDevis| date:'dd-MM-yyyy à h:mm:ss'}}</td>
               <td>
                 <button class="btn btn-success btn-sm" (click)="viewDevis(dev)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;

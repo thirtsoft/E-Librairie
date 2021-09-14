@@ -3,56 +3,91 @@
     <div class="panel-heading">
       <h2>DETAILS D'UNE VENTE</h2>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px;">
+    <div style="padding-left: 20px; padding-top: 10px">
       <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
-        <i class="fa fa-folder-open" aria-hidden="true"></i></a>&nbsp;
+        <i class="fa fa-folder-open" aria-hidden="true"></i></a
+      >&nbsp;
       <a (click)="PrintPdf()" class="btn btn-success btn-lg">
-        <i class="fa fa-print" aria-hidden="true"></i></a>&nbsp;
+        <i class="fa fa-print" aria-hidden="true"></i></a
+      >&nbsp;
       <a type="button" (click)="DownloadPdf()" class="btn btn-danger btn-lg">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>&nbsp;
-      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" >
-        <span class="fa fa-arrow-left"></span>&nbsp; </a>
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a
+      >&nbsp;
+      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg">
+        <span class="fa fa-arrow-left"></span>&nbsp;
+      </a>
     </div>
   </div>
   <div class="panel-body">
     <div class="row">
       <div class="form-group col-md-3">
         <label>Vendeur : </label>
-        <input name="id" [value]="this.username"  class="form-control" readonly>
+        <input
+          name="id"
+          [value]="this.username"
+          class="form-control"
+          readonly
+        />
       </div>
 
       <div class="form-group col-md-3">
         <label>Numéro Vente: </label>
-        <input type="text" class="form-control" name="numeroVente" [value]="this.numeroVente"  id="numeroVente" readonly>
+        <input
+          type="text"
+          class="form-control"
+          name="numeroVente"
+          [value]="this.numeroVente"
+          id="numeroVente"
+          readonly
+        />
       </div>
 
       <div class="form-group col-md-3">
         <label>Total Vente : </label>
-        <input type="text" class="form-control" [value]="this.totalVente" name="totalVente" id="totalVente" readonly>
+        <input
+          type="text"
+          class="form-control"
+          [value]="this.totalVente"
+          name="totalVente"
+          id="totalVente"
+          readonly
+        />
       </div>
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="datetime"  name="dateVente" [value]="[this.dateVente | date:'yyyy-MM-dd à h:mm:ss']" class="form-control" readonly>
+        <input
+        type="datetime"
+        name="dateVente"
+        [value]="[this.dateVente | date: 'yyyy-MM-dd à h:mm:ss']"
+        class="form-control"
+        readonly
+      />
       </div>
     </div>
     <div></div>
     <div></div>
     <!-- Debut Ligne de commandes -->
-    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
-      [dtTrigger]="dtTrigger">
+    <table
+      class="table table-striped table-bordered table-sm row-border hover"
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+    >
       <thead>
         <tr>
-          <th>Quantite</th><th>Désignation</th><th>P.Unitaire</th><th>P.Total</th>
-
+          <th>Quantite</th>
+          <th>Désignation</th>
+          <th>P.Unitaire</th>
+          <th>P.Total</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of this.lventeService.listData">
-          <td>{{item.quantite}}</td>
-          <td>{{item.produit?.designation}}</td>
-          <td>{{item.prixVente}}</td>
-          <td>{{(item.prixVente)*(item.quantite)}} </td>
+          <td>{{ item.quantite }}</td>
+          <td>{{ item.produit?.designation }}</td>
+          <td>{{ item.prixVente }}</td>
+          <td>{{ item.prixVente * item.quantite }}</td>
         </tr>
       </tbody>
     </table>

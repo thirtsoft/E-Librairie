@@ -92,7 +92,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
   getListVentes() {
@@ -162,7 +162,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
             [
               {
-                text: `Agent Caisse  : ${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
+                text: `Agent  : ${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]
@@ -172,7 +172,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
             [
               {
-                text: `Date : ${this.lventeService.listData[0].vente.dateVente}`,
+                text: `Date: ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
                 alignment: 'right',
                 margin: [0, 15, 0, 15]
               },
@@ -213,7 +213,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: `Total Net CFA : ${this.lventeService.listData[0].vente.totalVente}`,
+          text: `Total CFA : ${this.lventeService.listData[0].vente.totalVente}`,
           alignment: 'right',
           margin: [0, 8, 0, 8],
           bold: true,
@@ -221,7 +221,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: 'Réglement '
+          text: ''
            + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
           alignment: 'right',
           margin: [0, 5, 0, 15],
@@ -230,7 +230,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: 'Somme Rendu : '
+          text: 'RENDU : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
           alignment: 'right',
           margin: [0, 5, 0, 15],

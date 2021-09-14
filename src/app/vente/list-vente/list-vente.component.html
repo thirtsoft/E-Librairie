@@ -3,41 +3,59 @@
     <div class="panel-heading">
       <h2>GESTION DES VENTES</h2>
     </div>
-    <div class="form-group col-md-6" style="padding-left: 20px; padding-top: 10px;">
+    <div
+      class="form-group col-md-6"
+      style="padding-left: 20px; padding-top: 10px"
+    >
       <a type="button" (click)="onCreateVente()" class="btn btn-success btn-lg">
-        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a>&nbsp;
+        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
+      >&nbsp;
     </div>
-    <div class="form-group col-md-4 col-md-offset-2"  style="padding-top: 10px;">
+    <div class="form-group col-md-4 col-md-offset-2" style="padding-top: 10px">
       <label><strong>Montant Vente/Jour : </strong></label>
-      <div class="count">{{this.sumVenteByDay}}</div>
+      <div class="count">{{ this.sumVenteByDay }}</div>
     </div>
+  </div>
 
-    </div>
-
-    <div class="panel-body">
-        <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
-            [dtTrigger]="dtTrigger">
-            <thead>
-              <tr>
-               <th>Numéro</th><th>Montant</th>
-                <th>Réglement</th><th>Montant Réglement</th><th>Status</th><th>Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr *ngFor="let vent of listData; let i=index;">
-              <td>{{vent.numeroVente}}</td>
-              <td>{{vent.totalVente}}</td>
-              <td>{{vent.typeReglement}}</td>
-              <td>{{vent.montantReglement}}</td>
-              <td>{{vent.status}}</td>
-              <td>{{vent.dateVente | date:'dd-MM-yyyy à h:mm:ss'}}</td>
-              <td>
-                <button class="btn btn-success btn-sm" (click)="viewVente(vent)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-danger btn-sm" (click)="deleteVente(vent.id)"><i class="fa fa-trash-o"></i>  </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
+  <div class="panel-body">
+    <table
+      class="table table-striped table-bordered table-sm row-border hover"
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+    >
+      <thead>
+        <tr>
+          <th>Numéro</th>
+          <th>Montant</th>
+          <th>Réglement</th>
+          <th>Montant Réglement</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vent of listData; let i = index">
+          <td>{{ vent.numeroVente }}</td>
+          <td>{{ vent.totalVente }}</td>
+          <td>{{ vent.typeReglement }}</td>
+          <td>{{ vent.montantReglement }}</td>
+          <td>{{ vent.status }}</td>
+          <td>{{ vent.dateVente | date:'dd-MM-yyyy à h:mm:ss' }}</td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="viewVente(vent)">
+              <i class="fa fa-eye" aria-hidden="true"></i></button
+            >&nbsp;
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteVente(vent.id)"
+            >
+              <i class="fa fa-trash-o"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
