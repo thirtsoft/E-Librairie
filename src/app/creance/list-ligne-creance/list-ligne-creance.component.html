@@ -16,6 +16,7 @@
                 <th>Numéro</th> <th>Produit</th><th>Prix</th><th>Quantité</th>
                 <th>Total</th>
                 <th>Client</th>
+                <th>Agent</th>
               </tr>
             </thead>
           <tbody >
@@ -26,6 +27,7 @@
               <td>{{lcreance.quantite}}</td>
               <td>{{(lcreance.prix)*(lcreance.quantite)}} </td>
               <td>{{lcreance.creance?.client.chefService}}</td>
+              <td>{{lcreance.creance?.utilisateur?.name}}</td>
             </tr>
           </tbody>
         </table>

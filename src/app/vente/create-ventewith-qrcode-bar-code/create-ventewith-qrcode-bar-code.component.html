@@ -1,120 +1,176 @@
 <mat-toolbar color="success">
-    <div>
-        <h2>Effectuer une Vente</h2>
-    </div>
+  <div>
+    <h2>Effectuer une Vente</h2>
+  </div>
 </mat-toolbar>
 
- <form [formGroup]="this.crudApi.formData"  novalidate>
+<form [formGroup]="this.crudApi.formData" novalidate>
   <!-- <form> -->
-    <div class="col-md-12">
+  <div class="col-md-12">
     <div class="row">
+      <div class="form-row col-sm-3 mb-4 mb-sm-0">
+        <label><strong>Code-barre : </strong></label>
+        <!--  <input type="text" class="form-control" (keypress)="onKey($event)" autofocus> -->
 
-        <div class="form-row col-sm-3 mb-4 mb-sm-0">
-            <label><strong>Code-barre : </strong></label>
-          <!--  <input type="text" class="form-control" (keypress)="onKey($event)" autofocus> -->
-
-         <input type="text" class="form-control" (window:keypress)="onKey($event)"  autofocus  placeholder="placer ici la souris pour lire le code barre" />
-<!--
+        <input
+          type="text"
+          class="form-control"
+          (window:keypress)="onKey($event)"
+          autofocus
+          placeholder="placer ici la souris pour lire le code barre"
+        />
+        <!--
          <input type="text" class="form-control" (KeyboardEvent)="onKey($event)"  autofocus /> -->
-        </div>
+      </div>
 
-        <div class="form-row col-sm-3 mb-4 mb-sm-0">
-          <label><strong>Numéro Vente : </strong></label>
-          <input type="text" class="form-control" formControlName="numeroVente" id="numeroVente" readonly>
-        </div>
+      <div class="form-row col-sm-3 mb-4 mb-sm-0">
+        <label><strong>Numéro Vente : </strong></label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="numeroVente"
+          id="numeroVente"
+          readonly
+        />
+      </div>
 
-        <div class="form-row col-sm-3 mb-4 mb-sm-0">
-            <label>Type Réglement</label>
-            <select name="typeReglement" formControlName="typeReglement" id="typeReglement" class="form-control">
-                <option value=0>-Select-</option>
-                <option *ngFor="let item of listDataReglement" [ngValue]="item">{{item}}</option>
-              </select>
-        </div>
+      <div class="form-row col-sm-3 mb-4 mb-sm-0">
+        <label>Type Réglement</label>
+        <select
+          name="typeReglement"
+          formControlName="typeReglement"
+          id="typeReglement"
+          class="form-control"
+        >
+          <option value="0">-Select-</option>
+          <option *ngFor="let item of listDataReglement" [ngValue]="item">
+            {{ item }}
+          </option>
+        </select>
+      </div>
 
-        <div class="form-row col-sm-3 mb-4 mb-sm-0">
-            <label>Montant Réglement</label>
-            <input type="text" formControlName="montantReglement" class="form-control" id="montantReglement" placeholder="350000000">
-            <div *ngIf="f['montantReglement'].invalid && (f['montantReglement'].dirty || f['montantReglement'].touched)" class="alert alert-danger">
-              <span *ngIf="f['montantReglement'].errors.required">Le montant de réglement est obligatoire.</span>
-              <span *ngIf="f['montantReglement'].errors?.pattern">SVP, Le montant doit contenir que des chiffres..</span>
-            </div>
+      <div class="form-row col-sm-3 mb-4 mb-sm-0">
+        <label>Montant Réglement</label>
+        <input
+          type="text"
+          formControlName="montantReglement"
+          class="form-control"
+          id="montantReglement"
+          placeholder="350000000"
+        />
+        <div
+          *ngIf="
+            f['montantReglement'].invalid &&
+            (f['montantReglement'].dirty || f['montantReglement'].touched)
+          "
+          class="alert alert-danger"
+        >
+          <span *ngIf="f['montantReglement'].errors.required"
+            >Le montant de réglement est obligatoire.</span
+          >
+          <span *ngIf="f['montantReglement'].errors?.pattern"
+            >SVP, Le montant doit contenir que des chiffres..</span
+          >
         </div>
-
+      </div>
     </div>
 
-
- <div class="row">
+    <div class="row">
       <div class="cart transition is-open">
-          <div class="table">
-
-              <div class="layout-inline row th">
-                  <div class="col col-pro">Désignation</div>
-                  <div class="col col-price align-center ">
-                      P.Unit
-                  </div>
-                  <div class="col col-qty align-center">QTE</div>
-                  <div class="col">P.Total</div>
-                  <div class="col">Action</div>
-              </div>
-
-              <div class="layout-inline row align-center" *ngIf="this.listOfScannedBarCodes.length === 0" [class.text-danger]="!isValid && this.listOfScannedBarCodes.length === 0">
-                Aucun Article scanné pour cette Vente.</div>
-
-              <div *ngIf="listOfScannedBarCodes.length > 0">
-
-                <div  class="layout-inline row" *ngFor="let item of listOfScannedBarCodes; let i=index;">
-
-                    <div class="col col-pro layout-inline">
-                        <p>{{item.itemName}}</p>
-                    </div>
-
-                    <div class="col col-price col-numeric align-center ">
-                        <p>{{item.prixVente}}</p>
-                    </div>
-
-                    <div class="col col-qty layout-inline">
-                      <a (click)="decrementQuantity(item)" class="qty qty-minus" style="cursor: pointer;">-</a>
-                      <input type="numeric" value={{item.quantite}} />
-                      <a (click)="inCrementQuantity(item)" class="qty qty-plus" style="cursor: pointer;">+</a>
-                  </div>
-
-                    <div class="col col-total col-numeric">
-                        <p> {{item.quantite * item.prixVente}}</p>
-                    </div>
-
-                    <div class="col col-total col-numeric">
-                        <a (click)="removeCart(item.id,i)" class="btn btn-sm btn-danger text-white ml-1" style="cursor: pointer;">
-                            <i class="fa fa-trash"></i></a>
-                    </div>
-
-                </div>
-
-            </div>
-
-              <div class="tf">
-                <div class="row layout-inline">
-                      <div class="col">
-                            <p>Total :
-
-                          </p>
-
-
-                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <span>
-                        <input type="text" value="{{this.totalAmount}}" id="totalVente" formControlName="totalVente" class="form-control" readonly>
-                       </span>
-
-                  <div class="col">
-
-                  </div>
-                </div>
-              </div>
+        <div class="table">
+          <div class="layout-inline row th">
+            <div class="col col-pro">Désignation</div>
+            <div class="col col-price align-center">P.Unit</div>
+            <div class="col col-qty align-center">QTE</div>
+            <div class="col">P.Total</div>
+            <div class="col">Action</div>
           </div>
 
-          <button type="button" class="btn btn-lg btn-success" (click)="onSubmit()"
-            ><i class="fa fa-database"></i> Enregistrer</button>
+          <div
+            class="layout-inline row align-center"
+            *ngIf="this.listOfScannedBarCodes.length === 0"
+            [class.text-danger]="
+              !isValid && this.listOfScannedBarCodes.length === 0
+            "
+          >
+            Aucun Article scanné pour cette Vente.
+          </div>
+
+          <div *ngIf="listOfScannedBarCodes.length > 0">
+            <div
+              class="layout-inline row"
+              *ngFor="let item of listOfScannedBarCodes; let i = index"
+            >
+              <div class="col col-pro layout-inline">
+                <p>{{ item.itemName }}</p>
+              </div>
+
+              <div class="col col-price col-numeric align-center">
+                <p>{{ item.prixVente }}</p>
+              </div>
+
+              <div class="col col-qty layout-inline">
+                <a
+                  (click)="decrementQuantity(item)"
+                  class="qty qty-minus"
+                  style="cursor: pointer"
+                  >-</a
+                >
+                <input type="numeric" value="{{ item.quantite }}" />
+                <a
+                  (click)="inCrementQuantity(item)"
+                  class="qty qty-plus"
+                  style="cursor: pointer"
+                  >+</a
+                >
+              </div>
+
+              <div class="col col-total col-numeric">
+                <p>{{ item.quantite * item.prixVente }}</p>
+              </div>
+
+              <div class="col col-total col-numeric">
+                <a
+                  (click)="removeCart(item.id, i)"
+                  class="btn btn-sm btn-danger text-white ml-1"
+                  style="cursor: pointer"
+                >
+                  <i class="fa fa-trash"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="tf">
+            <div class="row layout-inline">
+              <div class="col">
+                <p>Total :</p>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <span>
+                <input
+                  type="text"
+                  value="{{ this.totalAmount }}"
+                  id="totalVente"
+                  formControlName="totalVente"
+                  class="form-control"
+                  readonly
+                />
+              </span>
+
+              <div class="col"></div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-lg btn-success"
+          (click)="onSubmit()"
+        >
+          <i class="fa fa-database"></i> Enregistrer
+        </button>
       </div>
     </div>
   </div>
-
 </form>

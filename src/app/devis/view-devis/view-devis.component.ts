@@ -168,7 +168,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
             [
 
               {
-                text: `Agent  : ${this.ldevService.listData[0].devis.numeroDevis}`,
+                text: `Agent  : ${this.ldevService.listData[0].devis.utilisateur.name}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]

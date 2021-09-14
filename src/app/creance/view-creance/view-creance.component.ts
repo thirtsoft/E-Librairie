@@ -1,16 +1,17 @@
-import { Produit } from './../../models/produit';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Creance } from 'src/app/models/creance';
-import { LigneCreance } from 'src/app/models/ligne-creance';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import { CreanceService } from 'src/app/services/creance.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LigneCreanceService } from 'src/app/services/ligne-creance.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Creance } from 'src/app/models/creance';
+import { CreanceService } from 'src/app/services/creance.service';
+import { LigneCreance } from 'src/app/models/ligne-creance';
+import { ToastrService } from 'ngx-toastr';
+import { LigneCreanceService } from 'src/app/services/ligne-creance.service';
 import { CreateCreanceComponent } from '../create-creance/create-creance.component';
+import { Produit } from './../../models/produit';
+
 import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -36,6 +37,7 @@ export class ViewCreanceComponent implements OnInit {
   client;
 
   produit: Produit = new Produit();
+  username = '';
 
   private editForm: FormGroup;
 
@@ -45,11 +47,16 @@ export class ViewCreanceComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: CreanceService,public fb: FormBuilder,private datePipe : DatePipe,
-    public toastr: ToastrService,  public lcreanceService: LigneCreanceService,
-    private router : Router, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateCreanceComponent>,
+  constructor(public crudApi: CreanceService,
+              public lcreanceService: LigneCreanceService,
+              public toastr: ToastrService,
+              private datePipe : DatePipe,
+              private router : Router,
+              public fb: FormBuilder,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private route: ActivatedRoute,
+              public dialogRef:MatDialogRef<CreateCreanceComponent>,
     ) { }
 
   ngOnInit(): void {
@@ -67,6 +74,7 @@ export class ViewCreanceComponent implements OnInit {
       this.dateCreance = this.lcreanceService.listData[0].creance.dateCreance;
       console.log(this.dateCreance);
       this.client = this.lcreanceService.listData[0].creance.client.chefService;
+      this.username = this.lcreanceService.listData[0].creance.utilisateur.name;
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
@@ -101,6 +109,7 @@ export class ViewCreanceComponent implements OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("home/creance");
   }
+
   deleteCreance(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette Commande ?')) {
     this.crudApi.deleteCreance(id)
@@ -171,7 +180,7 @@ export class ViewCreanceComponent implements OnInit {
 
             [
               {
-                text: `CREANCE N° : ${this.lcreanceService.listData[0].numero}`,
+                text: `Agent : ${this.lcreanceService.listData[0].creance.utilisateur.name}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]
@@ -191,12 +200,20 @@ export class ViewCreanceComponent implements OnInit {
         },
 
         {
-          text: 'CREANCE',
+          text: 'FACTURE CREANCE',
           alignment: 'center',
           fontSize: 20,
           color: '#0000ff',
           bold: true,
           margin: [0, 5, 0, 5],
+        },
+        {
+          text: `N° : ${this.lcreanceService.listData[0].numero}`,
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          color: '#0000ff',
+          margin: [0, 8, 0, 8]
         },
         {
           text: 'CLIENT  : ' +this.lcreanceService.listData[0].creance.client.chefService,
@@ -346,7 +363,7 @@ export class ViewCreanceComponent implements OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
 

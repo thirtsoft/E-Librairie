@@ -35,6 +35,7 @@ export class CreanceService {
   getAllCreances(): Observable<any> {
     return this.http.get(`${this.baseUrl}/creances`);
   }
+
   getCreancetByID(id:number):any {
     return this.http.get(`${this.baseUrl}/creances/`+id).toPromise();
   }
@@ -43,9 +44,14 @@ export class CreanceService {
     return this.http.get(`${this.baseUrl}/creances/${id}`);
   }
 
-  createCreance(info: Object): Observable<Object> {
+  /* createCreance(info: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/creances`, info);
+  } */
+
+  createCreance(info: Creance, id:number) {
+    return this.http.post(`${this.baseUrl}/creances/create?id=`+id, info);
   }
+
   updateCreance(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/creances/${id}`, value);
   }

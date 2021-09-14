@@ -72,9 +72,14 @@ export class CommandeClientService {
     return this.http.post(`${this.baseUrl_1}/commandesClientes`, body);
   }
 
-  saveCommande(info: Object) {
-    return this.http.post(`${this.baseUrl_1}/commandesClientes`, info);
+  saveCommande(info: CommandeClient, id:number) {
+    return this.http.post(`${this.baseUrl_1}/commandesClientes?id=`+id, info);
   }
+
+
+/*   saveCommande(info: Object) {
+    return this.http.post(`${this.baseUrl_1}/commandesClientes`, info);
+  } */
   updateCommandeClient(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl_1}/commandes/${id}`, value);
   }

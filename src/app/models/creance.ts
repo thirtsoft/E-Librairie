@@ -1,3 +1,4 @@
+import { Utilisateur } from './utilisateur';
 import { Client } from './client';
 import { LigneCreance } from './ligne-creance';
 export class Creance {
@@ -16,5 +17,7 @@ export class Creance {
   client: Client;
 
   lcreances :Array<LigneCreance>=[];
+
+  utilisateur: Utilisateur;
 
 }

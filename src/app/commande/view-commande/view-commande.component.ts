@@ -29,17 +29,22 @@ export class ViewCommandeComponent implements OnInit {
   totalCommande;
   dateCommande;
   client;
+  username = '';
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: CommandeClientService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
-    public lcmdService: LigneCmdClientService,
-    @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateCommandeComponent>,
-    ) { }
+  constructor(public crudApi: CommandeClientService,
+              public toastr: ToastrService,
+              public lcmdService: LigneCmdClientService,
+              private datePipe : DatePipe,
+              public fb: FormBuilder,
+              private router : Router,
+              public route: ActivatedRoute,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateCommandeComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.comId = this.route.snapshot.params.id;
@@ -50,6 +55,7 @@ export class ViewCommandeComponent implements OnInit {
       this.totalCommande = this.lcmdService.listData[0].commande.totalCommande;
       this.dateCommande = this.lcmdService.listData[0].commande.dateCommande;
       this.client = this.lcmdService.listData[0].commande.client.chefService;
+      this.username = this.lcmdService.listData[0].commande.utilisateur.name;
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
@@ -144,7 +150,7 @@ export class ViewCommandeComponent implements OnInit {
 
             [
               {
-                text: `FACTURE N° : ${this.lcmdService.listData[0].numero}`,
+                text: `Agent : ${this.lcmdService.listData[0].commande.utilisateur.name}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]
@@ -164,12 +170,20 @@ export class ViewCommandeComponent implements OnInit {
         },
 
         {
-          text: ' FACTURE',
+          text: ' FACTURE COMMANDE ',
           alignment: 'center',
           fontSize: 20,
           color: '#0000ff',
           bold: true,
           margin: [0, 5, 0, 5]
+        },
+        {
+          text: `N° : ${this.lcmdService.listData[0].commande.numeroCommande}`,
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          color: '#0000ff',
+          margin: [0, 8, 0, 8]
         },
         {
         //  bold:true,
@@ -185,6 +199,32 @@ export class ViewCommandeComponent implements OnInit {
         this.getListArticle(this.lcmdService.listData),
         {
 
+        },
+
+        {
+          text: `Total CFA : ${this.lcmdService.listData[0].commande.totalCommande}`,
+          alignment: 'right',
+          margin: [0, 8, 0, 8],
+          bold: true,
+          fontSize: 12,
+        },
+
+        {
+          text: ''
+           + [(this.lcmdService.listData[0].commande.typeReglement) + ' : ' + (this.lcmdService.listData[0].commande.montantReglement)],
+          alignment: 'right',
+          margin: [0, 5, 0, 15],
+          bold: true,
+          fontSize: 12,
+        },
+
+        {
+          text: 'RENDU : '
+           +[(this.lcmdService.listData[0].commande.montantReglement)-(this.lcmdService.listData[0].commande.totalCommande)],
+          alignment: 'right',
+          margin: [0, 5, 0, 15],
+          bold: true,
+          fontSize: 12,
         },
 
         {

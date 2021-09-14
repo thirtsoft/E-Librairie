@@ -1,3 +1,4 @@
+import { Utilisateur } from './utilisateur';
 import { Client } from './client';
 import { LigneCmdClient } from './ligne-cmd-client';
 
@@ -18,6 +19,8 @@ export class CommandeClient {
 
   client: Client;
   lcomms :Array<LigneCmdClient>=[];
+
+  utilisateur: Utilisateur;
 
 }
 

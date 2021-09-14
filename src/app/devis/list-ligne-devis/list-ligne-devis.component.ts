@@ -31,11 +31,16 @@ export class ListLigneDevisComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: LigneDevisService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, public devService: DevisService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private dialogService: DialogService,
-    public dialogRef:MatDialogRef<CreateDevisComponent>,
+  constructor(public crudApi: LigneDevisService,
+              private dialogService: DialogService,
+              public devService: DevisService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+
+              public dialogRef:MatDialogRef<CreateDevisComponent>,
     ) { }
 
   ngOnInit(): void {
@@ -88,6 +93,7 @@ export class ListLigneDevisComponent implements OnInit {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("home/devis");
   }
+
   deleteLigneDevis(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{

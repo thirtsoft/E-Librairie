@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../auth/token-storage.service';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Vente } from '../models/vente';
@@ -29,6 +30,7 @@ export class DashboardService {
   listDataClient : Client[];
 
   generatedNumber;
+  id;
 
   public dataForm:  FormGroup;
 
@@ -41,7 +43,9 @@ export class DashboardService {
     this.listners.next(filterBy);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private tokenService: TokenStorageService
+  ) { }
 
   getNumberOfProduitByScategorie(): Observable<any> {
     return this.http.get(`${this.baseUrl_Com}/searchCountProduitsByStock`);
@@ -134,6 +138,15 @@ export class DashboardService {
         console.log("Numero Vente:" + this.generatedNumber);
       }
     );
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.tokenService.getUser();
+  }
+
+  getUserId() {
+    const user = this.tokenService.getUser();
+    this.id = user.id
   }
 
 

@@ -61,6 +61,8 @@ export class CreateCreanceComponent implements OnInit {
 
     this.crudApi.generateReferenceCreance();
 
+    this.dashboardService.getUserId();
+
   }
 
   getReferenceCreance() {
@@ -133,13 +135,14 @@ export class CreateCreanceComponent implements OnInit {
   onSubmit() {
     this.f['lcreances'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
-    this.crudApi.createCreance(this.crudApi.formData.value).subscribe(
+    this.crudApi.createCreance(this.crudApi.formData.value, this.dashboardService.id).subscribe(
       data => {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Creance Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
         this.router.navigate(['/home/creances']);
-      });
+      }
+    );
   }
 
   onDeleteOrderItem(id: number, i: number) {

@@ -1,3 +1,4 @@
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material';
@@ -34,6 +35,7 @@ export class CreateCommandewithQrcodeBarCodeComponent implements OnInit {
               public clientService: ClientService,
               private artService: ProduitService,
               public lcomService: LigneCmdClientService,
+              private dashboardService: DashboardService,
               private toastr :ToastrService,
               private datePipe : DatePipe,
               private router :Router,
@@ -42,9 +44,9 @@ export class CreateCommandewithQrcodeBarCodeComponent implements OnInit {
               private route: ActivatedRoute, private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
   //  public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
-    ) { }
+  ) { }
 
-    get f() { return this.crudApi.formData.controls; }
+  get f() { return this.crudApi.formData.controls; }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A") {
@@ -71,6 +73,8 @@ export class CreateCommandewithQrcodeBarCodeComponent implements OnInit {
         this.ClientList = response;
       }
     );
+
+    this.dashboardService.getUserId();
 
 
   }
@@ -110,11 +114,13 @@ export class CreateCommandewithQrcodeBarCodeComponent implements OnInit {
     });
 
   }
+
   calculMontantTotal() {
     this.f['totalCommande'].setValue(this.crudApi.list.reduce((prev, curr) => {
       return prev + curr.total;
     }, 0));
   }
+
   validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
@@ -127,13 +133,14 @@ export class CreateCommandewithQrcodeBarCodeComponent implements OnInit {
   onSubmit() {
     this.f['lcomms'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
-    this.crudApi.saveCommande(this.crudApi.formData.value).subscribe(
+    this.crudApi.saveCommande(this.crudApi.formData.value, this.dashboardService.id).subscribe(
       data => {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Commande Ajoutée avec succès');
         console.log(this.crudApi.formData.value);
         this.router.navigate(['/home/listcommandes']);
-      });
+      }
+    );
 
   }
 

@@ -16,6 +16,7 @@
                 <th>Numéro</th> <th>Article</th><th>Quantité</th><th>P.Unitaire</th>
                 <th>P.Total</th>
                 <th>Client</th>
+                <th>Agent</th>
               </tr>
             </thead>
           <tbody >
@@ -26,6 +27,7 @@
               <td>{{ldev.prixDevis}}</td>
               <td>{{(ldev.prixDevis)*(ldev.quantite)}} </td>
               <td>{{ldev.devis?.client.chefService}}</td>
+              <td>{{ldev.devis?.utilisateur?.name}}</td>
  <!--
               <td>
             <button class="btn btn-info btn-lg" (click)="editerLigneCmdClient(lcomClient)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;

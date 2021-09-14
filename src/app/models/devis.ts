@@ -1,3 +1,4 @@
+import { Utilisateur } from './utilisateur';
 import { Client } from "./client";
 import { LigneDevis } from "./ligne-devis";
 
@@ -12,5 +13,7 @@ export class Devis {
   client: Client;
 
   ldevis :Array<LigneDevis>=[];
+
+  utilisateur: Utilisateur;
 
 }

@@ -26,11 +26,15 @@ export class ListLigneCreanceComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: LigneCreanceService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, public creanceService: CreanceService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private dialogService: DialogService,
-    public dialogRef:MatDialogRef<CreateCreanceComponent>,
+  constructor(public crudApi: LigneCreanceService,
+              public creanceService: CreanceService,
+              private dialogService: DialogService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateCreanceComponent>,
   ) { }
 
   ngOnInit(): void {

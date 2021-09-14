@@ -86,6 +86,8 @@ export class CreateDevisComponent implements OnInit {
 
     this.crudApi.generateNumeroDevis();
 
+    this.dashboardService.getUserId();
+
   }
 
   getNumeroDevis() {
@@ -148,7 +150,7 @@ export class CreateDevisComponent implements OnInit {
   onSubmit() {
     this.f['ldevis'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
-    this.crudApi.createDevis(this.crudApi.formData.value).subscribe(
+    this.crudApi.createDevis(this.crudApi.formData.value, this.dashboardService.id).subscribe(
       data => {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Devis Ajoutée avec succès');

@@ -61,10 +61,11 @@ export class VenteService {
   }
 
   constructor(private http: HttpClient,
-    private offlineService: OnlineofflineService,
-    private tokenService: TokenStorageService,
-    private authService: AuthService,
-    public route: ActivatedRoute) {
+              private offlineService: OnlineofflineService,
+              private tokenService: TokenStorageService,
+              private authService: AuthService,
+              public route: ActivatedRoute
+    ) {
 
     this.ouvrirStatusConnexion();
     this.addAllDataVenteToIndexeddb();

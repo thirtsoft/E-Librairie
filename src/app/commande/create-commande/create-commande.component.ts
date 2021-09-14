@@ -67,6 +67,8 @@ export class CreateCommandeComponent implements OnInit {
       }
     );
 
+    this.dashboardService.getUserId();
+
 
   }
 
@@ -109,11 +111,13 @@ export class CreateCommandeComponent implements OnInit {
     });
 
   }
+
   calculMontantTotal() {
     this.f['totalCommande'].setValue(this.crudApi.list.reduce((prev, curr) => {
       return prev + curr.total;
     }, 0));
   }
+
   validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
@@ -126,7 +130,7 @@ export class CreateCommandeComponent implements OnInit {
   onSubmit() {
     this.f['lcomms'].setValue(this.crudApi.list);
     console.log(this.crudApi.formData.value);
-    this.crudApi.saveCommande(this.crudApi.formData.value).subscribe(
+    this.crudApi.saveCommande(this.crudApi.formData.value, this.dashboardService.id).subscribe(
       data => {
         console.log(this.crudApi.formData.value);
         this.toastr.success('Commande Ajoutée avec succès');
@@ -159,7 +163,7 @@ export class CreateCommandeComponent implements OnInit {
   }
 
   transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
 }

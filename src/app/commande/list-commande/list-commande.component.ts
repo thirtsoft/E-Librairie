@@ -22,12 +22,15 @@ export class ListCommandeComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: CommandeClientService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private dialogService: DialogService,private datePipe : DatePipe,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateCommandeComponent>
-    ) { }
+  constructor(public crudApi: CommandeClientService,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              private datePipe : DatePipe,
+              public fb: FormBuilder,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateCommandeComponent>
+  ) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -83,6 +86,7 @@ export class ListCommandeComponent implements OnInit {
   viewCommandeClient(item: CommandeClient) {
     this.router.navigateByUrl('home/commandeView/' + item.id);
   }
+
   deleteCommandeClient(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{

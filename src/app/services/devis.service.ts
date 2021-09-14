@@ -43,12 +43,18 @@ export class DevisService {
     return this.http.get(`${this.baseUrl}/devis/${id}`);
   }
 
-  createDevis(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/devis`, info);
+  createDevis(info: Devis, id:number) {
+    return this.http.post(`${this.baseUrl}/devis/create?id=`+id, info);
   }
+
+ /*  createDevis(info: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/devis`, info);
+  } */
+
   updateDevis(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/devis/${id}`, value);
   }
+
   deleteDevis(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/devis/${id}`, { responseType: 'text' });
   }

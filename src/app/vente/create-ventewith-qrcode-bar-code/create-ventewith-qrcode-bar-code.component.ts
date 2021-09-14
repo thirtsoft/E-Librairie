@@ -192,7 +192,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
             }
             if (alreadyExistsInCart) {
              // increment the quantity
-              existingCartItem.quantite;
+              existingCartItem.quantite++;
             }else {
               this.listOfScannedBarCodes.push({produit: data, itemName: data.designation, prixVente: data.prixDetail, quantite: 1});
 
@@ -200,11 +200,15 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
             this.updateTotals();
 
-         }
-      }
-    )
+          }
+        }
+      )
+
+
 
     }
+
+
 
   }
 
