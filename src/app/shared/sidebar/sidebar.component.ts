@@ -1,8 +1,9 @@
+import { Component, OnInit } from '@angular/core';
+
 import { Utilisateur } from 'src/app/models/utilisateur';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -74,6 +75,5 @@ export class SidebarComponent implements OnInit {
   isAuthenticated() {
     this.authService.isAuthenticated();
   }
-
 
 }

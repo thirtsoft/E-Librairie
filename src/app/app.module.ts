@@ -5,10 +5,9 @@ import { HttpClientModule} from '@angular/common/http';
 import {DataTablesModule} from 'angular-datatables';
 declare var $: any;
 
-import { MatDialogModule,MatDialogRef, } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule,MatDialogRef, } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +16,11 @@ import { ToastrModule } from 'ngx-toastr';
 //import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
+import { DefautLayoutComponent } from './layout/defaut-layout/defaut-layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+
 import { ListClientComponent } from './client/list-client/list-client.component';
 import { CreateClientComponent } from './client/create-client/create-client.component';
 import { CreateCategorieComponent } from './categorie/create-categorie/create-categorie.component';
@@ -101,9 +104,6 @@ import { ProgressBarModule } from 'angular-progress-bar';
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { ProfilComponent } from './authentication/profil/profil.component';
-import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
-import { FooterComponent } from './layout/footer/footer.component';
 import { UpdateUsernameComponent } from './authentication/update-username/update-username.component';
 import { UpdatePasswordComponent } from './authentication/update-password/update-password.component';
 import { UpdateProfileComponent } from './authentication/update-profile/update-profile.component';
@@ -126,6 +126,9 @@ import { CreateCommandewithQrcodeBarCodeComponent } from './commande/create-comm
 import { CreateVentewithQrcodeBarCodeComponent } from './vente/create-ventewith-qrcode-bar-code/create-ventewith-qrcode-bar-code.component';
 import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
 import { ListArticleWithBarArcodeComponent } from './article/list-article-with-bar-arcode/list-article-with-bar-arcode.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -207,9 +210,8 @@ import { ListArticleWithBarArcodeComponent } from './article/list-article-with-b
     ViewDevisComponent,
     CreateLigneDevisComponent,
     ProfilComponent,
-    SidebarComponent,
-    NavbarComponent,
-    FooterComponent,
+    AdminLayoutComponent,
+    DefautLayoutComponent,
     UpdateUsernameComponent,
     UpdatePasswordComponent,
     UpdateProfileComponent,
@@ -232,6 +234,9 @@ import { ListArticleWithBarArcodeComponent } from './article/list-article-with-b
     CreateVentewithQrcodeBarCodeComponent,
     CreateArticleWithBarcodeComponent,
     ListArticleWithBarArcodeComponent,
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent,
 
   ],
   imports: [
