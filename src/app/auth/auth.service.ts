@@ -11,7 +11,9 @@ import { ProfileInfo, UpdateUsernameInfo, UpdatePasswordInfo, UpdateProfilInfo }
 import { TokenStorageService } from './token-storage.service';
 import { IUser } from '../models/utilisateur';
 
-const AUTH_API = 'http://localhost:8081/api/auth/';
+//const AUTH_API = 'http://localhost:8081/api/auth/';
+
+const AUTH_API  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth/';
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -23,12 +25,20 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:8081/api/auth/signin';
-  private signupUrl = 'http://localhost:8081/api/auth/signup';
+  /* private loginUrl = 'http://localhost:8081/api/auth/signin';
+  private signupUrl = 'http://localhost:8081/api/auth/signup'; */
 
-  private baseUrl = 'http://localhost:8081/api/auth';
 
-  private baseUrl_1 = 'http://localhost:8081/alAmine';
+  private loginUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth/signin';
+  private signupUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth/signup';
+
+/*   private baseUrl = 'http://localhost:8081/api/auth';
+
+  private baseUrl_1 = 'http://localhost:8081/alAmine'; */
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth';
+
+  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;

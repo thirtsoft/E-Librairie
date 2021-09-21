@@ -29,9 +29,16 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class CategorieService {
 
+  /*
   private baseUrl = 'http://localhost:8081/api';
   private baseUrl_1 = 'http://localhost:8081/prodApi';
   private baseUrl_2 = 'http://localhost:8081/apiSeller';
+  */
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api'
+  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi'
+  private baseUrl_2 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller'
+
   private db: Dexie;
   private tableCat: Dexie.Table<Categorie, number>;
   private tableProd: Dexie.Table<Produit, number>;
@@ -244,7 +251,8 @@ export class CategorieService {
   }
 
   private async addAllDataProdToIndexeddb() {
-    await this.http.get<Produit[]>('http://localhost:8081/prodApi/produits').subscribe(response => {
+  //  await this.http.get<Produit[]>('http://localhost:8081/prodApi/produits').subscribe(response => {
+    await this.http.get<Produit[]>('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/produits').subscribe(response => {
       this.listDataProd = response;
       this.db.transaction('rw', this.tableProd, async ()=> {
         console.log("Produit :" +this.listDataProd);
@@ -257,7 +265,8 @@ export class CategorieService {
   }
 
   private async addAllDataClientToIndexeddb() {
-    await this.http.get<Client[]>('http://localhost:8081/prodApi/clients').subscribe(response => {
+  //  await this.http.get<Client[]>('http://localhost:8081/prodApi/clients').subscribe(response => {
+    await this.http.get<Client[]>('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/clients').subscribe(response => {
       this.listDataClient = response;
       console.log("Debut Client:" +this.listDataClient);
       this.db.transaction('rw', this.tableClient, async ()=> {
@@ -319,7 +328,9 @@ export class CategorieService {
 
   }
   async addDataToIndexedDB() {
-    return fetch("http://localhost:8081/api/**").then(resp => {
+
+  //  return fetch("http://localhost:8081/api/**").then(resp => {
+    return fetch("http://localhost:8080/Library-0.0.1-SNAPSHOT/api/**").then(resp => {
       this.Data = resp;
       this.db.transaction('rw', this.tableCat, async () => {
         console.log(this.Data);
@@ -332,7 +343,9 @@ export class CategorieService {
   }
 
   async addDataProdToIndexedDB() {
-    return fetch("http://localhost:8081/prodApi/**").then(resp => {
+
+  //  return fetch("http://localhost:8081/prodApi/**").then(resp => {
+    return fetch("http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/**").then(resp => {
       this.Data = resp;
       this.db.transaction('rw', this.tableProd, async () => {
         console.log(this.Data);

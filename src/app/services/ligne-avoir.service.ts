@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class LigneAvoirService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -27,6 +29,7 @@ export class LigneAvoirService {
   getAllLigneAvoirs(): Observable<any> {
     return this.http.get(`${this.baseUrl}/ligneAvoirs`);
   }
+
   getAllByNumero(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/lavoirs/${id}`);
   }
@@ -45,6 +48,7 @@ export class LigneAvoirService {
   public getAllLigneAvoirByAvoir(avoirId: number) {
     return this.http.get(`${this.baseUrl}/searchListLigneAvoirByAvoirId/${avoirId}`);
   }
+
   updateLigneAvoir(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/ligneAvoirs/${id}`, value);
   }

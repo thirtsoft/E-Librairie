@@ -9,7 +9,9 @@ import { LigneDevis } from '../models/ligne-devis';
 })
 export class LigneDevisService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
   // private baseUrl = window["cfgApiBaseUrl"];
@@ -27,6 +29,7 @@ export class LigneDevisService {
    getAllLigneDevis(): Observable<any> {
      return this.http.get(`${this.baseUrl}/ligneDevis`);
    }
+
    getAllByNumero(id: number): Observable<Object> {
      return this.http.get(`${this.baseUrl}/ligneDevis/${id}`);
    }

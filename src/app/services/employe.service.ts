@@ -9,7 +9,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class EmployeService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -23,6 +25,7 @@ export class EmployeService {
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
@@ -43,8 +46,8 @@ export class EmployeService {
   }
 
 
-  createEmploye(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/employes`, info);
+  createEmploye(info: Employe): Observable<Employe> {
+    return this.http.post<Employe>(`${this.baseUrl}/employes`, info);
   }
   updateEmploye(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/employes/${id}`, value);

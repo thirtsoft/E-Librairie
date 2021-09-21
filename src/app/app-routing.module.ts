@@ -1,5 +1,3 @@
-import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
-import { ListArticleWithBarArcodeComponent } from './article/list-article-with-bar-arcode/list-article-with-bar-arcode.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -11,7 +9,6 @@ import { ListFournisseurComponent } from './fournisseur/list-fournisseur/list-fo
 import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/create-fournisseur.component';
 import { ListCategorieComponent } from './categorie/list-categorie/list-categorie.component';
 import { CreateCategorieComponent } from './categorie/create-categorie/create-categorie.component';
-//import { EditCategorieComponent } from './categorie/edit-categorie/edit-categorie.component';
 import { ListScategorieComponent } from './scategorie/list-scategorie/list-scategorie.component';
 import { CreateScategorieComponent } from './scategorie/create-scategorie/create-scategorie.component';
 import { ListArticleComponent } from './article/list-article/list-article.component';
@@ -21,7 +18,6 @@ import { CreateContratComponent } from './contrat/create-contrat/create-contrat.
 import { CreateVersementComponent } from './versement/create-versement/create-versement.component';
 import { ListVersementComponent } from './versement/list-versement/list-versement.component';
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
@@ -86,8 +82,11 @@ import { UploadContratComponent } from './contrat/upload-contrat/upload-contrat.
 import { UploadFileVersementComponent } from './versement/upload-file-versement/upload-file-versement.component';
 import { UpdateProfileComponent } from './authentication/update-profile/update-profile.component';
 
+import { CreateArticleWithBarcodeComponent } from './article/create-article-with-barcode/create-article-with-barcode.component';
+import { ListArticleWithBarArcodeComponent } from './article/list-article-with-bar-arcode/list-article-with-bar-arcode.component';
 import { CreateVentewithQrcodeBarCodeComponent } from './vente/create-ventewith-qrcode-bar-code/create-ventewith-qrcode-bar-code.component';
 import { CreateCommandewithQrcodeBarCodeComponent } from './commande/create-commandewith-qrcode-bar-code/create-commandewith-qrcode-bar-code.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -100,10 +99,12 @@ const routes: Routes = [
 
   { path: 'register', component: RegisterComponent },
 
-  {path: 'home', component: HomeComponent, children : [
+  { path: 'home', component: HomeComponent, children : [
+
 
 
     {path:'', redirectTo:'dashboard' , pathMatch:'full'},
+
 
   /*  { path: 'articles', component: ListArticleComponent},
     { path: 'article', component: CreateArticleComponent},
@@ -283,7 +284,7 @@ const routes: Routes = [
     { path: 'viewVersement', component: ViewVersementComponent },
 
 
-    { path: 'dashboard', component: DashboardComponent},
+    { path: 'dashboard', component: DashboardComponent },
 
     { path: 'tableau', component: ListStatistiqueComponent },
 
@@ -302,12 +303,13 @@ const routes: Routes = [
     { path: '**', component: PageNotFoundComponent },
 
 
+
   ]}
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

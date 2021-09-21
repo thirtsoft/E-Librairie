@@ -1,0 +1,140 @@
+<!--main content start-->
+<section id="container">
+  <!--overview start-->
+  <div class="row">
+      <div class="col-lg-12">
+          <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a routerLink="/">Home</a></li>
+              <li><i class="fa fa-laptop"></i>Dashboard</li>
+          </ol>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box blue-bg">
+              <!-- <i class="fa fa-cloud-download"></i> -->
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <div class="count">{{this.numberClients}}</div>
+              <div class="title">Clients</div>
+          </div>
+      </div>
+
+      <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box brown-bg">
+            <i class="fa fa-shopping-cart"></i>
+            <div class="count">{{this.sumVentes}}</div>
+            <div class="title">Ventes</div>
+          </div>
+        </div>
+-->
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box dark-bg">
+              <i class="fa fa-thumbs-o-up"></i>
+              <div class="count">{{this.numberVentesByDay}}</div>
+              <div class="title">NbreVente/Jours</div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box brown-bg">
+              <i class="fa fa-shopping-cart"></i>
+              <div class="count">{{this.sumVenteByMonth}} f</div>
+              <div class="title">MontantVentes/Mois</div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.sumCommandeByMonth}}</div>
+              <div class="title">MontantCommandes/Mois</div>
+          </div>
+      </div>
+
+      <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box green-bg">
+            <i class="fa fa-cubes"></i>
+            <div class="count">{{this.sumCommandes}}</div>
+            <div class="title">Commandes</div>
+          </div>
+        </div> -->
+
+  </div>
+
+  <div class="row">
+      <div class="col-md-6 portlets">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h2><strong>Diagramme en Barre des Nombre de Ventes Par mois</strong></h2>
+              </div>
+              <div class="panel-body">
+                  <div style="display: block">
+                      <!-- <canvas id="myChart" height="300" width="500"></canvas> -->
+                      <app-barchar-com-vente></app-barchar-com-vente>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-6 portlets">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <div class="pull-left">Diagramme en Barre des Nombre Commandes Par mois</div>
+                  <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                  <div class="padd">
+                      <div style="display: block">
+                          <!--  <canvas id="myChart1"  height="300" width="500"><app-linechart></app-linechart></canvas> -->
+                          <app-barchar-commande></app-barchar-commande>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.numberOfProductByStock}}</div>
+              <div class="title">QtéStock > QtéInital</div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.numberOfProductWhenStockEqualStockInit}}</div>
+              <div class="title">QtéStock = QtéInital</div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box green-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count">{{this.numberOfProductWhenStockInfStockInit}}</div>
+              <div class="title">QtéStock
+                  < QtéInital</div>
+              </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <div class="info-box green-bg">
+                  <i class="fa fa-cubes"></i>
+                  <div class="count">{{this.numberOfFournisseurs}}</div>
+                  <div class="title">Fournisseur</div>
+                  <!--  <a class="card-footer text-white clearfix small z-1" href="client/listeClient.php">
+              <span class="float-left">Voir Details</span>
+              <span class="float-right">
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </a> -->
+              </div>
+          </div>
+
+      </div>
+</section>
+<!--main content end-->

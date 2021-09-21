@@ -9,7 +9,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class VersementService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
+
+  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -23,6 +25,7 @@ export class VersementService {
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
@@ -73,7 +76,9 @@ export class VersementService {
 
   }
   public downloadFile(pathContrat: String){
-    return this.http.get<any>("http://localhost:8081/alAmine/downloadVersementFile"+"/"+ pathContrat);
+  //  return this.http.get<any>("http://localhost:8081/alAmine/downloadVersementFile"+"/"+ pathContrat);
+
+    return this.http.get<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/downloadVersementFile"+"/"+ pathContrat);
   }
 
 

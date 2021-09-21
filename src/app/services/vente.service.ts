@@ -18,7 +18,9 @@ import { ProfileInfo } from '../auth/profile-info';
 })
 export class VenteService {
 
-  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+//  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+
+  public baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
 
 
  // private baseUrl_1 = 'http://localhost:8081/alAmine';

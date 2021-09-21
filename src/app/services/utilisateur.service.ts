@@ -10,7 +10,9 @@ import { Utilisateur } from '../models/utilisateur';
 })
 export class UtilisateurService {
 
-  public baseUrl = 'http://localhost:8081/alAmine';
+//  public baseUrl = 'http://localhost:8081/alAmine';
+
+  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
   choixmenu : string  = 'A';
   listData : Utilisateur[];

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { Vente } from '../../models/vente';
-import { Chart } from 'chart.js';
-import { Client } from '../../models/client';
+
+
 declare var $: any;
 
 @Component({
@@ -141,8 +140,5 @@ export class DashboardComponent implements OnInit {
   reloadPage() {
     window.location.reload();
   }
-
-
-
 
 }

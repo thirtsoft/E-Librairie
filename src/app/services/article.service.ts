@@ -17,7 +17,9 @@ const EXCEL_EXTENSION = '.xlsx';
 export class ProduitService {
 
  // private baseUrl_1 = 'http://localhost:8081/prodApi';
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
+//  private baseUrl_1 = 'http://localhost:8081/prodApi';
+
+  private baseUrl_1  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
   /* private db: Dexie;
   private tableProd: Dexie.Table<Produit, number>; */
 
@@ -228,7 +230,10 @@ export class ProduitService {
   }
 
   public getProduitByBarcode(barCode: string): Observable<Produit> {
-    return this.http.get<Produit> ('http://localhost:8081/prodApi/produits/searchProduitByBarCode/' + barCode);
+  //  return this.http.get<Produit> ('http://localhost:8081/prodApi/produits/searchProduitByBarCode/' + barCode);
+
+    return this.http.get<Produit> ('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/produits/searchProduitByBarCode/' + barCode);
+
   }
 
   createProduitWithQrCode(info: Object): Observable<Produit> {

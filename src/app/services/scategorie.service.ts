@@ -14,7 +14,11 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ScategorieService {
 
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
+//  private baseUrl_1 = 'http://localhost:8081/prodApi';
+
+  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
+
+  alAmine
 
   //  private baseUrl = window["cfgApiBaseUrl"];
   // private baseUrl = '/api/categories';
@@ -35,7 +39,8 @@ export class ScategorieService {
    constructor(private http: HttpClient) { }
 
    getAllScategories(): Observable<any> {
-     return this.http.get('http://localhost:8081/prodApi/scategories');
+  //   return this.http.get('http://localhost:8081/prodApi/scategories');
+     return this.http.get(`${this.baseUrl_1}/scategories`);
    }
 
    getScategorieByID(id:number):any {
@@ -51,7 +56,10 @@ export class ScategorieService {
   }
 
    getListScategoriesByCategoryId(id: number){
-    return this.http.get('http://localhost:8081/prodApi/searchListScategoriesByCategoryId/' + id);
+
+  //  return this.http.get('http://localhost:8081/prodApi/searchListScategoriesByCategoryId/' + id);
+
+    return this.http.get('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/searchListScategoriesByCategoryId/' + id);
   }
 
    createScategorie(info: Object): Observable<Object> {

@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class LigneCreanceService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -27,6 +28,7 @@ export class LigneCreanceService {
   getAllLigneCreances(): Observable<any> {
     return this.http.get(`${this.baseUrl}/ligneCreances`);
   }
+
   getAllByNumero(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/lcreances/${id}`);
   }

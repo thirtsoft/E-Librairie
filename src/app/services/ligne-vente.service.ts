@@ -10,7 +10,9 @@ import { Observable } from 'rxjs';
 export class LigneVenteService {
 
 
-  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+//  private baseUrl_1 = 'http://localhost:8081/apiSeller';
+
+  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
 
 //  private baseUrl_1 = 'http://localhost:8081/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -45,6 +47,7 @@ export class LigneVenteService {
   createLigneVente(info: LigneVente): Observable<Object> {
     return this.http.post(`${this.baseUrl_1}/ligneVentes`, info);
   }
+
   updateLigneVente(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl_1}/ligneVentes/${id}`, value);
   }

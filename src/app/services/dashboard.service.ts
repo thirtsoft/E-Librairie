@@ -13,11 +13,18 @@ import { map } from 'rxjs/operators';
 })
 export class DashboardService {
 
+  private baseUrl_Seller = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
+
+  private baseUrl_Creance = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+
+  private baseUrl_Com = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
+
+  /*
   private baseUrl_Seller = 'http://localhost:8081/apiSeller';
 
   private baseUrl_Creance = 'http://localhost:8081/alAmine';
 
-  private baseUrl_Com = 'http://localhost:8081/prodApi';
+  private baseUrl_Com = 'http://localhost:8081/prodApi'; */
 
  // private baseUrl_Custom = 'http://localhost:8081/prodApi';
 
@@ -128,7 +135,10 @@ export class DashboardService {
   }
 
   generateNumCommande(): Observable<any> {
-    return this.http.get("http://localhost:8081/prodApi/generateCodeCommand");
+  //  return this.http.get("http://localhost:8081/prodApi/generateCodeCommand");
+
+    return this.http.get("http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/generateCodeCommand");
+
   }
 
   getNumeroCommande() {

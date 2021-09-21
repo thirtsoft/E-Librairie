@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  host: string = "http://localhost:8080";
+//  host: string = "http://localhost:8080";
+  private host  = 'http://localhost:8080';
 
   jwtToken = null;
   jwt: string;

@@ -9,7 +9,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ContratService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -66,7 +68,9 @@ export class ContratService {
   }
 
   public downloadFile(pathContrat: String){
-    return this.http.get<any>("http://localhost:8081/alAmine/downloadContratFile"+"/"+ pathContrat);
+  //  return this.http.get<any>("http://localhost:8081/alAmine/downloadContratFile"+"/"+ pathContrat);
+
+    return this.http.get<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/downloadContratFile"+"/"+ pathContrat);
   }
 
   updateContrat(id: number, value: any): Observable<Object> {

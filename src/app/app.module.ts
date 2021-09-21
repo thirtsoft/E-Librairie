@@ -38,7 +38,8 @@ import { ListVersementComponent } from './versement/list-versement/list-versemen
 import { ListContratComponent } from './contrat/list-contrat/list-contrat.component';
 import { CreateContratComponent } from './contrat/create-contrat/create-contrat.component';
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ListAvoirComponent } from './avoir/list-avoir/list-avoir.component';
 import { CreateAvoirComponent } from './avoir/create-avoir/create-avoir.component';
@@ -275,7 +276,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     CreateAvoirComponent, CreateChargeComponent, CreateCommandeComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
     UpdateUsernameComponent, CreateVentewithQrcodeBarCodeComponent,
-    CreateCommandewithQrcodeBarCodeComponent
+    CreateCommandewithQrcodeBarCodeComponent, DashboardComponent
   ]
 
 })

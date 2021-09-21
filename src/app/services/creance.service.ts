@@ -9,7 +9,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class CreanceService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+//  private baseUrl = 'http://localhost:8081/alAmine';
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -61,14 +63,20 @@ export class CreanceService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
     let data = {"status":status};
 
-    return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
+  //  return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
+
+    return this.http.patch<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
   }
+
   updateAvanceCreance(id: number, avanceCreance: number): Observable<any> {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     let data = {"avanceCreance":avanceCreance};
 
-    return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyAvanceCreance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
+  //  return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyAvanceCreance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
+
+    return this.http.patch<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/setCreanceOnlyAvanceCreance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
+
    }
 
   deleteCreance(id: number): Observable<any> {
