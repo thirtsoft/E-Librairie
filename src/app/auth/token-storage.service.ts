@@ -8,6 +8,7 @@ const NAME_KEY = 'AuthName';
 const EMAIL_KEY = 'AuthEmail';
 const USER_KEY = 'auth-user';
 const USER_ID = 'aut-userId';
+
 @Injectable({
   providedIn: 'root'
 })

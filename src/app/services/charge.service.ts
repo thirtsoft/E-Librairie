@@ -3,17 +3,17 @@ import { Charge } from '../models/charge';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChargeService {
 
-//  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -23,41 +23,47 @@ export class ChargeService {
   public dataForm: FormGroup;
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
 
   constructor(private http: HttpClient) { }
 
-  getAllCharges(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/charges`);
+  getAllCharges(): Observable<Charge[]> {
+    return this.http.get<Charge[]>(`${this.baseUrl}/charges/all`);
+  }
+
+  getAllChargesOrderDesc(): Observable<Charge[]> {
+    return this.http.get<Charge[]>(`${this.baseUrl}/charges/allChargeOrderDesc`);
   }
 
   getChargeByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/charges/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/charges/findById/`+id).toPromise();
   }
 
-  public getChargeById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/charges/${id}`);
+  public getChargeById(id: number): Observable<Charge> {
+    return this.http.get<Charge>(`${this.baseUrl}/charges/findById/${id}`);
   }
 
-  createCharge(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/charges`, info);
+  createCharge(info: Charge): Observable<Charge> {
+    return this.http.post<Charge>(`${this.baseUrl}/charges/create`, info);
   }
 
-  createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/charges`, info);
+  createData(info: Charge): Observable<Charge> {
+    return this.http.post<Charge>(`${this.baseUrl}/charges/crate`, info);
   }
 
-  updateCharge(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/charges/${id}`, value);
+  updateCharge(id: number, value: Charge): Observable<Charge> {
+    return this.http.put<Charge>(`${this.baseUrl}/charges/update/${id}`, value);
   }
 
   deleteCharge(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/charges/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/charges/delete/${id}`, { responseType: 'text' });
   }
 
 

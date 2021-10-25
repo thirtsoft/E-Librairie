@@ -17,9 +17,9 @@
         <div class="form-group col-md-6">
           <label>Nom</label>
           <input type="text" class="form-control" formControlName="nom" name="nom" id="nom" placeholder="Nom employé">
-          <div *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)" class="alert alert-danger">
-            <span *ngIf="f['name'].errors.required">Le name est obligatoire.</span>
-            <span *ngIf="f['name'].errors?.pattern">SVP, Le name doit contenir des lettres de l'alphabet A-Z..</span>
+          <div *ngIf="f['nom'].invalid && (f['nom'].dirty || f['nom'].touched)" class="alert alert-danger">
+            <span *ngIf="f['nom'].errors.required">Le nom est obligatoire.</span>
+            <span *ngIf="f['nom'].errors?.pattern">SVP, Le nom doit contenir des lettres de l'alphabet A-Z..</span>
           </div>
         </div>
       </div>
@@ -52,8 +52,8 @@
         <div class="form-group col-md-6">
           <label>Telephone2</label>
           <input type="text" class="form-control" formControlName="telephone2" name="telephone2" id="telephone2" placeholder="00 000 00 00">
-          <div *ngIf="f['telephone'].invalid && (f['telephone'].dirty || f['telephone'].touched)" class="alert alert-danger">
-            <span *ngIf="f['telephone'].errors?.pattern">SVP, Entrez un numéro Telephone est valide et doit contenir 9 caractère..</span>
+          <div *ngIf="f['telephone2'].invalid && (f['telephone2'].dirty || f['telephone2'].touched)" class="alert alert-danger">
+            <span *ngIf="f['telephone2'].errors?.pattern">SVP, Entrez un numéro Telephone est valide et doit contenir 9 caractère..</span>
           </div>
         </div>
       </div>

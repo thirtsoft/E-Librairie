@@ -3,16 +3,17 @@ import { FormGroup } from '@angular/forms';
 import { Avoir } from '../models/avoir';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AvoirService {
 
-//  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine'
- // private baseUrl = 'http://localhost:8080/alAmine';
+//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine'
+
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -34,31 +35,35 @@ export class AvoirService {
   constructor(private http: HttpClient) { }
 
   getAllAvoirs(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/avoirs`);
+    return this.http.get(`${this.baseUrl}/avoirs/all`);
+  }
+
+  getAllAvoirsOrderDesc(): Observable<Avoir[]> {
+    return this.http.get<Avoir[]>(`${this.baseUrl}/avoirs/allAvoirOrderDesc`);
   }
 
   getAvoirByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/avoirs/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/avoirs/findById/`+id).toPromise();
   }
 
   public getAvoirById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/avoirs/${id}`);
+    return this.http.get(`${this.baseUrl}/avoirs/findById/${id}`);
   }
 
   createAvoir(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/avoirs`, info);
+    return this.http.post(`${this.baseUrl}/avoirs/create`, info);
   }
 
   updateAvoir(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/avoirs/${id}`, value);
+    return this.http.put(`${this.baseUrl}/avoirs/update/${id}`, value);
   }
 
   deleteAvoir(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/avoirs/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/avoirs/delete/${id}`, { responseType: 'text' });
   }
 
   generateReferneceAvoir(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/generateReferneceAvoir`);
+    return this.http.get<any>(`${this.baseUrl}/avoirs/generateReferneceAvoir`);
   }
 
   getReferenceAvoir() {

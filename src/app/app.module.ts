@@ -130,6 +130,8 @@ import { ListArticleWithBarArcodeComponent } from './article/list-article-with-b
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
+import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/create-utilisateur.component';
 
 
 @NgModule({
@@ -238,6 +240,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    ListUtilisateurComponent,
+    CreateUtilisateurComponent,
 
   ],
   imports: [

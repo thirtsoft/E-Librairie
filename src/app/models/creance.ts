@@ -10,7 +10,7 @@ export class Creance {
   soldeCreance: number;
   avanceCreance: number;
   nbreJours: number;
-	totalCreance: number;
+  totalCreance: number;
   status: string;
   dateCreance: Date;
 

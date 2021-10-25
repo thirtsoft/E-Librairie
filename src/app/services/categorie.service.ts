@@ -21,6 +21,7 @@ import { LigneCreance } from '../models/ligne-creance';
 import { Appro } from '../models/appro';
 import { LigneAppro } from '../models/ligne-appro';
 import { Fournisseur } from '../models/fournisseur';
+import { environment } from 'src/environments/environment';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -29,16 +30,18 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class CategorieService {
 
-  /*
+
+//  private baseUrl = environment.apiBaseUrl;
+
   private baseUrl = 'http://localhost:8081/api';
   private baseUrl_1 = 'http://localhost:8081/prodApi';
   private baseUrl_2 = 'http://localhost:8081/apiSeller';
-  */
 
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api'
+
+/*   private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api'
   private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi'
   private baseUrl_2 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller'
-
+ */
   private db: Dexie;
   private tableCat: Dexie.Table<Categorie, number>;
   private tableProd: Dexie.Table<Produit, number>;

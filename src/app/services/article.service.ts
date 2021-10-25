@@ -11,23 +11,22 @@ import Dexie from 'dexie';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
 
- // private baseUrl_1 = 'http://localhost:8081/prodApi';
-//  private baseUrl_1 = 'http://localhost:8081/prodApi';
+  private baseUrl_1 = environment.apiBaseUrl;
 
-  private baseUrl_1  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
+//  private baseUrl_1  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
   /* private db: Dexie;
   private tableProd: Dexie.Table<Produit, number>; */
 
   Data;
   listDataProd: any[] = [];
 
-
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -56,27 +55,31 @@ export class ProduitService {
    }
 
   getAllProduits(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(`${this.baseUrl_1}/produits`);
+    return this.http.get<Produit[]>(`${this.baseUrl_1}/produits/all`);
+  }
+
+  getAllProductsOrderDesc(): Observable<Produit[]> {
+    return this.http.get<Produit[]>(`${this.baseUrl_1}/produits/allProduitOrderDesc`);
   }
 
   getProduitByID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/produits/`+id).toPromise();
+    return this.http.get(`${this.baseUrl_1}/produits/findById/`+id).toPromise();
   }
 
   public getProduitById(id: number): Observable<Produit> {
-    return this.http.get<Produit>(`${this.baseUrl_1}/produits/${id}`);
+    return this.http.get<Produit>(`${this.baseUrl_1}/produits/findById/${id}`);
   }
 
   exportPdfProduit(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl_1}/createPdf`,{responseType: 'blob'});
+    return this.http.get(`${this.baseUrl_1}/produits/createPdf`,{responseType: 'blob'});
   }
 
   createProduits(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/produits`, info);
+    return this.http.post(`${this.baseUrl_1}/produits/create`, info);
   }
 
   private createProduitAPI(info: Produit) {
-    this.http.post(`${this.baseUrl_1}/produits`, info)
+    this.http.post(`${this.baseUrl_1}/produits/create`, info)
       .subscribe(
         ()=> alert('Produit ajouté avec succes'),
         (err) => console.log('Erreur lors de ajout')
@@ -85,20 +88,20 @@ export class ProduitService {
 
 
   createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/produits`, info);
+    return this.http.post(`${this.baseUrl_1}/produits/create`, info);
   }
 
   saveProduit(info: Produit): Observable<Produit> {
-    return this.http.post<Produit>(`${this.baseUrl_1}/produits`, info);
+    return this.http.post<Produit>(`${this.baseUrl_1}/produits/create`, info);
   }
 
 
   updateProduit(id: number, value: Produit): Observable<Produit> {
-    return this.http.put<Produit>(`${this.baseUrl_1}/produits/${id}`, value);
+    return this.http.put<Produit>(`${this.baseUrl_1}/produits/update/${id}`, value);
   }
 
   deleteProduit(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/produits/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl_1}/produits/delete/${id}`, { responseType: 'text' });
   }
   /**
    * method pour importer les données de Excel à MySQL
@@ -113,7 +116,7 @@ export class ProduitService {
 
     const httpOptions = { headers: headers };
 
-    return this.http.post(`${this.baseUrl_1}/upload`, formData, httpOptions);
+    return this.http.post(`${this.baseUrl_1}/produits/upload`, formData, httpOptions);
 
   }
 
@@ -146,7 +149,7 @@ export class ProduitService {
    * methode permettant de generer un pdf depuis API Spring boot
    */
   exportPdfProduits(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl_1}/createPdf`, {responseType: 'blob'});
+    return this.http.get(`${this.baseUrl_1}/produits/createPdf`, {responseType: 'blob'});
   }
 
    // Methode pour Offline&Online et DexieJS

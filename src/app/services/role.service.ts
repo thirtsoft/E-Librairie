@@ -8,9 +8,9 @@ import { Role } from '../models/role';
 })
 export class RoleService {
 
-//  public baseUrl = 'http://localhost:8081/alAmine';
+  public baseUrl = 'http://localhost:8081/alAmine';
 
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
   choixmenu : string  = 'A';
   listData : Role[];

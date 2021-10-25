@@ -46,10 +46,10 @@ export class ViewApprovisionnementComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(public crudApi: ApproService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
-    private matDialog: MatDialog, public lapproService: LigneApproService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateVenteComponent>,
+      public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
+      private matDialog: MatDialog, public lapproService: LigneApproService,
+      @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
+      public dialogRef:MatDialogRef<CreateVenteComponent>,
     ) { }
 
   ngOnInit(): void {
@@ -140,6 +140,7 @@ export class ViewApprovisionnementComponent implements OnInit {
         },
         {
           text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+    //      text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 2345678192792',
           fontSize: 12,
           bold: true,
           color: '#0000ff'

@@ -3,17 +3,17 @@ import { CategorieCharge } from '../models/categorieCharge';
 import { FormGroup } from '@angular/forms';
 import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategorieChargeService {
 
-//  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine'
+//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine'
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -35,28 +35,32 @@ export class CategorieChargeService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCategorieCharges(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/categorieCharges`);
+  getAllCategorieCharges(): Observable<CategorieCharge[]> {
+    return this.http.get<CategorieCharge[]>(`${this.baseUrl}/categorieCharges/all`);
+  }
+
+  getAllCategorieChargesOrderDesc(): Observable<CategorieCharge[]> {
+    return this.http.get<CategorieCharge[]>(`${this.baseUrl}/categorieCharges/allCategorieChargeOrderDesc`);
   }
 
   getCategorieChargeByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/categorieCharges/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/categorieCharges/findById/`+id).toPromise();
   }
 
-  public getCategorieChargeById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/categorieCharges/${id}`);
+  public getCategorieChargeById(id: number): Observable<CategorieCharge> {
+    return this.http.get<CategorieCharge>(`${this.baseUrl}/categorieCharges/findById/${id}`);
   }
 
-  createCategorieCharge(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/categorieCharges`, info);
+  createCategorieCharge(info: CategorieCharge): Observable<CategorieCharge> {
+    return this.http.post<CategorieCharge>(`${this.baseUrl}/categorieCharges/create`, info);
   }
 
-  updateCategorieCharge(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/categorieCharges/${id}`, value);
+  updateCategorieCharge(id: number, value: CategorieCharge): Observable<CategorieCharge> {
+    return this.http.put<CategorieCharge>(`${this.baseUrl}/categorieCharges/update/${id}`, value);
   }
 
   deleteCategorieCharge(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/categorieCharges/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/categorieCharges/delete/${id}`, { responseType: 'text' });
   }
 
 }

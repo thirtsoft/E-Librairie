@@ -11,9 +11,9 @@ import { OnlineofflineService } from './onlineoffline.service';
 })
 export class LigneCmdClientService {
 
-  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
+//  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
 
-//  private baseUrl_1 = 'http://localhost:8081/prodApi';
+  private baseUrl_1 = 'http://localhost:8081/prodApi';
   private db: Dexie;
   private tableLcmd: Dexie.Table<LigneCmdClient, number>;
 

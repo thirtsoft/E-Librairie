@@ -10,9 +10,9 @@ import { Utilisateur } from '../models/utilisateur';
 })
 export class UtilisateurService {
 
-//  public baseUrl = 'http://localhost:8081/alAmine';
+  public baseUrl = 'http://localhost:8081/alAmine';
 
-  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+//  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
   choixmenu : string  = 'A';
   listData : Utilisateur[];
@@ -42,8 +42,12 @@ export class UtilisateurService {
     return this.http.get(`${this.baseUrl}/photoUser/`+ id);
   }
 
-  public getUserAvatar(id: number){
+ /*  public getUserAvatar(id: number){
     return this.http.get("http://localhost:8080/avatar/"+ id);
+  }
+ */
+  public getUserAvatar(id: number){
+    return this.http.get(`${this.baseUrl}/avatar/`+ id);
   }
 
   uploadPhotoUtilisateur(file: File, userId): Observable<HttpEvent<{}>> {
@@ -56,6 +60,18 @@ export class UtilisateurService {
 
     return this.http.request(req);
   }
+
+  /*
+  uploadPhotoUtilisateur(file: File, userId): Observable<HttpEvent<{}>> {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const req = new HttpRequest('POST', this.baseUrl+'/photo/'+userId, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+  }*/
 
   getAuthorities(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/utilisateurs/authorities`);

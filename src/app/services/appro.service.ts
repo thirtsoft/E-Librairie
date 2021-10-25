@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
+
 import { Appro } from '../models/appro';
 import { LigneAppro } from '../models/ligne-appro';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApproService {
 
-//  private baseUrl = 'http://localhost:8081/alAmine';
 
-  private baseUrl  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+  private baseUrl = environment.apiBaseUrl;
+
+//  private baseUrl  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
  // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -51,15 +55,21 @@ export class ApproService {
   constructor(private http: HttpClient) { }
 
   getAllAppros(): Observable<Appro[]> {
-    return this.http.get<Appro[]>(`${this.baseUrl}/approvisionnements`);
+    return this.http.get<Appro[]>(`${this.baseUrl}/approvisionnements/all`);
+  }
+
+  getAllApprosOrderDesc(): Observable<Appro[]> {
+    return this.http.get<Appro[]>(`${this.baseUrl}/approvisionnements/allApprosOrderDesc`);
   }
 
   public getApprovisionnementById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/approvisionnements/${id}`);
+    return this.http.get(`${this.baseUrl}/approvisionnements/findById/${id}`);
   }
 
+
+
   getApprovisionnementByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/approvisionnements/${id}`).toPromise();
+    return this.http.get(`${this.baseUrl}/approvisionnements/findById/${id}`).toPromise();
   }
 
   /* createCommandeClient(info: Object): Observable<Object> {
@@ -72,27 +82,27 @@ export class ApproService {
       ligneApprovisionnements: this.orderItems
     };
 
-    return this.http.post(`${this.baseUrl}/approvisionnements`, body);
+    return this.http.post(`${this.baseUrl}/approvisionnements/create`, body);
 
   }
 
   saveApprovisionnement(info: Object) {
-    return this.http.post(`${this.baseUrl}/approvisionnements`, info);
+    return this.http.post(`${this.baseUrl}/approvisionnements/create`, info);
   }
 
   createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/approvisionnements`, info);
+    return this.http.post(`${this.baseUrl}/approvisionnements/create`, info);
   }
 
   updateApprovisionnement(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/approvisionnements/${id}`, value);
+    return this.http.put(`${this.baseUrl}/approvisionnements/update/${id}`, value);
   }
 
   deleteApprovisionnement(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/approvisionnements/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/approvisionnements/delete/${id}`, { responseType: 'text' });
   }
   generateCodeApprovisionnement(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/generateCodeAppro`);
+    return this.http.get(`${this.baseUrl}/approvisionnements/generateCodeAppro`);
   }
 
   getCodeApprovisionnement() {
@@ -107,7 +117,10 @@ export class ApproService {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     let data = {"status":status};
-    return this.http.patch<any>("http://localhost:8081/alAmine/updateStatusApproById/"+id+"?status="+data.status, {headers: headers});
+    return this.http.patch<any>(`${this.baseUrl}/approvisionnements/updateStatusApproById/`+id+"?status="+data.status, {headers: headers});
+
+//    return this.http.patch<any>("http://localhost:8081/alAmine/updateStatusApproById/"+id+"?status="+data.status, {headers: headers});
+
   }
 
   updateMontantAvanceAppro(id: number, montantAvance: number): Observable<any> {
@@ -115,7 +128,9 @@ export class ApproService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
     let data = {"montantAvance":montantAvance};
 
-    return this.http.patch<any>("http://localhost:8081/alAmine/updateMontantAvanceApproById/"+id+"?montantAvance="+data.montantAvance, {headers: headers});
+    return this.http.patch<any>(`${this.baseUrl}/approvisionnements/updateMontantAvanceApproById/`+id+"?montantAvance="+data.montantAvance, {headers: headers});
+
+  //  return this.http.patch<any>("http://localhost:8081/alAmine/updateMontantAvanceApproById/"+id+"?montantAvance="+data.montantAvance, {headers: headers});
 
   }
 

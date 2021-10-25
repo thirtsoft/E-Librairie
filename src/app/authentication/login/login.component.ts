@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private router: Router,
-    private location: Location) {
+    private location: Location
 
-     }
+  ) {}
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.loginInfo = new Login(
       this.form.username,
       this.form.password,
-      );
+    );
 
     this.authService.attemptAuth(this.loginInfo).subscribe(data => {
         this.tokenStorage.saveToken(data.accessToken);

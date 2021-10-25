@@ -114,7 +114,8 @@ export class ViewCommandeComponent implements OnInit {
     return {
       content: [
         {
-          text: 'AL AMINE',
+      //    text: 'AL AMINE',
+          text: 'NOM DE L\'ENTREPRISE',
           fontSize: 50,
           alignment: 'center',
           color: '#0000ff',
@@ -134,7 +135,8 @@ export class ViewCommandeComponent implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
+      //    text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: 77 430 03 10 / Email: adamadiallo@gmail.com',
           fontSize: 12,
           bold: true,
           alignment: 'center',

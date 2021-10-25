@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit {
   email: String;
   userId;
   photo;
+  img: boolean;
 
   dateEndCreance;
 
@@ -74,6 +75,10 @@ export class NavbarComponent implements OnInit {
     this.getListArticlesSoldOut();
 
     this.getListCreancesLimiteDateOut();
+
+    if (this.userService.getUserAvatar(this.userId) === null)
+      this.img = false;
+    else this.img =true;
 
   }
 

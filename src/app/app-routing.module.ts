@@ -1,3 +1,4 @@
+import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -298,6 +299,8 @@ const routes: Routes = [
     { path: 'profile/:id', component: UpdateProfileComponent },
     { path: 'profile/:id', component: UpdateUsernameComponent },
     { path: 'profile/:id', component: UpdatePasswordComponent },
+
+    { path: 'utilisateurs', component: ListUtilisateurComponent },
 
    /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
     { path: '**', component: PageNotFoundComponent },
