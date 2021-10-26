@@ -61,16 +61,12 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllCategorieCharges().subscribe(
+    this.crudApi.getAllCategorieChargesOrderDesc().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
       }, err=> {
-        /*
-        this.authService.jwtToken = null;
-        this.authService.logout();
-        this.router.navigateByUrl('/login');
-        */
+
       });
 
   }
@@ -102,9 +98,12 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
   }
 
   getListCategorieCharges() {
-    this.crudApi.getAllCategorieCharges().subscribe(
-      response =>{this.listData = response;}
-    );
+    this.crudApi.getAllCategorieChargesOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
 
   }
 

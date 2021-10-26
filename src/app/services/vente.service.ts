@@ -12,18 +12,16 @@ import { Utilisateur } from '../models/utilisateur';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ProfileInfo } from '../auth/profile-info';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VenteService {
 
-//  private baseUrl_1 = 'http://localhost:8081/apiSeller';
-
-  public baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
+  private baseUrl_1 = environment.apiBaseUrl;
 
 
- // private baseUrl_1 = 'http://localhost:8081/alAmine';
   private db: Dexie;
   private tableVent: Dexie.Table<Vente, number>;
   private tableLvent: Dexie.Table<LigneVente, number>;
@@ -75,19 +73,23 @@ export class VenteService {
   }
 
    getAllVentes(): Observable<Vente[]> {
-     return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes`);
+     return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/all`);
    }
 
+   getAllVentesOrderDesc(): Observable<Vente[]> {
+    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/allVenteOrderDesc`);
+  }
+
    public getVenteById(id: number): Observable<Object> {
-     return this.http.get(`${this.baseUrl_1}/ventes/${id}`);
+     return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`);
    }
 
    getVenteID(id:number):any {
-     return this.http.get(`${this.baseUrl_1}/ventes/${id}`).toPromise();
+     return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`).toPromise();
    }
 
    getSumVenteByDay(): Observable<any> {
-     return this.http.get(`${this.baseUrl_1}/searchSumsOfVenteByDay`);
+     return this.http.get(`${this.baseUrl_1}/ventes/searchSumsOfVenteByDay`);
    }
 
    createVente() {
@@ -96,11 +98,11 @@ export class VenteService {
        ligneVentes: this.orderItems
      };
      let id: number;
-     return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, body);
+     return this.http.post(`${this.baseUrl_1}/ventes/ventes/create?id=`+id, body);
    }
 
    saveVente(info: Vente, id:number) {
-    return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, info);
+    return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, info);
   }
 
   saveVenteWithBarcode(info: Vente, id:number) {
@@ -109,15 +111,15 @@ export class VenteService {
 
 
    createData(info: Object, id: number): Observable<Object> {
-     return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, info);
+     return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, info);
    }
 
    updateVente(id: number, value: any): Observable<Object> {
-     return this.http.put(`${this.baseUrl_1}/ventes/${id}`, value);
+     return this.http.put(`${this.baseUrl_1}/ventes/update/${id}`, value);
    }
 
   deleteVente(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/ventes/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl_1}/ventes/delete/${id}`, { responseType: 'text' });
   }
 
   // Dexie and OffLine&OnLine
@@ -212,7 +214,7 @@ export class VenteService {
   }
 
   generateNumeroVente(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/generateNumeroVente`);
+    return this.http.get(`${this.baseUrl_1}/ventes/generateNumeroVente`);
   }
 
   getNumeroVente() {
@@ -239,7 +241,7 @@ export class VenteService {
   }
 
   listOfVenteByUsers(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/searchListVenteByEmpId`);
+    return this.http.get(`${this.baseUrl_1}.ventes/searchListVenteByEmpId`);
   }
 
 

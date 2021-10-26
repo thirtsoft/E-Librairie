@@ -139,7 +139,7 @@ export class ProduitService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl_1}/download/Produits.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+    this.http.get(`${this.baseUrl_1}/produits/download/Produits.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
       FileSaver.saveAs(blob, 'Produits.xlsx');
     });
@@ -235,7 +235,9 @@ export class ProduitService {
   public getProduitByBarcode(barCode: string): Observable<Produit> {
   //  return this.http.get<Produit> ('http://localhost:8081/prodApi/produits/searchProduitByBarCode/' + barCode);
 
-    return this.http.get<Produit> ('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/produits/searchProduitByBarCode/' + barCode);
+    return this.http.get<Produit> (`${this.baseUrl_1}/produits/searchProduitByBarCode/` + barCode);
+
+  //  return this.http.get<Produit> ('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/produits/searchProduitByBarCode/' + barCode);
 
   }
 

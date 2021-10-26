@@ -18,7 +18,6 @@ export class ApproService {
 
 //  private baseUrl  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -65,7 +64,6 @@ export class ApproService {
   public getApprovisionnementById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/approvisionnements/findById/${id}`);
   }
-
 
 
   getApprovisionnementByID(id:number):any {

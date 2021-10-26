@@ -132,6 +132,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
 import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/create-utilisateur.component';
+import { ActivatedUserComponent } from './authentication/activated-user/activated-user.component';
 
 
 @NgModule({
@@ -242,6 +243,7 @@ import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/cre
     SidebarComponent,
     ListUtilisateurComponent,
     CreateUtilisateurComponent,
+    ActivatedUserComponent,
 
   ],
   imports: [

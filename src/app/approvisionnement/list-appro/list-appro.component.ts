@@ -50,12 +50,13 @@ export class ListApproComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllAppros().subscribe(
-      response =>{
-        this.listData = response;
-        console.log(this.listData);
-        this.dtTrigger.next();
-      }
+    this.crudApi.getAllApprosOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+          console.log(this.listData);
+          this.dtTrigger.next();
+        }
     );
 
     this.fournisseur = new Fournisseur();
@@ -78,10 +79,12 @@ export class ListApproComponent implements OnDestroy, OnInit {
   }
 
   getListAppros() {
-    this.crudApi.getAllAppros().subscribe(
-      response =>{
-        this.listData = response;
-      });
+    this.crudApi.getAllApprosOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
 
   }
 
@@ -112,22 +115,6 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.matDialog.open(UpdateStatusApproComponent, dialogConfig);
 
   }
-
-/*  deleteAppro(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cet Approvisionnement ?')) {
-    this.crudApi.deleteApprovisionnement(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Approvisionnement supprimé avec succès!');
-          this.rerender
-          this.getListAppros();
-        },
-        error => console.log(error)
-      );
-    }
-
-  } */
 
   deleteAppro(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')

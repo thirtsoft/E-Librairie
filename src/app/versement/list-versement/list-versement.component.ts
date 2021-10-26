@@ -27,12 +27,16 @@ export class ListVersementComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: VersementService,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
-    private matDialog: MatDialog, private dialogService: DialogService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateVersementComponent>,
-    ) {
+  constructor(public crudApi: VersementService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private datePipe : DatePipe,
+              private matDialog: MatDialog,
+              private dialogService: DialogService,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateVersementComponent>,
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -49,7 +53,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllVersements().subscribe(
+    this.crudApi.getAllVersementsOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
         this.dtTrigger.next();
@@ -75,8 +79,10 @@ export class ListVersementComponent implements OnDestroy, OnInit {
   }
 
   getListVersements() {
-    this.crudApi.getAllVersements().subscribe(
-      response =>{this.crudApi.listData = response;}
+    this.crudApi.getAllVersementsOrderDesc().subscribe(
+      response =>{
+        this.crudApi.listData = response;
+      }
     );
   }
 

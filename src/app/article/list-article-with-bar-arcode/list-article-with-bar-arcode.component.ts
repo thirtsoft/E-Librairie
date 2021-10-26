@@ -74,12 +74,13 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllProduits().subscribe(
-      response =>{
-        this.crudApi.listData = response;
-        this.dtTrigger.next();
-      }
-    );
+    this.crudApi.getAllProductsOrderDesc()
+      .subscribe(
+        response =>{
+          this.crudApi.listData = response;
+          this.dtTrigger.next();
+        }
+      );
   }
 
   /**
@@ -99,9 +100,12 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
   }
 
   getListArticles() {
-    this.crudApi.getAllProduits().subscribe(
-      response =>{this.listData = response;
-      });
+    this.crudApi.getAllProductsOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
   }
 
   onCreateArticle(){

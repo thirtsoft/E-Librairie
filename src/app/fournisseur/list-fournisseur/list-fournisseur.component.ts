@@ -58,7 +58,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    this.crudApi.getAllFournisseurs().subscribe(
+    this.crudApi.getAllFournisseursOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
         console.log(this.crudApi.listData);
@@ -106,13 +106,14 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
   }
 
   getListFournisseurs() {
-    this.crudApi.getAllFournisseurs().subscribe(
-      response =>{this.crudApi.listData = response;}
+    this.crudApi.getAllFournisseursOrderDesc().subscribe(
+      response =>{
+        this.crudApi.listData = response;
+      }
     );
   }
 
   viewFournisseur(item: Fournisseur) {
-   // this.router.navigateByUrl('fournisseurView/' + item.id);
     this.crudApi.choixmenu = "M";
     this.crudApi.dataForm = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();

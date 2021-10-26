@@ -32,12 +32,16 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: EmployeService ,public fb: FormBuilder,
-    private route: ActivatedRoute, private router : Router, private dialogService: DialogService,
-    public toastr: ToastrService, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateEmployeComponent>,
-    ) {
+  constructor(public crudApi: EmployeService,
+              public fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router : Router,
+              private dialogService: DialogService,
+              public toastr: ToastrService,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateEmployeComponent>,
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -53,7 +57,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    this.crudApi.getAllEmployes().subscribe(
+    this.crudApi.getAllEmployesOrderDesc().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
@@ -95,8 +99,10 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   }
 
   getListEmployes() {
-    this.crudApi.getAllEmployes().subscribe(
-      response =>{this.listData = response;}
+    this.crudApi.getAllEmployesOrderDesc().subscribe(
+      response =>{
+        this.listData = response;
+      }
     );
   }
 

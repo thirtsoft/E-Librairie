@@ -25,12 +25,16 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: AvoirService, private dialogService: DialogService,
-    private datePipe : DatePipe, public toastr: ToastrService,
-    public fb: FormBuilder, private router : Router,
-    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateAvoirComponent>
-    ) {
+  constructor(public crudApi: AvoirService,
+              private dialogService: DialogService,
+              private datePipe : DatePipe,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateAvoirComponent>
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -47,12 +51,13 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllAvoirs().subscribe(
-      response =>{
-        this.crudApi.listData = response;
-        this.dtTrigger.next();
-      }
-    );
+    this.crudApi.getAllAvoirsOrderDesc()
+      .subscribe(
+        response =>{
+          this.crudApi.listData = response;
+          this.dtTrigger.next();
+        }
+      );
 
   }
 
@@ -78,9 +83,12 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
   }
 
   getListAvoirs() {
-    this.crudApi.getAllAvoirs().subscribe(
-      response =>{this.crudApi.listData = response;}
-    );
+    this.crudApi.getAllAvoirsOrderDesc()
+      .subscribe(
+        response =>{
+          this.crudApi.listData = response;
+        }
+      );
 
   }
 
@@ -103,22 +111,6 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
     };
     this.matDialog.open(CreateAvoirComponent, dialogConfig);
   }
-
-  /*
-  deleteAvoir(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cet Avoir ?')) {
-    this.crudApi.deleteAvoir(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Avoir supprimé avec succès!');
-          this.rerender();
-          this.getListAvoirs();
-      },
-        error => console.log(error));
-    }
-
-  }*/
 
   deleteAvoir(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')

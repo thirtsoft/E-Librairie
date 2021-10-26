@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Fournisseur } from '../models/fournisseur';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+
+import { Fournisseur } from '../models/fournisseur';
+
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FournisseurService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+
+  private baseUrl = environment.apiBaseUrl;
 
 //  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
   //private baseUrl = window["cfgApiBaseUrl"];
 
    choixmenu : string  = 'A';
@@ -22,7 +26,8 @@ export class FournisseurService {
 
    public dataForm:  FormGroup;
 
-   private listners = new Subject<any>();
+  private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
@@ -33,28 +38,32 @@ export class FournisseurService {
 
    constructor(private http: HttpClient) { }
 
-   getAllFournisseurs(): Observable<any> {
-     return this.http.get(`${this.baseUrl}/fournisseurs`);
+   getAllFournisseurs(): Observable<Fournisseur[]> {
+     return this.http.get<Fournisseur[]>(`${this.baseUrl}/fournisseurs/all`);
    }
 
-   getFournisseurByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/fournisseurs/`+id).toPromise();
+  getAllFournisseursOrderDesc(): Observable<Fournisseur[]> {
+    return this.http.get<Fournisseur[]>(`${this.baseUrl}/fournisseurs/allFournisseurOrderDesc`);
   }
 
-   public getFournisseurById(id: number): Observable<Object> {
-     return this.http.get(`${this.baseUrl}/fournisseurs/${id}`);
+   getFournisseurByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/fournisseurs/findById/`+id).toPromise();
+  }
+
+   public getFournisseurById(id: number): Observable<Fournisseur> {
+     return this.http.get<Fournisseur>(`${this.baseUrl}/fournisseurs/findById/${id}`);
    }
 
   createFournisseur(info: Fournisseur): Observable<Fournisseur> {
-    return this.http.post<Fournisseur>(`${this.baseUrl}/fournisseurs`, info);
+    return this.http.post<Fournisseur>(`${this.baseUrl}/fournisseurs/create`, info);
   }
 
-   updateFournisseur(id: number, value: any): Observable<Object> {
-     return this.http.put(`${this.baseUrl}/fournisseurs/${id}`, value);
+   updateFournisseur(id: number, value: Fournisseur): Observable<Fournisseur> {
+     return this.http.put<Fournisseur>(`${this.baseUrl}/fournisseurs/update/${id}`, value);
    }
 
    deleteFournisseur(id: number): Observable<any> {
-     return this.http.delete(`${this.baseUrl}/fournisseurs/${id}`, { responseType: 'text' });
+     return this.http.delete(`${this.baseUrl}/fournisseurs/delete/${id}`, { responseType: 'text' });
    }
 
 }

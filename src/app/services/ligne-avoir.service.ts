@@ -3,17 +3,17 @@ import { LigneAvoir } from '../models/ligne-avoir';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LigneAvoirService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
 //  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -27,34 +27,38 @@ export class LigneAvoirService {
   constructor(private http: HttpClient) { }
 
   getAllLigneAvoirs(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/ligneAvoirs`);
+    return this.http.get(`${this.baseUrl}/ligneAvoirs/all`);
+  }
+
+  getAllLigneAvoirsOrderDesc(): Observable<LigneAvoir[]> {
+    return this.http.get<LigneAvoir[]>(`${this.baseUrl}/ligneAvoirs/allLigneAvoirOrderDesc`);
   }
 
   getAllByNumero(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/lavoirs/${id}`);
+    return this.http.get(`${this.baseUrl}/lavoirs/findByNumero/${id}`);
   }
 
   public getLigneAvoirId(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/ligneAvoirs/${id}`);
+    return this.http.get(`${this.baseUrl}/ligneAvoirs/findById/${id}`);
   }
 
   createLigneAvoir(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/ligneAvoirs`, info);
+    return this.http.post(`${this.baseUrl}/ligneAvoirs/create`, info);
   }
 
   /**
    * Methode pour afficher la liste des categories par pages
    */
   public getAllLigneAvoirByAvoir(avoirId: number) {
-    return this.http.get(`${this.baseUrl}/searchListLigneAvoirByAvoirId/${avoirId}`);
+    return this.http.get(`${this.baseUrl}/ligneAvoirs/searchListLigneAvoirByAvoirId/${avoirId}`);
   }
 
   updateLigneAvoir(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/ligneAvoirs/${id}`, value);
+    return this.http.put(`${this.baseUrl}/ligneAvoirs/update/${id}`, value);
   }
 
   deleteLigneAvoir(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/ligneAvoirs/${id}`);
+    return this.http.delete(`${this.baseUrl}/ligneAvoirs/delete/${id}`);
   }
 
 }

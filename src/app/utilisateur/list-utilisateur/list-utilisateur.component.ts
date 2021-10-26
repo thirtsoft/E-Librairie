@@ -43,7 +43,7 @@ export class ListUtilisateurComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllUtilisateurs().subscribe(
+    this.crudApi.getAllUtilisateurOrderDesc().subscribe(
       response =>{
         this.listData = response;
         console.log(this.listData);
@@ -69,8 +69,8 @@ export class ListUtilisateurComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  getListVentes() {
-    this.crudApi.getAllUtilisateurs().subscribe(
+  getListUtilisateurs() {
+    this.crudApi.getAllUtilisateurOrderDesc().subscribe(
       response =>{this.listData = response;}
     );
   }
@@ -78,7 +78,6 @@ export class ListUtilisateurComponent implements OnInit {
   onCreateUtilisateur() {
     this.crudApi.choixmenu = "A";
     this.router.navigateByUrl("register");
-
     this.logout();
   }
 

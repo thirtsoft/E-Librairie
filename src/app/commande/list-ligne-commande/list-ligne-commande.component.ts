@@ -43,7 +43,7 @@ export class ListLigneCommandeComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllLigneCmdClients().subscribe(
+    this.crudApi.getAllLigneCmdClientsOrderDesc().subscribe(
       response =>{
         this.listData = response;
         console.log(response);
@@ -70,8 +70,9 @@ export class ListLigneCommandeComponent implements OnInit {
   }
 
   getListLigneCmdClients() {
-    this.crudApi.getAllLigneCmdClients().subscribe(
-      response =>{this.listData = response;
+    this.crudApi.getAllLigneCmdClientsOrderDesc().subscribe(
+      response =>{
+        this.listData = response;
       }
     );
   }

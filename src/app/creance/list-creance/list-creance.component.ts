@@ -35,12 +35,16 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: CreanceService, private datePipe : DatePipe,
-    public toastr: ToastrService, private dialogService: DialogService,
-    public fb: FormBuilder, private router : Router,
-    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateCreanceComponent>,
-    ) {
+  constructor(public crudApi: CreanceService,
+              private datePipe : DatePipe,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              public fb: FormBuilder,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateCreanceComponent>,
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -57,7 +61,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllCreances().subscribe(
+    this.crudApi.getAllCreancesOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
         for (let i=0; i<this.crudApi.listData.length; i++) {
@@ -95,8 +99,10 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
   }
 
   getListCreances() {
-    this.crudApi.getAllCreances().subscribe(
-      response =>{this.crudApi.listData = response;}
+    this.crudApi.getAllCreancesOrderDesc().subscribe(
+      response =>{
+        this.crudApi.listData = response;
+      }
     );
   }
 

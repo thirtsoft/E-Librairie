@@ -63,7 +63,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllScategories().subscribe(
+    this.crudApi.getAllScategorieOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
         this.dtTrigger.next();
@@ -99,8 +99,10 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   }
 
   getListScategories() {
-    this.crudApi.getAllScategories().subscribe(
-      response =>{this.listData = response;}
+    this.crudApi.getAllScategorieOrderDesc().subscribe(
+      response =>{
+        this.listData = response;
+      }
     );
   }
 

@@ -10,6 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 import { ProfileInfo, UpdateUsernameInfo, UpdatePasswordInfo, UpdateProfilInfo } from './profile-info';
 import { TokenStorageService } from './token-storage.service';
 import { IUser } from '../models/utilisateur';
+import { environment } from 'src/environments/environment';
 
 const AUTH_API = 'http://localhost:8081/api/auth/';
 
@@ -26,20 +27,10 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:8081/api/auth/signin';
-  private signupUrl = 'http://localhost:8081/api/auth/signup';
+  /* private loginUrl = 'http://localhost:8081/api/auth/signin';
+  private signupUrl = 'http://localhost:8081/api/auth/signup'; */
 
-
- /*  private loginUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth/signin';
-  private signupUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth/signup';
- */
-  private baseUrl = 'http://localhost:8081/api/auth';
-
-  private baseUrl_1 = 'http://localhost:8081/alAmine';
-
-/*   private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth';
-
-  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine'; */
+  private baseUrl_1 = environment.apiBaseUrl;
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;
@@ -54,9 +45,9 @@ export class AuthService {
   currentUser = {};
 
   constructor(private http: HttpClient,
-    private tokenService: TokenStorageService,
-    private route: ActivatedRoute,
-    private router: Router) {
+              private tokenService: TokenStorageService,
+              private route: ActivatedRoute,
+              private router: Router) {
 
   }
 
@@ -66,7 +57,8 @@ export class AuthService {
 
 
   attemptAuth(credentials: Login): Observable<any> {
-    return this.http.post(this.loginUrl, {
+  //  return this.http.post(this.loginUrl, {
+    return this.http.post(AUTH_API + 'signin', {
       username: credentials.username,
       password: credentials.password
     }, httpOptions);
@@ -91,7 +83,7 @@ export class AuthService {
 
 
   getUserProfile(id): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/utilisateurs/${id}`, httpOptions).pipe(
+    return this.http.get(`${this.baseUrl_1}/utilisateurs/findById/${id}`, httpOptions).pipe(
       map((res: Response) => {
         return res || {}
       }),
@@ -100,10 +92,11 @@ export class AuthService {
   }
 
   getUserByUsername(username: string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + `/getUserByUsername/${username}`);
+    return this.http.get<any>(this.baseUrl_1 + `/utilisateurs/getUserByUsername/${username}`);
   }
+
   getUserById(id: any) {
-    return this.http.get(`${this.baseUrl_1}/utilisateurs/${id}`);
+    return this.http.get(`${this.baseUrl_1}/utilisateurs/findById/${id}`);
   }
 
   updateProfil(item: UpdateProfilInfo): Observable<UpdateProfilInfo> {
@@ -118,7 +111,8 @@ export class AuthService {
   }
 
   updateUsername(item: UpdateUsernameInfo): Observable<UpdateUsernameInfo> {
-    return this.http.patch<UpdateUsernameInfo>("//localhost:8081/alAmine/updateUsername", {
+    //  return this.http.patch<UpdateUsernameInfo>("//localhost:8081/alAmine/updateUsername", {
+    return this.http.patch<UpdateUsernameInfo>(`${this.baseUrl_1}/utilisateurs/updateUsername`, {
       username: item.username,
       newUsername: item.newUsername
     }, httpOptions);
@@ -126,11 +120,20 @@ export class AuthService {
   }
 
   updatePassword(item: UpdatePasswordInfo): Observable<UpdatePasswordInfo> {
-    return this.http.patch<UpdatePasswordInfo>("//localhost:8081/alAmine/updatePassword", {
+  //  return this.http.patch<UpdatePasswordInfo>("//localhost:8081/alAmine/updatePassword", {
+    return this.http.patch<UpdatePasswordInfo>(`${this.baseUrl_1}/utilisateurs/updatePassword/`, {
       username: item.username,
       oldPassword: item.oldPassword,
       newPassword: item.newPassword
     }, httpOptions);
+  }
+
+  activatedUser(id: number, isActive: boolean): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    let data = {"isActive":isActive};
+    return this.http.patch(`${this.baseUrl_1}/utilisateurs/activatedUser/`+id+'?isActive='+data.isActive, {headers: headers});
+
   }
 
   handleError(error: HttpErrorResponse) {

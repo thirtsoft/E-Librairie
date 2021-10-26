@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Employe } from '../models/employe';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+
+import { Employe } from '../models/employe';
+
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
 //  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -22,6 +24,7 @@ export class EmployeService {
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
@@ -32,29 +35,32 @@ export class EmployeService {
 
   constructor(private http: HttpClient) { }
 
-  getAllEmployes(): Observable<any> {
+  getAllEmployes(): Observable<Employe[]> {
+    return this.http.get<Employe[]>(`${this.baseUrl}/employes/all`);
+  }
 
-    return this.http.get(`${this.baseUrl}/employes`);
+  getAllEmployesOrderDesc(): Observable<Employe[]> {
+    return this.http.get<Employe[]>(`${this.baseUrl}/employes/allEmployeOrderDesc`);
   }
 
   getEmployeByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/employes/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/employes/findById/`+id).toPromise();
   }
 
-  public getEmployeById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/employes/${id}`);
+  public getEmployeById(id: number): Observable<Employe> {
+    return this.http.get<Employe>(`${this.baseUrl}/employes/findById/${id}`);
   }
-
 
   createEmploye(info: Employe): Observable<Employe> {
-    return this.http.post<Employe>(`${this.baseUrl}/employes`, info);
+    return this.http.post<Employe>(`${this.baseUrl}/employes/create`, info);
   }
-  updateEmploye(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/employes/${id}`, value);
+
+  updateEmploye(id: number, value: any): Observable<Employe> {
+    return this.http.put<Employe>(`${this.baseUrl}/employes/update/${id}`, value);
   }
 
   deleteEmploye(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/employes/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/employes/delete/${id}`, { responseType: 'text' });
   }
 
 }

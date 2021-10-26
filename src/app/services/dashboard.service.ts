@@ -7,28 +7,22 @@ import { HttpClient } from '@angular/common/http';
 import { CommandeClient } from '../models/commande-client';
 import { Client } from '../models/client';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
 
-/*   private baseUrl_Seller = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
+  private baseUrl = environment.apiBaseUrl;
 
-  private baseUrl_Creance = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+/*   private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
 
-  private baseUrl_Com = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+
+  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
  */
 
-  private baseUrl_Seller = 'http://localhost:8081/apiSeller';
-
-  private baseUrl_Creance = 'http://localhost:8081/alAmine';
-
-  private baseUrl_Com = 'http://localhost:8081/prodApi';
-
- // private baseUrl_Custom = 'http://localhost:8081/prodApi';
-
- // private baseUrl_Prod = 'http://localhost:8081/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -39,9 +33,10 @@ export class DashboardService {
   generatedNumber;
   id;
 
-  public dataForm:  FormGroup;
+  dataForm:  FormGroup;
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
@@ -55,89 +50,95 @@ export class DashboardService {
   ) { }
 
   getNumberOfProduitByScategorie(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/searchCountProduitsByStock`);
+    return this.http.get(`${this.baseUrl}/produits/searchCountProduitsByStock`);
   }
 
   getNumberOfProductByStock(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/countProduitsByStock`);
+    return this.http.get(`${this.baseUrl}/produits/countProduitsByStock`);
   }
 
   getNumberOfProductWhenStockEqualStockInit(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/countProduitsWhenQStockEqualStockInit`);
+    return this.http.get(`${this.baseUrl}/produits/countProduitsWhenQStockEqualStockInit`);
   }
 
   getNumberOfProductWhenStockInfStockInit(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/countProduitsWhenQStockInfStockInit`);
+    return this.http.get(`${this.baseUrl}/produits/countProduitsWhenQStockInfStockInit`);
   }
 
   getNumberOfCommandes(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/NumberOfCommande`);
+    return this.http.get(`${this.baseUrl}/commandes/NumberOfCommande`);
   }
 
   getNumberOfVentesByDay(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Seller}/NumberOfVenteByDay`);
+    return this.http.get(`${this.baseUrl}/ventes/NumberOfVenteByDay`);
   }
 
   getNumbersOfClients(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/NumberOfClients`);
+    return this.http.get(`${this.baseUrl}/clients/NumberOfClients`);
   }
 
   getNumbersOfFournisseurs(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Creance}/countFournisseurs`);
+    return this.http.get(`${this.baseUrl}/fournisseurs/countFournisseurs`);
   }
 
   getSumTotalOfCommandes(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/NumbersOfCommandes`);
+    return this.http.get(`${this.baseUrl}/commandes/NumbersOfCommandes`);
   }
 
   getSumTotalOfVentes(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Seller}/SumsOfVentes`);
+    return this.http.get(`${this.baseUrl}/ventes/SumsOfVentes`);
   }
 
   getSumsOfVentesByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Seller}/SumsOfVentesByMonth`);
+    return this.http.get(`${this.baseUrl}/ventes/SumsOfVentesByMonth`);
   }
 
   getSumsOfVentesByYear(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Seller}/SumsOfVentesByYear`);
+    return this.http.get(`${this.baseUrl}/ventes/SumsOfVentesByYear`);
   }
 
   getSumsOfCommandesByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/SumsOfCommandesByMonth`);
+    return this.http.get(`${this.baseUrl}/ventes/SumsOfCommandesByMonth`);
   }
 
   getSumsOfCommandesByYear(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/SumsOfCommandesByYear`);
+    return this.http.get(`${this.baseUrl}/commandes/SumsOfCommandesByYear`);
   }
 
   getSumListOfCreancesByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Creance}/sumTotalOfCreanceByMonth`);
+    return this.http.get(`${this.baseUrl}/creances/sumTotalOfCreanceByMonth`);
   }
 
   getNumberTotalOfCommandeByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/searchNumberOfCommandeByMonth`);
+    return this.http.get(`${this.baseUrl}/commandes/searchNumberOfCommandeByMonth`);
   }
 
   getNumberTotalOfVenteByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Seller}/searchNumberOfVenteByMonth`);
+    return this.http.get(`${this.baseUrl}/ventes/searchNumberOfVenteByMonth`);
   }
 
   getSumTotalOfCommandeByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Com}/searchSumCommandeByMonth`);
+    return this.http.get(`${this.baseUrl}/commandes/searchSumCommandeByMonth`);
   }
 
   getSumTotalOfVenteByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Seller}/searchSumVenteByMonth`);
+    return this.http.get(`${this.baseUrl}/ventes/searchSumVenteByMonth`);
   }
 
   getSumTotalOfVenteByYear(): Observable<any> {
-    return this.http.get(`${this.baseUrl_Seller}/searchSumVenteByYears`);
+    return this.http.get(`${this.baseUrl}/ventes/searchSumVenteByYears`);
+  }
+
+  getSumMontantTotalOfChargeByMonth(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/charges/sumMontantTotalChargeByMonth`);
   }
 
   generateNumCommande(): Observable<any> {
   //  return this.http.get("http://localhost:8081/prodApi/generateCodeCommand");
 
-    return this.http.get("http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/generateCodeCommand");
+    return this.http.get(`${this.baseUrl}/commandes/searchSumVenteByYears`);
+
+  //  return this.http.get("http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/generateCodeCommand");
 
   }
 

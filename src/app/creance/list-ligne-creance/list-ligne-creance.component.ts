@@ -46,7 +46,7 @@ export class ListLigneCreanceComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllLigneCreances().subscribe(
+    this.crudApi.getAllLigneCreancesOrderDesc().subscribe(
       response =>{
         this.listDataCreance = response;
         console.log(response);
@@ -72,8 +72,9 @@ export class ListLigneCreanceComponent implements OnInit {
   }
 
   getListLigneCreances() {
-    this.crudApi.getAllLigneCreances().subscribe(
-      response =>{this.listDataCreance = response;
+    this.crudApi.getAllLigneCreancesOrderDesc().subscribe(
+      response =>{
+        this.listDataCreance = response;
       }
     );
   }

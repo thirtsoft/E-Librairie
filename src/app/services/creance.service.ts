@@ -3,17 +3,17 @@ import { Creance } from '../models/creance';
 import { FormGroup } from '@angular/forms';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreanceService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
 //  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -25,25 +25,31 @@ export class CreanceService {
   refCreance;
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
 
   constructor(private http: HttpClient) { }
 
-  getAllCreances(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/creances`);
+  getAllCreances(): Observable<Creance[]> {
+    return this.http.get<Creance[]>(`${this.baseUrl}/creances/all`);
+  }
+
+  getAllCreancesOrderDesc(): Observable<Creance[]> {
+    return this.http.get<Creance[]>(`${this.baseUrl}/creances/allCreanceOrderDesc`);
   }
 
   getCreancetByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/creances/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/creances/findById/`+id).toPromise();
   }
 
   public getCreanceById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/creances/${id}`);
+    return this.http.get(`${this.baseUrl}/creances/findById/${id}`);
   }
 
   /* createCreance(info: Object): Observable<Object> {
@@ -55,7 +61,7 @@ export class CreanceService {
   }
 
   updateCreance(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/creances/${id}`, value);
+    return this.http.put(`${this.baseUrl}/creances/update/${id}`, value);
   }
 
   updateStatusCreance(id: number, status: string): Observable<any> {
@@ -63,9 +69,11 @@ export class CreanceService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
     let data = {"status":status};
 
+    return this.http.patch<any>(`${this.baseUrl}/creances/setCreanceOnlyStatus/`+id+"?status="+data.status, {headers: headers});
+
   //  return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
 
-    return this.http.patch<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
+  //  return this.http.patch<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/setCreanceOnlyStatus/"+id+"?status="+data.status, {headers: headers});
   }
 
   updateAvanceCreance(id: number, avanceCreance: number): Observable<any> {
@@ -73,18 +81,20 @@ export class CreanceService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
     let data = {"avanceCreance":avanceCreance};
 
+    return this.http.patch<any>(`${this.baseUrl}/creances/setCreanceOnlyAvanceCreance/`+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
+
   //  return this.http.patch<any>("http://localhost:8081/alAmine/setCreanceOnlyAvanceCreance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
 
-    return this.http.patch<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/setCreanceOnlyAvanceCreance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
+  //  return this.http.patch<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/setCreanceOnlyAvanceCreance/"+id+"?avanceCreance="+data.avanceCreance, {headers: headers});
 
-   }
+  }
 
   deleteCreance(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/creances/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/creances/delete/${id}`, { responseType: 'text' });
   }
 
   generateReferenceCreance(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/generateReferenceCreance`);
+    return this.http.get(`${this.baseUrl}/creances/generateReferenceCreance`);
   }
 
   getReferenceCreance() {

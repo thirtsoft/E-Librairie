@@ -5,24 +5,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import Dexie from 'dexie';
 import { OnlineofflineService } from './onlineoffline.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LigneCmdClientService {
 
-//  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
+  private baseUrl_1 = environment.apiBaseUrl;
 
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
   private db: Dexie;
   private tableLcmd: Dexie.Table<LigneCmdClient, number>;
 
   Data;
   listDataLcmd: any[] = [];
-
-
-//  private baseUrl_1 = 'http://localhost:8080/alAmine';
- // private baseUrl_1 = window["cfgApibaseUrl_1"];
 
   choixmenu : string  = 'A';
   listData : LigneCmdClient[];
@@ -41,33 +37,37 @@ export class LigneCmdClientService {
   }
 
   getAllLigneCmdClients(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/ligneCommandes`);
+    return this.http.get(`${this.baseUrl_1}/ligneCommandes/all`);
+  }
+
+  getAllLigneCmdClientsOrderDesc(): Observable<LigneCmdClient[]> {
+    return this.http.get<LigneCmdClient[]>(`${this.baseUrl_1}/ligneCommandes/allLigneCmdClientOrderDesc`);
   }
 
   getAllByNumero(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/lcomms/${id}`);
+    return this.http.get(`${this.baseUrl_1}/lcomms/findByNumero/${id}`);
   }
 
   public getLigneCmdClientId(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/ligneCommandes/${id}`);
+    return this.http.get(`${this.baseUrl_1}/ligneCommandes.findById/${id}`);
   }
 
   createLigneCmdClient(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/ligneCommandes`, info);
+    return this.http.post(`${this.baseUrl_1}/ligneCommandes/create`, info);
   }
 
   /**
    * Methode pour afficher la liste des categories par pages
    */
   public getAllLigneCmdClientByCommande(comId: number) {
-    return this.http.get(`${this.baseUrl_1}/searchListLigneCmdClientByCommandeId/${comId}`);
+    return this.http.get(`${this.baseUrl_1}/ligneCommandes/searchListLigneCmdClientByCommandeId/${comId}`);
   }
   updateLigneCmdClient(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl_1}/ligneCommandes/${id}`, value);
+    return this.http.put(`${this.baseUrl_1}/ligneCommandes/update/${id}`, value);
   }
 
   deleteLigneCmdClient(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/ligneCommandes/${id}`);
+    return this.http.delete(`${this.baseUrl_1}/ligneCommandes/delete/${id}`);
   }
 
 

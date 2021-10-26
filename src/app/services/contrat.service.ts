@@ -3,17 +3,17 @@ import { Contrat } from '../models/contrat';
 import { FormGroup } from '@angular/forms';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContratService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
 //  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu: string  = 'A';
@@ -27,25 +27,31 @@ export class ContratService {
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
 
   constructor(private http: HttpClient) { }
 
-  getAllContrats(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/contrats`);
+  getAllContrats(): Observable<Contrat[]> {
+    return this.http.get<Contrat[]>(`${this.baseUrl}/contrats/all`);
   }
+
+  getAllContratsOrderDesc(): Observable<Contrat[]> {
+    return this.http.get<Contrat[]>(`${this.baseUrl}/contrats/allContratOrderDesc`);
+  }
+
   getContratByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/contrats/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/contrats/findById/`+id).toPromise();
   }
 
   public getContratById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/contrats/${id}`, { responseType: 'text' });
+    return this.http.get(`${this.baseUrl}/contrats/findById/${id}`, { responseType: 'text' });
   }
 
-  createContrat(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/contrats`, info);
+  createContrat(info: Contrat): Observable<Contrat> {
+    return this.http.post<Contrat>(`${this.baseUrl}/contrats/create`, info);
   }
 
   public createContrat2(formData, fileContrat:File) {
@@ -53,13 +59,13 @@ export class ContratService {
     data.append('contrat',JSON.stringify(formData));
     data.append('file',fileContrat);
 
-    return this.http.post(`${this.baseUrl}/createContrats`, data,  {responseType: 'text'});
+    return this.http.post(`${this.baseUrl}/contrats/createContrats`, data,  {responseType: 'text'});
   }
 
   uploadContratFile(file: File, contId) {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
-    const req = new HttpRequest('POST', this.baseUrl+'/uploadFilePdf/'+contId, formdata, {
+    const req = new HttpRequest('POST', this.baseUrl+'/contrats/uploadFilePdf/'+contId, formdata, {
       responseType: 'text'
     });
 
@@ -70,15 +76,17 @@ export class ContratService {
   public downloadFile(pathContrat: String){
   //  return this.http.get<any>("http://localhost:8081/alAmine/downloadContratFile"+"/"+ pathContrat);
 
-    return this.http.get<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/downloadContratFile"+"/"+ pathContrat);
+    return this.http.get<any>(`${this.baseUrl}/contrats/downloadContratFile`+"/"+ pathContrat);
+
+  //  return this.http.get<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/downloadContratFile"+"/"+ pathContrat);
   }
 
-  updateContrat(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/contrats/${id}`, value);
+  updateContrat(id: number, value: any): Observable<Contrat> {
+    return this.http.put<Contrat> (`${this.baseUrl}/contrats/update/${id}`, value);
   }
 
   deleteContrat(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/contrats/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/contrats/Delete/${id}`, { responseType: 'text' });
   }
 
 }

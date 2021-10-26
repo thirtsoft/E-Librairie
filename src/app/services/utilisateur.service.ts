@@ -2,6 +2,7 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Fournisseur } from '../models/fournisseur';
 import { Utilisateur } from '../models/utilisateur';
 
@@ -10,7 +11,7 @@ import { Utilisateur } from '../models/utilisateur';
 })
 export class UtilisateurService {
 
-  public baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
 //  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
@@ -31,21 +32,24 @@ export class UtilisateurService {
   }
 
   constructor(private http: HttpClient) { }
+
   getAllUtilisateurs(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/utilisateurs`);
+    return this.http.get(`${this.baseUrl}/utilisateurs/all`);
   }
+
+  getAllUtilisateurOrderDesc(): Observable<Utilisateur[]> {
+    return this.http.get<Utilisateur[]>(`${this.baseUrl}/utilisateurs/allUtilisateurOrderDesc`);
+  }
+
+
   getUtilisateurById(id: number) {
-    return this.http.get<any>(`${this.baseUrl}/utilisateurs/${id}`);
+    return this.http.get<any>(`${this.baseUrl}/utilisateurs/findById/${id}`);
   }
 
   getPhotoUtilisateur(id: number) {
-    return this.http.get(`${this.baseUrl}/photoUser/`+ id);
+    return this.http.get(`${this.baseUrl}/utilisateurs/photoUser/`+ id);
   }
 
- /*  public getUserAvatar(id: number){
-    return this.http.get("http://localhost:8080/avatar/"+ id);
-  }
- */
   public getUserAvatar(id: number){
     return this.http.get(`${this.baseUrl}/avatar/`+ id);
   }
@@ -53,7 +57,7 @@ export class UtilisateurService {
   uploadPhotoUtilisateur(file: File, userId): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
-    const req = new HttpRequest('POST', this.baseUrl+'/uploadUserPhoto/'+userId, formdata, {
+    const req = new HttpRequest('POST', this.baseUrl+'/utilisateurs/uploadUserPhoto/'+userId, formdata, {
       reportProgress: true,
       responseType: 'text'
     });

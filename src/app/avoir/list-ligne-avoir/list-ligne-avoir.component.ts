@@ -24,11 +24,15 @@ export class ListLigneAvoirComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: LigneAvoirService, private avoirService: AvoirService,
-    public toastr: ToastrService,private dialogService: DialogService,
-    private router : Router, public fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog,
-    public dialogRef:MatDialogRef<CreateAvoirComponent>,
+  constructor(public crudApi: LigneAvoirService,
+              private avoirService: AvoirService,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              private router : Router,
+              public fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private matDialog: MatDialog,
+              public dialogRef:MatDialogRef<CreateAvoirComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -40,13 +44,14 @@ export class ListLigneAvoirComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllLigneAvoirs().subscribe(
-      response =>{
-        this.listDataAvoir = response;
-        console.log(response);
-        this.dtTrigger.next();
-      }
-    );
+    this.crudApi.getAllLigneAvoirsOrderDesc()
+      .subscribe(
+        response =>{
+          this.listDataAvoir = response;
+          console.log(response);
+          this.dtTrigger.next();
+        }
+      );
   }
 
   /**
@@ -66,10 +71,12 @@ export class ListLigneAvoirComponent implements OnInit {
   }
 
   getListLigneAvoirs() {
-    this.crudApi.getAllLigneAvoirs().subscribe(
-      response =>{this.listDataAvoir = response;
-      }
-    );
+    this.crudApi.getAllLigneAvoirsOrderDesc()
+      .subscribe(
+        response =>{
+          this.listDataAvoir = response;
+        }
+      );
   }
 
   onCreateAvoir() {

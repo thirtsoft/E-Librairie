@@ -41,7 +41,7 @@ export class ListCommandeComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllCommandeClients().subscribe(
+    this.crudApi.getAllCommandesOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
         this.dtTrigger.next();
@@ -66,7 +66,7 @@ export class ListCommandeComponent implements OnInit {
   }
 
   getListCommandeClients() {
-    this.crudApi.getAllCommandeClients().subscribe(
+    this.crudApi.getAllCommandesOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
       });

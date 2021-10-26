@@ -36,12 +36,16 @@ export class ListClientComponent implements OnDestroy, OnInit {
 
   control: FormControl = new FormControl('');
 
-  constructor(public crudApi: ClientService ,public fb: FormBuilder,
-    public toastr: ToastrService, private dialogService: DialogService, private router : Router,
-    private matDialog: MatDialog, private route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateClientComponent>,
-    ) {
+  constructor(public crudApi: ClientService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              private router : Router,
+              private matDialog: MatDialog,
+              private route: ActivatedRoute,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateClientComponent>,
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -67,11 +71,12 @@ export class ListClientComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    this.crudApi.getAllClients().subscribe(
-      response =>{
-        this.crudApi.listData = response;
-        this.dtTrigger.next();
-      }
+    this.crudApi.getAllClientsOrderDesc()
+      .subscribe(
+        response =>{
+          this.crudApi.listData = response;
+          this.dtTrigger.next();
+        }
     );
   }
 
@@ -110,9 +115,12 @@ export class ListClientComponent implements OnDestroy, OnInit {
   }
 
   getListClients() {
-    this.crudApi.getAllClients().subscribe(
-      response =>{this.crudApi.listData = response;}
-    );
+    this.crudApi.getAllClientsOrderDesc()
+      .subscribe(
+        response =>{
+          this.crudApi.listData = response;
+        }
+      );
 
   }
 

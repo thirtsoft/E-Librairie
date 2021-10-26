@@ -3,17 +3,17 @@ import { LigneAppro } from '../models/ligne-appro';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LigneApproService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
 //  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
- // private baseUrl = 'http://localhost:8080/alAmine';
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -24,33 +24,38 @@ export class LigneApproService {
   constructor(private http: HttpClient) { }
 
   getAllLigneAppros(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/ligneApprovisionnements`);
+    return this.http.get(`${this.baseUrl}/ligneApprovisionnements/all`);
+  }
+
+  getAllLigneApprosOrderDesc(): Observable<LigneAppro[]> {
+    return this.http.get<LigneAppro[]>(`${this.baseUrl}/ligneApprovisionnements/allLigneApprovisionnementOrderDesc`);
   }
 
   getAllByNumero(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/lappros/${id}`);
+    return this.http.get(`${this.baseUrl}/lappros/findByNumero/${id}`);
   }
 
   public getLigneApproId(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/ligneApprovisionnements/${id}`);
+    return this.http.get(`${this.baseUrl}/ligneApprovisionnements/findById/${id}`);
   }
 
    /**
    * Methode pour afficher la liste des categories par pages
    */
   public getAllLigneApproByAppro(approId: number) {
-    return this.http.get(`${this.baseUrl}/searchListLigneApproByApprovisionnementId/${approId}`);
+    return this.http.get(`${this.baseUrl}/ligneApprovisionnements/searchListLigneApproByApprovisionnementId/${approId}`);
   }
 
   createLigneAppro(info: LigneAppro): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/ligneApprovisionnements`, info);
+    return this.http.post(`${this.baseUrl}/ligneApprovisionnements/create`, info);
   }
+
   updateLigneAppro(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/ligneApprovisionnements/${id}`, value);
+    return this.http.put(`${this.baseUrl}/ligneApprovisionnements/update/${id}`, value);
   }
 
   deleteLigneAppro(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/ligneApprovisionnements/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/ligneApprovisionnements/delete/${id}`, { responseType: 'text' });
   }
 
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { LigneDevis } from '../models/ligne-devis';
 
 @Injectable({
@@ -9,12 +10,7 @@ import { LigneDevis } from '../models/ligne-devis';
 })
 export class LigneDevisService {
 
-  private baseUrl = 'http://localhost:8081/alAmine';
-
-//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
-
- // private baseUrl = 'http://localhost:8080/alAmine';
-  // private baseUrl = window["cfgApiBaseUrl"];
+  private baseUrl = environment.apiBaseUrl;
 
    choixmenu : string  = 'A';
    listData : LigneDevis[];
@@ -26,19 +22,23 @@ export class LigneDevisService {
 
    constructor(private http: HttpClient) { }
 
-   getAllLigneDevis(): Observable<any> {
-     return this.http.get(`${this.baseUrl}/ligneDevis`);
+   getAllLigneDevis(): Observable<LigneDevis[]> {
+     return this.http.get<LigneDevis[]>(`${this.baseUrl}/ligneDevis/all`);
    }
 
    getAllByNumero(id: number): Observable<Object> {
      return this.http.get(`${this.baseUrl}/ligneDevis/${id}`);
    }
 
+   getAllLigneDevissOrderDesc(): Observable<LigneDevis[]> {
+    return this.http.get<LigneDevis[]>(`${this.baseUrl}/ligneDevis/allLigneDevisOrderDesc`);
+  }
+
     /**
    * Methode pour afficher la liste des categories par pages
    */
   public getAllLigneDevisByDevis(devId: number) {
-    return this.http.get(`${this.baseUrl}/searchListLigneDevisByDevisId/${devId}`);
+    return this.http.get(`${this.baseUrl}/ligneDevis/searchListLigneDevisByDevisId/${devId}`);
   }
 
   getLigneDevisId(id: number): Observable<Object> {
@@ -46,15 +46,15 @@ export class LigneDevisService {
    }
 
    createLigneDevis(info: Object): Observable<Object> {
-     return this.http.post(`${this.baseUrl}/ligneDevis`, info);
+     return this.http.post(`${this.baseUrl}/ligneDevis/create`, info);
    }
 
    updateLigneDevis(id: number, value: any): Observable<Object> {
-     return this.http.put(`${this.baseUrl}/ligneDevis/${id}`, value);
+     return this.http.put(`${this.baseUrl}/ligneDevis/update/${id}`, value);
    }
 
    deleteLigneDevis(id: number): Observable<any> {
-     return this.http.delete(`${this.baseUrl}/ligneDevis/${id}`);
+     return this.http.delete(`${this.baseUrl}/ligneDevis/delete/${id}`);
    }
 
 }

@@ -52,7 +52,7 @@ export class ListLigneDevisComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllLigneDevis().subscribe(
+    this.crudApi.getAllLigneDevissOrderDesc().subscribe(
       response =>{
         this.listData = response;
         console.log(response);
@@ -83,7 +83,7 @@ export class ListLigneDevisComponent implements OnInit {
   }
 
   getListLigneDevis() {
-    this.crudApi.getAllLigneDevis().subscribe(
+    this.crudApi.getAllLigneDevissOrderDesc().subscribe(
       response =>{this.listData = response;
       }
     );

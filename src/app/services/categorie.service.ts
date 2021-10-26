@@ -21,7 +21,9 @@ import { LigneCreance } from '../models/ligne-creance';
 import { Appro } from '../models/appro';
 import { LigneAppro } from '../models/ligne-appro';
 import { Fournisseur } from '../models/fournisseur';
-import { environment } from 'src/environments/environment';
+
+import { environment } from './../../environments/environment';
+
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -30,11 +32,13 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class CategorieService {
 
+  private baseUrl_1 = environment.apiBaseUrl;
+
 
 //  private baseUrl = environment.apiBaseUrl;
 
   private baseUrl = 'http://localhost:8081/api';
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
+//  private baseUrl_1 = 'http://localhost:8081/prodApi';
   private baseUrl_2 = 'http://localhost:8081/apiSeller';
 
 
@@ -69,10 +73,8 @@ export class CategorieService {
   listDataLigneVente: any[] = [];
 
 
-
-//  private baseUrl = 'http://localhost:8080/alAmine';
 //  private baseUrl = window["cfgApiBaseUrl"];
- // private baseUrl = '/api/categories';
+
   choixmenu : string  = 'A';
   listData : Categorie[];
 
@@ -111,24 +113,28 @@ export class CategorieService {
   }
 
 
-  getAllCategories(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/categories`);
+  getAllCategories(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(`${this.baseUrl_1}/categories/all`);
+  }
+
+  getAllCategoriesOrderDesc(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(`${this.baseUrl}/categorieCharges/allCategoryOrderDesc`);
   }
 
   getCategorieByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/categories/`+id).toPromise();
+    return this.http.get(`${this.baseUrl_1}/categories/findById/`+id).toPromise();
   }
 
   public getCategorieById(id: number): Observable<Categorie> {
-    return this.http.get<Categorie>(`${this.baseUrl}/categories/${id}`);
+    return this.http.get<Categorie>(`${this.baseUrl_1}/categories/findById/${id}`);
   }
 
   saveCategorie(info: Categorie): Observable<Categorie> {
-    return this.http.post<Categorie>(`${this.baseUrl}/categories`, info);
+    return this.http.post<Categorie>(`${this.baseUrl_1}/categories/create`, info);
   }
 
   public createCategorieAPI(info: Categorie) {
-    this.http.post(`${this.baseUrl}/categories`, info)
+    this.http.post(`${this.baseUrl_1}/categories/create`, info)
       .subscribe(
         ()=> alert('Categorie ajouté avec succes'),
         (err) => console.log('Erreur lors de ajout')
@@ -136,11 +142,11 @@ export class CategorieService {
   }
 
   updateCategorie(id: number, value: Categorie): Observable<Categorie> {
-    return this.http.put<Categorie>(`${this.baseUrl}/categories/${id}`, value);
+    return this.http.put<Categorie>(`${this.baseUrl_1}/categories/update/${id}`, value);
   }
 
   deleteCategorie(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/categories/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl_1}/categories/delete/${id}`, { responseType: 'text' });
   }
 
   /**
@@ -156,7 +162,7 @@ export class CategorieService {
 
     const httpOptions = { headers: headers };
 
-    return this.http.post(`${this.baseUrl}/uploadCategorie`, formData, httpOptions);
+    return this.http.post(`${this.baseUrl_1}/categories/uploadCategorie`, formData, httpOptions);
 
   }
 
@@ -165,7 +171,7 @@ export class CategorieService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl}/categories/download/categories.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+    this.http.get(`${this.baseUrl_1}/categories/categories/download/categories.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
       FileSaver.saveAs(blob, 'categories.xlsx');
     });
@@ -175,7 +181,7 @@ export class CategorieService {
    * methode permettant de generer un pdf depuis API Spring boot
    */
   exportPdfCategories(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/categories/createCategoriePdf`, {responseType: 'blob'});
+    return this.http.get(`${this.baseUrl_1}/categories/createCategoriePdf`, {responseType: 'blob'});
   }
   // Methode pour Offline&Online et DexieJS
 

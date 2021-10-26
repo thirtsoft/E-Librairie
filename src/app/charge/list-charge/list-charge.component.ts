@@ -29,12 +29,17 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ChargeService, private dialogService: DialogService, public toastr: ToastrService,
-    public fb: FormBuilder, private router : Router, private datePipe : DatePipe,
-    private matDialog: MatDialog, private route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateChargeComponent>,
-    ) {
+  constructor(public crudApi: ChargeService,
+              private dialogService: DialogService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              private datePipe : DatePipe,
+              private matDialog: MatDialog,
+              private route: ActivatedRoute,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateChargeComponent>,
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -61,7 +66,7 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    this.crudApi.getAllCharges().subscribe(
+    this.crudApi.getAllChargesOrderDesc().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
@@ -103,8 +108,10 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   }
 
   getListCharges() {
-    this.crudApi.getAllCharges().subscribe(
-      response =>{this.listData = response;}
+    this.crudApi.getAllChargesOrderDesc().subscribe(
+      response =>{
+        this.listData = response;
+      }
     );
 
   }

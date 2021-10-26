@@ -43,11 +43,15 @@ export class ListLigneApproComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: LigneApproService, private dialogService: DialogService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateLigneApproComponent>,
-    ) { }
+  constructor(public crudApi: LigneApproService,
+              private dialogService: DialogService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateLigneApproComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -58,13 +62,14 @@ export class ListLigneApproComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllLigneAppros().subscribe(
-      response =>{
-        this.listData = response;
-        console.log(response);
-        this.dtTrigger.next();
-      }
-    );
+    this.crudApi.getAllLigneApprosOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+          console.log(response);
+          this.dtTrigger.next();
+        }
+      );
 
     this.appro = new Appro();
     this.produit = this.produit;
@@ -88,32 +93,19 @@ export class ListLigneApproComponent implements OnInit {
   }
 
   getListLigneAppros() {
-    this.crudApi.getAllLigneAppros().subscribe(
-      response =>{this.listData = response;
-      }
-    );
+    this.crudApi.getAllLigneApprosOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
   }
 
   onCreateLigneAppro() {
-    this.crudApi.choixmenu = "A";
-  //  this.router.navigateByUrl("alamine/approvisionnements/approvisionnement");
+    this.crudApi.choixmenu == 'A';
     this.router.navigateByUrl("home/approvisionnement");
 
   }
-
-/*  deleteLigneAppro(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Détails Appro ?')) {
-    this.crudApi.deleteLigneAppro(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Détails Appro supprimé avec succès!');
-          this.rerender();
-          this.getListLigneAppros();
-      },
-        error => console.log(error));
-    }
-  } */
 
   deleteLigneAppro(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')

@@ -3,18 +3,16 @@ import { Stock } from '../models/stock';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockService {
 
-//  private baseUrl = 'http://localhost:8081/alAmine';
 
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
- // private baseUrl = 'http://localhost:8080/alAmine';
- // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : Stock[];
@@ -22,6 +20,7 @@ export class StockService {
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
@@ -33,26 +32,27 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
   getAllStocks(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/stocks`);
+    return this.http.get(`${this.baseUrl}/stocks/qll`);
   }
 
   public getStockById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/stocks/${id}`);
+    return this.http.get(`${this.baseUrl}/stocks/findById/${id}`);
   }
 
   exportPdfArticle(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/createPdf`,{responseType: 'blob'});
+    return this.http.get(`${this.baseUrl}/produits/createPdf`,{responseType: 'blob'});
   }
 
   createStock(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/stocks`, info);
+    return this.http.post(`${this.baseUrl}/stocks/create`, info);
   }
+
   updateStock(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/stocks/${id}`, value);
+    return this.http.put(`${this.baseUrl}/stocks/update/${id}`, value);
   }
 
   deleteStock(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/stocks/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/stocks/delete/${id}`, { responseType: 'text' });
   }
 
 }

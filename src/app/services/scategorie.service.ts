@@ -6,6 +6,7 @@ import { Scategorie } from '../models/scategorie';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import { environment } from 'src/environments/environment';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -14,14 +15,12 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ScategorieService {
 
-  private baseUrl_1 = 'http://localhost:8081/prodApi';
-
-//  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
+  private baseUrl_1 = environment.apiBaseUrl;
 
   alAmine
 
   //  private baseUrl = window["cfgApiBaseUrl"];
-  // private baseUrl = '/api/categories';
+
    choixmenu : string  = 'A';
    listData : Scategorie[];
    public formData:  Scategorie;
@@ -29,9 +28,11 @@ export class ScategorieService {
    public dataForm:  FormGroup;
 
    private listners = new Subject<any>();
-  listen(): Observable<any> {
+
+   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
@@ -40,19 +41,23 @@ export class ScategorieService {
 
    getAllScategories(): Observable<any> {
   //   return this.http.get('http://localhost:8081/prodApi/scategories');
-     return this.http.get(`${this.baseUrl_1}/scategories`);
+     return this.http.get(`${this.baseUrl_1}/scategories/all`);
    }
 
+   getAllScategorieOrderDesc(): Observable<Scategorie[]> {
+    return this.http.get<Scategorie[]>(`${this.baseUrl_1}/scategories/allScategorieOrderDesc`);
+  }
+
    getScategorieByID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/scategories/`+id).toPromise();
+    return this.http.get(`${this.baseUrl_1}/scategories/findById/`+id).toPromise();
   }
 
    public getScategorieById(id: number): Observable<Object> {
-     return this.http.get(`${this.baseUrl_1}/scategories/${id}`);
+     return this.http.get(`${this.baseUrl_1}/scategories/findById/${id}`);
    }
 
    getListScategoriesByCategory(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/searchListScategoriesByCategoryId/?catId=${id}`);
+    return this.http.get(`${this.baseUrl_1}/scategories/searchListScategoriesByCategoryId/?catId=${id}`);
   }
 
    getListScategoriesByCategoryId(id: number){
@@ -63,15 +68,15 @@ export class ScategorieService {
   }
 
    createScategorie(info: Object): Observable<Object> {
-     return this.http.post(`${this.baseUrl_1}/scategories`, info);
+     return this.http.post(`${this.baseUrl_1}/scategories/create`, info);
    }
 
    updateScategorie(id: number, value: any): Observable<Object> {
-     return this.http.put(`${this.baseUrl_1}/scategories/${id}`, value);
+     return this.http.put(`${this.baseUrl_1}/scategories/update/${id}`, value);
    }
 
    deleteScategorie(id: number): Observable<any> {
-     return this.http.delete(`${this.baseUrl_1}/scategories/${id}`, { responseType: 'text' });
+     return this.http.delete(`${this.baseUrl_1}/scategories/delete/${id}`, { responseType: 'text' });
    }
 
    /**

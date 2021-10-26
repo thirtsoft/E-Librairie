@@ -52,11 +52,14 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   logObject: any;
   array;
 
-  constructor(public crudApi: ProduitService, private dialogService: DialogService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateArticleComponent>,
+  constructor(public crudApi: ProduitService,
+              private dialogService: DialogService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateArticleComponent>,
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
@@ -74,12 +77,13 @@ export class ListArticleComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllProduits().subscribe(
-      response =>{
-        this.crudApi.listData = response;
-        this.dtTrigger.next();
-      }
-    );
+    this.crudApi.getAllProductsOrderDesc()
+      .subscribe(
+        response =>{
+          this.crudApi.listData = response;
+          this.dtTrigger.next();
+        }
+      );
   }
 
   /**
@@ -99,9 +103,12 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   getListArticles() {
-    this.crudApi.getAllProduits().subscribe(
-      response =>{this.listData = response;
-      });
+    this.crudApi.getAllProductsOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
   }
 
   onCreateArticle(){

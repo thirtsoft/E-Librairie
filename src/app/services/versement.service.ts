@@ -3,18 +3,15 @@ import { Versement } from '../models/versement';
 import { FormGroup } from '@angular/forms';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VersementService {
 
-//  private baseUrl = 'http://localhost:8081/alAmine';
+  private baseUrl = environment.apiBaseUrl;
 
-  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
-
- // private baseUrl = 'http://localhost:8080/alAmine';
- // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : Versement[];
@@ -22,6 +19,7 @@ export class VersementService {
   public dataForm:  FormGroup;
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
@@ -33,19 +31,23 @@ export class VersementService {
   constructor(private http: HttpClient) { }
 
   getAllVersements(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/versements`);
+    return this.http.get(`${this.baseUrl}/versements/all`);
+  }
+
+  getAllVersementsOrderDesc(): Observable<Versement[]> {
+    return this.http.get<Versement[]>(`${this.baseUrl}/versements/allVersementderDesc`);
   }
 
   getVersementByID(id:number):any {
-    return this.http.get(`${this.baseUrl}/versements/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/versements/findById/`+id).toPromise();
   }
 
   public getVersementById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/versements/${id}`);
+    return this.http.get(`${this.baseUrl}/versements/findById/${id}`);
   }
 
   createVersement(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/versements`, info);
+    return this.http.post(`${this.baseUrl}/versements/create`, info);
   }
 
   public createVersementWithFile(versement, file:File) {
@@ -53,7 +55,7 @@ export class VersementService {
     data.append('versement',JSON.stringify(versement));
     data.append('file',file);
 
-    return this.http.post(`${this.baseUrl}/createVersement`, data, {responseType: 'text'});
+    return this.http.post(`${this.baseUrl}/versements/createVersement`, data, {responseType: 'text'});
   }
 /*
   public createVersementWithFile(formData, fileContrat:File) {
@@ -68,7 +70,7 @@ export class VersementService {
   uploadVersementFile(file: File, verId) {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
-    const req = new HttpRequest('POST', this.baseUrl+'/uploadPdfFile/'+verId, formdata, {
+    const req = new HttpRequest('POST', this.baseUrl+'/versements/uploadPdfFile/'+verId, formdata, {
       responseType: 'text'
     });
 
@@ -78,19 +80,22 @@ export class VersementService {
   public downloadFile(pathContrat: String){
   //  return this.http.get<any>("http://localhost:8081/alAmine/downloadVersementFile"+"/"+ pathContrat);
 
-    return this.http.get<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/downloadVersementFile"+"/"+ pathContrat);
+    return this.http.get<any>(`${this.baseUrl}/versements/downloadVersementFile/`+"/"+ pathContrat);
+
+  //  return this.http.get<any>("http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine/downloadVersementFile"+"/"+ pathContrat);
   }
 
 
   updateVersement(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/versements/${id}`, value);
+    return this.http.put(`${this.baseUrl}/versements/update/${id}`, value);
   }
+
   deleteVersement(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/versements/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/versements/delete/${id}`, { responseType: 'text' });
   }
 
   listOfVersementeByEmploye(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchListVersementsByEmployeId`);
+    return this.http.get(`${this.baseUrl}/versements/searchListVersementsByEmployeId`);
   }
 
 }

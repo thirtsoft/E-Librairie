@@ -79,7 +79,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    this.crudApi.getAllCategories().subscribe(
+    this.crudApi.getAllCategoriesOrderDesc().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
@@ -120,9 +120,12 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   }
 
   getListCategories() {
-    this.crudApi.getAllCategories().subscribe(
-      response =>{this.listData = response;}
-    );
+    this.crudApi.getAllCategoriesOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
 
   }
 
@@ -147,22 +150,6 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateCategorieComponent, dialogConfig);
   }
 
-/*
-  deleteCategorie(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cet Categorie ?')) {
-    this.crudApi.deleteCategorie(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Categorie supprimé avec succès!');
-          this.rerender();
-          this.getListCategories();
-      },
-        error => console.log(error));
-    }
-
-  } */
-
   deleteCategorie(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
@@ -180,12 +167,6 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     });
 
   }
-
-  /*
-  editCategorie(item : Categorie) {
-    this.router.navigateByUrl('categories/'+item.id);
-  }
-*/
 
   uploadExcelFile() {
     let formData = new FormData();

@@ -34,18 +34,23 @@ export class ListContratComponent implements OnDestroy, OnInit {
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ContratService,  private dialogService: DialogService,
-     public toastr: ToastrService, private datePipe: DatePipe,
-    public fb: FormBuilder, private router : Router, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any, private currentRoute: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateContratComponent>,
-    ) {
+  constructor(public crudApi: ContratService,
+              private dialogService: DialogService,
+              public toastr: ToastrService,
+              private datePipe: DatePipe,
+              public fb: FormBuilder,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private currentRoute: ActivatedRoute,
+              public dialogRef:MatDialogRef<CreateContratComponent>,
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
         this.getListContrats();
       })
-     }
+  }
 
   ngOnInit() {
     this.dtOptions = {
@@ -56,7 +61,7 @@ export class ListContratComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllContrats().subscribe(
+    this.crudApi.getAllContratsOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
         this.dtTrigger.next();
@@ -82,8 +87,10 @@ export class ListContratComponent implements OnDestroy, OnInit {
   }
 
   getListContrats() {
-    this.crudApi.getAllContrats().subscribe(
-      response =>{this.crudApi.listData = response;}
+    this.crudApi.getAllContratsOrderDesc().subscribe(
+      response =>{
+        this.crudApi.listData = response;
+      }
     );
   }
 

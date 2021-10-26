@@ -43,7 +43,7 @@ export class ListVenteComponent implements OnDestroy, OnInit {
       order: [[0, 'desc']]
     };
 
-    this.crudApi.getAllVentes().subscribe(
+    this.crudApi.getAllVentesOrderDesc().subscribe(
       response =>{
         this.listData = response;
         console.log(this.listData);
@@ -87,8 +87,10 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   }
 
   getListVentes() {
-    this.crudApi.getAllVentes().subscribe(
-      response =>{this.listData = response;}
+    this.crudApi.getAllVentesOrderDesc().subscribe(
+      response =>{
+        this.listData = response;
+      }
     );
   }
 
