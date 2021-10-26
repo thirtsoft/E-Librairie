@@ -4,7 +4,7 @@ import { LigneAppro } from './ligne-appro';
 
 export class Appro {
   id: number;
-  ode: number;
+  code: number;
   total: number;
   montantAvance: number;
   totalAppro: number;

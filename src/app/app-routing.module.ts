@@ -1,3 +1,9 @@
+import { ListHistoriqueDevisComponent } from './historique/list-historique-devis/list-historique-devis.component';
+import { ListHistoriqueLoginComponent } from './historique/list-historique-login/list-historique-login.component';
+import { ListHistoriqueApproComponent } from './historique/list-historique-appro/list-historique-appro.component';
+import { ListHistoriqueAvoirComponent } from './historique/list-historique-avoir/list-historique-avoir.component';
+import { ListHistoriqueVenteComponent } from './historique/list-historique-vente/list-historique-vente.component';
+import { ListHistoriqueCommandeComponent } from './historique/list-historique-commande/list-historique-commande.component';
 import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -88,6 +94,7 @@ import { ListArticleWithBarArcodeComponent } from './article/list-article-with-b
 import { CreateVentewithQrcodeBarCodeComponent } from './vente/create-ventewith-qrcode-bar-code/create-ventewith-qrcode-bar-code.component';
 import { CreateCommandewithQrcodeBarCodeComponent } from './commande/create-commandewith-qrcode-bar-code/create-commandewith-qrcode-bar-code.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListHistoriqueCreanceComponent } from './historique/list-historique-creance/list-historique-creance.component';
 
 
 const routes: Routes = [
@@ -302,7 +309,16 @@ const routes: Routes = [
 
     { path: 'utilisateurs', component: ListUtilisateurComponent },
 
-   /*  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, */
+
+    { path: 'historiqueCommandes', component: ListHistoriqueCommandeComponent },
+    { path: 'historiqueVentes', component: ListHistoriqueVenteComponent },
+    { path: 'historiqueCreances', component: ListHistoriqueCreanceComponent },
+    { path: 'historiqueAvoirs', component: ListHistoriqueAvoirComponent },
+    { path: 'historiqueAppro', component: ListHistoriqueApproComponent },
+    { path: 'historiqueDevis', component: ListHistoriqueDevisComponent },
+    { path: 'historiqueLogins', component: ListHistoriqueLoginComponent },
+
+
     { path: '**', component: PageNotFoundComponent },
 
 

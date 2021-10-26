@@ -133,6 +133,13 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
 import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/create-utilisateur.component';
 import { ActivatedUserComponent } from './authentication/activated-user/activated-user.component';
+import { ListHistoriqueApproComponent } from './historique/list-historique-appro/list-historique-appro.component';
+import { ListHistoriqueCommandeComponent } from './historique/list-historique-commande/list-historique-commande.component';
+import { ListHistoriqueCreanceComponent } from './historique/list-historique-creance/list-historique-creance.component';
+import { ListHistoriqueVenteComponent } from './historique/list-historique-vente/list-historique-vente.component';
+import { ListHistoriqueAvoirComponent } from './historique/list-historique-avoir/list-historique-avoir.component';
+import { ListHistoriqueDevisComponent } from './historique/list-historique-devis/list-historique-devis.component';
+import { ListHistoriqueLoginComponent } from './historique/list-historique-login/list-historique-login.component';
 
 
 @NgModule({
@@ -244,6 +251,13 @@ import { ActivatedUserComponent } from './authentication/activated-user/activate
     ListUtilisateurComponent,
     CreateUtilisateurComponent,
     ActivatedUserComponent,
+    ListHistoriqueApproComponent,
+    ListHistoriqueCommandeComponent,
+    ListHistoriqueCreanceComponent,
+    ListHistoriqueVenteComponent,
+    ListHistoriqueAvoirComponent,
+    ListHistoriqueDevisComponent,
+    ListHistoriqueLoginComponent,
 
   ],
   imports: [
