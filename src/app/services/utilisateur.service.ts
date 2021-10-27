@@ -2,16 +2,17 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Fournisseur } from '../models/fournisseur';
 import { Utilisateur } from '../models/utilisateur';
+
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilisateurService {
 
-  private baseUrl = environment.apiBaseUrl;
+  public baseUrl = environment.apiBaseUrl;
 
 //  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
@@ -41,7 +42,6 @@ export class UtilisateurService {
     return this.http.get<Utilisateur[]>(`${this.baseUrl}/utilisateurs/allUtilisateurOrderDesc`);
   }
 
-
   getUtilisateurById(id: number) {
     return this.http.get<any>(`${this.baseUrl}/utilisateurs/findById/${id}`);
   }
@@ -51,7 +51,11 @@ export class UtilisateurService {
   }
 
   public getUserAvatar(id: number){
-    return this.http.get(`${this.baseUrl}/avatar/`+ id);
+    return this.http.get(`${this.baseUrl}/utilisateurs/avatar/`+ id);
+  }
+
+  updateUtilisateur(id: number, value: Utilisateur): Observable<Utilisateur> {
+    return this.http.put<Utilisateur>(`${this.baseUrl}/utilisateurs/update/${id}`, value);
   }
 
   uploadPhotoUtilisateur(file: File, userId): Observable<HttpEvent<{}>> {

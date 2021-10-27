@@ -140,6 +140,7 @@ import { ListHistoriqueVenteComponent } from './historique/list-historique-vente
 import { ListHistoriqueAvoirComponent } from './historique/list-historique-avoir/list-historique-avoir.component';
 import { ListHistoriqueDevisComponent } from './historique/list-historique-devis/list-historique-devis.component';
 import { ListHistoriqueLoginComponent } from './historique/list-historique-login/list-historique-login.component';
+import { ViewUtilisateurComponent } from './authentication/view-utilisateur/view-utilisateur.component';
 
 
 @NgModule({
@@ -258,6 +259,7 @@ import { ListHistoriqueLoginComponent } from './historique/list-historique-login
     ListHistoriqueAvoirComponent,
     ListHistoriqueDevisComponent,
     ListHistoriqueLoginComponent,
+    ViewUtilisateurComponent,
 
   ],
   imports: [
@@ -294,7 +296,8 @@ import { ListHistoriqueLoginComponent } from './historique/list-historique-login
     CreateCategorieComponent, CreateScategorieComponent, CreateArticleComponent, CreateArticleWithBarcodeComponent, CreateClientComponent,
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
     CreateAvoirComponent, CreateChargeComponent, CreateCommandeComponent, CreateApproComponent,
-    CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent,
+    CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent, UpdatePasswordComponent,
+    ActivatedUserComponent, CreateUtilisateurComponent,
     UpdateUsernameComponent, CreateVentewithQrcodeBarCodeComponent,
     CreateCommandewithQrcodeBarCodeComponent, DashboardComponent
   ]

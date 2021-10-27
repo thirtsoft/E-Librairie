@@ -1,34 +1,47 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-2">
-    <h1>Modifier Username</h1>
-    <!-- <form [formGroup]="this.crudApi.listData" (ngSubmit)="onSubmit()"> -->
-    <form #addUsernameForm="ngForm" name="form" (ngSubmit)="addUsernameForm.form.valid && onSubmit()">
+    <h3>Modifier Votre Nom Utilisateur</h3>
+    <form
+      #addUsernameForm="ngForm"
+      name="form"
+      (ngSubmit)="addUsernameForm.form.valid && onSubmit()"
+    >
+      <div class="form-group">
+        <label>Ancien Nom Utilisateur</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataProfile.username"
+          name="username"
+          id="username"
+          #username="ngModel"
+          placeholder="Donner votre ancien nom d'utiisateur"
+          required
+        />
+      </div>
 
-        <!-- <input type="hidden"  formControlName="id" id="id"> -->
-        <div class="form-group">
-          <label>Username</label>
-         <!--  <input type="text" class="form-control"  id="username" disabled> -->
-          <input type="text" class="form-control" [(ngModel)]="formDataProfile.username"
-            name="username" id="username" #username="ngModel" required>
-        </div>
+      <div class="form-group">
+        <label>Nouveau Nom Utilisateur</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataProfile.newUsername"
+          name="newUsername"
+          id="newUsername"
+          #newUsername="ngModel"
+          placeholder="Votre nouveau nom d'utiisateur"
+          required
+        />
+      </div>
 
-        <div class="form-group">
-          <label>New Username</label>
-          <!-- <input type="text" class="form-control"  id="newUsername"> -->
-          <input type="text" class="form-control" [(ngModel)]="formDataProfile.newUsername"
-            name="newUsername" id="newUsername" #newUsername="ngModel" required>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-success">
-            <i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
-            <i class="fa fa-close"></i> Close</button>
-        </div>
-
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">
+          <em class="fa fa-database"></em> Enregistrer</button
+        >&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+          <em class="fa fa-close"></em> Fermer
+        </button>
+      </div>
     </form>
   </div>
-
 </div>
-
-

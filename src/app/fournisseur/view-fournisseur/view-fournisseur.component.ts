@@ -32,12 +32,15 @@ export class ViewFournisseurComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: FournisseurService, private fb: FormBuilder,
-    private toastr: ToastrService,
-    private router : Router, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
-    public dialogRef:MatDialogRef<ViewFournisseurComponent>,
-    ) { }
+  constructor(public crudApi: FournisseurService,
+              private fb: FormBuilder,
+              private toastr: ToastrService,
+              private router : Router,
+              private route: ActivatedRoute,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<ViewFournisseurComponent>,
+  ) { }
 
   ngOnInit(): void {
     if (this.crudApi.choixmenu == "A") {

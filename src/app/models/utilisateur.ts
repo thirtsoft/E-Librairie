@@ -1,3 +1,4 @@
+import { Role } from './role';
 /*
 export class Utilisateur {
   id?: any;
@@ -25,9 +26,10 @@ export interface IUser {
   name?: string;
   username?: string;
   email?: string;
-  authorities?: any[];
+  roles?: Role[];
   photo?: string;
   password?: string;
+  active?: boolean;
 }
 
 export class Utilisateur implements IUser {
@@ -36,16 +38,18 @@ export class Utilisateur implements IUser {
       public name?: string,
       public username?: string,
       public email?: string,
-      public authorities?: any[],
+      public roles?: Role[],
       public photo?: string,
-      public password?: string
+      public password?: string,
+      public active?: boolean
   ) {
       this.id = id ? id : null;
       this.name = name ? name : null;
       this.username = username ? username : null;
       this.email = email ? email : null;
-      this.authorities = authorities ? authorities : null;
+      this.roles = roles ? roles : null;
       this.photo = photo ? photo : null;
       this.password = password ? password : null;
+      this.active = active ? active : null;
   }
 }

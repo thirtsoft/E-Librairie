@@ -22,29 +22,50 @@
     >
       <thead>
         <tr>
-          <th>Nom&Prénom</th>
-          <th>Nom Utilisateur</th>
+          <th>Phtoto</th>
+          <th>Utilisateur</th>
+          <th>Nom Utilisateur</th>             
           <th>Email</th>
+          <th>Role</th>
           <th>Enable</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of listData; let i = index">
+        <tr *ngFor="let user of crudApi.listData; let i = index">
+          <td>
+            <img class="avatar" src="assets/img/doctor-03.jpg" width="40" alt="" *ngIf="!img">
+              <img [src]="this.crudApi.baseUrl+'/utilisateurs/avatar/'+user.id+'?ts='+getTS()" width="40" class="avatar" alt="" *ngIf="img">
+          </td>
           <td>{{ user.name }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.authorities }}</td>
+          <td>{{ user.roles[0]?.name }}</td>
           <td>
-            <button class="btn btn-success btn-sm" (click)="activated(user)">
-              <i class="fa fa-eye" aria-hidden="true"></i></button
-            >&nbsp;
+            {{ user.active }}
+            <button
+                type="button"
+                class="btn btn-primary btn-sm pull-right"
+                (click)="ActivatedUser(user)"
+                style="cursor: pointer;"
+            >
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button>
+
+          </td>
+
+          <td>
+       
+            <button (click)="addEditUtilisateur(i)" class="btn btn-warning btn-sm">
+              <i class="fa fa-edit" aria-hidden="true"></i> </button>&nbsp;
+
             <button
               class="btn btn-danger btn-sm"
               (click)="deleteUser(user.id)"
             >
-              <i class="fa fa-trash-o"></i>
-            </button>
+              <i class="fa fa-trash-o" aria-hidden="true"></i></button
+            >&nbsp;
+
           </td>
         </tr>
       </tbody>

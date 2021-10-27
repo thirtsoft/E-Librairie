@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angul
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { Login } from 'src/app/auth/login';
 import { Register } from 'src/app/auth/register';
 import { JwtResponse } from './jwt-response';
@@ -44,11 +44,23 @@ export class AuthService {
   user;
   currentUser = {};
 
+  formData:  FormGroup;
+
   constructor(private http: HttpClient,
               private tokenService: TokenStorageService,
               private route: ActivatedRoute,
               private router: Router) {
 
+  }
+
+  private listners = new Subject<any>();
+  
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
   }
 
   signUp(info: Register): Observable<Register> {

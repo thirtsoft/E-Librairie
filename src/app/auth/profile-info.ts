@@ -27,3 +27,9 @@ export class UpdatePasswordInfo {
   oldPassword: string;
   newPassword: string;
 }
+
+export class ActivatedUserAccount {
+  idUser: number;
+  activated: boolean;
+}
+

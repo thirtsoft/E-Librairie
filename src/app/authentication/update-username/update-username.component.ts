@@ -26,10 +26,14 @@ export class UpdateUsernameComponent implements OnInit {
 //  password = '';
 //  profileInfo: ProfileInfo = {} as ProfileInfo;
 
-  constructor(public crudApi: AuthService, public toastr: ToastrService, public fb: FormBuilder,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,  private route: ActivatedRoute,
-    public dialogRef:MatDialogRef<UpdateUsernameComponent>,
-    ) { }
+  constructor(public crudApi: AuthService, 
+              public toastr: ToastrService, 
+              public fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router : Router, 
+              @Inject(MAT_DIALOG_DATA)  public data,  
+              public dialogRef:MatDialogRef<UpdateUsernameComponent>,
+  ) { }
 
   ngOnInit() {
 

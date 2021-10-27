@@ -22,8 +22,10 @@ import { UpdateUsernameComponent } from '../update-username/update-username.comp
 })
 export class ProfilComponent implements OnInit {
 
+  name = '';
   username = '';
   password = '';
+  
   profileInfo: ProfileInfo = {} as ProfileInfo;
   email;
 
@@ -36,15 +38,22 @@ export class ProfilComponent implements OnInit {
   currentRequest: string;
   currentTime: number = 0;
   id;
-  listDataProfil;
+  listDataProfil: any;
 
-  constructor(private authService: AuthService, private tokenService: TokenStorageService,
-    public toastr: ToastrService, private dialogService: DialogService,
-    public userService: UtilisateurService,
-    public fb: FormBuilder, private router: Router,
-    private route: ActivatedRoute,
-    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<ProfilComponent>,
+  userId;
+  img: boolean;
+
+  constructor(private authService: AuthService, 
+              private tokenService: TokenStorageService,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              public userService: UtilisateurService,
+              public fb: FormBuilder, 
+              private router: Router,
+              private route: ActivatedRoute,
+              private matDialog: MatDialog, 
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef: MatDialogRef<ProfilComponent>,
   ) {
 
   }
@@ -58,7 +67,11 @@ export class ProfilComponent implements OnInit {
     this.username = user.username;
     this.email = user.email;
     this.password = user.password;
-    // this.name = user.name;
+    this.name = user.name;
+
+    if (this.userService.getUserAvatar(this.userId) === null)
+      this.img = false;
+    else this.img =true;
 
   }
 

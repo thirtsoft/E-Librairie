@@ -24,7 +24,7 @@ export class FournisseurService {
    listData : Fournisseur[];
    formData:  Fournisseur;
 
-   public dataForm:  FormGroup;
+   dataForm:  FormGroup;
 
   private listners = new Subject<any>();
 
@@ -38,8 +38,8 @@ export class FournisseurService {
 
    constructor(private http: HttpClient) { }
 
-   getAllFournisseurs(): Observable<Fournisseur[]> {
-     return this.http.get<Fournisseur[]>(`${this.baseUrl}/fournisseurs/all`);
+   getAllFournisseurs(): Observable<any> {
+     return this.http.get(`${this.baseUrl}/fournisseurs/all`);
    }
 
   getAllFournisseursOrderDesc(): Observable<Fournisseur[]> {

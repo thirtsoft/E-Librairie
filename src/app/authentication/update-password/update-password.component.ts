@@ -17,10 +17,13 @@ export class UpdatePasswordComponent implements OnInit {
 
   formDataProfile: UpdatePasswordInfo  = new UpdatePasswordInfo();
 
-  constructor(public crudApi: AuthService, public toastr: ToastrService, public fb: FormBuilder,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,  private route: ActivatedRoute,
-    public dialogRef:MatDialogRef<UpdatePasswordComponent>,
-    ) { }
+  constructor(public crudApi: AuthService, 
+              public toastr: ToastrService, 
+              public fb: FormBuilder,
+              private router : Router, 
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<UpdatePasswordComponent>,
+  ) { }
 
   ngOnInit() {
 

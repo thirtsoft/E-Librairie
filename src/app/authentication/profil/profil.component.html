@@ -16,21 +16,17 @@
       <div class="profile-widget profile-widget-info">
         <div class="panel-body">
           <div class="col-lg-6 col-sm-2">
-            <!-- <h4>Jenifer Smith</h4> -->
+
             <form (ngSubmit)="processForm()">
+            
               <div class="follow-ava col-lg-4">
-                <!-- <img src="assets/menu/img/profile-widget-avatar.jpg" alt="">&nbsp;&nbsp; -->
-                <img
-                  [src]="
-                    this.userService.baseUrl +
-                    '/avatart/' +
-                    this.id +
-                    '?ts=' +
-                    getTS()
-                  "
-                />
+               
+                <img src="../../../assets/img/avatar.jpg" class="img-circle" width="40" routerLink ="/profil" alt="" *ngIf="!img">
+
+                <img [src]="this.userService.baseUrl+'/utilisateurs/avatar/'+this.id+'?ts='+getTS()" class="avatar" alt=""  *ngIf="img">
+
                 <br />
-                <!-- <p *ngIf="editPhoto && currentProfile==profileInfo"> -->
+
                 <input
                   type="file"
                   (change)="onSelectedFile($event)"
@@ -52,9 +48,9 @@
           </div>
           <div class="col-lg-4 col-sm-4 follow-info">
             <p>
-              Hello I’m {{ this.username }}, employé à la librairie AL-AMINE.
+              Je m'appele {{ listDataProfil.name }}, employé à la librairie AL-AMINE.
             </p>
-            <p>Email : {{ this.email }}</p>
+            <!-- <p>Email : {{ this.email }}</p> -->
            <!--  <p><i class="fa fa-twitter">jenifertweet</i></p>
             <h6>
               <span><i class="icon_clock_alt"></i>11:05 AM</span>
@@ -62,7 +58,7 @@
               <span><i class="icon_pin_alt"></i>NY</span>
             </h6> -->
           </div>
-          <div class="col-lg-2 col-sm-6 follow-info weather-category">
+          <!-- <div class="col-lg-2 col-sm-6 follow-info weather-category">
             <label>Username : {{ listDataProfil.username }}</label
             >&nbsp;
             <br />
@@ -71,7 +67,7 @@
             <label>Prenom: {{ listDataProfil.username }}</label
             ><br />
             <label>Telephone 1: {{ listDataProfil.username }}</label>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -155,33 +151,28 @@
               <section class="panel">
                 <div class="bio-graph-heading"></div>
                 <div class="panel-body bio-graph-info">
-                  <h1>Bio Graph</h1>
+                  <h1>Biobliographie</h1>
                   <div class="row">
                     <div class="bio-row">
                       <p>
-                        <span>First Name </span>: {{ listDataProfil.username }}
+                        <span>Nom et Prenom </span> : {{ listDataProfil.name }}
                       </p>
                     </div>
                     <div class="bio-row">
-                      <p><span>Last Name </span>: {{ listDataProfil.name }}</p>
+                      <p><span>Nom utilisateur </span> : {{ listDataProfil.username }}</p>
                     </div>
                     <div class="bio-row">
-                      <p><span>Birthday</span>: 27 August 1987</p>
+                      <p><span>Adresse Email</span> :  {{ listDataProfil.email }}</p>
                     </div>
                     <div class="bio-row">
-                      <p><span>Country </span>: United</p>
+                      <p><span>Activer </span> : {{ listDataProfil.active }}</p>
                     </div>
                     <div class="bio-row">
-                      <p><span>Occupation </span>: UI Designer</p>
+                      <p><span>Occupation </span>: {{ listDataProfil?.roles[0].name }}</p>
                     </div>
+                
                     <div class="bio-row">
-                      <p><span>Email </span>:{{ listDataProfil.email }}</p>
-                    </div>
-                    <div class="bio-row">
-                      <p><span>Mobile </span>: {{ listDataProfil.username }}</p>
-                    </div>
-                    <div class="bio-row">
-                      <p><span>Phone </span>: {{ listDataProfil.id }}</p>
+                      <p><span>Identifiant </span>: {{ listDataProfil.id }}</p>
                     </div>
                   </div>
                 </div>
