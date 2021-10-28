@@ -120,8 +120,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
     return {
       content: [
         {
-      //    text: 'AL AMINE',
-          text: 'NOM DE L\'ENTREPRISE',
+          text: 'AL AMINE',
           fontSize: 50,
           alignment: 'center',
           color: '#0000ff',
@@ -141,8 +140,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
           color: '#0000ff'
         },
         {
-      //    text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
-          text: 'Tél: 77 234 18 18 / Email: adamadiallo@gmail.com',
+          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 12,
           bold: true,
           alignment: 'center',
@@ -152,9 +150,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
 
         },
 
-        {
 
-        },
         {
 
         },
@@ -186,7 +182,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         {
           text: 'FACTURE VENTE',
           bold: true,
-          fontSize: 16,
+          fontSize: 15,
           alignment: 'center',
           color: '#0000ff',
           margin: [0, 8, 0, 8]
@@ -215,7 +211,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: `Total CFA : ${this.lventeService.listData[0].vente.totalVente}`,
+          text: `Total en F CFA : ${this.lventeService.listData[0].vente.totalVente}`,
           alignment: 'right',
           margin: [0, 8, 0, 8],
           bold: true,
@@ -223,16 +219,17 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: ''
+          text: 'Réglement '
            + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
           alignment: 'right',
-          margin: [0, 5, 0, 15],
+          margin: [0, 3, 0, 8],
           bold: true,
-          fontSize: 12,
+          fontSize: 11,
+
         },
 
         {
-          text: 'RENDU : '
+          text: 'Rendu en F CFA : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
           alignment: 'right',
           margin: [0, 5, 0, 15],

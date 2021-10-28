@@ -1,65 +1,96 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>DETAILS D'UN APPROVISIONNEMENT</h1>
+      <h1>FACTURES D'UN APPROVISIONNEMENT</h1>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px;">
+    <div style="padding-left: 20px; padding-top: 10px">
       <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
-        <i class="fa fa-folder-open" aria-hidden="true"></i></a>&nbsp;
+        <i class="fa fa-folder-open" aria-hidden="true"></i></a
+      >&nbsp;
       <a (click)="PrintPdf()" class="btn btn-success btn-lg">
-        <i class="fa fa-print" aria-hidden="true"></i></a>&nbsp;
+        <i class="fa fa-print" aria-hidden="true"></i></a
+      >&nbsp;
       <a type="button" (click)="DownloadPdf()" class="btn btn-danger btn-lg">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>&nbsp;
-      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg" >
-        <span class="fa fa-arrow-left"></span>&nbsp; </a>
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a
+      >&nbsp;
+      <a type="button" (click)="onGoBack()" class="btn btn-warning btn-lg">
+        <span class="fa fa-arrow-left"></span>&nbsp;
+      </a>
     </div>
   </div>
   <div class="panel-body">
     <div class="row">
-      <!--
-      <div class="form-group col-md-3">
-        <label>Appro ID : </label>
-        <input name="approId" [value]="this.approId"  class="form-control" readonly>
-      </div>
-      -->
       <div class="form-group col-md-3">
         <label>Code Appro : </label>
-        <input type="text" class="form-control" name="code" [value]="this.code"  id="code" readonly>
+        <input
+          type="text"
+          class="form-control"
+          name="code"
+          [value]="this.code"
+          id="code"
+          readonly
+        />
       </div>
 
       <div class="form-group col-md-3">
         <label>Fournisseur : </label>
-        <input type="text" class="form-control" name="forunisseur" [value]="this.forunisseur"  id="forunisseur" readonly>
+        <input
+          type="text"
+          class="form-control"
+          name="forunisseur"
+          [value]="this.forunisseur"
+          id="forunisseur"
+          readonly
+        />
       </div>
 
       <div class="form-group col-md-3">
         <label>P.Total : </label>
-        <input type="text" class="form-control" [value]="this.totalAppro" name="totalAppro" id="totalAppro" readonly>
+        <input
+          type="text"
+          class="form-control"
+          [value]="this.totalAppro"
+          name="totalAppro"
+          id="totalAppro"
+          readonly
+        />
       </div>
 
       <div class="form-group col-md-3">
         <label>Date : </label>
-        <input type="datetime"  name="dateAppro" [value]="[this.dateAppro | date:'yyyy-MM-dd à h:mm:ss']" id="dateAppro"   class="form-control" readonly>
+        <input
+          type="text"
+          name="dateAppro"
+          [value]="[this.dateAppro]"
+          id="dateAppro"
+          class="form-control"
+          readonly
+        />
       </div>
     </div>
     <div></div>
     <div></div>
     <!-- Debut Ligne de commandes -->
-    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
-      [dtTrigger]="dtTrigger">
+    <table
+      class="table table-striped table-bordered table-sm row-border hover"
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+    >
       <thead>
         <tr>
-          <th>Article</th><th>P.Unitaire</th><th>Quantite</th><th>P.Total</th>
-            <!--  <th>Status</th><th>Date</th>
-             <th>Action</th> -->
+          <th>Article</th>
+          <th>P.Unitaire</th>
+          <th>Quantite</th>
+          <th>P.Total</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of this.lapproService.listData">
-          <td>{{item.produit?.designation}}</td>
-          <td>{{item.prix}}</td>
-          <td>{{item.quantite}}</td>
-          <td>{{(item.prix)*(item.quantite)}} </td>
+          <td>{{ item.produit?.designation }}</td>
+          <td>{{ item.prix }}</td>
+          <td>{{ item.quantite }}</td>
+          <td>{{ item.prix * item.quantite }}</td>
         </tr>
       </tbody>
     </table>

@@ -17,10 +17,13 @@ export class UpdateStatusApproComponent implements OnInit {
 
   StatusList= ['PAYEE','MORATOIRE','NONPAYEE'];
 
-  constructor(public crudApi: ApproService, public toastr: ToastrService, public fb: FormBuilder,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<UpdateStatusApproComponent>,
-    ) { }
+  constructor(public crudApi: ApproService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<UpdateStatusApproComponent>,
+  ) { }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
@@ -30,8 +33,8 @@ export class UpdateStatusApproComponent implements OnInit {
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
-      id: null,
-      status: ['', [Validators.required]],
+      id: [this.crudApi.formData.value.id,  [Validators.required]],
+      status: [this.crudApi.formData.value.status, [Validators.required]],
     });
   }
 

@@ -1,17 +1,20 @@
-import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Subject } from 'rxjs';
+import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
+
 import { CommandeClient } from 'src/app/models/commande-client';
 import { LigneCmdClient } from 'src/app/models/ligne-cmd-client';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { CreateCommandeComponent } from '../create-commande/create-commande.component';
+
 import { map } from 'rxjs/operators';
+
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -65,7 +68,8 @@ export class ViewCommandeComponent implements OnInit {
 
   /**
    * methode pour recharger automatique le Datatable
-   */
+  */
+
   rerender() {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first in the current context
@@ -79,19 +83,22 @@ export class ViewCommandeComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  transformDate(date){
+ /*  transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
-  }
+  } */
 
   getListCommandeClients() {
-    this.crudApi.getAllCommandeClients().subscribe(
+    this.crudApi.getAllCommandeClients()
+    .subscribe(
       response =>{
         this.listData = response;
-      });
+      }
+    );
+
   }
 
   onCreateCommandeClient() {
-    this.crudApi.choixmenu = "A";
+    this.crudApi.choixmenu == 'A';
     this.router.navigateByUrl("home/commande");
   }
 
@@ -114,8 +121,7 @@ export class ViewCommandeComponent implements OnInit {
     return {
       content: [
         {
-      //    text: 'AL AMINE',
-          text: 'NOM DE L\'ENTREPRISE',
+          text: 'AL AMINE',
           fontSize: 50,
           alignment: 'center',
           color: '#0000ff',
@@ -135,8 +141,7 @@ export class ViewCommandeComponent implements OnInit {
           color: '#0000ff'
         },
         {
-      //    text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
-          text: 'Tél: 77 430 03 10 / Email: adamadiallo@gmail.com',
+          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 12,
           bold: true,
           alignment: 'center',
@@ -174,7 +179,7 @@ export class ViewCommandeComponent implements OnInit {
         {
           text: ' FACTURE COMMANDE ',
           alignment: 'center',
-          fontSize: 20,
+          fontSize: 15,
           color: '#0000ff',
           bold: true,
           margin: [0, 5, 0, 5]
@@ -189,7 +194,7 @@ export class ViewCommandeComponent implements OnInit {
         },
         {
         //  bold:true,
-          text: 'CLIENT : ' +this.lcmdService.listData[0].commande.client.chefService,
+          text: 'Client : ' +this.lcmdService.listData[0].commande.client.chefService,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

@@ -69,6 +69,7 @@ export class ListCommandeComponent implements OnInit {
     this.crudApi.getAllCommandesOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
+        console.log(this.crudApi.listData);
       });
   }
 
@@ -101,8 +102,8 @@ export class ListCommandeComponent implements OnInit {
     });
   }
 
-  transformDate(date){
+ /*  transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
-  }
+  } */
 
 }

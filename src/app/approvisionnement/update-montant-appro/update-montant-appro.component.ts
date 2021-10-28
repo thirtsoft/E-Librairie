@@ -15,27 +15,33 @@ export class UpdateMontantApproComponent implements OnInit {
 
   listData : Appro[];
 
-  constructor(public crudApi: ApproService, public toastr: ToastrService, public fb: FormBuilder,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<UpdateMontantApproComponent>,
-    ) { }
+  constructor(public crudApi: ApproService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<UpdateMontantApproComponent>,
+  ) { }
 
   ngOnInit() {
-    if (this.crudApi.choixmenu == "A"){
-      this.infoForm()
+    if (this.crudApi.choixmenu == 'A'){
+      this.infoForm();
     };
   }
 
+
   infoForm() {
     this.crudApi.formData = this.fb.group({
-      id: null,
-      montantAvance: ['', [Validators.required]],
+      id: [this.crudApi.formData.value.id, [Validators.required]],
+      montantAvance: [this.crudApi.formData.value.montantAvance, [Validators.required]],
     });
   }
 
   getListAppros() {
     this.crudApi.getAllAppros().subscribe(
-      response =>{this.listData = response;}
+      response =>{
+        this.listData = response;
+      }
     );
   }
 
@@ -44,6 +50,9 @@ export class UpdateMontantApproComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.crudApi.formData.value);
+    console.log(this.crudApi.formData.value.id);
+    console.log(this.crudApi.formData.value.montantAvance);
     this.crudApi.updateMontantAvanceAppro(this.crudApi.formData.value.id,this.crudApi.formData.value.montantAvance).
     subscribe( data => {
       this.dialogRef.close();

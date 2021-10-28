@@ -102,6 +102,7 @@ export class ListDevisComponent implements OnDestroy, OnInit {
   viewDevis(item: Devis) {
     this.router.navigateByUrl('home/devisView/' + item.id);
   }
+
   deleteDevis(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{

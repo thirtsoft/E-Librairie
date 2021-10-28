@@ -1,12 +1,15 @@
-import { TokenStorageService } from './../auth/token-storage.service';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Vente } from '../models/vente';
 import { FormGroup } from '@angular/forms';
+
+import { TokenStorageService } from './../auth/token-storage.service';
+import { Vente } from '../models/vente';
 import { HttpClient } from '@angular/common/http';
 import { CommandeClient } from '../models/commande-client';
 import { Client } from '../models/client';
+
 import { map } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,10 +20,6 @@ export class DashboardService {
   private baseUrl = environment.apiBaseUrl;
 
 /*   private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
-
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
-
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
  */
 
  // private baseUrl = window["cfgApiBaseUrl"];
@@ -98,7 +97,7 @@ export class DashboardService {
   }
 
   getSumsOfCommandesByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/ventes/SumsOfCommandesByMonth`);
+    return this.http.get(`${this.baseUrl}/commandes/SumsOfCommandesByMonth`);
   }
 
   getSumsOfCommandesByYear(): Observable<any> {
@@ -134,9 +133,8 @@ export class DashboardService {
   }
 
   generateNumCommande(): Observable<any> {
-  //  return this.http.get("http://localhost:8081/prodApi/generateCodeCommand");
 
-    return this.http.get(`${this.baseUrl}/commandes/searchSumVenteByYears`);
+    return this.http.get(`${this.baseUrl}/commandes/generateCodeCommand`);
 
   //  return this.http.get("http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/generateCodeCommand");
 

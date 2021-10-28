@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h2>GESTION DES COMMANDES</h2>
+      <h1>GESTION DES COMMANDES</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
@@ -26,20 +26,18 @@
           <th>Montant</th>
           <th>Réglement</th>
           <th>Montant Réglement</th>
-          <th>Status</th>
           <th>Date</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cmd of crudApi.listData; let i = index">
+        <tr *ngFor="let cmd of crudApi.listData; let i = index;">
           <td>{{ cmd.numeroCommande }}</td>
           <td>{{ cmd.client.raisonSocial }} - {{ cmd.client.chefService }}</td>
           <td>{{ cmd.totalCommande }}</td>
           <td>{{ cmd.typeReglement }}</td>
           <td>{{ cmd.montantReglement }}</td>
-          <td>{{ cmd.status }}</td>
-          <td>{{ cmd.dateCommande | date:'dd-MM-yyyy à h:mm:ss' }}</td>
+          <td>{{ cmd.dateCommande }}</td>
           <td>
             <button
               class="btn btn-success btn-sm"

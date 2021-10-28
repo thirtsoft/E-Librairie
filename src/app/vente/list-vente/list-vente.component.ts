@@ -104,6 +104,11 @@ export class ListVenteComponent implements OnDestroy, OnInit {
    // this.router.navigate(['/home/profile/'+profil]);
   }
 
+  onCreateVenteWithBarcode() {
+    this.crudApi.choixmenu == 'A';
+    this.router.navigateByUrl("home/venteQrcode");
+  }
+
   deleteVente(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{

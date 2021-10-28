@@ -34,12 +34,16 @@ export class ListApproComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ApproService, private dialogService: DialogService,
-    private datePipe : DatePipe, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateApproComponent>,
-    ) { }
+  constructor(public crudApi: ApproService,
+              private dialogService: DialogService,
+              private datePipe : DatePipe,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateApproComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -53,7 +57,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.crudApi.getAllApprosOrderDesc()
       .subscribe(
         response =>{
-          this.listData = response;
+          this.crudApi.listData = response;
           console.log(this.listData);
           this.dtTrigger.next();
         }
@@ -82,20 +86,19 @@ export class ListApproComponent implements OnDestroy, OnInit {
     this.crudApi.getAllApprosOrderDesc()
       .subscribe(
         response =>{
-          this.listData = response;
+          this.crudApi.listData = response;
         }
       );
 
   }
 
   onCreateAppro() {
-    this.crudApi.choixmenu = "A";
-  //  this.router.navigateByUrl("alamine/approvisionnements/approvisionnement");
+    this.crudApi.choixmenu == 'A';
     this.router.navigateByUrl("home/approvisionnement");
   }
 
   addEditMontantAvanceAppro(item : Appro) {
-    this.crudApi.choixmenu = "M";
+    this.crudApi.choixmenu === 'M';
     this.crudApi.formData = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -106,7 +109,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
   }
 
   addEditStatusAppro(item : Appro) {
-    this.crudApi.choixmenu = "M";
+    this.crudApi.choixmenu === 'M';
     this.crudApi.formData = this.fb.group(Object.assign({},item));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;

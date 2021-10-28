@@ -1,17 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>GESTION DES FOURNISSEURS</h1>
-    </div>
-    <div style="padding-left: 20px; padding-top: 10px">
-      <!--  <a type="button" (click)="onCreateFournisseur()" class="btn btn-success btn-lg" >
-        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a>&nbsp;
-      <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
-          <i class="fa fa-folder-open" aria-hidden="true"></i>Ouvrir</a>&nbsp;
-      <a (click)="PrintPdf()" class="btn btn-success btn-lg">
-          <i class="fa fa-print" aria-hidden="true"></i>Imprimer</a>&nbsp;
-      <a type="button" (click)="DownloadPdf()" class="btn btn-danger btn-lg">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>Télécharger</a>&nbsp; -->
+      <h1>HISTORIQUE OPERATIONS DES APPROVISONNEMENTS</h1>
     </div>
   </div>
   <div class="panel-body">
@@ -28,16 +18,16 @@
           <th>Approvisionnement</th>
           <th>Action Effectue</th>
           <th>Date</th>
-          <!--    <th>Action</th> -->
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let histAppro of crudApi.listData; let i = index">
+        <tr *ngFor="let histAppro of crudApi.listData; let i = index;">
           <td>{{ histAppro?.utilisateur?.name }}</td>
           <td>{{ histAppro?.utilisateur?.email }}</td>
-          <td>{{ histAppro?.appro?.code }}</td>
+          <td>{{ histAppro?.approvisionnement?.code }}</td>
           <td>{{ histAppro.action }}</td>
-          <td>{{ histAppro.createdDate }}</td>
+          <td>{{ histAppro.createdDate | date: 'dd-MM-yyyy à hh:mm:ss' }}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewAppro()">
               <i class="fa fa-eye" aria-hidden="true"></i></button

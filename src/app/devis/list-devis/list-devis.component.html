@@ -24,10 +24,11 @@
               <td>{{dev.client.raisonSocial}} - {{dev.client.chefService}} </td>
               <td>{{dev.totalDevis}}</td>
               <td>{{dev.observation}}</td>
-              <td>{{dev.dateDevis| date:'dd-MM-yyyy à h:mm:ss'}}</td>
+             <!--  <td>{{dev.dateDevis| date:'dd-MM-yyyy à h:mm:ss'}}</td> -->
+              <td>{{ dev.dateDevis }}</td>
               <td>
                 <button class="btn btn-success btn-sm" (click)="viewDevis(dev)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-danger btn-sm" (click)="deleteDevis(dev.id)"><i class="fa fa-trash-o"></i>  </button>&nbsp;
+                <button class="btn btn-danger btn-sm" (click)="deleteDevis(dev.id)"><em class="fa fa-trash-o"></em>  </button>&nbsp;
               </td>
             </tr>
           </tbody>

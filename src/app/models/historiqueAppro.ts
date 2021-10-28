@@ -9,7 +9,7 @@ export class HistoriqueAppro {
 
   utilisateur: Utilisateur;
 
-  appro: Appro;
+  approvisionnement: Appro;
 
 
 }

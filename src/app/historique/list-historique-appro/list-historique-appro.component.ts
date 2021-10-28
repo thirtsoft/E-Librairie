@@ -76,6 +76,7 @@ export class ListHistoriqueApproComponent implements OnInit {
     this.crudApi.getAllHistoriqueApprosOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
+        console.log(this.crudApi.listData);
       }
     );
   }

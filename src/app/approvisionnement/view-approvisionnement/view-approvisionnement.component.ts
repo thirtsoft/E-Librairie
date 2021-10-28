@@ -1,18 +1,22 @@
 import { Component, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Appro } from 'src/app/models/appro';
-import { ApproService } from 'src/app/services/appro.service';
-import { LigneApproService } from 'src/app/services/ligne-appro.service';
-import { LigneAppro } from 'src/app/models/ligne-appro';
-import { Fournisseur } from 'src/app/models/fournisseur';
+
 import { DataTableDirective } from 'angular-datatables';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CreateVenteComponent } from 'src/app/vente/create-vente/create-vente.component';
+
+import { Appro } from 'src/app/models/appro';
+import { ApproService } from 'src/app/services/appro.service';
+import { LigneApproService } from 'src/app/services/ligne-appro.service';
+import { LigneAppro } from 'src/app/models/ligne-appro';
 import { Produit } from './../../models/produit';
+
+import { CreateVenteComponent } from 'src/app/vente/create-vente/create-vente.component';
+
 import { map } from 'rxjs/operators';
+
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -45,12 +49,17 @@ export class ViewApprovisionnementComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: ApproService, public fb: FormBuilder,
-      public toastr: ToastrService, private router : Router, private datePipe : DatePipe,
-      private matDialog: MatDialog, public lapproService: LigneApproService,
-      @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute,
-      public dialogRef:MatDialogRef<CreateVenteComponent>,
-    ) { }
+  constructor(public crudApi: ApproService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private datePipe : DatePipe,
+              private matDialog: MatDialog,
+              public lapproService: LigneApproService,
+              private route: ActivatedRoute,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateVenteComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.approId = this.route.snapshot.params.id;
@@ -58,32 +67,21 @@ export class ViewApprovisionnementComponent implements OnInit {
     this.lapproService.getAllLigneApproByAppro(this.approId).subscribe((data: LigneAppro[]) => {
       //this.currentVente = data;
       this.lapproService.listData = data;
-      console.log(this.lapproService.listData);
-
-    //  console.log(this.lapproService.listData[0].numero);
       this.code = this.lapproService.listData[0].numero;
-    //  console.log(this.lapproService.listData[0].approvisionnement.totalAppro);
       this.totalAppro = this.lapproService.listData[0].approvisionnement.totalAppro;
-      console.log(this.lapproService.listData[0].approvisionnement.dateApprovisionnement);
       this.forunisseur = (this.lapproService.listData[0].approvisionnement.fournisseur.prenom +"."+this.lapproService.listData[0].approvisionnement.fournisseur.nom);
       this.dateAppro = this.lapproService.listData[0].approvisionnement.dateApprovisionnement;
-     // this.dtTrigger.next();
+
     }, err => {
       console.log(err);
     });
-  /*
-    this.vente = new Vente();
-    this.vente = {
-      venteId: null, numeroVente: 0,
-      totalVente: 0, status: '',
-      DeletedOrderItemIDs: '', dateVente: new Date()
-    }
-    */
+
   }
 
   /**
    * methode pour recharger automatique le Datatable
-   */
+  */
+
   rerender() {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first in the current context
@@ -103,12 +101,14 @@ export class ViewApprovisionnementComponent implements OnInit {
 
   getListVentes() {
     this.crudApi.getAllAppros().subscribe(
-      response =>{this.listData = response;}
+      response =>{
+        this.listData = response;
+      }
     );
   }
 
   onCreateAppro() {
-    this.crudApi.choixmenu = "A";
+    this.crudApi.choixmenu == 'A';
     this.router.navigateByUrl("home/approvisionnement");
   }
 
@@ -140,7 +140,6 @@ export class ViewApprovisionnementComponent implements OnInit {
         },
         {
           text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
-    //      text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 2345678192792',
           fontSize: 12,
           bold: true,
           color: '#0000ff'
@@ -152,7 +151,7 @@ export class ViewApprovisionnementComponent implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 12,
           bold: true,
           alignment: 'center',
@@ -162,12 +161,11 @@ export class ViewApprovisionnementComponent implements OnInit {
 
         },
 
-        {},
 
         {
           columns: [
 
-            [
+           /*  [
               {
                 text: `APPROVISIONNEMENT N° : ${this.lapproService.listData[0].numero}`,
                 fontSize: 14,
@@ -176,7 +174,7 @@ export class ViewApprovisionnementComponent implements OnInit {
 
               },
 
-            ],
+            ], */
 
             [
               {
@@ -191,10 +189,18 @@ export class ViewApprovisionnementComponent implements OnInit {
         {
           text: ' FACTURE APPROVISIONNEMENT',
           alignment: 'center',
-          fontSize: 20,
+          fontSize: 15,
           color: '#0000ff',
           bold: true,
-          margin: [0, 5, 0, 5],
+          margin: [0, 5, 0, 5]
+        },
+        {
+          text: `N° : ${this.lapproService.listData[0].numero}`,
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          color: '#0000ff',
+          margin: [0, 8, 0, 8]
         },
         {
           bold:true,

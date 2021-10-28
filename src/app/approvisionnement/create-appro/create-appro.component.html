@@ -1,191 +1,151 @@
 <mat-toolbar color="success">
-    <div>
-        <h2>Gestion Approvisionnement</h2>
-    </div>
+  <div>
+    <h1>EFFECTUER UN APPROVISIONNEMENT</h1>
+  </div>
 </mat-toolbar>
 
 <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()">
-    <!--  <input  type="hidden"  class="form-control" formControlName="lib_client" id="lib_client" > -->
-    <input type="hidden" class="form-control" formControlName="fournisseur" id="fournisseur">
 
-    <div class="row col-md-12">
-        <div class="row">
-            <div class="form-row col-sm-4 mb-3 mb-sm-0">
-                <label><strong>Code Approvisionnement : </strong></label>
-                <input type="text" class="form-control" formControlName="code" id="code" readonly>
-            </div>
+  <input
+    type="hidden"
+    class="form-control"
+    formControlName="fournisseur"
+    id="fournisseur"
+  />
 
-            <div class="form-group col-sm-4 mb-3 mb-sm-0">
-                <label>Fournisseur</label>
-                <div class="form-group">
-                    <select name="client" formControlName="fournisseur" id="fournisseur" class="form-control" [compareWith]="compareFournisseur">
-                      <option value="0">-Select-</option>
-                      <option *ngFor="let item of fournisseurList" [ngValue]="item"><td>{{item.prenom}} {{item.nom}}</td></option>
-                    </select>
-                </div>
-            </div>
-            <!--  <div class="form-group col-sm-4 mb-sm-0">
-        <label>Date</label>
-        <input  type="date"  class="form-control" formControlName="dateAppro"  id="dateAppro">
-      </div> -->
-
-            <div class="form-group col-sm-4" style="margin-top: 10px;">
-                <label>Montant Avancée</label>
-                <input type="number" formControlName="montantAvance" class="form-control" id="montantAvance">
-            </div>
-            <!--  <div class="form-group col-sm-4" style="margin-top: 10px;">
-          <label>Status</label>
-          <input type="text" formControlName="status" class="form-control" id="status">
-      </div> -->
-            <div class="form-group col-sm-4" style="margin-top: 10px;">
-                <label>Status</label>
-                <select name="status" formControlName="status" id="status" class="form-control">
-                  <option value="VALIDE">VALIDE</option>
-                  <option value="ENCOURS">ENCOURS</option>
-                </select>
-            </div>
-            <div class="form-group col-sm-4" style="margin-top: 10px;">
-                <label>Observation</label>
-                <textarea type="text" rows="2" cols="5" formControlName="observation" id="observation" class="form-control"></textarea>
-            </div>
-
-        </div>
-        <!--</div> -->
-
-        <!-- Debut Ligne de commandes -->
-        <table class="table table-borderless" style="margin-top: 10px;">
-            <thead class="thead-light">
-                <th>Article</th>
-                <th>Quantite</th>
-                <th>P.Unitiare</th>
-                <th>P.Total</th>
-                <th>
-                    <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
-                        <i class="fa fa-plus"></i>Ajouter
-                    </a>
-                </th>
-            </thead>
-            <tbody>
-                <tr *ngIf="crudApi.list.length==0" [class.text-danger]="!isValid && crudApi.list.length ==0">
-                    <td class="font-italic text-center" colspan="4">
-                        Aucun Article pour cet Approvisionnement ...
-                    </td>
-                </tr>
-                <tr *ngFor="let item of crudApi.list;let i=index;">
-                    <td>{{item.ItemName}}</td>
-                    <td>{{item.quantite}}</td>
-                    <td>{{item.prixAppro}}</td>
-                    <td>{{item.total}}</td>
-                    <td>
-                        <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
-                            <i class="fa fa-pencil"></i></a>
-                        <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.id,i)">
-                            <i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Fin  Ligne de commandes -->
-        <div class="form-group col-sm-4 mb-sm-0" style="padding-left: 0px;">
-            <label><strong>P.Total : </strong></label>
-            <input type="text" formControlName="totalAppro" id="totalAppro" class="form-control" readonly>
-        </div>
-    </div>
-
-    <div class="form-group" style="margin-top: 10px;">
-        <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;&nbsp;
-        <a class="btn btn-sm btn-primary ml-1" routerLink="/home/detailsApprovisionnements"><i class="fa fa-plus-square"></i> Liste </a>
-    </div>
-
-</form>
-
-<!--
-<mat-toolbar color="success">
-  <div>
-  <h1>Gestion Approvisionnement</h1>
-  </div>
-</mat-toolbar>
-
-<form #commandeForm="ngForm" (ngSubmit)="onSubmit(commandeForm)" *ngIf="crudApi.formData" autocomplete="off">
-  <div class="form-group row col-md-12">
-    <div class="form-group col-md-6">
+  <div class="row col-md-12">
+    <div class="row">
+      <div class="form-row col-sm-4 mb-3 mb-sm-0">
         <label><strong>Code Approvisionnement : </strong></label>
-        <input name="code" #code="ngModel" [(ngModel)]="crudApi.formData.code" class="form-control">
-    </div>
-    <div class="col-md-6 form-group">
-        <label>Date</label>
-        <input  type="date" name="dateAppro" #dateAppro="ngModel" [(ngModel)]="crudApi.formData.dateAppro" class="form-control">
-    </div>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="code"
+          id="code"
+          readonly
+        />
+      </div>
 
-    <div class="col-md-6 form-group">
-      <label>Fournisseur</label>
-      <div class="form-group">
-        <select name="fournisseur" #fournisseur="ngModel" [(ngModel)]="crudApi.formData.fournisseur" class="form-control"
-          [class.is-invalid]="!isValid && crudApi.formData.fournisseur.id==0">
-          <option value="0">-Select-</option>
-          <option *ngFor="let item of fournisseurList" [ngValue]="item">{{item.raisonSociale}}</option>
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
+        <label>Fournisseur</label>
+        <div class="form-group">
+          <select
+            name="client"
+            formControlName="fournisseur"
+            id="fournisseur"
+            class="form-control"
+            [compareWith]="compareFournisseur"
+          >
+            <option value="0">-Select-</option>
+            <option *ngFor="let item of fournisseurList" [ngValue]="item">
+              <td>{{ item.prenom }} {{ item.nom }}</td>
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group col-sm-4" style="margin-top: 10px">
+        <label>Montant Avancée</label>
+        <input
+          type="number"
+          formControlName="montantAvance"
+          class="form-control"
+          id="montantAvance"
+        />
+      </div>
+
+      <div class="form-group col-sm-4" style="margin-top: 10px">
+        <label>Status</label>
+        <select
+          name="status"
+          formControlName="status"
+          id="status"
+          class="form-control"
+        >
+          <option value="VALIDE">VALIDE</option>
+          <option value="ENCOURS">ENCOURS</option>
         </select>
       </div>
-    </div>
-    <div class="col-md-6 form-group">
-      <label>Status</label>
-      <input type="text"  name="status" #status="ngModel" [(ngModel)]="crudApi.formData.status" class="form-control">
-    </div>
-    <div class="col-md-6 form-group">
-      <label>Observation</label>
-      <textarea type="text" rows="4" cols="5"  name="observation" #observation="ngModel" [(ngModel)]="crudApi.formData.observation" class="form-control"></textarea>
-    </div>
-  </div>
-  -->
-
-<!-- Debut Ligne de commandes -->
-<!--
-  <table class="table table-borderless">
-    <thead class="thead-light">
-      <th>Article</th>
-      <th>Price</th>
-      <th>Quantite</th>
-      <th>Total</th>
-      <th>
-        <a class="btn btn-sm btn-success text-white" (click)="AddData(null,crudApi.formData.id)">
-            <i class="fa fa-plus"></i>Ajouter
-        </a>
-      </th>
-    </thead>
-    <tbody>
-      <tr *ngIf="crudApi.orderItems.length==0" [class.text-danger]="!isValid && crudApi.orderItems.length==0">
-        <td class="font-italic text-center" colspan="5">
-            Aucune Ligne Approvisionnement sélectionnée ...
-        </td>
-      </tr>
-      <tr *ngFor="let item of crudApi.orderItems;let i=index;">
-        <td>{{item.ItemName}}</td>
-        <td>{{item.prix}}</td>
-        <td>{{item.quantite}}</td>
-        <td>{{item.total}}</td>
-        <td>
-          <a class="btn btn-sm btn-info text-white" (click)="AddOrderItem(i,crudApi.formData.id)">
-              <i class="fa fa-pencil"></i></a>
-          <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemId,i)">
-              <i class="fa fa-trash"></i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
-<!-- Fin  Ligne de commandes -->
-<!--
-  <div class="form-group row">
-    <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="form-group">
-        <label>Total Ht : </label>
-        <input name="totalAppro" #totalAppro="ngModel" [(ngModel)]="crudApi.formData.totalAppro" class="form-control" readonly>
+      <div class="form-group col-sm-4" style="margin-top: 10px">
+        <label>Observation</label>
+        <textarea
+          type="text"
+          rows="2"
+          cols="5"
+          formControlName="observation"
+          id="observation"
+          class="form-control"
+        ></textarea>
       </div>
     </div>
+    <!--</div> -->
 
+    <!-- Debut Ligne de commandes -->
+    <table class="table table-borderless" style="margin-top: 10px">
+      <thead class="thead-light">
+        <th>Article</th>
+        <th>Quantite</th>
+        <th>P.Unitiare</th>
+        <th>P.Total</th>
+        <th>
+          <a
+            class="btn btn-sm btn-success text-white"
+            (click)="AddData(null, 1)"
+          >
+            <em class="fa fa-plus"></em>Ajouter
+          </a>
+        </th>
+      </thead>
+      <tbody>
+        <tr
+          *ngIf="crudApi.list.length == 0"
+          [class.text-danger]="!isValid && crudApi.list.length == 0"
+        >
+          <td class="font-italic text-center" colspan="4">
+            Aucun Article pour cet Approvisionnement ...
+          </td>
+        </tr>
+        <tr *ngFor="let item of crudApi.list; let i = index">
+          <td>{{ item.ItemName }}</td>
+          <td>{{ item.quantite }}</td>
+          <td>{{ item.prixAppro }}</td>
+          <td>{{ item.total }}</td>
+          <td>
+            <a class="btn btn-sm btn-info text-white" (click)="AddData(i, 1)">
+              <em class="fa fa-pencil"></em
+            ></a>
+            <a
+              class="btn btn-sm btn-danger text-white ml-1"
+              (click)="onDeleteOrderItem(item.id, i)"
+            >
+              <em class="fa fa-trash"></em
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Fin  Ligne de commandes -->
+    <div class="form-group col-sm-4 mb-sm-0" style="padding-left: 0px">
+      <label><strong>P.Total : </strong></label>
+      <input
+        type="text"
+        formControlName="totalAppro"
+        id="totalAppro"
+        class="form-control"
+        readonly
+      />
+    </div>
   </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
-    <a class="btn btn-outline-dark ml-1" routerLink="/detailsApprovisionnements"><i class="fa fa-plus-square"></i> Liste </a>
+
+  <div class="form-group" style="margin-top: 10px">
+    <button type="submit" class="btn btn-lg btn-success">
+      <em class="fa fa-database"></em> Enregistrer </button
+    >&nbsp;&nbsp;
+    <a
+      class="btn btn-lg btn-primary ml-2"
+      routerLink="/home/detailsApprovisionnements"
+      ><em class="fa fa-plus-square"></em> Liste Appro
+    </a>
   </div>
 </form>
--->
+

@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h2>DETAILS D'UNE VENTE</h2>
+      <h1>FACTURE D'UNE VENTE</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
@@ -57,9 +57,9 @@
       <div class="form-group col-md-3">
         <label>Date : </label>
         <input
-        type="datetime"
+        type="text"
         name="dateVente"
-        [value]="[this.dateVente | date: 'yyyy-MM-dd à h:mm:ss']"
+        [value]="[this.dateVente]"
         class="form-control"
         readonly
       />

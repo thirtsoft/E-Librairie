@@ -25,9 +25,7 @@ export class ListHistoriqueCommandeComponent implements OnInit {
               private dialogService: DialogService,
               public toastr: ToastrService,
               public fb: FormBuilder,
-              private router : Router,
-   //           @Inject(MAT_DIALOG_DATA) public data: any,
-   //           public dialogRef:MatDialogRef<CreateFournisseurComponent>,
+              private router : Router
   ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);

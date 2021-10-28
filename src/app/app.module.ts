@@ -297,7 +297,7 @@ import { ViewUtilisateurComponent } from './authentication/view-utilisateur/view
     CreateFournisseurComponent, CreateVersementComponent, CreateCreanceComponent, CreateContratComponent,
     CreateAvoirComponent, CreateChargeComponent, CreateCommandeComponent, CreateApproComponent,
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent, UpdatePasswordComponent,
-    ActivatedUserComponent, CreateUtilisateurComponent,
+    ActivatedUserComponent, CreateUtilisateurComponent, UpdateStatusApproComponent, UpdateMontantApproComponent,
     UpdateUsernameComponent, CreateVentewithQrcodeBarCodeComponent,
     CreateCommandewithQrcodeBarCodeComponent, DashboardComponent
   ]
