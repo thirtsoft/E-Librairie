@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment';
 })
 export class EmailService {
 
-//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
-
   private baseUrl = environment.apiBaseUrl;
 
   //private baseUrl = window["cfgApiBaseUrl"];
@@ -48,6 +46,10 @@ export class EmailService {
 
   public sendMail(info: Object): Observable<any> {
     return this.http.post(`${this.baseUrl}/sendMail`, info);
+  }
+
+  public sendMailToAllFournisseur(info: Object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/sendMailToAllFournisseur`, info);
   }
 
   public sendMailToCustomer(info: Object): Observable<any> {

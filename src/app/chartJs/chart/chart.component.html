@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-lg-12">
       <ol class="breadcrumb">
-        <li><i class="fa fa-home"></i><a routerLink="/home">Home</a></li>
-        <li><i class="icon_piechart"></i>Chart</li>
+        <li><em class="fa fa-home"></em><a routerLink="/home">Accueil</a></li>
+        <li><em class="icon_piechart"></em>Graphiques</li>
       </ol>
     </div>
   </div>
@@ -54,10 +54,24 @@
                   </header>
                   <div class="panel-body text-center">
                     <app-barchar-creance></app-barchar-creance>
-                    <!-- <canvas id="doughnut" height="300" width="400"></canvas> -->
                   </div>
                 </section>
               </div>
+
+              <div class="col-lg-6">
+                <section class="panel">
+                  <header class="panel-heading">
+                    Montant Total Charge Par mois
+                  </header>
+                  <div class="panel-body text-center">
+                    <app-barchar-charge></app-barchar-charge>
+                  </div>
+                </section>
+              </div>
+
+            </div>
+
+            <div class="row">
 
               <!-- Pie -->
               <div class="col-lg-6">
@@ -67,7 +81,6 @@
                   </header>
                   <div class="panel-body text-center" style="align-items: center;">
                    <app-piechart></app-piechart>
-                  <!--  <app-piechart-stock></app-piechart-stock> -->
                   </div>
                 </section>
               </div>
@@ -78,7 +91,7 @@
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box green-bg">
-                  <i class="fa fa-cubes"></i>
+                  <em class="fa fa-cubes"></em>
                   <div class="count">{{this.sumVenteByMonth}} f</div>
                   <div class="title">Vente/Mois</div>
                 </div>
@@ -86,7 +99,7 @@
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box green-bg">
-                  <i class="fa fa-cubes"></i>
+                  <em class="fa fa-cubes"></em>
                   <div class="count">{{this.sumVenteByYear}} f</div>
                   <div class="title">Vente/Années</div>
                 </div>
@@ -94,7 +107,7 @@
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box green-bg">
-                  <i class="fa fa-cubes"></i>
+                  <em class="fa fa-cubes"></em>
                   <div class="count">{{this.sumCommandeByMonth}} f</div>
                   <div class="title">Commande/Mois</div>
                 </div>
@@ -102,7 +115,7 @@
 
               <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box green-bg">
-                  <i class="fa fa-cubes"></i>
+                  <em class="fa fa-cubes"></em>
                   <div class="count">{{this.sumCommandeByYear}} f</div>
                   <div class="title">Commande/Années</div>
                 </div>

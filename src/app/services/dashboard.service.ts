@@ -19,9 +19,6 @@ export class DashboardService {
 
   private baseUrl = environment.apiBaseUrl;
 
-/*   private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller';
- */
-
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
@@ -133,14 +130,10 @@ export class DashboardService {
   }
 
   generateNumCommande(): Observable<any> {
-
     return this.http.get(`${this.baseUrl}/commandes/generateCodeCommand`);
-
-  //  return this.http.get("http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/generateCodeCommand");
-
   }
 
-  getNumeroCommande() {
+  getNumeroCommande(): void {
     this.generateNumCommande().subscribe(
       response =>{
         this.generatedNumber = response;
@@ -157,7 +150,6 @@ export class DashboardService {
     const user = this.tokenService.getUser();
     this.id = user.id
   }
-
 
 
 }

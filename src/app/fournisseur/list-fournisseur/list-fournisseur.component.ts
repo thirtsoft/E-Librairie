@@ -125,12 +125,15 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
 
   onCreateFournisseur(){
     this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("fournisseurs/new");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     this.matDialog.open(CreateFournisseurComponent, dialogConfig);
+  }
+
+  sendMail() {
+
   }
 
   editFournisseur(item: Fournisseur) {

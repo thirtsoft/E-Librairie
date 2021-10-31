@@ -141,6 +141,7 @@ import { ListHistoriqueAvoirComponent } from './historique/list-historique-avoir
 import { ListHistoriqueDevisComponent } from './historique/list-historique-devis/list-historique-devis.component';
 import { ListHistoriqueLoginComponent } from './historique/list-historique-login/list-historique-login.component';
 import { ViewUtilisateurComponent } from './authentication/view-utilisateur/view-utilisateur.component';
+import { BarcharChargeComponent } from './chartJs/barchar-charge/barchar-charge.component';
 
 
 @NgModule({
@@ -260,6 +261,7 @@ import { ViewUtilisateurComponent } from './authentication/view-utilisateur/view
     ListHistoriqueDevisComponent,
     ListHistoriqueLoginComponent,
     ViewUtilisateurComponent,
+    BarcharChargeComponent,
 
   ],
   imports: [
