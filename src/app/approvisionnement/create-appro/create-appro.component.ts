@@ -163,7 +163,7 @@ export class CreateApproComponent implements OnInit {
   }
   */
 
-  validateForm() {
+ /*  validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.fournisseur.id==0)
       this.isValid = false;
@@ -171,17 +171,45 @@ export class CreateApproComponent implements OnInit {
       this.isValid = false;
     return this.isValid;
   }
+ */
+
+  validateForm() {
+    this.isValid = false;
+    if ((this.crudApi.formData.value.code == 0) || (this.crudApi.formData.value.totalAppro == 0) ||
+        (this.crudApi.formData.value.observation == '') || (this.crudApi.formData.value.status == '')
+        || (this.crudApi.list == 0) || (this.crudApi.formData.value.montantAvance == 0) || (this.fournisseurList == null))
+      this.isValid = false;
+    else
+      this.isValid = true;
+    return this.isValid;
+  }
+
 
   onSubmit() {
-    this.f['ligneApprovisionnements'].setValue(this.crudApi.list);
-    console.log(this.crudApi.formData.value);
-    this.crudApi.saveApprovisionnement(this.crudApi.formData.value).subscribe(
-      data => {
-        console.log(this.crudApi.formData.value);
-        this.toastr.success('Approvisionnement Ajoutée avec succès');
-        console.log(this.crudApi.formData.value);
-        this.router.navigate(['/home/approvisionnements']);
+    if (this.validateForm()) {
+      this.f['ligneApprovisionnements'].setValue(this.crudApi.list);
+      console.log(this.crudApi.formData.value);
+      this.crudApi.saveApprovisionnement(this.crudApi.formData.value)
+        .subscribe(
+          data => {
+            console.log(this.crudApi.formData.value);
+            this.toastr.success('avec succès','Approvisionnement Ajoutée', {
+              timeOut: 1500,
+              positionClass: 'toast-top-right',
+            });
+          console.log(this.crudApi.formData.value);
+          this.router.navigate(['/home/approvisionnements']);
+        }
+      );
+
+    }else {
+      this.toastr.error('Veuillez remplir tous les champs','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
       });
+
+    }
+
 
   }
 

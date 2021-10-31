@@ -39,10 +39,8 @@ export class ListContratComponent implements OnDestroy, OnInit {
               public toastr: ToastrService,
               private datePipe: DatePipe,
               public fb: FormBuilder,
-              private router : Router,
               private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private currentRoute: ActivatedRoute,
               public dialogRef:MatDialogRef<CreateContratComponent>,
   ) {
       this.crudApi.listen().subscribe((m:any) => {

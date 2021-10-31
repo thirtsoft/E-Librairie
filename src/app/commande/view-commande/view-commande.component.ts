@@ -194,7 +194,7 @@ export class ViewCommandeComponent implements OnInit {
         },
         {
         //  bold:true,
-          text: 'Client : ' +this.lcmdService.listData[0].commande.client.chefService,
+          text: 'Pour : ' +this.lcmdService.listData[0].commande.client.chefService,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

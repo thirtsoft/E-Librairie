@@ -3,42 +3,76 @@
     <div class="panel-heading">
       <h1>GESTION DES VERSEMENTS</h1>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="addEditVersement(null)" class="btn btn-success btn-lg">
-        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a>&nbsp;
+    <div style="padding-left: 20px; padding-top: 10px">
+      <a
+        type="button"
+        (click)="addEditVersement(null)"
+        class="btn btn-success btn-lg"
+      >
+        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
+      >&nbsp;
     </div>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
-          [dtTrigger]="dtTrigger">
-          <thead>
-            <tr>
-              <th>Numéro</th><th>Employé</th><th>Montant</th><th>Versement</th><th>Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let versmnt of crudApi.listData; let i=index;">
-              <td>{{versmnt.numVersement}}</td>
-              <td>{{versmnt.employe.prenom}}  {{versmnt.employe.nom}}</td>
-              <td>{{versmnt.montantVersement}}</td>
-              <td>{{versmnt.fileVersement}}
-                &nbsp;<a (click)="addEditVersementFile(i)" style="cursor:pointer; align-items: flex-end;">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </a>&nbsp;&nbsp;
-                <a href="http://localhost:8081/alAmine/downloadVersementFile/{{versmnt.fileVersement}}"
-                        class="cv">&nbsp;&nbsp;
-                  <i class="fa fa-download" style="cursor:pointer; align-items: flex-end;"></i>&nbsp;&nbsp;
-                </a>
-              </td>
-              <td>{{versmnt.dateVersement| date:'dd/MM/yyyy'}}</td>
-              <td>
-                <button class="btn btn-success btn-sm" (click)="viewVersement(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-info btn-sm" (click)="addEditVersement(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
-                <button class="btn btn-danger btn-sm" (click)="deleteVersement(versmnt.id)"><i class="fa fa-trash-o"></i>  </button>
-              </td>
-            </tr>
-          </tbody>
-      </table>
-    </div>
+  </div>
+  <div class="panel-body">
+    <table
+      class="table table-striped table-bordered table-sm row-border hover"
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      aria-label=""
+    >
+      <thead>
+        <tr>
+          <th>Numéro</th>
+          <th>Employé</th>
+          <th>Montant</th>
+          <th>Versement</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let versmnt of crudApi.listData; let i = index">
+          <td>{{ versmnt.numVersement }}</td>
+          <td>{{ versmnt.employe.prenom }} {{ versmnt.employe.nom }}</td>
+          <td>{{ versmnt.montantVersement }}</td>
+          <td>
+            {{ versmnt.fileVersement }} &nbsp;<a
+              (click)="addEditVersementFile(i)"
+              style="cursor: pointer; align-items: flex-end"
+            >
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a
+            >&nbsp;&nbsp;
+            <a
+              href="http://localhost:8081/gestionstock-alamine/v1/versements/downloadVersementFile/{{
+                versmnt.fileVersement
+              }}"
+              class="cv"
+              >&nbsp;&nbsp;
+              <em
+                class="fa fa-download"
+                style="cursor: pointer; align-items: flex-end"
+              ></em
+              >&nbsp;&nbsp;
+            </a>
+          </td>
+          <td>{{ versmnt.dateVersement}}</td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="viewVersement(i)">
+              <i class="fa fa-eye" aria-hidden="true"></i></button
+            >&nbsp;
+            <button class="btn btn-info btn-sm" (click)="addEditVersement(i)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
+            >&nbsp;
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteVersement(versmnt.id)"
+            >
+              <i class="fa fa-trash-o"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

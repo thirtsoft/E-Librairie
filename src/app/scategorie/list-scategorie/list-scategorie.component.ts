@@ -24,9 +24,6 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   scat: Scategorie;
   ScatID: number;
 
-
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -40,13 +37,11 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
   constructor(public crudApi: ScategorieService,
               public fb: FormBuilder,
               public toastr: ToastrService,
-              private router : Router,
               private matDialog: MatDialog,
-              private route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dialogService: DialogService,
               public dialogRef:MatDialogRef<CreateScategorieComponent>,
-    ) {
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -65,7 +60,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllScategorieOrderDesc().subscribe(
       response =>{
-        this.crudApi.listData = response;
+        this.listData = response;
         this.dtTrigger.next();
       }
     );

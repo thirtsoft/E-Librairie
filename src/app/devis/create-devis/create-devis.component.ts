@@ -77,17 +77,29 @@ export class CreateDevisComponent implements OnInit {
       this.f['dateDevis'].setValue(this.crudApi.formData.value.dateDevis);
     }
 
-    this.clientService.getAllClients().subscribe(
+    this.getListOfClient();
+
+   /*  this.clientService.getAllClients().subscribe(
       response =>{
         this.ClientList = response;
         console.log(response);
       }
-    );
+    ); */
 
     this.crudApi.generateNumeroDevis();
 
     this.dashboardService.getUserId();
 
+  }
+
+  getListOfClient() {
+    this.clientService.getAllClients()
+      .subscribe(
+        response => {
+          this.ClientList = response;
+          console.log(response);
+        }
+      )
   }
 
   getNumeroDevis() {
@@ -114,6 +126,7 @@ export class CreateDevisComponent implements OnInit {
       ldevis: [[], Validators.required],
     });
   }
+
   compareClient(client1: Client, client2: Client) : boolean {
     return client1 && client2 ? client1.id === client2.id : client1 === client2;
   }
@@ -133,30 +146,58 @@ export class CreateDevisComponent implements OnInit {
     });
 
   }
+
   calculMontantTotal() {
     this.f['totalDevis'].setValue(this.crudApi.list.reduce((prev, curr) => {
       return prev + curr.total;
     }, 0));
   }
-  validateForm() {
+
+ /*  validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
       this.isValid = false
     else if (this.crudApi.list.length==0)
       this.isValid = false;
     return this.isValid;
+  } */
+
+  validateForm() {
+    this.isValid = false;
+    if ((this.crudApi.formData.value.numeroDevis == 0) || (this.crudApi.formData.value.totalDevis == 0) ||
+        (this.crudApi.formData.value.observation == '') || (this.ClientList == null)
+        || (this.crudApi.list == 0))
+      this.isValid = false;
+    else
+      this.isValid = true;
+    return this.isValid;
   }
 
   onSubmit() {
-    this.f['ldevis'].setValue(this.crudApi.list);
-    console.log(this.crudApi.formData.value);
-    this.crudApi.createDevis(this.crudApi.formData.value, this.dashboardService.id).subscribe(
-      data => {
-        console.log(this.crudApi.formData.value);
-        this.toastr.success('Devis Ajoutée avec succès');
-        console.log(this.crudApi.formData.value);
-        this.router.navigate(['/home/listdevis']);
+    if (this.validateForm()) {
+      this.f['ldevis'].setValue(this.crudApi.list);
+      console.log(this.crudApi.formData.value);
+      this.crudApi.createDevis(this.crudApi.formData.value, this.dashboardService.id).subscribe(
+        data => {
+          console.log(this.crudApi.formData.value);
+
+          this.toastr.success('avec succès','Devis Ajoutée', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
+
+          console.log(this.crudApi.formData.value);
+          this.router.navigate(['/home/listdevis']);
+        });
+
+    } else {
+      this.toastr.error('Veuillez remplir tous les champs','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
       });
+
+    }
+
   }
 
   OnSelectClient(ctrl) {

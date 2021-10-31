@@ -85,9 +85,6 @@ export class CreateVenteComponent implements OnInit {
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
-    //  venteId: null,
-    //  numeroVente: Math.floor(100000 + Math.random() * 900000).toString(),
-
       numeroVente: this.crudApi.NumVente,
       total: [0, Validators.required],
       totalVente: [0, Validators.required],
@@ -124,7 +121,7 @@ export class CreateVenteComponent implements OnInit {
     }, 0));
   }
 
-  validateForm() {
+ /*  validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
       this.isValid = false
@@ -132,21 +129,47 @@ export class CreateVenteComponent implements OnInit {
       this.isValid = false;
     return this.isValid;
   }
+ */
+
+  validateForm() {
+    this.isValid = false;
+    if ((this.crudApi.formData.value.numeroVente == 0) || (this.crudApi.formData.value.totalVente == 0) ||
+        (this.crudApi.formData.value.typeReglement == '') || (this.crudApi.formData.value.montantReglement == 0)
+        || (this.crudApi.formData.value.status == '') || (this.crudApi.list == 0))
+      this.isValid = false;
+    else
+      this.isValid = true;
+    return this.isValid;
+  }
 
   onSubmit() {
-    this.f['ligneVentes'].setValue(this.crudApi.list);
-    console.log(this.crudApi.formData.value);
-    console.log(this.crudApi.formData.value.numeroVente);
-    console.log(this.crudApi.formData.value, this.crudApi.id);
+    if (this.validateForm()) {
+      this.f['ligneVentes'].setValue(this.crudApi.list);
+      console.log(this.crudApi.formData.value);
+      console.log(this.crudApi.formData.value.numeroVente);
+      console.log(this.crudApi.formData.value, this.crudApi.id);
 
-    this.crudApi.saveVente(this.crudApi.formData.value, this.crudApi.id).subscribe(
-      data => {
-        console.log(data);
-        this.toastr.success('Vente Effectuée avec succès');
+      this.crudApi.saveVente(this.crudApi.formData.value, this.crudApi.id)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.toastr.success('avec succès','Vente Effectuée', {
+              timeOut: 1500,
+              positionClass: 'toast-top-right',
+            });
 
-        this.router.navigate(['/home/ventes']);
-      }
-    );
+            this.router.navigate(['/home/ventes']);
+          }
+        );
+
+    }else {
+      this.toastr.error('Veuillez remplir tous les champs','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+
+    }
+
 
 
   }

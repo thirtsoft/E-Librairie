@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-md-10 col-md-offset-2">
-    <h2>CatégorieCharge</h2>
+  <div class="col-md-12">
+    <h1>CATEGORIE CHARGE</h1>
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
         <input type="hidden"  formControlName="id" id="id">
         <div class="form-group">
@@ -21,20 +21,15 @@
             <span *ngIf="f['nomCategorieCharge'].errors.required">Designation obligatoire.</span>
             <span *ngIf="f['nomCategorieCharge'].errors?.pattern">SVP, Donner une désignation avec des lettres de l'alphabet A-Z..</span>
           </div>
-
-        <!--   <div *ngIf="f['nomCategorieCharge'].invalid && (f['nomCategorieCharge'].dirty || f['nomCategorieCharge'].touched)" class="alert alert-danger">
-            <span *ngIf="f['nomCategorieCharge'].errors.required">
-              Designation obligatoire.
-            </span>
-          </div> -->
         </div>
 
         <div class="form-group">
           <button type="submit"
             class="btn btn-success"
             [disabled]="!this.crudApi.dataForm.valid"
-          ><em class="fa fa-database"></em> Submit</button>&nbsp;
-          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><em class="fa fa-close"></em> Close</button>
+          ><em class="fa fa-database"></em> Enregistrer </button>&nbsp;
+          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+            <em class="fa fa-close"></em> Fermer </button>
         </div>
     </form>
   </div>

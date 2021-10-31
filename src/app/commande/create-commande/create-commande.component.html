@@ -1,8 +1,15 @@
-<mat-toolbar color="success">
+<!-- <mat-toolbar color="success">
   <div>
     <h2>Gestion Commandes</h2>
   </div>
-</mat-toolbar>
+</mat-toolbar> -->
+
+
+  <div class="btn-toolbar">
+    <div class="panel-heading">
+      <h1>EFFECTUER UNE COMMANDE</h1>
+    </div>
+  </div>
 
 <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()">
   <input
@@ -77,7 +84,7 @@
     <!--</div> -->
 
     <!-- Debut Ligne de commandes -->
-    <table class="table table-borderless">
+    <table class="table table-borderless" aria-label="">
       <thead class="thead-light">
         <th>Désignation</th>
         <th>P.Unitaire</th>
@@ -142,3 +149,6 @@
     </a>
   </div>
 </form>
+
+
+

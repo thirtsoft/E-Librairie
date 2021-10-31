@@ -31,8 +31,6 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   listData : Categorie[];
   CatId: number;
 
-  private editForm: FormGroup;
-
   control: FormControl = new FormControl('');
 
   dtOptions: DataTables.Settings = {};
@@ -46,13 +44,11 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   constructor(public crudApi: CategorieService,
               private dialogService: DialogService,
               public toastr: ToastrService,
-              private router : Router,
-              private route: ActivatedRoute,
               private matDialog: MatDialog,
               public fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateCategorieComponent>,
-    ) {
+  ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
@@ -124,19 +120,18 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
       .subscribe(
         response =>{
           this.listData = response;
+          console.log(this.listData)
         }
       );
 
   }
 
   onCreateCategorie(){
-    this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("categories/new");
+    this.crudApi.choixmenu == 'A';
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="30%";
-    //dialogConfig.data="gdddd";
     this.matDialog.open(CreateCategorieComponent, dialogConfig);
   }
 

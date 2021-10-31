@@ -76,7 +76,8 @@ export class CreateContratComponent implements OnInit {
 
   // selectionner une image et la garder
   selectFileContrat(event) {
-    this.fileContrat = event.target.files[0];
+    const file = event.target.files[0];
+    this.fileContrat = file;
   }
 
   onSubmit() {

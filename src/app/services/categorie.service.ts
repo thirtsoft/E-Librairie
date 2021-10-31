@@ -35,13 +35,6 @@ export class CategorieService {
   private baseUrl_1 = environment.apiBaseUrl;
 
 
-//  private baseUrl = environment.apiBaseUrl;
-
-  private baseUrl = 'http://localhost:8081/api';
-//  private baseUrl_1 = 'http://localhost:8081/prodApi';
-  private baseUrl_2 = 'http://localhost:8081/apiSeller';
-
-
 /*   private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api'
   private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi'
   private baseUrl_2 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/apiSeller'
@@ -94,21 +87,20 @@ export class CategorieService {
 
   constructor(private http: HttpClient,
     private offlineService: OnlineofflineService) {
-     this.ouvrirStatusConnexion();
+  //   this.ouvrirStatusConnexion();
      this.makeDatabase();
      this.connectToDatabase();
-     this.addAllDataToIndexeddb();
-    // this.addDataToIndexedDB();
-    this.addAllDataScatToIndexeddb();
+  //   this.addAllDataToIndexeddb();
+//    this.addAllDataScatToIndexeddb();
 
-    this.addAllDataProdToIndexeddb();
-    this.addAllDataClientToIndexeddb();
+ //   this.addAllDataProdToIndexeddb();
+ //   this.addAllDataClientToIndexeddb();
 
-    this.addAllDataCommandeToIndexeddb();
-    this.addAllDataLigneCmdToIndexeddb();
+ //   this.addAllDataCommandeToIndexeddb();
+//    this.addAllDataLigneCmdToIndexeddb();
 
-    this.addAllDataVenteToIndexeddb();
-    this.addAllDataLigneVenteToIndexeddb();
+ //   this.addAllDataVenteToIndexeddb();
+ //   this.addAllDataLigneVenteToIndexeddb();
 
   }
 
@@ -118,7 +110,7 @@ export class CategorieService {
   }
 
   getAllCategoriesOrderDesc(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${this.baseUrl}/categorieCharges/allCategoryOrderDesc`);
+    return this.http.get<Categorie[]>(`${this.baseUrl_1}/categories/allCategoryOrderDesc`);
   }
 
   getCategorieByID(id:number):any {
@@ -153,6 +145,7 @@ export class CategorieService {
    * method pour importer les données de Excel à MySQL
    * @param formData
    */
+
   public uploadCategorieExcelFile(formData: FormData) {
 
     let headers = new HttpHeaders();
@@ -177,12 +170,14 @@ export class CategorieService {
     });
 
   }
+
   /**
    * methode permettant de generer un pdf depuis API Spring boot
    */
   exportPdfCategories(): Observable<Blob> {
     return this.http.get(`${this.baseUrl_1}/categories/createCategoriePdf`, {responseType: 'blob'});
   }
+
   // Methode pour Offline&Online et DexieJS
 
   // Créer la BD et la table
@@ -220,6 +215,7 @@ export class CategorieService {
     this.tableFour = this.db.table('fournisseur');
 
   }
+
   // ouvrir la base de données
   connectToDatabase(): void {
     this.db.open().catch((error) => {
@@ -227,13 +223,14 @@ export class CategorieService {
     });
 
   }
+
   /**
    * Récuper les données depuis les services workers
    * Et les enregistrer dans Dexie database
    *
    */
 
-  async addAllDataToIndexeddb() {
+ /*  async addAllDataToIndexeddb() {
     await this.http.get<Categorie[]>(`${this.baseUrl}/categories`).subscribe(response => {
       this.listDataCat = response;
       this.db.transaction('rw', this.tableCat, async ()=> {
@@ -245,9 +242,9 @@ export class CategorieService {
 
     })
 
-  }
+  } */
 
-  async addAllDataScatToIndexeddb() {
+  /* async addAllDataScatToIndexeddb() {
     await this.http.get<Scategorie[]>(`${this.baseUrl_1}/scategories`).subscribe(response => {
       this.listDataScat = response;
       this.db.transaction('rw', this.tableScat, async ()=> {
@@ -260,7 +257,6 @@ export class CategorieService {
   }
 
   private async addAllDataProdToIndexeddb() {
-  //  await this.http.get<Produit[]>('http://localhost:8081/prodApi/produits').subscribe(response => {
     await this.http.get<Produit[]>('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/produits').subscribe(response => {
       this.listDataProd = response;
       this.db.transaction('rw', this.tableProd, async ()=> {
@@ -274,7 +270,6 @@ export class CategorieService {
   }
 
   private async addAllDataClientToIndexeddb() {
-  //  await this.http.get<Client[]>('http://localhost:8081/prodApi/clients').subscribe(response => {
     await this.http.get<Client[]>('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/clients').subscribe(response => {
       this.listDataClient = response;
       console.log("Debut Client:" +this.listDataClient);
@@ -312,6 +307,7 @@ export class CategorieService {
     })
 
   }
+
   private async addAllDataVenteToIndexeddb() {
     await this.http.get<Vente[]>(`${this.baseUrl_2}/ventes`).subscribe(response => {
       this.listDataVente = response;
@@ -324,6 +320,7 @@ export class CategorieService {
     })
 
   }
+
   private async addAllDataLigneVenteToIndexeddb() {
     await this.http.get<Vente[]>(`${this.baseUrl_2}/ligneVentes`).subscribe(response => {
       this.listDataLigneVente = response;
@@ -337,8 +334,6 @@ export class CategorieService {
 
   }
   async addDataToIndexedDB() {
-
-  //  return fetch("http://localhost:8081/api/**").then(resp => {
     return fetch("http://localhost:8080/Library-0.0.1-SNAPSHOT/api/**").then(resp => {
       this.Data = resp;
       this.db.transaction('rw', this.tableCat, async () => {
@@ -352,8 +347,6 @@ export class CategorieService {
   }
 
   async addDataProdToIndexedDB() {
-
-  //  return fetch("http://localhost:8081/prodApi/**").then(resp => {
     return fetch("http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/**").then(resp => {
       this.Data = resp;
       this.db.transaction('rw', this.tableProd, async () => {
@@ -405,7 +398,6 @@ export class CategorieService {
     this.offlineService.statusConnexion
       .subscribe(online => {
         if(online) {
-        // this.sendDataFromIndexedDbToAPI();
          this.sendDataVenteFromIndexedDbToAPI();
         }else {
           console.log('Mode offline active');
@@ -448,6 +440,6 @@ export class CategorieService {
       await this.tableVent.delete(vente.id);
       console.log('Vente com id ${categorie.id} foi excluddo com successfull');
     }
-  }
+  } */
 
 }

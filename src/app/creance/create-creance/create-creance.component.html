@@ -1,100 +1,162 @@
 <mat-toolbar color="success">
-  <div><h1>Gestion Creances</h1>
-  </div>
+  <div><h1>AJOUTER UNE CREANCE</h1></div>
 </mat-toolbar>
 
 <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()">
-  <input  type="hidden"  class="form-control" formControlName="client" id="client" >
+  <input
+    type="hidden"
+    class="form-control"
+    formControlName="client"
+    id="client"
+  />
   <div class="row col-md-12">
     <div class="row">
       <div class="form-row col-sm-4 mb-3 mb-sm-0">
         <label><strong>Référence : </strong></label>
-        <input type="text" class="form-control" formControlName="reference" id="reference" readonly>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="reference"
+          id="reference"
+          readonly
+        />
       </div>
       <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Code Creance</label>
-        <input type="text" formControlName="codeCreance" class="form-control" id="codeCreance">
+        <input
+          type="text"
+          formControlName="codeCreance"
+          class="form-control"
+          id="codeCreance"
+        />
       </div>
       <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Somme Empruntée</label>
-        <input type="text" formControlName="soldeCreance" class="form-control" id="soldeCreance">
+        <input
+          type="text"
+          formControlName="soldeCreance"
+          class="form-control"
+          id="soldeCreance"
+        />
       </div>
 
       <div class="form-group col-sm-3 mb-3 mb-sm-0">
         <label>Client</label>
         <div class="form-group">
-          <select name="client" formControlName="client" id="client" class="form-control"
-              [compareWith]="compareClient">
+          <select
+            name="client"
+            formControlName="client"
+            id="client"
+            class="form-control"
+            [compareWith]="compareClient"
+          >
             <option value="0">-Select-</option>
-            <option *ngFor="let item of ClientList" [ngValue]="item">{{item.chefService}}</option>
+            <option *ngFor="let item of ClientList" [ngValue]="item">
+              {{ item.chefService }}
+            </option>
           </select>
         </div>
       </div>
 
       <div class="form-group col-sm-3 mb-3 mb-sm-0">
         <label>Avance</label>
-        <input type="text" formControlName="avanceCreance" class="form-control" id="nbreJours">
+        <input
+          type="text"
+          formControlName="avanceCreance"
+          class="form-control"
+          id="avanceCreance"
+        />
       </div>
       <div class="form-group col-sm-2 mb-3 mb-sm-0">
         <label>Délais</label>
-        <input type="text" formControlName="nbreJours" class="form-control" id="nbreJours">
+        <input
+          type="text"
+          formControlName="nbreJours"
+          class="form-control"
+          id="nbreJours"
+        />
       </div>
       <div class="form-group col-sm-3 mb-3 mb-sm-0">
         <label>Status</label>
-        <select name="client" formControlName="status" id="status" class="form-control"
-          [compareWith]="compareClient">
+        <select
+          name="status"
+          formControlName="status"
+          id="status"
+          class="form-control"
+          [compareWith]="compareClient"
+        >
           <option value="MORATOIRE">MORATOIRE</option>
           <option value="NONPAYEE">NONPAYEE</option>
           <option value="PAYEE">PAYEE</option>
         </select>
-      <!--  <input type="text" formControlName="status" class="form-control" id="status"> -->
+        <!--  <input type="text" formControlName="status" class="form-control" id="status"> -->
       </div>
     </div>
-  <!--</div> -->
+    <!--</div> -->
 
     <!-- Debut Ligne de creances -->
-    <table class="table table-borderless">
+    <table class="table table-borderless" aria-label="">
       <thead class="thead-light">
         <th>Article</th>
         <th>P.Unitaire</th>
         <th>Quantite</th>
         <th>P.Total</th>
         <th>
-          <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)">
-              <i class="fa fa-plus"></i>Ajouter
+          <a
+            class="btn btn-sm btn-success text-white"
+            (click)="AddData(null, 1)"
+          >
+            <em class="fa fa-plus"></em>Ajouter
           </a>
         </th>
       </thead>
       <tbody>
-        <tr *ngIf="crudApi.list.length==0" [class.text-danger]="!isValid && crudApi.list.length ==0">
+        <tr
+          *ngIf="crudApi.list.length == 0"
+          [class.text-danger]="!isValid && crudApi.list.length == 0"
+        >
           <td class="font-italic text-center" colspan="4">
-              Aucun Article pour cette Creance ...
+            Aucun Article pour cette Creance ...
           </td>
         </tr>
-        <tr *ngFor="let item of crudApi.list;let i=index;">
-          <td>{{item.ItemName}}</td>
-          <td>{{item.prix}}</td>
-          <td>{{item.quantite}}</td>
-          <td>{{item.total}}</td>
+        <tr *ngFor="let item of crudApi.list; let i = index">
+          <td>{{ item.ItemName }}</td>
+          <td>{{ item.prix }}</td>
+          <td>{{ item.quantite }}</td>
+          <td>{{ item.total }}</td>
           <td>
-            <a class="btn btn-sm btn-info text-white" (click)="AddData(i,1)">
-                <i class="fa fa-pencil"></i></a>
-            <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.id,i)">
-                <i class="fa fa-trash"></i></a>
+            <a class="btn btn-sm btn-info text-white" (click)="AddData(i, 1)">
+              <em class="fa fa-pencil"></em
+            ></a>
+            <a
+              class="btn btn-sm btn-danger text-white ml-1"
+              (click)="onDeleteOrderItem(item.id, i)"
+            >
+              <em class="fa fa-trash"></em
+            ></a>
           </td>
         </tr>
       </tbody>
     </table>
     <!-- Fin  Ligne de creances -->
-    <div class="form-group col-sm-4 mb-sm-0" style="padding-left: 0px;">
+    <div class="form-group col-sm-4 mb-sm-0" style="padding-left: 0px">
       <label><strong>Total Ht : </strong></label>
-      <input type="text" id="totalCreance" formControlName="totalCreance" class="form-control" readonly>
+      <input
+        type="text"
+        id="totalCreance"
+        formControlName="totalCreance"
+        class="form-control"
+        readonly
+      />
     </div>
   </div>
 
   <div class="form-group">
-    <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;&nbsp;
-    <a class="btn btn-sm btn-primary ml-1" routerLink="/home/detailsCreances"><i class="fa fa-plus-square"></i> Liste </a>
+    <button type="submit" class="btn btn-lg btn-success">
+      <em class="fa fa-database"></em> Enregistrer </button
+    >&nbsp;&nbsp;
+    <a class="btn btn-lg btn-primary ml-1" routerLink="/home/detailsCreances"
+      ><em class="fa fa-plus-square"></em> Details Creances
+    </a>
   </div>
-
 </form>

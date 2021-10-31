@@ -40,7 +40,7 @@
           type="number"
           formControlName="montantReglement"
           class="form-control"
-          id="status"
+          id="montantReglement"
         />
       </div>
 
@@ -48,7 +48,7 @@
     <!--</div> -->
 
     <!-- Debut Ligne de commandes -->
-    <table class="table table-borderless">
+    <table class="table table-borderless" aria-label="">
       <thead class="thead-light">
         <th>Désignation</th>
         <th>P.Unitaire</th>
@@ -59,7 +59,7 @@
             class="btn btn-sm btn-success text-white"
             (click)="AddData(null, 1)"
           >
-            <i class="fa fa-plus"></i>Ajouter
+            <em class="fa fa-plus"></em>Ajouter
           </a>
         </th>
       </thead>
@@ -79,13 +79,13 @@
           <td>{{ item.total }}</td>
           <td>
             <a class="btn btn-sm btn-info text-white" (click)="AddData(i, 1)">
-              <i class="fa fa-pencil"></i
+              <em class="fa fa-pencil"></em
             ></a>
             <a
               class="btn btn-sm btn-danger text-white ml-1"
               (click)="onDeleteOrderItem(item.id, i)"
             >
-              <i class="fa fa-trash"></i
+              <em class="fa fa-trash"></em
             ></a>
           </td>
         </tr>
@@ -106,10 +106,10 @@
 
   <div class="form-group">
     <button type="submit" class="btn btn-lg btn-success">
-      <i class="fa fa-database"></i> Submit</button
+      <em class="fa fa-database"></em> Enregistrer </button
     >&nbsp;&nbsp;
-    <a class="btn btn-sm btn-primary ml-1" routerLink="/home/detailsVentes"
-      ><i class="fa fa-plus-square"></i> Liste
+    <a class="btn btn-lg btn-primary ml-1" routerLink="/home/detailsVentes"
+      ><em class="fa fa-plus-square"></em> Détails Ventes
     </a>
   </div>
 </form>

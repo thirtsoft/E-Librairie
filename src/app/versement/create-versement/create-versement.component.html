@@ -1,34 +1,57 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1>Nouveau Versement</h1>
+    <h1>NOUVEAU VERSEMENT</h1>
     <form #addVersmentForm="ngForm" name="form" (ngSubmit)="onSubmit()">
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataVersement.id">
+      <input
+        type="hidden"
+        name="id"
+        #id="ngModel"
+        [(ngModel)]="formDataVersement.id"
+      />
       <div class="row">
         <div class="form-group col-md-6">
           <label>Numéro </label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numVersement"
-            name="numVersement" id="numVersement"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.numVersement"
+            name="numVersement"
+            id="numVersement"
             #numVersement="ngModel"
             required
             placeholder="Numéro compte de versmement"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (numVersement.touched || addVersmentForm.submitted) &&
+              numVersement.errors?.required
+            "
           >
-          <span class="text-danger"
-              *ngIf="(numVersement.touched || addVersmentForm.submitted) && numVersement.errors?.required">
-              Numéro est obligatoire
+            Numéro est obligatoire
           </span>
         </div>
 
         <div class="form-group col-md-6">
           <label>Numéro Reçu</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numeroRecu"
-            name="numeroRecu" id="numeroRecu"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.numeroRecu"
+            name="numeroRecu"
+            id="numeroRecu"
             #numeroRecu="ngModel"
             required
             placeholder="Numéro du réçu de versmement"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (numeroRecu.touched || addVersmentForm.submitted) &&
+              numeroRecu.errors?.required
+            "
           >
-          <span class="text-danger"
-              *ngIf="(numeroRecu.touched || addVersmentForm.submitted) && numeroRecu.errors?.required">
-              Numéro Reçu est obligatoire
+            Numéro Reçu est obligatoire
           </span>
         </div>
       </div>
@@ -36,23 +59,36 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label>Nature</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nature" name="nature"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.nature"
+            name="nature"
             id="nature"
             required
             placeholder="Nature de versement"
-          >
+          />
         </div>
         <div class="form-group col-md-6">
           <label>Bank</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nomBank"
-            name="nomBank" id="nomBank"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.nomBank"
+            name="nomBank"
+            id="nomBank"
             #nomBank="ngModel"
             required
             placeholder="Nom de la banque"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (nomBank.touched || addVersmentForm.submitted) &&
+              nomBank.errors?.required
+            "
           >
-          <span class="text-danger"
-              *ngIf="(nomBank.touched || addVersmentForm.submitted) && nomBank.errors?.required">
-              Nom Bank est obligatoire
+            Nom Bank est obligatoire
           </span>
         </div>
       </div>
@@ -60,72 +96,134 @@
         <div class="form-group col-md-6">
           <label>Employe</label>
           <div class="form-group">
-            <select name="employe" id="employe" [(ngModel)]="formDataVersement.employe" class="form-control">
+            <select
+              name="employe"
+              id="employe"
+              [(ngModel)]="formDataVersement.employe"
+              class="form-control"
+            >
               <option [ngValue]="null">--Select--</option>
-              <option *ngFor="let emp of listEmployes" [ngValue]="emp.id == formDataVersement.employe?.id ? formDataVersement.employe : emp">{{emp.prenom}}  {{emp.nom}}</option>
+              <option
+                *ngFor="let emp of listEmployes"
+                [ngValue]="
+                  emp.id == formDataVersement.employe?.id
+                    ? formDataVersement.employe
+                    : emp
+                "
+              >
+                {{ emp.prenom }} {{ emp.nom }}
+              </option>
             </select>
           </div>
         </div>
 
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataVersement.montantVersement"
-            name="montantVersement" id="montantVersement"
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="formDataVersement.montantVersement"
+            name="montantVersement"
+            id="montantVersement"
             #montantVersement="ngModel"
             required
             placeholder="Montant de versment: 150000"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (montantVersement.touched || addVersmentForm.submitted) &&
+              montantVersement.errors?.required
+            "
           >
-          <span class="text-danger"
-            *ngIf="(montantVersement.touched || addVersmentForm.submitted) && montantVersement.errors?.required">
-             Montant Versement obligatoire
+            Montant Versement obligatoire
           </span>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Joindre fichier Pdf </label>
-          <input type="file"  id="fileVersement" class="form-control" [(ngModel)]="formDataVersement.fileVersement"
-            #fileVersement="ngModel" name="fileVersement"
-            (change)="selectFileVersement($event)" style="height:100%" required>
-          <span class="text-danger"
-            *ngIf="(fileVersement.touched || addVersmentForm.submitted) && fileVersement.errors?.required">
-             Veuillez joindre le réçu du Versement
+          <input
+            type="file"
+            id="fileVersement"
+            class="form-control"
+            [(ngModel)]="formDataVersement.fileVersement"
+            #fileVersement="ngModel"
+            name="fileVersement"
+            (change)="selectFileVersement($event)"
+            style="height: 100%"
+            required
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (fileVersement.touched || addVersmentForm.submitted) &&
+              fileVersement.errors?.required
+            "
+          >
+            Veuillez joindre le réçu du Versement
           </span>
         </div>
         <div class="form-group col-md-6">
           <label>Date</label>
-          <input type="date" class="form-control" [(ngModel)]="formDataVersement.dateVersement"
-            name="dateVersement" id="dateVersement" #dateVersement="ngModel"
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="formDataVersement.dateVersement"
+            name="dateVersement"
+            id="dateVersement"
+            #dateVersement="ngModel"
             required
             placeholder="Date de versement"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (dateVersement.touched || addVersmentForm.submitted) &&
+              dateVersement.errors?.required
+            "
           >
-          <span class="text-danger"
-            *ngIf="(dateVersement.touched || addVersmentForm.submitted) && dateVersement.errors?.required">
             Date Versement est obligatoire
           </span>
         </div>
       </div>
 
-
       <div class="form-group">
         <label>Motif</label>
-        <textarea class="form-control" [(ngModel)]="formDataVersement.motif"
-            name="motif" #motif="ngModel" required  id="motif" cols="4" rows="3"
-            placeholder="Commentaire sur le versement: Pourquoi vous avez fait ce versement"
+        <textarea
+          class="form-control"
+          [(ngModel)]="formDataVersement.motif"
+          name="motif"
+          #motif="ngModel"
+          required
+          id="motif"
+          cols="4"
+          rows="3"
+          placeholder="Commentaire sur le versement: Pourquoi vous avez fait ce versement"
         ></textarea>
-        <span class="text-danger"
-          *ngIf="(motif.touched || addVersmentForm.submitted) && motif.errors?.required">
-            Motif est obligatoire
+        <span
+          class="text-danger"
+          *ngIf="
+            (motif.touched || addVersmentForm.submitted) &&
+            motif.errors?.required
+          "
+        >
+          Motif est obligatoire
         </span>
       </div>
 
       <div class="form-group">
-        <button type="submit"
+        <button
+          type="submit"
           class="btn btn-success"
           [disabled]="!addVersmentForm.valid"
-        ><em class="fa fa-database"></em> Submit</button>&nbsp;
-        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><em class="fa fa-close"></em> Close</button>
+        >
+          <em class="fa fa-database"></em> Enregistrer </button
+        >&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+          <em class="fa fa-close"></em> Fermer
+        </button>
       </div>
     </form>
- </div>
+  </div>
 </div>

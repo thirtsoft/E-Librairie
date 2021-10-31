@@ -4,14 +4,12 @@ import { FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { Devis } from '../models/devis';
 
-import { environment } from 'src/environments/environment';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DevisService {
-
-//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 
   private baseUrl = environment.apiBaseUrl;
 

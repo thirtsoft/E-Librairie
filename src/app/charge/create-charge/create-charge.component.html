@@ -1,29 +1,61 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-2">
-    <h1>Nouveau Charge</h1>
-    <form #addChargeForm="ngForm"  name="form" (ngSubmit)="addChargeForm.form.valid && onSubmit()">
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataContrat.id">
+    <h1>AJOUTER UNE NOUVELLE CHARGE</h1>
+    <form
+      #addChargeForm="ngForm"
+      name="form"
+      (ngSubmit)="addChargeForm.form.valid && onSubmit()"
+    >
+      <input
+        type="hidden"
+        name="id"
+        #id="ngModel"
+        [(ngModel)]="formDataContrat.id"
+      />
       <div class="row">
         <div class="form-group col-md-6">
           <label>Code Charge </label>
-          <input type="text" class="form-control" [(ngModel)]="formDataContrat.codeCharge"
-            name="codeCharge" id="codeCharge" #codeCharge="ngModel" required placeholder="code charge">
-          <span class="text-danger"
-              *ngIf="(codeCharge.touched || addChargeForm.submitted) && codeCharge.errors?.required">
-              Code Charge est obligatoire
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataContrat.codeCharge"
+            name="codeCharge"
+            id="codeCharge"
+            #codeCharge="ngModel"
+            required
+            placeholder="code charge"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (codeCharge.touched || addChargeForm.submitted) &&
+              codeCharge.errors?.required
+            "
+          >
+            Code Charge est obligatoire
           </span>
         </div>
 
         <div class="form-group col-md-6">
           <label>Désignation</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataContrat.nature"
-            name="nature" id="nature" #nature="ngModel"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataContrat.nature"
+            name="nature"
+            id="nature"
+            #nature="ngModel"
             required
             placeholder="Libellé charge"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (nature.touched || addChargeForm.submitted) &&
+              nature.errors?.required
+            "
           >
-          <span class="text-danger"
-            *ngIf="(nature.touched || addChargeForm.submitted) && nature.errors?.required">
-              Désignation est obligatoire
+            Désignation est obligatoire
           </span>
         </div>
       </div>
@@ -31,43 +63,70 @@
         <div class="form-group col-md-6">
           <label>Categorie</label>
           <div class="form-group">
-            <select name="categorieCharge" id="categorieCharge" [(ngModel)]="formDataContrat.categorieCharge" class="form-control">
+            <select
+              name="categorieCharge"
+              id="categorieCharge"
+              [(ngModel)]="formDataContrat.categorieCharge"
+              class="form-control"
+            >
               <option [ngValue]="0">-Select-</option>
-              <option *ngFor="let catCharge of listCategorieCharge" [ngValue]="catCharge.id == formDataContrat.categorieCharge?.id ? formDataContrat.categorieCharge : catCharge">{{catCharge.nomCategorieCharge}}</option>
+              <option
+                *ngFor="let catCharge of listCategorieCharge"
+                [ngValue]="
+                  catCharge.id == formDataContrat.categorieCharge?.id
+                    ? formDataContrat.categorieCharge
+                    : catCharge
+                "
+              >
+                {{ catCharge.nomCategorieCharge }}
+              </option>
             </select>
           </div>
         </div>
 
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataContrat.montantCharge"
-            name="montantCharge" id="montantCharge"
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="formDataContrat.montantCharge"
+            name="montantCharge"
+            id="montantCharge"
             #montantCharge="ngModel"
             required
             placeholder="Montant de charge : 5000"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (montantCharge.touched || addChargeForm.submitted) &&
+              montantCharge.errors?.required
+            "
           >
-          <span class="text-danger"
-            *ngIf="(montantCharge.touched || addChargeForm.submitted) && montantCharge.errors?.required">
-              Montant est obligatoire
+            Montant est obligatoire
           </span>
         </div>
       </div>
-     <!--  <div class="row">
+      <!--  <div class="row">
         <div class="form-group col-md-6">
           <label>Date</label>
           <input type="date" class="form-control" [(ngModel)]="formDataContrat.date" name="date"  id="date">
         </div>
       </div> -->
       <div class="form-group">
-        <button type="submit" class="btn btn-success"
+        <button
+          type="submit"
+          class="btn btn-success"
           [disabled]="!addChargeForm.valid"
         >
-          <em class="fa fa-database"></em> Submit</button>&nbsp;
+          <em class="fa fa-database"></em> Enregistrer </button
+        >&nbsp;
         <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
-          <em class="fa fa-close"></em> Close</button>
+          <em class="fa fa-close"></em> Fermer
+        </button>
       </div>
     </form>
- </div>
+  </div>
 </div>
 
 <!--
@@ -115,6 +174,3 @@
   </div>
 </div>
 -->
-
-
-

@@ -3,45 +3,78 @@
     <div class="panel-heading">
       <h1>GESTION DES CONTRATS</h1>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="addEditContrat(null)"
-        class="btn btn-success btn-lg" ><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a>&nbsp;
+    <div style="padding-left: 20px; padding-top: 10px">
+      <a
+        type="button"
+        (click)="addEditContrat(null)"
+        class="btn btn-success btn-lg"
+        ><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
+      >&nbsp;
     </div>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
-          [dtTrigger]="dtTrigger">
-
-  <thead>
-    <tr>
-      <th>Reference</th><th>Client</th><th>Montant</th><th>Contrat</th>
-      <th>Date</th><th>Date-Fin</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cont of crudApi.listData; let i=index;">
-      <td>{{cont.reference}}</td>
-      <td>{{cont.client?.raisonSocial}} - {{cont.client?.chefService}}</td>
-      <td>{{cont.montantContrat}}</td>
-      <td>{{cont.fileContrat}}
-        &nbsp;<a (click)="addEditContratFile(i)" style="cursor:pointer; align-items: flex-end;">
-          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-        </a>&nbsp;&nbsp;
-        <a href="http://localhost:8081/alAmine/downloadContratFile/{{cont.fileContrat}}"
-                class="cv">&nbsp;&nbsp;
-          <i class="fa fa-download" style="cursor:pointer; align-items: flex-end;"></i>&nbsp;&nbsp;
-        </a>
-      </td>
-      <td>{{cont.dateDebutContrat| date:'dd/MM/yyyy'}}</td>
-      <td>{{cont.dateFinContrat| date:'dd/MM/yyyy'}}</td>
-      <td>
-        <button class="btn btn-success btn-sm" (click)="viewContrat(i)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
-        <button class="btn btn-info btn-sm" (click)="addEditContrat(i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
-        <button class="btn btn-danger btn-sm" (click)="deleteContrat(cont.id)"><i class="fa fa-trash-o"></i>  </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
+  </div>
+  <div class="panel-body">
+    <table
+      class="table table-striped table-bordered table-sm row-border hover"
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+    >
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Client</th>
+          <th>Montant</th>
+          <th>Contrat</th>
+          <th>Date</th>
+          <th>Date-Fin</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cont of crudApi.listData; let i = index">
+          <td>{{ cont.reference }}</td>
+          <td>
+            {{ cont.client?.raisonSocial }} - {{ cont.client?.chefService }}
+          </td>
+          <td>{{ cont.montantContrat }}</td>
+          <td>
+            {{ cont.fileContrat }} &nbsp;<a
+              (click)="addEditContratFile(i)"
+              style="cursor: pointer; align-items: flex-end"
+            >
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a
+            >&nbsp;&nbsp;
+            <a
+              href="http://localhost:8081/gestionstock-alamine/v1/contrats/downloadContratFile/{{
+                cont.fileContrat
+              }}"
+              class="cv"
+              >&nbsp;&nbsp;
+              <em
+                class="fa fa-download"
+                style="cursor: pointer; align-items: flex-end"
+              ></em
+              >&nbsp;&nbsp;
+            </a>
+          </td>
+          <td>{{ cont.dateDebutContrat }}</td>
+          <td>{{ cont.dateFinContrat  }}</td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="viewContrat(i)">
+              <i class="fa fa-eye" aria-hidden="true"></i></button
+            >&nbsp;
+            <button class="btn btn-info btn-sm" (click)="addEditContrat(i)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
+            >&nbsp;
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteContrat(cont.id)"
+            >
+              <i class="fa fa-trash-o"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

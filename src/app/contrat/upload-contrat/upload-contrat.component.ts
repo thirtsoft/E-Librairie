@@ -19,10 +19,13 @@ export class UploadContratComponent implements OnInit {
   contratFile: File;
   formDataContrat: Contrat = new Contrat();
 
-  constructor(public crudApi: ContratService, public toastr: ToastrService, public fb: FormBuilder,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<UploadContratComponent>,
-    ) { }
+  constructor(public crudApi: ContratService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<UploadContratComponent>,
+  ) { }
 
   ngOnInit() {
     if (!isNullOrUndefined(this.data.id)) {

@@ -118,7 +118,7 @@ export class CreateCommandeComponent implements OnInit {
     }, 0));
   }
 
-  validateForm() {
+ /*  validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
       this.isValid = false
@@ -126,17 +126,43 @@ export class CreateCommandeComponent implements OnInit {
       this.isValid = false;
     return this.isValid;
   }
+ */
+  validateForm() {
+    this.isValid = false;
+    if ((this.crudApi.formData.value.numeroCommande == 0) || (this.crudApi.formData.value.totalCommande == 0) ||
+        (this.crudApi.formData.value.typeReglement == '') || (this.crudApi.formData.value.montantReglement == 0)
+        || (this.crudApi.list == 0) || (this.ClientList == null))
+      this.isValid = false;
+    else
+      this.isValid = true;
+    return this.isValid;
+  }
+
 
   onSubmit() {
-    this.f['lcomms'].setValue(this.crudApi.list);
-    console.log(this.crudApi.formData.value);
-    this.crudApi.saveCommande(this.crudApi.formData.value, this.dashboardService.id).subscribe(
-      data => {
-        console.log(this.crudApi.formData.value);
-        this.toastr.success('Commande Ajoutée avec succès');
-        console.log(this.crudApi.formData.value);
-        this.router.navigate(['/home/listcommandes']);
+    if (this.validateForm()) {
+      this.f['lcomms'].setValue(this.crudApi.list);
+      console.log(this.crudApi.formData.value);
+      this.crudApi.saveCommande(this.crudApi.formData.value, this.dashboardService.id).subscribe(
+        data => {
+          console.log(this.crudApi.formData.value);
+          this.toastr.success('Commande Ajoutée avec succès');
+          this.toastr.success('avec succès','Commande Ajoutée', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
+
+          console.log(this.crudApi.formData.value);
+          this.router.navigate(['/home/listcommandes']);
+        });
+
+    }else {
+      this.toastr.error('Veuillez remplir tous les champs','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
       });
+
+    }
 
   }
 

@@ -1,35 +1,40 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h3>GESTION DES CATEGORIES DE CHARGES</h3>
+      <h1>GESTION DES CATEGORIES DE CHARGES</h1>
     </div>
 
     <div class="row" style="padding-left: 20px; padding-top: 10px;">
       <div class="col-md-1">
         <button (click)="onCreateCategorieCharge()"
-          class="btn btn-success btn-lg"
-        >
+          class="btn btn-success btn-lg">
           <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</button>
       </div>
 
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
-        [dtTrigger]="dtTrigger">
+    <table class="table table-striped table-bordered table-sm row-border hover"
+      datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger" aria-label="">
       <thead>
         <tr>
-          <th>Code</th><th>Designation</th>
+          <th>#</th><th>Code</th><th>Designation</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let catCharge of listData">
+          <td>{{catCharge.id}}</td>
           <td>{{catCharge.codeCategorieCharge}}</td>
           <td>{{catCharge.nomCategorieCharge}}</td>
           <td>
-            <button class="btn btn-info btn-sm" (click)="selectData(catCharge)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
-            <button class="btn btn-danger btn-sm" (click)="deleteCategorieCharge(catCharge.id)"><i class="fa fa-trash-o"></i>  </button>
+            <button class="btn btn-info btn-sm" (click)="selectData(catCharge)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>&nbsp;
+            <button class="btn btn-danger btn-sm"
+              (click)="deleteCategorieCharge(catCharge.id)">
+              <em class="fa
+                fa-trash-o"></em> </button>
           </td>
         </tr>
       </tbody>

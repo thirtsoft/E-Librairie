@@ -123,26 +123,51 @@ export class CreateCreanceComponent implements OnInit {
     }, 0));
   }
 
-  validateForm() {
+/*   validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
       this.isValid = false
     else if (this.crudApi.list.length==0)
       this.isValid = false;
     return this.isValid;
+  } */
+
+  validateForm() {
+    this.isValid = false;
+    if ((this.crudApi.formData.value.reference == 0) || (this.crudApi.formData.value.totalCreance == 0)
+      || (this.crudApi.formData.value.status == '') || (this.crudApi.formData.value.nbreJours == 0)
+      || (this.crudApi.list == 0) || (this.ClientList == null))
+      this.isValid = false;
+    else
+      this.isValid = true;
+    return this.isValid;
   }
 
+
   onSubmit() {
-    this.f['lcreances'].setValue(this.crudApi.list);
-    console.log(this.crudApi.formData.value);
-    this.crudApi.createCreance(this.crudApi.formData.value, this.dashboardService.id).subscribe(
-      data => {
-        console.log(this.crudApi.formData.value);
-        this.toastr.success('Creance Ajoutée avec succès');
-        console.log(this.crudApi.formData.value);
-        this.router.navigate(['/home/creances']);
-      }
-    );
+    if (this.validateForm()) {
+      this.f['lcreances'].setValue(this.crudApi.list);
+      console.log(this.crudApi.formData.value);
+      this.crudApi.createCreance(this.crudApi.formData.value, this.dashboardService.id)
+        .subscribe(
+          data => {
+            console.log(this.crudApi.formData.value);
+            this.toastr.success('avec succès','Creance Ajoutée', {
+              timeOut: 1500,
+              positionClass: 'toast-top-right',
+            });
+            this.router.navigate(['/home/creances']);
+          }
+        );
+
+    }else {
+      this.toastr.error('Veuillez remplir tous les champs','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+
+    }
+
   }
 
   onDeleteOrderItem(id: number, i: number) {

@@ -40,12 +40,17 @@ export class ViewAvoirComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: AvoirService, public lavoirService: LigneAvoirService,
-    public toastr: ToastrService, public fb: FormBuilder, private datePipe : DatePipe,
-    private router : Router, private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any, public route: ActivatedRoute,
-    public dialogRef:MatDialogRef<CreateAvoirComponent>,
-    ) { }
+  constructor(public crudApi: AvoirService,
+              public lavoirService: LigneAvoirService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private datePipe : DatePipe,
+              private router : Router,
+              private matDialog: MatDialog,
+              public route: ActivatedRoute,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateAvoirComponent>,
+  ) { }
 
   ngOnInit(): void {
     this.avoirId = this.route.snapshot.params.id;
@@ -155,7 +160,7 @@ export class ViewAvoirComponent implements OnInit {
         {
           columns: [
 
-            [
+           /*  [
               {
                 text: `AVOIR N° : ${this.lavoirService.listData[0].numero}`,
                 fontSize: 12,
@@ -163,7 +168,7 @@ export class ViewAvoirComponent implements OnInit {
                 margin: [0, 15, 0, 15]
               },
 
-            ],
+            ], */
 
             [
               {
@@ -176,15 +181,23 @@ export class ViewAvoirComponent implements OnInit {
           ]
         },
         {
-          text: 'AVOIR',
+          text: 'FACTURE AVOIR',
           alignment: 'center',
-          fontSize: 20,
+          fontSize: 15,
           color: '#0000ff',
           bold: true,
           margin: [0, 5, 0, 5],
         },
         {
-          text: 'Fournisseur  : ' +[(this.lavoirService.listData[0].avoir.fournisseur.prenom)+" "+(this.lavoirService.listData[0].avoir.fournisseur.nom)],
+          text: `N° : ${this.lavoirService.listData[0].avoir.reference}`,
+          bold: true,
+          fontSize: 14,
+          alignment: 'center',
+          color: '#0000ff',
+          margin: [0, 8, 0, 8]
+        },
+        {
+          text: 'Pour  : ' +[(this.lavoirService.listData[0].avoir.fournisseur.prenom)+" "+(this.lavoirService.listData[0].avoir.fournisseur.nom)],
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

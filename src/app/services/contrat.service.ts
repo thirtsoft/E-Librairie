@@ -54,12 +54,13 @@ export class ContratService {
     return this.http.post<Contrat>(`${this.baseUrl}/contrats/create`, info);
   }
 
-  public createContrat2(formData, fileContrat:File) {
-    const data:FormData= new FormData();
-    data.append('contrat',JSON.stringify(formData));
-    data.append('file',fileContrat);
 
-    return this.http.post(`${this.baseUrl}/contrats/createContrats`, data,  {responseType: 'text'});
+  public createContrat2(contrat, file:File) {
+    const data:FormData= new FormData();
+    data.append('contrat',JSON.stringify(contrat));
+    data.append('file',file);
+
+    return this.http.post(`${this.baseUrl}/contrats/createContrats`, data, {responseType: 'text'});
   }
 
   uploadContratFile(file: File, contId) {
@@ -70,8 +71,8 @@ export class ContratService {
     });
 
     return this.http.request(req);
-
   }
+
 
   public downloadFile(pathContrat: String){
   //  return this.http.get<any>("http://localhost:8081/alAmine/downloadContratFile"+"/"+ pathContrat);

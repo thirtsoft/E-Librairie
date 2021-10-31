@@ -100,29 +100,54 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
   }
 
-  validateForm() {
+ /*  validateForm() {
     this.isValid = true;
     if (this.crudApi.formData.value.id_client==0)
       this.isValid = false
     else if (this.listOfScannedBarCodes.length === 0)
       this.isValid = false;
     return this.isValid;
+  } */
+
+  validateForm() {
+    this.isValid = false;
+    if ((this.crudApi.formData.value.numeroVente == 0) || (this.crudApi.formData.value.totalVente == 0) ||
+        (this.crudApi.formData.value.typeReglement == '') || (this.crudApi.formData.value.montantReglement == 0)
+        || (this.crudApi.list == 0))
+      this.isValid = false;
+    else
+      this.isValid = true;
+    return this.isValid;
   }
 
   onSubmit() {
-    this.f['totalVente'].setValue(this.totalAmount);
-    this.f['ligneVentes'].setValue(this.listOfScannedBarCodes);
-    console.log(this.crudApi.formData.value);
-    console.log(this.crudApi.formData.value.numeroVente);
-    console.log(this.crudApi.formData.value, this.crudApi.id);
-    this.crudApi.saveVenteWithBarcode(this.crudApi.formData.value, this.crudApi.id).subscribe(
-      data => {
-        console.log(data);
-        this.toastr.success('Vente Effectuée avec succès');
+    if (this.validateForm()) {
+      this.f['totalVente'].setValue(this.totalAmount);
+      this.f['ligneVentes'].setValue(this.listOfScannedBarCodes);
+      console.log(this.crudApi.formData.value);
+      console.log(this.crudApi.formData.value.numeroVente);
+      console.log(this.crudApi.formData.value, this.crudApi.id);
+      this.crudApi.saveVenteWithBarcode(this.crudApi.formData.value, this.crudApi.id)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.toastr.success('avec succès','Vente Effectuée', {
+              timeOut: 1500,
+              positionClass: 'toast-top-right',
+            });
 
-        this.router.navigate(['/home/ventes']);
-      }
-    );
+            this.router.navigate(['/home/ventes']);
+          }
+        );
+
+    }else {
+      this.toastr.error('Veuillez renseigner tous les champs','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+
+    }
+
 
 
   }

@@ -30,7 +30,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
   closeResult: string;
 
-  val = 1000;
+  val = 200;
 
 
   constructor(public crudApi: StockService,

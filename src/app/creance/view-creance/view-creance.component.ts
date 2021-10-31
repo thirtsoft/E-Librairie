@@ -143,8 +143,7 @@ export class ViewCreanceComponent implements OnInit {
     return {
       content: [
         {
-      //    text: 'AL AMINE',
-          text: 'NOM DE L\'ENTREPRISE',
+          text: 'AL AMINE',
           fontSize: 50,
           alignment: 'center',
           color: '#0000ff',
@@ -164,8 +163,7 @@ export class ViewCreanceComponent implements OnInit {
           color: '#0000ff'
         },
         {
-      //    text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
-          text: 'Tél: 77 346 48 28 / Email: tairoudiallo@gmail.com',
+          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 12,
           bold: true,
           alignment: 'center',
@@ -204,7 +202,7 @@ export class ViewCreanceComponent implements OnInit {
         {
           text: 'FACTURE CREANCE',
           alignment: 'center',
-          fontSize: 20,
+          fontSize: 15,
           color: '#0000ff',
           bold: true,
           margin: [0, 5, 0, 5],
@@ -218,7 +216,7 @@ export class ViewCreanceComponent implements OnInit {
           margin: [0, 8, 0, 8]
         },
         {
-          text: 'CLIENT  : ' +this.lcreanceService.listData[0].creance.client.chefService,
+          text: 'Pour  : ' +this.lcreanceService.listData[0].creance.client.chefService,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

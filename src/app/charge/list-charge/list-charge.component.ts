@@ -23,8 +23,6 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   charge: Charge;
   chargeID: number;
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -33,7 +31,6 @@ export class ListChargeComponent implements OnDestroy, OnInit {
               private dialogService: DialogService,
               public toastr: ToastrService,
               public fb: FormBuilder,
-              private router : Router,
               private datePipe : DatePipe,
               private matDialog: MatDialog,
               private route: ActivatedRoute,
@@ -128,8 +125,7 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   }
 
   onCreateCharge(){
-    this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("contrats/new");
+    this.crudApi.choixmenu == 'A';
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -146,23 +142,9 @@ export class ListChargeComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateChargeComponent, dialogConfig);
   }
-/*
-  deleteCharge(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Charge ?')) {
-    this.crudApi.deleteCharge(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Charge supprimé avec succès!');
-          this.rerender();
-          this.getListCharges();
-      },
-        error => console.log(error));
-    }
-  }
- */
 
-deleteCharge(id: number){
+
+  deleteCharge(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{
       if(res){
@@ -175,11 +157,5 @@ deleteCharge(id: number){
     });
   }
 
-
-/*
-  editCharge(item : Charge) {
-    this.router.navigateByUrl('charges/'+item.id);
-  }
-*/
 
 }

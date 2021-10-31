@@ -77,6 +77,7 @@ export class VersementService {
     return this.http.request(req);
 
   }
+
   public downloadFile(pathContrat: String){
   //  return this.http.get<any>("http://localhost:8081/alAmine/downloadVersementFile"+"/"+ pathContrat);
 
