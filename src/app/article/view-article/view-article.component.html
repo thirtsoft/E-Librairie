@@ -1,58 +1,131 @@
 <div class="col-md-12">
-    <h1>Détail Article</h1>
-    <form #addArticleForm="ngForm" (ngSubmit)="onSubmit()">
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataArticle.id">
+  <h1>Détail Article</h1>
+  <form #addArticleForm="ngForm" (ngSubmit)="onSubmit()">
+    <input
+      type="hidden"
+      name="id"
+      #id="ngModel"
+      [(ngModel)]="formDataArticle.id"
+    />
+    <div class="form-group">
+      <label>Référence </label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="formDataArticle.reference"
+        name="reference"
+        id="reference"
+        readonly
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Désignation</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="formDataArticle.designation"
+        name="designation"
+        id="designation"
+        readonly
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Sous-Categorie</label>
       <div class="form-group">
-        <label>Référence </label>
-        <input type="text" class="form-control" [(ngModel)]="formDataArticle.reference" name="reference" id="reference" readonly>
+        <select
+          name="scategorie"
+          id="scategorie"
+          [(ngModel)]="formDataArticle.scategorie"
+          class="form-control"
+          readonly
+        >
+          <option value="0">-Select-</option>
+          <option
+            *ngFor="let scat of listScategories"
+            [ngValue]="
+              scat.id == formDataArticle.scategorie?.id
+                ? formDataArticle.scategorie
+                : scat
+            "
+          >
+            {{ scat.libelle }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>P.Achat</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="formDataArticle.prixAchat"
+        name="prixAchat"
+        id="prixAchat"
+        readonly
+      />
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>P.Vente</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.prixVente"
+          name="prixVente"
+          id="prixVente"
+          readonly
+        />
       </div>
 
-      <div class="form-group">
-        <label>Désignation</label>
-        <input type="text" class="form-control" [(ngModel)]="formDataArticle.designation" name="designation"  id="designation" readonly>
+      <div class="form-group col-md-6">
+        <label>P.Détails</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.prixDetail"
+          name="prixDetail"
+          id="prixDetail"
+          readonly
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>QStock</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.qtestock"
+          name="qtestock"
+          id="qtestock"
+          readonly
+        />
       </div>
 
-      <div class="form-group">
-        <label>Sous-Categorie</label>
-        <div class="form-group">
-          <select name="scategorie" id="scategorie" [(ngModel)]="formDataArticle.scategorie" class="form-control" readonly>
-            <option value=0>-Select-</option>
-            <option  *ngFor="let scat of listScategories" [ngValue]="scat.id == formDataArticle.scategorie?.id ? formDataArticle.scategorie : scat">{{scat.libelle}}</option>
-          </select>
-        </div>
+      <div class="form-group col-md-6">
+        <label>QStockInitial</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.stockInitial"
+          name="stockInitial"
+          id="stockInitial"
+          readonly
+        />
       </div>
+    </div>
 
-      <div class="form-group">
-        <label>P.Achat</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixAchat" name="prixAchat"  id="prixAchat" readonly>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label>P.Vente</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixVente" name="prixVente"  id="prixVente" readonly>
-        </div>
-
-        <div class="form-group col-md-6">
-          <label>P.Détails</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixDetail" name="prixDetail"  id="prixDetail" readonly>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label>QStock</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataArticle.qtestock" name="qtestock"  id="qtestock" readonly>
-        </div>
-
-        <div class="form-group col-md-6">
-          <label>QStockInitial</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataArticle.stockInitial" name="stockInitial"  id="stockInitial" readonly>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <!-- <button type="submit" class="btn btn-dark" [disabled]="!addArticleForm.form.valid">
-          <i class="fa fa-database"></i> Submit</button>&nbsp; -->
-        <button type="button" class="btn btn-danger btn-sm btn-block" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
-      </div>
-    </form>
- </div>
+    <div class="form-group">
+      <button
+        type="button"
+        class="btn btn-danger btn-sm btn-block"
+        [mat-dialog-close]
+      >
+        <em class="fa fa-close"></em> Close
+      </button>
+    </div>
+  </form>
+</div>

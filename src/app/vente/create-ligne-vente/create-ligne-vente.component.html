@@ -1,60 +1,111 @@
 <div class="row justify-content-center">
   <div class="col-md-8 col-md-offset-2">
-    <h4 class="dislay-4">Lignes Vente </h4>
-    <hr>
+    <h3 class="dislay-4">Lignes Vente</h3>
+
     <form [formGroup]="this.formData" (ngSubmit)="onSubmit()">
+      <input
+        type="hidden"
+        formControlName="OrderItemId"
+        id="OrderItemId"
+        class="form-control"
+      />
+      <input
+        type="hidden"
+        formControlName="OrderId"
+        id="OrderId"
+        class="form-control"
+      />
+      <input
+        type="hidden"
+        formControlName="ItemName"
+        id="ItemName"
+        class="form-control"
+      />
 
-        <input type="hidden" formControlName="OrderItemId" id="OrderItemId" class="form-control">
-        <input type="hidden" formControlName="OrderId" id="OrderId" class="form-control">
-        <input type="hidden" formControlName="ItemName" id="ItemName" class="form-control">
+      <div class="form-group">
+        <label>Article</label>
+        <select
+          formControlName="produit"
+          id="produit"
+          class="form-control"
+          (change)="selectPrice($event.target)"
+          [compareWith]="compareProduit"
+        >
+          <option value="0">-Select-</option>
+          <option *ngFor="let item of listArticle" [ngValue]="item">
+            {{ item.reference }}
+          </option>
+        </select>
+      </div>
 
+      <div class="form-group">
+        <label>Prix Vente</label>
         <div class="form-group">
-          <label>Article</label>
-          <select formControlName="produit" id="produit" class="form-control"
-            (change)="selectPrice($event.target)" [compareWith]="compareProduit">
-            <option value="0">-Select-</option>
-            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
-          </select>
+          <input
+            name="prixVente"
+            formControlName="prixVente"
+            id="prixVente"
+            class="form-control"
+            (keyup)="calculTotal()"
+            [class.is-invalid]="!isValid && formData.value.prixVente == 0"
+            readonly
+          />
         </div>
+      </div>
 
+      <div class="form-group">
+        <label>QtéStock</label>
         <div class="form-group">
-          <label>Prix Vente</label>
-          <div class="form-group">
-            <input name="prixVente" formControlName="prixVente" id="prixVente" class="form-control"  (keyup)="calculTotal()"
-              [class.is-invalid]="!isValid && formData.value.prixVente==0"  readonly>
-          </div>
+          <input
+            formControlName="qteStock"
+            id="qteStock"
+            class="form-control"
+            (keyup)="calculTotal()"
+            [class.is-invalid]="!isValid && formData.value.qteStock == 0"
+            readonly
+          />
         </div>
+      </div>
 
+      <div class="form-group">
+        <label>Quantité</label>
         <div class="form-group">
-          <label>QtéStock</label>
-          <div class="form-group">
-            <input formControlName="qteStock" id="qteStock" class="form-control"
-              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.qteStock==0" readonly>
-          </div>
+          <input
+            type="number"
+            formControlName="quantite"
+            id="quantite"
+            class="form-control"
+            (keyup)="calculTotal()"
+            [class.is-invalid]="!isValid && formData.value.quantite == 0"
+          />
         </div>
+      </div>
 
+      <div class="form-group">
+        <label>P.Total</label>
         <div class="form-group">
-          <label>Quantité</label>
-          <div class="form-group">
-            <input type="number" formControlName="quantite" id="quantite" class="form-control"
-              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.quantite==0">
-          </div>
+          <input
+            name="total"
+            formControlName="total"
+            id="total"
+            class="form-control"
+            readonly
+          />
         </div>
+      </div>
 
-        <div class="form-group">
-          <label>P.Total</label>
-          <div class="form-group">
-            <input name="total" formControlName="total" id="total" class="form-control" readonly>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-success btn-sm">
-            <i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-danger btn-sm ml-1" [mat-dialog-close]>
-            <i class="fa fa-close"></i> Close</button>
-        </div>
-
+      <div class="form-group">
+        <button type="submit" class="btn btn-success btn-sm">
+          <em class="fa fa-plus"></em> Ajouter</button
+        >&nbsp;
+        <button
+          type="button"
+          class="btn btn-danger btn-sm ml-1"
+          [mat-dialog-close]
+        >
+          <em class="fa fa-close"></em> Fermer
+        </button>
+      </div>
     </form>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h2>GESTION DES VENTES</h2>
+      <h2>GESTION DES UTILISATEURS</h2>
     </div>
     <div
       class="form-group col-md-6"
@@ -19,12 +19,13 @@
       datatable
       [dtOptions]="dtOptions"
       [dtTrigger]="dtTrigger"
+      aria-label=""
     >
       <thead>
         <tr>
           <th>Phtoto</th>
           <th>Utilisateur</th>
-          <th>Nom Utilisateur</th>             
+          <th>Nom Utilisateur</th>
           <th>Email</th>
           <th>Role</th>
           <th>Enable</th>
@@ -55,7 +56,7 @@
           </td>
 
           <td>
-       
+
             <button (click)="addEditUtilisateur(i)" class="btn btn-warning btn-sm">
               <i class="fa fa-edit" aria-hidden="true"></i> </button>&nbsp;
 

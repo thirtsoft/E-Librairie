@@ -41,7 +41,6 @@ export class CreateScategorieComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-//    this.infoForm();
     this.getCategories();
     if (!isNullOrUndefined(this.data.scatId)) {
       console.log(this.crudApi.listData[this.data.scatId]);

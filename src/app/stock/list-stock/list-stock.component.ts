@@ -22,8 +22,6 @@ export class ListStockComponent implements OnDestroy, OnInit {
   listData : Stock[];
   listArticle : Produit[];
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -32,7 +30,6 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
   val = 200;
 
-
   constructor(public crudApi: StockService,
               private artService: ProduitService,
               public toastr: ToastrService,
@@ -40,8 +37,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
               public fb: FormBuilder,
               private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public dialogRef:MatDialogRef<CreateApproComponent>,
-
+              public dialogRef:MatDialogRef<CreateApproComponent>
   ) { }
 
 
@@ -113,6 +109,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateApproComponent, dialogConfig);
   }
+
   deleteStock(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer ce Stock ?')) {
     this.crudApi.deleteStock(id)

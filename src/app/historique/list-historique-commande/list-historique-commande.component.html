@@ -10,6 +10,7 @@
       datatable
       [dtOptions]="dtOptions"
       [dtTrigger]="dtTrigger"
+      aria-label=""
     >
       <thead>
         <tr>
@@ -37,7 +38,7 @@
               class="btn btn-danger btn-sm"
               (click)="deleteHistoriqueCommande(histCom.id)"
             >
-              <i class="fa fa-trash-o"></i>
+              <em class="fa fa-trash-o"></em>
             </button>
           </td>
         </tr>

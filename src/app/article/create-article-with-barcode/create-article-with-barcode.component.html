@@ -1,24 +1,47 @@
 <div class="col-md-12">
-  <h3>Nouveau Article</h3>
+  <h2>Nouveau Article</h2>
   <form #addArticleForm="ngForm" name="form" (ngSubmit)="onSubmit()">
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataArticle.id">
-    <!-- <div class="form-group">
+    <input
+      type="hidden"
+      name="id"
+      #id="ngModel"
+      [(ngModel)]="formDataArticle.id"
+    />
+    <div class="form-group">
       <label>Référence </label>
-      <input type="text" class="form-control" [(ngModel)]="formDataArticle.reference"
-        name="reference" id="reference" #reference="ngModel" required>
-      <span class="text-danger"
-          *ngIf="(reference.touched || addArticleForm.submitted) && reference.errors?.required">
-          Référence est obligatoire
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="formDataArticle.reference"
+        name="reference"
+        id="reference"
+        #reference="ngModel"
+        required
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          (reference.touched || addArticleForm.submitted) &&
+          reference.errors?.required
+        "
+      >
+        Référence est obligatoire
       </span>
-    </div> -->
+    </div>
+
     <div class="form-group">
       <label>Barcode </label>
-      <input type="text" class="form-control" [(ngModel)]="formDataArticle.barCode"
-        name="barCode" id="barCode" #barCode="ngModel"
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="formDataArticle.barCode"
+        name="barCode"
+        id="barCode"
+        #barCode="ngModel"
         placeholder="Sairir le code barre du produit"
         required
-      >
-     <!--  <span class="text-danger" *ngIf="(barCode.touched || addArticleForm.submitted) && barCode.errors?.required">
+      />
+      <!--  <span class="text-danger" *ngIf="(barCode.touched || addArticleForm.submitted) && barCode.errors?.required">
         barCode est obligatoire
     </span> -->
     </div>
@@ -27,15 +50,24 @@
       <div class="form-group col-md-6">
         <div class="form-group">
           <label>Désignation</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataArticle.designation"
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataArticle.designation"
             name="designation"
-            id="designation"  #designation="ngModel"
+            id="designation"
+            #designation="ngModel"
             placeholder="Désignation du produit"
             required
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (designation.touched || addArticleForm.submitted) &&
+              designation.errors?.required
+            "
           >
-          <span class="text-danger"
-            *ngIf="(designation.touched || addArticleForm.submitted) && designation.errors?.required">
-              Désignation est obligatoire
+            Désignation est obligatoire
           </span>
         </div>
       </div>
@@ -43,14 +75,34 @@
         <div class="form-group">
           <label>Sous-Categorie</label>
           <div class="form-group">
-            <select name="scategorie" id="scategorie" [(ngModel)]="formDataArticle.scategorie" class="form-control"
-                #scategorie="ngModel" required>
+            <select
+              name="scategorie"
+              id="scategorie"
+              [(ngModel)]="formDataArticle.scategorie"
+              class="form-control"
+              #scategorie="ngModel"
+              required
+            >
               <option value="0" selected disabled>-Select-</option>
-              <option  *ngFor="let scat of listScategories" [ngValue]="scat.id == formDataArticle.scategorie?.id ? formDataArticle.scategorie : scat">{{scat.libelle}}</option>
+              <option
+                *ngFor="let scat of listScategories"
+                [ngValue]="
+                  scat.id == formDataArticle.scategorie?.id
+                    ? formDataArticle.scategorie
+                    : scat
+                "
+              >
+                {{ scat.libelle }}
+              </option>
             </select>
-            <span class="text-danger"
-              *ngIf="(scategorie.touched || addArticleForm.submitted) && scategorie.errors?.required">
-                scategorie est obligatoire
+            <span
+              class="text-danger"
+              *ngIf="
+                (scategorie.touched || addArticleForm.submitted) &&
+                scategorie.errors?.required
+              "
+            >
+              scategorie est obligatoire
             </span>
           </div>
         </div>
@@ -58,83 +110,132 @@
     </div>
     <div class="form-group">
       <label>P.Achat</label>
-      <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixAchat"
-          name="prixAchat"
-          id="prixAchat" #prixAchat="ngModel"
-          placeholder="prix achat: 20000"
-          required
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="formDataArticle.prixAchat"
+        name="prixAchat"
+        id="prixAchat"
+        #prixAchat="ngModel"
+        placeholder="prix achat: 20000"
+        required
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          (prixAchat.touched || addArticleForm.submitted) &&
+          prixAchat.errors?.required
+        "
       >
-      <span class="text-danger"
-        *ngIf="(prixAchat.touched || addArticleForm.submitted) && prixAchat.errors?.required">
-          Prix Achat obligatoire
+        Prix Achat obligatoire
       </span>
     </div>
     <div class="row">
       <div class="form-group col-md-6">
         <label>P.Vente</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixVente"
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.prixVente"
           name="prixVente"
-          id="prixVente" #prixVente="ngModel"
+          id="prixVente"
+          #prixVente="ngModel"
           placeholder="Prix vente: 100000"
           required
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (prixVente.touched || addArticleForm.submitted) &&
+            prixVente.errors?.required
+          "
         >
-        <span class="text-danger"
-          *ngIf="(prixVente.touched || addArticleForm.submitted) && prixVente.errors?.required">
           Prix Vente obligatoire
         </span>
       </div>
 
       <div class="form-group col-md-6">
         <label>P.Détails</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.prixDetail"
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.prixDetail"
           name="prixDetail"
-          id="prixDetail" #prixDetail="ngModel"
+          id="prixDetail"
+          #prixDetail="ngModel"
           placeholder="Prix détail : 300000"
           required
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (prixDetail.touched || addArticleForm.submitted) &&
+            prixDetail.errors?.required
+          "
         >
-        <span class="text-danger"
-          *ngIf="(prixDetail.touched || addArticleForm.submitted) && prixDetail.errors?.required">
-            Prix Detail obligatoire
+          Prix Detail obligatoire
         </span>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-6">
         <label>QStock</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.qtestock"
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.qtestock"
           name="qtestock"
-          id="qtestock" #qtestock="ngModel"
+          id="qtestock"
+          #qtestock="ngModel"
           placeholder="Quantité en stock"
           required
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (qtestock.touched || addArticleForm.submitted) &&
+            qtestock.errors?.required
+          "
         >
-        <span class="text-danger"
-          *ngIf="(qtestock.touched || addArticleForm.submitted) && qtestock.errors?.required">
-              Quantité obligatoire
+          Quantité obligatoire
         </span>
       </div>
 
       <div class="form-group col-md-6">
         <label>QStockInitial</label>
-        <input type="number" class="form-control" [(ngModel)]="formDataArticle.stockInitial" name="stockInitial"
-          id="stockInitial" #stockInitial="ngModel"
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="formDataArticle.stockInitial"
+          name="stockInitial"
+          id="stockInitial"
+          #stockInitial="ngModel"
           placeholder="Quantité seuil de stock"
           required
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (stockInitial.touched || addArticleForm.submitted) &&
+            stockInitial.errors?.required
+          "
         >
-        <span class="text-danger"
-          *ngIf="(stockInitial.touched || addArticleForm.submitted) && stockInitial.errors?.required">
-              Stock Initial obligatoire
+          Stock Initial obligatoire
         </span>
       </div>
     </div>
 
     <div class="form-group">
-      <button type="submit"
+      <button
+        type="submit"
         class="btn btn-success"
         [disabled]="addArticleForm.invalid"
       >
-
-        <i class="fa fa-database"></i> Submit</button>&nbsp;
-      <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+        <em class="fa fa-database"></em> Enregistrer </button
+      >&nbsp;
+      <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+        <em class="fa fa-close"></em> Femer
+      </button>
     </div>
   </form>
 </div>

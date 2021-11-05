@@ -1,8 +1,8 @@
-<mat-toolbar color="success">
+<div class="btn-toolbar">
   <div>
-    <h1>EFFECTUER UNE VENTE</h1>
+    <h1>EFFECTUEE UNE VENTE</h1>
   </div>
-</mat-toolbar>
+</div>
 
 <form [formGroup]="this.crudApi.formData" novalidate>
   <!-- <form> -->
@@ -13,10 +13,10 @@
         <!--  <input type="text" class="form-control" (keypress)="onKey($event)" autofocus> -->
 
         <input
-          type="text"
+          type="number"
           class="form-control"
           (window:keypress)="onKey($event)"
-          autofocus
+          autofocus=""
           placeholder="placer ici la souris pour lire le code barre"
         />
         <!--
@@ -26,7 +26,7 @@
       <div class="form-row col-sm-3 mb-4 mb-sm-0">
         <label><strong>Numéro Vente : </strong></label>
         <input
-          type="text"
+          type="number"
           class="form-control"
           formControlName="numeroVente"
           id="numeroVente"
@@ -37,6 +37,7 @@
       <div class="form-row col-sm-3 mb-4 mb-sm-0">
         <label>Type Réglement</label>
         <select
+          type="text"
           name="typeReglement"
           formControlName="typeReglement"
           id="typeReglement"
@@ -52,7 +53,7 @@
       <div class="form-row col-sm-3 mb-4 mb-sm-0">
         <label>Montant Réglement</label>
         <input
-          type="text"
+          type="number"
           formControlName="montantReglement"
           class="form-control"
           id="montantReglement"
@@ -144,12 +145,12 @@
           <div class="tf">
             <div class="row layout-inline">
               <div class="col">
-                <p>Total :</p>
+                <p>P.Total :</p>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <span>
                 <input
-                  type="text"
+                  type="number"
                   value="{{ this.totalAmount }}"
                   id="totalVente"
                   formControlName="totalVente"

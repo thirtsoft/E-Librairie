@@ -1,60 +1,134 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1>Nouveau Versement</h1>
+    <h1>DETAIL D'UN VERSEMENT</h1>
     <form>
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataVersement.id">
+      <input
+        type="hidden"
+        name="id"
+        #id="ngModel"
+        [(ngModel)]="formDataVersement.id"
+      />
       <div class="row">
         <div class="form-group col-md-6">
           <label>Numéro </label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numVersement" name="numVersement" id="numVersement" readonly>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.numVersement"
+            name="numVersement"
+            id="numVersement"
+            readonly
+          />
         </div>
 
         <div class="form-group col-md-6">
           <label>Numéro Reçu</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.numeroRecu" name="numeroRecu"  id="numeroRecu" readonly>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.numeroRecu"
+            name="numeroRecu"
+            id="numeroRecu"
+            readonly
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
           <label>Nature</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nature" name="nature"  id="nature" readonly>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.nature"
+            name="nature"
+            id="nature"
+            readonly
+          />
         </div>
         <div class="form-group col-md-6">
           <label>Bank</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataVersement.nomBank" name="nomBank"  id="nomBank" readonly>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataVersement.nomBank"
+            name="nomBank"
+            id="nomBank"
+            readonly
+          />
         </div>
       </div>
       <div class="form-group">
         <label>Employe</label>
         <div class="form-group">
-          <select name="employe" id="employe" [(ngModel)]="formDataVersement.employe" class="form-control" readonly>
+          <select
+            name="employe"
+            id="employe"
+            [(ngModel)]="formDataVersement.employe"
+            class="form-control"
+            readonly
+          >
             <option [ngValue]="null">--Select--</option>
-            <option *ngFor="let emp of listEmployes" [ngValue]="emp.id == formDataVersement.employe?.id ? formDataVersement.employe : emp">{{emp.prenom}}.{{emp.nom}}</option>
+            <option
+              *ngFor="let emp of listEmployes"
+              [ngValue]="
+                emp.id == formDataVersement.employe?.id
+                  ? formDataVersement.employe
+                  : emp
+              "
+            >
+              {{ emp.prenom }}.{{ emp.nom }}
+            </option>
           </select>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataVersement.montantVersement" name="montantVersement"  id="montantVersement" readonly>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="formDataVersement.montantVersement"
+            name="montantVersement"
+            id="montantVersement"
+            readonly
+          />
         </div>
         <div class="form-group col-md-6">
           <label>Date</label>
-          <input type="date" class="form-control" [(ngModel)]="formDataVersement.dateVersement" name="dateVersement"  id="dateVersement" readonly>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="formDataVersement.dateVersement"
+            name="dateVersement"
+            id="dateVersement"
+            readonly
+          />
         </div>
       </div>
 
       <div class="form-group">
         <label>Motif</label>
-        <textarea class="form-control" [(ngModel)]="formDataVersement.motif" name="motif"  id="motif" cols="6" rows="5" readonly></textarea>
+        <textarea
+          class="form-control"
+          [(ngModel)]="formDataVersement.motif"
+          name="motif"
+          id="motif"
+          cols="6"
+          rows="5"
+          readonly
+        ></textarea>
       </div>
 
       <div class="form-group">
-       <!--  <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp; -->
-        <button type="button" class="btn btn-danger btn-sm btn-block ml-1" [mat-dialog-close]>
-          <i class="fa fa-close"></i> Close</button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm btn-block ml-1"
+          [mat-dialog-close]
+        >
+          <em class="fa fa-close"></em> Fermer
+        </button>
       </div>
     </form>
- </div>
+  </div>
 </div>

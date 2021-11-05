@@ -1,56 +1,109 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h2>SOUS CATEGORIE</h2>
-    <form #addScategorieForm="ngForm" (ngSubmit)="addScategorieForm.form.valid &&onSubmit()"  name="form" novalidate>
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataScategorie.id">
+    <h2>NOUVELLE SOUS CATEGORIE</h2>
+    <form
+      #addScategorieForm="ngForm"
+      (ngSubmit)="addScategorieForm.form.valid && onSubmit()"
+      name="form"
+      novalidate
+    >
+      <input
+        type="hidden"
+        name="id"
+        #id="ngModel"
+        [(ngModel)]="formDataScategorie.id"
+      />
       <div class="form-group">
         <label>Code </label>
-        <input type="text" class="form-control" [(ngModel)]="formDataScategorie.code"
-          name="code" id="code" #code="ngModel" required>
-        <span class="text-danger"
-            *ngIf="(code.touched || addScategorieForm.submitted) && code.errors?.required">
-              Code est obligatoire
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataScategorie.code"
+          name="code"
+          id="code"
+          #code="ngModel"
+          required
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (code.touched || addScategorieForm.submitted) &&
+            code.errors?.required
+          "
+        >
+          Code est obligatoire
         </span>
       </div>
 
       <div class="form-group">
-
         <label for="libelle">Libelle </label>
-        <input type="text" id="libelle" name="libelle" required  #libelle="ngModel" class="form-control"
-            [(ngModel)]="formDataScategorie.libelle">
+        <input
+          type="text"
+          id="libelle"
+          name="libelle"
+          required
+          #libelle="ngModel"
+          class="form-control"
+          [(ngModel)]="formDataScategorie.libelle"
+        />
 
-        <div *ngIf="!libelle?.valid && (libelle?.dirty || libelle?.touched)" class="alert alert-danger">
-          <span *ngIf="libelle.errors.required">
-            Libelle est obligatoire
-          </span>
-         <!--  <span *ngIf="libelle.errors.pattern">
-            Libelle doit contenir des lettres de l'alphabet A-Z..
-          </span> -->
+        <div
+          *ngIf="!libelle?.valid && (libelle?.dirty || libelle?.touched)"
+          class="alert alert-danger"
+        >
+          <span *ngIf="libelle.errors.required"> Libelle est obligatoire </span>
+
         </div>
       </div>
 
       <div class="form-group">
         <label>Categorie</label>
         <div class="form-group">
-          <select name="categorie" [(ngModel)]="formDataScategorie.categorie" class="form-control"
-                name="categorie"  id="categorie" #categorie="ngModel" required>
-            <option [ngValue]=0>--Select--</option>
-            <option *ngFor="let cat of listCategorie" [ngValue]="cat.id == formDataScategorie.categorie?.id ? formDataScategorie.categorie : cat">{{cat.designation}}</option>
+          <select
+            name="categorie"
+            [(ngModel)]="formDataScategorie.categorie"
+            class="form-control"
+            name="categorie"
+            id="categorie"
+            #categorie="ngModel"
+            required
+          >
+            <option [ngValue]="0">--Select--</option>
+            <option
+              *ngFor="let cat of listCategorie"
+              [ngValue]="
+                cat.id == formDataScategorie.categorie?.id
+                  ? formDataScategorie.categorie
+                  : cat
+              "
+            >
+              {{ cat.designation }}
+            </option>
           </select>
-          <span class="text-danger"
-              *ngIf="(categorie.touched || addScategorieForm.submitted) && libelle.errors?.required">
-                Categorie est obligatoire
+          <span
+            class="text-danger"
+            *ngIf="
+              (categorie.touched || addScategorieForm.submitted) &&
+              libelle.errors?.required
+            "
+          >
+            Categorie est obligatoire
           </span>
         </div>
       </div>
 
       <div class="form-group">
-        <button type="submit"
+        <button
+          type="submit"
           class="btn btn-success"
           [disabled]="addScategorieForm.invalid"
-        ><em class="fa fa-database"></em> Submit</button>&nbsp;
-        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><em class="fa fa-close"></em> Close</button>
+        >
+          <em class="fa fa-database"></em> Enregistrer</button
+        >&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+          <em class="fa fa-close"></em> Fermer
+        </button>
       </div>
     </form>
- </div>
+  </div>
 </div>

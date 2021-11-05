@@ -130,8 +130,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
     return {
       content: [
         {
-      //    text: 'AL AMINE',
-          text: 'NOM DE L\'ENTREPRISE',
+          text: 'AL AMINE',
           fontSize: 50,
           alignment: 'center',
           color: '#0000ff',
@@ -151,8 +150,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
           color: '#0000ff'
         },
         {
-    //      text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
-          text: 'Tél: 77 109 18 18 / Email: thirdiallo@gmail.com',
+          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 12,
           bold: true,
           alignment: 'center',
@@ -207,7 +205,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
           margin: [0, 8, 0, 8]
         },
         {
-          text: 'CLIENT : ' + this.ldevService.listData[0].devis.client.chefService,
+          text: 'Pour : ' + this.ldevService.listData[0].devis.client.chefService,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

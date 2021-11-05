@@ -3,61 +3,75 @@
     <div class="panel-heading">
       <h1>GESTION DES APPROVISIONNEMENTS</h1>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px;">
-      <a type="button" (click)="onCreateAppro()"
-        class="btn btn-success btn-lg"
-      ><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a>&nbsp;
+    <div style="padding-left: 20px; padding-top: 10px">
+      <a type="button" (click)="onCreateAppro()" class="btn btn-success btn-lg"
+        ><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
+      >&nbsp;
       <!-- <a type="button" [routerLink]="['/createArticle']" class="btn btn-primary btn-lg" (click)="onCreateCategorie()"><i class="fa fa-download" aria-hidden="true"></i> Import</a>&nbsp;&nbsp;
       <a type="button" class="btn btn-warning btn-lg" (click)="onCreateCategorie()"><i class="fa fa-upload" aria-hidden="true"></i> Export</a> -->
     </div>
-    </div>
-    <div class="panel-body">
-        <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
-            [dtTrigger]="dtTrigger" aria-label="">
-            <thead>
-              <tr>
-                <th>Code</th><th>Fournisseur</th><th>Montant</th><th>MontantAvancée</th><th>Relicat</th>
-                <th>Status</th><th>Observation</th><th>Date</th>
-                <th>Action</th>
+  </div>
+  <div class="panel-body">
+    <table
+      class="table table-striped table-bordered table-sm row-border hover"
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      aria-label=""
+    >
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Fournisseur</th>
+          <th>Montant</th>
+          <th>MontantAvancée</th>
+          <th>Relicat</th>
+          <th>Status</th>
+          <th>Observation</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appro of crudApi.listData; let i = index">
+          <td>{{ appro.code }}</td>
+          <td>{{ appro.fournisseur.prenom }} {{ appro.fournisseur.nom }}</td>
+          <td>{{ appro.totalAppro }}</td>
+          <td>
+            {{ appro.montantAvance }}
 
-              </tr>
-            </thead>
-          <tbody>
-            <tr *ngFor="let appro of crudApi.listData; let i=index;">
-              <td>{{appro.code}}</td>
-              <td>{{appro.fournisseur.prenom}}  {{appro.fournisseur.nom}}</td>
-              <td>{{appro.totalAppro}}</td>
-              <td>{{appro.montantAvance}}
-
-                <span [ngClass]="{ 'disabled': appro.montantAvance==appro.totalAppro }"
-                  class="btn btn-success btn-sm pull-right" (click)="addEditMontantAvanceAppro(appro)"
-                  style="cursor: pointer;"
-                  >
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </span>
-              </td>
-              <td>{{(appro.totalAppro)-(appro.montantAvance)}}</td>
-              <td>{{appro.status}}
-                <button
-                  class="btn btn-warning btn-sm pull-right" (click)="addEditStatusAppro(appro)"
-                  [disabled]="appro.status==='VALIDE'"
-                  style="cursor: pointer;"
-                  >
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </button>
-
-              </td>
-              <td>{{appro.observation}}</td>
-              <td>{{ appro.dateApprovisionnement }}</td>
-              <td>
-          <!--      <button class="btn btn-info btn-lg" (click)="editeAppro(appro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
-                <button class="btn btn-success btn-sm" (click)="viewAppro(appro)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>&nbsp;
+            <span
+              [ngClass]="{ disabled: appro.montantAvance == appro.totalAppro }"
+              class="btn btn-success btn-sm pull-right"
+              (click)="addEditMontantAvanceAppro(appro)"
+              style="cursor: pointer"
+            >
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </span>
+          </td>
+          <td>{{ appro.totalAppro - appro.montantAvance }}</td>
+          <td>
+            {{ appro.status }}
+            <button
+              class="btn btn-warning btn-sm pull-right"
+              (click)="addEditStatusAppro(appro)"
+              [disabled]="appro.status === 'VALIDE'"
+              style="cursor: pointer"
+            >
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button>
+          </td>
+          <td>{{ appro.observation }}</td>
+          <td>{{ appro.dateApprovisionnement }}</td>
+          <td>
+            <!--      <button class="btn btn-info btn-lg" (click)="editeAppro(appro)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp; -->
+            <button class="btn btn-success btn-sm" (click)="viewAppro(appro)">
+              <i class="fa fa-eye" aria-hidden="true"></i></button
+            >&nbsp;
             <!--    <button class="btn btn-danger btn-lg" (click)="deleteAppro(appro.id)"><i class="fa fa-trash-o"></i>  </button> -->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-

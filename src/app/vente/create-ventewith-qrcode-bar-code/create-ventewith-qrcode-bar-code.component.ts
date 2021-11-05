@@ -45,8 +45,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
               private toastr :ToastrService,
               private datePipe : DatePipe,
               public fb: FormBuilder ,
-              private router :Router,
-              private route: ActivatedRoute,
+
   ) { }
 
   get f() { return this.crudApi.formData.controls; }
@@ -89,12 +88,15 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     const numberRegEx = /\-?\d*\.?\d{1,2}/;
     this.crudApi.formData = this.fb.group({
       numeroVente: this.crudApi.NumVente,
- //     total: [0, Validators.required],
+  //    total: [0, Validators.required],
       totalVente: [0, Validators.required],
       typeReglement: ['', Validators.required],
-      montantReglement: ['', [Validators.required, Validators.pattern(numberRegEx)]],
+      montantReglement: [0, Validators.required],
+  //    montantReglement: ['', [Validators.required, Validators.pattern(numberRegEx)]],
+ //     montantReglement: [0, [Validators.required]],
       dateVente: [new Date(), Validators.required],
       ligneVentes: [[], Validators.required],
+
 
     });
 
@@ -113,7 +115,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     this.isValid = false;
     if ((this.crudApi.formData.value.numeroVente == 0) || (this.crudApi.formData.value.totalVente == 0) ||
         (this.crudApi.formData.value.typeReglement == '') || (this.crudApi.formData.value.montantReglement == 0)
-        || (this.crudApi.list == 0))
+        || (this.listOfScannedBarCodes == 0))
       this.isValid = false;
     else
       this.isValid = true;
@@ -127,6 +129,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       console.log(this.crudApi.formData.value);
       console.log(this.crudApi.formData.value.numeroVente);
       console.log(this.crudApi.formData.value, this.crudApi.id);
+      /*
       this.crudApi.saveVenteWithBarcode(this.crudApi.formData.value, this.crudApi.id)
         .subscribe(
           data => {
@@ -138,7 +141,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
             this.router.navigate(['/home/ventes']);
           }
-        );
+        ); */
 
     }else {
       this.toastr.error('Veuillez renseigner tous les champs','Données non valides', {
@@ -188,7 +191,6 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
            //   this.listOfScannedBarCodes.push({barcode: this.barcode, designation: data.designation, prixVente: data.prixDetail, quantite: 1});
               this.listOfScannedBarCodes.push({produit: data, itemName: data.designation, prixVente: data.prixDetail, quantite: 1});
               this.updateTotals();
-
 
           }
         }

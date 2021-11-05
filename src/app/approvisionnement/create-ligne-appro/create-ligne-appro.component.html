@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-md-8 col-md-offset-2">
-    <h4 class="dislay-4">Lignes Appro </h4>
-    <hr>
+    <h3 class="dislay-4">Lignes Appro </h3>
+
     <form [formGroup]="this.formData" (ngSubmit)="onSubmit()">
 
         <input type="hidden" formControlName="OrderItemId" id="OrderItemId" class="form-control">
@@ -57,8 +57,10 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-danger btn-sm ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+          <button type="submit" class="btn btn-success btn-sm">
+            <em class="fa fa-plus"></em> Ajouter </button>&nbsp;
+          <button type="button" class="btn btn-danger btn-sm ml-1" [mat-dialog-close]>
+            <em class="fa fa-close"></em> Fermer </button>
         </div>
 
     </form>

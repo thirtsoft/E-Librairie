@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-md-8 col-md-offset-2">
-    <h4 class="dislay-4">Lignes Devis </h4>
-    <hr>
+    <h3 class="dislay-4">Lignes Devis </h3>
+  <!--   <hr> -->
     <form [formGroup]="this.ldevisService.dataForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label>Article</label>
@@ -61,8 +61,10 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
-          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+          <button type="submit" class="btn btn-success">
+            <em class="fa fa-plus"></em> Ajouter </button>&nbsp;
+          <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+            <em class="fa fa-close"></em> Fermer</button>
         </div>
     </form>
   </div>

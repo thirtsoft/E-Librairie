@@ -235,7 +235,7 @@ export class ProduitService {
   public getProduitByBarcode(barCode: string): Observable<Produit> {
   //  return this.http.get<Produit> ('http://localhost:8081/prodApi/produits/searchProduitByBarCode/' + barCode);
 
-    return this.http.get<Produit> (`${this.baseUrl_1}/produits/searchProduitByBarCode/` + barCode);
+    return this.http.get<Produit>(`${this.baseUrl_1}/produits/searchProduitByBarCode/` + barCode);
 
   //  return this.http.get<Produit> ('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/produits/searchProduitByBarCode/' + barCode);
 

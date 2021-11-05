@@ -18,9 +18,9 @@
           <div class="col-lg-6 col-sm-2">
 
             <form (ngSubmit)="processForm()">
-            
+
               <div class="follow-ava col-lg-4">
-               
+
                 <img src="../../../assets/img/avatar.jpg" class="img-circle" width="40" routerLink ="/profil" alt="" *ngIf="!img">
 
                 <img [src]="this.userService.baseUrl+'/utilisateurs/avatar/'+this.id+'?ts='+getTS()" class="avatar" alt=""  *ngIf="img">
@@ -97,7 +97,7 @@
                 style="cursor: pointer"
               >
                 <i class="icon-envelope"></i>
-                Edit Username
+                Editer Nom Utilisateur
               </a>
             </li>
             <li class="">
@@ -107,7 +107,7 @@
                 style="cursor: pointer"
               >
                 <i class="icon-envelope"></i>
-                Edit Password
+                Editer Password
               </a>
             </li>
             <!-- <li class="">
@@ -170,7 +170,7 @@
                     <div class="bio-row">
                       <p><span>Occupation </span>: {{ listDataProfil?.roles[0].name }}</p>
                     </div>
-                
+
                     <div class="bio-row">
                       <p><span>Identifiant </span>: {{ listDataProfil.id }}</p>
                     </div>
