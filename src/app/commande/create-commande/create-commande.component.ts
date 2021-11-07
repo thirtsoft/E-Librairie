@@ -35,8 +35,7 @@ export class CreateCommandeComponent implements OnInit {
               private router :Router,
               public dialog:MatDialog,
               public fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-  //  public dialogRef:MatDialogRef<CreateLigneCmdClientComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   get f() { return this.crudApi.formData.controls; }
@@ -82,10 +81,8 @@ export class CreateCommandeComponent implements OnInit {
       typeReglement: ['', Validators.required],
       montantReglement: [0, Validators.required],
       status: ['', Validators.required],
-  //    refClient: ['', Validators.required],
       dateCommande: [new Date(), Validators.required],
       client: [new Client(), Validators.required],
- //     DeletedOrderItemIDs: '',
       lcomms: [[], Validators.required],
     });
   }
@@ -146,7 +143,6 @@ export class CreateCommandeComponent implements OnInit {
       this.crudApi.saveCommande(this.crudApi.formData.value, this.dashboardService.id).subscribe(
         data => {
           console.log(this.crudApi.formData.value);
-          this.toastr.success('Commande Ajoutée avec succès');
           this.toastr.success('avec succès','Commande Ajoutée', {
             timeOut: 1500,
             positionClass: 'toast-top-right',

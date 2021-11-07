@@ -44,6 +44,14 @@ export class CreanceService {
     return this.http.get<Creance[]>(`${this.baseUrl}/creances/allCreanceOrderDesc`);
   }
 
+  getAllCreancesOf3LatestMonths(): Observable<Creance[]> {
+    return this.http.get<Creance[]>(`${this.baseUrl}/creances/allCreanceOf3LatestMonths`);
+  }
+
+  getTop500CreancesOrderByIdDesc(): Observable<Creance[]> {
+    return this.http.get<Creance[]>(`${this.baseUrl}/creances/findTop500OfCreanceOrderByIdDesc`);
+  }
+
   getCreancetByID(id:number):any {
     return this.http.get(`${this.baseUrl}/creances/findById/`+id).toPromise();
   }

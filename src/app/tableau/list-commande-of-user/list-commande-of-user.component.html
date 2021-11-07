@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h4>VENTES DES 3 DERNIERS MOIS EFFECTUEES PAR AGENT</h4>
+      <h4>COMMANDES DES 3 DERNIERS MOIS EFFECTUE PAR AGENT</h4>
     </div>
   </div>
    <div class="panel-body">
@@ -14,11 +14,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let vente of crudApi.listData; let i=index;">
-              <td>{{vente.numeroVente}}</td>
-              <td>{{vente.totalVente}}</td>
-              <td>{{vente.utilisateur?.name}}</td>
-              <td>{{vente.dateVente}}</td>
+            <tr *ngFor="let com of crudApi.listData; let i=index;">
+              <td>{{com.numeroCommande}}</td>
+              <td>{{com.totalCommande}}</td>
+              <td>{{com.utilisateur?.name}}</td>
+              <td>{{com.dateCommande}}</td>
             </tr>
           </tbody>
       </table>

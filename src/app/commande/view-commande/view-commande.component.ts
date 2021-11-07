@@ -222,7 +222,7 @@ export class ViewCommandeComponent implements OnInit {
           alignment: 'right',
           margin: [0, 5, 0, 15],
           bold: true,
-          fontSize: 12,
+          fontSize: 10,
         },
 
         {

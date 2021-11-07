@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CommandeClient } from '../models/commande-client';
 import { FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { LigneCmdClient } from '../models/ligne-cmd-client';
 import { ClientService } from './client.service';
 import Dexie from 'dexie';
@@ -45,11 +45,18 @@ export class CommandeClientService {
   numero;
   numCommande;
 
-  constructor(private http: HttpClient,  private clientService: ClientService,
-    private offlineService: OnlineofflineService) {
-     /*  this.ouvrirStatusConnexion();
-      this.connectToDatabase();
-     this.addAllDataCommandeToIndexeddb(); */
+  private listners = new Subject<any>();
+
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
+
+  constructor(private http: HttpClient,
+              private clientService: ClientService,
+              private offlineService: OnlineofflineService) {
+             /*  this.ouvrirStatusConnexion();
+              this.connectToDatabase();
+              this.addAllDataCommandeToIndexeddb(); */
   }
 
   getAllCommandeClients(): Observable<CommandeClient[]> {
@@ -58,6 +65,14 @@ export class CommandeClientService {
 
   getAllCommandesOrderDesc(): Observable<CommandeClient[]> {
     return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes/allCommandeClientOrderDesc`);
+  }
+
+  getAllCommandesOf3LatestMonths(): Observable<CommandeClient[]> {
+    return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes/allCommandeClientOf3LatestMonths`);
+  }
+
+  getTop500CommandesOrderByIdDesc(): Observable<CommandeClient[]> {
+    return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes/findTop500OfCommandeClientOrderByIdDesc`);
   }
 
   public getCommandeClientById(id: number): Observable<CommandeClient> {

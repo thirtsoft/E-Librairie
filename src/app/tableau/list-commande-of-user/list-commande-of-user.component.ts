@@ -1,28 +1,25 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { Vente } from 'src/app/models/vente';
-import { VenteService } from 'src/app/services/vente.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-list-vente-of-user',
-  templateUrl: './list-vente-of-user.component.html',
-  styleUrls: ['./list-vente-of-user.component.scss']
+  selector: 'app-list-commande-of-user',
+  templateUrl: './list-commande-of-user.component.html',
+  styleUrls: ['./list-commande-of-user.component.scss']
 })
-export class ListVenteOfUserComponent implements OnInit {
-
-  listData : Vente[];
+export class ListCommandeOfUserComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: VenteService
+  constructor(public crudApi: CommandeClientService
     ) {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
-        this.getTop500OfVentesOrderByIdDesc();
+        this.getTop500CommandesOrderByIdDesc();
       })
   }
 
@@ -35,16 +32,15 @@ export class ListVenteOfUserComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
-    this.getTop500OfVentesOrderByIdDesc();
-
 
   }
 
-  getTop500OfVentesOrderByIdDesc() {
-    this.crudApi.getTop500OfVentesOrderByIdDesc()
+  getTop500CommandesOrderByIdDesc() {
+    this.crudApi.getTop500CommandesOrderByIdDesc()
       .subscribe(
         response => {
           this.crudApi.listData = response;
+          console.log(this.crudApi.listData);
           this.dtTrigger.next();
         }
       );
@@ -65,12 +61,6 @@ export class ListVenteOfUserComponent implements OnInit {
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
-
-  /* getListOfVenteByEmployees() {
-    this.crudApi.listOfVenteByUsers().subscribe(
-      response =>{this.listData = response;}
-    );
-  } */
 
 
 }

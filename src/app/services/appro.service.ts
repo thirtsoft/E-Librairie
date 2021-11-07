@@ -61,6 +61,14 @@ export class ApproService {
     return this.http.get<Appro[]>(`${this.baseUrl}/approvisionnements/allApprovisionnementOrderDesc`);
   }
 
+  getAllApprosOf3LatestMonths(): Observable<Appro[]> {
+    return this.http.get<Appro[]>(`${this.baseUrl}/approvisionnements/allApprovisionnementOfLatest3Months`);
+  }
+
+  getTop500ApprosOrderByIdDesc(): Observable<Appro[]> {
+    return this.http.get<Appro[]>(`${this.baseUrl}/approvisionnements/findTop500OfApprovisionnementOrderByIdDesc`);
+  }
+
   public getApprovisionnementById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/approvisionnements/findById/${id}`);
   }

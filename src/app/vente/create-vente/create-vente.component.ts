@@ -135,7 +135,7 @@ export class CreateVenteComponent implements OnInit {
     this.isValid = false;
     if ((this.crudApi.formData.value.numeroVente == 0) || (this.crudApi.formData.value.totalVente == 0) ||
         (this.crudApi.formData.value.typeReglement == '') || (this.crudApi.formData.value.montantReglement == 0)
-        || (this.crudApi.formData.value.status == '') || (this.crudApi.list == 0))
+       || (this.crudApi.list == 0))
       this.isValid = false;
     else
       this.isValid = true;

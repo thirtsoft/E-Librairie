@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h4>VENTES DES 3 DERNIERS MOIS EFFECTUEES PAR AGENT</h4>
+      <h4>APPROVISIONNEMENT EEFECTUES LORS  DES 3 DERNIERS MOISS</h4>
     </div>
   </div>
    <div class="panel-body">
@@ -10,15 +10,15 @@
           aria-label="">
           <thead>
             <tr>
-              <th>Numéro</th><th>Montant Total</th><th>Agent</th><th>Date</th>
+              <th>Numéro</th><th>Montant Total</th><th>Fournisseur</th><th>Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let vente of crudApi.listData; let i=index;">
-              <td>{{vente.numeroVente}}</td>
-              <td>{{vente.totalVente}}</td>
-              <td>{{vente.utilisateur?.name}}</td>
-              <td>{{vente.dateVente}}</td>
+            <tr *ngFor="let appro of crudApi.listData; let i=index;">
+              <td>{{appro.code}}</td>
+              <td>{{appro.totalAppro}}</td>
+              <td>{{appro.fournisseur?.prenom}} {{appro.fournisseur?.nom}}</td>
+              <td>{{appro.dateApprovisionnement}}</td>
             </tr>
           </tbody>
       </table>

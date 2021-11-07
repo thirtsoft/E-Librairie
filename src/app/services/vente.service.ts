@@ -21,7 +21,6 @@ export class VenteService {
 
   private baseUrl_1 = environment.apiBaseUrl;
 
-
   private db: Dexie;
   private tableVent: Dexie.Table<Vente, number>;
   private tableLvent: Dexie.Table<LigneVente, number>;
@@ -53,9 +52,11 @@ export class VenteService {
   currentUser: any = {};
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
@@ -65,43 +66,51 @@ export class VenteService {
               private tokenService: TokenStorageService,
               private authService: AuthService,
               public route: ActivatedRoute
-    ) {
+  ) {
 
-    this.ouvrirStatusConnexion();
+  /*   this.ouvrirStatusConnexion();
     this.addAllDataVenteToIndexeddb();
-    this.addAllDataLigneVenteToIndexeddb();
+    this.addAllDataLigneVenteToIndexeddb(); */
   }
 
-   getAllVentes(): Observable<Vente[]> {
-     return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/all`);
-   }
+  getAllVentes(): Observable<Vente[]> {
+    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/all`);
+  }
 
-   getAllVentesOrderDesc(): Observable<Vente[]> {
+  getAllVentesOrderDesc(): Observable<Vente[]> {
     return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/allVenteOrderDesc`);
   }
 
-   public getVenteById(id: number): Observable<Object> {
-     return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`);
-   }
+  getAllVentesOf3LatestMonths(): Observable<Vente[]> {
+    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/allVenteOf3LatestMonths`);
+  }
 
-   getVenteID(id:number):any {
-     return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`).toPromise();
-   }
+  getTop500OfVentesOrderByIdDesc(): Observable<Vente[]> {
+    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/findTop500OfVenteOrderByIdDesc`);
+  }
 
-   getSumVenteByDay(): Observable<any> {
-     return this.http.get(`${this.baseUrl_1}/ventes/searchSumsOfVenteByDay`);
-   }
+  public getVenteById(id: number): Observable<Object> {
+    return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`);
+  }
 
-   createVente() {
-     var body = {
-       ...this.formData,
-       ligneVentes: this.orderItems
-     };
-     let id: number;
-     return this.http.post(`${this.baseUrl_1}/ventes/ventes/create?id=`+id, body);
-   }
+  getVenteID(id:number):any {
+    return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`).toPromise();
+  }
 
-   saveVente(info: Vente, id:number) {
+  getSumVenteByDay(): Observable<any> {
+    return this.http.get(`${this.baseUrl_1}/ventes/searchSumsOfVenteByDay`);
+  }
+
+  createVente() {
+    var body = {
+      ...this.formData,
+      ligneVentes: this.orderItems
+    };
+    let id: number;
+    return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, body);
+  }
+
+  saveVente(info: Vente, id:number) {
     return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, info);
   }
 
@@ -110,20 +119,19 @@ export class VenteService {
   }
 
 
-   createData(info: Object, id: number): Observable<Object> {
-     return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, info);
-   }
+  createData(info: Object, id: number): Observable<Object> {
+    return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, info);
+  }
 
-   updateVente(id: number, value: any): Observable<Object> {
-     return this.http.put(`${this.baseUrl_1}/ventes/update/${id}`, value);
-   }
+  updateVente(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl_1}/ventes/update/${id}`, value);
+  }
 
   deleteVente(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl_1}/ventes/delete/${id}`, { responseType: 'text' });
   }
 
   // Dexie and OffLine&OnLine
-
 
   private async addAllDataVenteToIndexeddb() {
     await this.http.get<Vente[]>(`${this.baseUrl_1}/ventes`).subscribe(response => {
@@ -177,6 +185,7 @@ export class VenteService {
         });
       });
   }
+
 /*
   private async createVenteToIndexedDb(categorie: Vente) {
     try {
@@ -190,6 +199,7 @@ export class VenteService {
     }
   }
  */
+
   private async sendDataFromIndexedDbToAPI() {
     const todosVente: Vente[] = await this.tableVent.toArray();
     console.log(todosVente);
@@ -200,7 +210,6 @@ export class VenteService {
       console.log('Categorie com id ${categorie.id} foi excluddo com successfull');
     }
   }
-
 
   private ouvrirStatusConnexion() {
     this.offlineService.statusConnexion
