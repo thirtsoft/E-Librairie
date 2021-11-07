@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Categorie } from '../models/categorie';
 import { FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+
 import Dexie from 'dexie';
 import relationships from 'dexie-relationships';
-
-import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
 import { OnlineofflineService } from './onlineoffline.service';
+
+
+import { Categorie } from '../models/categorie';
 import { Produit } from '../models/produit';
 import { Scategorie } from '../models/scategorie';
 import { CommandeClient } from '../models/commande-client';
@@ -24,6 +24,9 @@ import { Fournisseur } from '../models/fournisseur';
 
 import { environment } from './../../environments/environment';
 
+
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -86,7 +89,8 @@ export class CategorieService {
   }
 
   constructor(private http: HttpClient,
-    private offlineService: OnlineofflineService) {
+              private offlineService: OnlineofflineService
+  ) {
   //   this.ouvrirStatusConnexion();
      this.makeDatabase();
      this.connectToDatabase();
@@ -164,7 +168,9 @@ export class CategorieService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl_1}/categories/categories/download/categories.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
+    this.http.get(`${this.baseUrl_1}/categories/download/categories.xlsx`,
+      { observe: 'response', responseType: 'blob' }
+    ).subscribe(res => {
       const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
       FileSaver.saveAs(blob, 'categories.xlsx');
     });

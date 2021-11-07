@@ -1,17 +1,17 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
-import { Scategorie } from 'src/app/models/scategorie';
-import { Categorie } from 'src/app/models/categorie';
-import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
-import { ScategorieService } from 'src/app/services/scategorie.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
-import {MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CreateScategorieComponent } from '../create-scategorie/create-scategorie.component';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
+
+import { ScategorieService } from 'src/app/services/scategorie.service';
+import { Scategorie } from 'src/app/models/scategorie';
+import { Categorie } from 'src/app/models/categorie';
+import { CreateScategorieComponent } from '../create-scategorie/create-scategorie.component';
 
 @Component({
   selector: 'app-list-scategorie',
@@ -154,6 +154,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     this.crudApi.generateExcelFile();
     this.toastr.warning("Excel téléchargé avec succès");
   }
+
   generatePdf() {
     this.crudApi.exportPdfScategories().subscribe(x => {
       const blob = new Blob([x], {type: 'application/pdf'});

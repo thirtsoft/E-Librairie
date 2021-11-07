@@ -1,5 +1,5 @@
 import { ProduitService } from './../../services/article.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { VenteService } from 'src/app/services/vente.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -29,7 +29,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
   listDataReglement = ["ESPECES", "CHEQUE", "VIREMENT"];
 
-  barcode: string='';
+  barcode: string = '';
   total;
 
   products: any[] = [];
@@ -39,12 +39,15 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   formDataVente:  FormGroup;
   listArticle: Produit[];
 
+  @ViewChild('searchInput') searchInput: ElementRef;
+
   constructor(public crudApi: VenteService,
               private artService: ProduitService,
               public lventeService: LigneVenteService,
               private toastr :ToastrService,
               private datePipe : DatePipe,
               public fb: FormBuilder ,
+              private router: Router
 
   ) { }
 
@@ -91,8 +94,8 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
   //    total: [0, Validators.required],
       totalVente: [0, Validators.required],
       typeReglement: ['', Validators.required],
-      montantReglement: [0, Validators.required],
-  //    montantReglement: ['', [Validators.required, Validators.pattern(numberRegEx)]],
+  //    montantReglement: [0, Validators.required],
+      montantReglement: [0, [Validators.required, Validators.pattern(numberRegEx)]],
  //     montantReglement: [0, [Validators.required]],
       dateVente: [new Date(), Validators.required],
       ligneVentes: [[], Validators.required],
@@ -102,20 +105,15 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
   }
 
- /*  validateForm() {
-    this.isValid = true;
-    if (this.crudApi.formData.value.id_client==0)
-      this.isValid = false
-    else if (this.listOfScannedBarCodes.length === 0)
-      this.isValid = false;
-    return this.isValid;
-  } */
-
   validateForm() {
     this.isValid = false;
-    if ((this.crudApi.formData.value.numeroVente == 0) || (this.crudApi.formData.value.totalVente == 0) ||
-        (this.crudApi.formData.value.typeReglement == '') || (this.crudApi.formData.value.montantReglement == 0)
-        || (this.listOfScannedBarCodes == 0))
+    if (this.crudApi.formData.value.numeroVente == 0)
+      this.isValid = false;
+    else if (this.crudApi.formData.value.montantReglement == 0)
+      this.isValid = false;
+    else if (this.crudApi.formData.value.typeReglement == '')
+      this.isValid = false;
+    else if (this.listOfScannedBarCodes.length === 0)
       this.isValid = false;
     else
       this.isValid = true;
@@ -129,7 +127,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       console.log(this.crudApi.formData.value);
       console.log(this.crudApi.formData.value.numeroVente);
       console.log(this.crudApi.formData.value, this.crudApi.id);
-      /*
+
       this.crudApi.saveVenteWithBarcode(this.crudApi.formData.value, this.crudApi.id)
         .subscribe(
           data => {
@@ -141,7 +139,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
             this.router.navigate(['/home/ventes']);
           }
-        ); */
+        );
 
     }else {
       this.toastr.error('Veuillez renseigner tous les champs','Données non valides', {
@@ -191,13 +189,14 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
            //   this.listOfScannedBarCodes.push({barcode: this.barcode, designation: data.designation, prixVente: data.prixDetail, quantite: 1});
               this.listOfScannedBarCodes.push({produit: data, itemName: data.designation, prixVente: data.prixDetail, quantite: 1});
               this.updateTotals();
-
           }
+
         }
 
       )
 
     }
+
 
   }
 
@@ -227,16 +226,18 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
 
             this.updateTotals();
 
+            this.clearBarcode();
+
           }
         }
       )
 
-
-
     }
 
+  }
 
-
+  clearBarcode() {
+    this.searchInput.nativeElement.value = '';
   }
 
   updateTotals() {

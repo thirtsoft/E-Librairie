@@ -1,20 +1,21 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
-import { Categorie } from 'src/app/models/categorie';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule,Validators, NgForm } from '@angular/forms';
-import { CategorieService } from 'src/app/services/categorie.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, FormControl, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
-import {MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef } from "@angular/material/dialog";
 import { DialogService } from 'src/app/services/dialog.service';
-
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
+import { CategorieService } from 'src/app/services/categorie.service';
+import { Categorie } from 'src/app/models/categorie';
 import { CreateCategorieComponent } from '../create-categorie/create-categorie.component';
-import { DataTableDirective } from 'angular-datatables';
+
+
 import { map } from 'rxjs/operators';
+
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -180,6 +181,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
     this.crudApi.generateExcelFile();
     this.toastr.warning('Excel Télécharger avec succès!');
   }
+
   generatePdf() {
     this.crudApi.exportPdfCategories().subscribe(x => {
       const blob = new Blob([x], {type: 'application/pdf'});

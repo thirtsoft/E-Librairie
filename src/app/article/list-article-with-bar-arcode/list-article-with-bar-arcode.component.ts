@@ -1,27 +1,24 @@
-import { ProduitService } from './../../services/article.service';
-import { Produit } from './../../models/produit';
-import { CreateArticleWithBarcodeComponent } from './../create-article-with-barcode/create-article-with-barcode.component';
-import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import {MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { CreateArticleComponent } from '../create-article/create-article.component';
 import { DialogService } from 'src/app/services/dialog.service';
-/* import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx'; */
+import { DataTableDirective } from 'angular-datatables';
 
-import * as XLSX from 'xlsx';
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
+import { CreateArticleWithBarcodeComponent } from './../create-article-with-barcode/create-article-with-barcode.component';
+import { CreateArticleComponent } from '../create-article/create-article.component';
+import { ViewArticleComponent } from '../view-article/view-article.component';
 
+
+import { map } from 'rxjs/operators';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { style } from '@angular/animations';
-import { DataTableDirective } from 'angular-datatables';
-import { ViewArticleComponent } from '../view-article/view-article.component';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -35,15 +32,9 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
   // @Input()
   listData : Produit[];
 
-  @ViewChild('htmlData') htmlData:ElementRef;
-
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-
- // @ViewChild('TABLE') TABLE: ElementRef;
 
   @ViewChild("fileUploadInput")
   fileUploadInput: any;
@@ -52,17 +43,20 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
   logObject: any;
   array;
 
-  constructor(public crudApi: ProduitService, private dialogService: DialogService, public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    private matDialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef:MatDialogRef<CreateArticleComponent>,
-    ) {
-      this.crudApi.listen().subscribe((m:any) => {
-        console.log(m);
-        this.rerender();
-        this.getListArticles();
-      })
+  constructor(public crudApi: ProduitService,
+              private dialogService: DialogService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              private matDialog: MatDialog,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateArticleComponent>,
+  ) {
+    this.crudApi.listen().subscribe((m:any) => {
+      console.log(m);
+      this.rerender();
+      this.getListArticles();
+    })
   }
 
   ngOnInit(): void {
@@ -109,8 +103,7 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
   }
 
   onCreateArticle(){
-    this.crudApi.choixmenu = "A";
-    //this.router.navigateByUrl("articles/new");
+    this.crudApi.choixmenu == 'A';
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -162,20 +155,6 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
 
     this.matDialog.open(CreateArticleComponent, dialogConfig);
   }
-/*
-  deleteArticle(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer cet Article ?')) {
-    this.crudApi.deleteArticle(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Article supprimé avec succès!');
-          this.rerender();
-          this.getListArticles();
-      },
-        error => console.log(error));
-    }
-  } */
 
   deleteArticle(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
@@ -194,6 +173,7 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
     this.router.navigateByUrl('article/'+item.id);
   }
 
+
   uploadExcelFile() {
     let formData = new FormData();
     console.log(formData)
@@ -201,7 +181,7 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
     this.crudApi.uploadExcelFile(formData).subscribe(result => {
       console.log(result);
       this.mesagge = result.toString();
-      this.toastr.warning("Fichier importer avec succès");
+      this.toastr.warning('Fichier Excel Importé avec succès!');
       this.rerender();
       this.getListArticles();
     })
@@ -213,7 +193,7 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
   }
 
   generatePdf() {
-    this.crudApi.exportPdfProduits().subscribe(x => {
+    this.crudApi.exportPdfProduit().subscribe(x => {
       const blob = new Blob([x], {type: 'application/pdf'});
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
         window.navigator.msSaveOrOpenBlob(blob);
@@ -231,57 +211,7 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
       }, 100)
 
     });
-    this.toastr.warning("Pdf générer avec succès");
-
-  }
-
-  selectFile($event) {
-    let fileList = $event.srcElement.files;
-    let file = fileList[0];
-    if(file && file.name.endsWith(".csv")){
-      let input = $event.target;
-      let reader = new FileReader();
-      reader.readAsText(input.files[0]);
-
-      reader.onload = (data) => {
-        let csvData = reader.result;
-        let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
-        let headers = csvRecordsArray && csvRecordsArray.length>0 ? csvRecordsArray[0].split(";"): [];
-        // bind headers with dataModelList
-        let bindArray = this.getBindheadersDataModelistArray(headers);
-
-        this.logObject = bindArray;
-
-        console.log(bindArray);
-      };
-    }
-
-  }
-
-  getBindheadersDataModelistArray(headers: any[]) {
-    let bindArray = [];
-    let index = 0;
-    let getDataType = (header => {
-      let dataType = '';
-      this.listData.forEach(dataModel => {
-        if (dataModel.reference == header) {
-          dataType = dataModel.reference;
-        }
-      });
-      return dataType;
-    })
-
-    headers.forEach(header => {
-      const bindItem = {
-        columnName: header,
-        dataType: getDataType(header),
-        index: index
-      }
-      index++;
-      bindArray.push(bindItem);
-    });
-
-    return bindArray;
+    this.toastr.warning('Pdf Télécharger avec succès!');
 
   }
 

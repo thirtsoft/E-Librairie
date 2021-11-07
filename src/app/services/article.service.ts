@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+
 import { Produit } from '../models/produit';
+
+import { OnlineofflineService } from './onlineoffline.service';
+import Dexie from 'dexie';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
-import { OnlineofflineService } from './onlineoffline.service';
-import Dexie from 'dexie';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officiedocument.spreadsheetml.sheet;charset-UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -40,19 +42,22 @@ export class ProduitService {
   formDataProduit: Produit;
 
   private listners = new Subject<any>();
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
+
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
 
   constructor(private http: HttpClient,
-    private offlineService: OnlineofflineService) {
+              private offlineService: OnlineofflineService
+  ) {
     //  this.ouvrirStatusConnexion();
     //  this.connectToDatabase();
     //  this.addAllDataProdToIndexeddb();
-   }
+  }
 
   getAllProduits(): Observable<Produit[]> {
     return this.http.get<Produit[]>(`${this.baseUrl_1}/produits/all`);
@@ -95,7 +100,6 @@ export class ProduitService {
     return this.http.post<Produit>(`${this.baseUrl_1}/produits/create`, info);
   }
 
-
   updateProduit(id: number, value: Produit): Observable<Produit> {
     return this.http.put<Produit>(`${this.baseUrl_1}/produits/update/${id}`, value);
   }
@@ -103,6 +107,7 @@ export class ProduitService {
   deleteProduit(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl_1}/produits/delete/${id}`, { responseType: 'text' });
   }
+
   /**
    * method pour importer les données de Excel à MySQL
    * @param formData
@@ -117,6 +122,7 @@ export class ProduitService {
     const httpOptions = { headers: headers };
 
     return this.http.post(`${this.baseUrl_1}/produits/upload`, formData, httpOptions);
+
 
   }
 
@@ -139,12 +145,16 @@ export class ProduitService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl_1}/produits/download/Produits.xlsx`,{ observe: 'response', responseType: 'blob' }).subscribe(res => {
-      const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
-      FileSaver.saveAs(blob, 'Produits.xlsx');
-    });
+    this.http.get(`${this.baseUrl_1}/produits/download/articles.xlsx`,
+    { observe: 'response', responseType: 'blob' })
+      .subscribe(res => {
+        const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
+        FileSaver.saveAs(blob, 'articles.xlsx');
+        }
+      );
 
   }
+
   /**
    * methode permettant de generer un pdf depuis API Spring boot
    */
