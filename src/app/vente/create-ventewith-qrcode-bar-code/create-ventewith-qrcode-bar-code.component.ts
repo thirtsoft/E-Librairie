@@ -148,6 +148,8 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       });
 
     }
+	
+	
 
 
 
