@@ -5,6 +5,8 @@ import { HttpClientModule} from '@angular/common/http';
 import {DataTablesModule} from 'angular-datatables';
 declare var $: any;
 
+import { AuthGuardService } from './auth/auth-guard.service';
+
 import { MAT_DIALOG_DATA, MatDialogModule,MatDialogRef, } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -295,6 +297,7 @@ import { ListCommandeOfUserComponent } from './tableau/list-commande-of-user/lis
     { provide: MatDialogRef, useValue: {} },
 
     httpInterceptorProviders,
+    AuthGuardService
 
   ],
 
