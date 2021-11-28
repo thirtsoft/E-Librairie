@@ -10,6 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ListApproOfUserComponent implements OnInit {
 
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -20,10 +21,12 @@ export class ListApproOfUserComponent implements OnInit {
         console.log(m);
         this.rerender();
         this.getTop500ApprovisionnementsOrderByIdDesc();
-      })
+      });
+
   }
 
   ngOnInit() {
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -32,6 +35,7 @@ export class ListApproOfUserComponent implements OnInit {
       order: [[0, 'desc']]
     };
 
+    this.getTop500ApprovisionnementsOrderByIdDesc();
 
   }
 

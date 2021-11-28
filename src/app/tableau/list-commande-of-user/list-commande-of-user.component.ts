@@ -10,6 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ListCommandeOfUserComponent implements OnInit {
 
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -24,6 +25,7 @@ export class ListCommandeOfUserComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -31,6 +33,9 @@ export class ListCommandeOfUserComponent implements OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
+
+    this.getTop500CommandesOrderByIdDesc();
+
 
 
   }
