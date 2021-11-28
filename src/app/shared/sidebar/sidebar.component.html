@@ -1,44 +1,104 @@
 <!--sidebar start-->
 <aside>
-  <div id="sidebar" class="nav-collapse ">
-      <!-- sidebar menu start-->
-      <ul class="sidebar-menu">
-          <li class="active">
-              <a class="" routerLink="/home/dashboard" routerLinkActive="router-link-active">
-                  <i class="icon_house_alt"></i>
-                  <span>Tableau de Bord</span>
-              </a>
+  <div id="sidebar" class="nav-collapse">
+    <!-- sidebar menu start-->
+    <ul class="sidebar-menu">
+      <li class="active">
+        <a
+          class=""
+          routerLink="/home/dashboard"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon_house_alt"></i>
+          <span>Tableau de Bord</span>
+        </a>
+      </li>
+      <!-- <li class="sub-menu" *ngIf="showAdminBoard"> -->
+      <li class="sub-menu">
+        <a href="javascript:0;" class="">
+          <i class="fa fa-book fa-fw" aria-hidden="true"></i>
+          <span>Library</span>
+          <!--  <span>Magasin</span> -->
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li>
+            <a
+              class=""
+              routerLink="/home/categories"
+              routerLinkActive="router-link-active"
+              >Catégories</a
+            >
           </li>
-          <!-- <li class="sub-menu" *ngIf="showAdminBoard"> -->
-          <li class="sub-menu">
-              <a href="javascript:0;" class="">
-                  <i class="fa fa-book fa-fw" aria-hidden="true"></i>
-                  <span>Library</span>
-                 <!--  <span>Magasin</span> -->
-                  <span class="menu-arrow arrow_carrot-right"></span>
-              </a>
-              <ul class="sub">
-                  <li><a class="" routerLink="/home/categories" routerLinkActive="router-link-active">Catégories</a></li>
-                  <li><a class="" routerLink="/home/scategories" routerLinkActive="router-link-active">Scatégories</a></li>
-                   <li><a class="" routerLink="/home/listArticleWithBarcode" routerLinkActive="router-link-active">Articles</a></li>
-                  <li><a class="" routerLink="/home/articlesQrCodes" routerLinkActive="router-link-active">ArticlesBarCode</a></li>
-              </ul>
+          <li>
+            <a
+              class=""
+              routerLink="/home/scategories"
+              routerLinkActive="router-link-active"
+              >Scatégories</a
+            >
           </li>
-          <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
-          <li class="sub-menu">
-              <a href="javascript:0;" class="">
-                  <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                  <span>Commandes</span>
-                  <span class="menu-arrow arrow_carrot-right"></span>
-              </a>
-              <ul class="sub">
-                  <li><a class="" routerLink="/home/listcommandes" routerLinkActive="router-link-active">Commande</a></li>
-                  <li><a class="" routerLink="/home/detailsCommande" routerLinkActive="router-link-active">Détails Commandes</a></li>
-                  <li><a class="" routerLink="/home/listdevis" routerLinkActive="router-link-active">Devis</a></li>
-                  <li><a class="" routerLink="/home/detailsDevis" routerLinkActive="router-link-active">Détails Devis</a></li>
-              </ul>
+          <li>
+            <a
+              class=""
+              routerLink="/home/listArticleWithBarcode"
+              routerLinkActive="router-link-active"
+              >Articles</a
+            >
           </li>
-          <!--
+          <li>
+            <a
+              class=""
+              routerLink="/home/articlesQrCodes"
+              routerLinkActive="router-link-active"
+              >ArticlesBarCode</a
+            >
+          </li>
+        </ul>
+      </li>
+      <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
+      <li class="sub-menu">
+        <a href="javascript:0;" class="">
+          <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+          <span>Commandes</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li>
+            <a
+              class=""
+              routerLink="/home/listcommandes"
+              routerLinkActive="router-link-active"
+              >Commande</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/detailsCommande"
+              routerLinkActive="router-link-active"
+              >Détails Commandes</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/listdevis"
+              routerLinkActive="router-link-active"
+              >Devis</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/detailsDevis"
+              routerLinkActive="router-link-active"
+              >Détails Devis</a
+            >
+          </li>
+        </ul>
+      </li>
+      <!--
     <li>
       <a class="" href="widgets.html">
                     <i class="icon_genius"></i>
@@ -54,116 +114,240 @@
 
     </li>  -->
 
-          <!-- <li class="sub-menu" *ngIf="showVendeurBoard"> -->
-          <li class="sub-menu">
-              <a href="javascript:;" class="">
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                  <span>Ventes</span>
-                  <span class="menu-arrow arrow_carrot-right"></span>
-              </a>
-              <ul class="sub">
-                  <!-- <li><a class="" routerLink="/home/ventes" routerLinkActive="router-link-active">Ventes</a></li> -->
-                  <li><a class="" routerLink="/home/ventes" routerLinkActive="router-link-active">Vendre</a></li>
-                  <li><a class="" routerLink="/home/detailsVentes" routerLinkActive="router-link-active">Details Vente</a></li>
-              </ul>
-          </li>
-
-          <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
-          <li class="sub-menu">
-              <a href="javascript:;" class="">
-                  <i class="icon_documents_alt"></i>
-                  <span>Situation</span>
-                  <span class="menu-arrow arrow_carrot-right"></span>
-              </a>
-              <ul class="sub">
-                  <li><a class="" routerLink="/home/creances">Creance</a></li>
-                  <li><a class="" routerLink="/home/detailsCreances">Détails-Créance</a></li>
-                  <li><a class="" routerLink="/home/avoirs">Avoirs</a></li>
-                  <li><a class="" routerLink="/home/detailsAvoirs">Détails-Avoir</a></li>
-              </ul>
-          </li>
-
-          <li class="sub-menu">
-              <a href="javascript:;" class="">
-                  <i class="fa fa-line-chart" aria-hidden="true"></i>
-                  <span>Mouvement</span>
-                  <span class="menu-arrow arrow_carrot-right"></span>
-              </a>
-              <ul class="sub">
-                  <li><a class="" routerLink="/home/approvisionnements" routerLinkActive="router-link-active">Entrées</a></li>
-                  <li><a class="" routerLink="/home/detailsApprovisionnements" routerLinkActive="router-link-active">Détails Entrées</a></li>
-                  <li><a class="" routerLink="/home/stocks" routerLinkActive="router-link-active">Stock</a></li>
-              </ul>
-          </li>
-
-          <li class="sub-menu">
-              <a href="javascript:;" class="">
-                  <i class="fa fa-usd" aria-hidden="true"></i>
-                  <span>Réglement</span>
-                  <span class="menu-arrow arrow_carrot-right"></span>
-              </a>
-              <ul class="sub">
-                  <li><a class="" routerLink="/home/versements">Versement</a></li>
-                  <li><a class="" routerLink="/home/contrats">Contrat</a></li>
-                  <li><a class="" routerLink="/home/categorieCharges">Categorie-Charge</a></li>
-                  <li><a class="" routerLink="/home/charges">Charges</a></li>
-              </ul>
-          </li>
-
+      <!-- <li class="sub-menu" *ngIf="showVendeurBoard"> -->
+      <li class="sub-menu">
+        <a href="javascript:;" class="">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <span>Ventes</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <!-- <li><a class="" routerLink="/home/ventes" routerLinkActive="router-link-active">Ventes</a></li> -->
           <li>
-              <a class="" routerLink="/home/chart">
-                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                  <span>Graphiques</span>
-              </a>
-          </li>
-
-          <li>
-              <a class="" routerLink="/home/tableau">
-                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                  <span>Résumés</span>
-              </a>
+            <a
+              class=""
+              routerLink="/home/ventes"
+              routerLinkActive="router-link-active"
+              >Vendre</a
+            >
           </li>
           <li>
+            <a
+              class=""
+              routerLink="/home/detailsVentes"
+              routerLinkActive="router-link-active"
+              >Details Vente</a
+            >
+          </li>
+        </ul>
+      </li>
+
+      <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
+      <li class="sub-menu">
+        <a href="javascript:;" class="">
+          <i class="icon_documents_alt"></i>
+          <span>Situation</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li><a class="" routerLink="/home/creances">Creance</a></li>
+          <li>
+            <a class="" routerLink="/home/detailsCreances">Détails-Créance</a>
+          </li>
+          <li><a class="" routerLink="/home/avoirs">Avoirs</a></li>
+          <li>
+            <a class="" routerLink="/home/detailsAvoirs">Détails-Avoir</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="sub-menu">
+        <a href="javascript:;" class="">
+          <i class="fa fa-line-chart" aria-hidden="true"></i>
+          <span>Mouvement</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li>
+            <a
+              class=""
+              routerLink="/home/approvisionnements"
+              routerLinkActive="router-link-active"
+              >Entrées</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/detailsApprovisionnements"
+              routerLinkActive="router-link-active"
+              >Détails Entrées</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/stocks"
+              routerLinkActive="router-link-active"
+              >Stock</a
+            >
+          </li>
+        </ul>
+      </li>
+
+      <li class="sub-menu">
+        <a href="javascript:;" class="">
+          <i class="fa fa-usd" aria-hidden="true"></i>
+          <span>Réglement</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li><a class="" routerLink="/home/versements">Versement</a></li>
+          <li><a class="" routerLink="/home/contrats">Contrat</a></li>
+          <li>
+            <a class="" routerLink="/home/categorieCharges">Categorie-Charge</a>
+          </li>
+          <li><a class="" routerLink="/home/charges">Charges</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a class="" routerLink="/home/chart">
+          <i class="fa fa-bar-chart" aria-hidden="true"></i>
+          <span>Graphiques</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="" routerLink="/home/tableau">
+          <i class="fa fa-bar-chart" aria-hidden="true"></i>
+          <span>Résumés</span>
+        </a>
+      </li>
+      <!--  <li>
             <a class="" routerLink="/home/articlesQrCodes">
                 <i class="fa fa-bar-chart" aria-hidden="true"></i>
                 <span>CodeBarArticle</span>
             </a>
-        </li>
+        </li> -->
 
-          <li class="sub-menu">
-              <a href="javascript:;" class="">
-                  <i class="fa fa-users" aria-hidden="true"></i>
-                  <span>Personnes</span>
-                  <span class="menu-arrow arrow_carrot-right"></span>
-              </a>
-              <ul class="sub">
-                  <li><a class="" [routerLink]="['/home/clients']" routerLinkActive="router-link-active">Client</a></li>
-                  <li><a class="" [routerLink]="['/home/fournisseurs']" routerLinkActive="router-link-active">Fournisseur</a></li>
-                  <li><a class="" routerLink="/home/employes" routerLinkActive="router-link-active">Employee</a></li>
-                  <li><a class="" routerLink="/home/utilisateurs" routerLinkActive="router-link-active">Utilisateur</a></li>
-                  <li><a class="" routerLink="/register" routerLinkActive="router-link-active">Créer Compte</a></li>
-              </ul>
+      <li class="sub-menu">
+        <a href="javascript:;" class="">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <span>Personnes</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li>
+            <a
+              class=""
+              [routerLink]="['/home/clients']"
+              routerLinkActive="router-link-active"
+              >Client</a
+            >
           </li>
+          <li>
+            <a
+              class=""
+              [routerLink]="['/home/fournisseurs']"
+              routerLinkActive="router-link-active"
+              >Fournisseur</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/employes"
+              routerLinkActive="router-link-active"
+              >Employee</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/utilisateurs"
+              routerLinkActive="router-link-active"
+              >Utilisateur</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/register"
+              routerLinkActive="router-link-active"
+              >Créer Compte</a
+            >
+          </li>
+        </ul>
+      </li>
 
-          <li class="sub-menu">
-            <a href="javascript:0;" class="">
-                <i class="fa fa-cog" aria-hidden="true"></i>
-                <span>Activités</span>
-                <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-                <li><a class="" routerLink="/home/historiqueCommandes" routerLinkActive="router-link-active">Activités Com&Vente</a></li>
-                <li><a class="" routerLink="/home/historiqueVentes" routerLinkActive="router-link-active">Activités Ventes</a></li>
-                <li><a class="" routerLink="/home/historiqueCreances" routerLinkActive="router-link-active">Activités Creances</a></li>
-                <li><a class="" routerLink="/home/historiqueAvoirs" routerLinkActive="router-link-active">Activités Avoirs</a></li>
-                <li><a class="" routerLink="/home/historiqueAppro" routerLinkActive="router-link-active">Activités Appro</a></li>
-                <li><a class="" routerLink="/home/historiqueDevis" routerLinkActive="router-link-active">Activités Devis</a></li>
-                <li><a class="" routerLink="/home/historiqueLogins" routerLinkActive="router-link-active">Activités Login</a></li>
-            </ul>
-        </li>
-
-      </ul>
-      <!-- sidebar menu end-->
+      <li class="sub-menu">
+        <a href="javascript:0;" class="">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+          <span>Activités</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li>
+            <a
+              class=""
+              routerLink="/home/historiqueCommandes"
+              routerLinkActive="router-link-active"
+              >Activités Com&Vente</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/historiqueVentes"
+              routerLinkActive="router-link-active"
+              >Activités Ventes</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/historiqueCreances"
+              routerLinkActive="router-link-active"
+              >Activités Creances</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/historiqueAvoirs"
+              routerLinkActive="router-link-active"
+              >Activités Avoirs</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/historiqueAppro"
+              routerLinkActive="router-link-active"
+              >Activités Appro</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/historiqueDevis"
+              routerLinkActive="router-link-active"
+              >Activités Devis</a
+            >
+          </li>
+          <li>
+            <a
+              class=""
+              routerLink="/home/historiqueLogins"
+              routerLinkActive="router-link-active"
+              >Activités Login</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <!-- sidebar menu end-->
   </div>
 </aside>
 <!--sidebar end-->
