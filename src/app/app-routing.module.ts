@@ -154,7 +154,7 @@ const routes: Routes = [
         {
           path: '',
           component: ListScategorieComponent,
-          canActivate: [AuthGuardService]
+  //        canActivate: [AuthGuardService]
         },
         {
           path:'edit/:id',
@@ -167,7 +167,7 @@ const routes: Routes = [
         {
           path: '',
           component: ListArticleComponent,
-          canActivate: [AuthGuardService]
+   //       canActivate: [AuthGuardService]
         },
         {
           path:'edit/:id',
@@ -183,29 +183,29 @@ const routes: Routes = [
     {
       path: 'listArticleWithBarcode',
       component: ListArticleWithBarArcodeComponent,
-      canActivate: [AuthGuardService]
+  //    canActivate: [AuthGuardService]
     },
-    { 
-      path: 'articleWithBarcode', 
+    {
+      path: 'articleWithBarcode',
       component: CreateArticleWithBarcodeComponent
     },
 
 
-    { 
-      path: 'clients', 
+    {
+      path: 'clients',
       component: ListClientComponent,
-      canActivate: [AuthGuardService]
+  //    canActivate: [AuthGuardService]
     },
-    { 
-      path: 'client', 
+    {
+      path: 'client',
       component: CreateClientComponent
     },
-    { 
-      path: 'sendEmailToCustomer', 
+    {
+      path: 'sendEmailToCustomer',
       component: EnvoiEmailClientComponent
     },
-    { 
-      path: 'sendSMSToCustomer', 
+    {
+      path: 'sendSMSToCustomer',
       component: EnvoiSMSClientComponent
     },
 
@@ -217,80 +217,80 @@ const routes: Routes = [
       ]
     },
 */
-    { 
-      path: 'listcommandes', 
+    {
+      path: 'listcommandes',
       component: ListCommandeComponent,
-      canActivate: [AuthGuardService] 
+ //     canActivate: [AuthGuardService]
     },
-    { 
+    {
       path:'commande',
       component: CreateCommandeComponent,
-      canActivate: [AuthGuardService] 
+  //    canActivate: [AuthGuardService]
     },
-    { 
-      path:'commandeView/:id', 
+    {
+      path:'commandeView/:id',
       component: ViewCommandeComponent,
-      canActivate: [AuthGuardService] 
+  //    canActivate: [AuthGuardService]
     },
-    { 
-      path: 'detailsCommande', 
+    {
+      path: 'detailsCommande',
       component: ListLigneCommandeComponent,
-      canActivate: [AuthGuardService]
+  //    canActivate: [AuthGuardService]
     },
-    { 
-      path: 'detailsCommande', 
-      component: CreateLigneCommandeComponent 
+    {
+      path: 'detailsCommande',
+      component: CreateLigneCommandeComponent
     },
-    { 
-      path: 'commandeQrcode', 
+    {
+      path: 'commandeQrcode',
       component: CreateCommandewithQrcodeBarCodeComponent,
-      canActivate: [AuthGuardService] 
+  //    canActivate: [AuthGuardService]
     },
 
-    { 
-      path: 'listdevis', 
+    {
+      path: 'listdevis',
       component: ListDevisComponent,
-      canActivate: [AuthGuardService] 
+  //    canActivate: [AuthGuardService]
     },
-    { 
+    {
       path:'devis',
       component: CreateDevisComponent,
-      canActivate: [AuthGuardService] 
+ //     canActivate: [AuthGuardService]
     },
-    { 
-      path:'devisView/:id', 
+    {
+      path:'devisView/:id',
       component: ViewDevisComponent,
-      canActivate: [AuthGuardService] 
+ //     canActivate: [AuthGuardService]
     },
-    { 
-      path: 'detailsDevis', 
+    {
+      path: 'detailsDevis',
       component: ListLigneDevisComponent,
-      canActivate: [AuthGuardService] 
+ //     canActivate: [AuthGuardService]
     },
-    { 
+    {
       path:'detailsDevis',
-      component: CreateLigneDevisComponent 
+      component: CreateLigneDevisComponent
     },
 
-    { 
-      path: 'ventes', 
+    {
+      path: 'ventes',
       component: ListVenteComponent,
-      canActivate: [AuthGuardService]
+ //     canActivate: [AuthGuardService]
     },
-    { 
-      path: 'vente', 
+    {
+      path: 'vente',
       component: CreateVenteComponent,
-      canActivate: [AuthGuardService] 
+ //     canActivate: [AuthGuardService]
     },
-    { 
-      path: 'venteQrcode', 
+    {
+      path: 'venteQrcode',
       component: CreateVentewithQrcodeBarCodeComponent,
-      canActivate: [AuthGuardService] 
+  //    canActivate: [AuthGuardService]
     },
-    { 
-      path: 'venteQrcode/:barcode', 
+    {
+      path: 'venteQrcode/:barcode',
       component: CreateVentewithQrcodeBarCodeComponent,
-      canActivate: [AuthGuardService] 
+ //     canActivate: [AuthGuardService]
     },
    /* { path:'vente/:username',children:[
         {path:'',component:CreateVenteComponent},
@@ -298,15 +298,15 @@ const routes: Routes = [
     },
     */
     {
-      path:'venteView/:id', 
+      path:'venteView/:id',
       component: ViewVenteComponent,
-      canActivate: [AuthGuardService]
+  //    canActivate: [AuthGuardService]
     },
 
-    { 
-      path: 'detailsVentes', 
+    {
+      path: 'detailsVentes',
       component: ListLigneVenteComponent,
-      canActivate: [AuthGuardService]
+  //    canActivate: [AuthGuardService]
     },
     { path:'detailsVente',children:[
         {
@@ -316,8 +316,8 @@ const routes: Routes = [
       ]
     },
 
-    { 
-      path: 'approvisionnements', 
+    {
+      path: 'approvisionnements',
       component: ListApproComponent,
       canActivate: [AuthGuardService]
     },
@@ -333,13 +333,13 @@ const routes: Routes = [
       ]
     },
     {
-      path:'approView/:id', 
+      path:'approView/:id',
       component: ViewApprovisionnementComponent,
       canActivate: [AuthGuardService]
     },
 
-    { 
-      path: 'detailsApprovisionnements', 
+    {
+      path: 'detailsApprovisionnements',
       component: ListLigneApproComponent,
       canActivate: [AuthGuardService]
     },
@@ -355,8 +355,8 @@ const routes: Routes = [
       ]
     },
 
-    { 
-      path: 'stocks', 
+    {
+      path: 'stocks',
       component: ListStockComponent,
       canActivate: [AuthGuardService]
     },
@@ -373,63 +373,63 @@ const routes: Routes = [
     },
 
 
-    { 
-      path: 'creances', 
+    {
+      path: 'creances',
       component: ListCreanceComponent,
       canActivate: [AuthGuardService]
     },
-    { 
+    {
       path:'creance',
       component: CreateCreanceComponent
     },
-    { 
+    {
       path:'creance',
       component: UpdateStatusCreanceComponent
     },
-    { 
+    {
       path:'creance',
       component: UpdateSoldeCreanceComponent
     },
 
     {
-      path:'creanceView/:id', 
+      path:'creanceView/:id',
       component: ViewCreanceComponent,
       canActivate: [AuthGuardService]
     },
 
-    { 
-      path: 'detailsCreances', 
+    {
+      path: 'detailsCreances',
       component: ListLigneCreanceComponent,
       canActivate: [AuthGuardService]
     },
-    { 
-      path: 'detailsCreance', 
+    {
+      path: 'detailsCreance',
       component: CreateLigneCreanceComponent
     },
 
-    { 
-      path: 'avoirs', 
+    {
+      path: 'avoirs',
       component: ListAvoirComponent,
       canActivate: [AuthGuardService]
     },
-    { 
+    {
       path:'avoir',
       component: CreateAvoirComponent
     },
 
     {
-      path:'avoirView/:id', 
+      path:'avoirView/:id',
       component: ViewAvoirComponent,
       canActivate: [AuthGuardService]
     },
 
-    { 
-      path: 'detailsAvoirs', 
+    {
+      path: 'detailsAvoirs',
       component: ListLigneAvoirComponent,
       canActivate: [AuthGuardService]
     },
-    { 
-      path: 'detailsAvoir', 
+    {
+      path: 'detailsAvoir',
       component: CreateLigneAvoirComponent
     },
 
@@ -442,24 +442,24 @@ const routes: Routes = [
       ]
     }, */
 
-    { 
-      path: 'charges', component: 
+    {
+      path: 'charges', component:
       ListChargeComponent,
       canActivate: [AuthGuardService]
     },
-    { 
+    {
       path:'charge',
-      component: CreateChargeComponent 
+      component: CreateChargeComponent
     },
 
-    { 
-      path: 'categorieCharges', 
+    {
+      path: 'categorieCharges',
       component: ListCategorieChargeComponent,
       canActivate: [AuthGuardService]
     },
-    { 
-      path:'categorieCharge', 
-      component: CreateCategorieChargeComponent 
+    {
+      path:'categorieCharge',
+      component: CreateCategorieChargeComponent
     },
 
 
@@ -469,61 +469,61 @@ const routes: Routes = [
         { path:'viewContrat/:id',component: ViewContratComponent },
       ]
     }, */
-    { 
-      path: 'contrats', 
+    {
+      path: 'contrats',
       component: ListContratComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'contrat', 
-      component: CreateContratComponent 
+    {
+      path: 'contrat',
+      component: CreateContratComponent
     },
-    { 
-      path: 'contrat', 
-      component: UploadContratComponent 
+    {
+      path: 'contrat',
+      component: UploadContratComponent
     },
-    { 
-      path: 'contratView', 
-      component: ViewContratComponent 
+    {
+      path: 'contratView',
+      component: ViewContratComponent
     },
 
-    { 
-      path: 'fournisseurs', 
+    {
+      path: 'fournisseurs',
       component: ListFournisseurComponent,
       canActivate: [AuthGuardService]
     },
-    { 
-      path: 'fournisseur', 
+    {
+      path: 'fournisseur',
       component: CreateFournisseurComponent
     },
-    { 
-      path: 'fournisseurView', 
+    {
+      path: 'fournisseurView',
       component: ViewFournisseurComponent
     },
-    { 
-      path: 'sendEmailToFournisseur', 
+    {
+      path: 'sendEmailToFournisseur',
       component: EnvoiEmailFournisseurComponent
     },
-    { 
-      path: 'sendSMSToFournisseur', 
+    {
+      path: 'sendSMSToFournisseur',
       component: EnvoiSMSFournisseurComponent
     },
 
-    { 
-      path: 'employes', 
+    {
+      path: 'employes',
       component: ListEmployeComponent,
       canActivate: [AuthGuardService]
     },
-    { 
-      path: 'employe', 
+    {
+      path: 'employe',
       component: CreateEmployeComponent
     },
-    { 
-      path: 'sendEmailToEmploye', 
+    {
+      path: 'sendEmailToEmploye',
       component: EnvoiEmailEmployeComponent
     },
-    { 
-      path: 'sendSMSToEmploye', 
+    {
+      path: 'sendSMSToEmploye',
       component: EnvoiSMSEmployeComponent
     },
 
@@ -536,115 +536,115 @@ const routes: Routes = [
       ]
     },*/
 
-    { 
-      path: 'versements', 
+    {
+      path: 'versements',
       component: ListVersementComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'versement', 
-      component: CreateVersementComponent 
+    {
+      path: 'versement',
+      component: CreateVersementComponent
     },
-    { 
-      path: 'versement', 
-      component: UploadFileVersementComponent 
+    {
+      path: 'versement',
+      component: UploadFileVersementComponent
     },
-    { 
-      path: 'viewVersement', 
-      component: ViewVersementComponent 
+    {
+      path: 'viewVersement',
+      component: ViewVersementComponent
     },
 
 
-    { 
-      path: 'dashboard', 
+    {
+      path: 'dashboard',
       component: DashboardComponent,
-  //    canActivate: [AuthGuardService] 
+  //    canActivate: [AuthGuardService]
     },
 
-    { 
-      path: 'tableau', 
+    {
+      path: 'tableau',
       component: ListStatistiqueComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
 
-    { 
-      path: 'chart', 
+    {
+      path: 'chart',
       component: ChartComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'barchart', 
+    {
+      path: 'barchart',
       component: BarchartComponent
     },
-    { 
-      path: 'piechart', 
+    {
+      path: 'piechart',
       component: PiechartComponent
     },
-    { 
-      path: 'linechart', 
+    {
+      path: 'linechart',
       component: LinechartComponent
     },
 
   //  { path: 'profile/:username', component: ProfilComponent },
-    { 
-      path: 'profile/:id', 
+    {
+      path: 'profile/:id',
       component: ProfilComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'profile/:id', 
-      component: UpdateProfileComponent 
+    {
+      path: 'profile/:id',
+      component: UpdateProfileComponent
     },
-    { 
-      path: 'profile/:id', 
-      component: UpdateUsernameComponent 
+    {
+      path: 'profile/:id',
+      component: UpdateUsernameComponent
     },
-    { 
-      path: 'profile/:id', 
-      component: UpdatePasswordComponent 
+    {
+      path: 'profile/:id',
+      component: UpdatePasswordComponent
     },
 
-    { 
-      path: 'utilisateurs', 
+    {
+      path: 'utilisateurs',
       component: ListUtilisateurComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
 
 
-    { 
-      path: 'historiqueCommandes', 
+    {
+      path: 'historiqueCommandes',
       component: ListHistoriqueCommandeComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'historiqueVentes', 
+    {
+      path: 'historiqueVentes',
       component: ListHistoriqueVenteComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'historiqueCreances', 
+    {
+      path: 'historiqueCreances',
       component: ListHistoriqueCreanceComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'historiqueAvoirs', 
+    {
+      path: 'historiqueAvoirs',
       component: ListHistoriqueAvoirComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'historiqueAppro', 
+    {
+      path: 'historiqueAppro',
       component: ListHistoriqueApproComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'historiqueDevis', 
+    {
+      path: 'historiqueDevis',
       component: ListHistoriqueDevisComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
-    { 
-      path: 'historiqueLogins', 
+    {
+      path: 'historiqueLogins',
       component: ListHistoriqueLoginComponent,
-      canActivate: [AuthGuardService] 
+      canActivate: [AuthGuardService]
     },
 
 

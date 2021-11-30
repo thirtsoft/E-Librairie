@@ -34,12 +34,21 @@
     <div class="form-group">
       <label>Sous-Categorie</label>
       <div class="form-group">
+     <!--    <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataArticle.scategorie"
+          name="scategorie"
+          id="scategorie"
+          readonly
+          /> -->
         <select
           name="scategorie"
           id="scategorie"
           [(ngModel)]="formDataArticle.scategorie"
           class="form-control"
           readonly
+          disabled="true"
         >
           <option value="0">-Select-</option>
           <option
@@ -49,6 +58,7 @@
                 ? formDataArticle.scategorie
                 : scat
             "
+
           >
             {{ scat.libelle }}
           </option>
