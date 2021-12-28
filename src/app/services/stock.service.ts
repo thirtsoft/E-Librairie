@@ -10,8 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 export class StockService {
 
+  //baseUrl = environment.apiBaseUrl;
 
-  private baseUrl = environment.apiBaseUrl;
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
 
   choixmenu : string  = 'A';

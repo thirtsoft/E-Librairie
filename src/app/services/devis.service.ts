@@ -11,7 +11,9 @@ import { environment } from './../../environments/environment';
 })
 export class DevisService {
 
-  private baseUrl = environment.apiBaseUrl;
+  //baseUrl = environment.apiBaseUrl;
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
  // private baseUrl = window["cfgApiBaseUrl"];
 

@@ -13,8 +13,9 @@ import { environment } from 'src/environments/environment';
 })
 export class FournisseurService {
 
+  //baseUrl = environment.apiBaseUrl;
 
-  private baseUrl = environment.apiBaseUrl;
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
 //  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 

@@ -17,7 +17,9 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardService {
 
-  private baseUrl = environment.apiBaseUrl;
+  //baseUrl = environment.apiBaseUrl;
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
  // private baseUrl = window["cfgApiBaseUrl"];
 

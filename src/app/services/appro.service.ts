@@ -13,14 +13,14 @@ import { environment } from 'src/environments/environment';
 })
 export class ApproService {
 
+//  private baseUrl = environment.apiBaseUrl;
 
-  private baseUrl = environment.apiBaseUrl;
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : Appro[];
- // public formData:  Appro;
 
   public formData:  FormGroup;
 
@@ -28,14 +28,7 @@ export class ApproService {
 
   listLigneAppro: LigneAppro[];
 
- // listLigneCmd: LigneAppro[];
-
-  //public dataForm:  FormGroup;
-
   list: any={}
-
-  //list: LigneAppro[] = [];
-
 
   orderItems: LigneAppro[];
 
@@ -73,14 +66,9 @@ export class ApproService {
     return this.http.get(`${this.baseUrl}/approvisionnements/findById/${id}`);
   }
 
-
   getApprovisionnementByID(id:number):any {
     return this.http.get(`${this.baseUrl}/approvisionnements/findById/${id}`).toPromise();
   }
-
-  /* createCommandeClient(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/commandesClientes`, info);
-  } */
 
   createApprovisionnement() {
     var body = {

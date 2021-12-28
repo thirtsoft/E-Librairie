@@ -19,7 +19,9 @@ import { environment } from 'src/environments/environment';
 })
 export class VenteService {
 
-  private baseUrl_1 = environment.apiBaseUrl;
+  //baseUrl_1 = environment.apiBaseUrl;
+
+  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
   private db: Dexie;
   private tableVent: Dexie.Table<Vente, number>;

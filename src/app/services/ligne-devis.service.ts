@@ -10,7 +10,9 @@ import { LigneDevis } from '../models/ligne-devis';
 })
 export class LigneDevisService {
 
-  private baseUrl = environment.apiBaseUrl;
+  //baseUrl = environment.apiBaseUrl;
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
    choixmenu : string  = 'A';
    listData : LigneDevis[];

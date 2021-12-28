@@ -15,9 +15,10 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ScategorieService {
 
-  private baseUrl_1 = environment.apiBaseUrl;
+  //baseUrl_1 = environment.apiBaseUrl;
 
-  alAmine
+  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+
 
   //  private baseUrl = window["cfgApiBaseUrl"];
 

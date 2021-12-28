@@ -12,7 +12,9 @@ import { environment } from 'src/environments/environment';
 })
 export class UtilisateurService {
 
-  public baseUrl = environment.apiBaseUrl;
+  //baseUrl = environment.apiBaseUrl;
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
 //  public baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
 

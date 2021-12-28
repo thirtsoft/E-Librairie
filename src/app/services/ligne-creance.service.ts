@@ -10,7 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 export class LigneCreanceService {
 
-  private baseUrl = environment.apiBaseUrl;
+  //baseUrl = environment.apiBaseUrl;
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
   choixmenu : string  = 'A';
   listData : LigneCreance[];

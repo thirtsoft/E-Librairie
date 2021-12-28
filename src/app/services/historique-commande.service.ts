@@ -10,55 +10,57 @@ import { environment } from 'src/environments/environment';
 })
 export class HistoriqueCommandeService {
 
-  private baseUrl = environment.apiBaseUrl;
+  //baseUrl = environment.apiBaseUrl;
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
 
-     choixmenu : string  = 'A';
-     listData : HistoriqueCommande[];
-     formData:  HistoriqueCommande;
+  choixmenu : string  = 'A';
+  listData : HistoriqueCommande[];
+  formData:  HistoriqueCommande;
 
-    dataForm:  FormGroup;
+  dataForm:  FormGroup;
 
-    private listners = new Subject<any>();
+  private listners = new Subject<any>();
 
-    listen(): Observable<any> {
-      return this.listners.asObservable();
-    }
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
 
-    filter(filterBy: string) {
-      this.listners.next(filterBy);
-    }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getAllHistoriqueCommandes(): Observable<HistoriqueCommande[]> {
-      return this.http.get<HistoriqueCommande[]>(`${this.baseUrl}/historiqueCommandes/all`);
-    }
+  getAllHistoriqueCommandes(): Observable<HistoriqueCommande[]> {
+    return this.http.get<HistoriqueCommande[]>(`${this.baseUrl}/historiqueCommandes/all`);
+  }
 
-    getAllHistoriqueCommandesOrderDesc(): Observable<HistoriqueCommande[]> {
-      return this.http.get<HistoriqueCommande[]>(`${this.baseUrl}/historiqueCommandes/allHistoriqueCommandeOrderDesc`);
-    }
+  getAllHistoriqueCommandesOrderDesc(): Observable<HistoriqueCommande[]> {
+    return this.http.get<HistoriqueCommande[]>(`${this.baseUrl}/historiqueCommandes/allHistoriqueCommandeOrderDesc`);
+  }
 
 
-    getHistoriqueCommandeByID(id:number):any {
-     return this.http.get(`${this.baseUrl}/HistoriqueCommandes/findById/`+id).toPromise();
-    }
+  getHistoriqueCommandeByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/HistoriqueCommandes/findById/`+id).toPromise();
+  }
 
-     public getHistoriqueCommandeById(id: number): Observable<Object> {
-       return this.http.get(`${this.baseUrl}/historiqueCommandes/findById/${id}`);
-     }
+  public getHistoriqueCommandeById(id: number): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/historiqueCommandes/findById/${id}`);
+  }
 
-    createHistoriqueCommande(info: HistoriqueCommande): Observable<HistoriqueCommande> {
-      return this.http.post<HistoriqueCommande>(`${this.baseUrl}/historiqueCommandes/create`, info);
-    }
+  createHistoriqueCommande(info: HistoriqueCommande): Observable<HistoriqueCommande> {
+    return this.http.post<HistoriqueCommande>(`${this.baseUrl}/historiqueCommandes/create`, info);
+  }
 
-    updateHistoriqueCommande(id: number, value: HistoriqueCommande): Observable<HistoriqueCommande> {
-       return this.http.put<HistoriqueCommande>(`${this.baseUrl}/historiqueCommandes/update/${id}`, value);
-    }
+  updateHistoriqueCommande(id: number, value: HistoriqueCommande): Observable<HistoriqueCommande> {
+    return this.http.put<HistoriqueCommande>(`${this.baseUrl}/historiqueCommandes/update/${id}`, value);
+  }
 
-    deleteHistoriqueCommande(id: number): Observable<any> {
-      return this.http.delete(`${this.baseUrl}/historiqueCommandes/delete/${id}`, { responseType: 'text' });
-    }
+  deleteHistoriqueCommande(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/historiqueCommandes/delete/${id}`, { responseType: 'text' });
+  }
 
 
 }

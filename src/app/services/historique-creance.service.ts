@@ -10,55 +10,57 @@ import { environment } from 'src/environments/environment';
 })
 export class HistoriqueCreanceService {
 
-  private baseUrl = environment.apiBaseUrl;
+  //baseUrl = environment.apiBaseUrl;
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
 
   choixmenu : string  = 'A';
   listData : HistoriqueCreance[];
   formData:  HistoriqueCreance;
 
- dataForm:  FormGroup;
+  dataForm:  FormGroup;
 
- private listners = new Subject<any>();
+  private listners = new Subject<any>();
 
- listen(): Observable<any> {
+  listen(): Observable<any> {
    return this.listners.asObservable();
- }
+  }
 
- filter(filterBy: string) {
-   this.listners.next(filterBy);
- }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
- constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
- getAllHistoriqueCreances(): Observable<HistoriqueCreance[]> {
-   return this.http.get<HistoriqueCreance[]>(`${this.baseUrl}/historiqueCreances/all`);
- }
+  getAllHistoriqueCreances(): Observable<HistoriqueCreance[]> {
+    return this.http.get<HistoriqueCreance[]>(`${this.baseUrl}/historiqueCreances/all`);
+  }
 
- getAllHistoriqueCreancesOrderDesc(): Observable<HistoriqueCreance[]> {
-  return this.http.get<HistoriqueCreance[]>(`${this.baseUrl}/historiqueCreances/allHistoriqueCreanceOrderDesc`);
-}
+  getAllHistoriqueCreancesOrderDesc(): Observable<HistoriqueCreance[]> {
+    return this.http.get<HistoriqueCreance[]>(`${this.baseUrl}/historiqueCreances/allHistoriqueCreanceOrderDesc`);
+  }
 
 
- getHistoriqueCreanceByID(id:number):any {
-  return this.http.get(`${this.baseUrl}/historiqueCreances/findById/`+id).toPromise();
- }
+  getHistoriqueCreanceByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/historiqueCreances/findById/`+id).toPromise();
+  }
 
   public getHistoriqueCreanceById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/historiqueCreances/findById/${id}`);
   }
 
- createHistoriqueCreance(info: HistoriqueCreance): Observable<HistoriqueCreance> {
+  createHistoriqueCreance(info: HistoriqueCreance): Observable<HistoriqueCreance> {
    return this.http.post<HistoriqueCreance>(`${this.baseUrl}/historiqueCreances/create`, info);
- }
+  }
 
- updateHistoriqueCreance(id: number, value: HistoriqueCreance): Observable<HistoriqueCreance> {
+  updateHistoriqueCreance(id: number, value: HistoriqueCreance): Observable<HistoriqueCreance> {
     return this.http.put<HistoriqueCreance>(`${this.baseUrl}/historiqueCreances/update/${id}`, value);
- }
+  }
 
- deleteHistoriqueCreance(id: number): Observable<any> {
+  deleteHistoriqueCreance(id: number): Observable<any> {
    return this.http.delete(`${this.baseUrl}/historiqueCreances/delete/${id}`, { responseType: 'text' });
- }
+  }
 
 
 }

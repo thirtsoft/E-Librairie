@@ -12,7 +12,9 @@ import { TokenStorageService } from './token-storage.service';
 import { IUser } from '../models/utilisateur';
 import { environment } from 'src/environments/environment';
 
-const AUTH_API = 'http://localhost:8081/api/auth/';
+//const AUTH_API = 'http://localhost:8081/api/auth/';
+
+const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/api/auth/';
 
 //const AUTH_API  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth/';
 
@@ -30,7 +32,9 @@ export class AuthService {
   /* private loginUrl = 'http://localhost:8081/api/auth/signin';
   private signupUrl = 'http://localhost:8081/api/auth/signup'; */
 
-  private baseUrl_1 = environment.apiBaseUrl;
+  //baseUrl_1 = environment.apiBaseUrl;
+
+  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;
@@ -54,7 +58,7 @@ export class AuthService {
   }
 
   private listners = new Subject<any>();
-  
+
   listen(): Observable<any> {
     return this.listners.asObservable();
   }
