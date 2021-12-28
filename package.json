@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +36,7 @@
     "angular-material": "^1.2.0",
     "angular-progress-bar": "^1.0.11",
     "bootstrap": "^4.5.2",
+    "express": "^4.17.2",
     "chart.js": "^2.9.4",
     "core-js": "^2.5.4",
     "datatables.net": "^1.10.21",
