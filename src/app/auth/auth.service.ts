@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 
 //const AUTH_API = 'http://localhost:8081/api/auth/';
 
-const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/api/auth/';
+const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/';
 
 //const AUTH_API  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/api/auth/';
 
@@ -33,6 +33,8 @@ export class AuthService {
   private signupUrl = 'http://localhost:8081/api/auth/signup'; */
 
   //baseUrl_1 = environment.apiBaseUrl;
+
+  loginUrl = "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/auth/signIn";
 
   baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
@@ -68,19 +70,17 @@ export class AuthService {
   }
 
   signUp(info: Register): Observable<Register> {
-    return this.http.post<Register>(AUTH_API + 'signup', info , httpOptions);
+    return this.http.post<Register>(AUTH_API + 'auth/signUp', info , httpOptions);
   }
-
 
   attemptAuth(credentials: Login): Observable<any> {
-  //  return this.http.post(this.loginUrl, {
-    return this.http.post(AUTH_API + 'signin', {
+    const loginData = {
       username: credentials.username,
       password: credentials.password
-    }, httpOptions);
-    this.islogin = true;
+    };
+    return this.http.post(this.loginUrl, loginData, httpOptions);
+    this.islogin=true;
   }
-
 
 
 /*
