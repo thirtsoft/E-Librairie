@@ -24,20 +24,9 @@ export class ListLigneApproComponent implements OnInit {
   listData : LigneAppro[];
  // listData : LigneAppro[] = [];
 
-
   appro: Appro = new Appro();
 
   produit: Produit = new Produit();
-
-  /* produit1: Article = {
-    id: null, reference: '', designation: '', photo: '',
-    add_date: new Date(), prixAchat: 0,
-    prixVente: 0, prixDetail: 0, promo: false, tva: 0,
-    qtestock: 0, stockInitial: 0,
-    scategorie: new Scategorie(), categorie: new Categorie(),
-  }; */
-
-  private editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();

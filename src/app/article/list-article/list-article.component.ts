@@ -37,13 +37,9 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   @ViewChild('htmlData') htmlData:ElementRef;
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-
- // @ViewChild('TABLE') TABLE: ElementRef;
 
   @ViewChild("fileUploadInput")
   fileUploadInput: any;

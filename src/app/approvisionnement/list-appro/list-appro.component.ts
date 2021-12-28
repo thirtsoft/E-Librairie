@@ -28,8 +28,6 @@ export class ListApproComponent implements OnDestroy, OnInit {
 
   fournisseur;
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
