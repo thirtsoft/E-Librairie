@@ -25,9 +25,6 @@ export class ViewFournisseurComponent implements OnInit {
   client;
 
   currentFournisseur: any;
-
- // @ViewChild('content') content: ElementRef;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -96,6 +93,7 @@ export class ViewFournisseurComponent implements OnInit {
   onSubmit() {
 
   }
+
   deleteCreance(id: number) {
     if (window.confirm('Etes-vous sure de vouloir supprimer cette données ?')) {
     this.crudApi.deleteFournisseur(id)

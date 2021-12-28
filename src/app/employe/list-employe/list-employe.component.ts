@@ -26,7 +26,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   listData : Employe[];
   empID: number;
 
-  private editForm: FormGroup;
+  editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();

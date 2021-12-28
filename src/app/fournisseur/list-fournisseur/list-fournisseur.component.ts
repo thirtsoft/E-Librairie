@@ -28,7 +28,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
   fournisseur: Fournisseur;
   FourID: number;
 
-  private editForm: FormGroup;
+  editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
