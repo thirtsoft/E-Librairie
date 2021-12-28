@@ -19,47 +19,46 @@ export class HistoriqueDevisService {
   listData : HistoriqueDevis[];
   formData:  HistoriqueDevis;
 
- dataForm:  FormGroup;
+  dataForm:  FormGroup;
 
- private listners = new Subject<any>();
+  private listners = new Subject<any>();
 
- listen(): Observable<any> {
+  listen(): Observable<any> {
    return this.listners.asObservable();
- }
+  }
 
- filter(filterBy: string) {
+  filter(filterBy: string) {
    this.listners.next(filterBy);
- }
+  }
 
- constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
- getAllHistoriqueDeviss(): Observable<HistoriqueDevis[]> {
-   return this.http.get<HistoriqueDevis[]>(`${this.baseUrl}/historiqueDeviss/all`);
- }
+  getAllHistoriqueDeviss(): Observable<HistoriqueDevis[]> {
+    return this.http.get<HistoriqueDevis[]>(`${this.baseUrl}/historiqueDeviss/all`);
+  }
 
- getAllHistoriqueDevissOrderDesc(): Observable<HistoriqueDevis[]> {
-  return this.http.get<HistoriqueDevis[]>(`${this.baseUrl}/historiqueCreances/allHistoriqueCreanceOrderDesc`);
-}
+  getAllHistoriqueDevissOrderDesc(): Observable<HistoriqueDevis[]> {
+    return this.http.get<HistoriqueDevis[]>(`${this.baseUrl}/historiqueCreances/allHistoriqueCreanceOrderDesc`);
+  }
 
-
- getHistoriqueDevisByID(id:number):any {
-  return this.http.get(`${this.baseUrl}/historiqueDeviss/findById/`+id).toPromise();
- }
+  getHistoriqueDevisByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/historiqueDeviss/findById/`+id).toPromise();
+  }
 
   public getHistoriqueDevisById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/historiqueDeviss/findById/${id}`);
   }
 
- createHistoriqueDevis(info: HistoriqueDevis): Observable<HistoriqueDevis> {
+  createHistoriqueDevis(info: HistoriqueDevis): Observable<HistoriqueDevis> {
    return this.http.post<HistoriqueDevis>(`${this.baseUrl}/historiqueDeviss/create`, info);
- }
+  }
 
- updateHistoriqueDevis(id: number, value: HistoriqueDevis): Observable<HistoriqueDevis> {
+  updateHistoriqueDevis(id: number, value: HistoriqueDevis): Observable<HistoriqueDevis> {
     return this.http.put<HistoriqueDevis>(`${this.baseUrl}/historiqueDeviss/update/${id}`, value);
- }
+  }
 
- deleteHistoriqueDevis(id: number): Observable<any> {
-   return this.http.delete(`${this.baseUrl}/historiqueDeviss/delete/${id}`, { responseType: 'text' });
- }
+  deleteHistoriqueDevis(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/historiqueDeviss/delete/${id}`, { responseType: 'text' });
+  }
 
 }

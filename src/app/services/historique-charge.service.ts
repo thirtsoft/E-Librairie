@@ -30,35 +30,35 @@ export class HistoriqueChargeService {
     this.listners.next(filterBy);
   }
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getAllHistoriqueCharges(): Observable<HistoriqueCharge[]> {
-      return this.http.get<HistoriqueCharge[]>(`${this.baseUrl}/historiqueCharges/all`);
-    }
+  getAllHistoriqueCharges(): Observable<HistoriqueCharge[]> {
+    return this.http.get<HistoriqueCharge[]>(`${this.baseUrl}/historiqueCharges/all`);
+  }
 
-    getAllHistoriqueChargesOrderDesc(): Observable<HistoriqueCharge[]> {
-      return this.http.get<HistoriqueCharge[]>(`${this.baseUrl}/historiqueCharges/allHistoriqueChargeOrderDesc`);
-    }
+  getAllHistoriqueChargesOrderDesc(): Observable<HistoriqueCharge[]> {
+    return this.http.get<HistoriqueCharge[]>(`${this.baseUrl}/historiqueCharges/allHistoriqueChargeOrderDesc`);
+  }
 
-    getHistoriqueChargeByID(id:number):any {
-     return this.http.get(`${this.baseUrl}/historiqueCharges/findById/`+id).toPromise();
-    }
+  getHistoriqueChargeByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/historiqueCharges/findById/`+id).toPromise();
+  }
 
-     public getHistoriqueChargeById(id: number): Observable<Object> {
-       return this.http.get(`${this.baseUrl}/historiqueCharges/findById/${id}`);
-     }
+  public getHistoriqueChargeById(id: number): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/historiqueCharges/findById/${id}`);
+  }
 
-    createHistoriqueCharge(info: HistoriqueCharge): Observable<HistoriqueCharge> {
-      return this.http.post<HistoriqueCharge>(`${this.baseUrl}/historiqueCharges/create`, info);
-    }
+  createHistoriqueCharge(info: HistoriqueCharge): Observable<HistoriqueCharge> {
+    return this.http.post<HistoriqueCharge>(`${this.baseUrl}/historiqueCharges/create`, info);
+  }
 
-    updateHistoriqueCharge(id: number, value: HistoriqueCharge): Observable<HistoriqueCharge> {
-       return this.http.put<HistoriqueCharge>(`${this.baseUrl}/historiqueCharges/update/${id}`, value);
-    }
+  updateHistoriqueCharge(id: number, value: HistoriqueCharge): Observable<HistoriqueCharge> {
+    return this.http.put<HistoriqueCharge>(`${this.baseUrl}/historiqueCharges/update/${id}`, value);
+  }
 
-    deleteHistoriqueCharge(id: number): Observable<any> {
-      return this.http.delete(`${this.baseUrl}/historiqueCharges/delete/${id}`, { responseType: 'text' });
-    }
+  deleteHistoriqueCharge(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/historiqueCharges/delete/${id}`, { responseType: 'text' });
+  }
 
 
 }

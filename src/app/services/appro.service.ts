@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApproService {
 
-//  private baseUrl = environment.apiBaseUrl;
+// baseUrl = environment.apiBaseUrl;
 
   baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 

@@ -14,8 +14,6 @@ export class AvoirService {
 
   baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
-//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine'
-
  // private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
