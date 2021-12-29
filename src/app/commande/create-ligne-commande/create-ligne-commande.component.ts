@@ -22,11 +22,13 @@ export class CreateLigneCommandeComponent implements OnInit {
 
   total = 0;
 
-  constructor(public lcmdService: LigneCmdClientService, private cmdService: CommandeClientService,
-    private articleService: ProduitService,
-    public fb: FormBuilder, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data,
-    private dialogRef: MatDialogRef<CreateLigneCommandeComponent>,
+  constructor(public lcmdService: LigneCmdClientService,
+              private cmdService: CommandeClientService,
+              private articleService: ProduitService,
+              public fb: FormBuilder,
+              private toastr :ToastrService,
+              @Inject(MAT_DIALOG_DATA) public data,
+              private dialogRef: MatDialogRef<CreateLigneCommandeComponent>,
    ) { }
 
   get f() { return this.lcmdService.dataForm.controls; }
@@ -90,21 +92,44 @@ export class CreateLigneCommandeComponent implements OnInit {
   }
 
   onSubmit() {
-    if ((this.data.lcommandeIndex == null)  || (this.lcmdService.dataForm.invalid)) {
-      this.cmdService.list.push(this.lcmdService.dataForm.value);
+    if (this.validateForm()){
+      if ((this.data.lcommandeIndex == null)  || (this.lcmdService.dataForm.invalid)) {
+        this.cmdService.list.push(this.lcmdService.dataForm.value);
+        this.dialogRef.close();
+      }else {
+        this.cmdService.list[this.data.lcommandeIndex] = this.lcmdService.dataForm.value;
+      }
       this.dialogRef.close();
+
     }else {
-      this.cmdService.list[this.data.lcommandeIndex] = this.lcmdService.dataForm.value;
+
+      this.toastr.error('Veuillez vérifier le prix et la quantité saisies','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+
     }
-    this.dialogRef.close();
+
   }
- validateForm(formData: LigneCmdClient){
-  this.isValid=true;
-  if(formData.produit.id==0)
-    this.isValid=false;
-    else if(formData.quantite==0)
-    this.isValid=false;
+
+  validateForm() {
+    this.isValid = false;
+    if ((this.lcmdService.dataForm.value.quantite <= 0) ||
+        (this.lcmdService.dataForm.value.quantite > this.lcmdService.dataForm.value.qteStock) ||
+        (this.lcmdService.dataForm.value.prixCommande > this.lcmdService.dataForm.value.prix))
+      this.isValid = false;
+    else
+      this.isValid = true;
     return this.isValid;
   }
+
+  /* validateForm(formData: LigneCmdClient){
+    this.isValid=true;
+    if(formData.produit.id==0)
+      this.isValid=false;
+    else if(formData.quantite==0)
+      this.isValid=false;
+    return this.isValid;
+  } */
 
 }

@@ -96,6 +96,7 @@
       <label>P.Achat</label>
       <input
         type="number"
+        min="0"
         class="form-control"
         [(ngModel)]="formDataArticle.prixAchat"
         name="prixAchat"
@@ -119,6 +120,7 @@
         <label>P.Vente</label>
         <input
           type="number"
+          min="0"
           class="form-control"
           [(ngModel)]="formDataArticle.prixVente"
           name="prixVente"
@@ -142,6 +144,7 @@
         <label>P.Détails</label>
         <input
           type="number"
+          min="0"
           class="form-control"
           [(ngModel)]="formDataArticle.prixDetail"
           name="prixDetail"
@@ -163,9 +166,10 @@
     </div>
     <div class="row">
       <div class="form-group col-md-6">
-        <label>QStock</label>
+        <label>Quantité</label>
         <input
           type="number"
+          min="0"
           class="form-control"
           [(ngModel)]="formDataArticle.qtestock"
           name="qtestock"
@@ -186,9 +190,10 @@
       </div>
 
       <div class="form-group col-md-6">
-        <label>QStockInitial</label>
+        <label>Seuil Stock</label>
         <input
           type="number"
+          min="0"
           class="form-control"
           [(ngModel)]="formDataArticle.stockInitial"
           name="stockInitial"
@@ -204,7 +209,7 @@
             stockInitial.errors?.required
           "
         >
-          Stock Initial obligatoire
+          Seuil stock est obligatoire
         </span>
       </div>
     </div>

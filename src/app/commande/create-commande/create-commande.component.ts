@@ -124,6 +124,7 @@ export class CreateCommandeComponent implements OnInit {
     return this.isValid;
   }
  */
+
   validateForm() {
     this.isValid = false;
     if ((this.crudApi.formData.value.numeroCommande == 0) || (this.crudApi.formData.value.totalCommande == 0) ||
