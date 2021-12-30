@@ -1,38 +1,73 @@
 <div class="row justify-content-center">
   <div class="col-md-8 col-md-offset-2">
-    <h3 class="dislay-4">Lignes Appro </h3>
+    <h3 class="dislay-4">Lignes Appro</h3>
 
     <form [formGroup]="this.formData" (ngSubmit)="onSubmit()">
+      <input
+        type="hidden"
+        formControlName="OrderItemId"
+        id="OrderItemId"
+        class="form-control"
+      />
+      <input
+        type="hidden"
+        formControlName="OrderId"
+        id="OrderId"
+        class="form-control"
+      />
+      <input
+        type="hidden"
+        formControlName="ItemName"
+        id="ItemName"
+        class="form-control"
+      />
 
-        <input type="hidden" formControlName="OrderItemId" id="OrderItemId" class="form-control">
-        <input type="hidden" formControlName="OrderId" id="OrderId" class="form-control">
-        <input type="hidden" formControlName="ItemName" id="ItemName" class="form-control">
+      <div class="form-group">
+        <label>Article</label>
+        <select
+          formControlName="produit"
+          id="produit"
+          class="form-control"
+          (change)="selectPrice($event.target)"
+          [compareWith]="compareProduit"
+        >
+          <option value="0">-Select-</option>
+          <option *ngFor="let item of listArticle" [ngValue]="item">
+            {{ item.reference }}
+          </option>
+        </select>
+      </div>
 
+      <div class="form-group">
+        <label>Prix</label>
         <div class="form-group">
-          <label>Article</label>
-          <select formControlName="produit" id="produit" class="form-control"
-            (change)="selectPrice($event.target)" [compareWith]="compareProduit">
-            <option value="0">-Select-</option>
-            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
-          </select>
+          <input
+            name="prix"
+            formControlName="prix"
+            id="prix"
+            class="form-control"
+            (keyup)="calculTotal()"
+            [class.is-invalid]="!isValid && formData.value.prix == 0"
+            readonly
+          />
         </div>
+      </div>
 
+      <div class="form-group">
+        <label>Prix Achat</label>
         <div class="form-group">
-          <label>Prix</label>
-          <div class="form-group">
-            <input name="prix" formControlName="prix" id="prix" class="form-control"  (keyup)="calculTotal()"
-              [class.is-invalid]="!isValid && formData.value.prix==0"  readonly>
-          </div>
+          <input
+            type="number"
+            name="prixAppro"
+            formControlName="prixAppro"
+            id="prixAppro"
+            class="form-control"
+            (keyup)="calculTotal()"
+            [class.is-invalid]="!isValid && formData.value.prixAppro == 0"
+          />
         </div>
-
-        <div class="form-group">
-          <label>Prix Achat</label>
-          <div class="form-group">
-            <input type="number" name="prixAppro" formControlName="prixAppro" id="prixAppro" class="form-control"  (keyup)="calculTotal()"
-              [class.is-invalid]="!isValid && formData.value.prixAppro==0">
-          </div>
-        </div>
-        <!--
+      </div>
+      <!--
         <div class="form-group">
           <label>QtéStock</label>
           <div class="form-group">
@@ -41,28 +76,45 @@
           </div>
         </div>
         -->
+      <div class="form-group">
+        <label>Quantité</label>
         <div class="form-group">
-          <label>Quantité</label>
-          <div class="form-group">
-            <input type="number" formControlName="quantite" id="quantite" class="form-control"
-              (keyup)="calculTotal()" [class.is-invalid]="!isValid && formData.value.quantite==0">
-          </div>
+          <input
+            type="number"
+            formControlName="quantite"
+            id="quantite"
+            class="form-control"
+            (keyup)="calculTotal()"
+            [class.is-invalid]="!isValid && formData.value.quantite == 0"
+          />
         </div>
+      </div>
 
+      <div class="form-group">
+        <label>P.Total</label>
         <div class="form-group">
-          <label>P.Total</label>
-          <div class="form-group">
-            <input name="total" formControlName="total" id="total" class="form-control" readonly>
-          </div>
+          <input
+            name="total"
+            formControlName="total"
+            id="total"
+            class="form-control"
+            readonly
+          />
         </div>
+      </div>
 
-        <div class="form-group">
-          <button type="submit" class="btn btn-success btn-sm">
-            <em class="fa fa-plus"></em> Ajouter </button>&nbsp;
-          <button type="button" class="btn btn-danger btn-sm ml-1" [mat-dialog-close]>
-            <em class="fa fa-close"></em> Fermer </button>
-        </div>
-
+      <div class="form-group">
+        <button type="submit" class="btn btn-success btn-sm">
+          <em class="fa fa-plus"></em> Ajouter</button
+        >&nbsp;
+        <button
+          type="button"
+          class="btn btn-danger btn-sm ml-1"
+          [mat-dialog-close]
+        >
+          <em class="fa fa-close"></em> Fermer
+        </button>
+      </div>
     </form>
   </div>
 </div>
@@ -73,8 +125,8 @@
     <h4 class="dislay-4">Approvisionnement </h4>
     <hr>
     <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)"> -->
-        <!-- <input type="hidden" class="form-control" formControlName="id" id="id">-->
-        <!--
+<!-- <input type="hidden" class="form-control" formControlName="id" id="id">-->
+<!--
         <input type="hidden" name="OrderItemId" #OrderItemId="ngModel" [(ngModel)]="formData.OrderItemId" class="form-control">
         <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="formData.OrderId" class="form-control">
         <input type="hidden" name="ItemName" #ItemName="ngModel" [(ngModel)]="formData.ItemName" class="form-control">

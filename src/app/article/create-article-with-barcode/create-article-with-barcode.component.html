@@ -112,7 +112,7 @@
       <label>P.Achat</label>
       <input
         type="number"
-        min="0"
+        min="0" oninput="this.value = Math.abs(this.value)"
         class="form-control"
         [(ngModel)]="formDataArticle.prixAchat"
         name="prixAchat"
@@ -130,13 +130,19 @@
       >
         Prix Achat obligatoire
       </span>
+      <span
+        class="text-danger"
+        *ngIf="this.isValid"
+      >
+        Prix doit etre positif
+      </span>
     </div>
     <div class="row">
       <div class="form-group col-md-6">
         <label>P.Vente</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.prixVente"
           name="prixVente"
@@ -154,13 +160,19 @@
         >
           Prix Vente obligatoire
         </span>
+        <span
+          class="text-danger"
+          *ngIf="this.isValid"
+        >
+          Prix de vente doit etre positif
+        </span>
       </div>
 
       <div class="form-group col-md-6">
         <label>P.Détails</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.prixDetail"
           name="prixDetail"
@@ -178,6 +190,12 @@
         >
           Prix Detail obligatoire
         </span>
+        <span
+          class="text-danger"
+          *ngIf="this.isValid"
+        >
+          Prix detail doit etre positif
+        </span>
       </div>
     </div>
     <div class="row">
@@ -185,7 +203,7 @@
         <label>Quantité </label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.qtestock"
           name="qtestock"
@@ -203,13 +221,20 @@
         >
           Quantité obligatoire
         </span>
+
+        <span
+          class="text-danger"
+          *ngIf="this.isValid"
+        >
+          quatité doit etre positif
+        </span>
       </div>
 
       <div class="form-group col-md-6">
         <label>Seuil</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.stockInitial"
           name="stockInitial"
@@ -226,6 +251,12 @@
           "
         >
           Seuil stock est obligatoire
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="this.isValid"
+        >
+          Le seuil doit etre inférieur à la quantité
         </span>
       </div>
     </div>

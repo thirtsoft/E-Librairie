@@ -46,7 +46,7 @@
         <label>P.Commande</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           name="prixCommande"
           formControlName="prixCommande"
           class="form-control"
@@ -82,7 +82,7 @@
         <label>Quantité</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           formControlName="quantite"
           id="quantite"
           class="form-control"
@@ -99,7 +99,7 @@
           <span *ngIf="f['quantite'].errors.required">
             quantite obligatoire.
           </span>
-          <span *ngIf="this.isInvalidQte"> quantite stock insuffisante. </span>
+          <span *ngIf="this.isValid "> quantite stock insuffisante. </span>
         </div>
       </div>
 

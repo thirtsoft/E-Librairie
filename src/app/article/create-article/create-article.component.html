@@ -96,7 +96,7 @@
       <label>P.Achat</label>
       <input
         type="number"
-        min="0"
+        min="0" oninput="this.value = Math.abs(this.value)"
         class="form-control"
         [(ngModel)]="formDataArticle.prixAchat"
         name="prixAchat"
@@ -120,7 +120,7 @@
         <label>P.Vente</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.prixVente"
           name="prixVente"
@@ -144,7 +144,7 @@
         <label>P.Détails</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.prixDetail"
           name="prixDetail"
@@ -169,7 +169,7 @@
         <label>Quantité</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.qtestock"
           name="qtestock"
@@ -193,7 +193,7 @@
         <label>Seuil Stock</label>
         <input
           type="number"
-          min="0"
+          min="0" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.stockInitial"
           name="stockInitial"

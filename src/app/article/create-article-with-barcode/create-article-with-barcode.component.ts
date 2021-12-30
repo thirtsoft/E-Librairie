@@ -23,7 +23,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
   listScategories: Scategorie[];
   addArticleForm: NgForm;
 
-//  dropDownForm: FormGroup;
+  isValid:boolean = true;
 
   submitted = false;
 
@@ -59,6 +59,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
   ResetForm() {
     this.crudApi.dataForm.reset();
   }
+
 /*
   onSubmit() {
     if (isNullOrUndefined(this.data.id)) {
@@ -99,8 +100,12 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');
-        this.toastr.success("Articel Ajouté avec Succès");
-        this.crudApi.getAllProduits().subscribe(
+        this.toastr.success('avec succès','Artice Ajoutée', {
+          timeOut: 1500,
+          positionClass: 'toast-top-right',
+        });
+
+        this.crudApi.getAllProductsOrderDesc().subscribe(
           response =>{this.crudApi.listData = response;},
         );
         this.router.navigate(['/home/listArticleWithBarcode']);
@@ -135,30 +140,76 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
 
   }
 
-  saveArticle(art: Produit) {
-    this.crudApi.createProduitWithBarCode(art).
-    subscribe( data => {
-      this.dialogRef.close();
-      this.crudApi.filter('Register click');
-      this.toastr.success("Article Ajouté avec Succès");
-      this.crudApi.getAllProduits().subscribe(
-        response =>{this.crudApi.listData = response;},
 
-      );
-      this.router.navigate(['/home/listArticleWithBarcode']);
-    });
+  validateForm() {
+    this.isValid = false;
+    if ((this.formDataArticle.prixAchat <= 0) || (this.formDataArticle.prixVente <= 0) ||
+        (this.formDataArticle.prixDetail <= 0) || (this.formDataArticle.qtestock <= 0)
+        || (this.formDataArticle.stockInitial <= 0) ||
+        (this.formDataArticle.prixAchat <= this.formDataArticle.prixVente) ||
+        (this.formDataArticle.prixVente <= this.formDataArticle.prixDetail) ||
+        (this.formDataArticle.qtestock <= this.formDataArticle.stockInitial)
+        )
+      this.isValid = false;
+    else
+      this.isValid = true;
+    return this.isValid;
+  }
+
+  saveArticle(art: Produit) {
+    if (this.validateForm()) {
+      this.crudApi.createProduitWithBarCode(art).
+      subscribe( data => {
+        this.dialogRef.close();
+        this.crudApi.filter('Register click');
+        this.toastr.success('avec succès','Article Ajoutée', {
+          timeOut: 1500,
+          positionClass: 'toast-top-right',
+        });
+        this.crudApi.getAllProductsOrderDesc().subscribe(
+          response =>{
+            this.crudApi.listData = response;
+          }
+
+        );
+        this.router.navigate(['/home/listArticleWithBarcode']);
+      });
+
+    } else {
+      this.toastr.error('Veuillez corrigé les valeur erronées','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+    }
+
+
   }
 
   updateArticle(id: number, art: Produit){
-    this.crudApi.updateProduit(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
-    subscribe( data => {
-      this.toastr.success("Article Modifier avec Succès");
-      this.dialogRef.close();
-      this.crudApi.getAllProduits().subscribe(
-        response =>{this.crudApi.listData = response;}
-      );
-      this.router.navigate(['/home/listArticleWithBarcode']);
-    });
+    if (this.validateForm()) {
+      this.crudApi.updateProduit(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value)
+        .subscribe( data => {
+          this.toastr.warning('avec succès','Article Modifié', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
+          this.dialogRef.close();
+          this.crudApi.getAllProductsOrderDesc().subscribe(
+            response =>{
+              this.crudApi.listData = response;
+            }
+          );
+        this.router.navigate(['/home/listArticleWithBarcode']);
+      }
+    );
+
+    }else {
+      this.toastr.error('Veuillez corrigé les valeur erronées','Données non valides', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+    }
+
   }
 
   onChangeCtegorie(id: number) {

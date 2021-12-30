@@ -115,8 +115,7 @@ export class CreateLigneCommandeComponent implements OnInit {
   validateForm() {
     this.isValid = false;
     if ((this.lcmdService.dataForm.value.quantite <= 0) ||
-        (this.lcmdService.dataForm.value.quantite > this.lcmdService.dataForm.value.qteStock) ||
-        (this.lcmdService.dataForm.value.prixCommande > this.lcmdService.dataForm.value.prix))
+        (this.lcmdService.dataForm.value.quantite > this.lcmdService.dataForm.value.qteStock))
       this.isValid = false;
     else
       this.isValid = true;
