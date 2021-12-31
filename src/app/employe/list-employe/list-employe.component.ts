@@ -52,7 +52,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 15,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
@@ -125,6 +125,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(CreateEmployeComponent, dialogConfig);
   }
+
   deleteEmploye(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe(res =>{
@@ -158,7 +159,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
       content: [
         {
           text: 'AL AMINE',
-          fontSize: 50,
+          fontSize: 46,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -198,7 +199,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
         {
           text: ' LISTE DES EMPLOYEES',
           alignment: 'center',
-          fontSize: 20,
+          fontSize: 16,
           color: '#0000ff',
           bold: true,
           margin: [0, 15, 0, 15]
@@ -259,6 +260,7 @@ export class ListEmployeComponent implements OnDestroy, OnInit {
     };
 
   }
+
   getPDFListEmployees(item: Employe[]) {
     return {
       table: {

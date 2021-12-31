@@ -62,7 +62,7 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 15,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
@@ -131,7 +131,8 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
     dialogConfig.data = {
       id
     };
-    this.matDialog.open(CreateArticleComponent, dialogConfig);
+  //  this.matDialog.open(CreateArticleComponent, dialogConfig);
+    this.matDialog.open(CreateArticleWithBarcodeComponent, dialogConfig);
   }
 
   viewArticle(id?: number) {

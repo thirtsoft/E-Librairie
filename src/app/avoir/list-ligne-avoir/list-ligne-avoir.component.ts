@@ -38,7 +38,7 @@ export class ListLigneAvoirComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 15,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]

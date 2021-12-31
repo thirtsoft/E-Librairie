@@ -28,7 +28,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
   listData: Client[];
   clientID: number;
 
-  private editForm: FormGroup;
+  editForm: FormGroup;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -66,11 +66,12 @@ export class ListClientComponent implements OnDestroy, OnInit {
 */
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 15,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
     };
+
     this.crudApi.getAllClientsOrderDesc()
       .subscribe(
         response =>{
@@ -187,18 +188,13 @@ export class ListClientComponent implements OnDestroy, OnInit {
     .afterClosed().subscribe(res =>{
       if(res){
         this.crudApi.deleteClient(id).subscribe(data => {
-          this.toastr.warning('Client supprimé avec succès!');
+          this.toastr.error('Client supprimé avec succès!');
           this.rerender();
           this.getListClients();
         });
       }
     });
   }
-
-  /* editClient(item : Client) {
-    this.router.navigateByUrl('clients/'+item.id);
-
-  } */
 
   OpenPdf() {
     const document = this.getDocument();
@@ -220,7 +216,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
       content: [
         {
           text: 'AL AMINE',
-          fontSize: 50,
+          fontSize: 46,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -260,7 +256,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
         {
           text: ' LISTE DES CLIENTS',
           alignment: 'center',
-          fontSize: 20,
+          fontSize: 16,
           color: '#0000ff',
           bold: true,
           margin: [0, 15, 0, 15]
@@ -321,16 +317,13 @@ export class ListClientComponent implements OnDestroy, OnInit {
     };
 
   }
+
   getPDFListClients(item: Client[]) {
     return {
       table: {
-        widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+        widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
         body: [
           [
-            {
-              text: 'Code',
-              style: 'tableHeader'
-            },
             {
               text: 'Raison Social',
               style: 'tableHeader'
@@ -354,7 +347,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
 
           ],
           ...item.map(x => {
-            return ([x.codeClient, x.raisonSocial, x.chefService, x.adresse, x.telephone, x.email])
+            return ([x.raisonSocial, x.chefService, x.adresse, x.telephone, x.email])
           }),
 
         ]

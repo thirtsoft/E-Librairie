@@ -71,7 +71,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 15,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]

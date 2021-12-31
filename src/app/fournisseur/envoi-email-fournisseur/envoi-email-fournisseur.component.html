@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-md-8 col-md-offset-2">
-    <h1>Envoi Email au Fournisseur</h1>
+    <h3>Envoi Email au Fournisseur</h3>
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
       <input type="hidden" formControlName="id" id="id" />
       <div class="form-group">
@@ -36,7 +36,7 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Send Message</button
+        <button type="submit" class="btn btn-primary">Envoi Email</button
         >&nbsp;
         <button type="button" class="btn btn-danger" [mat-dialog-close]>
           <em class="fa fa-close"></em> Fermer

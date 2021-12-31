@@ -17,8 +17,11 @@ export class SidebarComponent implements OnInit {
 
   isLoggedIn = false;
   showAdminBoard = false;
-  showUserBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
   showVendeurBoard = false;
+
 
   username: string;
   email : String ;
@@ -26,8 +29,9 @@ export class SidebarComponent implements OnInit {
   id : number;
 
   constructor(private authService: AuthenticationService,
-    private tokenService: TokenStorageService,
-    private router: Router) { }
+              private tokenService: TokenStorageService,
+              private router: Router
+  ) { }
 
   ngOnInit() {
     this.isLoggedIn = !!this.tokenService.getToken();
@@ -36,25 +40,14 @@ export class SidebarComponent implements OnInit {
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
-      this.showUserBoard = this.roles.includes('ROLE_USER');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
 
       this.username = user.username;
       this.id = user.id;
     }
-    /*
-    this.info = {
-      token: this.tokenService.getToken(),
-      username: this.tokenService.getUsername(),
-      authorities: this.tokenService.getAuthorities(),
-
-    }
-    this.roles = this.tokenService.getAuthorities();
-    this.showAdminBoard = this.roles.includes("ROLE_ADMIN");
-    this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
-    this.showUserBoard = this.roles.includes("ROLE_USER");
-
-    */
 
   }
 

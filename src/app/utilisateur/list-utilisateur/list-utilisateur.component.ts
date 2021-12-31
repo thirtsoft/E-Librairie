@@ -28,16 +28,24 @@ export class ListUtilisateurComponent implements OnInit {
 
   listData: Utilisateur[];
   sumVenteByDay;
-  info: any;
 
   isActived: boolean = false;
   isEqual: boolean = true;
 
   id : number;
-  isLoggedIn;
-  roles;
+//  roles;
   currentTime: number = 0;
   img: boolean;
+
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -58,10 +66,21 @@ export class ListUtilisateurComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
+    };
+
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+
+      this.id = user.id;
     };
 
     this.crudApi.getAllUtilisateurOrderDesc().subscribe(
@@ -114,7 +133,7 @@ export class ListUtilisateurComponent implements OnInit {
 
   logout() {
     this.tokenService.signOut();
-    this.router.navigateByUrl("");
+  //  this.router.navigateByUrl("");
   }
 
   infoForm(form?: NgForm) {

@@ -28,7 +28,7 @@
           <th>Nom Utilisateur</th>
           <th>Email</th>
           <th>Role</th>
-          <th>Enable</th>
+          <th>Active</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -46,6 +46,7 @@
             {{ user.active }}
             <button
                 type="button"
+                [disabled]="showManagerBoard"
                 class="btn btn-primary btn-sm pull-right"
                 (click)="ActivatedUser(user)"
                 style="cursor: pointer;"

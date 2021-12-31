@@ -20,6 +20,18 @@
     </div>
 
     <div class="form-group">
+      <label>Code-barres </label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="formDataArticle.barCode"
+        name="barCode"
+        id="barCode"
+        readonly
+      />
+    </div>
+
+    <div class="form-group">
       <label>Désignation</label>
       <input
         type="text"
