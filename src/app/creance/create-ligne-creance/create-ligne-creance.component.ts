@@ -26,10 +26,13 @@ export class CreateLigneCreanceComponent implements OnInit {
 
   formData: FormGroup;
 
-  constructor(public crudApi: LigneCreanceService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ProduitService,
-    private creanceService: CreanceService,public fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateLigneCreanceComponent>,
+  constructor(public crudApi: LigneCreanceService,
+              private toastr :ToastrService,
+              @Inject(MAT_DIALOG_DATA) public data,
+              private articleService: ProduitService,
+              private creanceService: CreanceService,
+              public fb: FormBuilder,
+              public dialogRef: MatDialogRef<CreateLigneCreanceComponent>,
    ) { }
 
   get f() { return this.formData.controls; }
@@ -42,7 +45,7 @@ export class CreateLigneCreanceComponent implements OnInit {
       console.log(this.formData);
     }
 
-    this.articleService.getAllProduits().subscribe(
+    this.articleService.getAllProductsOrderDesc().subscribe(
       response =>{
         this.listArticle = response;
       }

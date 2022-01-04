@@ -1,6 +1,6 @@
 <div class="btn-toolbar">
   <div>
-    <h1>EFFECTUEE UNE VENTE</h1>
+    <h3>EFFECTUEE UNE VENTE</h3>
   </div>
 </div>
 
@@ -26,7 +26,7 @@
          <input type="text" class="form-control" (KeyboardEvent)="onKey($event)"  autofocus /> -->
       </div>
 
-      <div class="form-row col-sm-3 mb-4 mb-sm-0">
+     <!--  <div class="form-row col-sm-3 mb-4 mb-sm-0">
         <label><strong>Numéro Vente : </strong></label>
         <input
           type="number"
@@ -45,11 +45,10 @@
           <span *ngIf="f['numeroVente'].errors.required"
             >Le numero de vente est obligatoire.</span
           >
-
         </div>
-      </div>
+      </div> -->
 
-      <div class="form-row col-sm-3 mb-4 mb-sm-0">
+      <div class="form-row col-sm-4 mb-4 mb-sm-0">
         <label>Type Réglement</label>
         <select
           type="text"
@@ -76,7 +75,7 @@
         </select>
       </div>
 
-      <div class="form-row col-sm-3 mb-4 mb-sm-0">
+      <div class="form-row col-sm-4 mb-4 mb-sm-0">
         <label>Montant Réglement</label>
         <input
           type="number"

@@ -44,7 +44,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 35,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
