@@ -41,7 +41,7 @@ export class CreateLigneAvoirComponent implements OnInit {
       console.log(this.formData);
     }
 
-    this.articleService.getAllProduits().subscribe(
+    this.articleService.getAllProductsOrderDesc().subscribe(
       response =>{
         this.listArticle = response;
       }

@@ -26,7 +26,7 @@ export class ListCreanceOfUserComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: 25,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]

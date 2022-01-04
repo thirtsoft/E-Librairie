@@ -47,7 +47,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 50,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]

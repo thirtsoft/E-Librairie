@@ -55,7 +55,7 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
