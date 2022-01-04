@@ -62,7 +62,7 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 15,
+      pageLength: 55,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
