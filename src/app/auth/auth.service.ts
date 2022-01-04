@@ -14,9 +14,9 @@ import { environment } from 'src/environments/environment';
 
 //const AUTH_API = 'http://localhost:8081/api/auth/';
 
-//const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/';
+const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/';
 
-const AUTH_API  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/';
+//const AUTH_API  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/';
 
 
 const TOKEN_KEY = 'AuthToken';
@@ -35,13 +35,13 @@ export class AuthService {
 
   //baseUrl_1 = environment.apiBaseUrl;
 
-//  loginUrl = "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/auth/signIn";
+  loginUrl = "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/auth/signIn";
 
-  loginUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/auth/signIn";
+//  loginUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/auth/signIn";
 
-//  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
-  baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
+//  baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
 
   choixmenu : string  = 'A';
