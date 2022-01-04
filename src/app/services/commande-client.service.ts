@@ -18,7 +18,9 @@ export class CommandeClientService {
 
   //baseUrl_1 = environment.apiBaseUrl;
 
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+ // baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+
+  baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
 //  private baseUrl_1 = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi';
 

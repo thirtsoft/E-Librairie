@@ -10,7 +10,9 @@ export class SmsService {
 
 //  private baseUrl = 'http://localhost:8080/alAmine';
 
-  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+ // private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+
+  baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
   //private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
