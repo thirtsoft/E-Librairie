@@ -35,7 +35,7 @@
               <div class="title">NbreVente/Jours</div>
           </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" *ngIf="!showVendeurBoard">
           <div class="info-box brown-bg">
               <i class="fa fa-shopping-cart"></i>
               <div class="count">{{this.sumVenteByMonth}} f</div>
@@ -43,7 +43,7 @@
           </div>
       </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" *ngIf="!showVendeurBoard">
           <div class="info-box green-bg">
               <i class="fa fa-cubes"></i>
               <div class="count">{{this.sumCommandeByMonth}}</div>

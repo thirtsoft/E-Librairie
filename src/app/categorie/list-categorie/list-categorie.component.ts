@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../../auth/token-storage.service';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormControl, NgForm } from '@angular/forms';
@@ -42,9 +43,20 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   fileUploadInput: any;
   mesagge: string;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: CategorieService,
               private dialogService: DialogService,
               public toastr: ToastrService,
+              private tokenService: TokenStorageService,
               private matDialog: MatDialog,
               public fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -58,6 +70,18 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenService.getToken();
+   if (this.isLoggedIn) {
+     const user = this.tokenService.getUser();
+     this.roles = user.roles;
+
+     this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+     this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+     this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+     this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+     this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+   }
     /*
     this.CatId = this.route.snapshot.params.id;
     if (this.CatId == null) {
@@ -71,7 +95,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]

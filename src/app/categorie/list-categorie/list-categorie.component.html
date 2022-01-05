@@ -1,13 +1,13 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>GESTION DES CATEGORIES</h1>
+      <h3>GESTION DES CATEGORIES</h3>
     </div>
 
     <div class="row" style="padding-left: 20px; padding-top: 10px">
       <div class="col-sm-12">
         <div class="col-sm-4">
-          <a (click)="onCreateCategorie()" class="btn btn-success btn-lg">
+          <a (click)="onCreateCategorie()" class="btn btn-success btn-lg" *ngIf="!showVendeurBoard">
             <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
           >&nbsp;
           <!-- <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
@@ -45,6 +45,7 @@
               type="button"
               class="btn btn-success btn-lg"
               (click)="uploadExcelFile()"
+              *ngIf="!showVendeurBoard"
             >
               <i class="fa fa-upload" aria-hidden="true"></i>Importer!</a
             >
@@ -81,6 +82,7 @@
             <button
               class="btn btn-danger btn-sm"
               (click)="deleteCategorie(cat.id)"
+              *ngIf="showGerantBoard"
             >
               <em class="fa fa-trash-o"></em>
             </button>

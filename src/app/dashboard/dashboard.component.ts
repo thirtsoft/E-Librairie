@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../auth/token-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
@@ -26,7 +27,18 @@ export class DashboardComponent implements OnInit {
   numberOfProductWhenStockEqualStockInit;
   numberOfProductWhenStockInfStockInit;
 
-  constructor(private dashboardService: DashboardService) { }
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
+  constructor(private dashboardService: DashboardService,
+              private tokenService: TokenStorageService) { }
 
   ngOnInit() {
 
@@ -48,6 +60,19 @@ export class DashboardComponent implements OnInit {
     this.getNumberOfProductsWhenQStockInfStockInital();
 
    // this.reloadPage();
+
+   this.isLoggedIn = !!this.tokenService.getToken();
+   if (this.isLoggedIn) {
+     const user = this.tokenService.getUser();
+     this.roles = user.roles;
+
+     this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+     this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+     this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+     this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+     this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+   }
 
 
 

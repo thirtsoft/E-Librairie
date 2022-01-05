@@ -143,7 +143,7 @@
       </li>
 
       <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
-      <li class="sub-menu">
+      <li class="sub-menu" *ngIf="!showVendeurBoard">
         <a href="javascript:;" class="">
           <i class="icon_documents_alt"></i>
           <span>Situation</span>
@@ -161,7 +161,7 @@
         </ul>
       </li>
 
-      <li class="sub-menu">
+      <li class="sub-menu" *ngIf="!showVendeurBoard">
         <a href="javascript:;" class="">
           <i class="fa fa-line-chart" aria-hidden="true"></i>
           <span>Mouvement</span>
@@ -195,7 +195,7 @@
         </ul>
       </li>
 
-      <li class="sub-menu">
+      <li class="sub-menu" *ngIf="!showVendeurBoard">
         <a href="javascript:;" class="">
           <i class="fa fa-usd" aria-hidden="true"></i>
           <span>Réglement</span>
@@ -211,14 +211,14 @@
         </ul>
       </li>
 
-      <li>
+      <li *ngIf="!showVendeurBoard">
         <a class="" routerLink="/home/chart">
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           <span>Graphiques</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="!showVendeurBoard">
         <a class="" routerLink="/home/tableau">
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           <span>Résumés</span>
@@ -231,7 +231,7 @@
         </a>
       </li> -->
 
-      <li class="sub-menu">
+      <li class="sub-menu" *ngIf="!showVendeurBoard">
         <a href="javascript:;" class="">
           <i class="fa fa-users" aria-hidden="true"></i>
           <span>Personnes</span>
@@ -281,7 +281,7 @@
         </ul>
       </li>
 
-      <li class="sub-menu">
+      <li class="sub-menu" *ngIf="!showVendeurBoard">
         <a href="javascript:0;" class="">
           <i class="fa fa-cog" aria-hidden="true"></i>
           <span>Activités</span>
