@@ -451,7 +451,7 @@ const routes: Routes = [
     {
       path: 'contrats',
       component: ListContratComponent,
-      canActivate: [AuthGuardService]
+  //    canActivate: [AuthGuardService]
     },
     {
       path: 'contrat',
@@ -559,7 +559,7 @@ const routes: Routes = [
     {
       path: 'profile/:id',
       component: ProfilComponent,
-      canActivate: [AuthGuardService]
+  //    canActivate: [AuthGuardService]
     },
     {
       path: 'profile/:id',
