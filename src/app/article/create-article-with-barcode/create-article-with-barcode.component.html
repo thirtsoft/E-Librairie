@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <h2>Nouveau Article</h2>
+  <h3>Nouveau Article</h3>
   <form #addArticleForm="ngForm" name="form" (ngSubmit)="onSubmit()">
     <input
       type="hidden"
@@ -35,7 +35,7 @@
 
       <div class="form-group col-md-6">
         <div class="form-group">
-          <label>Barcode </label>
+          <label>Code-Barre </label>
           <input
             type="text"
             class="form-control"
@@ -82,7 +82,7 @@
     <div class="row">
       <div class="form-group col-md-6">
         <div class="form-group">
-          <label>P.Achat</label>
+          <label>Prix.Achat</label>
           <input
             type="number"
             min="0" oninput="this.value = Math.abs(this.value)"
@@ -148,7 +148,7 @@
     <div class="row">
 
       <div class="form-group col-md-6">
-        <label>P.Vente</label>
+        <label>Prix.Vente</label>
         <input
           type="number"
           min="0" oninput="this.value = Math.abs(this.value)"
@@ -173,7 +173,7 @@
       </div>
 
       <div class="form-group col-md-6">
-        <label>P.Engagement</label>
+        <label>Prix.Engagement</label>
         <input
           type="number"
           min="0" oninput="this.value = Math.abs(this.value)"
@@ -182,7 +182,7 @@
           name="prixVente"
           id="prixVente"
           #prixVente="ngModel"
-          placeholder="Prix vente: 100000"
+          placeholder="Prix engagement: 100000"
           required
         />
         <span
@@ -203,7 +203,7 @@
         <label>Quantité </label>
         <input
           type="number"
-          min="0" oninput="this.value = Math.abs(this.value)"
+          min="1" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.qtestock"
           name="qtestock"
@@ -228,7 +228,7 @@
         <label>Seuil</label>
         <input
           type="number"
-          min="0" oninput="this.value = Math.abs(this.value)"
+          min="1" oninput="this.value = Math.abs(this.value)"
           class="form-control"
           [(ngModel)]="formDataArticle.stockInitial"
           name="stockInitial"

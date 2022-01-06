@@ -36,7 +36,9 @@ export class CreateClientComponent implements OnInit {
     const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
-      codeClient: ['', [Validators.required]],
+    //  codeClient: ['', [Validators.required]],
+      codeClient: ['CL' + Date.now() + (Math.random()*100000).toFixed(), [Validators.required]],
+     // numeroVente: [(Date.now() + ((Math.random()*100000).toFixed())), Validators.required],
       raisonSocial: ['', [Validators.required, Validators.pattern(validatorString)]],
       chefService: ['', [Validators.required, Validators.pattern(validatorString)]],
       adresse: ['', [Validators.required, Validators.pattern(validatorString)]],
@@ -54,7 +56,7 @@ export class CreateClientComponent implements OnInit {
   }
 
   ResetForm() {
-      this.crudApi.dataForm.reset();
+    this.crudApi.dataForm.reset();
   }
 
   onSubmit() {

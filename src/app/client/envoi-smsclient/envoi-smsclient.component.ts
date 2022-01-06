@@ -13,11 +13,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EnvoiSMSClientComponent implements OnInit {
 
-  constructor(public crudApi: ClientService, private smsService: SmsService ,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<EnvoiSMSClientComponent>,
-    ) { }
+  constructor(public crudApi: ClientService, 
+              private smsService: SmsService ,public fb: FormBuilder,
+              public toastr: ToastrService, private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<EnvoiSMSClientComponent>,
+  ) { }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
@@ -28,7 +29,7 @@ export class EnvoiSMSClientComponent implements OnInit {
   infoForm() {
     this.crudApi.dataForm = this.fb.group({
       id: null,
-      telephone: ['', [Validators.required]],
+      mobile: ['', [Validators.required]],
       message: ['', [Validators.required]],
     });
   }

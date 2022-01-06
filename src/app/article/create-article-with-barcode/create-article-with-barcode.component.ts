@@ -157,7 +157,7 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
   }
 
   saveArticle(art: Produit) {
-    if (this.validateForm()) {
+  //  if (this.validateForm()) {
       this.crudApi.createProduitWithBarCode(art).
       subscribe( data => {
         this.dialogRef.close();
@@ -175,18 +175,18 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
         this.router.navigate(['/home/listArticleWithBarcode']);
       });
 
-    } else {
+   /*  } else {
       this.toastr.error('Veuillez corrigé les valeur erronées','Données non valides', {
         timeOut: 1500,
         positionClass: 'toast-top-right',
       });
-    }
+    } */
 
 
   }
 
   updateArticle(id: number, art: Produit){
-    if (this.validateForm()) {
+  //  if (this.validateForm()) {
       this.crudApi.updateProduit(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value)
         .subscribe( data => {
           this.toastr.warning('avec succès','Article Modifié', {
@@ -203,12 +203,12 @@ export class CreateArticleWithBarcodeComponent implements OnInit {
       }
     );
 
-    }else {
+   /*  }else {
       this.toastr.error('Veuillez corrigé les valeur erronées','Données non valides', {
         timeOut: 1500,
         positionClass: 'toast-top-right',
       });
-    }
+    } */
 
   }
 

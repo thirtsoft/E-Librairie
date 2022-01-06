@@ -28,7 +28,7 @@ export class EnvoiSMSFournisseurComponent implements OnInit {
   infoForm() {
     this.crudApi.dataForm = this.fb.group({
       id: null,
-      telephone: ['', [Validators.required]],
+      mobile: ['', [Validators.required]],
       message: ['', [Validators.required]],
 
     });

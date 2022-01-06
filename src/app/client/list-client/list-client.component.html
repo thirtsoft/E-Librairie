@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2>GESTION DES CLIENTS</h2>
+    <h3>GESTION DES CLIENTS</h3>
   </div>
   <div style="padding-left: 20px; padding-top: 10px">
     <a type="button" (click)="onCreateClient()" class="btn btn-success btn-lg">
@@ -27,8 +27,8 @@
       <thead>
         <tr>
           <th>Raison Social</th>
-          <th>Chef Service</th>
-          <th>Telephone</th>
+          <th>Telephone Mobile</th>
+          <th>Telephone Fixe</th>
           <th>Email</th>
           <th>Adresse</th>
           <th>Action</th>
@@ -37,7 +37,7 @@
       <tbody>
         <tr *ngFor="let clt of crudApi.listData; let i = index">
           <td>{{ clt.raisonSocial }}</td>
-          <td>{{ clt.chefService }}</td>
+          <td>{{ clt.mobile }}</td>
           <td>{{ clt.telephone }}</td>
           <td>{{ clt.email }}</td>
           <td>{{ clt.adresse }}</td>
