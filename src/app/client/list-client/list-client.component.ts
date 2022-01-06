@@ -104,7 +104,6 @@ export class ListClientComponent implements OnDestroy, OnInit {
       id: null,
       codeClient: '',
       raisonSocial: '',
-      chefService: '',
       adresse: '',
       email: '',
       telephone:'',
@@ -188,7 +187,10 @@ export class ListClientComponent implements OnDestroy, OnInit {
     .afterClosed().subscribe(res =>{
       if(res){
         this.crudApi.deleteClient(id).subscribe(data => {
-          this.toastr.error('Client supprimé avec succès!');
+          this.toastr.error('avec succès','Client supprimé', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
           this.rerender();
           this.getListClients();
         });

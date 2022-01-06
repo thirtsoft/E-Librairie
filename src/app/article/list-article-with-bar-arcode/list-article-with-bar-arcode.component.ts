@@ -162,7 +162,10 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
     .afterClosed().subscribe(res =>{
       if(res){
         this.crudApi.deleteProduit(id).subscribe(data => {
-          this.toastr.warning('Article supprimé avec succès!');
+          this.toastr.error('avec succès','Article supprimé', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
           this.rerender();
           this.getListArticles();
         });

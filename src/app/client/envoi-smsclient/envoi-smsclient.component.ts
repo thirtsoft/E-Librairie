@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EnvoiSMSClientComponent implements OnInit {
 
-  constructor(public crudApi: ClientService, 
+  constructor(public crudApi: ClientService,
               private smsService: SmsService ,public fb: FormBuilder,
               public toastr: ToastrService, private router : Router,
               @Inject(MAT_DIALOG_DATA)  public data,
@@ -40,8 +40,10 @@ export class EnvoiSMSClientComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
-      this.toastr.success("Sms Envoyé avec Succès");
-    //  this.getListFournisseurs();
+      this.toastr.success('avec succès','Sms Envoyé', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
       this.router.navigate(['/home/clients']);
     });
   }

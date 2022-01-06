@@ -36,11 +36,8 @@ export class CreateClientComponent implements OnInit {
     const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
-    //  codeClient: ['', [Validators.required]],
-      codeClient: ['CL' + Date.now() + (Math.random()*100000).toFixed(), [Validators.required]],
-     // numeroVente: [(Date.now() + ((Math.random()*100000).toFixed())), Validators.required],
+      codeClient: ['CL_' + Date.now() + (Math.random()*1000).toFixed(), [Validators.required]],
       raisonSocial: ['', [Validators.required, Validators.pattern(validatorString)]],
-      chefService: ['', [Validators.required, Validators.pattern(validatorString)]],
       adresse: ['', [Validators.required, Validators.pattern(validatorString)]],
       telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
@@ -50,9 +47,12 @@ export class CreateClientComponent implements OnInit {
   }
 
   getListClients() {
-    this.crudApi.getAllClients().subscribe(
-      response =>{this.listData = response;}
-    );
+    this.crudApi.getAllClientsOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
   }
 
   ResetForm() {
@@ -76,11 +76,12 @@ export class CreateClientComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
-      this.toastr.success("Client Ajouté avec Succès");
-      //this.ResetForm();
+      this.toastr.success('avec succès','Client Ajouté', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
       this.getListClients();
       this.router.navigate(['/home/clients']);
-    //  this.router.navigate(['/clients']);
     },
     (error: HttpErrorResponse) => {
       this.toastr.error("Ce Client exist déjà, veuillez changez le code");
@@ -92,7 +93,10 @@ export class CreateClientComponent implements OnInit {
     this.crudApi.updateClient(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
-      this.toastr.success("Client Modifier avec Succès");
+      this.toastr.warning('avec succès','Client Modifié', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
       this.crudApi.filter('Register click');
       this.getListClients();
       this.router.navigate(['/home/clients']);
