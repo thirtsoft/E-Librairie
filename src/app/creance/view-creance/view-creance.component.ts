@@ -73,7 +73,7 @@ export class ViewCreanceComponent implements OnInit {
       this.totalCreance = this.lcreanceService.listData[0].creance.totalCreance;
       this.dateCreance = this.lcreanceService.listData[0].creance.dateCreance;
       console.log(this.dateCreance);
-      this.client = this.lcreanceService.listData[0].creance.client.chefService;
+      this.client = this.lcreanceService.listData[0].creance.client.raisonSocial;
       this.username = this.lcreanceService.listData[0].creance.utilisateur.name;
      // this.dtTrigger.next();
     }, err => {
@@ -216,7 +216,7 @@ export class ViewCreanceComponent implements OnInit {
           margin: [0, 8, 0, 8]
         },
         {
-          text: 'Pour  : ' +this.lcreanceService.listData[0].creance.client.chefService,
+          text: 'Pour  : ' +this.lcreanceService.listData[0].creance.client.raisonSocial,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

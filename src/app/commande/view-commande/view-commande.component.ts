@@ -57,7 +57,7 @@ export class ViewCommandeComponent implements OnInit {
       this.numeroCommande = this.lcmdService.listData[0].numero;
       this.totalCommande = this.lcmdService.listData[0].commande.totalCommande;
       this.dateCommande = this.lcmdService.listData[0].commande.dateCommande;
-      this.client = this.lcmdService.listData[0].commande.client.chefService;
+      this.client = this.lcmdService.listData[0].commande.client.raisonSocial;
       this.username = this.lcmdService.listData[0].commande.utilisateur.name;
      // this.dtTrigger.next();
     }, err => {
@@ -122,7 +122,7 @@ export class ViewCommandeComponent implements OnInit {
       content: [
         {
           text: 'AL AMINE',
-          fontSize: 50,
+          fontSize: 46,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -141,8 +141,8 @@ export class ViewCommandeComponent implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 12,
+          text: 'Tél: +221 77 729 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 10,
           bold: true,
           alignment: 'center',
           color: '#0000ff'
@@ -194,7 +194,7 @@ export class ViewCommandeComponent implements OnInit {
         },
         {
         //  bold:true,
-          text: 'Pour : ' +this.lcmdService.listData[0].commande.client.chefService,
+          text: 'Pour : ' +this.lcmdService.listData[0].commande.client.raisonSocial,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

@@ -192,7 +192,7 @@ export class ListDevisComponent implements OnDestroy, OnInit {
         },
         {
           bold:true,
-          text: 'M  : ' +this.crudApi.listData[0].client.chefService
+          text: 'M  : ' +this.crudApi.listData[0].client.raisonSocial
         },
         {
           text: 'LA LISTE DES ARTICLES',

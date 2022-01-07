@@ -71,7 +71,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
       this.totalDevis = this.ldevService.listData[0].devis.totalDevis;
       console.log(this.ldevService.listData[0].devis.dateDevis);
       this.dateDevis = this.ldevService.listData[0].devis.dateDevis;
-      this.client = this.ldevService.listData[0].devis.client.chefService;
+      this.client = this.ldevService.listData[0].devis.client.raisonSocial;
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
@@ -205,7 +205,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
           margin: [0, 8, 0, 8]
         },
         {
-          text: 'Pour : ' + this.ldevService.listData[0].devis.client.chefService,
+          text: 'Pour : ' + this.ldevService.listData[0].devis.client.raisonSocial,
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

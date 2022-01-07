@@ -218,7 +218,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
       content: [
         {
           text: 'AL AMINE',
-          fontSize: 46,
+          fontSize: 40,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -237,8 +237,8 @@ export class ListClientComponent implements OnDestroy, OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 12,
+          text: 'Tél: 77729 94 22 / 77109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 11,
           bold: true,
           alignment: 'center',
           color: '#0000ff'
@@ -331,15 +331,15 @@ export class ListClientComponent implements OnDestroy, OnInit {
               style: 'tableHeader'
             },
             {
-              text: 'Chef-Service',
-              style: 'tableHeader'
-            },
-            {
               text: 'Adresse',
               style: 'tableHeader'
             },
             {
-              text: 'Telephone',
+              text: 'Téléphone Mobile',
+              style: 'tableHeader'
+            },
+            {
+              text: 'Telephone Fixe',
               style: 'tableHeader'
             },
             {
@@ -349,7 +349,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
 
           ],
           ...item.map(x => {
-            return ([x.raisonSocial, x.chefService, x.adresse, x.telephone, x.email])
+            return ([x.raisonSocial, x.adresse, x.mobile, x.telephone, x.email])
           }),
 
         ]
