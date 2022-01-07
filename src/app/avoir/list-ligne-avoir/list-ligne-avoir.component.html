@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>DETAILS DES AVOIRS</h1>
+      <h3>DETAILS DES AVOIRS</h3>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a type="button" (click)="onCreateAvoir()" class="btn btn-success btn-lg"
@@ -38,9 +38,7 @@
           <td>{{ lavoir.quantite }}</td>
           <td>{{ lavoir.prix * lavoir.quantite }}</td>
           <td>
-            {{ lavoir.avoir?.fournisseur.prenom }}.{{
-              lavoir.avoir?.fournisseur.nom
-            }}
+            {{ lavoir.avoir?.fournisseur.raisonSociale }}
           </td>
           <!--
               <td>

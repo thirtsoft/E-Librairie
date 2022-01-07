@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
@@ -91,8 +92,6 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
       id: null,
       code: '',
       raisonSociale: '',
-      prenom: '',
-      nom: '',
       numeroCompte: '',
       nomBank: '',
       adresse: '',
@@ -166,6 +165,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     dialogConfig.width="50%";
     this.matDialog.open(EnvoiSMSFournisseurComponent, dialogConfig);
   }
+
   deleteFournisseur(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe(res =>{
@@ -203,7 +203,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
       content: [
         {
           text: 'AL AMINE',
-          fontSize: 50,
+          fontSize: 46,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -304,6 +304,7 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
     };
 
   }
+
   getPDFListFournisseurs(item: Fournisseur[]) {
     return {
       table: {
@@ -336,6 +337,10 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
               style: 'tableHeader'
             },
             {
+              taxt: "Mobile",
+              style: 'tableHeader'
+            },
+            {
               text: 'Telephone',
               style: 'tableHeader'
             },
@@ -352,8 +357,8 @@ export class ListFournisseurComponent implements OnDestroy, OnInit {
           }), */
 
           item.map(x => {
-            return ([x.raisonSociale, x.prenom, x.nom, x.numeroCompte,
-              x.nomBank, x.adresse, x.telephone, x.email])
+            return ([x.raisonSociale, x.numeroCompte,
+              x.nomBank, x.adresse, x.mobile, x.telephone, x.email])
           }),
 
         ]

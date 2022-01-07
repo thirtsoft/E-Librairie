@@ -16,11 +16,14 @@ export class EnvoiEmailFournisseurComponent implements OnInit {
 
   four: Fournisseur = new Fournisseur();
 
-  constructor(public crudApi: FournisseurService, private mailService: EmailService,
-    public fb: FormBuilder, public toastr: ToastrService, private router : Router,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<EnvoiEmailFournisseurComponent>,
-    ) { }
+  constructor(public crudApi: FournisseurService,
+              private mailService: EmailService,
+              public fb: FormBuilder,
+              public toastr: ToastrService,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<EnvoiEmailFournisseurComponent>,
+  ) { }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){

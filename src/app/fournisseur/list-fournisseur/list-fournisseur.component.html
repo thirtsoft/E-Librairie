@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h2>GESTION DES FOURNISSEURS</h2>
+      <h3>GESTION DES FOURNISSEURS</h3>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
@@ -39,17 +39,17 @@
           <th>Fournisseur</th>
           <th>Numero Compte</th>
           <th>NomBank</th>
-          <th>Telephone</th>
+          <th>Mobile</th>
           <th>Email</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let four of crudApi.listData; let i = index">
-          <td>{{ four.prenom }} {{ four.nom }}</td>
+          <td>{{ four.raisonSociale }}</td>
           <td>{{ four.numeroCompte }}</td>
           <td>{{ four.nomBank }}</td>
-          <td>{{ four.telephone }}</td>
+          <td>{{ four.mobile }}</td>
           <td>{{ four.email }}</td>
           <td>
             <button class="btn btn-warning btn-sm" (click)="envoiEmail(four)">

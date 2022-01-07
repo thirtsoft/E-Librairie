@@ -147,6 +147,7 @@ import { BarcharChargeComponent } from './chartJs/barchar-charge/barchar-charge.
 import { ListApproOfUserComponent } from './tableau/list-appro-of-user/list-appro-of-user.component';
 import { ListCreanceOfUserComponent } from './tableau/list-creance-of-user/list-creance-of-user.component';
 import { ListCommandeOfUserComponent } from './tableau/list-commande-of-user/list-commande-of-user.component';
+import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
 
 
 @NgModule({
@@ -270,6 +271,7 @@ import { ListCommandeOfUserComponent } from './tableau/list-commande-of-user/lis
     ListApproOfUserComponent,
     ListCreanceOfUserComponent,
     ListCommandeOfUserComponent,
+    ViewVente2Component,
 
   ],
   imports: [

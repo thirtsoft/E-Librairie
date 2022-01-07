@@ -36,11 +36,8 @@ export class CreateFournisseurComponent implements OnInit {
     const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
-  //    code: ['', [Validators.required]],
-      code: ['FOUR' + Date.now() + (Math.random()*100000).toFixed(), [Validators.required]],
+      code: ['FOUR_1' + Date.now() + (Math.random()*10).toFixed(), [Validators.required]],
       raisonSociale: ['', [Validators.required, Validators.pattern(validatorString)]],
-      prenom: ['', [Validators.required, Validators.pattern(validatorString)]],
-      nom: ['', [Validators.required, Validators.pattern(validatorString)]],
       nomBank: ['', [Validators.required]],
       numeroCompte: ['', [Validators.required]],
       adresse: ['', [Validators.required, Validators.pattern(validatorString)]],

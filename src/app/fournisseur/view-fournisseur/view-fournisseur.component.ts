@@ -50,8 +50,6 @@ export class ViewFournisseurComponent implements OnInit {
       id: null,
       code: ['', [Validators.required]],
       raisonSociale: ['', [Validators.required]],
-      prenom: ['', [Validators.required]],
-      nom: ['', [Validators.required]],
       nomBank: ['', [Validators.required]],
       numeroCompte: ['', [Validators.required]],
       adresse: ['', [Validators.required]],

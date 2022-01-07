@@ -45,7 +45,8 @@
           >
             <option value="0">-Select-</option>
             <option *ngFor="let item of fournisseurList" [ngValue]="item">
-              <td>{{ item.prenom }} {{ item.nom }}</td>
+           <!--    <td>{{ item.prenom }} {{ item.nom }}</td> -->
+              <td>{{ item.raisonSociale }}</td>
             </option>
           </select>
         </div>

@@ -65,7 +65,7 @@ export class ViewAvoirComponent implements OnInit {
       console.log(this.lavoirService.listData[0].avoir.totalAvoir);
       this.totalAvoir = this.lavoirService.listData[0].avoir.totalAvoir;
       this.dateAvoir = this.lavoirService.listData[0].avoir.dateAvoir;
-      this.fournisseur = [(this.lavoirService.listData[0].avoir.fournisseur.prenom) +" "+ (this.lavoirService.listData[0].avoir.fournisseur.nom)];
+      this.fournisseur = this.lavoirService.listData[0].avoir.fournisseur.raisonSociale;
      // this.dtTrigger.next();
     }, err => {
       console.log(err);
@@ -125,7 +125,7 @@ export class ViewAvoirComponent implements OnInit {
       content: [
         {
           text: 'AL AMINE',
-          fontSize: 50,
+          fontSize: 46,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -197,7 +197,7 @@ export class ViewAvoirComponent implements OnInit {
           margin: [0, 8, 0, 8]
         },
         {
-          text: 'Pour  : ' +[(this.lavoirService.listData[0].avoir.fournisseur.prenom)+" "+(this.lavoirService.listData[0].avoir.fournisseur.nom)],
+          text: 'Pour  : ' +[(this.lavoirService.listData[0].avoir.fournisseur.raisonSociale)],
           alignment: 'left',
           margin: [0, 8, 0, 8]
         },

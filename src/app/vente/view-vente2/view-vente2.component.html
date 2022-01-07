@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h3>FACTURES D'UN APPROVISIONNEMENT</h3>
+      <h1>FACTURE D'UNE VENTE</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
@@ -21,37 +21,35 @@
   <div class="panel-body">
     <div class="row">
       <div class="form-group col-md-3">
-        <label>Code Appro : </label>
+        <label>Vendeur : </label>
         <input
-          type="text"
+          name="id"
+          [value]="this.username"
           class="form-control"
-          name="code"
-          [value]="this.code"
-          id="code"
           readonly
         />
       </div>
 
       <div class="form-group col-md-3">
-        <label>Fournisseur : </label>
+        <label>Numéro Vente: </label>
         <input
           type="text"
           class="form-control"
-          name="forunisseur"
-          [value]="this.forunisseur"
-          id="forunisseur"
+          name="numeroVente"
+          [value]="this.numeroVente"
+          id="numeroVente"
           readonly
         />
       </div>
 
       <div class="form-group col-md-3">
-        <label>P.Total : </label>
+        <label>Total Vente : </label>
         <input
           type="text"
           class="form-control"
-          [value]="this.totalAppro"
-          name="totalAppro"
-          id="totalAppro"
+          [value]="this.totalVente"
+          name="totalVente"
+          id="totalVente"
           readonly
         />
       </div>
@@ -59,13 +57,12 @@
       <div class="form-group col-md-3">
         <label>Date : </label>
         <input
-          type="text"
-          name="dateAppro"
-          [value]="[this.dateAppro]"
-          id="dateAppro"
-          class="form-control"
-          readonly
-        />
+        type="text"
+        name="dateVente"
+        [value]="[this.dateVente]"
+        class="form-control"
+        readonly
+      />
       </div>
     </div>
     <div></div>
@@ -80,18 +77,18 @@
     >
       <thead>
         <tr>
-          <th>Article</th>
-          <th>P.Unitaire</th>
           <th>Quantite</th>
+          <th>Désignation</th>
+          <th>P.Unitaire</th>
           <th>P.Total</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of this.lapproService.listData">
-          <td>{{ item.produit?.designation }}</td>
-          <td>{{ item.prix }}</td>
+        <tr *ngFor="let item of this.lventeService.listData">
           <td>{{ item.quantite }}</td>
-          <td>{{ item.prix * item.quantite }}</td>
+          <td>{{ item.produit?.designation }}</td>
+          <td>{{ item.prixVente }}</td>
+          <td>{{ item.prixVente * item.quantite }}</td>
         </tr>
       </tbody>
     </table>

@@ -131,6 +131,10 @@ export class ListVenteComponent implements OnDestroy, OnInit {
     this.router.navigateByUrl('home/venteView/' + item.id);
   }
 
+  viewVente2(item: Vente) {
+    this.router.navigateByUrl('home/viewVente/' + item.id);
+  }
+
   transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
