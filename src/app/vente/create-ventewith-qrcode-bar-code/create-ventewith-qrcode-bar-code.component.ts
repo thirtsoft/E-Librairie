@@ -148,8 +148,8 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
       });
 
     }
-	
-	
+
+
 
 
 
@@ -206,6 +206,42 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     let alreadyExistsInCart: boolean = false;
     let existingCartItem: any = undefined;
     this.barcode = event.target.value;
+    if ((this.barcode.length == 13)) {
+      this.artService.getProduitByBarcode(this.barcode).subscribe(
+        (data: Produit)=> {
+          const sameProduct = this.listArticle.find((prod) => prod.reference === data.reference);
+          if ((this.barcode === data.barCode) && (sameProduct)) {
+            console.log("Barcode of barcode is " + this.barcode);
+
+            if (this.listOfScannedBarCodes.length > 0) {
+              existingCartItem = this.listOfScannedBarCodes.find(tempCartItem => tempCartItem.itemName === data.designation);
+              console.log(existingCartItem);
+              alreadyExistsInCart = (existingCartItem != undefined)
+            }
+            if (alreadyExistsInCart) {
+             // increment the quantity
+              existingCartItem.quantite++;
+            }else {
+              this.listOfScannedBarCodes.push({produit: data, itemName: data.designation, prixVente: data.prixDetail, quantite: 1});
+
+            }
+
+            this.updateTotals();
+
+            this.clearBarcode();
+
+          }
+        }
+      )
+
+    }
+
+  }
+
+ /*  onKey(event: any) {
+    let alreadyExistsInCart: boolean = false;
+    let existingCartItem: any = undefined;
+    this.barcode = event.target.value;
     if (this.barcode.length == 13) {
       this.artService.getProduitByBarcode(this.barcode).subscribe(
         (data: Produit)=> {
@@ -237,6 +273,7 @@ export class CreateVentewithQrcodeBarCodeComponent implements OnInit {
     }
 
   }
+ */
 
   clearBarcode() {
     this.searchInput.nativeElement.value = '';

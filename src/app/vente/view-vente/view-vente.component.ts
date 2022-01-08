@@ -283,6 +283,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
     };
 
   }
+  
   getListLigneVentes(item: LigneVente[]) {
     return {
       table: {

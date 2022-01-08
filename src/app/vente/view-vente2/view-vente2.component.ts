@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -117,45 +118,41 @@ export class ViewVente2Component implements OnInit {
 
   getDocument() {
     return {
+      pageSize: { width: 195.55, height: 'auto' },
+      pageMargins: [ 2, 0, 0, 2 ],
       content: [
         {
-          text: 'AL AMINE',
-          fontSize: 50,
+          text: 'LIBRAIRIE AL AMINE',
+          fontSize: 10,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
           style: 'name',
         },
         {
-          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
-          fontSize: 12,
-          bold: true,
-          color: '#0000ff'
-        },
-        {
-          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
-          fontSize: 10.5,
-          bold: true,
-          color: '#0000ff'
-        },
-        {
-          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 12,
-          bold: true,
+          text: 'BIGNONA EN FACE CBEAO',
+          fontSize: 10,
           alignment: 'center',
           color: '#0000ff'
         },
         {
-
+          text: 'Tél : +221 77 729 94 22 / +221 77 109 18 18',
+          fontSize: 10,
+          alignment: 'center',
+          color: '#0000ff'
         },
 
 
-        {
-
-        },
-
-        {
+      /*   {
           columns: [
+
+            [
+              {
+                text: `${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
+              //  alignment: 'right',
+                margin: [0, 15, 0, 15]
+              },
+            ],
 
             [
               {
@@ -167,39 +164,35 @@ export class ViewVente2Component implements OnInit {
 
             ],
 
-            [
-              {
-                text: `Date: ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
-                alignment: 'right',
-                margin: [0, 15, 0, 15]
-              },
-            ],
+
 
           ]
+        }, */
+
+        {
+          text: `Le ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
+        //  alignment: 'right',
+          margin: [0, 7, 0, 7]
         },
 
         {
-          text: 'FACTURE VENTE',
-          bold: true,
-          fontSize: 15,
+          text: `${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
+          margin: [0, 5, 0, 5]
+        },
+
+        {
+          text: 'Ticket',
           alignment: 'center',
           color: '#0000ff',
-          margin: [0, 8, 0, 8]
+          margin: [0, 4, 0, 4]
         },
         {
           text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
-          bold: true,
-          fontSize: 14,
           alignment: 'center',
           color: '#0000ff',
-          margin: [0, 8, 0, 8]
+          margin: [0, 4, 0, 4]
         },
-        {
-          text: 'M.',
-          fontSize: 13,
-          alignment: 'left',
-          margin: [0, 5, 0, 5]
-        },
+
         {
 
         },
@@ -210,37 +203,30 @@ export class ViewVente2Component implements OnInit {
         },
 
         {
-          text: `Total en F CFA : ${this.lventeService.listData[0].vente.totalVente}`,
-          alignment: 'right',
-          margin: [0, 8, 0, 8],
-          bold: true,
-          fontSize: 12,
+          text: `TOTAL CFA : ${this.lventeService.listData[0].vente.totalVente}`,
+          margin: [2, 8, 0, 2],
         },
 
         {
-          text: 'Réglement '
+          text: ''
            + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
-          alignment: 'right',
-          margin: [0, 3, 0, 8],
-          bold: true,
-          fontSize: 11,
+          margin: [2, 0, 0, 2],
 
         },
 
         {
-          text: 'Rendu en F CFA : '
+          text: 'Rendu : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
-          alignment: 'right',
-          margin: [0, 5, 0, 15],
-          bold: true,
-          fontSize: 12,
+
+          margin: [2, 0, 0, 2],
         },
 
         {
-          text: 'Signature',
+          text: 'MERCI DE VOTRE CONFIANCE !!!',
           style: 'sign',
-          alignment: 'right',
-          decoration: 'underline',
+          alignment: 'center',
+          bold: true,
+          fontSize: 10,
         },
 
 
@@ -250,8 +236,8 @@ export class ViewVente2Component implements OnInit {
         header: {
           fontSize: 14,
           bold: true,
-          margin: [0, 20, 0, 10],
-          decoration: 'underline'
+          margin: [0, 10, 0],
+        //  decoration: 'underline'
         },
         name: {
           fontSize: 14,
@@ -282,43 +268,54 @@ export class ViewVente2Component implements OnInit {
     };
 
   }
+
   getListLigneVentes(item: LigneVente[]) {
     return {
+      layout: 'lightHorizontalLines',
       table: {
-        widths: ['auto', '*', 'auto', 'auto'],
+        headerRows: 1,
+        widths: [1, 100, 'auto', 80],
+
         body: [
           [
+
             {
-              text: 'QUANTITE',
-              style: 'tableHeader'
+              text: '',
+          //    style: 'tableHeader'
             },
+
             {
-              text: 'DESIGNATION',
-              style: 'tableHeader'
+              text: '',
+          //    style: 'tableHeader'
             },
+
             {
-              text: 'P.UNITAIRE',
-              style: 'tableHeader'
+              text: '',
+        //      style: 'tableHeader'
             },
+
             {
-              text: 'P.TOTAL',
-              style: 'tableHeader'
+              text: '',
+      //        style: 'tableHeader'
             },
 
           ],
 
-          ...item.map(x => {
-            return ([x.quantite, x.produit.designation, x.prixVente,
-              (x.quantite*x.prixVente).toFixed(2)])
-          }),
-          [
+            ...item.map(x => {
+              return ([x.quantite, x.produit.designation,
+                (x.quantite*x.prixVente).toFixed(1), x.prixVente])
+            }),
+
+
+
+
+         /*  [
             {
-              text: 'MONTANT TOTAL',
-              alignment: 'center',
-              colSpan: 3
+              text: 'Montant Total',
+              colSpan: 2
             }, {}, {},
             this.lventeService.listData.reduce((sum, x)=> sum + (x.quantite * x.prixVente), 0).toFixed(2)
-          ]
+          ] */
         ]
       }
     }
@@ -330,4 +327,7 @@ export class ViewVente2Component implements OnInit {
   }
 
 
+
 }
+
+

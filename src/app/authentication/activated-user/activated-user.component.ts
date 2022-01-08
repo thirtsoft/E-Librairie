@@ -62,7 +62,7 @@ export class ActivatedUserComponent implements OnInit {
       this.router.navigateByUrl("home/utilisateurs").then(() => {
         window.location.reload();
       });
-   
+
     });
   }
 
