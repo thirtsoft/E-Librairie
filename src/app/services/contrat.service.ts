@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contrat } from '../models/contrat';
 import { FormGroup } from '@angular/forms';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -67,6 +67,15 @@ export class ContratService {
     data.append('file',file);
 
     return this.http.post(`${this.baseUrl}/contrats/createContrats`, data, {responseType: 'text'});
+  }
+
+  addContratInPath(contrat, file: File) {
+    let formdata: FormData = new FormData();
+    formdata.append('contrat',JSON.stringify(contrat));
+    formdata.append('file',file);
+
+    return this.http.post(`${this.baseUrl}/contrats/addContratInPath`, formdata, {responseType: 'text'});
+
   }
 
   uploadContratFile(file: File, contId) {

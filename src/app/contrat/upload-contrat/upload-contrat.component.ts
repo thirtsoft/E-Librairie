@@ -38,7 +38,7 @@ export class UploadContratComponent implements OnInit {
   }
 
   getListContrat() {
-    this.crudApi.getAllContrats().subscribe(
+    this.crudApi.getAllContratsOrderDesc().subscribe(
       response =>{this.listData = response;}
     );
   }

@@ -83,7 +83,7 @@ export class CreateContratComponent implements OnInit {
   onSubmit() {
     if(isNullOrUndefined(this.data.id)) {
       console.log(this.formDataContrat, this.fileContrat);
-      this.crudApi.createContrat2(this.formDataContrat, this.fileContrat).
+      this.crudApi.addContratInPath(this.formDataContrat, this.fileContrat).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');

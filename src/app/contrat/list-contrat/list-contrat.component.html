@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>GESTION DES CONTRATS</h1>
+      <h3>GESTION DES CONTRATS</h3>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
@@ -34,7 +34,7 @@
         <tr *ngFor="let cont of crudApi.listData; let i = index">
           <td>{{ cont.reference }}</td>
           <td>
-            {{ cont.client?.raisonSocial }} - {{ cont.client?.chefService }}
+            {{ cont.client?.raisonSocial }}
           </td>
           <td>{{ cont.montantContrat }}</td>
           <td>
