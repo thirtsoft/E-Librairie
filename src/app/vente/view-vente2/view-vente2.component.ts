@@ -118,12 +118,12 @@ export class ViewVente2Component implements OnInit {
 
   getDocument() {
     return {
-      pageSize: { width: 196.55, height: 'auto' },
+      pageSize: { width: 198.55, height: 'auto' },
       pageMargins: [0.5, 0, 0, 0.5 ],
       content: [
         {
           text: 'AL AMINE SEDHIOU',
-          fontSize: 9,
+          fontSize: 7,
         //  alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -131,13 +131,13 @@ export class ViewVente2Component implements OnInit {
         },
         {
           text: 'BIGNONA EN FACE CBEAO',
-          fontSize: 8,
+          fontSize: 7,
       //    alignment: 'center',
           color: '#0000ff'
         },
         {
           text: 'Tél : +221 77 729 94 22',
-          fontSize: 8,
+          fontSize: 7,
     //      alignment: 'center',
           color: '#0000ff'
         },
@@ -172,7 +172,7 @@ export class ViewVente2Component implements OnInit {
         {
           text: `Le ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
         //  alignment: 'right',
-          margin: [0, 7, 0, 7]
+          margin: [3, 7, 0, 7]
         },
 
         {
@@ -184,15 +184,15 @@ export class ViewVente2Component implements OnInit {
           text: 'Ticket',
       //    alignment: 'center',
           color: '#0000ff',
-          margin: [0, 4, 0, 4],
-        //  fontSize: 9,
+          margin: [4, 4, 0, 4],
+          fontSize: 6,
         },
         {
           text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
         //  alignment: 'center',
           color: '#0000ff',
-          margin: [0, 5, 0, 5]
-        //  fontSize: 9,
+          margin: [5, 5, 5, 5],
+          fontSize: 6,
         },
 
         {
@@ -206,8 +206,8 @@ export class ViewVente2Component implements OnInit {
 
         {
           text: `TOTAL CFA : ${this.lventeService.listData[0].vente.totalVente}`,
-          margin: [2, 8, 0, 2],
-       //   fontSize: 9,
+          margin: [5, 0, 0, 2],
+          fontSize: 7,
           colSpan: 2,
           bold: true
         },
@@ -216,7 +216,7 @@ export class ViewVente2Component implements OnInit {
           text: ''
            + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
           margin: [2, 0, 0, 2],
-     //     fontSize: 9,
+          fontSize: 7,
           colSpan: 2,
           bold: true
 
@@ -226,7 +226,7 @@ export class ViewVente2Component implements OnInit {
           text: 'Rendu : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
           margin: [1, 0, 0, 1],
-        //  fontSize: 9,
+          fontSize: 7,
           colSpan: 2,
           bold: true
         },
@@ -235,9 +235,9 @@ export class ViewVente2Component implements OnInit {
           text: 'MERCI DE VOTRE CONFIANCE !!!',
       //    style: 'sign',
       //    alignment: 'center',
-          margin: [5, 8, 0, 7],
+          margin: [10, 0, 0, 7],
     //      bold: true,
-          fontSize: 8,
+      //    fontSize: 5,
         },
 
 
@@ -285,7 +285,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.8, 50, 'auto', 50],
+        widths: [0.5, 90, 'auto', 50],
 
         body: [
           [

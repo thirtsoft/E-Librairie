@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>SITUATION DU STOCK</h1>
+      <h3>SITUATION DU STOCK</h3>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a type="button" (click)="onCreateStock()" class="btn btn-success btn-lg">
@@ -37,8 +37,6 @@
             {{ stock.qtestock <= stock.stockInitial ? "epuisé" : "encours" }}
           </td>
           <td>
-            <!-- <progress-bar [progress]="100" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
-                </progress-bar> -->
             <span *ngIf="stock.qtestock > stock.stockInitial">
               <progress-bar
                 [progress]="[(stock.qtestock * 100) / this.val]"

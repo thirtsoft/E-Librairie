@@ -11,7 +11,7 @@
           <select formControlName="produit" id="produit" class="form-control"
             (change)="selectPrice($event.target)" [compareWith]="compareProduit">
             <option value="0">-Select-</option>
-            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.reference}}</option>
+            <option *ngFor="let item of listArticle" [ngValue]="item">{{item.designation}}</option>
           </select>
         </div>
 
