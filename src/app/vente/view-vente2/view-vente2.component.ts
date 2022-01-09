@@ -123,7 +123,7 @@ export class ViewVente2Component implements OnInit {
       content: [
         {
           text: 'AL AMINE SEDHIOU',
-        //  fontSize: 8,
+          fontSize: 9,
         //  alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -131,13 +131,13 @@ export class ViewVente2Component implements OnInit {
         },
         {
           text: 'BIGNONA EN FACE CBEAO',
-      //    fontSize: 8,
+          fontSize: 8,
       //    alignment: 'center',
           color: '#0000ff'
         },
         {
           text: 'Tél : +221 77 729 94 22',
-      //    fontSize: 8,
+          fontSize: 8,
     //      alignment: 'center',
           color: '#0000ff'
         },
@@ -191,7 +191,7 @@ export class ViewVente2Component implements OnInit {
           text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
         //  alignment: 'center',
           color: '#0000ff',
-          margin: [0, 4, 0, 4],
+          margin: [0, 5, 0, 5]
         //  fontSize: 9,
         },
 
@@ -235,9 +235,9 @@ export class ViewVente2Component implements OnInit {
           text: 'MERCI DE VOTRE CONFIANCE !!!',
       //    style: 'sign',
       //    alignment: 'center',
-          margin: [0, 8, 0, 7],
+          margin: [5, 8, 0, 7],
     //      bold: true,
-        //  fontSize: 8,
+          fontSize: 8,
         },
 
 
@@ -285,7 +285,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.8, 100, 'auto', 50],
+        widths: [0.8, 50, 'auto', 50],
 
         body: [
           [
