@@ -60,7 +60,7 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllScategorieOrderDesc().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -109,13 +109,13 @@ export class ListScategorieComponent implements OnDestroy, OnInit {
     this.matDialog.open(CreateScategorieComponent, dialogConfig);
   }
 
-  addEditScategorie(scatId?: number) {
+  addEditScategorie(id?: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
     dialogConfig.data = {
-      scatId
+      id
     };
     this.matDialog.open(CreateScategorieComponent, dialogConfig);
 

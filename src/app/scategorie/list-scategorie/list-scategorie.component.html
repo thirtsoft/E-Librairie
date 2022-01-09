@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>GESTION DES SCATEGORIES</h1>
+      <h3>GESTION DES SCATEGORIES</h3>
     </div>
     <div class="row" style="padding-left: 20px; padding-top: 10px">
       <div class="col-md-1">
@@ -51,7 +51,6 @@
                 <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>Pdf</a
                 >
               </li>
-              <!--  <li><a href="#">Imprimer</a></li> -->
             </ul>
           </div>
           <!-- /btn-group -->
@@ -77,7 +76,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let scat of listData; let i = index">
+        <tr *ngFor="let scat of crudApi.listData; let i = index;">
           <td>{{ scat.code }}</td>
           <td>{{ scat.libelle }}</td>
           <td>{{ scat.categorie?.designation }}</td>

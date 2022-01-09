@@ -143,22 +143,9 @@ const routes: Routes = [
     },
 
 
-  /*  { path: 'scategories', component: ListScategorieComponent},
-    { path:'scategorie',component: CreateScategorieComponent }, */
+    { path: 'scategories', component: ListScategorieComponent},
+    { path:'scategorie',component: CreateScategorieComponent },
 
-
-    { path: 'scategories', children: [
-        {
-          path: '',
-          component: ListScategorieComponent,
-  //        canActivate: [AuthGuardService]
-        },
-        {
-          path:'edit/:id',
-          component:CreateScategorieComponent
-        },
-      ]
-    },
 
     { path: 'articles', children: [
         {

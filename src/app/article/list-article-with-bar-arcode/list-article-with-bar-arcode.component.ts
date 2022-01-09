@@ -29,7 +29,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ListArticleWithBarArcodeComponent implements OnInit {
 
-  // @Input()
   listData : Produit[];
 
   dtOptions: DataTables.Settings = {};
@@ -108,7 +107,6 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-    //dialogConfig.data="gdddd";
     this.matDialog.open(CreateArticleComponent, dialogConfig);
   }
 
@@ -118,7 +116,6 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width="50%";
-    //dialogConfig.data="gdddd";
     this.matDialog.open(CreateArticleWithBarcodeComponent, dialogConfig);
 
   }
@@ -131,7 +128,6 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
     dialogConfig.data = {
       id
     };
-  //  this.matDialog.open(CreateArticleComponent, dialogConfig);
     this.matDialog.open(CreateArticleWithBarcodeComponent, dialogConfig);
   }
 

@@ -40,11 +40,10 @@ export class CreateScategorieComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initForm();
     this.getCategories();
-    if (!isNullOrUndefined(this.data.scatId)) {
-      console.log(this.crudApi.listData[this.data.scatId]);
-      this.formDataScategorie = Object.assign({},this.crudApi.listData[this.data.scatId])
+    if (!isNullOrUndefined(this.data.id)) {
+      console.log(this.crudApi.listData[this.data.id]);
+      this.formDataScategorie = Object.assign({},this.crudApi.listData[this.data.id])
     }
   }
 
@@ -74,7 +73,7 @@ export class CreateScategorieComponent implements OnInit {
   }
 
   onSubmit() {
-    if (isNullOrUndefined(this.data.scatId)) {
+    if (isNullOrUndefined(this.data.id)) {
       this.crudApi.createScategorie(this.formDataScategorie).
       subscribe( data => {
         this.dialogRef.close();
