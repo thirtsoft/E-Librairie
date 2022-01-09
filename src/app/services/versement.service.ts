@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment';
 })
 export class VersementService {
 
-  //baseUrl = environment.apiBaseUrl;
-
 //  baseUrl = environment.apiBaseUrl;
 
   baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
