@@ -11,9 +11,9 @@ import { environment } from './../../environments/environment';
 })
 export class DevisService {
 
-  //baseUrl = environment.apiBaseUrl;
+  baseUrl = environment.apiBaseUrl;
 
-  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  //baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
   choixmenu : string  = 'A';
   listData: Devis[];
