@@ -26,23 +26,25 @@ export class CreateLigneApproComponent implements OnInit {
   total = 0;
   formData: FormGroup;
 
-  constructor(public lApproService: LigneApproService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ProduitService,
-    private AppService: ApproService,public fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateLigneApproComponent>,
-   ) { }
+  constructor(public lApproService: LigneApproService,
+              @Inject(MAT_DIALOG_DATA) public data,
+              private articleService: ProduitService,
+              private AppService: ApproService,
+              public fb: FormBuilder,
+              public dialogRef: MatDialogRef<CreateLigneApproComponent>,
+  ) { }
 
-   get f() { return this.formData.controls; }
+  get f() { return this.formData.controls; }
 
-   ngOnInit() {
+  ngOnInit() {
     if (this.data.lcommandeIndex == null) {
       this.infoForm();
     } else {
       this.formData = this.fb.group(Object.assign({}, this.AppService.list[this.data.lcommandeIndex]));
       console.log(this.formData);
-    }
+   }
 
-    this.articleService.getAllProductsOrderDesc().subscribe(
+    this.articleService.getAllProductsOrderByDesignationAsc().subscribe(
       response =>{
         this.listArticle = response;
       }
@@ -66,7 +68,6 @@ export class CreateLigneApproComponent implements OnInit {
 
   infoForm() {
     this.formData = this.fb.group({
-      //OrderItemId: null,
       id: null,
       OrderId: this.data.OrderId,
       ItemId: 0,
@@ -78,7 +79,6 @@ export class CreateLigneApproComponent implements OnInit {
       prixAppro: 0,
       total: 0,
       produit: new Produit(),
-     // commande: new CommandeClient(),
     });
   }
 
@@ -117,36 +117,6 @@ export class CreateLigneApproComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  /*
-  selectPrice(ctrl) {
-    if (ctrl.selectedIndex==0) {
-      this.formData.prix = 0;
-      this.formData.ItemName = '';
-    }
-    else {
-      this.formData.prix = this.listArticle[ctrl.selectedIndex-1].prixAchat;
-      this.formData.ItemName = this.listArticle[ctrl.selectedIndex-1].designation;
-    }
-    this.calculTotal();
-  }
-
-
-  calculTotal() {
-    this.formData.total = parseFloat((this.formData.quantite * this.formData.prix).toFixed(2));
-  }
-
-  onSubmit(form: NgForm) {
-    if (this.validateForm(form.value)) {
-      if (this.data.orderItemIndex == null) {
-        this.AppService.orderItems.push(form.value);
-      }
-      else {
-        this.AppService.orderItems[this.data.orderItemIndex] = form.value;
-      }
-      this.dialogRef.close();
-    }
-  }
-  */
   validateForm(formData: LigneAppro) {
     this.isValid = true;
     if (formData.produit.id==0)

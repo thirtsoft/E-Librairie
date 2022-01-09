@@ -25,11 +25,13 @@ export class CreateLigneAvoirComponent implements OnInit {
 
   formData: FormGroup;
 
-  constructor(public crudApi: LigneAvoirService, private toastr :ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data, private articleService: ProduitService,
-    private avoirService: AvoirService,public fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateLigneAvoirComponent>,
-   ) { }
+  constructor(public crudApi: LigneAvoirService,
+              @Inject(MAT_DIALOG_DATA) public data,
+              private articleService: ProduitService,
+              private avoirService: AvoirService,
+              public fb: FormBuilder,
+              public dialogRef: MatDialogRef<CreateLigneAvoirComponent>,
+  ) { }
 
   get f() { return this.formData.controls; }
 
@@ -41,7 +43,7 @@ export class CreateLigneAvoirComponent implements OnInit {
       console.log(this.formData);
     }
 
-    this.articleService.getAllProductsOrderDesc().subscribe(
+    this.articleService.getAllProductsOrderByDesignationAsc().subscribe(
       response =>{
         this.listArticle = response;
       }

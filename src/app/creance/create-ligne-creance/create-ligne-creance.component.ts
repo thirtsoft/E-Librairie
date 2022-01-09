@@ -45,7 +45,7 @@ export class CreateLigneCreanceComponent implements OnInit {
       console.log(this.formData);
     }
 
-    this.articleService.getAllProductsOrderDesc().subscribe(
+    this.articleService.getAllProductsOrderByDesignationAsc().subscribe(
       response =>{
         this.listArticle = response;
       }

@@ -41,7 +41,7 @@ export class CreateLigneCommandeComponent implements OnInit {
       console.log(this.lcmdService.dataForm);
     }
 
-    this.articleService.getAllProductsOrderDesc().subscribe(
+    this.articleService.getAllProductsOrderByDesignationAsc().subscribe(
       response =>{
         this.listArticle = response;
       }

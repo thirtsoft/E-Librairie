@@ -15,7 +15,6 @@ import { LigneDevisService } from 'src/app/services/ligne-devis.service';
 })
 export class CreateLigneDevisComponent implements OnInit {
 
-  //  formData: LigneCmdClient;
   listArticle: Produit[];
   isValid: boolean = true;
   approvisionnement: any;
@@ -45,7 +44,7 @@ export class CreateLigneDevisComponent implements OnInit {
       console.log(this.ldevisService.dataForm);
     }
 
-    this.articleService.getAllProduits().subscribe(
+    this.articleService.getAllProductsOrderByDesignationAsc().subscribe(
       response =>{
         this.listArticle = response;
       }
