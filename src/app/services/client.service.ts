@@ -16,9 +16,9 @@ export class ClientService {
 
  // baseUrl_1 = environment.apiBaseUrl;
 
-  baseUrl_1 = environment.apiBaseUrl;
+//  baseUrl_1 = environment.apiBaseUrl;
 
-//  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
  // baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
@@ -92,45 +92,5 @@ export class ClientService {
     return this.http.get(`${this.baseUrl_1}/clients/ListClientGroupByRaisonSocial`);
   }
 
-  // ouvrir la base de données
-  /* connectToDatabase(): void {
-    this.db.open().catch((error) => {
-      alert("Errod during connecting to database : " + error);
-    });
-
-  } */
-
- /*  async addAllDataClientToIndexeddb() {
-    await this.http.get<Client[]>(`${this.baseUrl_1}/clients`).subscribe(response => {
-      this.listDataClt = response;
-      this.db.transaction('rw', this.tableClient, async ()=> {
-        console.log(this.listDataClt);
-        for (let i = 0; i < this.listDataClt.length; i++) {
-          this.tableClient.put(this.listDataClt[i]);
-        }
-      });
-    })
-  }
-
-  private async sendDataFromIndexedDbToAPI() {
-    const todosCategorie: Client[] = await this.tableClient.toArray();
-    console.log(todosCategorie);
-    for(const categorie of todosCategorie) {
-      console.log(categorie);
-  //    this.createCategorieAPI(categorie);
-      await this.tableClient.delete(categorie.id);
-      console.log('Categorie com id ${categorie.id} foi excluddo com successfull');
-    }
-  } */
-  /* private ouvrirStatusConnexion() {
-    this.offlineService.statusConnexion
-      .subscribe(online => {
-        if(online) {
-         this.sendDataFromIndexedDbToAPI();
-        }else {
-          console.log('Mode offline active');
-        }
-      });
-  } */
 
 }

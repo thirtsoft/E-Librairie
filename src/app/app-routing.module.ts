@@ -1,3 +1,5 @@
+import { CreatePrestationComponent } from './prestation/create-prestation/create-prestation.component';
+import { ListPrestationComponent } from './prestation/list-prestation/list-prestation.component';
 import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -185,7 +187,6 @@ const routes: Routes = [
       component: CreateArticleWithBarcodeComponent
     },
 
-
     {
       path: 'clients',
       component: ListClientComponent,
@@ -204,14 +205,16 @@ const routes: Routes = [
       component: EnvoiSMSClientComponent
     },
 
-/*
-    { path: 'commandeclients', component: ListCommandeClientComponent},
-    { path:'commandeclient',children:[
-        {path:'',component:CreateCommandeClientComponent},
-        {path:'edit/:id',component:CreateCommandeClientComponent},
-      ]
+    {
+      path: 'prestations',
+      component: ListPrestationComponent,
+  //    canActivate: [AuthGuardService]
     },
-*/
+    {
+      path: 'prestation',
+      component: CreatePrestationComponent
+    },
+
     {
       path: 'listcommandes',
       component: ListCommandeComponent,

@@ -19,9 +19,9 @@ export class DashboardService {
 
   //baseUrl = environment.apiBaseUrl;
 
-  baseUrl = environment.apiBaseUrl;
+//  baseUrl = environment.apiBaseUrl;
 
-//  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
 //  baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 

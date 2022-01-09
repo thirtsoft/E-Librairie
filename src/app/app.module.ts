@@ -148,6 +148,8 @@ import { ListApproOfUserComponent } from './tableau/list-appro-of-user/list-appr
 import { ListCreanceOfUserComponent } from './tableau/list-creance-of-user/list-creance-of-user.component';
 import { ListCommandeOfUserComponent } from './tableau/list-commande-of-user/list-commande-of-user.component';
 import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
+import { ListPrestationComponent } from './prestation/list-prestation/list-prestation.component';
+import { CreatePrestationComponent } from './prestation/create-prestation/create-prestation.component';
 
 
 @NgModule({
@@ -272,6 +274,8 @@ import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
     ListCreanceOfUserComponent,
     ListCommandeOfUserComponent,
     ViewVente2Component,
+    ListPrestationComponent,
+    CreatePrestationComponent,
 
   ],
   imports: [
@@ -312,7 +316,7 @@ import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
     CreateVenteComponent,CreateEmployeComponent, MatConfirmDialogComponent, ProfilComponent, UpdatePasswordComponent,
     ActivatedUserComponent, CreateUtilisateurComponent, UpdateStatusApproComponent, UpdateMontantApproComponent,
     UpdateUsernameComponent, CreateVentewithQrcodeBarCodeComponent,
-    CreateCommandewithQrcodeBarCodeComponent, DashboardComponent
+    CreateCommandewithQrcodeBarCodeComponent, DashboardComponent, CreatePrestationComponent
   ]
 
 })

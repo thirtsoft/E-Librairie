@@ -1,0 +1,56 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>GESTION DES PRESTATIONS</h3>
+  </div>
+  <div style="padding-left: 20px; padding-top: 10px">
+    <a
+      type="button"
+      (click)="onCreatePrestation()"
+      class="btn btn-success btn-lg"
+    >
+      <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
+    >&nbsp;
+  </div>
+  <div class="form-group col-md-6 pull-right" style="padding-top: 10px">
+    <label><strong>Montant Presation/Moi : </strong></label>
+    <div class="count">{{ this.sumPrestationInMonth }}</div>
+  </div>
+  <div class="panel-body">
+    <table
+      class="table table-striped table-bordered table-sm row-border hover"
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      aria-label=""
+    >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Designation</th>
+          <th>Montant</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clt of crudApi.listData; let i = index">
+          <td>{{ clt.id }}</td>
+          <td>{{ clt.designation }}</td>
+          <td>{{ clt.montant }}</td>
+          <td>{{ clt.datePrestation }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="editPrestation(clt)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
+            >&nbsp;
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deletePrestation(clt.id)"
+            >
+              <em class="fa fa-trash-o"></em>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

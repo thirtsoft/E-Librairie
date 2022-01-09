@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-md-offset-2">
+    <h3>Nouvelle Prestation</h3>
+    <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" formControlName="id" id="id" />
+
+      <div class="form-group">
+        <label>Designation</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="designation"
+          id="designation"
+          placeholder="designation"
+        />
+        <div
+          *ngIf="
+            f['designation'].invalid &&
+            (f['designation'].dirty || f['designation'].touched)
+          "
+          class="alert alert-danger"
+        >
+          <span *ngIf="f['designation'].errors.required"
+            >designation obligatoire.</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label>Montant</label>
+          <input
+            type="number"
+            min="1"
+            class="form-control"
+            formControlName="montant"
+            id="montant"
+            placeholder="10000"
+          />
+          <div
+            *ngIf="
+              f['montant'].invalid &&
+              (f['montant'].dirty || f['montant'].touched)
+            "
+            class="alert alert-danger"
+          >
+
+          </div>
+      </div>
+
+      <div class="form-group">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!this.crudApi.dataForm.valid"
+        >
+          <em class="fa fa-database"></em> Enregirtrer </button
+        >&nbsp;
+        <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
+          <em class="fa fa-close"></em> Fermer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
