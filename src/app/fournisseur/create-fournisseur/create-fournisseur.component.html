@@ -53,7 +53,6 @@
           "
           class="alert alert-danger"
         >
-          <!--  <span *ngIf="f['raisonSociale'].errors.required">Le numéro de Téléphone est obligatoire.</span> -->
           <span *ngIf="f['raisonSociale'].errors?.pattern"
             >SVP, La raison social doit contenir que des lettres..</span
           >
@@ -71,17 +70,7 @@
             id="nomBank"
             placeholder="Banque du fournisseur"
           />
-          <div
-            *ngIf="
-              f['nomBank'].invalid &&
-              (f['nomBank'].dirty || f['nomBank'].touched)
-            "
-            class="alert alert-danger"
-          >
-            <span *ngIf="f['nomBank'].errors.required">
-              Banque obligatoire.
-            </span>
-          </div>
+
         </div>
 
         <div class="form-group col-sm-6">
@@ -94,17 +83,7 @@
             id="numeroCompte"
             placeholder="compte du fournisseur"
           />
-          <div
-            *ngIf="
-              f['numeroCompte'].invalid &&
-              (f['numeroCompte'].dirty || f['numeroCompte'].touched)
-            "
-            class="alert alert-danger"
-          >
-            <span *ngIf="f['numeroCompte'].errors.required">
-              Compte obligatoire.
-            </span>
-          </div>
+
         </div>
       </div>
 

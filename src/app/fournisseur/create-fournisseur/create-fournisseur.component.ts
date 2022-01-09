@@ -38,12 +38,12 @@ export class CreateFournisseurComponent implements OnInit {
       id: null,
       code: ['FOUR_1' + Date.now() + (Math.random()*10).toFixed(), [Validators.required]],
       raisonSociale: ['', [Validators.required, Validators.pattern(validatorString)]],
-      nomBank: ['', [Validators.required]],
-      numeroCompte: ['', [Validators.required]],
+      nomBank: '',
+      numeroCompte: '',
       adresse: ['', [Validators.required, Validators.pattern(validatorString)]],
       telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
-      fax: ['', [Validators.required]],
+      fax: '',
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
     });
 
