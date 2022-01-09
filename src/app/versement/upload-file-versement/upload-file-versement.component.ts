@@ -18,10 +18,13 @@ export class UploadFileVersementComponent implements OnInit {
   versementFile: File;
   formDataContrat: Versement = new Versement();
 
-  constructor(public crudApi: VersementService, public toastr: ToastrService, public fb: FormBuilder,
-    private router : Router, @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<UploadFileVersementComponent>,
-    ) { }
+  constructor(public crudApi: VersementService,
+              public toastr: ToastrService,
+              public fb: FormBuilder,
+              private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<UploadFileVersementComponent>,
+  ) { }
 
   ngOnInit() {
     if (!isNullOrUndefined(this.data.id)) {
@@ -34,7 +37,7 @@ export class UploadFileVersementComponent implements OnInit {
   }
 
   getListVersements() {
-    this.crudApi.getAllVersements().subscribe(
+    this.crudApi.getAllVersementsOrderDesc().subscribe(
       response =>{this.listData = response;}
     );
   }
@@ -45,7 +48,7 @@ export class UploadFileVersementComponent implements OnInit {
 
   onSubmit() {
     console.log(this.versementFile, this.formDataContrat.id);
-    this.crudApi.uploadVersementFile(this.versementFile, this.formDataContrat.id).
+    this.crudApi.uploadVersementFileInPah(this.versementFile, this.formDataContrat.id).
     subscribe( data => {
       this.dialogRef.close();
       this.toastr.success("Fichier Pdf Modifier avec Succès");

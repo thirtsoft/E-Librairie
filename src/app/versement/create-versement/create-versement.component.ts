@@ -60,7 +60,7 @@ export class CreateVersementComponent implements OnInit {
 
   onSubmit() {
     if(isNullOrUndefined(this.data.verId)) {
-      this.crudApi.createVersementWithFile(this.formDataVersement, this.fileVersement).
+      this.crudApi.saveVersementWithFile(this.formDataVersement, this.fileVersement).
       subscribe( data => {
         this.dialogRef.close();
         this.crudApi.filter('Register click');

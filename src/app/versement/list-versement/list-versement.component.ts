@@ -142,6 +142,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
   transformDate(date){
     return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
+
   deleteVersement(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe(res =>{

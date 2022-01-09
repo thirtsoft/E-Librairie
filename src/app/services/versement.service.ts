@@ -63,20 +63,30 @@ export class VersementService {
 
     return this.http.post(`${this.baseUrl}/versements/createVersement`, data, {responseType: 'text'});
   }
-/*
-  public createVersementWithFile(formData, fileContrat:File) {
-    const data:FormData= new FormData();
-    data.append('versement',JSON.stringify(formData));
-    data.append('file',fileContrat);
 
-    return this.http.post(`${this.baseUrl}/createContrats`, data,  {responseType: 'text'});
+  public saveVersementWithFile(versement, file:File) {
+    const formData:FormData= new FormData();
+    formData.append('versement',JSON.stringify(versement));
+    formData.append('file',file);
+
+    return this.http.post(`${this.baseUrl}/versements/createVersementInPath`, formData, {responseType: 'text'});
   }
-  */
 
   uploadVersementFile(file: File, verId) {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
     const req = new HttpRequest('POST', this.baseUrl+'/versements/uploadPdfFile/'+verId, formdata, {
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+
+  }
+
+  uploadVersementFileInPah(file: File, verId) {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const req = new HttpRequest('POST', this.baseUrl+'/versements/uploadPdfFileInPath/'+verId, formdata, {
       responseType: 'text'
     });
 
