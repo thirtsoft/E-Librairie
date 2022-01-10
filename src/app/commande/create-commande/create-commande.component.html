@@ -1,6 +1,6 @@
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>EFFECTUER UNE COMMANDE</h1>
+      <h3>EFFECTUER UNE COMMANDE</h3>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
           >
             <option value="0">-Select-</option>
             <option *ngFor="let item of ClientList" [ngValue]="item">
-              {{ item.chefService }}
+              {{ item.raisonSocial }}
             </option>
           </select>
         </div>

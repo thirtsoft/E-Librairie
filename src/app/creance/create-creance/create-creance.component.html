@@ -11,16 +11,7 @@
   />
   <div class="row col-md-12">
     <div class="row">
-      <div class="form-row col-sm-4 mb-3 mb-sm-0">
-        <label><strong>Référence : </strong></label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="reference"
-          id="reference"
-          readonly
-        />
-      </div>
+
       <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Code Creance</label>
         <input
@@ -40,7 +31,7 @@
         />
       </div>
 
-      <div class="form-group col-sm-3 mb-3 mb-sm-0">
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Client</label>
         <div class="form-group">
           <select
@@ -52,13 +43,16 @@
           >
             <option value="0">-Select-</option>
             <option *ngFor="let item of ClientList" [ngValue]="item">
-              {{ item.chefService }}
+              {{ item.raisonSocial }}
             </option>
           </select>
         </div>
       </div>
 
-      <div class="form-group col-sm-3 mb-3 mb-sm-0">
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Avance</label>
         <input
           type="text"
@@ -67,7 +61,7 @@
           id="avanceCreance"
         />
       </div>
-      <div class="form-group col-sm-2 mb-3 mb-sm-0">
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Délais</label>
         <input
           type="text"
@@ -76,7 +70,7 @@
           id="nbreJours"
         />
       </div>
-      <div class="form-group col-sm-3 mb-3 mb-sm-0">
+      <div class="form-group col-sm-4 mb-3 mb-sm-0">
         <label>Status</label>
         <select
           name="status"
@@ -89,10 +83,8 @@
           <option value="NONPAYEE">NONPAYEE</option>
           <option value="PAYEE">PAYEE</option>
         </select>
-        <!--  <input type="text" formControlName="status" class="form-control" id="status"> -->
       </div>
     </div>
-    <!--</div> -->
 
     <!-- Debut Ligne de creances -->
     <table class="table table-borderless" aria-label="">
@@ -106,7 +98,7 @@
             class="btn btn-sm btn-success text-white"
             (click)="AddData(null, 1)"
           >
-            <em class="fa fa-plus"></em>Ajouter
+            <em class="fa fa-plus"></em>Ajouter Article
           </a>
         </th>
       </thead>

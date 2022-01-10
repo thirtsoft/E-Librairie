@@ -39,22 +39,9 @@ export class CreateChargeComponent implements OnInit {
 
   ngOnInit() {
     this.getListCategorieCharges();
-    this. infoForm();
     if (!isNullOrUndefined(this.data.id)) {
       this.formDataContrat = Object.assign({},this.crudApi.listData[this.data.id])
     }
-  }
-
-  infoForm() {
-    this.crudApi.dataForm = this.fb.group({
-      id: null,
-      codeCharge: ['CHARG_' + Date.now() + (Math.random()*10).toFixed(), [Validators.required]],
-      nature: ['', [Validators.required]],
-      categorieCharge: [''],
-      montantCharge: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-    });
-
   }
 
   ResetForm() {

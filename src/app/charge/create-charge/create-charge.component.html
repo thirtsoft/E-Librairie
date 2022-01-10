@@ -12,31 +12,7 @@
         #id="ngModel"
         [(ngModel)]="formDataContrat.id"
       />
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label>Code Charge </label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="formDataContrat.codeCharge"
-            name="codeCharge"
-            id="codeCharge"
-            #codeCharge="ngModel"
-            required
-            placeholder="code charge"
-          />
-          <span
-            class="text-danger"
-            *ngIf="
-              (codeCharge.touched || addChargeForm.submitted) &&
-              codeCharge.errors?.required
-            "
-          >
-            Code Charge est obligatoire
-          </span>
-        </div>
-
-        <div class="form-group col-md-6">
+      <div class="form-group">
           <label>Désignation</label>
           <input
             type="text"
@@ -57,7 +33,6 @@
           >
             Désignation est obligatoire
           </span>
-        </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">

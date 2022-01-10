@@ -179,23 +179,6 @@ export class ListClientComponent implements OnDestroy, OnInit {
     this.matDialog.open(EnvoiSMSClientComponent, dialogConfig);
   }
 
-/*
-  deleteClient(id: number) {
-    if (window.confirm('Etes-vous sure de vouloir supprimer ce Client ?')) {
-    this.crudApi.deleteClient(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.toastr.warning('Client supprimé avec succès!');
-          this.rerender();
-          this.getListClients();
-      },
-        error => console.log(error));
-    }
-
-  }
-  */
-
   deleteClient(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cette donnée ?')
     .afterClosed().subscribe(res =>{

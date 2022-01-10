@@ -50,22 +50,6 @@ export class CreateContratComponent implements OnInit {
     });
   }
 
-  infoForm(form?: NgForm) {
-    if (form = null)
-      form.resetForm();
-    this.crudApi.formData = {
-      id: null,
-      reference: '',
-      nature: '',
-      fileContrat: '',
-      montantContrat: 0,
-      description: '',
-      dateDebutContrat: new Date(),
-      dateFinContrat: new Date(),
-      client: new Client()
-    };
-  }
-
   ResetForm() {
     this.crudApi.dataForm.reset();
   }

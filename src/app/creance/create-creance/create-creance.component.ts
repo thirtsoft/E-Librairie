@@ -78,11 +78,10 @@ export class CreateCreanceComponent implements OnInit {
     this.dashboardService.getNumeroCommande();
     this.crudApi.formData = this.fb.group({
       id: null,
-    //  reference: Math.floor(100000 + Math.random() * 900000).toString(),
       reference: this.dashboardService.generatedNumber,
       total: [0, Validators.required],
       libelle: ['', Validators.required],
-      codeCreance: ['', Validators.required],
+      codeCreance: ['CREAN_' + Date.now() + (Math.random()*1000).toFixed(), [Validators.required]],
       soldeCreance: [0, Validators.required],
       avanceCreance: [0, Validators.required],
       nbreJours: [0, Validators.required],
