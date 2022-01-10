@@ -3,7 +3,10 @@
     <h3>GESTION DES CLIENTS</h3>
   </div>
   <div style="padding-left: 20px; padding-top: 10px">
-    <a type="button" (click)="onCreateClient()" class="btn btn-success btn-lg">
+    <a
+      type="button"
+      *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
+      (click)="onCreateClient()" class="btn btn-success btn-lg">
       <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
     >&nbsp;
     <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
@@ -48,10 +51,13 @@
             <button class="btn btn-primary btn-sm" (click)="envoiSMS(clt)">
               <i class="fa fa-mobile" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-info btn-sm" (click)="editClient(clt)">
+            <button
+              *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
+              class="btn btn-info btn-sm" (click)="editClient(clt)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
+              *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
               class="btn btn-danger btn-sm"
               (click)="deleteClient(clt.id)"
             >

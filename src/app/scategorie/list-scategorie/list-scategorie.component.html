@@ -6,6 +6,7 @@
     <div class="row" style="padding-left: 20px; padding-top: 10px">
       <div class="col-md-1">
         <button
+          *ngIf="!showAssocieBoard && !showVendeurBoard"
           (click)="addEditScategorie(null)"
           class="btn btn-success btn-lg"
         >
@@ -20,7 +21,9 @@
           style="height: 45px"
         />
       </div>
-      <div class="col-md-1" style="margin-left: 0px">
+      <div
+        *ngIf="!showAssocieBoard && !showVendeurBoard"
+        class="col-md-1" style="margin-left: 0px">
         <button class="btn btn-warning btn-lg" (click)="uploadExcelFile()">
           <i class="fa fa-upload" aria-hidden="true"></i> Importer
         </button>
@@ -72,7 +75,7 @@
           <th>Code</th>
           <th>Libelle</th>
           <th>Categorie</th>
-          <th>Action</th>
+          <th *ngIf="!showAssocieBoard && !showVendeurBoard">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -80,8 +83,10 @@
           <td>{{ scat.code }}</td>
           <td>{{ scat.libelle }}</td>
           <td>{{ scat.categorie?.designation }}</td>
-          <td>
-            <button class="btn btn-info btn-sm" (click)="addEditScategorie(i)">
+          <td *ngIf="!showAssocieBoard && !showVendeurBoard">
+            <button
+              class="btn btn-info btn-sm"
+              (click)="addEditScategorie(i)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button

@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/services/client.service';
@@ -16,6 +17,8 @@ import { map } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 @Component({
   selector: 'app-list-client',
   templateUrl: './list-client.component.html',
@@ -23,7 +26,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ListClientComponent implements OnDestroy, OnInit {
 
- // client: Client;
   client: Client;
   listData: Client[];
   clientID: number;
@@ -36,13 +38,22 @@ export class ListClientComponent implements OnDestroy, OnInit {
 
   control: FormControl = new FormControl('');
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: ClientService,
               public fb: FormBuilder,
               public toastr: ToastrService,
               private dialogService: DialogService,
-              private router : Router,
+              private tokenService: TokenStorageService,
               private matDialog: MatDialog,
-              private route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateClientComponent>,
   ) {
@@ -54,19 +65,22 @@ export class ListClientComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    /*
-    this.clientID = this.route.snapshot.params.id;
-    if (this.clientID == null) {
-      this.resetForm();
-    }else {
-      this.crudApi.getClientByID(this.clientID).then(res => {
-        this.listData = res.client;
-      });
-    }
-*/
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 25,
+      pageLength: 30,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]

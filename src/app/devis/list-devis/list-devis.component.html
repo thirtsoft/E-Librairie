@@ -38,7 +38,9 @@
             <button class="btn btn-success btn-sm" (click)="viewDevis(dev)">
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-danger btn-sm" (click)="deleteDevis(dev.id)">
+            <button
+              *ngIf="(showGerantBoard || showManagerBoard || showAdminBoard)"
+              class="btn btn-danger btn-sm" (click)="deleteDevis(dev.id)">
               <em class="fa fa-trash-o"></em></button
             >&nbsp;
           </td>

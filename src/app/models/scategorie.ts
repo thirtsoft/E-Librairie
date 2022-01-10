@@ -4,10 +4,5 @@ export class Scategorie {
   code: string;
   libelle: string;
   categorie = new Categorie();
-/*
-  public constructor() {
-  this.categorie = new Categorie();
-  }
-*/
 
 }

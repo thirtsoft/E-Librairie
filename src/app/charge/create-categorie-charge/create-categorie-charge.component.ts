@@ -37,7 +37,7 @@ export class CreateCategorieChargeComponent implements OnInit {
     const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
-      codeCategorieCharge: ['', [Validators.required]],
+      codeCategorieCharge: ['CAT_CH_' + Date.now() + (Math.random()*10).toFixed(), [Validators.required]],
       nomCategorieCharge: ['', [Validators.required, Validators.pattern(validatorString)]],
     });
   }

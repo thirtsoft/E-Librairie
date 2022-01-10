@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Produit } from './../../models/produit';
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { LigneAppro } from 'src/app/models/ligne-appro';
@@ -19,11 +20,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class ListLigneApproComponent implements OnInit {
 
-  //listData : LigneAppro[];
-
   listData : LigneAppro[];
- // listData : LigneAppro[] = [];
-
   appro: Appro = new Appro();
 
   produit: Produit = new Produit();
@@ -32,12 +29,22 @@ export class ListLigneApproComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: LigneApproService,
               private dialogService: DialogService,
               public fb: FormBuilder,
               public toastr: ToastrService,
+              private tokenService: TokenStorageService,
               private router : Router,
-              private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateLigneApproComponent>,
   ) { }

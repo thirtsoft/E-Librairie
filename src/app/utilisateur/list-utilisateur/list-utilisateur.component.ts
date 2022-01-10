@@ -77,8 +77,11 @@ export class ListUtilisateurComponent implements OnInit {
       const user = this.tokenService.getUser();
       this.roles = user.roles;
 
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
       this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
 
       this.id = user.id;
     };

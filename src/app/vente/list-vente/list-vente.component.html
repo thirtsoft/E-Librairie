@@ -19,7 +19,11 @@
         <i class="fa fa-plus" aria-hidden="true"></i> Vendre Automatiquement</a
       >&nbsp;
     </div>
-    <div class="form-group col-md-4 col-md-offset-2" style="padding-top: 10px">
+    <div
+      *ngIf="showManagerBoard || showAdminBoard"
+      class="form-group col-md-4 col-md-offset-2"
+      style="padding-top: 10px"
+    >
       <label><strong>Montant Vente/Jour : </strong></label>
       <div class="count">{{ this.sumVenteByDay }}</div>
     </div>
@@ -44,20 +48,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let vent of listData; let i=index;">
+        <tr *ngFor="let vent of listData; let i = index">
           <td>{{ vent.numeroVente }}</td>
           <td>{{ vent.totalVente }}</td>
           <td>{{ vent.typeReglement }}</td>
           <td>{{ vent.montantReglement }}</td>
           <td>{{ vent.dateVente }}</td>
           <td>
-            <button class="btn btn-success btn-sm" (click)="viewVente(vent)">
+            <button
+              *ngIf="showManagerBoard || showAdminBoard"
+              class="btn btn-success btn-sm"
+              (click)="viewVente(vent)"
+            >
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button class="btn btn-warning btn-sm" (click)="viewVente2(vent)">
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button
+              *ngIf="showManagerBoard || showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteVente(vent.id)"
             >

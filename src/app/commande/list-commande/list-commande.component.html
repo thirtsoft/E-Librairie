@@ -5,6 +5,7 @@
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
+        *ngIf="(showGerantBoard || showVendeurBoard || showManagerBoard || showAdminBoard)"
         type="button"
         (click)="onCreateCommandeClient()"
         class="btn btn-success btn-lg"
@@ -41,12 +42,14 @@
           <td>{{ cmd.dateCommande }}</td>
           <td>
             <button
+            *ngIf="(showGerantBoard || showManagerBoard || showAdminBoard)"
               class="btn btn-success btn-sm"
               (click)="viewCommandeClient(cmd)"
             >
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button
+              *ngIf="(showGerantBoard || showManagerBoard || showAdminBoard)"
               class="btn btn-danger btn-sm"
               (click)="deleteCommandeClient(cmd.id)"
             >

@@ -41,7 +41,7 @@ export class CreateFournisseurComponent implements OnInit {
       nomBank: '',
       numeroCompte: '',
       adresse: ['', [Validators.required, Validators.pattern(validatorString)]],
-      telephone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
+      telephone: '',
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
       fax: '',
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]

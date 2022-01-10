@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, ViewChild, Inject } from '@angular/core';
 import { CategorieCharge } from 'src/app/models/categorieCharge';
@@ -23,8 +24,6 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
   listData : CategorieCharge[];
   CatId: number;
 
-  private editForm: FormGroup;
-
   control: FormControl = new FormControl('');
 
   dtOptions: DataTables.Settings = {};
@@ -35,11 +34,21 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
   fileUploadInput: any;
   mesagge: string;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
+
   constructor(public crudApi: CategorieChargeService,
               private dialogService: DialogService,
+              private tokenService: TokenStorageService,
               public toastr: ToastrService,
-              private router : Router,
-              private route: ActivatedRoute,
               private matDialog: MatDialog,
               public fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -53,6 +62,19 @@ export class ListCategorieChargeComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,

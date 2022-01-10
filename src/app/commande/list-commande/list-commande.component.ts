@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -22,10 +23,20 @@ export class ListCommandeComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: CommandeClientService,
               public toastr: ToastrService,
               private dialogService: DialogService,
-              private datePipe : DatePipe,
+              private tokenService: TokenStorageService,
               public fb: FormBuilder,
               private router : Router,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,6 +44,18 @@ export class ListCommandeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+    };
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 30,

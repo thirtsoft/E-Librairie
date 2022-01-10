@@ -19,11 +19,20 @@ export class ListVenteComponent implements OnDestroy, OnInit {
 
   listData: Vente[];
   sumVenteByDay;
-  info: any;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
 
   constructor(public crudApi: VenteService,
               public toastr: ToastrService,
@@ -35,6 +44,18 @@ export class ListVenteComponent implements OnDestroy, OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 30,

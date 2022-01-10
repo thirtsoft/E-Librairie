@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class SidebarComponent implements OnInit {
 
   info: any;
-  private roles: string[];
+  roles: string[];
 
   isLoggedIn = false;
   showAdminBoard = false;

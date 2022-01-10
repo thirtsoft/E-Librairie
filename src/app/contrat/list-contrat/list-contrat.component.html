@@ -5,6 +5,7 @@
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
+        *ngIf="showGerantBoard || showManagerBoard"
         type="button"
         (click)="addEditContrat(null)"
         class="btn btn-success btn-lg"
@@ -38,7 +39,9 @@
           </td>
           <td>{{ cont.montantContrat }}</td>
           <td>
-            {{ cont.fileContrat }} &nbsp;<a
+            {{ cont.fileContrat }} &nbsp;
+            <a
+              *ngIf="showGerantBoard || showManagerBoard"
               (click)="addEditContratFile(i)"
               style="cursor: pointer; align-items: flex-end"
             >
@@ -58,15 +61,20 @@
             </a>
           </td>
           <td>{{ cont.dateDebutContrat }}</td>
-          <td>{{ cont.dateFinContrat  }}</td>
+          <td>{{ cont.dateFinContrat }}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewContrat(i)">
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-info btn-sm" (click)="addEditContrat(i)">
+            <button
+              *ngIf="showGerantBoard || showManagerBoard"
+              class="btn btn-info btn-sm"
+              (click)="addEditContrat(i)"
+            >
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
+              *ngIf="showGerantBoard || showManagerBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteContrat(cont.id)"
             >

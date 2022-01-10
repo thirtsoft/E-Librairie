@@ -1,15 +1,17 @@
-import { ProduitService } from './../../services/article.service';
-import { Produit } from './../../models/produit';
 import { Component, OnInit, OnDestroy, Inject, ViewChild, Input } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { StockService } from 'src/app/services/stock.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { CreateApproComponent } from 'src/app/approvisionnement/create-appro/create-appro.component';
 import { DataTableDirective } from 'angular-datatables';
+
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { ProduitService } from './../../services/article.service';
+import { Produit } from './../../models/produit';
+import { StockService } from 'src/app/services/stock.service';
 
 
 @Component({
@@ -30,8 +32,19 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
   val = 200;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: StockService,
               private artService: ProduitService,
+              public tokenService: TokenStorageService,
               public toastr: ToastrService,
               private router : Router,
               public fb: FormBuilder,
@@ -42,6 +55,18 @@ export class ListStockComponent implements OnDestroy, OnInit {
 
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+    };
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 45,
@@ -55,7 +80,7 @@ export class ListStockComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
-  //  this.getValueProgressBar();
+
 
   }
 

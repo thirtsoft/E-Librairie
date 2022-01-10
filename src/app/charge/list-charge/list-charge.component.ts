@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Component, OnInit, OnDestroy, Inject, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Charge } from 'src/app/models/charge';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
@@ -27,13 +28,23 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: ChargeService,
               private dialogService: DialogService,
               public toastr: ToastrService,
+              private tokenService: TokenStorageService,
               public fb: FormBuilder,
               private datePipe : DatePipe,
               private matDialog: MatDialog,
-              private route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateChargeComponent>,
   ) {
@@ -45,16 +56,18 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    /*
-    this.chargeID = this.route.snapshot.params.id;
-    if (this.chargeID == null) {
-      this.resetForm();
-    }else {
-      this.crudApi.getChargeByID(this.chargeID).then(res => {
-        this.listData = res.charge;
-      });
-    }
-   */
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+    };
 
     this.dtOptions = {
       pagingType: 'full_numbers',

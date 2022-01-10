@@ -5,13 +5,13 @@
     </div>
     <div class="row" style="padding-left: 20px; padding-top: 10px">
       <div class="col-md-1">
-        <button (click)="addEditArticle(null)" class="btn btn-success btn-lg">
+        <button
+          *ngIf="!showAssocieBoard && !showVendeurBoard"
+          (click)="addEditArticle(null)"
+          class="btn btn-success btn-lg">
           <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
         </button>
       </div>
-      <!-- <div class="col-md-1">&nbsp;&nbsp;
-              <button (click)="onCreateArticleWithBarCoder(null)" class="btn btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</button>
-          </div> -->
       <div class="col-md-3 col-md-offset-1">
         <input
           class="form-control"
@@ -21,7 +21,9 @@
         />
       </div>
       <div class="col-md-1" style="margin-left: 0px">
-        <button class="btn btn-warning btn-lg" (click)="uploadExcelFile()">
+        <button
+          *ngIf="!showAssocieBoard && !showVendeurBoard"
+          class="btn btn-warning btn-lg" (click)="uploadExcelFile()">
           <i class="fa fa-upload" aria-hidden="true"></i> Importer
         </button>
       </div>
@@ -93,10 +95,13 @@
             <button class="btn btn-success btn-sm" (click)="viewArticle(i)">
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-info btn-sm" (click)="addEditArticle(i)">
+            <button
+              *ngIf="!showAssocieBoard && !showVendeurBoard"
+              class="btn btn-info btn-sm" (click)="addEditArticle(i)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
+              *ngIf="!showAssocieBoard && !showVendeurBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteArticle(art.id)"
             >

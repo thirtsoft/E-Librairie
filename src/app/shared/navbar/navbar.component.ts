@@ -14,8 +14,6 @@ import { Produit } from './../../models/produit';
 })
 export class NavbarComponent implements OnInit {
 
-  info: any;
-  private roles: string[];
   listData: Produit[];
   listDataCreance: Creance[];
   notification = 0;
@@ -25,9 +23,14 @@ export class NavbarComponent implements OnInit {
   nbcreanceRef = 10;
   currentTime: number = 0;
 
+  info: any;
+  roles: string[];
+
   isLoggedIn = false;
   showAdminBoard = false;
-  showUserBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
   showVendeurBoard = false;
 
   username: string;
@@ -63,8 +66,10 @@ export class NavbarComponent implements OnInit {
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
-      this.showUserBoard = this.roles.includes('ROLE_USER');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
 
       this.username = user.username;
       this.userId = user.id;

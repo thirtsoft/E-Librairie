@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Produit } from './../../models/produit';
 import { ProduitService } from './../../services/article.service';
@@ -32,8 +33,17 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ListArticleComponent implements OnDestroy, OnInit {
 
- // @Input()
   listData : Produit[];
+
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
 
   @ViewChild('htmlData') htmlData:ElementRef;
 
@@ -50,6 +60,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: ProduitService,
               private dialogService: DialogService,
+              private tokenService: TokenStorageService,
               public fb: FormBuilder,
               public toastr: ToastrService,
               private router : Router,
@@ -65,6 +76,18 @@ export class ListArticleComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 50,

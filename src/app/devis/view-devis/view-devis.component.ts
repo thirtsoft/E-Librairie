@@ -51,7 +51,6 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
               private router : Router,
               public fb: FormBuilder,
               private datePipe : DatePipe,
-              private matDialog: MatDialog,
               public route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateDevisComponent>,
@@ -188,7 +187,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: ' FACTURE PREFORMAT',
+          text: ' FACTURE PROFORMAT',
           alignment: 'center',
           fontSize: 20,
           color: '#0000ff',

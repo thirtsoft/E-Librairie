@@ -33,16 +33,6 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   listData : Categorie[];
   CatId: number;
 
-  control: FormControl = new FormControl('');
-
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
-  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-
-  @ViewChild("fileUploadInput")
-  fileUploadInput: any;
-  mesagge: string;
-
   info: any;
   roles: string[];
 
@@ -52,6 +42,16 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
   showAssocieBoard = false;
   showGerantBoard = false;
   showVendeurBoard = false;
+
+  control: FormControl = new FormControl('');
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+
+  @ViewChild("fileUploadInput")
+  fileUploadInput: any;
+  mesagge: string;
 
   constructor(public crudApi: CategorieService,
               private dialogService: DialogService,
@@ -71,27 +71,16 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenService.getToken();
-   if (this.isLoggedIn) {
-     const user = this.tokenService.getUser();
-     this.roles = user.roles;
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
 
-     this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-     this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
-     this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
-     this.showGerantBoard = this.roles.includes('ROLE_GERANT');
-     this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
-
-   }
-    /*
-    this.CatId = this.route.snapshot.params.id;
-    if (this.CatId == null) {
-      this.resetForm();
-    }else {
-      this.crudApi.getCategorieByID(this.CatId).then(res => {
-        this.listData = res.categorie;
-      });
-    }
-    */
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    };
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -100,6 +89,7 @@ export class ListCategorieComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
+
     this.crudApi.getAllCategoriesOrderDesc().subscribe(
       response =>{
         this.listData = response;

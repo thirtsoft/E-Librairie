@@ -105,7 +105,6 @@
             "
             class="alert alert-danger"
           >
-            <!-- <span *ngIf="f['adresse'].errors.required">Le  nom obligatoire est obligatoire.</span> -->
             <span *ngIf="f['adresse'].errors?.pattern"
               >SVP, L'addresse doit contenir des lettres de l'alphabet
               A-Z..</span
@@ -123,18 +122,7 @@
             id="telephone"
             placeholder="773459821"
           />
-          <div
-            *ngIf="
-              f['telephone'].invalid &&
-              (f['telephone'].dirty || f['telephone'].touched)
-            "
-            class="alert alert-danger"
-          >
-            <span *ngIf="f['telephone'].errors?.pattern"
-              >SVP, Entrez un numéro Telephone est valide et doit contenir 9
-              caractère..</span
-            >
-          </div>
+          
         </div>
       </div>
 

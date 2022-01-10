@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { CreatePrestationComponent } from './../create-prestation/create-prestation.component';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
@@ -28,12 +29,22 @@ export class ListPrestationComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: PrestationService,
               public fb: FormBuilder,
               public toastr: ToastrService,
               private dialogService: DialogService,
+              private tokenService: TokenStorageService,
               private matDialog: MatDialog,
-              private route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreatePrestationComponent>,
   ) {
@@ -45,6 +56,19 @@ export class ListPrestationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 25,

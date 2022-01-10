@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Versement } from 'src/app/models/versement';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -21,6 +22,16 @@ import { UploadFileVersementComponent } from '../upload-file-versement/upload-fi
 })
 export class ListVersementComponent implements OnDestroy, OnInit {
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   listData : Versement[];
 
   dtOptions: DataTables.Settings = {};
@@ -30,7 +41,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
   constructor(public crudApi: VersementService,
               public fb: FormBuilder,
               public toastr: ToastrService,
-              private router : Router,
+              private tokenService: TokenStorageService,
               private datePipe : DatePipe,
               private matDialog: MatDialog,
               private dialogService: DialogService,
@@ -45,6 +56,19 @@ export class ListVersementComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    }
+
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 50,
@@ -59,6 +83,7 @@ export class ListVersementComponent implements OnDestroy, OnInit {
         this.dtTrigger.next();
       }
     );
+
 
   }
 

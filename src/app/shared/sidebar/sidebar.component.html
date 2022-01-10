@@ -13,12 +13,11 @@
           <span>Tableau de Bord</span>
         </a>
       </li>
-      <!-- <li class="sub-menu" *ngIf="showAdminBoard"> -->
+
       <li class="sub-menu">
         <a href="javascript:0;" class="">
           <i class="fa fa-book fa-fw" aria-hidden="true"></i>
           <span>Library</span>
-          <!--  <span>Magasin</span> -->
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
@@ -46,17 +45,10 @@
               >Articles</a
             >
           </li>
-         <!--  <li>
-            <a
-              class=""
-              routerLink="/home/articlesQrCodes"
-              routerLinkActive="router-link-active"
-              >ArticlesBarCode</a
-            >
-          </li> -->
+
         </ul>
       </li>
-      <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
+
       <li class="sub-menu">
         <a href="javascript:0;" class="">
           <i class="fa fa-shopping-basket" aria-hidden="true"></i>
@@ -80,7 +72,7 @@
               >Détails Commandes</a
             >
           </li>
-          <li>
+          <li *ngIf="!showAssocieBoard && !showManagerBoard">
             <a
               class=""
               routerLink="/home/listdevis"
@@ -88,7 +80,7 @@
               >Devis</a
             >
           </li>
-          <li>
+          <li *ngIf="!showAssocieBoard && !showManagerBoard">
             <a
               class=""
               routerLink="/home/detailsDevis"
@@ -98,31 +90,14 @@
           </li>
         </ul>
       </li>
-      <!--
-    <li>
-      <a class="" href="widgets.html">
-                    <i class="icon_genius"></i>
-                    <span>Widgets</span>
-                </a>
-    </li>
-    <li>
-      <a class="" href="chart-chartjs.html">
-                    <i class="icon_piechart"></i>
-                    <span>Charts</span>
 
-                </a>
-
-    </li>  -->
-
-      <!-- <li class="sub-menu" *ngIf="showVendeurBoard"> -->
-      <li class="sub-menu">
+      <li class="sub-menu" *ngIf="!showAssocieBoard">
         <a href="javascript:;" class="">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           <span>Ventes</span>
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <!-- <li><a class="" routerLink="/home/ventes" routerLinkActive="router-link-active">Ventes</a></li> -->
           <li>
             <a
               class=""
@@ -142,8 +117,7 @@
         </ul>
       </li>
 
-      <!-- <li class="sub-menu" *ngIf="showUserBoard"> -->
-      <li class="sub-menu" *ngIf="!showVendeurBoard">
+      <li class="sub-menu" *ngIf="!showAssocieBoard">
         <a href="javascript:;" class="">
           <i class="icon_documents_alt"></i>
           <span>Situation</span>
@@ -161,14 +135,14 @@
         </ul>
       </li>
 
-      <li class="sub-menu" *ngIf="!showVendeurBoard">
+      <li class="sub-menu">
         <a href="javascript:;" class="">
           <i class="fa fa-line-chart" aria-hidden="true"></i>
           <span>Mouvement</span>
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <li>
+          <li *ngIf="!showAssocieBoard">
             <a
               class=""
               routerLink="/home/approvisionnements"
@@ -176,7 +150,7 @@
               >Entrées</a
             >
           </li>
-          <li>
+          <li *ngIf="!showAssocieBoard">
             <a
               class=""
               routerLink="/home/detailsApprovisionnements"
@@ -189,50 +163,48 @@
               class=""
               routerLink="/home/stocks"
               routerLinkActive="router-link-active"
-              >Stock</a
+              >Voir Stock</a
             >
           </li>
         </ul>
       </li>
 
-      <li class="sub-menu" *ngIf="!showVendeurBoard">
+      <li class="sub-menu" *ngIf="!showAssocieBoard">
         <a href="javascript:;" class="">
           <i class="fa fa-usd" aria-hidden="true"></i>
           <span>Réglement</span>
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <li><a class="" routerLink="/home/versements">Versement</a></li>
-          <li><a class="" routerLink="/home/contrats">Contrat</a></li>
-          <li>
+          <li *ngIf="!showAssocieBoard && !showVendeurBoard">
+            <a class="" routerLink="/home/versements">Versement</a></li>
+          <li *ngIf="!showAssocieBoard && !showVendeurBoard">
+            <a class="" routerLink="/home/contrats">Contrat</a></li>
+          <li *ngIf="!showAssocieBoard && !showVendeurBoard">
             <a class="" routerLink="/home/categorieCharges">Categorie-Charge</a>
           </li>
-          <li><a class="" routerLink="/home/charges">Charges</a></li>
-          <li><a class="" routerLink="/home/prestations">Prestations</a></li>
+          <li *ngIf="(showGerantBoard || showVendeurBoard)">
+            <a class="" routerLink="/home/charges">Charges</a></li>
+          <li *ngIf="(showGerantBoard || showVendeurBoard)">
+            <a class="" routerLink="/home/prestations">Prestations</a></li>
         </ul>
       </li>
 
-      <li *ngIf="!showVendeurBoard">
+      <li *ngIf="(showGerantBoard || showManagerBoard)">
         <a class="" routerLink="/home/chart">
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           <span>Graphiques</span>
         </a>
       </li>
 
-      <li *ngIf="!showVendeurBoard">
+      <li *ngIf="(showGerantBoard || showManagerBoard)">
         <a class="" routerLink="/home/tableau">
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           <span>Résumés</span>
         </a>
       </li>
-     <!--  <li>
-        <a class="" routerLink="/home/articlesQrCodes">
-          <i class="fa fa-bar-chart" aria-hidden="true"></i>
-          <span>CodeBarArticle</span>
-        </a>
-      </li> -->
 
-      <li class="sub-menu" *ngIf="!showVendeurBoard">
+      <li class="sub-menu" *ngIf="!showAssocieBoard">
         <a href="javascript:;" class="">
           <i class="fa fa-users" aria-hidden="true"></i>
           <span>Personnes</span>
@@ -255,7 +227,7 @@
               >Fournisseur</a
             >
           </li>
-          <li>
+          <li *ngIf="showManagerBoard">
             <a
               class=""
               routerLink="/home/employes"
@@ -263,7 +235,7 @@
               >Employee</a
             >
           </li>
-          <li>
+          <li *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard )">
             <a
               class=""
               routerLink="/home/utilisateurs"
@@ -271,7 +243,7 @@
               >Utilisateur</a
             >
           </li>
-          <li>
+          <li *ngIf="(showManagerBoard || showAdminBoard)">
             <a
               class=""
               routerLink="/register"
@@ -282,7 +254,7 @@
         </ul>
       </li>
 
-      <li class="sub-menu" *ngIf="!showVendeurBoard">
+      <li class="sub-menu" *ngIf="showManagerBoard">
         <a href="javascript:0;" class="">
           <i class="fa fa-cog" aria-hidden="true"></i>
           <span>Activités</span>

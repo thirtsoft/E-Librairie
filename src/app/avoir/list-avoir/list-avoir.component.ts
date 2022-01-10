@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Component, OnInit, Inject, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Avoir } from 'src/app/models/avoir';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -25,10 +26,21 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: AvoirService,
               private dialogService: DialogService,
               private datePipe : DatePipe,
               public toastr: ToastrService,
+              private tokenService: TokenStorageService,
               public fb: FormBuilder,
               private router : Router,
               private matDialog: MatDialog,
@@ -43,6 +55,18 @@ export class ListAvoirComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 25,

@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>GESTION DES CHARGES</h1>
+      <h3>GESTION DES CHARGES</h3>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
@@ -39,10 +39,14 @@
           <td>{{ ch.montantCharge }}</td>
           <td>{{ ch.date }}</td>
           <td>
-            <button class="btn btn-info btn-sm" (click)="addOrEditCharge(i)">
+            <button
+              *ngIf="(showGerantBoard || showAdminBoard)"
+              class="btn btn-info btn-sm" (click)="addOrEditCharge(i)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-danger btn-sm" (click)="deleteCharge(ch.id)">
+            <button
+              *ngIf="showManagerBoard"
+              class="btn btn-danger btn-sm" (click)="deleteCharge(ch.id)">
               <em class="fa fa-trash-o"></em>
             </button>
           </td>

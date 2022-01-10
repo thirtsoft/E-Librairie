@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -27,10 +28,17 @@ export class ListDevisComponent implements OnDestroy, OnInit {
   client: Client;
   devis: Devis;
   devisItems: LigneDevis;
-
-  private editForm: FormGroup;
-
   id: number ;
+
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -39,15 +47,28 @@ export class ListDevisComponent implements OnDestroy, OnInit {
   constructor(public crudApi: DevisService,
               public fb: FormBuilder,
               public toastr: ToastrService,
+              private tokenService: TokenStorageService,
               private router : Router,
               private dialogService: DialogService,
               private datePipe : DatePipe,
   ) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 35,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
@@ -173,7 +194,7 @@ export class ListDevisComponent implements OnDestroy, OnInit {
 
             [
               {
-                text: `FACTURE N° : ${this.crudApi.listData[0].numeroDevis}`,
+                text: `N° : ${this.crudApi.listData[0].numeroDevis}`,
                 fontSize: 14,
                 bold: true,
 
@@ -284,7 +305,7 @@ export class ListDevisComponent implements OnDestroy, OnInit {
             return ([x.ldevis[0].produit.designation, x.ldevis[0].quantite,
               x.ldevis[0].prixDevis, (x.ldevis[0].quantite*x.ldevis[0].prix).toFixed(2)])
           }),
-          [{text: 'Total Amount', colSpan: 3}, {}, {}, this.crudApi.listData.reduce((sum, x)=> sum + (x.ldevis[0].quantite * x.ldevis[0].prixDevis), 0).toFixed(2)]
+          [{text: 'Montant Total', colSpan: 3}, {}, {}, this.crudApi.listData.reduce((sum, x)=> sum + (x.ldevis[0].quantite * x.ldevis[0].prixDevis), 0).toFixed(2)]
         ]
       }
     }

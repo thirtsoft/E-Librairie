@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Appro } from 'src/app/models/appro';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -7,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { CreateApproComponent } from '../create-appro/create-appro.component';
-import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { Fournisseur } from 'src/app/models/fournisseur';
 import { DataTableDirective } from 'angular-datatables';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -22,9 +22,15 @@ import { UpdateStatusApproComponent } from '../update-status-appro/update-status
 })
 export class ListApproComponent implements OnDestroy, OnInit {
 
-  //listData: Appro[];
+  info: any;
+  roles: string[];
 
-  listData;
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
 
   fournisseur;
 
@@ -34,6 +40,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
 
   constructor(public crudApi: ApproService,
               private dialogService: DialogService,
+              private tokenService: TokenStorageService,
               private datePipe : DatePipe,
               public fb: FormBuilder,
               public toastr: ToastrService,
@@ -44,9 +51,22 @@ export class ListApproComponent implements OnDestroy, OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+
+    };
+
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 25,
+      pageLength: 30,
       processing: true,
       autoWidth: true,
       order: [[0, 'desc']]
@@ -56,7 +76,7 @@ export class ListApproComponent implements OnDestroy, OnInit {
       .subscribe(
         response =>{
           this.crudApi.listData = response;
-          console.log(this.listData);
+          console.log(this.crudApi.listData);
           this.dtTrigger.next();
         }
     );

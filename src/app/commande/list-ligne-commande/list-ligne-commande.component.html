@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h2>DETAILS DES COMMANDES</h2>
+      <h3>DETAILS DES COMMANDES</h3>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
@@ -38,7 +38,7 @@
           <td>{{ lcomClient.quantite }}</td>
           <td>{{ lcomClient.prixCommande }}</td>
           <td>{{ lcomClient.prixCommande * lcomClient.quantite }}</td>
-          <td>{{ lcomClient.commande?.client.chefService }}</td>
+          <td>{{ lcomClient.commande?.client.raisonSocial }}</td>
           <td>{{ lcomClient.commande?.utilisateur.name }}</td>
           <!--
               <td>

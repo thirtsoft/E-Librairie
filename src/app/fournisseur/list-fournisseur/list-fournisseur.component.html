@@ -5,25 +5,14 @@
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
+      *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
         type="button"
         (click)="onCreateFournisseur()"
         class="btn btn-success btn-lg"
       >
         <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
       >&nbsp;
-     <!--  <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
-        <i class="fa fa-folder-open" aria-hidden="true"></i>Ouvrir</a
-      >&nbsp;
-      <a (click)="PrintPdf()" class="btn btn-success btn-lg">
-        <i class="fa fa-print" aria-hidden="true"></i>Imprimer</a
-      >&nbsp;
-      <a type="button" (click)="DownloadPdf()" class="btn btn-danger btn-lg">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>Télécharger</a
-      >&nbsp; -->
 
-      <!--  <a type="button" (click)="sendMail()" class="btn btn-danger btn-lg">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>SendEmail</a
-      >&nbsp; -->
     </div>
   </div>
   <div class="panel-body">
@@ -64,10 +53,14 @@
             >
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-info btn-sm" (click)="editFournisseur(four)">
+            <button
+              *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
+              class="btn btn-info btn-sm"
+              (click)="editFournisseur(four)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
+            *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
               class="btn btn-danger btn-sm"
               (click)="deleteFournisseur(four.id)"
             >

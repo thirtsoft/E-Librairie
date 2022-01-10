@@ -5,6 +5,7 @@
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
+        *ngIf="(showGerantBoard || showManagerBoard)"
         type="button"
         (click)="addEditVersement(null)"
         class="btn btn-success btn-lg"
@@ -61,10 +62,14 @@
             <button class="btn btn-success btn-sm" (click)="viewVersement(i)">
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-info btn-sm" (click)="addEditVersement(i)">
+            <button
+              *ngIf="(showGerantBoard || showManagerBoard)"
+              class="btn btn-info btn-sm"
+              (click)="addEditVersement(i)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
+              *ngIf="(showGerantBoard || showManagerBoard)"
               class="btn btn-danger btn-sm"
               (click)="deleteVersement(versmnt.id)"
             >

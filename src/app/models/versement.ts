@@ -13,9 +13,4 @@ export class Versement {
 
   employe: Employe;
 
-  /*
-  public constructor() {
-    this.employe = new Employe();
-  }
-  */
 }

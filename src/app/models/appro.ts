@@ -16,8 +16,6 @@ export class Appro {
 
   fournisseur: Fournisseur;
 
- // utilisateur: Utilisateur;
-
   ligneApprovisionnements :Array<LigneAppro>=[];
 
 }

@@ -2,82 +2,173 @@
   <div class="col-md-8 col-md-offset-2">
     <h3>Nouveau Employe</h3>
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
-      <input type="hidden"  formControlName="id" id="id">
+      <input type="hidden" formControlName="id" id="id" />
 
       <div class="row">
         <div class="form-group col-md-6">
           <label>Prénom</label>
-          <input type="text" class="form-control" formControlName="prenom" name="prenom" id="prenom"  placeholder="Prénom employé"/>
-          <div *ngIf="f['prenom'].invalid && (f['prenom'].dirty || f['prenom'].touched)" class="alert alert-danger">
-            <span *ngIf="f['prenom'].errors.required">Le prénom est obligatoire.</span>
-            <span *ngIf="f['prenom'].errors?.pattern">SVP, Le prénom doit contenir des lettres de l'alphabet A-Z..</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="prenom"
+            name="prenom"
+            id="prenom"
+            placeholder="Prénom employé"
+          />
+          <div
+            *ngIf="
+              f['prenom'].invalid && (f['prenom'].dirty || f['prenom'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <span *ngIf="f['prenom'].errors.required"
+              >Le prénom est obligatoire.</span
+            >
+            <span *ngIf="f['prenom'].errors?.pattern"
+              >SVP, Le prénom doit contenir des lettres de l'alphabet
+              A-Z..</span
+            >
           </div>
         </div>
 
         <div class="form-group col-md-6">
           <label>Nom</label>
-          <input type="text" class="form-control" formControlName="nom" name="nom" id="nom" placeholder="Nom employé">
-          <div *ngIf="f['nom'].invalid && (f['nom'].dirty || f['nom'].touched)" class="alert alert-danger">
-            <span *ngIf="f['nom'].errors.required">Le nom est obligatoire.</span>
-            <span *ngIf="f['nom'].errors?.pattern">SVP, Le nom doit contenir des lettres de l'alphabet A-Z..</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nom"
+            name="nom"
+            id="nom"
+            placeholder="Nom employé"
+          />
+          <div
+            *ngIf="f['nom'].invalid && (f['nom'].dirty || f['nom'].touched)"
+            class="alert alert-danger"
+          >
+            <span *ngIf="f['nom'].errors.required"
+              >Le nom est obligatoire.</span
+            >
+            <span *ngIf="f['nom'].errors?.pattern"
+              >SVP, Le nom doit contenir des lettres de l'alphabet A-Z..</span
+            >
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label>CNI</label>
-        <input type="text" class="form-control" formControlName="cni" name="cni" id="cni" placeholder="Numéro de carte d'identité">
-        <div *ngIf="f['cni'].invalid && (f['cni'].dirty || f['cni'].touched)" class="alert alert-danger">
-          <span *ngIf="f['cni'].errors.required">
-            Cni obligatoire.
-         </span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="cni"
+          name="cni"
+          id="cni"
+          placeholder="Numéro de carte d'identité"
+        />
+        <div
+          *ngIf="f['cni'].invalid && (f['cni'].dirty || f['cni'].touched)"
+          class="alert alert-danger"
+        >
+          <span *ngIf="f['cni'].errors.required"> Cni obligatoire. </span>
         </div>
       </div>
 
       <div class="form-group">
         <label>Adresse</label>
-        <input type="text" class="form-control" formControlName="adresse" name="adresse" id="adresse" placeholder="Addresse employé">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="adresse"
+          name="adresse"
+          id="adresse"
+          placeholder="Addresse employé"
+        />
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
           <label>Telephone</label>
-          <input type="text" class="form-control" formControlName="telephone" name="telephone" id="telephone" placeholder="00 000 00 00">
-          <div *ngIf="f['telephone'].invalid && (f['telephone'].dirty || f['telephone'].touched)" class="alert alert-danger">
-            <span *ngIf="f['telephone'].errors.required">Le numéro de Téléphone est obligatoire.</span>
-            <span *ngIf="f['telephone'].errors?.pattern">SVP, Entrez un numéro Telephone est valide et doit contenir 9 caractère..</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="telephone"
+            name="telephone"
+            id="telephone"
+            placeholder="00 000 00 00"
+          />
+          <div
+            *ngIf="
+              f['telephone'].invalid &&
+              (f['telephone'].dirty || f['telephone'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <span *ngIf="f['telephone'].errors.required"
+              >Le numéro de Téléphone est obligatoire.</span
+            >
+            <span *ngIf="f['telephone'].errors?.pattern"
+              >SVP, Entrez un numéro Telephone est valide et doit contenir 9
+              caractère..</span
+            >
           </div>
         </div>
 
         <div class="form-group col-md-6">
           <label>Telephone2</label>
-          <input type="text" class="form-control" formControlName="telephone2" name="telephone2" id="telephone2" placeholder="00 000 00 00">
-          <div *ngIf="f['telephone2'].invalid && (f['telephone2'].dirty || f['telephone2'].touched)" class="alert alert-danger">
-            <span *ngIf="f['telephone2'].errors?.pattern">SVP, Entrez un numéro Telephone est valide et doit contenir 9 caractère..</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="telephone2"
+            name="telephone2"
+            id="telephone2"
+            placeholder="00 000 00 00"
+          />
+          <div
+            *ngIf="
+              f['telephone2'].invalid &&
+              (f['telephone2'].dirty || f['telephone2'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <span *ngIf="f['telephone2'].errors?.pattern"
+              >SVP, Entrez un numéro Telephone est valide et doit contenir 9
+              caractère..</span
+            >
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" formControlName="email" id="email" placeholder="client@gmail.com">
-        <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="alert alert-danger">
-          <span *ngIf="f['email'].errors?.pattern">SVP, Donnez un email valide.</span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="email"
+          id="email"
+          placeholder="client@gmail.com"
+        />
+        <div
+          *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)"
+          class="alert alert-danger"
+        >
+          <span *ngIf="f['email'].errors?.pattern"
+            >SVP, Donnez un email valide.</span
+          >
         </div>
       </div>
 
       <div class="form-group">
-        <button type="submit"
+        <button
+          type="submit"
           class="btn btn-success"
           [disabled]="!this.crudApi.dataForm.valid"
-        ><em class="fa fa-database"></em> Enregistrer </button>&nbsp;
+        >
+          <em class="fa fa-database"></em> Enregistrer</button
+        >&nbsp;
         <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
-          <em class="fa fa-close"></em> Fermer </button>
+          <em class="fa fa-close"></em> Fermer
+        </button>
       </div>
-
     </form>
   </div>
 </div>
-
-
-
