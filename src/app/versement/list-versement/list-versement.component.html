@@ -57,7 +57,7 @@
               >&nbsp;&nbsp;
             </a>
           </td>
-          <td>{{ versmnt.dateVersement}}</td>
+          <td>{{ versmnt.dateVersement |  date: 'dd-MM-yyyy à hh:mm:ss'}}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewVersement(i)">
               <i class="fa fa-eye" aria-hidden="true"></i></button

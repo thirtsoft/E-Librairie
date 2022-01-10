@@ -60,8 +60,8 @@
               >&nbsp;&nbsp;
             </a>
           </td>
-          <td>{{ cont.dateDebutContrat }}</td>
-          <td>{{ cont.dateFinContrat }}</td>
+          <td>{{ cont.dateDebutContrat | date:'dd-MM-yyyy' }}</td>
+          <td>{{ cont.dateFinContrat | date:'dd-MM-yyyy' }}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewContrat(i)">
               <i class="fa fa-eye" aria-hidden="true"></i></button
