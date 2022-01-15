@@ -1,3 +1,4 @@
+import { OrangeSMSapiService } from './../../services/orange-smsapi.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
 import { SmsService } from 'src/app/services/sms.service';
@@ -14,7 +15,9 @@ import { ToastrService } from 'ngx-toastr';
 export class EnvoiSMSClientComponent implements OnInit {
 
   constructor(public crudApi: ClientService,
-              private smsService: SmsService ,public fb: FormBuilder,
+              private smsService: SmsService,
+              private sendSMSservice: OrangeSMSapiService,
+              public fb: FormBuilder,
               public toastr: ToastrService, private router : Router,
               @Inject(MAT_DIALOG_DATA)  public data,
               public dialogRef:MatDialogRef<EnvoiSMSClientComponent>,
@@ -36,7 +39,7 @@ export class EnvoiSMSClientComponent implements OnInit {
 
 
   onSubmit() {
-    this.smsService.sendSMSToCustomer(this.crudApi.dataForm.value).
+    this.sendSMSservice.sendSMS(this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
@@ -47,5 +50,18 @@ export class EnvoiSMSClientComponent implements OnInit {
       this.router.navigate(['/home/clients']);
     });
   }
+
+ /*  onSubmit() {
+    this.smsService.sendSMSToCustomer(this.crudApi.dataForm.value).
+    subscribe( data => {
+      this.dialogRef.close();
+      this.crudApi.filter('Register click');
+      this.toastr.success('avec succès','Sms Envoyé', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+      this.router.navigate(['/home/clients']);
+    });
+  } */
 
 }

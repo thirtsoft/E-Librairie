@@ -235,7 +235,7 @@
               >Employee</a
             >
           </li>
-          <li *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard )">
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               routerLink="/home/utilisateurs"
@@ -243,7 +243,7 @@
               >Utilisateur</a
             >
           </li>
-          <li *ngIf="(showManagerBoard || showAdminBoard)">
+          <li *ngIf="!showGerantBoard && !showVendeurBoard">
             <a
               class=""
               routerLink="/register"

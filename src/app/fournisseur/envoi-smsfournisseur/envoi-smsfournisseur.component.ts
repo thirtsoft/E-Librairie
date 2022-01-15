@@ -1,3 +1,4 @@
+import { OrangeSMSapiService } from './../../services/orange-smsapi.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { FournisseurService } from 'src/app/services/fournisseur.service';
@@ -13,11 +14,14 @@ import { SmsService } from 'src/app/services/sms.service';
 })
 export class EnvoiSMSFournisseurComponent implements OnInit {
 
-  constructor(public crudApi: FournisseurService, private smsService: SmsService ,public fb: FormBuilder,
-    public toastr: ToastrService, private router : Router,
-    @Inject(MAT_DIALOG_DATA)  public data,
-    public dialogRef:MatDialogRef<EnvoiSMSFournisseurComponent>,
-    ) { }
+  constructor(public crudApi: FournisseurService, 
+              private smsService: SmsService,
+              private sendSMSservice: OrangeSMSapiService,
+              public fb: FormBuilder,
+              public toastr: ToastrService, private router : Router,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<EnvoiSMSFournisseurComponent>,
+  ) { }
 
   ngOnInit() {
     if (this.crudApi.choixmenu == "A"){
@@ -33,10 +37,10 @@ export class EnvoiSMSFournisseurComponent implements OnInit {
 
     });
 
-  }
+  } 
 
 
-  onSubmit() {
+ /*  onSubmit() {
     this.smsService.sendSMSToFournisseur(this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
@@ -44,6 +48,16 @@ export class EnvoiSMSFournisseurComponent implements OnInit {
       this.toastr.success("Sms Envoyé avec Succès");
     //  this.getListFournisseurs();
       this.router.navigate(['/fournisseurs']);
+    });
+  } */
+
+  onSubmit() {
+    this.sendSMSservice.sendSMS(this.crudApi.dataForm.value).
+    subscribe( data => {
+      this.dialogRef.close();
+      this.crudApi.filter('Register click');
+      this.toastr.success("Sms Envoyé avec Succès");
+      this.router.navigate(['home/fournisseurs']);
     });
   }
 
