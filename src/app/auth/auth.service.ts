@@ -30,16 +30,16 @@ const httpOptions = {
 })
 export class AuthService {
 
-  baseUrl_1 = environment.apiBaseUrl;
+ // baseUrl_1 = environment.apiBaseUrl;
 
- // loginUrl = "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/auth/signIn";
+  loginUrl = "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/auth/signIn";
 
-  loginUrl = "http://localhost:8081/gestionstock-alamine/v1/auth/signIn";
+//  loginUrl = "http://localhost:8081/gestionstock-alamine/v1/auth/signIn";
 
 
 //  loginUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/auth/signIn";
 
- // baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;

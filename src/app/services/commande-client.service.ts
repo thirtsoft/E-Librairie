@@ -16,9 +16,9 @@ import { environment } from 'src/environments/environment';
 })
 export class CommandeClientService {
 
-  baseUrl_1 = environment.apiBaseUrl;
+//  baseUrl_1 = environment.apiBaseUrl;
 
-//  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
  // baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
@@ -84,9 +84,6 @@ export class CommandeClientService {
     return this.http.get(`${this.baseUrl_1}/commandes/findById/`+id).toPromise();
   }
 
-  /* createCommandeClient(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/commandesClientes`, info);
-  } */
 
   createCommandeClient() {
     var body = {
