@@ -230,7 +230,7 @@ export class ViewVente2Component implements OnInit {
           italics: true
         },
         ligne: {
-          fontSize: 11,
+          fontSize: 10,
           bold: true,
           italics: true
         },
@@ -241,7 +241,7 @@ export class ViewVente2Component implements OnInit {
         },
         tableHeader: {
           bold: true,
-          fontSize: 11,
+          fontSize: 10,
           alignment: 'center'
         },
 
@@ -255,7 +255,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.8, 60, 'auto', 50],
+        widths: [0.8, 65, 'auto', 50],
 
         body: [
           [
