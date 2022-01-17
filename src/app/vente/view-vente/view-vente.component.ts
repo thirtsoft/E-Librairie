@@ -140,16 +140,12 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 12,
           bold: true,
           alignment: 'center',
           color: '#0000ff'
         },
-        {
-
-        },
-
 
         {
 
@@ -283,7 +279,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
     };
 
   }
-  
+
   getListLigneVentes(item: LigneVente[]) {
     return {
       table: {

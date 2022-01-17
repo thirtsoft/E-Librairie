@@ -136,7 +136,7 @@ export class ViewVente2Component implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél : +221 77 729 94 22',
+          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 7,
     //      alignment: 'center',
           color: '#0000ff'
@@ -223,16 +223,16 @@ export class ViewVente2Component implements OnInit {
         //  decoration: 'underline'
         },
         name: {
-          fontSize: 14,
+          fontSize: 12,
         //  bold: true
         },
         total: {
-          fontSize: 14,
+          fontSize: 12,
           bold: true,
           italics: true
         },
         ligne: {
-          fontSize: 12,
+          fontSize: 11,
           bold: true,
           italics: true
         },
@@ -243,7 +243,7 @@ export class ViewVente2Component implements OnInit {
         },
         tableHeader: {
           bold: true,
-          fontSize: 12,
+          fontSize: 11,
           alignment: 'center'
         },
 
@@ -257,7 +257,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.8, 90, 'auto', 50],
+        widths: [0.8, 60, 'auto', 50],
 
         body: [
           [

@@ -161,7 +161,7 @@ export class ViewCreanceComponent implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 729 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 10,
           bold: true,
           alignment: 'center',
