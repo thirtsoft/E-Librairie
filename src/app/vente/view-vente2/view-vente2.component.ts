@@ -123,7 +123,7 @@ export class ViewVente2Component implements OnInit {
       content: [
         {
           text: 'AL AMINE SEDHIOU',
-          fontSize: 8,
+          fontSize: 10,
         //  alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -131,7 +131,7 @@ export class ViewVente2Component implements OnInit {
           bold: true
         },
         {
-          text: 'BIGNONA EN FACE CBEAO',
+          text: 'SEDHIOU EN FACE CBEAO',
           fontSize: 7,
       //    alignment: 'center',
           color: '#0000ff'
@@ -143,44 +143,17 @@ export class ViewVente2Component implements OnInit {
           color: '#0000ff'
         },
 
-
-      /*   {
-          columns: [
-
-            [
-              {
-                text: `${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
-              //  alignment: 'right',
-                margin: [0, 15, 0, 15]
-              },
-            ],
-
-            [
-              {
-                text: `${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
-                fontSize: 12,
-                bold: true,
-                margin: [0, 15, 0, 15]
-              },
-
-            ],
-
-
-
-          ]
-        }, */
-
         {
           text: `Le ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
         //  alignment: 'right',
-          fontSize: 7,
+          fontSize: 9,
           margin: [3, 7, 0, 7]
         },
 
         {
           text: `${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
           margin: [0, 5, 0, 5],
-          fontSize: 7,
+          fontSize: 9,
         },
 
         {
@@ -188,14 +161,14 @@ export class ViewVente2Component implements OnInit {
       //    alignment: 'center',
           color: '#0000ff',
           margin: [4, 4, 0, 4],
-          fontSize: 7,
+          fontSize: 8,
         },
         {
           text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
         //  alignment: 'center',
           color: '#0000ff',
           margin: [5, 5, 5, 5],
-          fontSize: 7,
+          fontSize: 8,
         },
 
         {
@@ -208,9 +181,10 @@ export class ViewVente2Component implements OnInit {
         },
 
         {
+          layout: 'lightHorizontalLines',
           text: `TOTAL CFA : ${this.lventeService.listData[0].vente.totalVente}`,
           margin: [0, 5, 0, 5],
-          fontSize: 8,
+          fontSize: 10,
           colSpan: 2,
           bold: true
         },
@@ -219,8 +193,8 @@ export class ViewVente2Component implements OnInit {
           text: ''
            + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
            margin: [0, 5, 0, 5],
-          fontSize: 8,
-          colSpan: 2,
+          fontSize: 10,
+          colSpan: 3,
           bold: true
 
         },
@@ -229,7 +203,7 @@ export class ViewVente2Component implements OnInit {
           text: 'Rendu : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
            margin: [0, 5, 0, 5],
-          fontSize: 8,
+          fontSize: 10,
           colSpan: 2,
           bold: true
         },
@@ -245,13 +219,13 @@ export class ViewVente2Component implements OnInit {
 
       styles: {
         header: {
-          fontSize: 14,
+          fontSize: 12,
           bold: true,
           margin: [0, 10, 0],
         //  decoration: 'underline'
         },
         name: {
-          fontSize: 14,
+          fontSize: 10,
           bold: true
         },
         total: {
@@ -271,7 +245,7 @@ export class ViewVente2Component implements OnInit {
         },
         tableHeader: {
           bold: true,
-          fontSize: 14,
+          fontSize: 12,
           alignment: 'center'
         },
 
@@ -319,14 +293,6 @@ export class ViewVente2Component implements OnInit {
 
 
 
-
-         /*  [
-            {
-              text: 'Montant Total',
-              colSpan: 2
-            }, {}, {},
-            this.lventeService.listData.reduce((sum, x)=> sum + (x.quantite * x.prixVente), 0).toFixed(2)
-          ] */
         ]
       }
     }
