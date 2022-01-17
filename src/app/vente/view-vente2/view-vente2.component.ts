@@ -124,7 +124,6 @@ export class ViewVente2Component implements OnInit {
         {
           text: 'AL AMINE SEDHIOU',
           fontSize: 9,
-        //  alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
           style: 'name',
@@ -138,7 +137,6 @@ export class ViewVente2Component implements OnInit {
         {
           text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
           fontSize: 7,
-    //      alignment: 'center',
           color: '#0000ff'
         },
 
