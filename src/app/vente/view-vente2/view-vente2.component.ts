@@ -217,17 +217,17 @@ export class ViewVente2Component implements OnInit {
 
       styles: {
         header: {
-          fontSize: 12,
-          bold: true,
+          fontSize: 14,
+       //   bold: true,
           margin: [0, 10, 0],
         //  decoration: 'underline'
         },
         name: {
-          fontSize: 10,
-          bold: true
+          fontSize: 14,
+        //  bold: true
         },
         total: {
-          fontSize: 12,
+          fontSize: 14,
           bold: true,
           italics: true
         },
@@ -257,7 +257,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.3, 90, 'auto', 50],
+        widths: [0.3, 50, 'auto', 50],
 
         body: [
           [
