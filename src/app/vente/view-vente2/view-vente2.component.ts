@@ -179,7 +179,7 @@ export class ViewVente2Component implements OnInit {
         {
           layout: 'lightHorizontalLines',
           text: `TOTAL CFA : ${this.lventeService.listData[0].vente.totalVente}`,
-          margin: [0, 5, 0, 5],
+          margin: [10, 0, 0, 7],
       //    fontSize: 10,
           colSpan: 2,
           bold: true
@@ -255,7 +255,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.8, 65, 'auto', 50],
+        widths: [0.5, 63.8, 'auto', 50],
 
         body: [
           [
