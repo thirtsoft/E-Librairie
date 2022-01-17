@@ -133,7 +133,6 @@ export class ViewVente2Component implements OnInit {
         {
           text: 'ROUTE DU BAC EN FACE DU CRF SEDHIOU',
           fontSize: 8,
-      //    alignment: 'center',
           color: '#0000ff'
         },
         {
@@ -145,7 +144,6 @@ export class ViewVente2Component implements OnInit {
 
         {
           text: `Le ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
-        //  alignment: 'right',
           fontSize: 9,
           margin: [3, 7, 0, 7]
         },
