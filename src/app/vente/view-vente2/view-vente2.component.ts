@@ -118,7 +118,7 @@ export class ViewVente2Component implements OnInit {
 
   getDocument() {
     return {
-      pageSize: { width: 196.55, height: 'auto' },
+      pageSize: { width: 198.55, height: 'auto' },
       pageMargins: [0.5, 0, 0, 0.5 ],
       content: [
         {
@@ -131,20 +131,20 @@ export class ViewVente2Component implements OnInit {
           bold: true
         },
         {
-          text: 'ROUTE DU BAC EN FACE DU CRF SEDHIOU',
-          fontSize: 8,
+          text: 'ROUTE BAC EN FACE CRF SEDHIOU',
+          fontSize: 7,
           color: '#0000ff'
         },
         {
           text: 'Tél : +221 77 729 94 22',
-          fontSize: 8,
+          fontSize: 7,
     //      alignment: 'center',
           color: '#0000ff'
         },
 
         {
           text: `Le ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
-          fontSize: 9,
+          fontSize: 7,
           margin: [3, 7, 0, 7]
         },
 
@@ -159,7 +159,7 @@ export class ViewVente2Component implements OnInit {
       //    alignment: 'center',
           color: '#0000ff',
           margin: [4, 4, 0, 4],
-          fontSize: 9,
+        //  fontSize: 9,
         },
         {
           text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
@@ -257,7 +257,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.3, 50, 'auto', 50],
+        widths: [0.8, 90, 'auto', 50],
 
         body: [
           [
