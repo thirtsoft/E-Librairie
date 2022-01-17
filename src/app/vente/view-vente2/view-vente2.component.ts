@@ -131,7 +131,7 @@ export class ViewVente2Component implements OnInit {
           bold: true
         },
         {
-          text: 'SEDHIOU EN FACE CBEAO',
+          text: 'SEDHIOU ROUTE PREFECTURE',
           fontSize: 7,
       //    alignment: 'center',
           color: '#0000ff'
