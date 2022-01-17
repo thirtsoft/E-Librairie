@@ -43,8 +43,6 @@ export class ViewApprovisionnementComponent implements OnInit {
 
   produit: Produit = new Produit();
 
-  private editForm: FormGroup;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -54,7 +52,6 @@ export class ViewApprovisionnementComponent implements OnInit {
               public toastr: ToastrService,
               private router : Router,
               private datePipe : DatePipe,
-              private matDialog: MatDialog,
               public lapproService: LigneApproService,
               private route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -152,8 +149,8 @@ export class ViewApprovisionnementComponent implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 12,
+          text: 'Tél: +221 77 729 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 10,
           bold: true,
           alignment: 'center',
           color: '#0000ff'
@@ -165,18 +162,6 @@ export class ViewApprovisionnementComponent implements OnInit {
 
         {
           columns: [
-
-           /*  [
-              {
-                text: `APPROVISIONNEMENT N° : ${this.lapproService.listData[0].numero}`,
-                fontSize: 14,
-                bold: true,
-                margin: [0, 15, 0, 15]
-
-              },
-
-            ], */
-
             [
               {
                 text: `Date: ${this.lapproService.listData[0].approvisionnement.dateApprovisionnement.toLocaleString()}`,
@@ -205,7 +190,6 @@ export class ViewApprovisionnementComponent implements OnInit {
         },
         {
           bold:true,
-       //   text: 'Fournisseur  : ' +[(this.lapproService.listData[0].approvisionnement.fournisseur.prenom)+" "+(this.lapproService.listData[0].approvisionnement.fournisseur.nom)],
           text: 'Fournisseur  : ' +[this.lapproService.listData[0].approvisionnement.fournisseur.raisonSociale],
           alignment: 'left',
           margin: [0, 8, 0, 8]
@@ -290,10 +274,6 @@ export class ViewApprovisionnementComponent implements OnInit {
             },
 
           ],
-         /*  item.map(x => {
-            return ([x.quantite, x.produit.designation, x.prix,
-              (x.quantite*x.prix).toFixed(2)])
-          }), */
 
           ...item.map(x => {
             return ([x.quantite, x.produit.designation, x.prix,

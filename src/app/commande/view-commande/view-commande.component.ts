@@ -157,7 +157,7 @@ export class ViewCommandeComponent implements OnInit {
 
             [
               {
-                text: `Agent : ${this.lcmdService.listData[0].commande.utilisateur.name}`,
+                text: `${this.lcmdService.listData[0].commande.utilisateur.name}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]

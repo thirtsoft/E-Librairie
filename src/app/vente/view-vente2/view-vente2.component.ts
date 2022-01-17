@@ -123,11 +123,12 @@ export class ViewVente2Component implements OnInit {
       content: [
         {
           text: 'AL AMINE SEDHIOU',
-          fontSize: 7,
+          fontSize: 8,
         //  alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
           style: 'name',
+          bold: true
         },
         {
           text: 'BIGNONA EN FACE CBEAO',
@@ -172,12 +173,14 @@ export class ViewVente2Component implements OnInit {
         {
           text: `Le ${this.lventeService.listData[0].vente.dateVente.toLocaleString()}`,
         //  alignment: 'right',
+          fontSize: 7,
           margin: [3, 7, 0, 7]
         },
 
         {
           text: `${this.lventeService.listData[0].vente.utilisateur.name.toLowerCase()}`,
-          margin: [0, 5, 0, 5]
+          margin: [0, 5, 0, 5],
+          fontSize: 7,
         },
 
         {
@@ -185,14 +188,14 @@ export class ViewVente2Component implements OnInit {
       //    alignment: 'center',
           color: '#0000ff',
           margin: [4, 4, 0, 4],
-          fontSize: 6,
+          fontSize: 7,
         },
         {
           text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
         //  alignment: 'center',
           color: '#0000ff',
           margin: [5, 5, 5, 5],
-          fontSize: 6,
+          fontSize: 7,
         },
 
         {
@@ -206,8 +209,8 @@ export class ViewVente2Component implements OnInit {
 
         {
           text: `TOTAL CFA : ${this.lventeService.listData[0].vente.totalVente}`,
-          margin: [5, 0, 0, 2],
-          fontSize: 7,
+          margin: [0, 5, 0, 5],
+          fontSize: 8,
           colSpan: 2,
           bold: true
         },
@@ -215,8 +218,8 @@ export class ViewVente2Component implements OnInit {
         {
           text: ''
            + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
-          margin: [2, 0, 0, 2],
-          fontSize: 7,
+           margin: [0, 5, 0, 5],
+          fontSize: 8,
           colSpan: 2,
           bold: true
 
@@ -225,19 +228,16 @@ export class ViewVente2Component implements OnInit {
         {
           text: 'Rendu : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
-          margin: [1, 0, 0, 1],
-          fontSize: 7,
+           margin: [0, 5, 0, 5],
+          fontSize: 8,
           colSpan: 2,
           bold: true
         },
 
         {
-          text: 'MERCI DE VOTRE CONFIANCE !!!',
-      //    style: 'sign',
-      //    alignment: 'center',
-          margin: [10, 0, 0, 7],
-    //      bold: true,
-      //    fontSize: 5,
+          text: 'Merci de Votre Confiance !!!',
+          margin: [0, 5, 0, 5],
+          fontSize: 7
         },
 
 
@@ -285,7 +285,7 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.5, 90, 'auto', 50],
+        widths: [0.3, 90, 'auto', 50],
 
         body: [
           [

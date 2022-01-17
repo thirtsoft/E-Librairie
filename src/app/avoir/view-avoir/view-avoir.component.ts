@@ -144,8 +144,8 @@ export class ViewAvoirComponent implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: 77109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 12,
+          text: 'Tél: +221 77 729 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 10,
           bold: true,
           alignment: 'center',
           color: '#0000ff'
@@ -154,22 +154,8 @@ export class ViewAvoirComponent implements OnInit {
 
         },
 
-
-        {},
-
         {
           columns: [
-
-           /*  [
-              {
-                text: `AVOIR N° : ${this.lavoirService.listData[0].numero}`,
-                fontSize: 12,
-                bold: true,
-                margin: [0, 15, 0, 15]
-              },
-
-            ], */
-
             [
               {
                 text: `Date: ${this.lavoirService.listData[0].avoir.dateAvoir.toLocaleString()}`,

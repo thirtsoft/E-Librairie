@@ -12,9 +12,9 @@ import { TokenStorageService } from './token-storage.service';
 import { IUser } from '../models/utilisateur';
 import { environment } from 'src/environments/environment';
 
-const AUTH_API = 'http://localhost:8081/gestionstock-alamine/v1/';
+//const AUTH_API = 'http://localhost:8081/gestionstock-alamine/v1/';
 
-//const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/';
+const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/';
 
 //const AUTH_API  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/';
 

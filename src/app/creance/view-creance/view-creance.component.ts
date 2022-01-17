@@ -39,8 +39,6 @@ export class ViewCreanceComponent implements OnInit {
   produit: Produit = new Produit();
   username = '';
 
-  private editForm: FormGroup;
-
   @ViewChild('content') content: ElementRef;
 
   dtOptions: DataTables.Settings = {};
@@ -144,7 +142,7 @@ export class ViewCreanceComponent implements OnInit {
       content: [
         {
           text: 'AL AMINE',
-          fontSize: 50,
+          fontSize: 46,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
@@ -163,8 +161,8 @@ export class ViewCreanceComponent implements OnInit {
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 12,
+          text: 'Tél: +221 77 729 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          fontSize: 10,
           bold: true,
           alignment: 'center',
           color: '#0000ff'
@@ -173,14 +171,12 @@ export class ViewCreanceComponent implements OnInit {
 
         },
 
-        {},
-
         {
           columns: [
 
             [
               {
-                text: `Agent : ${this.lcreanceService.listData[0].creance.utilisateur.name}`,
+                text: `${this.lcreanceService.listData[0].creance.utilisateur.name}`,
                 fontSize: 12,
                 bold: true,
                 margin: [0, 15, 0, 15]
@@ -339,10 +335,6 @@ export class ViewCreanceComponent implements OnInit {
               (x.quantite*x.prix).toFixed(2)])
           }),
 
-         /*  item.map(x => {
-            return ([x.quantite, x.produit.designation, x.prix,
-              (x.quantite*x.prix).toFixed(2)])
-          }), */
           [
             {
               text: 'MONTANT TOTAL',
