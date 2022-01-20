@@ -88,13 +88,18 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     this.crudApi.getAllCreancesOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
+        console.log(this.crudApi.listData);
+        console.log(this.crudApi.listData.length);
         for (let i=0; i<this.crudApi.listData.length; i++) {
           this.endDate = new Date(this.crudApi.listData[i].dateCreance);
-          this.numberDay = this.crudApi.listData[i].nbreJours
+          this.numberDay = this.crudApi.listData[i].nbreJours;
+          console.log("jour : " +this.numberDay);
           console.log("End Date : " +this.endDate);
+        //  this.dateResult = new Date();
+        //  console.log(this.endDate.setDate((this.endDate.getDate())+(this.numberDay)));
         //  this.dateResult.setDate((this.endDate.getDate())+(this.numberDay));
-          this.dateResult = new Date(this.endDate);
-          this.dateResult2 = new Date(this.dateResult.setDate(this.dateResult.getDate() + this.numberDay));
+          this.dateResult = new Date(this.endDate.setDate(this.endDate.getDate() + this.numberDay));
+          this.dateResult2 = this.dateResult;
           console.log("Data Result : " +this.dateResult2);
 
         }

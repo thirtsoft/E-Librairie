@@ -62,9 +62,9 @@
           </td>
           <td>{{ cont.nbreJours }}</td>
 
-          <td>{{ cont.dateCreance }}</td>
+          <td>{{ cont.dateCreance | date:'dd-MM-yyyy' }}</td>
 
-          <td>{{ this.dateResult2 }}</td>
+          <td>{{ this.dateResult2 | date:'dd-MM-yyyy' }}</td>
 
           <td>
             <button class="btn btn-success btn-sm" (click)="viewCreance(cont)">
