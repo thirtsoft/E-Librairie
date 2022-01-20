@@ -1,57 +1,30 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-2">
     <h3>Détails Fournisseur</h3>
-    <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label>Code</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="code"
-            name="code"
-            id="code"
-            readonly
-          />
-        </div>
-
-        <div class="form-group col-md-6">
-          <label>Raison Sociale</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="raisonSociale"
-            name="raisonSociale"
-            id="raisonSociale"
-            readonly
-          />
-        </div>
+    <form [formGroup]="this.crudApi.dataForm">
+      <div class="form-group">
+        <label>Code</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="code"
+          name="code"
+          id="code"
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label>Raison Sociale</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="raisonSociale"
+          name="raisonSociale"
+          id="raisonSociale"
+          readonly
+        />
       </div>
 
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label>Bank</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="nomBank"
-            name="nomBank"
-            id="nomBank"
-            readonly
-          />
-        </div>
-        <div class="form-group col-md-6">
-          <label>Compte</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="numeroCompte"
-            name="numeroCompte"
-            id="numeroCompte"
-            readonly
-          />
-        </div>
-      </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Adresse</label>
@@ -64,22 +37,21 @@
             readonly
           />
         </div>
-
         <div class="form-group col-md-6">
-          <label>Fax</label>
+          <label>Mobile</label>
           <input
             type="text"
             class="form-control"
-            formControlName="fax"
-            name="fax"
-            id="fax"
+            formControlName="mobile"
+            name="mobile"
+            id="mobile"
             readonly
           />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Telephone</label>
+        <label>Telephone Fixe</label>
         <input
           type="text"
           class="form-control"

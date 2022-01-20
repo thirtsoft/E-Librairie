@@ -36,24 +36,22 @@ export class CreateFournisseurComponent implements OnInit {
     const validatorString = '^[a-zA-Z,.!?\\s-]*$';
     this.crudApi.dataForm = this.fb.group({
       id: null,
-      code: ['FOUR_1' + Date.now() + (Math.random()*10).toFixed(), [Validators.required]],
-      raisonSociale: ['', [Validators.required, Validators.pattern(validatorString)]],
-      nomBank: '',
-      numeroCompte: '',
+      code: ['FOUR_' + Date.now() + (Math.random()*1000).toFixed(), [Validators.required]],
+      raisonSociale: ['', [Validators.required]],
       adresse: '',
       telephone: '',
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
-      fax: '',
-      email: ['', ['', Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
+      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
     });
-
   }
 
   getListFournisseurs() {
-    this.crudApi.getAllFournisseurs().subscribe(
-      response =>{this.listData = response;}
-    );
-
+    this.crudApi.getAllFournisseursOrderDesc()
+      .subscribe(
+        response =>{
+          this.listData = response;
+        }
+      );
   }
 
   ResetForm() {
@@ -67,10 +65,9 @@ export class CreateFournisseurComponent implements OnInit {
       }else{
         this.updateFournisseur();
       }
-    }else {
+    } else {
       return;
     }
-
   }
 
   saveFournisseur() {
@@ -78,12 +75,14 @@ export class CreateFournisseurComponent implements OnInit {
     subscribe( data => {
       this.dialogRef.close();
       this.crudApi.filter('Register click');
-      this.toastr.success("Fournisseur Ajouté avec Succès");
-      this.getListFournisseurs();
+      this.toastr.success('avec succès','Fournisseur Ajouté', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
       this.router.navigate(['/home/fournisseurs']);
     },
-      (error: HttpErrorResponse) => {
-      this.toastr.error("Ce Fournisseur exist déjà, veuillez changez le code");
+    (error: HttpErrorResponse) => {
+      this.toastr.error("Champs vides, veuillez remplir tous les champs");
       }
     );
   }
@@ -92,13 +91,13 @@ export class CreateFournisseurComponent implements OnInit {
     this.crudApi.updateFournisseur(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
-      this.toastr.success("Fournisseur Modifier avec Succès");
+      this.toastr.warning('avec succès','Fournisseur Modifié', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
       this.crudApi.filter('Register click');
-      this.getListFournisseurs();
       this.router.navigate(['/home/fournisseurs']);
     });
   }
-
-
 
 }

@@ -1,90 +1,48 @@
-<div class="row">
-  <div class="col-md-10 col-md-offset-2">
+<div class="row justify-content-center">
+  <div class="col-md-8 col-md-offset-2">
     <h3>Nouveau Fournisseur</h3>
     <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
       <input type="hidden" formControlName="id" id="id" />
-
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label>Code</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="code"
-            name="code"
-            id="code"
-            placeholder="Code unique du fournisseur"
-          />
-          <div
-            *ngIf="f['code'].invalid && (f['code'].dirty || f['code'].touched)"
-            class="alert alert-danger"
+      <div class="form-group">
+        <label>code Fournisseur</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="code"
+          id="code"
+          placeholder="Code du client"
+        />
+        <div
+          *ngIf="
+            f['code'].invalid &&
+            (f['code'].dirty || f['code'].touched)
+          "
+          class="alert alert-danger"
+        >
+          <span *ngIf="f['code'].errors.required"
+            >Code fournisseur obligatoire.</span
           >
-            <span *ngIf="f['code'].errors.required"> Code obligatoire. </span>
-          </div>
-        </div>
-
-        <div class="form-group col-sm-6">
-          <label>Fax</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="fax"
-            name="fax"
-            id="fax"
-            placeholder="fax du fournisseur"
-          />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Raison Sociale / Prénom&Nom</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="raisonSociale"
-          name="raisonSociale"
-          id="raisonSociale"
-          placeholder="Raison social fournisseur"
-        />
-        <div
-          *ngIf="
-            f['raisonSociale'].invalid &&
-            (f['raisonSociale'].dirty || f['raisonSociale'].touched)
-          "
-          class="alert alert-danger"
-        >
-          <span *ngIf="f['raisonSociale'].errors?.pattern"
-            >SVP, La raison social doit contenir que des lettres..</span
+          <label>Raison Social / Prénom et Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="raisonSociale"
+            id="raisonSociale"
+            placeholder="Raison social du client"
+          />
+          <div
+            *ngIf="
+              f['raisonSociale'].invalid &&
+              (f['raisonSociale'].dirty || f['raisonSociale'].touched)
+            "
+            class="alert alert-danger"
           >
-        </div>
-      </div>
+          </div>
 
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label>Bank</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="nomBank"
-            name="nomBank"
-            id="nomBank"
-            placeholder="Banque du fournisseur"
-          />
-
-        </div>
-
-        <div class="form-group col-sm-6">
-          <label>Compte</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="numeroCompte"
-            name="numeroCompte"
-            id="numeroCompte"
-            placeholder="compte du fournisseur"
-          />
-
-        </div>
       </div>
 
       <div class="row">
@@ -94,9 +52,8 @@
             type="text"
             class="form-control"
             formControlName="adresse"
-            name="adresse"
             id="adresse"
-            placeholder="Address du fournisseur"
+            placeholder="Addresse du fournisseur"
           />
 
         </div>
@@ -109,7 +66,7 @@
             formControlName="telephone"
             name="telephone"
             id="telephone"
-            placeholder="773459821"
+            placeholder="00 000 00 00"
           />
 
         </div>
@@ -124,7 +81,7 @@
             formControlName="mobile"
             name="mobile"
             id="mobile"
-            placeholder="773459821"
+            placeholder="00 000 00 00"
           />
           <div
             *ngIf="
@@ -133,25 +90,30 @@
             class="alert alert-danger"
           >
             <span *ngIf="f['mobile'].errors.required"
-              >Le numéro de Téléphone mobile est obligatoire.</span
+              >Le numéro de Téléphone est obligatoire.</span
             >
             <span *ngIf="f['mobile'].errors?.pattern"
-              >SVP, Entrez un numéro mobile est valide et doit contenir 9
+              >SVP, Entrez un numéro Telephone est valide et doit contenir 9
               caractère..</span
             >
           </div>
         </div>
 
         <div class="form-group col-sm-6">
-          <label for="email">Email</label>
+          <label for="email">email</label>
           <input
             type="email"
             class="form-control"
             formControlName="email"
             id="email"
-            placeholder="fournisseur@gmail.com"
+            placeholder="client@gmail.com"
           />
-          <div>
+          <div
+            *ngIf="
+              f['email'].invalid && (f['email'].dirty || f['email'].touched)
+            "
+            class="alert alert-danger"
+          >
             <span *ngIf="f['email'].errors?.pattern"
               >SVP, Donnez un email valide.</span
             >
@@ -165,7 +127,7 @@
           class="btn btn-success"
           [disabled]="!this.crudApi.dataForm.valid"
         >
-          <em class="fa fa-database"></em> Enregistrer</button
+          <em class="fa fa-database"></em> Enregirtrer </button
         >&nbsp;
         <button type="button" class="btn btn-danger ml-1" [mat-dialog-close]>
           <em class="fa fa-close"></em> Fermer

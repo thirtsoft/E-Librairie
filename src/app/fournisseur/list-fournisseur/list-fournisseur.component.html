@@ -25,9 +25,8 @@
     >
       <thead>
         <tr>
+          <th>#</th>
           <th>Fournisseur</th>
-          <th>Numero Compte</th>
-          <th>NomBank</th>
           <th>Mobile</th>
           <th>Email</th>
           <th>Action</th>
@@ -35,33 +34,33 @@
       </thead>
       <tbody>
         <tr *ngFor="let four of crudApi.listData; let i = index">
+          <td>{{ four.id }}</td>
           <td>{{ four.raisonSociale }}</td>
-          <td>{{ four.numeroCompte }}</td>
-          <td>{{ four.nomBank }}</td>
           <td>{{ four.mobile }}</td>
           <td>{{ four.email }}</td>
+                  
           <td>
-            <button class="btn btn-warning btn-sm" (click)="envoiEmail(four)">
+            <button class="btn btn-warning btn-lg" (click)="envoiEmail(four)">
               <i class="fa fa-envelope" aria-hidden="true"></i></button
             >&nbsp;
-            <button class="btn btn-primary btn-sm" (click)="envoiSMS(four)">
+            <button class="btn btn-primary btn-lg" (click)="envoiSMS(four)">
               <i class="fa fa-mobile" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              class="btn btn-success btn-sm"
+              class="btn btn-success btn-lg"
               (click)="viewFournisseur(four)"
             >
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button
               *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
-              class="btn btn-info btn-sm"
+              class="btn btn-info btn-lg"
               (click)="editFournisseur(four)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
             *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
-              class="btn btn-danger btn-sm"
+              class="btn btn-danger btn-lg"
               (click)="deleteFournisseur(four.id)"
             >
               <em class="fa fa-trash-o"></em>
