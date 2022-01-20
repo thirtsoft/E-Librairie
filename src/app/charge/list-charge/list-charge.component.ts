@@ -1,3 +1,4 @@
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Component, OnInit, OnDestroy, Inject, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Charge } from 'src/app/models/charge';
@@ -38,7 +39,10 @@ export class ListChargeComponent implements OnDestroy, OnInit {
   showGerantBoard = false;
   showVendeurBoard = false;
 
+  sumTotalOfChargebyYear;
+
   constructor(public crudApi: ChargeService,
+              public dashboarservice: DashboardService,
               private dialogService: DialogService,
               public toastr: ToastrService,
               private tokenService: TokenStorageService,
@@ -76,12 +80,15 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
+
     this.crudApi.getAllChargesOrderDesc().subscribe(
       response =>{
         this.listData = response;
         this.dtTrigger.next();
       }
     );
+
+    this.getSumTotalOfChargeByYear();
   }
 
    /**
@@ -102,6 +109,14 @@ export class ListChargeComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  getSumTotalOfChargeByYear() {
+    this.dashboarservice.getSumTotalOfChargeByYear().subscribe(
+      response =>{
+        this.sumTotalOfChargebyYear = response;
+      }
+    );
   }
 
   resetForm(form?: NgForm) {

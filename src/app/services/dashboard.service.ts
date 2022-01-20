@@ -133,6 +133,10 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}/charges/sumMontantTotalChargeByMonth`);
   }
 
+  getSumTotalOfChargeByYear(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/charges/sumTotalChargeByYear`);
+  }
+
   getSumTotalOfCreanceByYear(): Observable<any> {
     return this.http.get(`${this.baseUrl}/creances/SumTotalOfCreanceByYear`);
   }

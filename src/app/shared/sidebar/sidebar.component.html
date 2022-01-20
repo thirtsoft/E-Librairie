@@ -183,9 +183,9 @@
           <li *ngIf="!showAssocieBoard && !showVendeurBoard">
             <a class="" routerLink="/home/categorieCharges">Categorie-Charge</a>
           </li> 
-          <li *ngIf="(showGerantBoard || showVendeurBoard)">
+          <li *ngIf="!showAssocieBoard">
             <a class="" routerLink="/home/charges">Charges</a></li>
-          <li *ngIf="(showGerantBoard || showVendeurBoard)">
+          <li *ngIf="!showAssocieBoard">
             <a class="" routerLink="/home/prestations">Prestations</a></li>
         </ul>
       </li>

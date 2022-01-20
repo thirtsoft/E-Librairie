@@ -3,14 +3,23 @@
     <div class="panel-heading">
       <h3>GESTION DES CHARGES</h3>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px">
-      <a
+    <div 
+      class="form-group col-md-4"
+      style="padding-left: 20px; padding-top: 10px">
+      <a 
         type="button"
         (click)="addOrEditCharge(null)"
         class="btn btn-success btn-lg"
         ><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
       >&nbsp;
-
+    </div>
+    <div
+      *ngIf="showManagerBoard || showAdminBoard"
+      class="form-group col-md-6 col-md-offset-2"
+      style="padding-top: 20px"
+    >
+      <label><strong>Montant Charge/Années : </strong></label>
+      <div class="count"> <strong>{{ this.sumTotalOfChargebyYear }} </strong> </div>
     </div>
   </div>
   <div class="panel-body">
