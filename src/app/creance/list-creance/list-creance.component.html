@@ -3,13 +3,23 @@
     <div class="panel-heading">
       <h3>GESTION DES CREANCES</h3>
     </div>
-    <div style="padding-left: 20px; padding-top: 10px">
+    <div 
+      class="form-group col-md-4"
+      style="padding-left: 20px; padding-top: 10px">
       <a
         type="button"
         (click)="onCreateCreance()"
         class="btn btn-success btn-lg"
         ><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
       >&nbsp;
+    </div>
+    <div
+      *ngIf="showManagerBoard || showAdminBoard"
+      class="form-group col-md-6 col-md-offset-2"
+      style="padding-top: 20px"
+    >
+      <label><strong>Montant Creance/Années : </strong></label>
+      <div class="count"> <strong>{{ this.sumTotalOfCreance }} </strong> </div>
     </div>
   </div>
   <div class="panel-body">

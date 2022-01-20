@@ -1,3 +1,4 @@
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Component, OnInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Creance } from 'src/app/models/creance';
@@ -29,6 +30,8 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
   dateResult2: Date;
   numberDay;
 
+  sumTotalOfCreance;
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
@@ -46,6 +49,7 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
 
   constructor(public crudApi: CreanceService,
+              public dashboarservice: DashboardService,
               private datePipe : DatePipe,
               public toastr: ToastrService,
               private dialogService: DialogService,
@@ -108,6 +112,8 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
       }
     );
 
+    this.getSumTotalOfCreanceByYear();
+
   }
 
   /**
@@ -120,7 +126,6 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
       // call the dtTrigger to rerender again
       this.dtTrigger.next();
     });
-
   }
 
   ngOnDestroy(): void {
@@ -131,6 +136,14 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
     this.crudApi.getAllCreancesOrderDesc().subscribe(
       response =>{
         this.crudApi.listData = response;
+      }
+    );
+  }
+
+  getSumTotalOfCreanceByYear() {
+    this.dashboarservice.getSumTotalOfCreanceByYear().subscribe(
+      response =>{
+        this.sumTotalOfCreance = response;
       }
     );
   }

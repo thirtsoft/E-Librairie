@@ -60,10 +60,6 @@ export class CreanceService {
     return this.http.get(`${this.baseUrl}/creances/findById/${id}`);
   }
 
-  /* createCreance(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/creances`, info);
-  } */
-
   createCreance(info: Creance, id:number) {
     return this.http.post(`${this.baseUrl}/creances/create?id=`+id, info);
   }
