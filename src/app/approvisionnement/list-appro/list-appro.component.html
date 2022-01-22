@@ -39,8 +39,8 @@
             {{ appro.montantAvance }}
 
             <span
-              *ngIf="(showGerantBoard || showAdminBoard)"
-              [ngClass]="{ disabled: appro.montantAvance == appro.totalAppro }"
+              *ngIf="!showAssocieBoard && !showVendeurBoard"
+              [ngClass]="{ disabled: appro.montantAvance == appro.totalAppro || appro.status === 'VALIDE' }"
               class="btn btn-success btn-sm pull-right"
               (click)="addEditMontantAvanceAppro(appro)"
               style="cursor: pointer"
@@ -52,10 +52,10 @@
           <td>
             {{ appro.status }}
             <button
-              *ngIf="(showGerantBoard || showAdminBoard)"
+              *ngIf="!showAssocieBoard && !showVendeurBoard"
               class="btn btn-warning btn-sm pull-right"
               (click)="addEditStatusAppro(appro)"
-              [disabled]="appro.status === 'VALIDE'"
+              [disabled]="appro.status === 'VALIDE' || appro.montantAvance == appro.totalAppro"
               style="cursor: pointer"
             >
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

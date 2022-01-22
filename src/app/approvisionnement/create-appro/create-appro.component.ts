@@ -133,19 +133,6 @@ export class CreateApproComponent implements OnInit {
     });
 
   }
-/*
-  AddOrderItem(lcommandeIndex, OrderId){
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    dialogConfig.data={lcommandeIndex, OrderId};
-    this.dialog.open(CreateLigneApproComponent, dialogConfig).afterClosed().subscribe(res =>{
-        this.calculMontantTotal();
-    });
-
-  }
-*/
 
   calculMontantTotal() {
     this.f['totalAppro'].setValue(this.crudApi.list.reduce((prev, curr) => {
@@ -154,30 +141,10 @@ export class CreateApproComponent implements OnInit {
 
   }
 
-/*
-  calculMontantTotal() {
-    this.crudApi.formData.totalAppro = this.crudApi.orderItems.reduce((prev, curr) => {
-      return prev + curr.total ;
-    }, 0);
-    this.crudApi.formData.totalAppro = parseFloat(this.crudApi.formData.totalAppro.toFixed(2));
-  }
-  */
-
- /*  validateForm() {
-    this.isValid = true;
-    if (this.crudApi.formData.value.fournisseur.id==0)
-      this.isValid = false;
-    else if (this.crudApi.list.length==0)
-      this.isValid = false;
-    return this.isValid;
-  }
- */
-
   validateForm() {
     this.isValid = false;
-    if ((this.crudApi.formData.value.code == 0) || (this.crudApi.formData.value.totalAppro == 0) ||
-        (this.crudApi.formData.value.observation == '') || (this.crudApi.formData.value.status == '')
-        || (this.crudApi.list == 0) || (this.crudApi.formData.value.montantAvance == 0) || (this.fournisseurList == null))
+    if ((this.crudApi.formData.value.totalAppro == 0) || (this.crudApi.formData.value.status == '')
+        || (this.crudApi.list == 0)|| (this.fournisseurList == null))
       this.isValid = false;
     else
       this.isValid = true;

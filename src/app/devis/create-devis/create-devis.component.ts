@@ -79,13 +79,6 @@ export class CreateDevisComponent implements OnInit {
 
     this.getListOfClient();
 
-   /*  this.clientService.getAllClients().subscribe(
-      response =>{
-        this.ClientList = response;
-        console.log(response);
-      }
-    ); */
-
     this.crudApi.generateNumeroDevis();
 
     this.dashboardService.getUserId();
