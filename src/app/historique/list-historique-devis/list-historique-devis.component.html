@@ -1,17 +1,9 @@
 <div class="panel panel-default">
   <div class="btn-toolbar">
     <div class="panel-heading">
-      <h1>HISTORIQUES OPERATIONS DES DEVIS</h1>
+      <h1>HISTORIQUES OPERATIONS DES CHARGES</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
-      <!--  <a type="button" (click)="onCreateFournisseur()" class="btn btn-success btn-lg" >
-        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a>&nbsp;
-      <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
-          <i class="fa fa-folder-open" aria-hidden="true"></i>Ouvrir</a>&nbsp;
-      <a (click)="PrintPdf()" class="btn btn-success btn-lg">
-          <i class="fa fa-print" aria-hidden="true"></i>Imprimer</a>&nbsp;
-      <a type="button" (click)="DownloadPdf()" class="btn btn-danger btn-lg">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>Télécharger</a>&nbsp; -->
     </div>
   </div>
   <div class="panel-body">
@@ -26,7 +18,7 @@
         <tr>
           <th>Utilisateur</th>
           <th>Email</th>
-          <th>Devis</th>
+          <th>Charge</th>
           <th>Action Effectue</th>
           <th>Date</th>
           <th>Action</th>
@@ -36,17 +28,17 @@
         <tr *ngFor="let histDevis of listData; let i = index">
           <td>{{ histDevis?.utilisateur?.name }}</td>
           <td>{{ histDevis?.utilisateur?.email }}</td>
-          <td>{{ histDevis?.devis?.numeroDevis }}</td>
+          <td>{{ histDevis?.charge?.codeCharge }}</td>
           <td>{{ histDevis.action }}</td>
-          <td>{{ histDevis.createdDate }}</td>
+          <td>{{ histDevis.createdDate | date:'dd-MM-yyyy à h:mm:ss'}} </td>
           <td>
-            <button class="btn btn-success btn-sm" (click)="viewDevis()">
+            <button class="btn btn-success btn-sm" (click)="viewCharge()">
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
 
             <button
               class="btn btn-danger btn-sm"
-              (click)="deleteHistoriqueDevis(histDevis.id)"
+              (click)="deleteHistoriqueCharge(histDevis.id)"
             >
               <em class="fa fa-trash-o"></em>
             </button>

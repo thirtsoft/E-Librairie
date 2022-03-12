@@ -47,7 +47,6 @@ export class ListChargeComponent implements OnDestroy, OnInit {
               public toastr: ToastrService,
               private tokenService: TokenStorageService,
               public fb: FormBuilder,
-              private datePipe : DatePipe,
               private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateChargeComponent>,
@@ -83,7 +82,7 @@ export class ListChargeComponent implements OnDestroy, OnInit {
 
     this.crudApi.getAllChargesOrderDesc().subscribe(
       response =>{
-        this.listData = response;
+        this.crudApi.listData = response;
         this.dtTrigger.next();
       }
     );
@@ -101,10 +100,6 @@ export class ListChargeComponent implements OnDestroy, OnInit {
       // call the dtTrigger to rerender again
       this.dtTrigger.next();
     });
-  }
-
-  transformDate(date){
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   ngOnDestroy(): void {

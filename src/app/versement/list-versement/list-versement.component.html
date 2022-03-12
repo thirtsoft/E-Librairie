@@ -5,7 +5,7 @@
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
-        *ngIf="(showGerantBoard || showManagerBoard)"
+        *ngIf="!showAssocieBoard"
         type="button"
         (click)="addEditVersement(null)"
         class="btn btn-success btn-lg"
@@ -45,11 +45,17 @@
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a
             >&nbsp;&nbsp;
             <a
-              href="http://localhost:8081/gestionstock-alamine/v1/versements/downloadVersementFile/{{
+              href="https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/versements/downloadVersementFile/{{
                 versmnt.fileVersement
               }}"
               class="cv"
               >&nbsp;&nbsp;
+             <!--  <a
+              href="http://localhost:8081/gestionstock-alamine/v1/versements/downloadVersementFile/{{
+                versmnt.fileVersement
+              }}"
+              class="cv"
+              >&nbsp;&nbsp; -->
               <em
                 class="fa fa-download"
                 style="cursor: pointer; align-items: flex-end"
@@ -69,7 +75,7 @@
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="(showGerantBoard || showManagerBoard)"
+              *ngIf="(showManagerBoard || showAdminBoard)"
               class="btn btn-danger btn-sm"
               (click)="deleteVersement(versmnt.id)"
             >

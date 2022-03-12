@@ -1,3 +1,4 @@
+import { ViewClientComponent } from './client/view-client/view-client.component';
 import { CreatePrestationComponent } from './prestation/create-prestation/create-prestation.component';
 import { ListPrestationComponent } from './prestation/list-prestation/list-prestation.component';
 import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
@@ -178,6 +179,10 @@ const routes: Routes = [
       path: 'clients',
       component: ListClientComponent,
   //    canActivate: [AuthGuardService]
+    },
+    {
+      path:'detailClient/:id',
+      component: ViewClientComponent,
     },
     {
       path: 'client',

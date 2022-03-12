@@ -1,12 +1,13 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'src/app/services/dialog.service';
-import { HistoriqueDevisService } from './../../services/historique-devis.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { HistoriqueDevis } from './../../models/historiqueDevis';
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { HistoriqueChargeService } from './../../services/historique-charge.service';
+import { HistoriqueCharge } from './../../models/historiqueCharge';
 
 @Component({
   selector: 'app-list-historique-devis',
@@ -15,13 +16,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ListHistoriqueDevisComponent implements OnInit {
 
-  listData: HistoriqueDevis[];
+  listData: HistoriqueCharge[];
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  constructor(public crudApi: HistoriqueDevisService,
+  constructor(public crudApi: HistoriqueChargeService,
               private dialogService: DialogService,
               public toastr: ToastrService,
               public fb: FormBuilder,
@@ -32,7 +33,7 @@ export class ListHistoriqueDevisComponent implements OnInit {
       this.crudApi.listen().subscribe((m:any) => {
         console.log(m);
         this.rerender();
-        this.getListHistoriqueDevis();
+        this.getListHistoriqueCharges();
       })
   }
 
@@ -44,7 +45,7 @@ export class ListHistoriqueDevisComponent implements OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
-    this.crudApi.getAllHistoriqueDevissOrderDesc().subscribe(
+    this.crudApi.getAllHistoriqueChargesOrderDesc().subscribe(
       response =>{
         this.listData = response;
         console.log(this.listData);
@@ -70,8 +71,8 @@ export class ListHistoriqueDevisComponent implements OnInit {
   }
 
 
-  getListHistoriqueDevis() {
-    this.crudApi.getAllHistoriqueDevissOrderDesc().subscribe(
+  getListHistoriqueCharges() {
+    this.crudApi.getAllHistoriqueChargesOrderDesc().subscribe(
       response =>{
         this.listData = response;
       }
@@ -79,21 +80,21 @@ export class ListHistoriqueDevisComponent implements OnInit {
   }
 
 
-  deleteHistoriqueDevis(id: number){
+  deleteHistoriqueCharge(id: number){
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe(res =>{
       if(res){
-        this.crudApi.deleteHistoriqueDevis(id).subscribe(data => {
-          this.toastr.warning('HistoriqueDevis supprimé avec succès!');
+        this.crudApi.deleteHistoriqueCharge(id).subscribe(data => {
+          this.toastr.warning('HistoriqueCharge supprimé avec succès!');
           this.rerender();
-          this.getListHistoriqueDevis();
+          this.getListHistoriqueCharges();
         });
       }
     });
   }
 
-  viewDevis() {
-    this.router.navigateByUrl('home/devis')
+  viewCharge() {
+    this.router.navigateByUrl('home/charges')
   }
 
 

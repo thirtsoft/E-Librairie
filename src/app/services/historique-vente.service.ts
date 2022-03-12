@@ -10,57 +10,57 @@ import { environment } from 'src/environments/environment';
 })
 export class HistoriqueVenteService {
 
-  //baseUrl = environment.apiBaseUrl;
+//  baseUrl = environment.apiBaseUrl;
 
-//  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
-  baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
+  // baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
 
   choixmenu : string  = 'A';
   listData : HistoriqueVente[];
   formData:  HistoriqueVente;
 
- dataForm:  FormGroup;
+  dataForm:  FormGroup;
 
- private listners = new Subject<any>();
+  private listners = new Subject<any>();
 
- listen(): Observable<any> {
-   return this.listners.asObservable();
- }
+  listen(): Observable<any> {
+    return this.listners.asObservable();
+  }
 
- filter(filterBy: string) {
-   this.listners.next(filterBy);
- }
+  filter(filterBy: string) {
+    this.listners.next(filterBy);
+  }
 
- constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
- getAllHistoriqueVentes(): Observable<HistoriqueVente[]> {
-   return this.http.get<HistoriqueVente[]>(`${this.baseUrl}/historiqueVentes/all`);
- }
+  getAllHistoriqueVentes(): Observable<HistoriqueVente[]> {
+    return this.http.get<HistoriqueVente[]>(`${this.baseUrl}/historiqueVentes/all`);
+  }
 
- getAllHistoriqueVentesOrderDesc(): Observable<HistoriqueVente[]> {
-  return this.http.get<HistoriqueVente[]>(`${this.baseUrl}/historiqueVentes/allHistoriqueVenteOrderDesc`);
-}
+  getAllHistoriqueVentesOrderDesc(): Observable<HistoriqueVente[]> {
+    return this.http.get<HistoriqueVente[]>(`${this.baseUrl}/historiqueVentes/allHistoriqueVenteOrderDesc`);
+  }
 
- getHistoriqueVenteByID(id:number):any {
-  return this.http.get(`${this.baseUrl}/historiqueVentes/findById/`+id).toPromise();
- }
+  getHistoriqueVenteByID(id:number):any {
+    return this.http.get(`${this.baseUrl}/historiqueVentes/findById/`+id).toPromise();
+  }
 
   public getHistoriqueVenteById(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/historiqueVentes/findById/${id}`);
   }
 
- createHistoriqueVente(info: HistoriqueVente): Observable<HistoriqueVente> {
-   return this.http.post<HistoriqueVente>(`${this.baseUrl}/historiqueVentes/create`, info);
- }
+  createHistoriqueVente(info: HistoriqueVente): Observable<HistoriqueVente> {
+    return this.http.post<HistoriqueVente>(`${this.baseUrl}/historiqueVentes/create`, info);
+  }
 
- updateHistoriqueVente(id: number, value: HistoriqueVente): Observable<HistoriqueVente> {
+  updateHistoriqueVente(id: number, value: HistoriqueVente): Observable<HistoriqueVente> {
     return this.http.put<HistoriqueVente>(`${this.baseUrl}/historiqueVentes/update/${id}`, value);
- }
+  }
 
- deleteHistoriqueVente(id: number): Observable<any> {
-   return this.http.delete(`${this.baseUrl}/historiqueVentes/delete/${id}`, { responseType: 'text' });
- }
+  deleteHistoriqueVente(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/historiqueVentes/delete/${id}`, { responseType: 'text' });
+  }
 
 }

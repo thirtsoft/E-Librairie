@@ -3,7 +3,7 @@
     <div class="panel-heading">
       <h3>GESTION DES CREANCES</h3>
     </div>
-    <div 
+    <div
       class="form-group col-md-4"
       style="padding-left: 20px; padding-top: 10px">
       <a
@@ -14,7 +14,7 @@
       >&nbsp;
     </div>
     <div
-      *ngIf="showManagerBoard || showAdminBoard"
+      *ngIf="!showAssocieBoard"
       class="form-group col-md-6 col-md-offset-2"
       style="padding-top: 20px"
     >
@@ -63,6 +63,7 @@
           <td>
             {{ cont.status }}
             <span
+            *ngIf="(showGerantBoard || showManagerBoard || showAdminBoard)"
               [ngClass]="{ disabled: cont.status == 'PAYEE' }"
               class="btn btn-info btn-sm pull-right"
               (click)="addEditStatus(cont)"
@@ -81,7 +82,7 @@
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="(showGerantBoard || showAdminBoard)"
+              *ngIf="(showManagerBoard || showAdminBoard)"
               class="btn btn-danger btn-sm"
               (click)="deleteCreance(cont.id)"
             >

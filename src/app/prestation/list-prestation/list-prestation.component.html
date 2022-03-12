@@ -4,7 +4,7 @@
   </div>
   <div style="padding-left: 20px; padding-top: 10px">
     <a
-    *ngIf="(showGerantBoard || showVendeurBoard)"
+    *ngIf="!showAssocieBoard"
       type="button"
       (click)="onCreatePrestation()"
       class="btn btn-success btn-lg"
@@ -13,7 +13,7 @@
     >&nbsp;
   </div>
   <div
-    *ngIf="showGerantBoard"
+    *ngIf="!showAssocieBoard"
     class="form-group col-md-6 pull-right" style="padding-top: 10px">
     <label><strong>Montant Presation/Moi : </strong></label>
     <div class="count">{{ this.sumPrestationInMonth }}</div>
@@ -46,7 +46,7 @@
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="(showGerantBoard || showGerantBoard)"
+              *ngIf="(showGerantBoard || showManagerBoard)"
               class="btn btn-danger btn-sm"
               (click)="deletePrestation(clt.id)"
             >

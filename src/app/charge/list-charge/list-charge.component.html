@@ -3,10 +3,11 @@
     <div class="panel-heading">
       <h3>GESTION DES CHARGES</h3>
     </div>
-    <div 
+    <div
       class="form-group col-md-4"
-      style="padding-left: 20px; padding-top: 10px">
-      <a 
+      style="padding-left: 20px; padding-top: 10px"
+    >
+      <a
         type="button"
         (click)="addOrEditCharge(null)"
         class="btn btn-success btn-lg"
@@ -14,12 +15,14 @@
       >&nbsp;
     </div>
     <div
-      *ngIf="showManagerBoard || showAdminBoard"
+      *ngIf="showManagerBoard || showGerantBoard"
       class="form-group col-md-6 col-md-offset-2"
       style="padding-top: 20px"
     >
       <label><strong>Montant Charge/Années : </strong></label>
-      <div class="count"> <strong>{{ this.sumTotalOfChargebyYear }} </strong> </div>
+      <div class="count">
+        <strong>{{ this.sumTotalOfChargebyYear }} </strong>
+      </div>
     </div>
   </div>
   <div class="panel-body">
@@ -41,7 +44,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ch of listData; let i=index;">
+        <tr *ngFor="let ch of crudApi.listData; let i = index">
           <td>{{ ch.codeCharge }}</td>
           <td>{{ ch.nature }}</td>
           <td>{{ ch.categorieCharge?.nomCategorieCharge }}</td>
@@ -49,13 +52,17 @@
           <td>{{ ch.date }}</td>
           <td>
             <button
-              *ngIf="(showGerantBoard || showAdminBoard)"
-              class="btn btn-info btn-sm" (click)="addOrEditCharge(i)">
+              *ngIf="!showAssocieBoard"
+              class="btn btn-info btn-sm"
+              (click)="addOrEditCharge(i)"
+            >
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
               *ngIf="showManagerBoard"
-              class="btn btn-danger btn-sm" (click)="deleteCharge(ch.id)">
+              class="btn btn-danger btn-sm"
+              (click)="deleteCharge(ch.id)"
+            >
               <em class="fa fa-trash-o"></em>
             </button>
           </td>

@@ -11,9 +11,11 @@ import { environment } from './../../environments/environment';
 })
 export class DevisService {
 
-  baseUrl = environment.apiBaseUrl;
+//  baseUrl = environment.apiBaseUrl;
 
-//  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+ // baseUrl = 'https://62.171.128.8/gestionstock-alamine/v1';
+
+  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
  // baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
@@ -56,7 +58,6 @@ export class DevisService {
   createDevis(info: Devis, id:number) {
     return this.http.post(`${this.baseUrl}/devis/create?id=`+id, info);
   }
-
 
   updateDevis(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/devis/update/${id}`, value);

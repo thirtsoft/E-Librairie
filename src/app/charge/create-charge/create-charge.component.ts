@@ -98,16 +98,14 @@ export class CreateChargeComponent implements OnInit {
 
   }
 
-
-  /*
-  onSubmit() {
+ /*  onSubmit() {
     if (this.crudApi.choixmenu == "A") {
       this.saveCharge();
     }else {
       this.updateCharge();
     }
-  }
-  */
+  } */
+
 
   saveCharge() {
     this.crudApi.createCharge(this.crudApi.dataForm.value)
@@ -124,8 +122,8 @@ export class CreateChargeComponent implements OnInit {
     this.crudApi.updateCharge(this.crudApi.dataForm.value.id,this.crudApi.dataForm.value).
     subscribe( data => {
       this.dialogRef.close();
-      this.toastr.success("Charge Modifier avec Succès");
       this.crudApi.filter('Register click');
+      this.toastr.warning("Charge Modifier avec Succès");
       this.getListCharges();
       this.router.navigate(['/home/charges']);
     });

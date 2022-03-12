@@ -42,14 +42,14 @@
           <td>{{ cmd.dateCommande }}</td>
           <td>
             <button
-            *ngIf="(showGerantBoard || showManagerBoard || showAdminBoard)"
+            *ngIf="(showGerantBoard || showManagerBoard || showVendeurBoard || showAdminBoard)"
               class="btn btn-success btn-sm"
               (click)="viewCommandeClient(cmd)"
             >
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="(showGerantBoard || showManagerBoard || showAdminBoard)"
+              *ngIf="(showManagerBoard || showAdminBoard)"
               class="btn btn-danger btn-sm"
               (click)="deleteCommandeClient(cmd.id)"
             >

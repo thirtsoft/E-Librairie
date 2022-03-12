@@ -53,6 +53,7 @@ export class ListClientComponent implements OnDestroy, OnInit {
               public toastr: ToastrService,
               private dialogService: DialogService,
               private tokenService: TokenStorageService,
+              private router: Router,
               private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateClientComponent>,
@@ -195,6 +196,10 @@ export class ListClientComponent implements OnDestroy, OnInit {
     });
   }
 
+  viewDetail(item: Client) {
+    this.router.navigateByUrl('home/detailClient/' + item.id);
+  }
+
   OpenPdf() {
     const document = this.getDocument();
     pdfMake.createPdf(document).open();
@@ -332,11 +337,11 @@ export class ListClientComponent implements OnDestroy, OnInit {
               style: 'tableHeader'
             },
             {
-              text: 'Téléphone Mobile',
+              text: 'Mobile',
               style: 'tableHeader'
             },
             {
-              text: 'Telephone Fixe',
+              text: 'Fixe',
               style: 'tableHeader'
             },
             {

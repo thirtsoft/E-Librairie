@@ -12,7 +12,7 @@ export class HistoriqueDevisService {
 
   //baseUrl = environment.apiBaseUrl;
 
-  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+   baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
 
  // baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
@@ -40,7 +40,7 @@ export class HistoriqueDevisService {
   }
 
   getAllHistoriqueDevissOrderDesc(): Observable<HistoriqueDevis[]> {
-    return this.http.get<HistoriqueDevis[]>(`${this.baseUrl}/historiqueCreances/allHistoriqueCreanceOrderDesc`);
+    return this.http.get<HistoriqueDevis[]>(`${this.baseUrl}/historiqueDeviss/allHistoriqueCreanceOrderDesc`);
   }
 
   getHistoriqueDevisByID(id:number):any {

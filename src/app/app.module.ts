@@ -150,6 +150,7 @@ import { ListCommandeOfUserComponent } from './tableau/list-commande-of-user/lis
 import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
 import { ListPrestationComponent } from './prestation/list-prestation/list-prestation.component';
 import { CreatePrestationComponent } from './prestation/create-prestation/create-prestation.component';
+import { ViewClientComponent } from './client/view-client/view-client.component';
 
 
 @NgModule({
@@ -276,6 +277,7 @@ import { CreatePrestationComponent } from './prestation/create-prestation/create
     ViewVente2Component,
     ListPrestationComponent,
     CreatePrestationComponent,
+    ViewClientComponent,
 
   ],
   imports: [

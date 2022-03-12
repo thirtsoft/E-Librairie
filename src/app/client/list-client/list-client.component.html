@@ -30,9 +30,11 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Raison Social</th>
+          <th>Raison Social / Nom&Prénom</th>
           <th>Telephone Mobile</th>
           <th>Email</th>
+          <th>Addresse</th>
+          <th>Telephone Fixe</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -42,7 +44,12 @@
           <td>{{ clt.raisonSocial }}</td>
           <td>{{ clt.mobile }}</td>
           <td>{{ clt.email }}</td>
+          <td>{{ clt.telephone }}</td>
+          <td>{{ clt.adresse }}</td>
           <td>
+            <button class="btn btn-success btn-lg" (click)="viewDetail(clt)">
+              <i class="fa fa-eye" aria-hidden="true"></i></button
+            >&nbsp;
             <button class="btn btn-warning btn-lg" (click)="envoiEmail(clt)">
               <i class="fa fa-envelope" aria-hidden="true"></i></button
             >&nbsp;
@@ -55,7 +62,7 @@
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
+              *ngIf="(showManagerBoard || showAdminBoard)"
               class="btn btn-danger btn-lg"
               (click)="deleteClient(clt.id)"
             >

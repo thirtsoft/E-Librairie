@@ -76,7 +76,7 @@ export class CreateVenteComponent implements OnInit {
       this.f['dateVente'].setValue(this.crudApi.formData.value.dateVente);
     }
 
-    this.crudApi.getNumeroVente();
+ //   this.crudApi.getNumeroVente();
 
     this.crudApi.getUserId();
 
@@ -84,6 +84,7 @@ export class CreateVenteComponent implements OnInit {
   }
 
   infoForm() {
+    this.crudApi.getNumeroVente();
     this.crudApi.formData = this.fb.group({
       numeroVente: this.crudApi.NumVente,
       total: [0, Validators.required],

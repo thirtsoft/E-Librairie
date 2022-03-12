@@ -48,7 +48,13 @@ export class ListApproComponent implements OnDestroy, OnInit {
               private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef:MatDialogRef<CreateApproComponent>,
-  ) { }
+  ) {
+    this.crudApi.listen().subscribe((m:any) => {
+      console.log(m);
+      this.rerender();
+      this.getListAppros();
+    })
+   }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenService.getToken();

@@ -176,11 +176,11 @@
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <li *ngIf="!showAssocieBoard && !showVendeurBoard">
+          <li *ngIf="!showAssocieBoard">
             <a class="" routerLink="/home/versements">Versement</a></li>
-         <li *ngIf="!showAssocieBoard && !showVendeurBoard">
+         <li *ngIf="showManagerBoard || showGerantBoard">
             <a class="" routerLink="/home/contrats">Contrat</a></li>
-          <li *ngIf="!showAssocieBoard && !showVendeurBoard">
+          <li *ngIf="showManagerBoard || showGerantBoard">
             <a class="" routerLink="/home/categorieCharges">Categorie-Charge</a>
           </li>
           <li *ngIf="!showAssocieBoard">
@@ -243,7 +243,7 @@
               >Utilisateur</a
             >
           </li>
-          <li *ngIf="!showGerantBoard && !showVendeurBoard">
+          <li *ngIf="showManagerBoard">
             <a
               class=""
               routerLink="/register"

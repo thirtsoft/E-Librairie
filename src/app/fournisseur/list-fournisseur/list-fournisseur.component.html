@@ -38,7 +38,7 @@
           <td>{{ four.raisonSociale }}</td>
           <td>{{ four.mobile }}</td>
           <td>{{ four.email }}</td>
-                  
+
           <td>
             <button class="btn btn-warning btn-lg" (click)="envoiEmail(four)">
               <i class="fa fa-envelope" aria-hidden="true"></i></button
@@ -59,7 +59,7 @@
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
-            *ngIf="(showManagerBoard || showAdminBoard || showGerantBoard)"
+            *ngIf="(showManagerBoard || showAdminBoard)"
               class="btn btn-danger btn-lg"
               (click)="deleteFournisseur(four.id)"
             >

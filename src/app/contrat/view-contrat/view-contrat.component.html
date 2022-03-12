@@ -1,31 +1,61 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1>Détails Contrat</h1>
+    <h3>Détails Contrat</h3>
     <form>
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataContrat.id">
+      <input
+        type="hidden"
+        name="id"
+        #id="ngModel"
+        [(ngModel)]="formDataContrat.id"
+      />
       <div class="row">
         <div class="form-group col-md-6">
           <label>Référence </label>
-          <input type="text" class="form-control" [(ngModel)]="formDataContrat.reference" name="reference" id="reference" readonly>
-        </div>
-
-        <div class="form-group col-md-6">
-          <label>Nature</label>
-          <input type="text" class="form-control" [(ngModel)]="formDataContrat.nature" name="nature"  id="nature" readonly>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataContrat.reference"
+            name="reference"
+            id="reference"
+            readonly
+          />
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Montant</label>
-          <input type="number" class="form-control" [(ngModel)]="formDataContrat.montantContrat" name="montantContrat"  id="montantContrat" readonly>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="formDataContrat.montantContrat"
+            name="montantContrat"
+            id="montantContrat"
+            readonly
+          />
         </div>
 
         <div class="form-group col-md-6">
           <label>Client</label>
           <div class="form-group">
-            <select name="client" id="client" [(ngModel)]="formDataContrat.client" class="form-control" readonly>
+            <select
+              name="client"
+              id="client"
+              [(ngModel)]="formDataContrat.client"
+              class="form-control"
+              readonly
+              disabled
+            >
               <option [ngValue]="0">Client</option>
-              <option *ngFor="let client of listClient" [ngValue]="client.id == formDataContrat.client?.id ? formDataContrat.client : client">{{client.chefService}}</option>
+              <option
+                *ngFor="let client of listClient"
+                [ngValue]="
+                  client.id == formDataContrat.client?.id
+                    ? formDataContrat.client
+                    : client
+                "
+              >
+                {{ client.raisonSocial }}
+              </option>
             </select>
           </div>
         </div>
@@ -33,24 +63,49 @@
 
       <div class="form-group">
         <label>Description</label>
-        <textarea type="text" class="form-control" [(ngModel)]="formDataContrat.description" name="description"  id="description" readonly></textarea>
+        <textarea
+          type="text"
+          class="form-control"
+          [(ngModel)]="formDataContrat.description"
+          name="description"
+          id="description"
+          readonly
+        ></textarea>
       </div>
       <div class="row">
         <div class="form-group col-md-6">
           <label>Date-Début</label>
-          <input type="date" class="form-control" [(ngModel)]="formDataContrat.dateDebutContrat" name="dateDebutContrat"  id="dateDebutContrat" readonly>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataContrat.dateDebutContrat"
+            name="dateDebutContrat"
+            id="dateDebutContrat"
+            readonly
+          />
         </div>
         <div class="form-group col-md-6">
           <label>Date-Fin</label>
-          <input type="date" class="form-control" [(ngModel)]="formDataContrat.dateFinContrat" name="dateFinContrat"  id="dateFinContrat" readonly>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formDataContrat.dateFinContrat"
+            name="dateFinContrat"
+            id="dateFinContrat"
+            readonly
+          />
         </div>
       </div>
 
       <div class="form-group">
-      <!--   <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>&nbsp; -->
-        <button type="button" class="btn btn-danger btn-sm btn-block ml-1" [mat-dialog-close]>
-          <i class="fa fa-close"></i> Close</button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm btn-block ml-1"
+          [mat-dialog-close]
+        >
+          <i class="fa fa-close"></i> Fermer
+        </button>
       </div>
     </form>
- </div>
+  </div>
 </div>

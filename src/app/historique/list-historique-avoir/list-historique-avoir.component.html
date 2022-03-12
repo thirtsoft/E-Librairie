@@ -4,14 +4,6 @@
       <h1>HISTORIQUE OPERATIONS DES AVOIRS</h1>
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
-      <!--  <a type="button" (click)="onCreateFournisseur()" class="btn btn-success btn-lg" >
-        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a>&nbsp;
-      <a (click)="OpenPdf()" class="btn btn-warning btn-lg">
-          <i class="fa fa-folder-open" aria-hidden="true"></i>Ouvrir</a>&nbsp;
-      <a (click)="PrintPdf()" class="btn btn-success btn-lg">
-          <i class="fa fa-print" aria-hidden="true"></i>Imprimer</a>&nbsp;
-      <a type="button" (click)="DownloadPdf()" class="btn btn-danger btn-lg">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>Télécharger</a>&nbsp; -->
     </div>
   </div>
   <div class="panel-body">
@@ -36,9 +28,9 @@
         <tr *ngFor="let histAvoir of listData; let i = index">
           <td>{{ histAvoir?.utilisateur?.name }}</td>
           <td>{{ histAvoir?.utilisateur?.email }}</td>
-          <td>{{ histAvoir?.avoir?.id }}</td>
+          <td>{{ histAvoir?.avoir?.reference }}</td>
           <td>{{ histAvoir.action }}</td>
-          <td>{{ histAvoir.createdDate }}</td>
+          <td>{{ histAvoir.createdDate | date:'dd-MM-yyyy à h:mm:ss'}} </td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewAvoir()">
               <i class="fa fa-eye" aria-hidden="true"></i></button
