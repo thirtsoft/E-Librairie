@@ -129,18 +129,18 @@
       <li class="sub-menu" *ngIf="!showAssocieBoard">
         <a href="javascript:;" class="">
           <i class="icon_documents_alt"></i>
-          <span>Situation</span>
+          <span>Dettes</span>
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <li><a class="" routerLink="/home/creances">Créance</a></li>
+          <li><a class="" routerLink="/home/creances">Liste Dettes</a></li>
           <li>
-            <a class="" routerLink="/home/detailsCreances">Détails-Créance</a>
+            <a class="" routerLink="/home/detailsCreances">Détails-dettes</a>
           </li>
-        <!--  <li><a class="" routerLink="/home/avoirs">Avoirs</a></li>
-          <li>
+          <li *ngIf="showAdminBoard"><a class="" routerLink="/home/avoirs">Avoirs</a></li>
+          <li *ngIf="showAdminBoard">
             <a class="" routerLink="/home/detailsAvoirs">Détails-Avoir</a>
-          </li> -->
+          </li>
         </ul>
       </li>
 
@@ -185,40 +185,34 @@
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <li *ngIf="!showAssocieBoard">
-         <!--   <a class="" routerLink="/home/versements">Versement</a></li>
-          <li *ngIf="showManagerBoard || showGerantBoard">
-            <a class="" routerLink="/home/contrats">Contrat</a></li> -->
+          <li *ngIf="showAdminBoard">
+           <a class="" routerLink="/home/versements">Versement</a></li>
+          <li *ngIf="showAdminBoard">
+            <a class="" routerLink="/home/contrats">Contrat</a></li> 
           <li *ngIf="!showAssocieBoard">
             <a class="" routerLink="/home/categorieCharges">Type dépenses</a>
           </li>
           <li *ngIf="!showAssocieBoard">
             <a class="" routerLink="/home/charges">Dépenses</a></li>
-         <!--  <li *ngIf="!showAssocieBoard">
-            <a class="" routerLink="/home/prestations">Prestations</a></li> -->
+          <li *ngIf="showAdminBoard">
+            <a class="" routerLink="/home/prestations">Prestations</a></li>
         </ul>
       </li>
 
-      <!-- <li *ngIf="(showGerantBoard || showManagerBoard)">
-        <a class="" routerLink="/home/chart">
-          <i class="fa fa-bar-chart" aria-hidden="true"></i>
-          <span>Graphiques</span>
-        </a>
-      </li> -->
-
-      <li>
+   
+      <li *ngIf="showAdminBoard">
         <a class="" routerLink="/home/chart">
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           <span>Graphiques</span>
         </a>
       </li>
 
-     <!--  <li *ngIf="!showAssocieBoard">
+      <li *ngIf="showAdminBoard">
         <a class="" routerLink="/home/tableau">
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           <span>Résumés</span>
         </a>
-      </li> -->
+      </li> 
 
       <li class="sub-menu" *ngIf="!showAssocieBoard">
         <a href="javascript:;" class="">
@@ -243,8 +237,8 @@
               >Fournisseur</a
             >
           </li>
-           <!--
-          <li>
+           
+          <li *ngIf="showAdminBoard">
             <a
               class=""
               [routerLink]="['/home/employees']"
@@ -253,14 +247,15 @@
             >
           </li>
           
-          <li *ngIf="showManagerBoard || showAdminBoard">
+          <li *ngIf="showAdminBoard">
             <a
               class=""
               routerLink="/home/employes"
               routerLinkActive="router-link-active"
               >Employee</a
             >
-          </li> -->
+          </li> 
+
           <li *ngIf="showAdminBoard || showManagerBoard">
             <a
               class=""
@@ -280,7 +275,7 @@
         </ul>
       </li>
 
-      <!-- <li class="sub-menu" *ngIf="showManagerBoard || showAdminBoard ">
+      <li class="sub-menu" *ngIf="showAdminBoard ">
         <a href="javascript:0;" class="">
           <i class="fa fa-cog" aria-hidden="true"></i>
           <span>Activités</span>
@@ -344,7 +339,7 @@
             >
           </li>
         </ul>
-      </li> -->
+      </li>
     </ul>
     <!-- sidebar menu end-->
   </div>

@@ -38,6 +38,7 @@
           <td>
             {{ appro.montantAvance }}
             <span
+            *ngIf="showManagerBoard || showAdminBoard"
               [ngClass]="{ disabled: appro.status == 'VALIDE' }"
               class="btn btn-info btn-sm pull-right"
               (click)="addEditMontantAvanceAppro(appro)"
@@ -59,7 +60,7 @@
           <td>
             {{ appro.status }}
             <span
-              *ngIf="!showAssocieBoard && !showVendeurBoard"
+            *ngIf="showManagerBoard || showAdminBoard"
               [ngClass]="{ disabled: appro.status == 'VALIDE'}"
               class="btn btn-info btn-sm pull-right"
               (click)="addEditStatusAppro(appro)"
