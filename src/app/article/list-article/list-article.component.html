@@ -6,7 +6,6 @@
     <div class="row" style="padding-left: 20px; padding-top: 10px">
       <div class="col-md-1">
         <button
-          *ngIf="!showAssocieBoard && !showVendeurBoard"
           (click)="addEditArticle(null)"
           class="btn btn-success btn-lg">
           <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
@@ -96,12 +95,11 @@
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="!showAssocieBoard && !showVendeurBoard"
               class="btn btn-info btn-sm" (click)="addEditArticle(i)">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="!showAssocieBoard && !showVendeurBoard"
+            *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteArticle(art.id)"
             >

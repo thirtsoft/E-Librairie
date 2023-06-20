@@ -1,4 +1,4 @@
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
@@ -6,22 +6,23 @@ import { Fournisseur } from '../models/fournisseur';
 import { Utilisateur } from '../models/utilisateur';
 
 import { environment } from 'src/environments/environment';
+import { Vente } from '../models/vente';
 
+const TOKEN_KEY = 'AuthToken';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
 export class UtilisateurService {
 
- // baseUrl = environment.apiBaseUrl;
-
- // baseUrl = 'https://62.171.128.8/gestionstock-alamine/v1';
-
- baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
-//  baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
+  baseUrl = environment.apiBaseUrl
 
   choixmenu : string  = 'A';
   listData : Utilisateur[];
+  listVente : Vente[];
   formData:  Fournisseur;
 
   dataForm:  FormGroup;
@@ -89,6 +90,12 @@ export class UtilisateurService {
     return this.http.get<string[]>(`${this.baseUrl}/utilisateurs/authorities`);
 
   }
+
+  getAllVenteByEmployeId(userId: number): Observable<Vente[]> {
+    return this.http.get<Vente[]>(`${this.baseUrl}/ventes/searchListVenteByEmpId/`+ userId, httpOptions);
+  }
+
+  
 
 
 

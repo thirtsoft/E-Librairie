@@ -12,7 +12,9 @@ export class Vente {
   dateVente: Date;
   DeletedOrderItemIDs: string;
 
-  ligneVentes :Array<LigneVente>=[];
+ // ligneVentes :Array<LigneVente>=[];
+
+  ligneVentes: LigneVente[];
 
   utilisateur: Utilisateur;
 

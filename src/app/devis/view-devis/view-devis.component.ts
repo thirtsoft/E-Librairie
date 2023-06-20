@@ -129,27 +129,29 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
     return {
       content: [
         {
-          text: 'AL AMINE',
-          fontSize: 46,
+          text: 'WOKITE SARL',
+          fontSize: 20,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
           style: 'name',
         },
         {
-          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+          text: 'Prestation de Service & Ingénierie Logigiel et Systèmes - Formation - Consultance - Audit',
           fontSize: 12,
+          alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
-          fontSize: 10.5,
+          text: 'Hann-Mariste 2 – Dakar / Sénégal - RC : SN.DKR.2021.A.15470',
+          fontSize: 11,
+          alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: +221 77 944 03 10 / Email: contact@wokite.net',
           fontSize: 10,
           bold: true,
           alignment: 'center',
@@ -166,7 +168,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
               {
                 text: `${this.ldevService.listData[0].devis.utilisateur.name}`,
-                fontSize: 12,
+                fontSize: 10,
                 bold: true,
                 margin: [0, 15, 0, 15]
               },
@@ -187,7 +189,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
         {
           text: ' FACTURE PROFORMAT',
           alignment: 'center',
-          fontSize: 20,
+          fontSize: 12,
           color: '#0000ff',
           bold: true,
           margin: [0, 5, 0, 5],
@@ -196,7 +198,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
         {
           text: `N° : ${this.ldevService.listData[0].devis.numeroDevis}`,
           bold: true,
-          fontSize: 14,
+          fontSize: 11,
           alignment: 'center',
           color: '#0000ff',
           margin: [0, 8, 0, 8]
@@ -204,6 +206,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
         {
           text: 'Pour : ' + this.ldevService.listData[0].devis.client.raisonSocial,
           alignment: 'left',
+          fontSize: 11,
           margin: [0, 8, 0, 8]
         },
 
@@ -228,22 +231,22 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
       styles: {
         header: {
-          fontSize: 14,
+          fontSize: 10,
           bold: true,
           margin: [0, 20, 0, 10],
           decoration: 'underline'
         },
         name: {
-          fontSize: 14,
+          fontSize: 10,
           bold: true
         },
         total: {
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           italics: true
         },
         ligne: {
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           italics: true
         },
@@ -254,7 +257,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
         },
         tableHeader: {
           bold: true,
-          fontSize: 14,
+          fontSize: 10,
           alignment: 'center'
         },
 

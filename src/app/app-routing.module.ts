@@ -101,6 +101,9 @@ import { ListHistoriqueAvoirComponent } from './historique/list-historique-avoir
 import { ListHistoriqueVenteComponent } from './historique/list-historique-vente/list-historique-vente.component';
 import { ListHistoriqueCommandeComponent } from './historique/list-historique-commande/list-historique-commande.component';
 import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
+import { EmployeAvecCompteComponent } from './employe/employe-avec-compte/employe-avec-compte.component';
+import { DetailVenteEmployeComponent } from './employe/detail-vente-employe/detail-vente-employe.component';
+import { VenteCreationComponent } from './vente/vente-creation/vente-creation.component';
 
 const routes: Routes = [
 
@@ -280,6 +283,11 @@ const routes: Routes = [
     {
       path: 'venteQrcode/:barcode',
       component: CreateVentewithQrcodeBarCodeComponent,
+ //     canActivate: [AuthGuardService]
+    },
+    {
+      path: 'vente-creation',
+      component: VenteCreationComponent,
  //     canActivate: [AuthGuardService]
     },
    /* { path:'vente/:username',children:[
@@ -617,6 +625,17 @@ const routes: Routes = [
       path: 'historiqueLogins',
       component: ListHistoriqueLoginComponent,
   //    canActivate: [AuthGuardService]
+    },
+
+    {
+      path: 'employees',
+      component: EmployeAvecCompteComponent,
+//      canActivate: [AuthGuardService]
+    },
+    {
+      path:'employe/detail-vente/:id',
+      component: DetailVenteEmployeComponent,
+ //     canActivate: [AuthGuardService]
     },
 
 

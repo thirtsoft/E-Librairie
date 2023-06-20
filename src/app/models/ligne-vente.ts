@@ -11,6 +11,7 @@ export class LigneVente {
   qteStock: number;
   prixVente: number;
   total: number;
+  barCode: string;
 
   vente: Vente;
 

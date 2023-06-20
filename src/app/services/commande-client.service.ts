@@ -16,13 +16,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CommandeClientService {
 
- // baseUrl_1 = environment.apiBaseUrl;
-
- // baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
-//  baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
+  baseUrl = environment.apiBaseUrl
 
   private db: Dexie;
   private tableCmdClient: Dexie.Table<CommandeClient, number>;
@@ -30,7 +24,7 @@ export class CommandeClientService {
   Data;
   listDataCmd: any[] = [];
 
- // private baseUrl_1 = window["cfgApibaseUrl_1"];
+ // private baseUrl = window["cfgApibaseUrl"];
 
   choixmenu : string  = 'A';
   listData : CommandeClient[];
@@ -63,27 +57,27 @@ export class CommandeClientService {
   }
 
   getAllCommandeClients(): Observable<CommandeClient[]> {
-    return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes/all`);
+    return this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes/all`);
   }
 
   getAllCommandesOrderDesc(): Observable<CommandeClient[]> {
-    return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes/allCommandeClientOrderDesc`);
+    return this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes/allCommandeClientOrderDesc`);
   }
 
   getAllCommandesOf3LatestMonths(): Observable<CommandeClient[]> {
-    return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes/allCommandeClientOf3LatestMonths`);
+    return this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes/allCommandeClientOf3LatestMonths`);
   }
 
   getTop500CommandesOrderByIdDesc(): Observable<CommandeClient[]> {
-    return this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes/findTop500OfCommandeClientOrderByIdDesc`);
+    return this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes/findTop500OfCommandeClientOrderByIdDesc`);
   }
 
   public getCommandeClientById(id: number): Observable<CommandeClient> {
-    return this.http.get<CommandeClient> (`${this.baseUrl_1}/commandes/findById/${id}`);
+    return this.http.get<CommandeClient> (`${this.baseUrl}/commandes/findById/${id}`);
   }
 
   getOrderByID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/commandes/findById/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/commandes/findById/`+id).toPromise();
   }
 
 
@@ -92,27 +86,27 @@ export class CommandeClientService {
       ...this.formData,
       lcomms: this.orderItems
     };
-    return this.http.post(`${this.baseUrl_1}/commandes/commandesClientes`, body);
+    return this.http.post(`${this.baseUrl}/commandes/commandesClientes`, body);
   }
 
   saveCommande(info: CommandeClient, id:number) {
-    return this.http.post(`${this.baseUrl_1}/commandes/commandesClientes?id=`+id, info);
+    return this.http.post(`${this.baseUrl}/commandes/commandesClientes?id=`+id, info);
   }
 
 
 /*   saveCommande(info: Object) {
-    return this.http.post(`${this.baseUrl_1}/commandesClientes`, info);
+    return this.http.post(`${this.baseUrl}/commandesClientes`, info);
   } */
   updateCommandeClient(id: number, value: CommandeClient): Observable<CommandeClient> {
-    return this.http.put<CommandeClient>(`${this.baseUrl_1}/commandes/update/${id}`, value);
+    return this.http.put<CommandeClient>(`${this.baseUrl}/commandes/update/${id}`, value);
   }
 
   deleteCommandeClient(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/commandes/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/commandes/delete/${id}`, { responseType: 'text' });
   }
 
   deleteCommande(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/commandes/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/commandes/delete/${id}`, { responseType: 'text' });
   }
 
   getDocument(id :number) {
@@ -297,13 +291,13 @@ export class CommandeClientService {
   public generateReport(id: number){
   //  return this.http.get<any>("http://localhost:8080/alAmine/report/pdf"+"/"+ id);
 
-    return this.http.get(`${this.baseUrl_1}/commandes/report/pdf`+"/"+ id);
+    return this.http.get(`${this.baseUrl}/commandes/report/pdf`+"/"+ id);
   }
 
   generateNumCommande(): Observable<any> {
   //  return this.http.get("http://localhost:8081/prodApi/generateCodeCommand");
 
-    return this.http.get(`${this.baseUrl_1}/commandes/generateCodeCommand`);
+    return this.http.get(`${this.baseUrl}/commandes/generateCodeCommand`);
   }
 
   getNumeroCommande() {
@@ -324,7 +318,7 @@ export class CommandeClientService {
   }
 
   async addAllDataCommandeToIndexeddb() {
-    await this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes`).subscribe(response => {
+    await this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes`).subscribe(response => {
       this.listDataCmd = response;
       this.db.transaction('rw', this.tableCmdClient, async ()=> {
         console.log(this.listDataCmd);

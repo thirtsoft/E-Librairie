@@ -251,20 +251,33 @@ export class ListArticleWithBarArcodeComponent implements OnInit {
           columns: [
             [
               {
-                text: 'LIBRARY ALAMINE',
+                text: 'WOKITE SARL',
+                fontSize: 20,
+                alignment: 'center',
+                color: '#0000ff',
+                decoration: 'underline',
                 style: 'name',
               },
               {
-                text: 'En Face CBAO Marché Bignona',
+                text: 'Prestation de Service & Ingénierie Logigiel et Systèmes - Formation - Consultance - Audit',
+                fontSize: 12,
+                alignment: 'center',
+                bold: true,
+                color: '#0000ff'
               },
               {
-                text: 'Téléphone : +221338763598',
+                text: 'Hann-Mariste 2 – Dakar / Sénégal - RC : SN.DKR.2021.A.15470',
+                fontSize: 11,
+                alignment: 'center',
+                bold: true,
+                color: '#0000ff'
               },
               {
-                text: 'Mobile : +221779440310',
-              },
-              {
-                text: 'Email : alamine@gmail.com',
+                text: 'Tél: +221 77 944 03 10 / Email: contact@wokite.net',
+                fontSize: 10,
+                bold: true,
+                alignment: 'center',
+                color: '#0000ff'
               },
 
             ],

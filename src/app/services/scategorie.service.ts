@@ -15,16 +15,8 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ScategorieService {
 
-//  baseUrl_1 = environment.apiBaseUrl;
+  baseUrl = environment.apiBaseUrl
 
- // baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
- baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
- // baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
-
-
-  //  private baseUrl = window["cfgApiBaseUrl"];
 
   choixmenu : string  = 'A';
   listData : Scategorie[];
@@ -46,23 +38,23 @@ export class ScategorieService {
   constructor(private http: HttpClient) { }
 
   getAllScategories(): Observable<any> {
-     return this.http.get(`${this.baseUrl_1}/scategories/all`);
+     return this.http.get(`${this.baseUrl}/scategories/all`);
   }
 
   getAllScategorieOrderDesc(): Observable<Scategorie[]> {
-    return this.http.get<Scategorie[]>(`${this.baseUrl_1}/scategories/allScategorieOrderDesc`);
+    return this.http.get<Scategorie[]>(`${this.baseUrl}/scategories/allScategorieOrderDesc`);
   }
 
   getScategorieByID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/scategories/findById/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/scategories/findById/`+id).toPromise();
   }
 
   public getScategorieById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/scategories/findById/${id}`);
+    return this.http.get(`${this.baseUrl}/scategories/findById/${id}`);
   }
 
   getListScategoriesByCategory(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/scategories/searchListScategoriesByCategoryId/?catId=${id}`);
+    return this.http.get(`${this.baseUrl}/scategories/searchListScategoriesByCategoryId/?catId=${id}`);
   }
 
   getListScategoriesByCategoryId(id: number){
@@ -73,15 +65,15 @@ export class ScategorieService {
   }
 
   createScategorie(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/scategories/create`, info);
+    return this.http.post(`${this.baseUrl}/scategories/create`, info);
   }
 
   updateScategorie(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl_1}/scategories/update/${id}`, value);
+    return this.http.put(`${this.baseUrl}/scategories/update/${id}`, value);
   }
 
   deleteScategorie(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/scategories/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/scategories/delete/${id}`, { responseType: 'text' });
   }
 
    /**
@@ -95,7 +87,7 @@ export class ScategorieService {
 
     const httpOptions = { headers: headers };
 
-    return this.http.post(`${this.baseUrl_1}/scategories/uploadScategorie`, formData, httpOptions);
+    return this.http.post(`${this.baseUrl}/scategories/uploadScategorie`, formData, httpOptions);
 
   }
 
@@ -104,7 +96,7 @@ export class ScategorieService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl_1}/scategories/download/scategories.xlsx`,{ observe: 'response', responseType: 'blob' })
+    this.http.get(`${this.baseUrl}/scategories/download/scategories.xlsx`,{ observe: 'response', responseType: 'blob' })
       .subscribe(res => {
         const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
         FileSaver.saveAs(blob, 'scategories.xlsx');
@@ -117,7 +109,7 @@ export class ScategorieService {
    * methode permettant de generer un pdf depuis API Spring boot
    */
   exportPdfScategories(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl_1}/scategories/createScategoriePdf`, {responseType: 'blob'});
+    return this.http.get(`${this.baseUrl}/scategories/createScategoriePdf`, {responseType: 'blob'});
   }
 
 }

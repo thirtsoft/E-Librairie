@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   numberOfProductByStock;
   numberOfProductWhenStockEqualStockInit;
   numberOfProductWhenStockInfStockInit;
+  capitalDeDepart;
 
   info: any;
   roles: string[];
@@ -58,6 +59,7 @@ export class DashboardComponent implements OnInit {
     this.getNumberOfProductsByStock();
     this.getNumberOfProductsWhenQStockEqualStockInital();
     this.getNumberOfProductsWhenQStockInfStockInital();
+    this.getCapitalDeDepart();
 
    // this.reloadPage();
 
@@ -158,6 +160,13 @@ export class DashboardComponent implements OnInit {
   getSumOfCommandesByMonth(): void {
     this.dashboardService.getSumsOfCommandesByMonth().subscribe(data => {
       this.sumCommandeByMonth = data;
+      console.log("Commande Par mois " +this.sumCommandeByMonth);
+    });
+  }
+
+  getCapitalDeDepart(): void {
+    this.dashboardService.calculerLeCapitaDedepart().subscribe(data => {
+      this.capitalDeDepart = data;
       console.log("Commande Par mois " +this.sumCommandeByMonth);
     });
   }

@@ -10,16 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ChargeService {
 
-//  baseUrl = environment.apiBaseUrl;
-
- // baseUrl = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
- // baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
-
- // private baseUrl = window["cfgApiBaseUrl"];
-
+  baseUrl = environment.apiBaseUrl
+  
   choixmenu : string  = 'A';
   listData : Charge[];
   public formData: Charge;

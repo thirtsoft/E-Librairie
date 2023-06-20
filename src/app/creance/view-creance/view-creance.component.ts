@@ -141,27 +141,29 @@ export class ViewCreanceComponent implements OnInit {
     return {
       content: [
         {
-          text: 'AL AMINE',
-          fontSize: 46,
+          text: 'WOKITE SARL',
+          fontSize: 20,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
           style: 'name',
         },
         {
-          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+          text: 'Prestation de Service & Ingénierie Logigiel et Systèmes - Formation - Consultance - Audit',
           fontSize: 12,
+          alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
-          fontSize: 10.5,
+          text: 'Hann-Mariste 2 – Dakar / Sénégal - RC : SN.DKR.2021.A.15470',
+          fontSize: 11,
+          alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: +221 77 944 03 10 / Email: contact@wokite.net',
           fontSize: 10,
           bold: true,
           alignment: 'center',
@@ -177,7 +179,7 @@ export class ViewCreanceComponent implements OnInit {
             [
               {
                 text: `${this.lcreanceService.listData[0].creance.utilisateur.name}`,
-                fontSize: 12,
+                fontSize: 10,
                 bold: true,
                 margin: [0, 15, 0, 15]
               },
@@ -198,7 +200,7 @@ export class ViewCreanceComponent implements OnInit {
         {
           text: 'FACTURE CREANCE',
           alignment: 'center',
-          fontSize: 15,
+          fontSize: 12,
           color: '#0000ff',
           bold: true,
           margin: [0, 5, 0, 5],
@@ -206,7 +208,7 @@ export class ViewCreanceComponent implements OnInit {
         {
           text: `N° : ${this.lcreanceService.listData[0].numero}`,
           bold: true,
-          fontSize: 14,
+          fontSize: 11,
           alignment: 'center',
           color: '#0000ff',
           margin: [0, 8, 0, 8]
@@ -214,6 +216,7 @@ export class ViewCreanceComponent implements OnInit {
         {
           text: 'Pour  : ' +this.lcreanceService.listData[0].creance.client.raisonSocial,
           alignment: 'left',
+          fontSize: 11,
           margin: [0, 8, 0, 8]
         },
 
@@ -229,7 +232,7 @@ export class ViewCreanceComponent implements OnInit {
           text: 'Montant Emprunté : ' +this.lcreanceService.listData[0].creance.soldeCreance,
           alignment: 'right',
           margin: [0, 8, 0, 8],
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           colSpan: 3
         },
@@ -237,7 +240,7 @@ export class ViewCreanceComponent implements OnInit {
           text: 'Montant Total : ' +this.lcreanceService.listData[0].creance.totalCreance,
           alignment: 'right',
           margin: [0, 5, 0, 5],
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           colSpan: 3
         },
@@ -245,7 +248,7 @@ export class ViewCreanceComponent implements OnInit {
           text: 'Montant Avancée : ' +this.lcreanceService.listData[0].creance.avanceCreance,
           alignment: 'right',
           margin: [0, 5, 0, 5],
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           colSpan: 3
         },
@@ -254,7 +257,7 @@ export class ViewCreanceComponent implements OnInit {
           text: 'Montant à Payer : ' +[(this.lcreanceService.listData[0].creance.totalCreance)-(this.lcreanceService.listData[0].creance.avanceCreance)],
           alignment: 'right',
           margin: [0, 5, 0, 5],
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           colSpan: 3
         },
@@ -271,22 +274,22 @@ export class ViewCreanceComponent implements OnInit {
 
       styles: {
         header: {
-          fontSize: 14,
+          fontSize: 10,
           bold: true,
           margin: [0, 20, 0, 10],
           decoration: 'underline'
         },
         name: {
-          fontSize: 14,
+          fontSize: 10,
           bold: true
         },
         total: {
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           italics: true
         },
         ligne: {
-          fontSize: 12,
+          fontSize: 10,
           bold: true,
           italics: true
         },
@@ -297,7 +300,7 @@ export class ViewCreanceComponent implements OnInit {
         },
         tableHeader: {
           bold: true,
-          fontSize: 14,
+          fontSize: 10,
           alignment: 'center'
         },
 

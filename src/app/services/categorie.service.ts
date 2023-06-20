@@ -35,11 +35,7 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class CategorieService {
 
- // baseUrl_1 = environment.apiBaseUrl;
- // baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
-//  baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
+  baseUrl = environment.apiBaseUrl
 
   private db: Dexie;
   private tableCat: Dexie.Table<Categorie, number>;
@@ -109,27 +105,27 @@ export class CategorieService {
 
 
   getAllCategories(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${this.baseUrl_1}/categories/all`);
+    return this.http.get<Categorie[]>(`${this.baseUrl}/categories/all`);
   }
 
   getAllCategoriesOrderDesc(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${this.baseUrl_1}/categories/allCategoryOrderDesc`);
+    return this.http.get<Categorie[]>(`${this.baseUrl}/categories/allCategoryOrderDesc`);
   }
 
   getCategorieByID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/categories/findById/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/categories/findById/`+id).toPromise();
   }
 
   public getCategorieById(id: number): Observable<Categorie> {
-    return this.http.get<Categorie>(`${this.baseUrl_1}/categories/findById/${id}`);
+    return this.http.get<Categorie>(`${this.baseUrl}/categories/findById/${id}`);
   }
 
   saveCategorie(info: Categorie): Observable<Categorie> {
-    return this.http.post<Categorie>(`${this.baseUrl_1}/categories/create`, info);
+    return this.http.post<Categorie>(`${this.baseUrl}/categories/create`, info);
   }
 
   public createCategorieAPI(info: Categorie) {
-    this.http.post(`${this.baseUrl_1}/categories/create`, info)
+    this.http.post(`${this.baseUrl}/categories/create`, info)
       .subscribe(
         ()=> alert('Categorie ajouté avec succes'),
         (err) => console.log('Erreur lors de ajout')
@@ -137,11 +133,11 @@ export class CategorieService {
   }
 
   updateCategorie(id: number, value: Categorie): Observable<Categorie> {
-    return this.http.put<Categorie>(`${this.baseUrl_1}/categories/update/${id}`, value);
+    return this.http.put<Categorie>(`${this.baseUrl}/categories/update/${id}`, value);
   }
 
   deleteCategorie(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/categories/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/categories/delete/${id}`, { responseType: 'text' });
   }
 
   /**
@@ -158,7 +154,7 @@ export class CategorieService {
 
     const httpOptions = { headers: headers };
 
-    return this.http.post(`${this.baseUrl_1}/categories/uploadCategorie`, formData, httpOptions);
+    return this.http.post(`${this.baseUrl}/categories/uploadCategorie`, formData, httpOptions);
 
   }
 
@@ -167,7 +163,7 @@ export class CategorieService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl_1}/categories/download/categories.xlsx`,
+    this.http.get(`${this.baseUrl}/categories/download/categories.xlsx`,
       { observe: 'response', responseType: 'blob' }
     ).subscribe(res => {
       const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
@@ -180,7 +176,7 @@ export class CategorieService {
    * methode permettant de generer un pdf depuis API Spring boot
    */
   exportPdfCategories(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl_1}/categories/createCategoriePdf`, {responseType: 'blob'});
+    return this.http.get(`${this.baseUrl}/categories/createCategoriePdf`, {responseType: 'blob'});
   }
 
   // Methode pour Offline&Online et DexieJS
@@ -250,7 +246,7 @@ export class CategorieService {
   } */
 
   /* async addAllDataScatToIndexeddb() {
-    await this.http.get<Scategorie[]>(`${this.baseUrl_1}/scategories`).subscribe(response => {
+    await this.http.get<Scategorie[]>(`${this.baseUrl}/scategories`).subscribe(response => {
       this.listDataScat = response;
       this.db.transaction('rw', this.tableScat, async ()=> {
         console.log(this.listDataScat);
@@ -288,7 +284,7 @@ export class CategorieService {
   }
 
   async addAllDataCommandeToIndexeddb() {
-    await this.http.get<CommandeClient[]>(`${this.baseUrl_1}/commandes`).subscribe(response => {
+    await this.http.get<CommandeClient[]>(`${this.baseUrl}/commandes`).subscribe(response => {
       this.listDataCommande = response;
       this.db.transaction('rw', this.tableCmdClient, async ()=> {
         console.log(this.listDataCommande);
@@ -301,7 +297,7 @@ export class CategorieService {
   }
 
   async addAllDataLigneCmdToIndexeddb() {
-    await this.http.get<LigneCmdClient[]>(`${this.baseUrl_1}/ligneCommandes`).subscribe(response => {
+    await this.http.get<LigneCmdClient[]>(`${this.baseUrl}/ligneCommandes`).subscribe(response => {
       this.listDataLigneCommande = response;
       this.db.transaction('rw', this.tableLcmd, async ()=> {
         console.log(this.listDataLigneCommande);

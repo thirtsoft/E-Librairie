@@ -14,21 +14,12 @@ import { environment } from 'src/environments/environment';
 })
 export class ClientService {
 
- // baseUrl_1 = environment.apiBaseUrl;
-
- // baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
-//  baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
-
- /*  private db: Dexie;
-  private tableClient: Dexie.Table<Client, number>; */
+  baseUrl = environment.apiBaseUrl
 
   Data;
   listDataClt: any[] = [];
 
- // private baseUrl_1 = window["cfgApibaseUrl_1"];
+ // private baseUrl = window["cfgApibaseUrl"];
 
   choixmenu : string  = 'A';
   listData : Client[];
@@ -55,39 +46,39 @@ export class ClientService {
   }
 
   getAllClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.baseUrl_1}/clients/all`);
+    return this.http.get<Client[]>(`${this.baseUrl}/clients/all`);
   }
 
   getAllClientsOrderDesc(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.baseUrl_1}/clients/allClientOrderDesc`);
+    return this.http.get<Client[]>(`${this.baseUrl}/clients/allClientOrderDesc`);
   }
 
   public getClientById(id: number): Observable<Client> {
-    return this.http.get<Client>(`${this.baseUrl_1}/clients/findById/${id}`);
+    return this.http.get<Client>(`${this.baseUrl}/clients/findById/${id}`);
   }
 
   getClientByID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/clients/findById/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/clients/findById/`+id).toPromise();
   }
 
   createClient(info: Client): Observable<Client> {
-    return this.http.post<Client>(`${this.baseUrl_1}/clients/create`, info);
+    return this.http.post<Client>(`${this.baseUrl}/clients/create`, info);
   }
 
   createData(info: Client): Observable<Client> {
-    return this.http.post<Client>(`${this.baseUrl_1}/clients/create`, info);
+    return this.http.post<Client>(`${this.baseUrl}/clients/create`, info);
   }
 
   updateClient(id: number, value: Client): Observable<Client> {
-    return this.http.put<Client> (`${this.baseUrl_1}/clients/update/${id}`, value);
+    return this.http.put<Client> (`${this.baseUrl}/clients/update/${id}`, value);
   }
 
   deleteClient(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/clients/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/clients/delete/${id}`, { responseType: 'text' });
   }
 
   getClientGroupByRaisonSocial() {
-    return this.http.get(`${this.baseUrl_1}/clients/ListClientGroupByRaisonSocial`);
+    return this.http.get(`${this.baseUrl}/clients/ListClientGroupByRaisonSocial`);
   }
 
 

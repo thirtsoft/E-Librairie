@@ -19,13 +19,8 @@ import { environment } from 'src/environments/environment';
 })
 export class VenteService {
 
-//  baseUrl_1 = environment.apiBaseUrl;
+  baseUrl = environment.apiBaseUrl
 
-//  baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
-  //baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 
   private db: Dexie;
   private tableVent: Dexie.Table<Vente, number>;
@@ -80,31 +75,31 @@ export class VenteService {
   }
 
   getAllVentes(): Observable<Vente[]> {
-    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/all`);
+    return this.http.get<Vente[]>(`${this.baseUrl}/ventes/all`);
   }
 
   getAllVentesOrderDesc(): Observable<Vente[]> {
-    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/allVenteOrderDesc`);
+    return this.http.get<Vente[]>(`${this.baseUrl}/ventes/allVenteOrderDesc`);
   }
 
   getAllVentesOf3LatestMonths(): Observable<Vente[]> {
-    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/allVenteOf3LatestMonths`);
+    return this.http.get<Vente[]>(`${this.baseUrl}/ventes/allVenteOf3LatestMonths`);
   }
 
   getTop500OfVentesOrderByIdDesc(): Observable<Vente[]> {
-    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/findTop500OfVenteOrderByIdDesc`);
+    return this.http.get<Vente[]>(`${this.baseUrl}/ventes/findTop500OfVenteOrderByIdDesc`);
   }
 
   public getVenteById(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`);
+    return this.http.get(`${this.baseUrl}/ventes/findById/${id}`);
   }
 
   getVenteID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/ventes/findById/${id}`).toPromise();
+    return this.http.get(`${this.baseUrl}/ventes/findById/${id}`).toPromise();
   }
 
   getSumVenteByDay(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/ventes/searchSumsOfVenteByDay`);
+    return this.http.get(`${this.baseUrl}/ventes/searchSumsOfVenteByDay`);
   }
 
   createVente() {
@@ -113,34 +108,34 @@ export class VenteService {
       ligneVentes: this.orderItems
     };
     let id: number;
-    return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, body);
+    return this.http.post(`${this.baseUrl}/ventes/create?id=`+id, body);
   }
 
   saveVente(info: Vente, id:number) {
-    return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, info);
+    return this.http.post(`${this.baseUrl}/ventes/create?id=`+id, info);
   }
 
   saveVenteWithBarcode(info: Vente, id:number) {
-    return this.http.post(`${this.baseUrl_1}/ventes/venteWithbarCode?id=`+id, info);
+    return this.http.post(`${this.baseUrl}/ventes/venteWithbarCode?id=`+id, info);
   }
 
 
   createData(info: Object, id: number): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/ventes/create?id=`+id, info);
+    return this.http.post(`${this.baseUrl}/ventes/create?id=`+id, info);
   }
 
   updateVente(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl_1}/ventes/update/${id}`, value);
+    return this.http.put(`${this.baseUrl}/ventes/update/${id}`, value);
   }
 
   deleteVente(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/ventes/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/ventes/delete/${id}`, { responseType: 'text' });
   }
 
   // Dexie and OffLine&OnLine
 
   private async addAllDataVenteToIndexeddb() {
-    await this.http.get<Vente[]>(`${this.baseUrl_1}/ventes`).subscribe(response => {
+    await this.http.get<Vente[]>(`${this.baseUrl}/ventes`).subscribe(response => {
       this.listDataVente = response;
       this.db.transaction('rw', this.tableVent, async ()=> {
         console.log(this.listDataVente);
@@ -153,7 +148,7 @@ export class VenteService {
   }
 
   private async addAllDataLigneVenteToIndexeddb() {
-    await this.http.get<LigneVente[]>(`${this.baseUrl_1}/ligneVentes`).subscribe(response => {
+    await this.http.get<LigneVente[]>(`${this.baseUrl}/ligneVentes`).subscribe(response => {
       this.listDataLigneVente = response;
       this.db.transaction('rw', this.tableLvent, async ()=> {
         console.log(this.listDataLigneVente);
@@ -166,7 +161,7 @@ export class VenteService {
   }
 
   createVenteAPI(vente: Vente, id: number) {
-    return this.http.post(`${this.baseUrl_1}/ventes?id=`+id, vente);
+    return this.http.post(`${this.baseUrl}/ventes?id=`+id, vente);
   }
 
 
@@ -229,7 +224,7 @@ export class VenteService {
   }
 
   generateNumeroVente(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/ventes/generateNumeroVente`);
+    return this.http.get(`${this.baseUrl}/ventes/generateNumeroVente`);
   }
 
   getNumeroVente() {
@@ -256,7 +251,7 @@ export class VenteService {
   }
 
   listOfVenteByUsers(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}.ventes/searchListVenteByEmpId`);
+    return this.http.get(`${this.baseUrl}.ventes/searchListVenteByEmpId`);
   }
 
 

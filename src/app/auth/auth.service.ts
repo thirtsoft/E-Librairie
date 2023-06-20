@@ -12,11 +12,7 @@ import { TokenStorageService } from './token-storage.service';
 import { IUser } from '../models/utilisateur';
 import { environment } from 'src/environments/environment';
 
-//const AUTH_API = 'http://localhost:8081/gestionstock-alamine/v1/';
-
-//const AUTH_API = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/';
+//const AUTH_API = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/';
 
 //const AUTH_API  = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/';
 
@@ -32,22 +28,12 @@ const httpOptions = {
 })
 export class AuthService {
 
- // baseUrl_1 = environment.apiBaseUrl;
-
-  loginUrl = "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/auth/signIn";
-
-//  loginUrl = "http://localhost:8081/gestionstock-alamine/v1/auth/signIn";
+  baseUrl_1 = environment.apiBaseUrl;
 
   //loginUrl = "http://62.171.128.8/gestionstock-alamine/v1/auth/signIn";
 
 
 //  loginUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1/auth/signIn";
-
- // baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
-//  baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'http://localhost:8081/gestionstock-alamine/v1';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;
@@ -81,7 +67,7 @@ export class AuthService {
   }
 
   signUp(info: Register): Observable<Register> {
-    return this.http.post<Register>(AUTH_API + 'auth/signUp', info , httpOptions);
+    return this.http.post<Register>(this.baseUrl_1 + '/auth/signUp', info , httpOptions);
   }
 
   attemptAuth(credentials: Login): Observable<any> {
@@ -89,25 +75,9 @@ export class AuthService {
       username: credentials.username,
       password: credentials.password
     };
-    return this.http.post(this.loginUrl, loginData, httpOptions);
+    return this.http.post(this.baseUrl_1 + '/auth/signIn', loginData, httpOptions);
     this.islogin=true;
   }
-
-
-/*
-  attemptAuth(user: Utilisateur) {
-    return this.http.post<any>(this.loginUrl, user)
-      .subscribe((res: any) => {
-        window.sessionStorage.setItem(TOKEN_KEY, res.token);
-        this.getUserProfile(res.id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate(['home/profile/' + res.msg.id]);
-        })
-      })
-  }
-*/
-
-
 
   getUserProfile(id): Observable<any> {
     return this.http.get(`${this.baseUrl_1}/utilisateurs/findById/${id}`, httpOptions).pipe(

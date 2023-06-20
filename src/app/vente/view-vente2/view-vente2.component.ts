@@ -122,21 +122,24 @@ export class ViewVente2Component implements OnInit {
       pageMargins: [0.5, 0, 0, 0.5 ],
       content: [
         {
-          text: 'AL AMINE SEDHIOU',
-          fontSize: 9,
+          text: 'WOKITE SARL',
+          fontSize: 10,
           color: '#0000ff',
+          alignment: 'center',
           decoration: 'underline',
           style: 'name',
           bold: true
         },
         {
-          text: 'ROUTE BAC EN FACE CRF SEDHIOU',
-          fontSize: 7,
+          text: 'Prestation de Service & Ingénierie Logigiel et Systèmes - Formation - Consultance - Audit',
+          fontSize: 9,
+          alignment: 'center',
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 7,
+          text: 'Tél: +221 77 944 03 10 / Email: contact@wokite.net',
+          fontSize: 8,
+          alignment: 'center',
           color: '#0000ff'
         },
 
@@ -155,6 +158,8 @@ export class ViewVente2Component implements OnInit {
         {
           text: 'Ticket',
       //    alignment: 'center',
+          alignment: 'center',
+          fontSize: 7,
           color: '#0000ff',
           margin: [4, 4, 0, 4],
         //  fontSize: 9,
@@ -163,8 +168,9 @@ export class ViewVente2Component implements OnInit {
           text: `N° : ${this.lventeService.listData[0].vente.numeroVente}`,
         //  alignment: 'center',
           color: '#0000ff',
-          margin: [5, 5, 5, 5],
-          fontSize: 9,
+          alignment: 'center',
+          fontSize: 8,
+          margin: [5, 5, 5, 5]
         },
 
         {
@@ -179,7 +185,9 @@ export class ViewVente2Component implements OnInit {
         {
           layout: 'lightHorizontalLines',
           text: `TOTAL CFA : ${this.lventeService.listData[0].vente.totalVente}`,
-          margin: [10, 0, 0, 7],
+      //    margin: [10, 0, 0, 7],
+          margin: [0, 5, 0, 5],
+          fontSize: 8,
       //    fontSize: 10,
           colSpan: 2,
           bold: true
@@ -189,6 +197,7 @@ export class ViewVente2Component implements OnInit {
           text: ''
            + [(this.lventeService.listData[0].vente.typeReglement) + ' : ' + (this.lventeService.listData[0].vente.montantReglement)],
            margin: [0, 5, 0, 5],
+           fontSize: 8,
       //    fontSize: 10,
           colSpan: 3,
           bold: true
@@ -199,6 +208,7 @@ export class ViewVente2Component implements OnInit {
           text: 'Rendu : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
            margin: [0, 5, 0, 5],
+           fontSize: 8,
         //  fontSize: 10,
           colSpan: 2,
           bold: true
@@ -207,7 +217,8 @@ export class ViewVente2Component implements OnInit {
         {
           text: 'Merci de Votre Confiance !!!',
           margin: [10, 0, 0, 7],
-          fontSize: 8
+          fontSize: 8,
+          alignment: 'center',
         },
 
 
@@ -215,22 +226,26 @@ export class ViewVente2Component implements OnInit {
 
       styles: {
         header: {
-          fontSize: 14,
+        //  fontSize: 14,
+          fontSize: 0.5,
        //   bold: true,
           margin: [0, 10, 0],
         //  decoration: 'underline'
         },
         name: {
-          fontSize: 12,
+        //  fontSize: 12,
+          fontSize: 0.5,
         //  bold: true
         },
         total: {
-          fontSize: 12,
+        //  fontSize: 12,
+          fontSize: 0.5,
           bold: true,
           italics: true
         },
         ligne: {
-          fontSize: 10,
+        //  fontSize: 10,
+          fontSize: 0.5,
           bold: true,
           italics: true
         },
@@ -240,9 +255,10 @@ export class ViewVente2Component implements OnInit {
           italics: true
         },
         tableHeader: {
-          bold: true,
-          fontSize: 10,
-          alignment: 'center'
+        //  bold: true,
+        //  fontSize: 10,
+          fontSize: 0.5,
+       //   alignment: 'center'
         },
 
       }
@@ -255,36 +271,41 @@ export class ViewVente2Component implements OnInit {
       layout: 'lightHorizontalLines',
       table: {
         headerRows: 1,
-        widths: [0.5, 63.8, 'auto', 50],
+      //  widths: [0.5, 63.8, 'auto', 50],
+        widths: ['*', 'auto', '*'],
 
         body: [
           [
 
+            /*
             {
               text: '',
-          //    style: 'tableHeader'
+              fontSize: 0.5,
+            },*/
+
+            {
+              text: '',
+          //    fontSize: 0.5,
+              style: 'tableHeader'
             },
 
             {
               text: '',
-          //    style: 'tableHeader'
+        //      fontSize: 0.5,
+              style: 'tableHeader'
             },
 
             {
               text: '',
-        //      style: 'tableHeader'
-            },
-
-            {
-              text: '',
-      //        style: 'tableHeader'
+      //        fontSize: 0.5,
+              style: 'tableHeader'
             },
 
           ],
 
             ...item.map(x => {
-              return ([x.quantite, x.produit.designation,
-                (x.quantite*x.prixVente).toFixed(1), x.prixVente])
+              return ([x.quantite +'x'+ x.produit.designation,x.prixVente,
+                (x.quantite*x.prixVente).toFixed(1)])
             }),
 
 

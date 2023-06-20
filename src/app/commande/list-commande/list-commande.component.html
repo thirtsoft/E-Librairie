@@ -5,7 +5,6 @@
     </div>
     <div style="padding-left: 20px; padding-top: 10px">
       <a
-        *ngIf="(showGerantBoard || showVendeurBoard || showManagerBoard || showAdminBoard)"
         type="button"
         (click)="onCreateCommandeClient()"
         class="btn btn-success btn-lg"
@@ -49,11 +48,11 @@
               <i class="fa fa-eye" aria-hidden="true"></i></button
             >&nbsp;
             <button
-              *ngIf="(showManagerBoard || showAdminBoard)"
+              *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteCommandeClient(cmd.id)"
             >
-              <em class="fa fa-trash-o"></em></button
+        .      <em class="fa fa-trash-o"></em></button
             >&nbsp;
           </td>
         </tr>

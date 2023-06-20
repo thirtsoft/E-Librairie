@@ -151,6 +151,9 @@ import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
 import { ListPrestationComponent } from './prestation/list-prestation/list-prestation.component';
 import { CreatePrestationComponent } from './prestation/create-prestation/create-prestation.component';
 import { ViewClientComponent } from './client/view-client/view-client.component';
+import { EmployeAvecCompteComponent } from './employe/employe-avec-compte/employe-avec-compte.component';
+import { DetailVenteEmployeComponent } from './employe/detail-vente-employe/detail-vente-employe.component';
+import { VenteCreationComponent } from './vente/vente-creation/vente-creation.component';
 
 
 @NgModule({
@@ -278,6 +281,9 @@ import { ViewClientComponent } from './client/view-client/view-client.component'
     ListPrestationComponent,
     CreatePrestationComponent,
     ViewClientComponent,
+    EmployeAvecCompteComponent,
+    DetailVenteEmployeComponent,
+    VenteCreationComponent,
 
   ],
   imports: [

@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+  <div class="btn-toolbar">
+    <div class="panel-heading">
+      <h3>GESTION DES AGENTS VENDEURS</h3>
+    </div>
+    <!-- <div
+      class="form-group col-md-6"
+      style="padding-left: 20px; padding-top: 10px"
+    >
+      <a
+        type="button"
+        *ngIf="showManagerBoard || showAdminBoard"
+        (click)="onCreateUtilisateur()"
+        class="btn btn-success btn-lg"
+      >
+        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
+      >&nbsp;
+    </div> -->
+  </div>
+
+  <div class="panel-body">
+    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger" aria-label="">
+      <thead>
+        <tr>
+          <th>Phtoto</th>
+          <th>Utilisateur</th>
+          <th>Nom Utilisateur</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of crudApi.listData; let i = index">
+        <tr
+          *ngIf="user.roles[0]?.name == 'ROLE_VENDEUR' || user.roles[0]?.name == 'ROLE_GERANT' || user.roles[0]?.name == 'ROLE_MANAGER'">
+          <td>
+            <img class="avatar" src="assets/img/doctor-03.jpg" width="40" alt="" *ngIf="!img" />
+            <img [src]="
+                this.crudApi.baseUrl +
+                '/utilisateurs/avatar/' +
+                user.id +
+                '?ts=' +
+                getTS()
+              " width="40" class="avatar" alt="" *ngIf="img" />
+          </td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.roles[0]?.name }}</td>
+          <td>
+            {{ user.active }}
+          </td>
+          <td>
+            <button class="btn btn-success btn-lg" (click)="detailVenteEmploye(user)">
+              <i class="fa fa-eye" aria-hidden="true"></i> Voir détails</button>&nbsp;
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -12,11 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PrestationService {
 
-//  baseUrl_1 = environment.apiBaseUrl;
-
- // baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl = environment.apiBaseUrl
 
   choixmenu : string  = 'A';
   listData : Prestation[];
@@ -38,35 +34,35 @@ export class PrestationService {
   }
 
   getAllPrestations(): Observable<Prestation[]> {
-    return this.http.get<Prestation[]>(`${this.baseUrl_1}/prestations/all`);
+    return this.http.get<Prestation[]>(`${this.baseUrl}/prestations/all`);
   }
 
   getAllPrestationsOrderDesc(): Observable<Prestation[]> {
-    return this.http.get<Prestation[]>(`${this.baseUrl_1}/prestations/allPrestationOrderDesc`);
+    return this.http.get<Prestation[]>(`${this.baseUrl}/prestations/allPrestationOrderDesc`);
   }
 
   public getPrestationById(id: number): Observable<Prestation> {
-    return this.http.get<Prestation>(`${this.baseUrl_1}/prestations/findById/${id}`);
+    return this.http.get<Prestation>(`${this.baseUrl}/prestations/findById/${id}`);
   }
 
   createPrestation(info: Prestation): Observable<Prestation> {
-    return this.http.post<Prestation>(`${this.baseUrl_1}/prestations/create`, info);
+    return this.http.post<Prestation>(`${this.baseUrl}/prestations/create`, info);
   }
 
   updatePrestation(id: number, value: Prestation): Observable<Prestation> {
-    return this.http.put<Prestation> (`${this.baseUrl_1}/prestations/update/${id}`, value);
+    return this.http.put<Prestation> (`${this.baseUrl}/prestations/update/${id}`, value);
   }
 
   getSumsOfPrestationsByMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/prestations/searchSumsOfPrestationByMonth`);
+    return this.http.get(`${this.baseUrl}/prestations/searchSumsOfPrestationByMonth`);
   }
 
   getSumsOfPrestationsByYear(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/prestations/searchSumsOfPrestationByYear`);
+    return this.http.get(`${this.baseUrl}/prestations/searchSumsOfPrestationByYear`);
   }
 
   deletePrestation(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/prestations/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/prestations/delete/${id}`, { responseType: 'text' });
   }
 
 

@@ -2,15 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Role } from '../models/role';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
 
-  public baseUrl = 'http://localhost:8081/alAmine';
-
-//  private baseUrl = 'http://localhost:8080/Library-0.0.1-SNAPSHOT/alAmine';
+  baseUrl = environment.apiBaseUrl
 
   choixmenu : string  = 'A';
   listData : Role[];

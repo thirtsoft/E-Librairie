@@ -20,18 +20,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProduitService {
 
- // baseUrl_1 = environment.apiBaseUrl;
-
-//  baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-//  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
- // baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
-
-  /* private db: Dexie;
-  private tableProd: Dexie.Table<Produit, number>; */
+  baseUrl = environment.apiBaseUrl
 
   Data;
   listDataProd: any[] = [];
@@ -67,35 +56,35 @@ export class ProduitService {
   }
 
   getAllProduits(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(`${this.baseUrl_1}/produits/all`);
+    return this.http.get<Produit[]>(`${this.baseUrl}/produits/all`);
   }
 
   getAllProductsOrderDesc(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(`${this.baseUrl_1}/produits/allProduitOrderDesc`);
+    return this.http.get<Produit[]>(`${this.baseUrl}/produits/allProduitOrderDesc`);
   }
 
   getAllProductsOrderByDesignationAsc(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(`${this.baseUrl_1}/produits/allProduitOrderByDesignationAsc`);
+    return this.http.get<Produit[]>(`${this.baseUrl}/produits/allProduitOrderByDesignationAsc`);
   }
 
   getProduitByID(id:number):any {
-    return this.http.get(`${this.baseUrl_1}/produits/findById/`+id).toPromise();
+    return this.http.get(`${this.baseUrl}/produits/findById/`+id).toPromise();
   }
 
   public getProduitById(id: number): Observable<Produit> {
-    return this.http.get<Produit>(`${this.baseUrl_1}/produits/findById/${id}`);
+    return this.http.get<Produit>(`${this.baseUrl}/produits/findById/${id}`);
   }
 
   exportPdfProduit(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl_1}/produits/createPdf`,{responseType: 'blob'});
+    return this.http.get(`${this.baseUrl}/produits/createPdf`,{responseType: 'blob'});
   }
 
   createProduits(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/produits/create`, info);
+    return this.http.post(`${this.baseUrl}/produits/create`, info);
   }
 
   private createProduitAPI(info: Produit) {
-    this.http.post(`${this.baseUrl_1}/produits/create`, info)
+    this.http.post(`${this.baseUrl}/produits/create`, info)
       .subscribe(
         ()=> alert('Produit ajouté avec succes'),
         (err) => console.log('Erreur lors de ajout')
@@ -104,19 +93,19 @@ export class ProduitService {
 
 
   createData(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/produits/create`, info);
+    return this.http.post(`${this.baseUrl}/produits/create`, info);
   }
 
   saveProduit(info: Produit): Observable<Produit> {
-    return this.http.post<Produit>(`${this.baseUrl_1}/produits/create`, info);
+    return this.http.post<Produit>(`${this.baseUrl}/produits/create`, info);
   }
 
   updateProduit(id: number, value: Produit): Observable<Produit> {
-    return this.http.put<Produit>(`${this.baseUrl_1}/produits/update/${id}`, value);
+    return this.http.put<Produit>(`${this.baseUrl}/produits/update/${id}`, value);
   }
 
   deleteProduit(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/produits/delete/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/produits/delete/${id}`, { responseType: 'text' });
   }
 
   /**
@@ -132,7 +121,7 @@ export class ProduitService {
 
     const httpOptions = { headers: headers };
 
-    return this.http.post(`${this.baseUrl_1}/produits/upload`, formData, httpOptions);
+    return this.http.post(`${this.baseUrl}/produits/upload`, formData, httpOptions);
 
 
   }
@@ -156,7 +145,7 @@ export class ProduitService {
    */
 
   generateExcelFile() {
-    this.http.get(`${this.baseUrl_1}/produits/download/articles.xlsx`,
+    this.http.get(`${this.baseUrl}/produits/download/articles.xlsx`,
     { observe: 'response', responseType: 'blob' })
       .subscribe(res => {
         const blob = new Blob([res.body], { type: 'application/vnd.ms-excel' });
@@ -170,7 +159,7 @@ export class ProduitService {
    * methode permettant de generer un pdf depuis API Spring boot
    */
   exportPdfProduits(): Observable<Blob> {
-    return this.http.get(`${this.baseUrl_1}/produits/createPdf`, {responseType: 'blob'});
+    return this.http.get(`${this.baseUrl}/produits/createPdf`, {responseType: 'blob'});
   }
 
    // Methode pour Offline&Online et DexieJS
@@ -250,25 +239,25 @@ export class ProduitService {
 
 */
   createProduitWithBarCode(info: Object): Observable<Produit> {
-    return this.http.post<Produit>(`${this.baseUrl_1}/produits/createProduitWithBarcode`, info);
+    return this.http.post<Produit>(`${this.baseUrl}/produits/createProduitWithBarcode`, info);
   }
 
   public getProduitByBarcode(barCode: string): Observable<Produit> {
   //  return this.http.get<Produit> ('http://localhost:8081/prodApi/produits/searchProduitByBarCode/' + barCode);
 
-    return this.http.get<Produit>(`${this.baseUrl_1}/produits/searchProduitByBarCode/` + barCode);
+    return this.http.get<Produit>(`${this.baseUrl}/produits/searchProduitByBarCode/` + barCode);
 
   //  return this.http.get<Produit> ('http://localhost:8080/Library-0.0.1-SNAPSHOT/prodApi/produits/searchProduitByBarCode/' + barCode);
 
   }
 
   createProduitWithQrCode(info: Object): Observable<Produit> {
-    return this.http.post<Produit>(`${this.baseUrl_1}/produits/createProduitWithQrcode`, info);
+    return this.http.post<Produit>(`${this.baseUrl}/produits/createProduitWithQrcode`, info);
   }
 
 
   public getProduitByQrcode(qrCode: string): Observable<Produit> {
-    return this.http.get<Produit>(`${this.baseUrl_1}/produits/searchProduitByQrCode/${qrCode}`);
+    return this.http.get<Produit>(`${this.baseUrl}/produits/searchProduitByQrCode/${qrCode}`);
   }
 
 

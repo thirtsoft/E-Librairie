@@ -7,7 +7,6 @@
       <div class="col-md-1">
         &nbsp;&nbsp;
         <button
-        *ngIf="!showAssocieBoard && !showVendeurBoard"
           (click)="onCreateArticleWithBarCoder()"
           class="btn btn-success btn-lg"
         >
@@ -22,8 +21,7 @@
           style="height: 45px"
         />
       </div>
-      <div class="col-md-1" style="margin-left: 0px"
-        *ngIf="!showAssocieBoard && !showVendeurBoard">
+      <div class="col-md-1" style="margin-left: 0px">
         <button class="btn btn-warning btn-lg" (click)="uploadExcelFile()">
           <i class="fa fa-upload" aria-hidden="true"></i> Importer
         </button>
@@ -104,7 +102,7 @@
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
             >&nbsp;
             <button
-            *ngIf="!showAssocieBoard && !showVendeurBoard"
+            *ngIf="showAdminBoard || showManagerBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteArticle(art.id)"
             >

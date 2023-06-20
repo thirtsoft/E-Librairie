@@ -34,7 +34,7 @@
           <th>Email</th>
           <th>Role</th>
           <th>Active</th>
-          <th *ngIf="(showManagerBoard || showAdminBoard)">Action</th>
+          <th *ngIf="showAdminBoard">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -67,10 +67,21 @@
           <td>{{ user.roles[0]?.name }}</td>
           <td>
             {{ user.active }}
-            <button
-            *ngIf="(showManagerBoard || showAdminBoard)"
+           <!--  <button
+            *ngIf="showAdminBoard"
               type="button"
               [disabled]="user.roles[0]?.name == 'ROLE_MANAGER'"
+              class="btn btn-primary btn-sm pull-right"
+              (click)="ActivatedUser(user)"
+              style="cursor: pointer"
+            >
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button> -->
+
+            <button
+            *ngIf="showAdminBoard || showManagerBoard"
+              type="button"
+              [disabled]="user.roles[0]?.name == 'ROLE_MANAGER' || user.roles[0]?.name == 'ROLE_ADMIN'"
               class="btn btn-primary btn-sm pull-right"
               (click)="ActivatedUser(user)"
               style="cursor: pointer"
@@ -79,7 +90,7 @@
             </button>
           </td>
 
-          <td *ngIf="(showManagerBoard || showAdminBoard)">
+          <td *ngIf="showAdminBoard">
             <button
               (click)="addEditUtilisateur(i)"
               class="btn btn-warning btn-sm"

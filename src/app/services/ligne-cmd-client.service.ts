@@ -12,13 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LigneCmdClientService {
 
- // baseUrl_1 = environment.apiBaseUrl;
-
- // baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
-
- // baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
+  baseUrl = environment.apiBaseUrl
 
   private db: Dexie;
   private tableLcmd: Dexie.Table<LigneCmdClient, number>;
@@ -43,37 +37,37 @@ export class LigneCmdClientService {
   }
 
   getAllLigneCmdClients(): Observable<any> {
-    return this.http.get(`${this.baseUrl_1}/ligneCommandes/all`);
+    return this.http.get(`${this.baseUrl}/ligneCommandes/all`);
   }
 
   getAllLigneCmdClientsOrderDesc(): Observable<LigneCmdClient[]> {
-    return this.http.get<LigneCmdClient[]>(`${this.baseUrl_1}/ligneCommandes/allLigneCmdClientOrderDesc`);
+    return this.http.get<LigneCmdClient[]>(`${this.baseUrl}/ligneCommandes/allLigneCmdClientOrderDesc`);
   }
 
   getAllByNumero(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/lcomms/findByNumero/${id}`);
+    return this.http.get(`${this.baseUrl}/lcomms/findByNumero/${id}`);
   }
 
   public getLigneCmdClientId(id: number): Observable<Object> {
-    return this.http.get(`${this.baseUrl_1}/ligneCommandes.findById/${id}`);
+    return this.http.get(`${this.baseUrl}/ligneCommandes.findById/${id}`);
   }
 
   createLigneCmdClient(info: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl_1}/ligneCommandes/create`, info);
+    return this.http.post(`${this.baseUrl}/ligneCommandes/create`, info);
   }
 
   /**
    * Methode pour afficher la liste des categories par pages
    */
   public getAllLigneCmdClientByCommande(comId: number) {
-    return this.http.get(`${this.baseUrl_1}/ligneCommandes/searchListLigneCmdClientByCommandeId/${comId}`);
+    return this.http.get(`${this.baseUrl}/ligneCommandes/searchListLigneCmdClientByCommandeId/${comId}`);
   }
   updateLigneCmdClient(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl_1}/ligneCommandes/update/${id}`, value);
+    return this.http.put(`${this.baseUrl}/ligneCommandes/update/${id}`, value);
   }
 
   deleteLigneCmdClient(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl_1}/ligneCommandes/delete/${id}`);
+    return this.http.delete(`${this.baseUrl}/ligneCommandes/delete/${id}`);
   }
 
 
@@ -85,7 +79,7 @@ export class LigneCmdClientService {
   }
 
   async addAllDataLigneCmdToIndexeddb() {
-    await this.http.get<LigneCmdClient[]>(`${this.baseUrl_1}/ligneCommandes`).subscribe(response => {
+    await this.http.get<LigneCmdClient[]>(`${this.baseUrl}/ligneCommandes`).subscribe(response => {
       this.listDataLcmd = response;
       this.db.transaction('rw', this.tableLcmd, async ()=> {
         console.log(this.listDataLcmd);

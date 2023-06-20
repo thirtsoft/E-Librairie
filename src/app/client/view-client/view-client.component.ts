@@ -188,27 +188,29 @@ export class ViewClientComponent implements OnInit {
     return {
       content: [
         {
-          text: 'AL AMINE',
-          fontSize: 46,
+          text: 'WOKITE SARL',
+          fontSize: 20,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
           style: 'name',
         },
         {
-          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+          text: 'Prestation de Service & Ingénierie Logigiel et Systèmes - Formation - Consultance - Audit',
           fontSize: 12,
+          alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
-          fontSize: 10.5,
+          text: 'Hann-Mariste 2 – Dakar / Sénégal - RC : SN.DKR.2021.A.15470',
+          fontSize: 11,
+          alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: +221 77 944 03 10 / Email: contact@wokite.net',
           fontSize: 10,
           bold: true,
           alignment: 'center',
@@ -228,7 +230,7 @@ export class ViewClientComponent implements OnInit {
         },
 
         {
-          text: 'BILAN CREANCE',
+          text: 'LISTE DES CLIENTS',
           alignment: 'center',
           fontSize: 15,
           color: '#0000ff',
