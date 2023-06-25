@@ -148,7 +148,6 @@ export class CreateCommandeComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
       }
-
       this.crudApi.saveCommande(this.crudApi.formData.value, this.dashboardService.id).subscribe(
         data => {
           console.log(this.crudApi.formData.value);

@@ -76,8 +76,9 @@
           <th>Reference</th>
           <th>Designation</th>
           <th>Scategorie</th>
-          <th>P.Achat</th>
-          <th>P.Vente</th>
+          <th>Prix achat</th>
+          <th>Prix en gros</th>
+          <th>Prix détail</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -89,6 +90,7 @@
           <td>{{ art.scategorie?.libelle }}</td>
           <td>{{ art.prixAchat }}</td>
           <td>{{ art.prixVente }}</td>
+          <td>{{ art.prixDetail }}</td>
           <td>{{ art.qtestock <= art.stockInitial ? "epuisé" : "encours" }}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewArticle(i)">

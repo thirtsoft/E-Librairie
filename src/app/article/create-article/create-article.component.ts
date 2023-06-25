@@ -72,7 +72,7 @@ export class CreateArticleComponent implements OnInit {
         this.crudApi.getAllProduits().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/home/articles']);
       },
         (error: HttpErrorResponse) => {
         this.toastr.error("Ce Article exist déjà, veuillez changez la référence");
@@ -108,7 +108,7 @@ export class CreateArticleComponent implements OnInit {
         this.crudApi.getAllProduits().subscribe(
           response =>{this.crudApi.listData = response;},
         );
-        this.router.navigate(['/articles']);
+        this.router.navigate(['/home/articles']);
       });
 
     }

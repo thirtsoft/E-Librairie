@@ -105,7 +105,7 @@ export class NavbarComponent implements OnInit {
     this.crudApi.getAllProduits().subscribe(res => {
       this.listData = res;
       for (var i = 0; i < this.listData.length; i++) {
-        if ((this.listData[i].qtestock) < (this.listData[i].stockInitial)) {
+        if ((this.listData[i].qtestock) === (this.listData[i].stockInitial)) {
           this.notification++;
         }
 
