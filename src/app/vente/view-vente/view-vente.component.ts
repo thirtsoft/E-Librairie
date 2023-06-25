@@ -209,7 +209,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: `Total en F CFA : ${this.lventeService.listData[0].vente.totalVente}`,
+          text: `Total en FCFA : ${this.lventeService.listData[0].vente.totalVente}`,
           alignment: 'right',
           margin: [0, 8, 0, 8],
           bold: true,
@@ -227,7 +227,7 @@ export class ViewVenteComponent implements OnDestroy, OnInit {
         },
 
         {
-          text: 'Rendu en F CFA : '
+          text: 'Rendu en FCFA : '
            +[(this.lventeService.listData[0].vente.montantReglement)-(this.lventeService.listData[0].vente.totalVente)],
           alignment: 'right',
           margin: [0, 5, 0, 15],

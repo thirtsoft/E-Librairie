@@ -24,7 +24,7 @@ export class CreateCommandeComponent implements OnInit {
 
   total = 0;
 
-  listDataReglement = ["ESPECES", "CHEQUE", "VIREMENT"];
+  listDataReglement = ["ESPECES", "WAVE", "ORANGE-MONEY","FREE-MONEY"];
 
   constructor(public crudApi: CommandeClientService,
               public clientService: ClientService,
@@ -141,6 +141,14 @@ export class CreateCommandeComponent implements OnInit {
     if (this.validateForm()) {
       this.f['lcomms'].setValue(this.crudApi.list);
       console.log(this.crudApi.formData.value);
+
+      if (this.crudApi.formData.value.montantReglement < this.crudApi.formData.value.totalCommande) {
+        this.toastr.error('Le montant de réglement ne doit pas inféreur au montant total','Veuillez revoir le montant de réglement', {
+          timeOut: 3500,
+          positionClass: 'toast-top-right',
+        });
+      }
+
       this.crudApi.saveCommande(this.crudApi.formData.value, this.dashboardService.id).subscribe(
         data => {
           console.log(this.crudApi.formData.value);

@@ -129,7 +129,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
     return {
       content: [
         {
-          text: 'WOKITE SARL',
+          text: 'BOUTIQUE D&P',
           fontSize: 20,
           alignment: 'center',
           color: '#0000ff',
@@ -137,21 +137,21 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
           style: 'name',
         },
         {
-          text: 'Prestation de Service & Ingénierie Logigiel et Systèmes - Formation - Consultance - Audit',
+          text: 'Distribution et Commercialisation de parfums D&P et autres produits costmétiques',
           fontSize: 12,
           alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'Hann-Mariste 2 – Dakar / Sénégal - RC : SN.DKR.2021.A.15470',
+          text: 'Marché touba sandaga – Dakar / Sénégal - Boutique N° 229',
           fontSize: 11,
           alignment: 'center',
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 944 03 10 / Email: contact@wokite.net',
+          text: 'Tél: +221 77 147 75 28 / Email: bigsoul87@gmail.com',
           fontSize: 10,
           bold: true,
           alignment: 'center',
@@ -204,7 +204,7 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
           margin: [0, 8, 0, 8]
         },
         {
-          text: 'Pour : ' + this.ldevService.listData[0].devis.client.raisonSocial,
+          text: 'M (e) : ' + this.ldevService.listData[0].devis.client.raisonSocial,
           alignment: 'left',
           fontSize: 11,
           margin: [0, 8, 0, 8]
@@ -228,6 +228,24 @@ export class ViewDevisComponent implements OnDestroy, OnInit {
 
 
       ],
+
+      
+      footer: {
+        columns: [
+          {
+            text: 'Developed by WOKITE SARL',
+            fontSize: 8,
+          },
+           
+            {
+              fontSize: 8,
+              alignment: 'right',
+              text: 'www.wokite.net'
+          },
+        ],
+        margin: [60, 10, 60, 10 ]
+     },
+
 
       styles: {
         header: {

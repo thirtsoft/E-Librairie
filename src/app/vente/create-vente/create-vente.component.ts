@@ -39,7 +39,7 @@ export class CreateVenteComponent implements OnInit {
   currentUser: any = {};
   id: number;
 
-  listDataReglement = ["ESPECES", "CHEQUE", "VIREMENT"];
+  listDataReglement = ["ESPECES", "WAVE", "FREE-MONEY","ORANGE-MONEY"];
 
   constructor(public crudApi: VenteService,
               public lventeService: LigneVenteService,
@@ -147,8 +147,13 @@ export class CreateVenteComponent implements OnInit {
     if (this.validateForm()) {
       this.f['ligneVentes'].setValue(this.crudApi.list);
       console.log(this.crudApi.formData.value);
-      console.log(this.crudApi.formData.value.numeroVente);
-      console.log(this.crudApi.formData.value, this.crudApi.id);
+
+      if (this.crudApi.formData.value.montantReglement < this.crudApi.formData.value.totalVente) {
+        this.toastr.error('Le montant de réglement ne doit pas inféreur au montant total','Veuillez revoir le montant de réglement', {
+          timeOut: 3500,
+          positionClass: 'toast-top-right',
+        });
+      }
 
       this.crudApi.saveVente(this.crudApi.formData.value, this.crudApi.id)
         .subscribe(
