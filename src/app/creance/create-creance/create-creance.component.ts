@@ -37,6 +37,9 @@ export class CreateCreanceComponent implements OnInit {
 
   referenceCreance;
 
+  listStatusCreances = ["ENCOURS", "PAYEE"];
+
+
   constructor(public crudApi: CreanceService,
               private dashboardService: DashboardService,
               public clientService: ClientService,

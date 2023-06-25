@@ -11,7 +11,7 @@
           <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
         </button>
       </div>
-      <div class="col-md-3 col-md-offset-1">
+      <div class="col-md-3 col-md-offset-1" *ngIf="!showVendeurBoard">
         <input
           class="form-control"
           type="file"
@@ -19,9 +19,8 @@
           style="height: 45px"
         />
       </div>
-      <div class="col-md-1" style="margin-left: 0px">
+      <div class="col-md-1" style="margin-left: 0px" *ngIf="!showVendeurBoard">
         <button
-          *ngIf="!showAssocieBoard && !showVendeurBoard"
           class="btn btn-warning btn-lg" (click)="uploadExcelFile()">
           <i class="fa fa-upload" aria-hidden="true"></i> Importer
         </button>
@@ -94,18 +93,21 @@
           <td>{{ art.qtestock <= art.stockInitial ? "epuisé" : "encours" }}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewArticle(i)">
-              <i class="fa fa-eye" aria-hidden="true"></i></button
+              <i class="fa fa-eye" aria-hidden="true"></i> Voir détails</button
             >&nbsp;
             <button
+              *ngIf="!showVendeurBoard"
               class="btn btn-info btn-sm" (click)="addEditArticle(i)">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
+              <i class="fa fa-pencil-square-o" aria-hidden="true">Modifier</i></button
             >&nbsp;
             <button
             *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteArticle(art.id)"
             >
-              <em class="fa fa-trash-o"></em></button
+              <em class="fa fa-trash-o"></em>
+              Supprimer
+              </button
             >&nbsp;
 
           </td>

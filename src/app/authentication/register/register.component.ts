@@ -34,9 +34,10 @@ export class RegisterComponent implements OnInit {
   //  { name: 'User', id:1, selected: true },
     { name: 'Vendeur', id:1, selected: true },
     { name: 'Gerant', id:2, selected: false },
+    /*
     { name: 'Associe', id:3, selected: false },
     { name: 'Manager', id:4, selected: false },
-  //  { name: 'Admin', id:3, selected: false },
+  //  { name: 'Admin', id:3, selected: false },*/
   ];
   selectedRoles: string[];
 

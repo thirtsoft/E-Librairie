@@ -97,7 +97,7 @@
     <button type="submit" class="btn btn-lg btn-success">
       <em class="fa fa-database"></em> Enregistrer</button
     >&nbsp;&nbsp;
-    <a class="btn btn-lg btn-primary ml-1" routerLink="/home/detailsVentes"
+    <a *ngIf="!showVendeurBoard" class="btn btn-lg btn-primary ml-1" routerLink="/home/detailsVentes"
       ><em class="fa fa-plus-square"></em> Détails Ventes
     </a>
   </div>

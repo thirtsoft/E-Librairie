@@ -15,7 +15,7 @@
       >&nbsp;
     </div>
     <div
-      *ngIf="showManagerBoard || showGerantBoard"
+      *ngIf="showGerantBoard"
       class="form-group col-md-6 col-md-offset-2"
       style="padding-top: 20px"
     >
@@ -52,18 +52,19 @@
           <td>{{ ch.date }}</td>
           <td>
             <button
-              *ngIf="!showAssocieBoard"
               class="btn btn-info btn-sm"
               (click)="addOrEditCharge(i)"
             >
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              Modifier</button
             >&nbsp;
             <button
-            *ngIf="showManagerBoard || showAdminBoard"
+            *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteCharge(ch.id)"
             >
               <em class="fa fa-trash-o"></em>
+              Supprimer
             </button>
           </td>
         </tr>

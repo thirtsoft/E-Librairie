@@ -38,7 +38,7 @@
           <td>
             {{ appro.montantAvance }}
             <span
-            *ngIf="showManagerBoard || showAdminBoard"
+            *ngIf="!showGerantBoard"
               [ngClass]="{ disabled: appro.status == 'VALIDE' }"
               class="btn btn-info btn-sm pull-right"
               (click)="addEditMontantAvanceAppro(appro)"
@@ -60,7 +60,7 @@
           <td>
             {{ appro.status }}
             <span
-            *ngIf="showManagerBoard || showAdminBoard"
+            *ngIf="!showGerantBoard"
               [ngClass]="{ disabled: appro.status == 'VALIDE'}"
               class="btn btn-info btn-sm pull-right"
               (click)="addEditStatusAppro(appro)"
@@ -81,7 +81,8 @@
           <td>{{ appro.dateApprovisionnement }}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewAppro(appro)">
-              <i class="fa fa-eye" aria-hidden="true"></i></button
+              <i class="fa fa-eye" aria-hidden="true"></i>
+              Voir détails</button
             >&nbsp;
             <!--    <button class="btn btn-danger btn-lg" (click)="deleteAppro(appro.id)"><i class="fa fa-trash-o"></i>  </button> -->
           </td>

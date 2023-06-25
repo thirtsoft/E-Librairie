@@ -10,6 +10,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { CommandeClientService } from 'src/app/services/commande-client.service';
 import { LigneCmdClientService } from 'src/app/services/ligne-cmd-client.service';
 import { CreateLigneCommandeComponent } from '../create-ligne-commande/create-ligne-commande.component';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-create-commande',
@@ -26,10 +27,21 @@ export class CreateCommandeComponent implements OnInit {
 
   listDataReglement = ["ESPECES", "WAVE", "ORANGE-MONEY","FREE-MONEY"];
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showManagerBoard = false;
+  showAssocieBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: CommandeClientService,
               public clientService: ClientService,
               public lcomService: LigneCmdClientService,
               private dashboardService: DashboardService,
+              private tokenService: TokenStorageService,
               private toastr :ToastrService,
               private datePipe : DatePipe,
               private router :Router,
@@ -41,6 +53,18 @@ export class CreateCommandeComponent implements OnInit {
   get f() { return this.crudApi.formData.controls; }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
+      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    };
+    
     if (this.crudApi.choixmenu == "A") {
 
       this.infoForm();

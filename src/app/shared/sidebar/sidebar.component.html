@@ -73,7 +73,7 @@
               >Commande</a
             >
           </li>
-          <li>
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               routerLink="/home/detailsCommande"
@@ -81,7 +81,7 @@
               >Détails Commandes</a
             >
           </li>
-          <li *ngIf="!showAssocieBoard">
+          <li>
             <a
               class=""
               routerLink="/home/listdevis"
@@ -89,7 +89,7 @@
               >Devis</a
             >
           </li>
-          <li *ngIf="!showAssocieBoard">
+          <li>
             <a
               class=""
               routerLink="/home/detailsDevis"
@@ -115,7 +115,7 @@
               >Vendre</a
             >
           </li>
-          <li>
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               routerLink="/home/detailsVentes"
@@ -135,7 +135,7 @@
         </ul>
       </li>
 
-      <li class="sub-menu" *ngIf="!showAssocieBoard">
+      <li class="sub-menu">
         <a href="javascript:;" class="">
           <i class="icon_documents_alt"></i>
           <span>Dettes</span>
@@ -143,7 +143,7 @@
         </a>
         <ul class="sub">
           <li><a class="" routerLink="/home/creances">Liste Dettes</a></li>
-          <li>
+          <li *ngIf="!showVendeurBoard">
             <a class="" routerLink="/home/detailsCreances">Détails-dettes</a>
           </li>
          <!--  <li *ngIf="showAdminBoard"><a class="" routerLink="/home/avoirs">Avoirs</a></li>
@@ -160,7 +160,7 @@
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
-          <li *ngIf="!showAssocieBoard">
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               routerLink="/home/approvisionnements"
@@ -168,7 +168,7 @@
               >Entrées</a
             >
           </li>
-          <li *ngIf="!showAssocieBoard">
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               routerLink="/home/detailsApprovisionnements"
@@ -187,10 +187,10 @@
         </ul>
       </li>
 
-      <li class="sub-menu" *ngIf="!showAssocieBoard">
+      <li class="sub-menu">
         <a href="javascript:;" class="">
           <i class="fa fa-usd" aria-hidden="true"></i>
-          <span>Réglement</span>
+          <span>Dépenses</span>
           <span class="menu-arrow arrow_carrot-right"></span>
         </a>
         <ul class="sub">
@@ -198,10 +198,10 @@
            <a class="" routerLink="/home/versements">Versement</a></li>
           <li *ngIf="showAdminBoard">
             <a class="" routerLink="/home/contrats">Contrat</a></li>  -->
-          <li *ngIf="!showAssocieBoard">
+          <li *ngIf="!showVendeurBoard">
             <a class="" routerLink="/home/categorieCharges">Type dépenses</a>
           </li>
-          <li *ngIf="!showAssocieBoard">
+          <li>
             <a class="" routerLink="/home/charges">Dépenses</a></li>
          <!--  <li *ngIf="showAdminBoard">
             <a class="" routerLink="/home/prestations">Prestations</a></li> -->
@@ -223,7 +223,7 @@
         </a>
       </li>  -->
 
-      <li class="sub-menu" *ngIf="!showAssocieBoard">
+      <li class="sub-menu">
         <a href="javascript:;" class="">
           <i class="fa fa-users" aria-hidden="true"></i>
           <span>Personnes</span>
@@ -233,12 +233,12 @@
           <li>
             <a
               class=""
-              [routerLink]="['/home/clients']"
+              routerLink="/home/clients"
               routerLinkActive="router-link-active"
               >Client</a
             >
           </li>
-          <li>
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               [routerLink]="['/home/fournisseurs']"
@@ -266,7 +266,7 @@
             >
           </li>  -->
 
-          <li *ngIf="showAdminBoard || showManagerBoard">
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               routerLink="/home/utilisateurs"
@@ -274,7 +274,7 @@
               >Employés</a
             >
           </li>
-          <li *ngIf="showManagerBoard || showAdminBoard">
+          <li *ngIf="!showVendeurBoard">
             <a
               class=""
               routerLink="/register"

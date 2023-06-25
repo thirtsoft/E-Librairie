@@ -41,14 +41,16 @@
             <button
               class="btn btn-info btn-sm"
               (click)="selectData(catCharge)">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              Modifier</button
             >&nbsp;
             <button
-            *ngIf="showManagerBoard || showAdminBoard"
+            *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteCategorieCharge(catCharge.id)"
             >
               <em class="fa fa-trash-o"></em>
+              Supprimer
             </button>
           </td>
         </tr>

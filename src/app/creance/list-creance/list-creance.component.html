@@ -7,6 +7,7 @@
       class="form-group col-md-4"
       style="padding-left: 20px; padding-top: 10px">
       <a
+      *ngIf="!showVendeurBoard"
         type="button"
         (click)="onCreateCreance()"
         class="btn btn-success btn-lg"
@@ -14,7 +15,7 @@
       >&nbsp;
     </div>
     <div
-      *ngIf="!showAssocieBoard"
+      *ngIf="showGerantBoard"
       class="form-group col-md-6 col-md-offset-2"
       style="padding-top: 20px"
     >
@@ -51,6 +52,7 @@
           <td>
             {{ cont.avanceCreance }}
             <span
+            *ngIf="!showVendeurBoard"
               [ngClass]="{ disabled: cont.status == 'PAYEE' }"
               class="btn btn-info btn-sm pull-right"
               (click)="addEditSolde(cont)"
@@ -63,7 +65,7 @@
           <td>
             {{ cont.status }}
             <span
-            *ngIf="(showGerantBoard || showManagerBoard || showAdminBoard)"
+            *ngIf="!showVendeurBoard"
               [ngClass]="{ disabled: cont.status == 'PAYEE' }"
               class="btn btn-info btn-sm pull-right"
               (click)="addEditStatus(cont)"
@@ -79,14 +81,16 @@
 
           <td>
             <button class="btn btn-success btn-sm" (click)="viewCreance(cont)">
-              <i class="fa fa-eye" aria-hidden="true"></i></button
+              <i class="fa fa-eye" aria-hidden="true"></i>
+              Voir détails</button
             >&nbsp;
             <button
-            *ngIf="showManagerBoard || showAdminBoard"
+            *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteCreance(cont.id)"
             >
               <em class="fa fa-trash-o"></em>
+              Supprimer
             </button>
           </td>
         </tr>

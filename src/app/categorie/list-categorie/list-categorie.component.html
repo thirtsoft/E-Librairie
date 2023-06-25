@@ -7,7 +7,7 @@
     <div class="row" style="padding-left: 20px; padding-top: 10px">
       <div class="col-sm-12">
         <div class="col-sm-4">
-          <a
+          <a *ngIf="!showVendeurBoard"
             (click)="onCreateCategorie()"
             class="btn btn-success btn-lg">
             <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</a
@@ -29,7 +29,7 @@
           <i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i></a
           >&nbsp;
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8" *ngIf="!showVendeurBoard">
           <div class="col-sm-7">
             <input
               class="form-control"
@@ -38,9 +38,7 @@
               style="height: 45px"
             />&nbsp;
           </div>
-          <div
-            *ngIf="!showAssocieBoard && !showVendeurBoard"
-            class="col-sm-1" style="margin-left: 0px">
+          <div class="col-sm-1" style="margin-left: 0px">
             <a
               type="button"
               class="btn btn-success btn-lg"
@@ -66,7 +64,7 @@
           <th>#</th>
           <th>Code</th>
           <th>Designation</th>
-          <th  *ngIf="showManagerBoard || showAdminBoard">Action</th>
+          <th  *ngIf="!showVendeurBoard">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -74,12 +72,14 @@
           <td>{{ cat.id }}</td>
           <td>{{ cat.code }}</td>
           <td>{{ cat.designation }}</td>
-          <td *ngIf="showManagerBoard || showAdminBoard">
+          <td *ngIf="!showVendeurBoard">
             <button class="btn btn-info btn-sm" (click)="selectData(cat)">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              Modifier
+              </button
             >&nbsp;
             <button
-            *ngIf="showManagerBoard || showAdminBoard"
+            *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteCategorie(cat.id)"
             >

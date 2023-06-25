@@ -79,9 +79,14 @@
           class="form-control"
           [compareWith]="compareClient"
         >
-          <option value="MORATOIRE">MORATOIRE</option>
+        <option value="0">-Select-</option>
+          <option *ngFor="let item of listStatusCreances" [ngValue]="item">
+            {{ item }}
+          </option>
+
+         <!--  <option value="MORATOIRE">MORATOIRE</option>
           <option value="NONPAYEE">NONPAYEE</option>
-          <option value="PAYEE">PAYEE</option>
+          <option value="PAYEE">PAYEE</option> -->
         </select>
       </div>
     </div>

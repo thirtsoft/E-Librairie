@@ -41,9 +41,18 @@ export class CreateVenteComponent implements OnInit {
 
   listDataReglement = ["ESPECES", "WAVE", "FREE-MONEY","ORANGE-MONEY"];
 
+  info: any;
+  roles: string[];
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showGerantBoard = false;
+  showVendeurBoard = false;
+
   constructor(public crudApi: VenteService,
               public lventeService: LigneVenteService,
               private toastr :ToastrService,
+              private tokenService: TokenStorageService,
               private dialog:MatDialog,
               private datePipe : DatePipe,
               public fb: FormBuilder ,
@@ -55,6 +64,16 @@ export class CreateVenteComponent implements OnInit {
   get f() { return this.crudApi.formData.controls; }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showGerantBoard = this.roles.includes('ROLE_GERANT');
+      this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
+    };
+
     if (this.crudApi.choixmenu == "A") {
       this.infoForm();
       this.crudApi.list = [];

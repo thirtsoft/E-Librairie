@@ -42,8 +42,6 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
 
   isLoggedIn = false;
   showAdminBoard = false;
-  showManagerBoard = false;
-  showAssocieBoard = false;
   showGerantBoard = false;
   showVendeurBoard = false;
 
@@ -74,8 +72,6 @@ export class ListCreanceComponent implements OnDestroy, OnInit {
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showManagerBoard = this.roles.includes("ROLE_MANAGER");
-      this.showAssocieBoard = this.roles.includes('ROLE_ASSOCIE');
       this.showGerantBoard = this.roles.includes('ROLE_GERANT');
       this.showVendeurBoard = this.roles.includes('ROLE_VENDEUR');
 
