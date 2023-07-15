@@ -9,12 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LigneVenteService {
-
-//  baseUrl_1 = environment.apiBaseUrl;
-
-//  baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  
+  baseUrl_1 = environment.apiBaseUrl;
 
  // baseUrl_1 = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 

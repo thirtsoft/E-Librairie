@@ -11,12 +11,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PrestationService {
-
-//  baseUrl_1 = environment.apiBaseUrl;
-
- // baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl_1 = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  
+  baseUrl_1 = environment.apiBaseUrl;
 
   choixmenu : string  = 'A';
   listData : Prestation[];

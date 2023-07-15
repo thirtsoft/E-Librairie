@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
- // production: false,
+//  production: true,
+  production: false,
   apiBaseUrl: 'http://localhost:8081/gestionstock-alamine/v1'
  // production: true,
  // apiBaseUrl: "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1"

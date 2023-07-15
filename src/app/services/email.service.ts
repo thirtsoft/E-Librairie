@@ -10,11 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EmailService {
 
- // baseUrl = environment.apiBaseUrl;
-
- // baseUrl = 'https://62.171.128.8/gestionstock-alamine/v1';
-
-  baseUrl = 'https://alamine-admin.herokuapp.com/gestionstock-alamine/v1';
+  baseUrl = environment.apiBaseUrl;
 
  // baseUrl = "http://localhost:8080/Library-0.0.1-SNAPSHOT/gestionstock-alamine/v1";
 

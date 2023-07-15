@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
- // api_url:'https://alamine-admin.herokuapp.com/'
+  apiBaseUrl:'https://library-production-d681.up.railway.app/gestionstock-alamine/v1'
 };

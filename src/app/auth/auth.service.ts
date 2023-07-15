@@ -31,8 +31,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-
- // baseUrl_1 = environment.apiBaseUrl;
+  
+  baseUrl_1 = environment.apiBaseUrl;
 
   loginUrl = "https://alamine-admin.herokuapp.com/gestionstock-alamine/v1/auth/signIn";
 
@@ -47,7 +47,7 @@ export class AuthService {
 
 //  baseUrl_1 = 'https://62.171.128.8/gestionstock-alamine/v1';
 
-  baseUrl_1 = 'http://localhost:8081/gestionstock-alamine/v1';
+//  baseUrl_1 = 'http://localhost:8081/gestionstock-alamine/v1';
 
   choixmenu : string  = 'A';
   dataForm:  FormGroup;
@@ -81,7 +81,8 @@ export class AuthService {
   }
 
   signUp(info: Register): Observable<Register> {
-    return this.http.post<Register>(AUTH_API + 'auth/signUp', info , httpOptions);
+  //  return this.http.post<Register>(AUTH_API + 'auth/signUp', info , httpOptions);
+    return this.http.post<Register>(this.baseUrl_1 + '/auth/signUp', info , httpOptions);
   }
 
   attemptAuth(credentials: Login): Observable<any> {
@@ -89,7 +90,8 @@ export class AuthService {
       username: credentials.username,
       password: credentials.password
     };
-    return this.http.post(this.loginUrl, loginData, httpOptions);
+  //  return this.http.post(this.loginUrl, loginData, httpOptions);
+    return this.http.post(this.baseUrl_1 + '/auth/signIn', loginData, httpOptions);
     this.islogin=true;
   }
 
