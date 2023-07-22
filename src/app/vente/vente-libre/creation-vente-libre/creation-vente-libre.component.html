@@ -18,7 +18,6 @@
           formControlName="typeReglement"
           id="typeReglement"
           class="form-control"
-          [compareWith]="compareVente"
         >
           <option value="0">-Select-</option>
           <option *ngFor="let item of listDataReglement" [ngValue]="item">
