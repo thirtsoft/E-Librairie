@@ -72,14 +72,14 @@ export class CreateLigneCommandeComponent implements OnInit {
 
   selectPrice(ctrl) {
     if (ctrl.selectedIndex == 0) {
-    //  this.f['prix'].setValue(0);
-      this.f['prixCommande'].setValue(0);
+      this.f['prix'].setValue(0);
+    //  this.f['prixCommande'].setValue(0);
       this.f['quantite'].setValue(0);
       this.f['ItemName'].setValue('');
       this.f['qteStock'].setValue(0);
     } else {
-    //  this.f['prix'].setValue(this.listArticle[ctrl.selectedIndex-1].prixVente);
-      this.f['prixCommande'].setValue(this.listArticle[ctrl.selectedIndex-1].prixVente);
+      this.f['prix'].setValue(this.listArticle[ctrl.selectedIndex-1].prixVente);
+    //  this.f['prixCommande'].setValue(this.listArticle[ctrl.selectedIndex-1].prixVente);
 
       this.f['ItemName'].setValue(this.listArticle[ctrl.selectedIndex-1].designation);
 
@@ -89,8 +89,8 @@ export class CreateLigneCommandeComponent implements OnInit {
   }
 
   calculTotal() {
-/*     this.total = parseFloat((this.lcmdService.dataForm.value.quantite * this.lcmdService.dataForm.value.prixCommande).toFixed(2)); */
     this.total = parseFloat((this.lcmdService.dataForm.value.quantite * this.lcmdService.dataForm.value.prixCommande).toFixed(2));
+  //  this.total = parseFloat((this.lcmdService.dataForm.value.quantite * this.lcmdService.dataForm.value.prixCommande).toFixed(2));
     this.f['total'].setValue(this.total);
   }
 
