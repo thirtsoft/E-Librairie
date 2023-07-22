@@ -57,4 +57,7 @@ export class LigneVenteService {
     return this.http.delete(`${this.baseUrl_1}/ligneVentes/delete/${id}`, { responseType: 'text' });
   }
 
+  getTop100LigneVenteOrderDesc(): Observable<LigneVente[]> {
+    return this.http.get<LigneVente[]>(`${this.baseUrl_1}/ligneVentes/top-100-ligne-ventes-order-desc`);
+  }
 }

@@ -141,28 +141,28 @@ export class ViewCreanceComponent implements OnInit {
     return {
       content: [
         {
-          text: 'AL AMINE',
-          fontSize: 46,
+          text: 'WOKITE',
+          fontSize: 30,
           alignment: 'center',
           color: '#0000ff',
           decoration: 'underline',
           style: 'name',
         },
         {
-          text: 'Prestation de Service & Commerce GeneralRC SN ZGR 2016 C233 / NINEA 00058166762P6',
+          text: 'Ingénierie logiciel - Développement de (logiciel & site web) - Consultance - Formation - Audit',
           fontSize: 12,
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'N°Compte CNCAS SN 048 03001 000108318801 J/40N° Compte BNDE SN 169 03001 001000519301/30',
+          text: 'N°Compte UBA SN 048 03001 000238318823 J/40N° Compte UBA SN 123 03001 001000519504/50',
           fontSize: 10.5,
           bold: true,
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
-          fontSize: 10,
+          text: 'Tél: +221 77 083 86 29 / +221 77 944 03 10 / Email: contact@wokite.net',
+          fontSize: 12,
           bold: true,
           alignment: 'center',
           color: '#0000ff'

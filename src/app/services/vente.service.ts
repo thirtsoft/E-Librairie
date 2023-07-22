@@ -256,5 +256,9 @@ export class VenteService {
     return this.http.get(`${this.baseUrl_1}.ventes/searchListVenteByEmpId`);
   }
 
+  getTop100VentesOrderDesc(): Observable<Vente[]> {
+    return this.http.get<Vente[]>(`${this.baseUrl_1}/ventes/top-100-orders-order-desc`);
+  }
+
 
 }

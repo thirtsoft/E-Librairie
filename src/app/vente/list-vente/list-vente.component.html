@@ -8,16 +8,16 @@
       style="padding-left: 20px; padding-top: 10px"
     >
       <a type="button" (click)="onCreateVente()" class="btn btn-success btn-lg">
-        <i class="fa fa-plus" aria-hidden="true"></i> Vendre Manuellement</a
+        <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Effecter une vente</a
       >&nbsp;
 
-      <a
+    <!--   <a
         type="button"
         (click)="onCreateVenteWithBarcode()"
         class="btn btn-success btn-lg"
       >
         <i class="fa fa-plus" aria-hidden="true"></i> Vendre Automatiquement</a
-      >&nbsp;
+      >&nbsp; -->
     </div>
     <div
       *ngIf="!showAssocieBoard"
@@ -56,22 +56,21 @@
           <td>{{ vent.dateVente }}</td>
           <td>
             <button
-              *ngIf="showManagerBoard || showAdminBoard"
               class="btn btn-success btn-sm"
               (click)="viewVente(vent)"
             >
-              <i class="fa fa-eye" aria-hidden="true"></i></button
+              <i class="fa fa-eye" aria-hidden="true"></i> voir les détails</button
             >&nbsp;
-            <button class="btn btn-warning btn-sm" (click)="viewVente2(vent)">
-              <i class="fa fa-eye" aria-hidden="true"></i></button
+             <button class="btn btn-warning btn-sm" (click)="viewVente2(vent)">
+              <i class="fa fa-eye" aria-hidden="true"></i> détails</button
             >&nbsp;
-            <button
+          <!--   <button
               *ngIf="showManagerBoard || showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteVente(vent.id)"
             >
               <em class="fa fa-trash-o"></em>
-            </button>
+            </button> -->
           </td>
         </tr>
       </tbody>

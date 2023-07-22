@@ -151,6 +151,11 @@ import { ViewVente2Component } from './vente/view-vente2/view-vente2.component';
 import { ListPrestationComponent } from './prestation/list-prestation/list-prestation.component';
 import { CreatePrestationComponent } from './prestation/create-prestation/create-prestation.component';
 import { ViewClientComponent } from './client/view-client/view-client.component';
+import { ListVenteLibreComponent } from './vente/vente-libre/list-vente-libre/list-vente-libre.component';
+import { CreationVenteLibreComponent } from './vente/vente-libre/creation-vente-libre/creation-vente-libre.component';
+import { CreationLigneVenteLibreComponent } from './vente/vente-libre/creation-ligne-vente-libre/creation-ligne-vente-libre.component';
+import { ListLigneVenteLibreComponent } from './vente/vente-libre/list-ligne-vente-libre/list-ligne-vente-libre.component';
+import { DetailsVenteLibreComponent } from './vente/vente-libre/details-vente-libre/details-vente-libre.component';
 
 
 @NgModule({
@@ -278,6 +283,11 @@ import { ViewClientComponent } from './client/view-client/view-client.component'
     ListPrestationComponent,
     CreatePrestationComponent,
     ViewClientComponent,
+    ListVenteLibreComponent,
+    CreationVenteLibreComponent,
+    CreationLigneVenteLibreComponent,
+    ListLigneVenteLibreComponent,
+    DetailsVenteLibreComponent,
 
   ],
   imports: [

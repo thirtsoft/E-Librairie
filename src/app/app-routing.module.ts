@@ -101,11 +101,36 @@ import { ListHistoriqueAvoirComponent } from './historique/list-historique-avoir
 import { ListHistoriqueVenteComponent } from './historique/list-historique-vente/list-historique-vente.component';
 import { ListHistoriqueCommandeComponent } from './historique/list-historique-commande/list-historique-commande.component';
 import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
+import { ListVenteLibreComponent } from './vente/vente-libre/list-vente-libre/list-vente-libre.component';
+import { CreationVenteLibreComponent } from './vente/vente-libre/creation-vente-libre/creation-vente-libre.component';
+import { DetailsVenteLibreComponent } from './vente/vente-libre/details-vente-libre/details-vente-libre.component';
+import { ListLigneVenteLibreComponent } from './vente/vente-libre/list-ligne-vente-libre/list-ligne-vente-libre.component';
 
 const routes: Routes = [
 
-  { path: '', component: LoginComponent, children: [
-    { path:'', redirectTo:'login' , pathMatch:'full'},
+  {
+    path: 'list-ventes',
+    component: ListVenteLibreComponent
+  },
+  {
+    path:'se-connecter',
+    component: ListLigneVenteLibreComponent,
+  },
+  {
+    path:'vendre',
+    component: CreationVenteLibreComponent,
+  },
+
+  {
+    path:'detail-vente/:id',
+    component: DetailsVenteLibreComponent,
+  },
+
+  { path:'', redirectTo:'list-ventes' , pathMatch:'full'},
+
+  { path: 'login', component: LoginComponent, children: [
+
+    { path:'login', redirectTo:'login' , pathMatch:'full'},
 
   ] },
 

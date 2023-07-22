@@ -122,7 +122,7 @@ export class ViewVente2Component implements OnInit {
       pageMargins: [0.5, 0, 0, 0.5 ],
       content: [
         {
-          text: 'AL AMINE SEDHIOU',
+          text: 'WOKITE',
           fontSize: 9,
           color: '#0000ff',
           decoration: 'underline',
@@ -130,12 +130,12 @@ export class ViewVente2Component implements OnInit {
           bold: true
         },
         {
-          text: 'ROUTE BAC EN FACE CRF SEDHIOU',
+          text: 'Développement de logiciel et site web',
           fontSize: 7,
           color: '#0000ff'
         },
         {
-          text: 'Tél: +221 77 727 94 22 / +221 77 109 18 18 / Email: papeteriealamine@gmail.com',
+          text: 'Tél: +221 77 083 86 29 / +221 77 944 03 10 / Email: contact@wokite.net',
           fontSize: 7,
           color: '#0000ff'
         },
