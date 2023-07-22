@@ -106,7 +106,7 @@ export class CreationVenteLibreComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
       }
-      this.crudApi.saveVente(this.crudApi.formData.value, 1)
+      this.crudApi.saveVente(this.crudApi.formData.value, 2)
         .subscribe(
           data => {
             console.log(data);

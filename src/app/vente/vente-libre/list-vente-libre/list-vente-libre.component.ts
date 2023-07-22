@@ -126,4 +126,9 @@ export class ListVenteLibreComponent implements OnInit {
     return this.datePipe.transform(date, 'yyyy-MM-dd, h:mm:ss');
   }
 
+  seConnecter() {
+    this.router.navigateByUrl('login');
+    window.location.reload();
+  }
+
 }

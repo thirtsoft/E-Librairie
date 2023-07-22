@@ -128,11 +128,17 @@ const routes: Routes = [
 
   { path:'', redirectTo:'list-ventes' , pathMatch:'full'},
 
+  {
+    path:'login',
+    component: LoginComponent,
+  },
+
+  /*
   { path: 'login', component: LoginComponent, children: [
 
     { path:'login', redirectTo:'login' , pathMatch:'full'},
 
-  ] },
+  ] },*/
 
 
   { path: 'register', component: RegisterComponent },
