@@ -351,7 +351,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
           margin: [0, 0, 0, 20]
         },
 
-        this.getListArticle(this.crudApi.listData),
+        this.getListArticle(this.listData),
         {
 
         },
@@ -468,7 +468,7 @@ export class ListArticleComponent implements OnDestroy, OnInit {
                 margin: [0, 0, 0, 20]
               },
 
-              this.getList(this.crudApi.listData),
+              this.getList(this.listData),
               {
 
               },

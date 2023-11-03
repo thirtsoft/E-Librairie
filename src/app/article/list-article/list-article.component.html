@@ -93,14 +93,14 @@
           <td>{{ art.qtestock <= art.stockInitial ? "epuisé" : "encours" }}</td>
           <td>
             <button class="btn btn-success btn-sm" (click)="viewArticle(i)">
-              <i class="fa fa-eye" aria-hidden="true"></i> Voir détails</button
+              <i class="fa fa-eye" aria-hidden="true"></i> Détails</button
             >&nbsp;
             <button
               *ngIf="!showVendeurBoard"
               class="btn btn-info btn-sm" (click)="addEditArticle(i)">
               <i class="fa fa-pencil-square-o" aria-hidden="true">Modifier</i></button
             >&nbsp;
-            <button
+           <!--  <button
             *ngIf="showAdminBoard"
               class="btn btn-danger btn-sm"
               (click)="deleteArticle(art.id)"
@@ -108,7 +108,7 @@
               <em class="fa fa-trash-o"></em>
               Supprimer
               </button
-            >&nbsp;
+            >&nbsp; -->
 
           </td>
         </tr>
